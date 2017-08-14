@@ -136,6 +136,7 @@ return [
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Broadcasting\BroadcastServiceProvider',
 		Collective\Html\HtmlServiceProvider::class,
+		Barryvdh\DomPDF\ServiceProvider::class,
 
 		/*
 		 * Application Service Providers...
