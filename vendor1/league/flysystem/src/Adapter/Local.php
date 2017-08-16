@@ -33,11 +33,11 @@ class Local extends AbstractAdapter
      */
     protected static $permissions = [
         'file' => [
-            'public' => 0644,
+            'storage' => 0644,
             'private' => 0600,
         ],
         'dir' => [
-            'public' => 0755,
+            'storage' => 0755,
             'private' => 0700,
         ]
     ];
@@ -99,7 +99,7 @@ class Local extends AbstractAdapter
     {
         if ( ! is_dir($root)) {
             $umask = umask(0);
-            @mkdir($root, $this->permissionMap['dir']['public'], true);
+            @mkdir($root, $this->permissionMap['dir']['storage'], true);
             umask($umask);
 
             if ( ! is_dir($root)) {
@@ -362,7 +362,7 @@ class Local extends AbstractAdapter
     {
         $location = $this->applyPathPrefix($dirname);
         $umask = umask(0);
-        $visibility = $config->get('visibility', 'public');
+        $visibility = $config->get('visibility', 'storage');
 
         if ( ! is_dir($location) && ! mkdir($location, $this->permissionMap['dir'][$visibility], true)) {
             $return = false;

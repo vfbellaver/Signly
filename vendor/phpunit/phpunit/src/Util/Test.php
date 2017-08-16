@@ -942,7 +942,7 @@ class PHPUnit_Util_Test
                         $visibility = 'isProtected';
                     } elseif (strpos($methodName, 'private')) {
                         $visibility = 'isPrivate';
-                    } elseif (strpos($methodName, 'public')) {
+                    } elseif (strpos($methodName, 'storage')) {
                         $visibility = 'isPublic';
                     }
 

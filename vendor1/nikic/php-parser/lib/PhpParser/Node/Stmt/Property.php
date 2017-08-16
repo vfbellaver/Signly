@@ -20,7 +20,7 @@ class Property extends Node\Stmt
      */
     public function __construct($type, array $props, array $attributes = array()) {
         if (0 === ($type & Class_::VISIBILITY_MODIFER_MASK)) {
-            // If no visibility modifier given, PHP defaults to public
+            // If no visibility modifier given, PHP defaults to storage
             $type |= Class_::MODIFIER_PUBLIC;
         }
 

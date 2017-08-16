@@ -7,7 +7,7 @@
 class CoverageTwoDefaultClassAnnotations
 {
     /**
-     * @covers Foo\CoveredClass::<public>
+     * @covers Foo\CoveredClass::<storage>
      */
     public function testSomething()
     {

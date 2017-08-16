@@ -115,7 +115,7 @@ class KeywordPatch implements ClassPatchInterface
             'print',
             'private',
             'protected',
-            'public',
+            'storage',
             'require',
             'require_once',
             'return',

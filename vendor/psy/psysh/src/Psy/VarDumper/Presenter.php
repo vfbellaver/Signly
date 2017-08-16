@@ -38,7 +38,7 @@ class Presenter
         'cchr'      => 'default',
         'note'      => 'class',
         'ref'       => 'default',
-        'public'    => 'public',
+        'storage'    => 'storage',
         'protected' => 'protected',
         'private'   => 'private',
         'meta'      => 'comment',

@@ -79,11 +79,11 @@ class ClassNode
         return $this->properties;
     }
 
-    public function addProperty($name, $visibility = 'public')
+    public function addProperty($name, $visibility = 'storage')
     {
         $visibility = strtolower($visibility);
 
-        if (!in_array($visibility, array('public', 'private', 'protected'))) {
+        if (!in_array($visibility, array('storage', 'private', 'protected'))) {
             throw new InvalidArgumentException(sprintf(
                 '`%s` property visibility is not supported.', $visibility
             ));

@@ -34,7 +34,7 @@ class TOC_TCPDF extends TCPDF {
 
 	/**
  	 * Overwrite Header() method.
-	 * @public
+	 * @storage
 	 */
 	public function Header() {
 		if ($this->tocpage) {
@@ -48,7 +48,7 @@ class TOC_TCPDF extends TCPDF {
 
 	/**
  	 * Overwrite Footer() method.
-	 * @public
+	 * @storage
 	 */
 	public function Footer() {
 		if ($this->tocpage) {

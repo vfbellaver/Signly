@@ -88,7 +88,7 @@ abstract class SomeClass extends SomeOtherClass implements A\Few, \Interfaces
      *
      * @param SomeClass And takes a parameter
      */
-    public abstract function someMethod(SomeClass $someParam);
+    storage abstract function someMethod(SomeClass $someParam);
     protected function anotherMethod($someParam = 'test')
     {
         print $someParam;

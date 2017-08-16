@@ -59,50 +59,50 @@ class TCPDF_STATIC {
 
 	/**
 	 * String alias for total number of pages.
-	 * @public static
+	 * @storage static
 	 */
 	public static $alias_tot_pages = '{:ptp:}';
 
 	/**
 	 * String alias for page number.
-	 * @public static
+	 * @storage static
 	 */
 	public static $alias_num_page = '{:pnp:}';
 
 	/**
 	 * String alias for total number of pages in a single group.
-	 * @public static
+	 * @storage static
 	 */
 	public static $alias_group_tot_pages = '{:ptg:}';
 
 	/**
 	 * String alias for group page number.
-	 * @public static
+	 * @storage static
 	 */
 	public static $alias_group_num_page = '{:png:}';
 
 	/**
 	 * String alias for right shift compensation used to correctly align page numbers on the right.
-	 * @public static
+	 * @storage static
 	 */
 	public static $alias_right_shift = '{rsc:';
 
 	/**
 	 * Encryption padding string.
-	 * @public static
+	 * @storage static
 	 */
 	public static $enc_padding = "\x28\xBF\x4E\x5E\x4E\x75\x8A\x41\x64\x00\x4E\x56\xFF\xFA\x01\x08\x2E\x2E\x00\xB6\xD0\x68\x3E\x80\x2F\x0C\xA9\xFE\x64\x53\x69\x7A";
 
 	/**
 	 * ByteRange placemark used during digital signature process.
 	 * @since 4.6.028 (2009-08-25)
-	 * @public static
+	 * @storage static
 	 */
 	public static $byterange_string = '/ByteRange[0 ********** ********** **********]';
 
 	/**
 	 * Array page boxes names
-	 * @public static
+	 * @storage static
 	 */
 	public static $pageboxes = array('MediaBox', 'CropBox', 'BleedBox', 'TrimBox', 'ArtBox');
 
@@ -112,7 +112,7 @@ class TCPDF_STATIC {
 	 * Return the current TCPDF version.
 	 * @return TCPDF version string
 	 * @since 5.9.012 (2010-11-10)
-	 * @public static
+	 * @storage static
 	 */
 	public static function getTCPDFVersion() {
 		return self::$tcpdf_version;
@@ -122,7 +122,7 @@ class TCPDF_STATIC {
 	 * Return the current TCPDF producer.
 	 * @return TCPDF producer string
 	 * @since 6.0.000 (2013-03-16)
-	 * @public static
+	 * @storage static
 	 */
 	public static function getTCPDFProducer() {
 		return "\x54\x43\x50\x44\x46\x20".self::getTCPDFVersion()."\x20\x28\x68\x74\x74\x70\x3a\x2f\x2f\x77\x77\x77\x2e\x74\x63\x70\x64\x66\x2e\x6f\x72\x67\x29";
@@ -132,7 +132,7 @@ class TCPDF_STATIC {
 	 * Sets the current active configuration setting of magic_quotes_runtime (if the set_magic_quotes_runtime function exist)
 	 * @param $mqr (boolean) FALSE for off, TRUE for on.
 	 * @since 4.6.025 (2009-08-17)
-	 * @public static
+	 * @storage static
 	 */
 	public static function set_mqr($mqr) {
 		if (!defined('PHP_VERSION_ID')) {
@@ -148,7 +148,7 @@ class TCPDF_STATIC {
 	 * Gets the current active configuration setting of magic_quotes_runtime (if the get_magic_quotes_runtime function exist)
 	 * @return Returns 0 if magic quotes runtime is off or get_magic_quotes_runtime doesn't exist, 1 otherwise.
 	 * @since 4.6.025 (2009-08-17)
-	 * @public static
+	 * @storage static
 	 */
 	public static function get_mqr() {
 		if (!defined('PHP_VERSION_ID')) {
@@ -166,7 +166,7 @@ class TCPDF_STATIC {
 	 * @param $url (string) URL to check.
 	 * @return Boolean true if the URl exist, false otherwise.
 	 * @since 5.9.204 (2013-01-28)
-	 * @public static
+	 * @storage static
 	 */
 	public static function isValidURL($url) {
 		$headers = @get_headers($url);
@@ -188,7 +188,7 @@ class TCPDF_STATIC {
 	 * @param $unicode (boolean) True if we are in unicode mode, false otherwise.
 	 * @return string without SHY characters.
 	 * @since (4.5.019) 2009-02-28
-	 * @public static
+	 * @storage static
 	 */
 	public static function removeSHY($txt='', $unicode=true) {
 		$txt = preg_replace('/([\\xc2]{1}[\\xad]{1})/', '', $txt);
@@ -206,7 +206,7 @@ class TCPDF_STATIC {
 	 * @param $opencell (boolean) True when the cell is left open at the page bottom, false otherwise.
 	 * @return border mode array
 	 * @since 4.4.002 (2008-12-09)
-	 * @public static
+	 * @storage static
 	 */
 	public static function getBorderMode($brd, $position='start', $opencell=true) {
 		if ((!$opencell) OR empty($brd)) {
@@ -278,7 +278,7 @@ class TCPDF_STATIC {
 	 * @param $str (string) string to be checked
 	 * @return boolean true if string is empty
 	 * @since 4.5.044 (2009-04-16)
-	 * @public static
+	 * @storage static
 	 */
 	public static function empty_string($str) {
 		return (is_null($str) OR (is_string($str) AND (strlen($str) == 0)));
@@ -290,7 +290,7 @@ class TCPDF_STATIC {
 	 * @param $file_id (string) TCPDF file_id.
 	 * @return string filename.
 	 * @since 4.5.000 (2008-12-31)
-	 * @public static
+	 * @storage static
 	 */
 	public static function getObjFilename($type='tmp', $file_id='') {
 		return tempnam(K_PATH_CACHE, '__tcpdf_'.$file_id.'_'.$type.'_'.md5(TCPDF_STATIC::getRandomSeed()).'_');
@@ -300,7 +300,7 @@ class TCPDF_STATIC {
 	 * Add "\" before "\", "(" and ")"
 	 * @param $s (string) string to escape.
 	 * @return string escaped string.
-	 * @public static
+	 * @storage static
 	 */
 	public static function _escape($s) {
 		// the chr(13) substitution fixes the Bugs item #1421290.
@@ -312,7 +312,7 @@ class TCPDF_STATIC {
 	* @param $str (string) Input string to convert.
 	* @return converted string
 	* @since 5.9.121 (2011-09-28)
-	 * @public static
+	 * @storage static
 	 */
 	public static function _escapeXML($str) {
 		$replaceTable = array("\0" => '', '&' => '&amp;', '<' => '&lt;', '>' => '&gt;');
@@ -325,7 +325,7 @@ class TCPDF_STATIC {
 	 * @param $object (object) class object to be cloned
 	 * @return cloned object
 	 * @since 4.5.029 (2009-03-19)
-	 * @public static
+	 * @storage static
 	 */
 	public static function objclone($object) {
 		if (($object instanceof Imagick) AND (version_compare(phpversion('imagick'), '3.0.1') !== 1)) {
@@ -340,7 +340,7 @@ class TCPDF_STATIC {
 	 * @param $data (string) Data to output.
 	 * @param $length (int) Data length in bytes.
 	 * @since 5.9.086
-	 * @public static
+	 * @storage static
 	 */
 	public static function sendOutputData($data, $length) {
 		if (!isset($_SERVER['HTTP_ACCEPT_ENCODING']) OR empty($_SERVER['HTTP_ACCEPT_ENCODING'])) {
@@ -356,7 +356,7 @@ class TCPDF_STATIC {
 	 * @param $replace (array) Array of replacements (array keys are replacement strings, values are alias arrays).
 	 * @param $diff (int) If passed, this will be set to the total char number difference between alias and replacements.
 	 * @return replaced page content and updated $diff parameter as array.
-	 * @public static
+	 * @storage static
 	 */
 	public static function replacePageNumAliases($page, $replace, $diff=0) {
 		foreach ($replace as $rep) {
@@ -375,7 +375,7 @@ class TCPDF_STATIC {
 	 * @param $date (string) Formatted date-time.
 	 * @return int seconds.
 	 * @since 5.9.152 (2012-03-23)
-	 * @public static
+	 * @storage static
 	 */
 	public static function getTimestamp($date) {
 		if (($date[0] == 'D') AND ($date[1] == ':')) {
@@ -390,7 +390,7 @@ class TCPDF_STATIC {
 	 * @param $time (int) Time in seconds.
 	 * @return string escaped date string.
 	 * @since 5.9.152 (2012-03-23)
-	 * @public static
+	 * @storage static
 	 */
 	public static function getFormattedDate($time) {
 		return substr_replace(date('YmdHisO', intval($time)), '\'', (0 - 2), 0).'\'';
@@ -402,7 +402,7 @@ class TCPDF_STATIC {
 	 * @return string containing random data
 	 * @author Nicola Asuni
 	 * @since 5.9.006 (2010-10-19)
-	 * @public static
+	 * @storage static
 	 */
 	public static function getRandomSeed($seed='') {
 		$rnd = uniqid(rand().microtime(true), true);
@@ -425,7 +425,7 @@ class TCPDF_STATIC {
 	 * @param $str (string) input string
 	 * @return String MD5 encrypted binary string
 	 * @since 2.0.000 (2008-01-02)
-	 * @public static
+	 * @storage static
 	 */
 	public static function _md5_16($str) {
 		return pack('H*', md5($str));
@@ -439,7 +439,7 @@ class TCPDF_STATIC {
 	 * @return String encrypted text
 	 * @author Nicola Asuni
 	 * @since 5.0.005 (2010-05-11)
-	 * @public static
+	 * @storage static
 	 */
 	public static function _AES($key, $text) {
 		// padding (RFC 2898, PKCS #5: Password-Based Cryptography Specification Version 2.0)
@@ -464,7 +464,7 @@ class TCPDF_STATIC {
 	 * @return String encrypted text
 	 * @author Nicola Asuni
 	 * @since TODO
-	 * @public static
+	 * @storage static
 	 */
 	public static function _AESnopad($key, $text) {
 		if (extension_loaded('openssl')) {
@@ -487,7 +487,7 @@ class TCPDF_STATIC {
 	 * @return String encrypted text
 	 * @since 2.0.000 (2008-01-02)
 	 * @author Klemen Vodopivec, Nicola Asuni
-	 * @public static
+	 * @storage static
 	 */
 	public static function _RC4($key, $text, &$last_enc_key, &$last_enc_key_c) {
 		if (function_exists('mcrypt_encrypt') AND ($out = @mcrypt_encrypt(MCRYPT_ARCFOUR, $key, $text, MCRYPT_MODE_STREAM, ''))) {
@@ -531,7 +531,7 @@ class TCPDF_STATIC {
 	 * @param $mode (int) encryption strength: 0 = RC4 40 bit; 1 = RC4 128 bit; 2 = AES 128 bit; 3 = AES 256 bit.
 	 * @since 5.0.005 (2010-05-12)
 	 * @author Nicola Asuni
-	 * @public static
+	 * @storage static
 	 */
 	public static function getUserPermissionCode($permissions, $mode=0) {
 		$options = array(
@@ -568,7 +568,7 @@ class TCPDF_STATIC {
 	 * @return String
 	 * @since 5.0.005 (2010-05-12)
 	 * @author Nicola Asuni
-	 * @public static
+	 * @storage static
 	 */
 	public static function convertHexStringToString($bs) {
 		$string = ''; // string to be returned
@@ -590,7 +590,7 @@ class TCPDF_STATIC {
 	 * @return byte string
 	 * @since 5.0.010 (2010-05-17)
 	 * @author Nicola Asuni
-	 * @public static
+	 * @storage static
 	 */
 	public static function convertStringToHexString($s) {
 		$bs = '';
@@ -607,7 +607,7 @@ class TCPDF_STATIC {
 	 * @return String
 	 * @since 5.0.005 (2010-05-12)
 	 * @author Nicola Asuni
-	 * @public static
+	 * @storage static
 	 */
 	public static function getEncPermissionsString($protection) {
 		$binprot = sprintf('%032b', $protection);
@@ -624,7 +624,7 @@ class TCPDF_STATIC {
 	 * @return (string) Encoded name object.
 	 * @author Nicola Asuni
 	 * @since 5.9.097 (2011-06-23)
-	 * @public static
+	 * @storage static
 	 */
 	public static function encodeNameObject($name) {
 		$escname = '';
@@ -648,7 +648,7 @@ class TCPDF_STATIC {
 	 * @return array of annotation properties
 	 * @author Nicola Asuni
 	 * @since 4.8.000 (2009-09-06)
-	 * @public static
+	 * @storage static
 	 */
 	public static function getAnnotOptFromJSProp($prop, &$spot_colors, $rtl=false) {
 		if (isset($prop['aopt']) AND is_array($prop['aopt'])) {
@@ -1014,7 +1014,7 @@ class TCPDF_STATIC {
 	 * This method can be overriden for custom formats.
 	 * @param $num (int) page number
 	 * @since 4.2.005 (2008-11-06)
-	 * @public static
+	 * @storage static
 	 */
 	public static function formatPageNumber($num) {
 		return number_format((float)$num, 0, '', '.');
@@ -1026,7 +1026,7 @@ class TCPDF_STATIC {
 	 * @param $num (int) page number
 	 * @since 4.5.001 (2009-01-04)
 	 * @see addTOC(), addHTMLTOC()
-	 * @public static
+	 * @storage static
 	 */
 	public static function formatTOCPageNumber($num) {
 		return number_format((float)$num, 0, '', '.');
@@ -1038,7 +1038,7 @@ class TCPDF_STATIC {
 	 * @return An array where the keys are the CSS selectors and the values are the CSS properties.
 	 * @author Nicola Asuni
 	 * @since 5.1.000 (2010-05-25)
-	 * @public static
+	 * @storage static
 	 */
 	public static function extractCSSproperties($cssdata) {
 		if (empty($cssdata)) {
@@ -1134,7 +1134,7 @@ class TCPDF_STATIC {
 	 * @author Nicola Asuni
 	 * @since 5.9.017 (2010-11-16)
 	 * @see setHtmlVSpace()
-	 * @public static
+	 * @storage static
 	 */
 	public static function fixHTMLCode($html, $default_css='', $tagvs='', $tidy_options='', &$tagvspaces) {
 		// configure parameters for HTML Tidy
@@ -1200,7 +1200,7 @@ class TCPDF_STATIC {
 	 * @param $selector (string) CSS selector string
 	 * @return true if the selector is valid, false otherwise
 	 * @since 5.1.000 (2010-05-25)
-	 * @public static
+	 * @storage static
 	 */
 	public static function isValidCSSSelectorForTag($dom, $key, $selector) {
 		$valid = false; // value to be returned
@@ -1360,7 +1360,7 @@ class TCPDF_STATIC {
 	 * @param $css (array) array of CSS properties
 	 * @return array containing CSS properties
 	 * @since 5.1.000 (2010-05-25)
-	 * @public static
+	 * @storage static
 	 */
 	public static function getCSSdataArray($dom, $key, $css) {
 		$cssarray = array(); // style to be returned
@@ -1405,7 +1405,7 @@ class TCPDF_STATIC {
 	 * @param $css (array) array of CSS properties
 	 * @return string containing merged CSS properties
 	 * @since 5.9.070 (2011-04-19)
-	 * @public static
+	 * @storage static
 	 */
 	public static function getTagStyleFromCSSarray($css) {
 		$tagstyle = ''; // value to be returned
@@ -1436,7 +1436,7 @@ class TCPDF_STATIC {
 	 * @param $number (int) number to convert
 	 * @return string roman representation of the specified number
 	 * @since 4.4.004 (2008-12-10)
-	 * @public static
+	 * @storage static
 	 */
 	public static function intToRoman($number) {
 		$roman = '';
@@ -1502,7 +1502,7 @@ class TCPDF_STATIC {
 	 * @param $offset (int) May be specified to begin searching an arbitrary number of characters into the string.
 	 * @return Returns the position where the needle exists. Returns FALSE if the needle was not found.
 	 * @since 4.8.038 (2010-03-13)
-	 * @public static
+	 * @storage static
 	 */
 	public static function revstrpos($haystack, $needle, $offset = 0) {
 		$length = strlen($haystack);
@@ -1517,7 +1517,7 @@ class TCPDF_STATIC {
 	 * @return array of hyphenation patterns
 	 * @author Nicola Asuni
 	 * @since 4.9.012 (2010-04-12)
-	 * @public static
+	 * @storage static
 	 */
 	public static function getHyphenPatternsFromTEX($file) {
 		// TEX patterns are available at:
@@ -1563,7 +1563,7 @@ class TCPDF_STATIC {
 	 * @param $default (string) default style
 	 * @author Nicola Asuni
 	 * @since 5.0.000 (2010-04-30)
-	 * @public static
+	 * @storage static
 	 */
 	public static function getPathPaintOperator($style, $default='S') {
 		$op = '';
@@ -1642,7 +1642,7 @@ class TCPDF_STATIC {
 	 * @return transformation array
 	 * @author Nicola Asuni
 	 * @since 5.0.000 (2010-05-02)
-	 * @public static
+	 * @storage static
 	 */
 	public static function getTransformationMatrixProduct($ta, $tb) {
 		$tm = array();
@@ -1661,7 +1661,7 @@ class TCPDF_STATIC {
 	 * @return array of transformations
 	 * @author Nicola Asuni
 	 * @since 5.0.000 (2010-05-02)
-	 * @public static
+	 * @storage static
 	 */
 	public static function getSVGTransformMatrix($attribute) {
 		// identity matrix
@@ -1758,7 +1758,7 @@ class TCPDF_STATIC {
 	 * @param $y2 (int) Y coordinate of second vector point
 	 * @author Nicola Asuni
 	 * @since 5.0.000 (2010-05-04)
-	 * @public static
+	 * @storage static
 	 */
 	public static function getVectorsAngle($x1, $y1, $x2, $y2) {
 		$dprod = ($x1 * $x2) + ($y1 * $y2);
@@ -1818,7 +1818,7 @@ class TCPDF_STATIC {
 	 * @return Returns an array containing substrings of subject split along boundaries matched by pattern.modifier
 	 * @author Nicola Asuni
 	 * @since 6.0.023
-	 * @public static
+	 * @storage static
 	 */
 	public static function pregSplit($pattern, $modifiers, $subject, $limit=NULL, $flags=NULL) {
 		// the bug only happens on PHP 5.2 when using the u modifier
@@ -1843,7 +1843,7 @@ class TCPDF_STATIC {
 	 * @param filename (string) Name of the file to open
 	 * @param $mode (string) 
 	 * @return Returns a file pointer resource on success, or FALSE on error.  
-	 * @public static
+	 * @storage static
 	 */
 	public static function fopenLocal($filename, $mode) {
 		if (strpos($filename, '://') === false) {
@@ -1861,7 +1861,7 @@ class TCPDF_STATIC {
 	 * @return The function returns the read data or FALSE on failure. 
 	 * @author Nicola Asuni
 	 * @since 6.0.025
-	 * @public static
+	 * @storage static
 	 */
 	public static function fileGetContents($file) {
 		$alt = array($file);
@@ -1958,7 +1958,7 @@ class TCPDF_STATIC {
 	 * @return int 32 bit value
 	 * @author Nicola Asuni
 	 * @since 5.2.000 (2010-06-02)
-	 * @public static
+	 * @storage static
 	 */
 	public static function _getULONG($str, $offset) {
 		$v = unpack('Ni', substr($str, $offset, 4));
@@ -1972,7 +1972,7 @@ class TCPDF_STATIC {
 	 * @return int 16 bit value
 	 * @author Nicola Asuni
 	 * @since 5.2.000 (2010-06-02)
-	 * @public static
+	 * @storage static
 	 */
 	public static function _getUSHORT($str, $offset) {
 		$v = unpack('ni', substr($str, $offset, 2));
@@ -1986,7 +1986,7 @@ class TCPDF_STATIC {
 	 * @return int 16 bit value
 	 * @author Nicola Asuni
 	 * @since 5.2.000 (2010-06-02)
-	 * @public static
+	 * @storage static
 	 */
 	public static function _getSHORT($str, $offset) {
 		$v = unpack('si', substr($str, $offset, 2));
@@ -2000,7 +2000,7 @@ class TCPDF_STATIC {
 	 * @return int 16 bit value
 	 * @author Nicola Asuni
 	 * @since 5.9.123 (2011-09-30)
-	 * @public static
+	 * @storage static
 	 */
 	public static function _getFWORD($str, $offset) {
 		$v = self::_getUSHORT($str, $offset);
@@ -2017,7 +2017,7 @@ class TCPDF_STATIC {
 	 * @return int 16 bit value
 	 * @author Nicola Asuni
 	 * @since 5.9.123 (2011-09-30)
-	 * @public static
+	 * @storage static
 	 */
 	public static function _getUFWORD($str, $offset) {
 		$v = self::_getUSHORT($str, $offset);
@@ -2031,7 +2031,7 @@ class TCPDF_STATIC {
 	 * @return int 16 bit value
 	 * @author Nicola Asuni
 	 * @since 5.9.123 (2011-09-30)
-	 * @public static
+	 * @storage static
 	 */
 	public static function _getFIXED($str, $offset) {
 		// mantissa
@@ -2049,7 +2049,7 @@ class TCPDF_STATIC {
 	 * @return int 8 bit value
 	 * @author Nicola Asuni
 	 * @since 5.2.000 (2010-06-02)
-	 * @public static
+	 * @storage static
 	 */
 	public static function _getBYTE($str, $offset) {
 		$v = unpack('Ci', substr($str, $offset, 1));
@@ -2063,7 +2063,7 @@ class TCPDF_STATIC {
 	 * @return Returns the read string or FALSE in case of error.
 	 * @author Nicola Asuni
 	 * @since 4.5.027 (2009-03-16)
-	 * @public static
+	 * @storage static
 	 */
 	public static function rfread($handle, $length) {
 		$data = fread($handle, $length);
@@ -2081,7 +2081,7 @@ class TCPDF_STATIC {
 	 * Read a 4-byte (32 bit) integer from file.
 	 * @param $f (string) file name.
 	 * @return 4-byte integer
-	 * @public static
+	 * @storage static
 	 */
 	public static function _freadint($f) {
 		$a = unpack('Ni', fread($f, 4));
@@ -2092,7 +2092,7 @@ class TCPDF_STATIC {
 	/**
 	 * Array of page formats
 	 * measures are calculated in this way: (inches * 72) or (millimeters * 72 / 25.4)
-	 * @public static
+	 * @storage static
 	 */
 	public static $page_formats = array(
 		// ISO 216 A Series + 2 SIS 014711 extensions
@@ -2451,7 +2451,7 @@ class TCPDF_STATIC {
 	 * @param $format (mixed) The format name @see self::$page_format<ul>
 	 * @return array containing page width and height in points
 	 * @since 5.0.010 (2010-05-17)
-	 * @public static
+	 * @storage static
 	 */
 	public static function getPageSizeFromFormat($format) {
 		if (isset(self::$page_formats[$format])) {
@@ -2473,7 +2473,7 @@ class TCPDF_STATIC {
 	 * @param $pagedim (array) Array of page dimensions.
 	 * @return pagedim array of page dimensions.
 	 * @since 5.0.010 (2010-05-17)
-	 * @public static
+	 * @storage static
 	 */
 	public static function setPageBoxes($page, $type, $llx, $lly, $urx, $ury, $points=false, $k, $pagedim=array()) {
 		if (!isset($pagedim[$page])) {
@@ -2499,7 +2499,7 @@ class TCPDF_STATIC {
 	 * @param $pagedim (array) Array of page dimensions.
 	 * @return pagedim array of page dimensions.
 	 * @since 5.0.010 (2010-05-17)
-	 * @public static
+	 * @storage static
 	 */
 	public static function swapPageBoxCoordinates($page, $pagedim) {
 		foreach (self::$pageboxes as $type) {
@@ -2520,7 +2520,7 @@ class TCPDF_STATIC {
 	 * Get the canonical page layout mode.
 	 * @param $layout (string) The page layout. Possible values are:<ul><li>SinglePage Display one page at a time</li><li>OneColumn Display the pages in one column</li><li>TwoColumnLeft Display the pages in two columns, with odd-numbered pages on the left</li><li>TwoColumnRight Display the pages in two columns, with odd-numbered pages on the right</li><li>TwoPageLeft (PDF 1.5) Display the pages two at a time, with odd-numbered pages on the left</li><li>TwoPageRight (PDF 1.5) Display the pages two at a time, with odd-numbered pages on the right</li></ul>
 	 * @return (string) Canonical page layout name.
-	 * @public static
+	 * @storage static
 	 */
 	public static function getPageLayoutMode($layout='SinglePage') {
 		switch ($layout) {
@@ -2563,7 +2563,7 @@ class TCPDF_STATIC {
 	 * Get the canonical page layout mode.
 	 * @param $mode (string) A name object specifying how the document should be displayed when opened:<ul><li>UseNone Neither document outline nor thumbnail images visible</li><li>UseOutlines Document outline visible</li><li>UseThumbs Thumbnail images visible</li><li>FullScreen Full-screen mode, with no menu bar, window controls, or any other window visible</li><li>UseOC (PDF 1.5) Optional content group panel visible</li><li>UseAttachments (PDF 1.6) Attachments panel visible</li></ul>
 	 * @return (string) Canonical page mode name.
-	 * @public static
+	 * @storage static
 	 */
 	public static function getPageMode($mode='UseNone') {
 		switch ($mode) {

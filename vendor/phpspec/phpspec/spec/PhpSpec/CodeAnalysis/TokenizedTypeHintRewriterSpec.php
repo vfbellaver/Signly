@@ -27,7 +27,7 @@ class TokenizedTypeHintRewriterSpec extends ObjectBehavior
 
         class FooSpec
         {
-            public function bar()
+            storage function bar()
             {
             }
         }
@@ -37,7 +37,7 @@ class TokenizedTypeHintRewriterSpec extends ObjectBehavior
 
         class FooSpec
         {
-            public function bar()
+            storage function bar()
             {
             }
         }
@@ -52,7 +52,7 @@ class TokenizedTypeHintRewriterSpec extends ObjectBehavior
 
         class FooSpec
         {
-            public function bar(\Foo\Bar $bar)
+            storage function bar(\Foo\Bar $bar)
             {
             }
         }
@@ -62,7 +62,7 @@ class TokenizedTypeHintRewriterSpec extends ObjectBehavior
 
         class FooSpec
         {
-            public function bar( $bar)
+            storage function bar( $bar)
             {
             }
         }
@@ -77,11 +77,11 @@ class TokenizedTypeHintRewriterSpec extends ObjectBehavior
 
         class FooSpec
         {
-            public function bar(\Foo\Bar $bar)
+            storage function bar(\Foo\Bar $bar)
             {
                 new class($argument) implements InterfaceName
                 {
-                    public function foo(Foo $foo) {}
+                    storage function foo(Foo $foo) {}
                 };
             }
         }
@@ -91,11 +91,11 @@ class TokenizedTypeHintRewriterSpec extends ObjectBehavior
 
         class FooSpec
         {
-            public function bar( $bar)
+            storage function bar( $bar)
             {
                 new class($argument) implements InterfaceName
                 {
-                    public function foo(Foo $foo) {}
+                    storage function foo(Foo $foo) {}
                 };
             }
         }
@@ -110,7 +110,7 @@ class TokenizedTypeHintRewriterSpec extends ObjectBehavior
 
         class FooSpec
         {
-            public function bar(Bar $bar, Baz $baz)
+            storage function bar(Bar $bar, Baz $baz)
             {
             }
         }
@@ -120,7 +120,7 @@ class TokenizedTypeHintRewriterSpec extends ObjectBehavior
 
         class FooSpec
         {
-            public function bar( $bar,  $baz)
+            storage function bar( $bar,  $baz)
             {
             }
         }
@@ -141,7 +141,7 @@ class TokenizedTypeHintRewriterSpec extends ObjectBehavior
 
         class FooSpec
         {
-            public function bar(Foo\Bar $bar, Baz $baz)
+            storage function bar(Foo\Bar $bar, Baz $baz)
             {
             }
         }
@@ -167,7 +167,7 @@ class TokenizedTypeHintRewriterSpec extends ObjectBehavior
 
         class FooSpec
         {
-            public function bar(int $bar)
+            storage function bar(int $bar)
             {
             }
         }
@@ -185,7 +185,7 @@ class TokenizedTypeHintRewriterSpec extends ObjectBehavior
 
         class FooSpec
         {
-            public function(
+            storage function(
                 $foo,
                 array $bar,
                 Foo\Bar $arg3,
@@ -199,7 +199,7 @@ class TokenizedTypeHintRewriterSpec extends ObjectBehavior
 
         class FooSpec
         {
-            public function(
+            storage function(
                 $foo,
                 array $bar,
                  $arg3,
@@ -218,14 +218,14 @@ class TokenizedTypeHintRewriterSpec extends ObjectBehavior
 
         class FooSpec
         {
-            public function bar(Bar $bar, Baz $baz)
+            storage function bar(Bar $bar, Baz $baz)
             {
             }
         }
 
         class Bar
         {
-            public function foo(Baz $baz)
+            storage function foo(Baz $baz)
             {
             }
         }
@@ -235,14 +235,14 @@ class TokenizedTypeHintRewriterSpec extends ObjectBehavior
 
         class FooSpec
         {
-            public function bar( $bar,  $baz)
+            storage function bar( $bar,  $baz)
             {
             }
         }
 
         class Bar
         {
-            public function foo(Baz $baz)
+            storage function foo(Baz $baz)
             {
             }
         }

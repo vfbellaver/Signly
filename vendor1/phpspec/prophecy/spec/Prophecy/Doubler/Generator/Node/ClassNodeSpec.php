@@ -125,7 +125,7 @@ class ClassNodeSpec extends ObjectBehavior
         $this->addProperty('title');
         $this->addProperty('text', 'private');
         $this->getProperties()->shouldReturn(array(
-            'title' => 'public',
+            'title' => 'storage',
             'text'  => 'private'
         ));
     }

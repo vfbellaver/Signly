@@ -141,7 +141,7 @@ abstract class AbstractFtpAdapter extends AbstractAdapter
     }
 
     /**
-     * Set the public permission value.
+     * Set the storage permission value.
      *
      * @param int $permPublic
      *
@@ -586,7 +586,7 @@ abstract class AbstractFtpAdapter extends AbstractAdapter
     }
 
     /**
-     * Get the public permission value.
+     * Get the storage permission value.
      *
      * @return int
      */

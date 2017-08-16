@@ -96,7 +96,7 @@ class PHPUnit_Framework_MockObject_Generator
       'print'           => true,
       'private'         => true,
       'protected'       => true,
-      'public'          => true,
+      'storage'          => true,
       'require'         => true,
       'require_once'    => true,
       'return'          => true,
@@ -910,7 +910,7 @@ class PHPUnit_Framework_MockObject_Generator
         } elseif ($method->isProtected()) {
             $modifier = 'protected';
         } else {
-            $modifier = 'public';
+            $modifier = 'storage';
         }
 
         if ($method->isStatic()) {
@@ -950,7 +950,7 @@ class PHPUnit_Framework_MockObject_Generator
      * @param  bool   $static
      * @return string
      */
-    protected function generateMockedMethodDefinition($templateDir, $className, $methodName, $cloneArguments = true, $modifier = 'public', $arguments_decl = '', $arguments_call = '', $reference = '', $callOriginalMethods = false, $static = false)
+    protected function generateMockedMethodDefinition($templateDir, $className, $methodName, $cloneArguments = true, $modifier = 'storage', $arguments_decl = '', $arguments_call = '', $reference = '', $callOriginalMethods = false, $static = false)
     {
         if ($static) {
             $templateFile = 'mocked_static_method.tpl';

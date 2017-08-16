@@ -42,8 +42,8 @@ class FreshCommand extends Command {
 		$files->deleteDirectory(base_path('resources/views/emails'));
 		$files->delete(app_path('Http/Controllers/HomeController.php'));
 
-		$files->deleteDirectory(base_path('public/css'));
-		$files->deleteDirectory(base_path('public/fonts'));
+		$files->deleteDirectory(base_path('storage/css'));
+		$files->deleteDirectory(base_path('storage/fonts'));
 		$files->put(base_path('resources/assets/less/app.less'), ''.PHP_EOL);
 		$files->deleteDirectory(base_path('resources/assets/less/bootstrap'));
 

@@ -1,6 +1,7 @@
 <?php namespace App\Http\Controllers;
 
 use App\Http\Requests\ClientFormRequest;
+use Illuminate\Support\Facades\Storage;
 use Response;
 use View;
 use DB;
@@ -38,7 +39,7 @@ class ClientController extends Controller {
 	 */
 	public function index()
 	{
-		$clients = DB::table('clients')->where('instance_id',$this->user->instance_id)->get();
+		$clients = DB::table('clients')->where('instance_id',$this->user->instance_id)->paginate(10);
 		return view('client.clients',array('clients' => $clients ) );
 	}
 
@@ -55,7 +56,10 @@ class ClientController extends Controller {
 	public function store(ClientFormRequest $request){
 		
 		//DB::insert('insert into users (id, name) values (?, ?)', [1, 'Dayle']);
-		$id = DB::table('clients')->insertGetId(
+
+        $file = $request->file('logo');
+
+        $id = DB::table('clients')->insertGetId(
 		    array(
 		    		'company' => $request->input('company'),
 		    	  	'first_name' => $request->input('first_name'),
@@ -72,7 +76,15 @@ class ClientController extends Controller {
 		    	  )
 		);
 
+
 		if ($id > 0){
+            $path = storage_path('app/public/storage/clients_logo/').$id;
+            $fileName = $file->getClientOriginalName();
+            $url = $path.'/'.$fileName;
+            $file->move($path,$fileName);
+
+            DB::table('clients')->where('id',$id)->update(['logo' => $url]);
+
 			return redirect('/clients');
 		} else {
 			$request::flash('Error encountered');

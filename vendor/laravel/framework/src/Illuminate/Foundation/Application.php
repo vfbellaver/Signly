@@ -277,7 +277,7 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
     {
         $this->instance('path', $this->path());
 
-        foreach (['base', 'config', 'database', 'lang', 'public', 'storage'] as $path) {
+        foreach (['base', 'config', 'database', 'lang', 'storage', 'storage'] as $path) {
             $this->instance('path.'.$path, $this->{$path.'Path'}());
         }
     }
@@ -348,13 +348,13 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
     }
 
     /**
-     * Get the path to the public / web directory.
+     * Get the path to the storage / web directory.
      *
      * @return string
      */
     public function publicPath()
     {
-        return $this->basePath.DIRECTORY_SEPARATOR.'public';
+        return $this->basePath.DIRECTORY_SEPARATOR.'storage';
     }
 
     /**
