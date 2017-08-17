@@ -7,6 +7,7 @@ use App\Http\Requests\ProposalPdfRequest;
 use App\Http\Requests\ProposalFaceBillboardRequest;
 use App\Http\Requests\CommentFormRequest;
 use App\Http\Requests\ContractFormRequest;
+use App\Http\Requests\ProposalSettingsFormRequest;
 use Response;
 use View;
 use DB;
@@ -680,5 +681,11 @@ UNAUTHORIZED REPRESENTATIONS	Neither party hereto shall be bound by any agreemen
 		$pdf->Output('signly_contract.pdf', 'I');
 
 	}
+
+	public function settings () {
+	    $clients = DB::table('clients')
+            ->select('first_name','last_name','id')->get();
+	    return view('proposal.settings',compact('clients'));
+    }
 
 }
