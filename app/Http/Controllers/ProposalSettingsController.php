@@ -36,7 +36,7 @@ class ProposalSettingsController extends Controller {
         return view('proposal.settings',array('customer' => $client,'clients'  => $clients));
     }
 
-    public function logo (Request $request) {
+    public function logo (ProposalSettingsFormRequest $request) {
         $file = $request->file('file');
         return $file->move(storage_path('app/public'),$file->getFilename().'.'.$file->getClientOriginalExtension());
     }

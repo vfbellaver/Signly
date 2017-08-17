@@ -683,9 +683,7 @@ UNAUTHORIZED REPRESENTATIONS	Neither party hereto shall be bound by any agreemen
 	}
 
 	public function settings () {
-	    $clients = DB::table('clients')
-            ->select('first_name','last_name','id')->get();
-	    return view('proposal.settings',compact('clients'));
+	    return view('proposal.settings');
     }
 
 }
