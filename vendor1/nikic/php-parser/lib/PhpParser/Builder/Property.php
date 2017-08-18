@@ -23,7 +23,7 @@ class Property extends PhpParser\BuilderAbstract
     }
 
     /**
-     * Makes the property public.
+     * Makes the property storage.
      *
      * @return $this The builder instance (for fluid interface)
      */

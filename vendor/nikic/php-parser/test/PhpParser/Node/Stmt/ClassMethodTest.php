@@ -28,7 +28,7 @@ class ClassMethodTest extends \PHPUnit_Framework_TestCase
 
     public function provideModifiers() {
         return array(
-            array('public'),
+            array('storage'),
             array('protected'),
             array('private'),
             array('abstract'),
@@ -38,7 +38,7 @@ class ClassMethodTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Checks that implicit public modifier detection for method is working
+     * Checks that implicit storage modifier detection for method is working
      *
      * @dataProvider implicitPublicModifiers
      *
@@ -50,7 +50,7 @@ class ClassMethodTest extends \PHPUnit_Framework_TestCase
             'type' => constant('PhpParser\Node\Stmt\Class_::MODIFIER_' . strtoupper($modifier))
         ));
 
-        $this->assertTrue($node->isPublic(), 'Node should be implicitly public');
+        $this->assertTrue($node->isPublic(), 'Node should be implicitly storage');
     }
 
     public function implicitPublicModifiers() {

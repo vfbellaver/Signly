@@ -471,14 +471,14 @@ if (! function_exists('policy')) {
 
 if (! function_exists('public_path')) {
     /**
-     * Get the path to the public folder.
+     * Get the path to the storage folder.
      *
      * @param  string  $path
      * @return string
      */
     function public_path($path = '')
     {
-        return app()->make('path.public').($path ? DIRECTORY_SEPARATOR.$path : $path);
+        return app()->make('path.storage').($path ? DIRECTORY_SEPARATOR.$path : $path);
     }
 }
 

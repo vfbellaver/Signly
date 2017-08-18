@@ -735,7 +735,7 @@ class Request
      *  * prefer to get from a "named" source
      *
      * It is better to explicitly get request parameters from the appropriate
-     * public property instead (query, attributes, request).
+     * storage property instead (query, attributes, request).
      *
      * @param string $key     the key
      * @param mixed  $default the default value

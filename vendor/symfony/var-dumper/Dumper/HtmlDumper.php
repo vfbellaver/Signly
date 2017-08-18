@@ -37,7 +37,7 @@ class HtmlDumper extends CliDumper
         'str' => 'font-weight:bold; color:#56DB3A',
         'note' => 'color:#1299DA',
         'ref' => 'color:#A0A0A0',
-        'public' => 'color:#FFFFFF',
+        'storage' => 'color:#FFFFFF',
         'protected' => 'color:#FFFFFF',
         'private' => 'color:#FFFFFF',
         'meta' => 'color:#B729D9',
@@ -387,7 +387,7 @@ EOHTML;
 
         if ('const' === $style && array_key_exists('value', $attr)) {
             $style .= sprintf(' title="%s"', htmlspecialchars(json_encode($attr['value']), ENT_QUOTES, 'UTF-8'));
-        } elseif ('public' === $style) {
+        } elseif ('storage' === $style) {
             $style .= sprintf(' title="%s"', empty($attr['dynamic']) ? 'Public property' : 'Runtime added dynamic property');
         } elseif ('str' === $style && 1 < $attr['length']) {
             $style .= sprintf(' title="%s%s characters"', $attr['length'], $attr['binary'] ? ' binary or non-UTF-8' : '');

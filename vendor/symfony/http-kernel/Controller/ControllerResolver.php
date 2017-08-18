@@ -199,7 +199,7 @@ class ControllerResolver implements ControllerResolverInterface
         $className = is_object($controller) ? get_class($controller) : $controller;
 
         if (method_exists($controller, $method)) {
-            return sprintf('Method "%s" on class "%s" should be public and non-abstract.', $method, $className);
+            return sprintf('Method "%s" on class "%s" should be storage and non-abstract.', $method, $className);
         }
 
         $collection = get_class_methods($controller);

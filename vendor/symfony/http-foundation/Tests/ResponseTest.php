@@ -310,7 +310,7 @@ class ResponseTest extends ResponseTestCase
         $response->setSharedMaxAge(20);
 
         $cacheControl = $response->headers->get('Cache-Control');
-        $this->assertEquals('public, s-maxage=20', $cacheControl);
+        $this->assertEquals('storage, s-maxage=20', $cacheControl);
     }
 
     public function testIsPrivate()
@@ -322,11 +322,11 @@ class ResponseTest extends ResponseTestCase
         $this->assertTrue($response->headers->getCacheControlDirective('private'), '->isPrivate() adds the private Cache-Control directive when set to true');
 
         $response = new Response();
-        $response->headers->set('Cache-Control', 'public, max-age=100');
+        $response->headers->set('Cache-Control', 'storage, max-age=100');
         $response->setPrivate();
         $this->assertEquals(100, $response->headers->getCacheControlDirective('max-age'), '->isPrivate() adds the private Cache-Control directive when set to true');
         $this->assertTrue($response->headers->getCacheControlDirective('private'), '->isPrivate() adds the private Cache-Control directive when set to true');
-        $this->assertFalse($response->headers->hasCacheControlDirective('public'), '->isPrivate() removes the public Cache-Control directive');
+        $this->assertFalse($response->headers->hasCacheControlDirective('storage'), '->isPrivate() removes the storage Cache-Control directive');
     }
 
     public function testExpire()
@@ -564,7 +564,7 @@ class ResponseTest extends ResponseTestCase
     public function testSetCache()
     {
         $response = new Response();
-        //array('etag', 'last_modified', 'max_age', 's_maxage', 'private', 'public')
+        //array('etag', 'last_modified', 'max_age', 's_maxage', 'private', 'storage')
         try {
             $response->setCache(array('wrong option' => 'value'));
             $this->fail('->setCache() throws an InvalidArgumentException if an option is not supported');
@@ -590,23 +590,23 @@ class ResponseTest extends ResponseTestCase
         $response->setCache($options);
         $this->assertEquals($response->getMaxAge(), 200);
 
-        $this->assertTrue($response->headers->hasCacheControlDirective('public'));
+        $this->assertTrue($response->headers->hasCacheControlDirective('storage'));
         $this->assertFalse($response->headers->hasCacheControlDirective('private'));
 
-        $response->setCache(array('public' => true));
-        $this->assertTrue($response->headers->hasCacheControlDirective('public'));
+        $response->setCache(array('storage' => true));
+        $this->assertTrue($response->headers->hasCacheControlDirective('storage'));
         $this->assertFalse($response->headers->hasCacheControlDirective('private'));
 
-        $response->setCache(array('public' => false));
-        $this->assertFalse($response->headers->hasCacheControlDirective('public'));
+        $response->setCache(array('storage' => false));
+        $this->assertFalse($response->headers->hasCacheControlDirective('storage'));
         $this->assertTrue($response->headers->hasCacheControlDirective('private'));
 
         $response->setCache(array('private' => true));
-        $this->assertFalse($response->headers->hasCacheControlDirective('public'));
+        $this->assertFalse($response->headers->hasCacheControlDirective('storage'));
         $this->assertTrue($response->headers->hasCacheControlDirective('private'));
 
         $response->setCache(array('private' => false));
-        $this->assertTrue($response->headers->hasCacheControlDirective('public'));
+        $this->assertTrue($response->headers->hasCacheControlDirective('storage'));
         $this->assertFalse($response->headers->hasCacheControlDirective('private'));
     }
 
@@ -625,7 +625,7 @@ class ResponseTest extends ResponseTestCase
         $response = new Response();
         $response->setPublic();
 
-        $this->assertTrue($response->headers->hasCacheControlDirective('public'));
+        $this->assertTrue($response->headers->hasCacheControlDirective('storage'));
         $this->assertFalse($response->headers->hasCacheControlDirective('private'));
     }
 

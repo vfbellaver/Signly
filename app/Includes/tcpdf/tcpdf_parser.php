@@ -96,7 +96,7 @@ class TCPDF_PARSER {
 	 * 			'die_for_errors' : if true termitate the program execution in case of error, otherwise thows an exception;
 	 * 			'ignore_filter_decoding_errors' : if true ignore filter decoding errors;
 	 * 			'ignore_missing_filter_decoders' : if true ignore missing filter decoding errors.
-	 * @public
+	 * @storage
 	 * @since 1.0.000 (2011-05-24)
 	 */
 	public function __construct($data, $cfg=array()) {
@@ -134,7 +134,7 @@ class TCPDF_PARSER {
 	 * 			'die_for_errors' : if true termitate the program execution in case of error, otherwise thows an exception;
 	 * 			'ignore_filter_decoding_errors' : if true ignore filter decoding errors;
 	 * 			'ignore_missing_filter_decoders' : if true ignore missing filter decoding errors.
-	 * @public
+	 * @storage
 	 */
 	protected function setConfig($cfg) {
 		if (isset($cfg['die_for_errors'])) {
@@ -151,7 +151,7 @@ class TCPDF_PARSER {
 	/**
 	 * Return an array of parsed PDF document objects.
 	 * @return (array) Array of parsed PDF document objects.
-	 * @public
+	 * @storage
 	 * @since 1.0.000 (2011-06-26)
 	 */
 	public function getParsedData() {
@@ -797,7 +797,7 @@ class TCPDF_PARSER {
 	/**
 	 * Throw an exception or print an error message and die if the K_TCPDF_PARSER_THROW_EXCEPTION_ERROR constant is set to true.
 	 * @param $msg (string) The error message
-	 * @public
+	 * @storage
 	 * @since 1.0.000 (2011-05-23)
 	 */
 	public function Error($msg) {

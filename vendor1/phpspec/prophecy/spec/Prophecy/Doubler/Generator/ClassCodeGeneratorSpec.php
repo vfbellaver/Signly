@@ -26,11 +26,11 @@ class ClassCodeGeneratorSpec extends ObjectBehavior
         $class->getInterfaces()->willReturn(array(
             'Prophecy\Doubler\Generator\MirroredInterface', 'ArrayAccess', 'ArrayIterator'
         ));
-        $class->getProperties()->willReturn(array('name' => 'public', 'email' => 'private'));
+        $class->getProperties()->willReturn(array('name' => 'storage', 'email' => 'private'));
         $class->getMethods()->willReturn(array($method1, $method2, $method3, $method4));
 
         $method1->getName()->willReturn('getName');
-        $method1->getVisibility()->willReturn('public');
+        $method1->getVisibility()->willReturn('storage');
         $method1->returnsReference()->willReturn(false);
         $method1->isStatic()->willReturn(true);
         $method1->getArguments()->willReturn(array($argument11, $argument12));
@@ -49,7 +49,7 @@ class ClassCodeGeneratorSpec extends ObjectBehavior
         $method2->getCode()->willReturn('return $this->email;');
 
         $method3->getName()->willReturn('getRefValue');
-        $method3->getVisibility()->willReturn('public');
+        $method3->getVisibility()->willReturn('storage');
         $method3->returnsReference()->willReturn(true);
         $method3->isStatic()->willReturn(false);
         $method3->getArguments()->willReturn(array($argument31));
@@ -59,7 +59,7 @@ class ClassCodeGeneratorSpec extends ObjectBehavior
         $method3->getCode()->willReturn('return $this->refValue;');
 
         $method4->getName()->willReturn('doSomething');
-        $method4->getVisibility()->willReturn('public');
+        $method4->getVisibility()->willReturn('storage');
         $method4->returnsReference()->willReturn(false);
         $method4->isStatic()->willReturn(false);
         $method4->getArguments()->willReturn(array());
@@ -105,19 +105,19 @@ class ClassCodeGeneratorSpec extends ObjectBehavior
             $expected = <<<'PHP'
 namespace  {
 class CustomClass extends \RuntimeException implements \Prophecy\Doubler\Generator\MirroredInterface, \ArrayAccess, \ArrayIterator {
-public $name;
+storage $name;
 private $email;
 
-public static function getName(array $fullname = NULL, \ReflectionClass $class): ?string {
+storage static function getName(array $fullname = NULL, \ReflectionClass $class): ?string {
 return $this->name;
 }
 protected  function getEmail(?string $default = 'ever.zet@gmail.com') {
 return $this->email;
 }
-public  function &getRefValue( $refValue): string {
+storage  function &getRefValue( $refValue): string {
 return $this->refValue;
 }
-public  function doSomething(): void {
+storage  function doSomething(): void {
 return;
 }
 
@@ -128,19 +128,19 @@ PHP;
             $expected = <<<'PHP'
 namespace  {
 class CustomClass extends \RuntimeException implements \Prophecy\Doubler\Generator\MirroredInterface, \ArrayAccess, \ArrayIterator {
-public $name;
+storage $name;
 private $email;
 
-public static function getName(array $fullname = NULL, \ReflectionClass $class): string {
+storage static function getName(array $fullname = NULL, \ReflectionClass $class): string {
 return $this->name;
 }
 protected  function getEmail(string $default = 'ever.zet@gmail.com') {
 return $this->email;
 }
-public  function &getRefValue( $refValue): string {
+storage  function &getRefValue( $refValue): string {
 return $this->refValue;
 }
-public  function doSomething() {
+storage  function doSomething() {
 return;
 }
 
@@ -151,19 +151,19 @@ PHP;
             $expected = <<<'PHP'
 namespace  {
 class CustomClass extends \RuntimeException implements \Prophecy\Doubler\Generator\MirroredInterface, \ArrayAccess, \ArrayIterator {
-public $name;
+storage $name;
 private $email;
 
-public static function getName(array $fullname = NULL, \ReflectionClass $class) {
+storage static function getName(array $fullname = NULL, \ReflectionClass $class) {
 return $this->name;
 }
 protected  function getEmail(\string $default = 'ever.zet@gmail.com') {
 return $this->email;
 }
-public  function &getRefValue( $refValue) {
+storage  function &getRefValue( $refValue) {
 return $this->refValue;
 }
-public  function doSomething() {
+storage  function doSomething() {
 return;
 }
 
@@ -194,7 +194,7 @@ PHP;
         ));
 
         $method1->getName()->willReturn('variadic');
-        $method1->getVisibility()->willReturn('public');
+        $method1->getVisibility()->willReturn('storage');
         $method1->returnsReference()->willReturn(false);
         $method1->isStatic()->willReturn(false);
         $method1->getArguments()->willReturn(array($argument1));
@@ -202,7 +202,7 @@ PHP;
         $method1->getCode()->willReturn('');
 
         $method2->getName()->willReturn('variadicByRef');
-        $method2->getVisibility()->willReturn('public');
+        $method2->getVisibility()->willReturn('storage');
         $method2->returnsReference()->willReturn(false);
         $method2->isStatic()->willReturn(false);
         $method2->getArguments()->willReturn(array($argument2));
@@ -210,7 +210,7 @@ PHP;
         $method2->getCode()->willReturn('');
 
         $method3->getName()->willReturn('variadicWithType');
-        $method3->getVisibility()->willReturn('public');
+        $method3->getVisibility()->willReturn('storage');
         $method3->returnsReference()->willReturn(false);
         $method3->isStatic()->willReturn(false);
         $method3->getArguments()->willReturn(array($argument3));
@@ -218,7 +218,7 @@ PHP;
         $method3->getCode()->willReturn('');
 
         $method4->getName()->willReturn('variadicWithTypeByRef');
-        $method4->getVisibility()->willReturn('public');
+        $method4->getVisibility()->willReturn('storage');
         $method4->returnsReference()->willReturn(false);
         $method4->isStatic()->willReturn(false);
         $method4->getArguments()->willReturn(array($argument4));
@@ -258,16 +258,16 @@ PHP;
 namespace  {
 class CustomClass extends \stdClass implements \Prophecy\Doubler\Generator\MirroredInterface {
 
-public  function variadic( ...$args) {
+storage  function variadic( ...$args) {
 
 }
-public  function variadicByRef( &...$args) {
+storage  function variadicByRef( &...$args) {
 
 }
-public  function variadicWithType(\\ReflectionClass ...$args) {
+storage  function variadicWithType(\\ReflectionClass ...$args) {
 
 }
-public  function variadicWithTypeByRef(\\ReflectionClass &...$args) {
+storage  function variadicWithTypeByRef(\\ReflectionClass &...$args) {
 
 }
 
@@ -289,7 +289,7 @@ PHP;
         $class->getMethods()->willReturn(array($method));
 
         $method->getName()->willReturn('getName');
-        $method->getVisibility()->willReturn('public');
+        $method->getVisibility()->willReturn('storage');
         $method->isStatic()->willReturn(false);
         $method->getArguments()->willReturn(array($argument));
         $method->hasReturnType()->willReturn(false);
@@ -309,7 +309,7 @@ PHP;
 namespace  {
 class CustomClass extends \RuntimeException implements \Prophecy\Doubler\Generator\MirroredInterface {
 
-public  function getName(array &$fullname = NULL) {
+storage  function getName(array &$fullname = NULL) {
 return $this->name;
 }
 

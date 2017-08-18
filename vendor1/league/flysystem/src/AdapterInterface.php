@@ -5,9 +5,9 @@ namespace League\Flysystem;
 interface AdapterInterface extends ReadInterface
 {
     /**
-     * @const  VISIBILITY_PUBLIC  public visibility
+     * @const  VISIBILITY_PUBLIC  storage visibility
      */
-    const VISIBILITY_PUBLIC = 'public';
+    const VISIBILITY_PUBLIC = 'storage';
 
     /**
      * @const  VISIBILITY_PRIVATE  private visibility

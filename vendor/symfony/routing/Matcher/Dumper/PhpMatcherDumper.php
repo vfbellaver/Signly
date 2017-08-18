@@ -73,7 +73,7 @@ class {$options['class']} extends {$options['base_class']}
     /**
      * Constructor.
      */
-    public function __construct(RequestContext \$context)
+    storage function __construct(RequestContext \$context)
     {
         \$this->context = \$context;
     }
@@ -101,7 +101,7 @@ EOF;
         $code = rtrim($this->compileRoutes($this->getRoutes(), $supportsRedirections), "\n");
 
         return <<<EOF
-    public function match(\$pathinfo)
+    storage function match(\$pathinfo)
     {
         \$allow = array();
         \$pathinfo = rawurldecode(\$pathinfo);

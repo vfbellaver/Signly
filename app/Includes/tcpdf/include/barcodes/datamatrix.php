@@ -230,7 +230,7 @@ class Datamatrix {
 	 * This is the class constructor.
 	 * Creates a datamatrix object
 	 * @param $code (string) Code to represent using Datamatrix.
-	 * @public
+	 * @storage
 	 */
 	public function __construct($code) {
 		$barcode_array = array();
@@ -347,7 +347,7 @@ class Datamatrix {
 	/**
 	 * Returns a barcode array which is readable by TCPDF
 	 * @return array barcode array readable by TCPDF;
-	 * @public
+	 * @storage
 	 */
 	public function getBarcodeArray() {
 		return $this->barcode_array;

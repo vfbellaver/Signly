@@ -527,7 +527,7 @@ class PDF417 {
 	 * @param $ecl (int) error correction level (0-8); default -1 = automatic correction level
 	 * @param $aspectratio (float) the width to height of the symbol (excluding quiet zones)
 	 * @param $macro (array) information for macro block
-	 * @public
+	 * @storage
 	 */
 	public function __construct($code, $ecl=-1, $aspectratio=2, $macro=array()) {
 		$barcode_array = array();
@@ -726,7 +726,7 @@ class PDF417 {
 	/**
 	 * Returns a barcode array which is readable by TCPDF
 	 * @return array barcode array readable by TCPDF;
-	 * @public
+	 * @storage
 	 */
 	public function getBarcodeArray() {
 		return $this->barcode_array;

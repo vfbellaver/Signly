@@ -182,7 +182,7 @@ class ShellOutput extends ConsoleOutput
         $formatter->setStyle('hidden',  new OutputFormatterStyle('black'));
 
         // Visibility
-        $formatter->setStyle('public',    new OutputFormatterStyle(null, null, array('bold')));
+        $formatter->setStyle('storage',    new OutputFormatterStyle(null, null, array('bold')));
         $formatter->setStyle('protected', new OutputFormatterStyle('yellow'));
         $formatter->setStyle('private',   new OutputFormatterStyle('red'));
         $formatter->setStyle('global',    new OutputFormatterStyle('cyan', null, array('bold')));

@@ -62,7 +62,7 @@ class {$options['class']} extends {$options['base_class']}
     /**
      * Constructor.
      */
-    public function __construct(RequestContext \$context, LoggerInterface \$logger = null)
+    storage function __construct(RequestContext \$context, LoggerInterface \$logger = null)
     {
         \$this->context = \$context;
         \$this->logger = \$logger;
@@ -109,7 +109,7 @@ EOF;
     private function generateGenerateMethod()
     {
         return <<<EOF
-    public function generate(\$name, \$parameters = array(), \$referenceType = self::ABSOLUTE_PATH)
+    storage function generate(\$name, \$parameters = array(), \$referenceType = self::ABSOLUTE_PATH)
     {
         if (!isset(self::\$declaredRoutes[\$name])) {
             throw new RouteNotFoundException(sprintf('Unable to generate a URL for the named route "%s" as such route does not exist.', \$name));

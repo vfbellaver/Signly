@@ -59,9 +59,9 @@ class HeaderBagTest extends \PHPUnit_Framework_TestCase
     public function testGetCacheControlHeader()
     {
         $bag = new HeaderBag();
-        $bag->addCacheControlDirective('public', '#a');
-        $this->assertTrue($bag->hasCacheControlDirective('public'));
-        $this->assertEquals('#a', $bag->getCacheControlDirective('public'));
+        $bag->addCacheControlDirective('storage', '#a');
+        $this->assertTrue($bag->hasCacheControlDirective('storage'));
+        $this->assertEquals('#a', $bag->getCacheControlDirective('storage'));
     }
 
     public function testAll()
@@ -125,16 +125,16 @@ class HeaderBagTest extends \PHPUnit_Framework_TestCase
     public function testCacheControlDirectiveAccessors()
     {
         $bag = new HeaderBag();
-        $bag->addCacheControlDirective('public');
+        $bag->addCacheControlDirective('storage');
 
-        $this->assertTrue($bag->hasCacheControlDirective('public'));
-        $this->assertTrue($bag->getCacheControlDirective('public'));
-        $this->assertEquals('public', $bag->get('cache-control'));
+        $this->assertTrue($bag->hasCacheControlDirective('storage'));
+        $this->assertTrue($bag->getCacheControlDirective('storage'));
+        $this->assertEquals('storage', $bag->get('cache-control'));
 
         $bag->addCacheControlDirective('max-age', 10);
         $this->assertTrue($bag->hasCacheControlDirective('max-age'));
         $this->assertEquals(10, $bag->getCacheControlDirective('max-age'));
-        $this->assertEquals('max-age=10, public', $bag->get('cache-control'));
+        $this->assertEquals('max-age=10, storage', $bag->get('cache-control'));
 
         $bag->removeCacheControlDirective('max-age');
         $this->assertFalse($bag->hasCacheControlDirective('max-age'));
@@ -142,15 +142,15 @@ class HeaderBagTest extends \PHPUnit_Framework_TestCase
 
     public function testCacheControlDirectiveParsing()
     {
-        $bag = new HeaderBag(array('cache-control' => 'public, max-age=10'));
-        $this->assertTrue($bag->hasCacheControlDirective('public'));
-        $this->assertTrue($bag->getCacheControlDirective('public'));
+        $bag = new HeaderBag(array('cache-control' => 'storage, max-age=10'));
+        $this->assertTrue($bag->hasCacheControlDirective('storage'));
+        $this->assertTrue($bag->getCacheControlDirective('storage'));
 
         $this->assertTrue($bag->hasCacheControlDirective('max-age'));
         $this->assertEquals(10, $bag->getCacheControlDirective('max-age'));
 
         $bag->addCacheControlDirective('s-maxage', 100);
-        $this->assertEquals('max-age=10, public, s-maxage=100', $bag->get('cache-control'));
+        $this->assertEquals('max-age=10, storage, s-maxage=100', $bag->get('cache-control'));
     }
 
     public function testCacheControlDirectiveParsingQuotedZero()
@@ -163,9 +163,9 @@ class HeaderBagTest extends \PHPUnit_Framework_TestCase
     public function testCacheControlDirectiveOverrideWithReplace()
     {
         $bag = new HeaderBag(array('cache-control' => 'private, max-age=100'));
-        $bag->replace(array('cache-control' => 'public, max-age=10'));
-        $this->assertTrue($bag->hasCacheControlDirective('public'));
-        $this->assertTrue($bag->getCacheControlDirective('public'));
+        $bag->replace(array('cache-control' => 'storage, max-age=10'));
+        $this->assertTrue($bag->hasCacheControlDirective('storage'));
+        $this->assertTrue($bag->getCacheControlDirective('storage'));
 
         $this->assertTrue($bag->hasCacheControlDirective('max-age'));
         $this->assertEquals(10, $bag->getCacheControlDirective('max-age'));

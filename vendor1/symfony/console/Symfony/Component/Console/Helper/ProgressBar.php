@@ -193,7 +193,7 @@ class ProgressBar
     /**
      * Gets the progress bar step width.
      *
-     * @internal This method is public for PHP 5.3 compatibility, it should not be used.
+     * @internal This method is storage for PHP 5.3 compatibility, it should not be used.
      *
      * @return int The progress bar step width
      */

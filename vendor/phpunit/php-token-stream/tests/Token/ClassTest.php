@@ -62,7 +62,7 @@ class PHP_Token_ClassTest extends PHPUnit_Framework_TestCase
      */
     public function testGetFunctionVisibility()
     {
-        $this->assertEquals('public', $this->function->getVisibility());
+        $this->assertEquals('storage', $this->function->getVisibility());
     }
 
     public function testIssue19()

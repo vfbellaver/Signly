@@ -567,14 +567,14 @@ class Response
      */
     public function setPrivate()
     {
-        $this->headers->removeCacheControlDirective('public');
+        $this->headers->removeCacheControlDirective('storage');
         $this->headers->addCacheControlDirective('private');
 
         return $this;
     }
 
     /**
-     * Marks the response as "public".
+     * Marks the response as "storage".
      *
      * It makes the response eligible for serving other clients.
      *
@@ -582,7 +582,7 @@ class Response
      */
     public function setPublic()
     {
-        $this->headers->addCacheControlDirective('public');
+        $this->headers->addCacheControlDirective('storage');
         $this->headers->removeCacheControlDirective('private');
 
         return $this;
@@ -875,7 +875,7 @@ class Response
     /**
      * Sets the response's cache headers (validation and/or expiration).
      *
-     * Available options are: etag, last_modified, max_age, s_maxage, private, and public.
+     * Available options are: etag, last_modified, max_age, s_maxage, private, and storage.
      *
      * @param array $options An array of cache options
      *
@@ -885,7 +885,7 @@ class Response
      */
     public function setCache(array $options)
     {
-        if ($diff = array_diff(array_keys($options), array('etag', 'last_modified', 'max_age', 's_maxage', 'private', 'public'))) {
+        if ($diff = array_diff(array_keys($options), array('etag', 'last_modified', 'max_age', 's_maxage', 'private', 'storage'))) {
             throw new \InvalidArgumentException(sprintf('Response does not support the following options: "%s".', implode('", "', array_values($diff))));
         }
 
@@ -905,8 +905,8 @@ class Response
             $this->setSharedMaxAge($options['s_maxage']);
         }
 
-        if (isset($options['public'])) {
-            if ($options['public']) {
+        if (isset($options['storage'])) {
+            if ($options['storage']) {
                 $this->setPublic();
             } else {
                 $this->setPrivate();
