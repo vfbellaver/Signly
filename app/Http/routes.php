@@ -95,8 +95,8 @@ Route::get('/proposal-signature', 'ProposalController@proposalForm');
 Route::get('/proposals/book/{id}', 'ProposalController@bookProposal');
 
 //Proposal settings
-Route::post('/logo-proposal', ['as' => 'logo.upload', 'uses' => 'ProposalSettingsController@logo']);
-Route::post('/get-clients', ['as' => 'get.client', 'uses' => 'ProposalSettingsController@client']);
+Route::post('/logo-proposal', ['as' => 'setthings', 'uses' => 'ProposalSettingsController@settings']);
+//Route::post('/get-clients', ['as' => 'get.client', 'uses' => 'ProposalSettingsController@client']);
 
 Route::get('/add-proposal', 'ProposalController@add');
 Route::get('/edit-proposal-billboards/{id}', 'ProposalController@edit');

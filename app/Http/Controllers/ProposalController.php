@@ -8,6 +8,8 @@ use App\Http\Requests\ProposalFaceBillboardRequest;
 use App\Http\Requests\CommentFormRequest;
 use App\Http\Requests\ContractFormRequest;
 use App\Http\Requests\ProposalSettingsFormRequest;
+use App\ProposalSettings;
+use Illuminate\Support\Facades\Auth;
 use Response;
 use View;
 use DB;
@@ -683,7 +685,9 @@ UNAUTHORIZED REPRESENTATIONS	Neither party hereto shall be bound by any agreemen
 	}
 
 	public function settings () {
-	    return view('proposal.settings');
+
+	    $settings = ProposalSettings::where('user_id',$this->user->id)->first();
+	    return view('proposal.settings',compact('settings'));
     }
 
 }

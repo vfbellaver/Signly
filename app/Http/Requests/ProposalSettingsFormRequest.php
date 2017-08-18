@@ -13,13 +13,12 @@ class ProposalSettingsFormRequest extends FormRequest
     public function rules()
     {
         return [
-            'user_id' => 'required',
-            'email' => 'required',
             'website' => 'required',
-            'street' => 'required',
-            'city' => 'required',
-            'state' => 'required',
-            'zip_code' => 'required'
+            'path_image' => 'required',
+            'user_street' => 'required',
+            'user_city' => 'required',
+            'user_state' => 'required',
+            'user_zipcode' => 'required'
         ];
     }
 

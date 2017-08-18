@@ -116,7 +116,7 @@
 					</div>
 				</form>
 				<div class="pull-right">
-					<!-- <div id="daterange" class="btn">
+					<!-- <idv id="daterange" class="btn">
 	                  <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
 	                  <span></span> <b class="caret"></b>
 	               	</div> -->
@@ -1303,7 +1303,7 @@
 			    $('.sidr-class-table').addClass('table');
 
 
-				$('#sidr-id-copy_link').click( function() {  
+				$('#sidr-id-copy_link').click( function() {
 
 					$.ajax({
 						 method: "POST",
@@ -1320,7 +1320,7 @@
 				});
 
 				//var copyEmailBtn = document.querySelector('.copy_link');  
-				// var copyEmailBtn = document.querySelector('#sidr-id-copy_link');  
+				// var copyEmailBtn = document.querySelector('#sidr-id-copy_link');
 				
 
 				// copyEmailBtn.addEventListener('click', function(event) {  

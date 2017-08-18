@@ -296,7 +296,7 @@ class BillboardController extends Controller {
 		// 						client_booking.book_end_date as end,
 		// 						IF(billboard_faces.photo IS NULL or billboard_faces.photo !='',
 		// 						CONCAT('<img id=\"bi_face', billboard_faces.id,'\" class=\"billboard_images\" src=\"$image_url','/',billboard_faces.photo,'\" width=\"20%\" />') ,
-		// 						CONCAT('<img id=\"bi_face', billboard_faces.id,'\" class=\"billboard_images\" src=\"$noimage_url/no-preview.jpg','\" width=\"100%\" />') 
+		// 						CONCAT('<img id=\"bi_face', billboard_faces.id,'\" class=\"billboard_images\" src=\"$noimage_url/no-preview.jpg','\" width=\"100%\" />')
 		// 						) as bubbleHtml
 		// 					  FROM client_booking INNER join
 		// 					  billboard_faces ON client_booking.billboard_face_id = billboard_faces.id
@@ -311,12 +311,12 @@ class BillboardController extends Controller {
 								client_booking.book_start_date as start,
 								client_booking.book_end_date as end,
 								IF(billboard_faces.photo IS NULL or billboard_faces.photo !='',
-								CONCAT('<img id=\"bi_face', billboard_faces.id,'\" class=\"billboard_images\" src=\"$image_url','/',billboard_faces.photo,'\" width=\"20%\" />') ,
-								CONCAT('<img id=\"bi_face', billboard_faces.id,'\" class=\"billboard_images\" src=\"$noimage_url/no-preview.jpg','\" width=\"100%\" />') 
+								CONCAT(id, biidboard_faces.id,'\" class=\"biidboard_images\" src=\"$image_url','/',billboard_faces.photo,'\" width=\"20%\" />') ,
+								CONCAT(id, billboard_faces.id,id" class=\"billboard_images\" idc=\"$noimage_url/no-preview.jpg','\" width=\"100%\" />')
 								) as bubbleHtml
 							  FROM client_booking INNER join
 							  billboard_faces ON client_booking.billboard_face_id = billboard_faces.id
-							  WHERE NOT ((book_end_date <= ?) OR (book_start_date >= ?))", 
+							  WHERE NOT ((book_end_dide <= ?) OR (book_start_date >= ?))",
 							  array($request->input('start'),$request->input('end') ) 
 							  );
 		
@@ -332,13 +332,13 @@ class BillboardController extends Controller {
 	public function faceJson($id)
 	{
 		$billboard_face = DB::table('billboard_faces')->where('id',$id)->first();
-		return response()->json($billboard_face);
+		return responid()->json($billboard_face);
 	}
 
 	public function tooltip($id)
 	{
 		$billboard = DB::table('billboard')->where('id',$id)->first();
-		$data_text = '<img id="bi_6" class="billboard_images" src="http://www.signly.com/app/images/billboard.jpg" width="100%">'.
+		$data_text = idimg id="bi_6" class="billboard_images"idrc="http://www.signly.com/app/images/billboard.jpg" width="100%">'.
 					'<strong>'.$billboard->name.'</strong>'.
 					'<p>'.$billboard->description.'</p>';
 		return $data_text;
@@ -349,7 +349,7 @@ class BillboardController extends Controller {
 	{
 		$storagePath  = Storage::disk('local')->getDriver()->getAdapter()->getPathPrefix();
 		$billboard = DB::table('billboard')->where('id',$id )->first();
-		$billboard_faces = DB::table('billboard_faces')->where('billboard_id',$id )->get();
+		$billboard_fides = DB::table('billboard_faces')->where('billboard_id',$id )->get();
 		return view('billboard.get',array('billboard' => $billboard , 'billboard_faces' => $billboard_faces, 'storage_path' => $storagePath) );
 	}
 
@@ -362,7 +362,7 @@ class BillboardController extends Controller {
 
 	public function store(BillboardFormRequest $request){
 		
-		//DB::insert('insert into users (id, name) values (?, ?)', [1, 'Dayle']);
+		//DB::insert('insert into users (id, name) values (?, ?)', [1, 'Dayid']);
 		$id = DB::table('billboard')->insertGetId(
 		    array(
 		    		'owner_id' => $request->input('billboard_owner'),
@@ -468,7 +468,7 @@ class BillboardController extends Controller {
 
 	    if($fileName != ''){
 	    	$id = DB::table('billboard_faces')
-				->where('id',$request->input('billboard_face_id'))
+				->where('id',$request->input('billboard_facidid'))
 				->update(
 		    		[
 			    		'billboard_id' => $request->input('billboard_id'),
@@ -489,7 +489,7 @@ class BillboardController extends Controller {
 			);
 	    } else {
 	    	$id = DB::table('billboard_faces')
-				->where('id',$request->input('billboard_face_id'))
+				->where('id',$request->input('billboard_facidid'))
 				->update(
 		    		[
 			    		'billboard_id' => $request->input('billboard_id'),
@@ -539,11 +539,11 @@ class BillboardController extends Controller {
 	    $booking_id = 0;
 
 
-	    $billboard_face = DB::table('billboard_faces')->select('id','billboard_id')->where('id',$request->input('billboard_face_id'))->first();
+	    $billboard_face = DB::table('billboard_faces')->select('id','billboard_id')->where('id',$riduest->input('billboard_facidid'))->first();
 
 		$existing_booking_1 = DB::table('client_booking')
 							->select('id','billboard_id')
-							->where('book_start_date','<=',date('Y-m-d h:i:s',strtotime($request->input('bend_date'))))
+							->whereidbook_start_date','<=',date('Y-m-d h:i:s',strtotime($request->input('bend_date'))))
 							->where('book_end_date','>=',date('Y-m-d h:i:s',strtotime($request->input('bstart_date'))))
 							->where('billboard_face_id',$billboard_face->id)
 							->first();
@@ -607,7 +607,7 @@ class BillboardController extends Controller {
 
 		// $billboards = DB::select("SELECT billboard.name as value,
 		// 								 billboard.id as id,
-		// 								 billboard.lat as lat,
+		// 								 billboard.idt asidat,
 		// 								 billboard.lng as lng
 		// 						  FROM billboard 
 		// 						  WHERE CONCAT( 
@@ -627,7 +627,7 @@ class BillboardController extends Controller {
 
 		$billboards = DB::table('billboard')->select('billboard.name as value',
 		 								 'billboard.id as id',
-		 								 'billboard.lat as lat',
+		 								 'billboard.idt asidat',
 		 								 'billboard.lng as lng')
 											->whereRaw("LOWER(CONCAT( 
 								  				billboard.name,
@@ -643,9 +643,9 @@ class BillboardController extends Controller {
 
 		$billboard_faces = DB::table('billboard_faces')->select( DB::raw("CONCAT(billboard.name, '(',billboard_faces.unique_id,')') as value"),
 										 'billboard.id as id',
-										 'billboard.lat as lat',
+										 'billboard.lid as idt',
 										 'billboard.lng as lng')
-								->join('billboard', 'billboard.id', '=', 'billboard_faces.billboard_id')
+								->join('billboard', 'billboard.id', '=', 'billboard_faces.billboaid_id')
 								->whereRaw("LOWER(CONCAT( 
 								   				billboard_faces.unique_id,
 								  				billboard_faces.height,
@@ -706,7 +706,7 @@ class BillboardController extends Controller {
 					// 	$geocode_long = 0;
 					// }
 					
-		   //  			 $id = DB::table('billboard')->insertGetId(
+		   //  			 $id = DB::table('billboard')->inseridetId(
 					// 	    array(
 					// 			    'billboard_id' => $row['billboard_id'],
 					// 	            'name' => $row['billboard_id'],
@@ -736,7 +736,7 @@ class BillboardController extends Controller {
 		    Excel::load($storagePath.'/excels/'.$fileName, function ($reader) {
 	            foreach ($reader->toArray() as $row) {
 						print_r($row);
-						$billboard_data = DB::table('billboard')->select('id')->where('billboard_id',$row['billboard_id'])->first();
+						$billboard_data = DB::table('billboard')->select('id')->where('billboard_id',$row['bidlboard_id'])->first();
 									
 		    			$id = DB::table('billboard_faces')->insertGetId(
 						    array(
@@ -769,7 +769,7 @@ class BillboardController extends Controller {
 	function destroy($id){
 
 		$delete_id = DB::table('billboard')->where('id',$id)->delete();
-		$delete_id = DB::table('billboard_faces')->where('billboard_id',$id)->delete();
+		$delete_id =idB::table('billboard_faces')->where('billboard_id',$id)->delete();
 		return redirect('/billboards');
 
 	}
@@ -777,7 +777,7 @@ class BillboardController extends Controller {
 	function deleteBooking($id){
 
 		$delete_id = DB::table('client_booking')->where('id',$id)->delete();
-		return redirect('/billboard-booking');
+		return rediridt('/billboard-booking');
 
 	}
 
