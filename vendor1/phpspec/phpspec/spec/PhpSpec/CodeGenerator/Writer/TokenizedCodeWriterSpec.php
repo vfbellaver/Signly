@@ -83,7 +83,7 @@ final class MyClass
     /**
      * @return string
      */
-    public function methodOne()
+    storage function methodOne()
     {
         return 'something';
     }
@@ -94,7 +94,7 @@ SINGLE_METHOD_CLASS;
     private function getMethod()
     {
         return <<<METHOD
-    public function newMethod()
+    storage function newMethod()
     {
         return 'newSomething';
     }
@@ -113,12 +113,12 @@ final class MyClass
     /**
      * @return string
      */
-    public function methodOne()
+    storage function methodOne()
     {
         return 'something';
     }
 
-    public function newMethod()
+    storage function newMethod()
     {
         return 'newSomething';
     }
@@ -135,7 +135,7 @@ namespace MyNamespace;
 
 final class MyClass
 {
-    public function newMethod()
+    storage function newMethod()
     {
         return 'newSomething';
     }
@@ -143,7 +143,7 @@ final class MyClass
     /**
      * @return string
      */
-    public function methodOne()
+    storage function methodOne()
     {
         return 'something';
     }
@@ -163,7 +163,7 @@ final class MyClass
     /**
      * @return string
      */
-    public function methodOne()
+    storage function methodOne()
     {
         return 'something';
     }
@@ -171,7 +171,7 @@ final class MyClass
     /**
      * @return string
      */
-    public function methodTwo()
+    storage function methodTwo()
     {
         return 'something';
     }
@@ -191,12 +191,12 @@ final class MyClass
     /**
      * @return string
      */
-    public function methodOne()
+    storage function methodOne()
     {
         return 'something';
     }
 
-    public function newMethod()
+    storage function newMethod()
     {
         return 'newSomething';
     }
@@ -204,7 +204,7 @@ final class MyClass
     /**
      * @return string
      */
-    public function methodTwo()
+    storage function methodTwo()
     {
         return 'something';
     }
@@ -234,7 +234,7 @@ namespace MyNamespace;
 
 final class MyClass
 {
-    public function newMethod()
+    storage function newMethod()
     {
         return 'newSomething';
     }
@@ -251,7 +251,7 @@ namespace MyNamespace;
 
 final class MyClass
 {
-    public function braceMethod()
+    storage function braceMethod()
     {
         return "{$foo}";
     }
@@ -268,12 +268,12 @@ namespace MyNamespace;
 
 final class MyClass
 {
-    public function braceMethod()
+    storage function braceMethod()
     {
         return "{$foo}";
     }
 
-    public function newMethod()
+    storage function newMethod()
     {
         return 'newSomething';
     }

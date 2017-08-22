@@ -22,7 +22,7 @@ use Symfony\Component\Console\Input\InputInterface;
 abstract class Enumerator
 {
     // Output styles
-    const IS_PUBLIC    = 'public';
+    const IS_PUBLIC    = 'storage';
     const IS_PROTECTED = 'protected';
     const IS_PRIVATE   = 'private';
     const IS_GLOBAL    = 'global';
@@ -71,7 +71,7 @@ abstract class Enumerator
      *         'Constants' => [
      *             'FOO' => [
      *                 'name'  => 'FOO',
-     *                 'style' => 'public',
+     *                 'style' => 'storage',
      *                 'value' => '123',
      *             ],
      *         ],

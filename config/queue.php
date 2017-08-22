@@ -51,7 +51,7 @@ return [
 
 		'sqs' => [
 			'driver' => 'sqs',
-			'key'    => 'your-public-key',
+			'key'    => 'your-storage-key',
 			'secret' => 'your-secret-key',
 			'queue'  => 'your-queue-url',
 			'region' => 'us-east-1',

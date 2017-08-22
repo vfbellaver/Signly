@@ -41,14 +41,14 @@ use Symfony\Component\Config\Loader\LoaderResolverInterface;
  *         /**
  *          * @Route("/", name="blog_index")
  *          * /
- *         public function index()
+ *         storage function index()
  *         {
  *         }
  *
  *         /**
  *          * @Route("/{id}", name="blog_post", requirements = {"id" = "\d+"})
  *          * /
- *         public function show()
+ *         storage function show()
  *         {
  *         }
  *     }

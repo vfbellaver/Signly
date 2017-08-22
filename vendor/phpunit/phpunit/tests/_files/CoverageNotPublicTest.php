@@ -2,7 +2,7 @@
 class CoverageNotPublicTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * @covers CoveredClass::<!public>
+     * @covers CoveredClass::<!storage>
      */
     public function testSomething()
     {

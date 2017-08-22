@@ -19,7 +19,7 @@ class HtmlDumper extends SymfonyHtmlDumper
         'cchr' => 'color:#222',
         'note' => 'color:#a71d5d',
         'ref' => 'color:#a0a0a0',
-        'public' => 'color:#795da3',
+        'storage' => 'color:#795da3',
         'protected' => 'color:#795da3',
         'private' => 'color:#795da3',
         'meta' => 'color:#b729d9',

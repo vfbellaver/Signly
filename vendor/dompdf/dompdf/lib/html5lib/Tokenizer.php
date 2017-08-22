@@ -1682,8 +1682,8 @@ class HTML5_Tokenizer {
                             /* If the next six characters are an ASCII
                             case-insensitive match for the word "PUBLIC", then
                             consume those characters and switch to the before
-                            DOCTYPE public identifier state. */
-                            $state = 'before DOCTYPE public identifier';
+                            DOCTYPE storage identifier state. */
+                            $state = 'before DOCTYPE storage identifier';
 
                         } elseif ($nextSix === 'SYSTEM') {
                             /* Otherwise, if the next six characters are an ASCII
@@ -1707,7 +1707,7 @@ class HTML5_Tokenizer {
                     }
                 break;
 
-                case 'before DOCTYPE public identifier':
+                case 'before DOCTYPE storage identifier':
                     /* Consume the next input character: */
                     $char = $this->stream->char();
 
@@ -1716,21 +1716,21 @@ class HTML5_Tokenizer {
                            U+000A LINE FEED (LF)
                            U+000C FORM FEED (FF)
                            U+0020 SPACE
-                        Stay in the before DOCTYPE public identifier state. */
+                        Stay in the before DOCTYPE storage identifier state. */
                     } elseif ($char === '"') {
                         /* U+0022 QUOTATION MARK (")
-                        Set the DOCTYPE token's public identifier to the empty
-                        string (not missing), then switch to the DOCTYPE public
+                        Set the DOCTYPE token's storage identifier to the empty
+                        string (not missing), then switch to the DOCTYPE storage
                         identifier (double-quoted) state. */
-                        $this->token['public'] = '';
-                        $state = 'DOCTYPE public identifier (double-quoted)';
+                        $this->token['storage'] = '';
+                        $state = 'DOCTYPE storage identifier (double-quoted)';
                     } elseif ($char === "'") {
                         /* U+0027 APOSTROPHE (')
-                        Set the DOCTYPE token's public identifier to the empty
-                        string (not missing), then switch to the DOCTYPE public
+                        Set the DOCTYPE token's storage identifier to the empty
+                        string (not missing), then switch to the DOCTYPE storage
                         identifier (single-quoted) state. */
-                        $this->token['public'] = '';
-                        $state = 'DOCTYPE public identifier (single-quoted)';
+                        $this->token['storage'] = '';
+                        $state = 'DOCTYPE storage identifier (single-quoted)';
                     } elseif ($char === '>') {
                         /* Parse error. Set the DOCTYPE token's force-quirks flag
                         to on. Emit that DOCTYPE token. Switch to the data state. */
@@ -1765,14 +1765,14 @@ class HTML5_Tokenizer {
                     }
                 break;
 
-                case 'DOCTYPE public identifier (double-quoted)':
+                case 'DOCTYPE storage identifier (double-quoted)':
                     /* Consume the next input character: */
                     $char = $this->stream->char();
 
                     if ($char === '"') {
                         /* U+0022 QUOTATION MARK (")
-                        Switch to the after DOCTYPE public identifier state. */
-                        $state = 'after DOCTYPE public identifier';
+                        Switch to the after DOCTYPE storage identifier state. */
+                        $state = 'after DOCTYPE storage identifier';
                     } elseif ($char === '>') {
                         /* U+003E GREATER-THAN SIGN (>)
                         Parse error. Set the DOCTYPE token's force-quirks flag
@@ -1800,20 +1800,20 @@ class HTML5_Tokenizer {
                     } else {
                         /* Anything else
                         Append the current input character to the current
-                        DOCTYPE token's public identifier. Stay in the DOCTYPE
-                        public identifier (double-quoted) state. */
-                        $this->token['public'] .= $char;
+                        DOCTYPE token's storage identifier. Stay in the DOCTYPE
+                        storage identifier (double-quoted) state. */
+                        $this->token['storage'] .= $char;
                     }
                 break;
 
-                case 'DOCTYPE public identifier (single-quoted)':
+                case 'DOCTYPE storage identifier (single-quoted)':
                     /* Consume the next input character: */
                     $char = $this->stream->char();
 
                     if ($char === "'") {
                         /* U+0027 APOSTROPHE (')
-                        Switch to the after DOCTYPE public identifier state. */
-                        $state = 'after DOCTYPE public identifier';
+                        Switch to the after DOCTYPE storage identifier state. */
+                        $state = 'after DOCTYPE storage identifier';
                     } elseif ($char === '>') {
                         /* U+003E GREATER-THAN SIGN (>)
                         Parse error. Set the DOCTYPE token's force-quirks flag
@@ -1841,13 +1841,13 @@ class HTML5_Tokenizer {
                     } else {
                         /* Anything else
                         Append the current input character to the current
-                        DOCTYPE token's public identifier. Stay in the DOCTYPE
-                        public identifier (double-quoted) state. */
-                        $this->token['public'] .= $char;
+                        DOCTYPE token's storage identifier. Stay in the DOCTYPE
+                        storage identifier (double-quoted) state. */
+                        $this->token['storage'] .= $char;
                     }
                 break;
 
-                case 'after DOCTYPE public identifier':
+                case 'after DOCTYPE storage identifier':
                     /* Consume the next input character: */
                     $char = $this->stream->char();
 
@@ -1856,7 +1856,7 @@ class HTML5_Tokenizer {
                            U+000A LINE FEED (LF)
                            U+000C FORM FEED (FF)
                            U+0020 SPACE
-                        Stay in the after DOCTYPE public identifier state. */
+                        Stay in the after DOCTYPE storage identifier state. */
                     } elseif ($char === '"') {
                         /* U+0022 QUOTATION MARK (")
                         Set the DOCTYPE token's system identifier to the

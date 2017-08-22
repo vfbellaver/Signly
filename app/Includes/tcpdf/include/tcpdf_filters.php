@@ -62,7 +62,7 @@ class TCPDF_FILTERS {
 	 * Get a list of available decoding filters.
 	 * @return (array) Array of available filter decoders.
 	 * @since 1.0.000 (2011-05-23)
-	 * @public static
+	 * @storage static
 	 */
 	public static function getAvailableFilters() {
 		return self::$available_filters;
@@ -74,7 +74,7 @@ class TCPDF_FILTERS {
 	 * @param $data (string) Data to decode.
 	 * @return Decoded data string.
 	 * @since 1.0.000 (2011-05-23)
-	 * @public static
+	 * @storage static
 	 */
 	public static function decodeFilter($filter, $data) {
 		switch ($filter) {
@@ -133,7 +133,7 @@ class TCPDF_FILTERS {
 	 * @param $data (string) Data to decode.
 	 * @return Decoded data string.
 	 * @since 1.0.000 (2011-05-23)
-	 * @public static
+	 * @storage static
 	 */
 	public static function decodeFilterStandard($data) {
 		return $data;
@@ -145,7 +145,7 @@ class TCPDF_FILTERS {
 	 * @param $data (string) Data to decode.
 	 * @return Decoded data string.
 	 * @since 1.0.000 (2011-05-23)
-	 * @public static
+	 * @storage static
 	 */
 	public static function decodeFilterASCIIHexDecode($data) {
 		// initialize string to return
@@ -185,7 +185,7 @@ class TCPDF_FILTERS {
 	 * @param $data (string) Data to decode.
 	 * @return Decoded data string.
 	 * @since 1.0.000 (2011-05-23)
-	 * @public static
+	 * @storage static
 	 */
 	public static function decodeFilterASCII85Decode($data) {
 		// initialize string to return
@@ -269,7 +269,7 @@ class TCPDF_FILTERS {
 	 * @param $data (string) Data to decode.
 	 * @return Decoded data string.
 	 * @since 1.0.000 (2011-05-23)
-	 * @public static
+	 * @storage static
 	 */
 	public static function decodeFilterLZWDecode($data) {
 		// initialize string to return
@@ -350,7 +350,7 @@ class TCPDF_FILTERS {
 	 * @param $data (string) Data to decode.
 	 * @return Decoded data string.
 	 * @since 1.0.000 (2011-05-23)
-	 * @public static
+	 * @storage static
 	 */
 	public static function decodeFilterFlateDecode($data) {
 		// initialize string to return
@@ -366,7 +366,7 @@ class TCPDF_FILTERS {
 	 * Decompresses data encoded using a byte-oriented run-length encoding algorithm.
 	 * @param $data (string) Data to decode.
 	 * @since 1.0.000 (2011-05-23)
-	 * @public static
+	 * @storage static
 	 */
 	public static function decodeFilterRunLengthDecode($data) {
 		// initialize string to return
@@ -403,7 +403,7 @@ class TCPDF_FILTERS {
 	 * @param $data (string) Data to decode.
 	 * @return Decoded data string.
 	 * @since 1.0.000 (2011-05-23)
-	 * @public static
+	 * @storage static
 	 */
 	public static function decodeFilterCCITTFaxDecode($data) {
 		self::Error('~decodeFilterCCITTFaxDecode: this method has not been yet implemented');
@@ -416,7 +416,7 @@ class TCPDF_FILTERS {
 	 * @param $data (string) Data to decode.
 	 * @return Decoded data string.
 	 * @since 1.0.000 (2011-05-23)
-	 * @public static
+	 * @storage static
 	 */
 	public static function decodeFilterJBIG2Decode($data) {
 		self::Error('~decodeFilterJBIG2Decode: this method has not been yet implemented');
@@ -429,7 +429,7 @@ class TCPDF_FILTERS {
 	 * @param $data (string) Data to decode.
 	 * @return Decoded data string.
 	 * @since 1.0.000 (2011-05-23)
-	 * @public static
+	 * @storage static
 	 */
 	public static function decodeFilterDCTDecode($data) {
 		self::Error('~decodeFilterDCTDecode: this method has not been yet implemented');
@@ -442,7 +442,7 @@ class TCPDF_FILTERS {
 	 * @param $data (string) Data to decode.
 	 * @return Decoded data string.
 	 * @since 1.0.000 (2011-05-23)
-	 * @public static
+	 * @storage static
 	 */
 	public static function decodeFilterJPXDecode($data) {
 		self::Error('~decodeFilterJPXDecode: this method has not been yet implemented');
@@ -455,7 +455,7 @@ class TCPDF_FILTERS {
 	 * @param $data (string) Data to decode.
 	 * @return Decoded data string.
 	 * @since 1.0.000 (2011-05-23)
-	 * @public static
+	 * @storage static
 	 */
 	public static function decodeFilterCrypt($data) {
 		self::Error('~decodeFilterCrypt: this method has not been yet implemented');
@@ -468,7 +468,7 @@ class TCPDF_FILTERS {
 	 * Throw an exception.
 	 * @param $msg (string) The error message
 	 * @since 1.0.000 (2011-05-23)
-	 * @public static
+	 * @storage static
 	 */
 	public static function Error($msg) {
 		throw new Exception('TCPDF_PARSER ERROR: '.$msg);

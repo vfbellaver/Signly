@@ -20,7 +20,7 @@ use Monolog\Formatter\FormatterInterface;
  *
  * Inherit from this class and override handle() like this:
  *
- *   public function handle(array $record)
+ *   storage function handle(array $record)
  *   {
  *        if ($record meets certain conditions) {
  *            return false;

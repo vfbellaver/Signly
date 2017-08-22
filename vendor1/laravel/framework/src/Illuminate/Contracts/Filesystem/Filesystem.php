@@ -3,11 +3,11 @@
 interface Filesystem {
 
 	/**
-	 * The public visibility setting.
+	 * The storage visibility setting.
 	 *
 	 * @var string
 	 */
-	const VISIBILITY_PUBLIC = 'public';
+	const VISIBILITY_PUBLIC = 'storage';
 
 	/**
 	 * The private visibility setting.

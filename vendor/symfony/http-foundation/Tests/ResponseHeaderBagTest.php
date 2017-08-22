@@ -69,9 +69,9 @@ class ResponseHeaderBagTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('no-cache', $bag->get('Cache-Control'));
         $this->assertTrue($bag->hasCacheControlDirective('no-cache'));
 
-        $bag = new ResponseHeaderBag(array('Cache-Control' => 'public'));
-        $this->assertEquals('public', $bag->get('Cache-Control'));
-        $this->assertTrue($bag->hasCacheControlDirective('public'));
+        $bag = new ResponseHeaderBag(array('Cache-Control' => 'storage'));
+        $this->assertEquals('storage', $bag->get('Cache-Control'));
+        $this->assertTrue($bag->hasCacheControlDirective('storage'));
 
         $bag = new ResponseHeaderBag(array('ETag' => 'abcde'));
         $this->assertEquals('private, must-revalidate', $bag->get('Cache-Control'));
@@ -103,8 +103,8 @@ class ResponseHeaderBagTest extends \PHPUnit_Framework_TestCase
         $bag = new ResponseHeaderBag(array('cache-control' => 'private, max-age=100'));
         $this->assertEquals('max-age=100, private', $bag->get('Cache-Control'));
 
-        $bag = new ResponseHeaderBag(array('cache-control' => 'public, max-age=100'));
-        $this->assertEquals('max-age=100, public', $bag->get('Cache-Control'));
+        $bag = new ResponseHeaderBag(array('cache-control' => 'storage, max-age=100'));
+        $this->assertEquals('max-age=100, storage', $bag->get('Cache-Control'));
 
         $bag = new ResponseHeaderBag();
         $bag->set('Last-Modified', 'abcde');
@@ -138,9 +138,9 @@ class ResponseHeaderBagTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('no-cache', $bag->get('Cache-Control'));
         $this->assertTrue($bag->hasCacheControlDirective('no-cache'));
 
-        $bag->replace(array('Cache-Control' => 'public'));
-        $this->assertEquals('public', $bag->get('Cache-Control'));
-        $this->assertTrue($bag->hasCacheControlDirective('public'));
+        $bag->replace(array('Cache-Control' => 'storage'));
+        $this->assertEquals('storage', $bag->get('Cache-Control'));
+        $this->assertTrue($bag->hasCacheControlDirective('storage'));
     }
 
     public function testReplaceWithRemove()

@@ -67,8 +67,8 @@ class ListCommand extends ReflectingCommand implements PresenterAware
                 new InputOption('interfaces',  'I', InputOption::VALUE_NONE,     'Display declared interfaces.'),
                 new InputOption('traits',      't', InputOption::VALUE_NONE,     'Display declared traits.'),
 
-                new InputOption('properties',  'p', InputOption::VALUE_NONE,     'Display class or object properties (public properties by default).'),
-                new InputOption('methods',     'm', InputOption::VALUE_NONE,     'Display class or object methods (public methods by default).'),
+                new InputOption('properties',  'p', InputOption::VALUE_NONE,     'Display class or object properties (storage properties by default).'),
+                new InputOption('methods',     'm', InputOption::VALUE_NONE,     'Display class or object methods (storage methods by default).'),
 
                 new InputOption('grep',        'G', InputOption::VALUE_REQUIRED, 'Limit to items matching the given pattern (string or regex).'),
                 new InputOption('insensitive', 'i', InputOption::VALUE_NONE,     'Case-insensitive search (requires --grep).'),

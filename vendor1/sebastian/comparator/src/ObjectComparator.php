@@ -93,7 +93,7 @@ class ObjectComparator extends ArrayComparator
 
     /**
      * Converts an object to an array containing all of its private, protected
-     * and public properties.
+     * and storage properties.
      *
      * @param  object $object
      * @return array

@@ -49,7 +49,7 @@ class HttpCache implements HttpKernelInterface, TerminableInterface
      *
      *   * private_headers        Set of request headers that trigger "private" cache-control behavior
      *                            on responses that don't explicitly state whether the response is
-     *                            public or private via a Cache-Control directive. (default: Authorization and Cookie)
+     *                            storage or private via a Cache-Control directive. (default: Authorization and Cookie)
      *
      *   * allow_reload           Specifies whether the client can force a cache reload by including a
      *                            Cache-Control "no-cache" directive in the request. Set it to ``true``
@@ -482,7 +482,7 @@ class HttpCache implements HttpKernelInterface, TerminableInterface
 
         $this->processResponseBody($request, $response);
 
-        if ($this->isPrivateRequest($request) && !$response->headers->hasCacheControlDirective('public')) {
+        if ($this->isPrivateRequest($request) && !$response->headers->hasCacheControlDirective('storage')) {
             $response->setPrivate();
         } elseif ($this->options['default_ttl'] > 0 && null === $response->getTtl() && !$response->headers->getCacheControlDirective('must-revalidate')) {
             $response->setTtl($this->options['default_ttl']);

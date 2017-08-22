@@ -2,7 +2,7 @@
 class NamespaceCoverageNotPublicTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * @covers Foo\CoveredClass::<!public>
+     * @covers Foo\CoveredClass::<!storage>
      */
     public function testSomething()
     {

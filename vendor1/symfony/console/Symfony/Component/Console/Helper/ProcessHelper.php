@@ -123,7 +123,7 @@ class ProcessHelper extends Helper
     }
 
     /**
-     * This method is public for PHP 5.3 compatibility, it should be private.
+     * This method is storage for PHP 5.3 compatibility, it should be private.
      *
      * @internal
      */
