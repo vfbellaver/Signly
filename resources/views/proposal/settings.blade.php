@@ -16,7 +16,7 @@
                             <div class="col-lg-4">
                                 <div class="card" style="width: 20rem;">
                                     <img class="card-img-top"
-                                         src="{{@$settings->path_image ?asset('/storage/'.$settings->path_image): asset('/images/file.png')}}"
+                                         src="{{@$settings->path_image ?asset('storage/'.$settings->path_image): asset('/images/file.png')}}"
                                          alt="Your Logo Here"
                                          style="margin-left:20%">
                                     <div class="card-body text-center">

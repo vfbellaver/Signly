@@ -28,14 +28,7 @@ class ProposalSettingsController extends Controller {
         $this->middleware('auth');
         $this->user = \Auth::user();
     }
-
-
-    public function client (Request $request) {
-        $clients = DB::table('clients')
-            ->select('first_name','last_name','id')->get();
-        $client = DB::table('clients')->where('id','=',$request->input('client_id'))->first();
-        return view('proposal.settings',array('customer' => $client,'clients'  => $clients));
-    }
+    
 
     public function settings (ProposalSettingsFormRequest $request) {
 
@@ -56,16 +49,16 @@ class ProposalSettingsController extends Controller {
 
         if ($saveOrUpdate) {
             $proposalSettings = ProposalSettings::find($saveOrUpdate);
-            File::delete($proposalSettings->path_image);
-            $file->move(storage_path('app/public'),$file->getClientOriginalName().'.'.$file->getClientOriginalExtension());
-            $data['path_image'] = $file->getClientOriginalName().'.'.$file->getClientOriginalExtension();
+            Storage::delete($proposalSettings->path_image);
+            $file->move(storage_path('app/public'),$file->getClientOriginalName());
+            $data['path_image'] = $file->getClientOriginalName();
             $proposalSettings->update($data);
 
         } else
             {
                 $proposalSettings = new ProposalSettings();
-                $file->move(storage_path('app/public'),$file->getClientOriginalName().'.'.$file->getClientOriginalExtension());
-                $data['path_image'] = $file->getClientOriginalName().'.'.$file->getClientOriginalExtension();
+                $file->move(storage_path('app/public'),$file->getClientOriginalName());
+                $data['path_image'] = $file->getClientOriginalName();
                 $proposalSettings->fill($data);
                 $proposalSettings->user_id = Auth::user()->id;
                 $proposalSettings->save();

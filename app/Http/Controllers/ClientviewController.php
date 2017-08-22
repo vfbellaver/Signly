@@ -45,14 +45,16 @@ class ClientviewController extends Controller {
 
 		$proposal = DB::table('proposal')->where('hash',$hash)->first();
 
-		$proposal_billboards = DB::table('proposal_billboard')->where('proposal_id',$proposal->id)->get();		
+		// alter before $proposal->id
+		$proposal_billboards = DB::table('proposal_billboard')->where('proposal_id',$proposal->id)->get();
 
 		$billboard_ids = array();
 
 		foreach ($proposal_billboards as $proposal_billboard) {
 			$billboard_ids[] = $proposal_billboard->billboard_id;
 		}
-		
+
+		// alter before client_id
 		$clients = DB::table('clients')->where('id',$proposal->client_id)->get();
 		
 		$billboards = DB::table('billboard')->whereIn('id',$billboard_ids)->get();
