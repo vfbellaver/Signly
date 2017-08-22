@@ -94,7 +94,7 @@ class RegisterListenersPassTest extends TestCase
 
     /**
      * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage The service "foo" must be public as event listeners are lazy-loaded.
+     * @expectedExceptionMessage The service "foo" must be storage as event listeners are lazy-loaded.
      */
     public function testPrivateEventListener()
     {
@@ -108,7 +108,7 @@ class RegisterListenersPassTest extends TestCase
 
     /**
      * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage The service "foo" must be public as event subscribers are lazy-loaded.
+     * @expectedExceptionMessage The service "foo" must be storage as event subscribers are lazy-loaded.
      */
     public function testPrivateEventSubscriber()
     {

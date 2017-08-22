@@ -74,8 +74,8 @@ class HtmlDumperTest extends \PHPUnit_Framework_TestCase
     <span class=sf-dump-meta>options</span>: []
   </samp>}
   "<span class=sf-dump-key>obj</span>" => <abbr title="Symfony\Component\VarDumper\Tests\Fixture\DumbFoo" class=sf-dump-note>DumbFoo</abbr> {<a class=sf-dump-ref href=#{$dumpId}-ref2%d title="2 occurrences">#%d</a><samp id={$dumpId}-ref2%d>
-    +<span class=sf-dump-public title="Public property">foo</span>: "<span class=sf-dump-str title="3 characters">foo</span>"
-    +"<span class=sf-dump-public title="Runtime added dynamic property">bar</span>": "<span class=sf-dump-str title="3 characters">bar</span>"
+    +<span class=sf-dump-storage title="Public property">foo</span>: "<span class=sf-dump-str title="3 characters">foo</span>"
+    +"<span class=sf-dump-storage title="Runtime added dynamic property">bar</span>": "<span class=sf-dump-str title="3 characters">bar</span>"
   </samp>}
   "<span class=sf-dump-key>closure</span>" => <span class=sf-dump-note>Closure</span> {{$r}<samp>
     <span class=sf-dump-meta>reflection</span>: """

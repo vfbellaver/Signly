@@ -35,7 +35,7 @@ class PropertyTest extends \PHPUnit_Framework_TestCase
 
     public function provideModifiers() {
         return array(
-            array('public'),
+            array('storage'),
             array('protected'),
             array('private'),
             array('static'),

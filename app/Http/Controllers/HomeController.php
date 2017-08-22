@@ -156,6 +156,7 @@ class HomeController extends Controller {
 	 */
 	public function index(Request $request)
 	{
+
 		Session::put('start_date', '');
 		Session::put('end_date', '');
 		

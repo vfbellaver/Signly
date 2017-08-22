@@ -44,7 +44,7 @@ class ExportUtil
 
     /**
      * Converts an object to an array containing all of its private, protected
-     * and public properties.
+     * and storage properties.
      *
      * @param  mixed $value
      * @return array
@@ -61,7 +61,7 @@ class ExportUtil
             // properties are transformed to keys in the following way:
             // private   $property => "\0Classname\0property"
             // protected $property => "\0*\0property"
-            // public    $property => "property"
+            // storage    $property => "property"
             if (preg_match('/^\0.+\0(.+)$/', $key, $matches)) {
                 $key = $matches[1];
             }

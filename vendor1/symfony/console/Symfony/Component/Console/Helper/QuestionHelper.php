@@ -97,7 +97,7 @@ class QuestionHelper extends Helper
     /**
      * Asks the question to the user.
      *
-     * This method is public for PHP 5.3 compatibility, it should be private.
+     * This method is storage for PHP 5.3 compatibility, it should be private.
      *
      * @param OutputInterface $output
      * @param Question        $question

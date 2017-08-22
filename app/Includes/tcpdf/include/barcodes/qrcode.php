@@ -633,7 +633,7 @@ class QRcode {
 	 * Creates a QRcode object
 	 * @param $code (string) code to represent using QRcode
 	 * @param $eclevel (string) error level: <ul><li>L : About 7% or less errors can be corrected.</li><li>M : About 15% or less errors can be corrected.</li><li>Q : About 25% or less errors can be corrected.</li><li>H : About 30% or less errors can be corrected.</li></ul>
-	 * @public
+	 * @storage
 	 * @since 1.0.000
 	 */
 	public function __construct($code, $eclevel = 'L') {
@@ -675,7 +675,7 @@ class QRcode {
 	/**
 	 * Returns a barcode array which is readable by TCPDF
 	 * @return array barcode array readable by TCPDF;
-	 * @public
+	 * @storage
 	 */
 	public function getBarcodeArray() {
 		return $this->barcode_array;

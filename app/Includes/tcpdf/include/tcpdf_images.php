@@ -54,7 +54,7 @@ class TCPDF_IMAGES {
 	/**
 	 * Array of hinheritable SVG properties.
 	 * @since 5.0.000 (2010-05-02)
-	 * @public static
+	 * @storage static
 	 */
 	public static $svginheritprop = array('clip-rule', 'color', 'color-interpolation', 'color-interpolation-filters', 'color-profile', 'color-rendering', 'cursor', 'direction', 'display', 'fill', 'fill-opacity', 'fill-rule', 'font', 'font-family', 'font-size', 'font-size-adjust', 'font-stretch', 'font-style', 'font-variant', 'font-weight', 'glyph-orientation-horizontal', 'glyph-orientation-vertical', 'image-rendering', 'kerning', 'letter-spacing', 'marker', 'marker-end', 'marker-mid', 'marker-start', 'pointer-events', 'shape-rendering', 'stroke', 'stroke-dasharray', 'stroke-dashoffset', 'stroke-linecap', 'stroke-linejoin', 'stroke-miterlimit', 'stroke-opacity', 'stroke-width', 'text-anchor', 'text-rendering', 'visibility', 'word-spacing', 'writing-mode');
 
@@ -66,7 +66,7 @@ class TCPDF_IMAGES {
 	 * @param $iminfo (array) array of image information returned by getimagesize() function.
 	 * @return string image type
 	 * @since 4.8.017 (2009-11-27)
-	 * @public static
+	 * @storage static
 	 */
 	public static function getImageFileType($imgfile, $iminfo=array()) {
 		$type = '';
@@ -94,7 +94,7 @@ class TCPDF_IMAGES {
 	 * @param $image (image) GD image object.
 	 * return GD image object.
 	 * @since 4.9.016 (2010-04-20)
-	 * @public static
+	 * @storage static
 	 */
 	public static function setGDImageTransparency($new_image, $image) {
 		// default transparency color (white)
@@ -119,7 +119,7 @@ class TCPDF_IMAGES {
 	 * @param $tempfile (string) Temporary file name.
 	 * return image PNG image object.
 	 * @since 4.9.016 (2010-04-20)
-	 * @public static
+	 * @storage static
 	 */
 	public static function _toPNG($image, $tempfile) {
 		// turn off interlaced mode
@@ -142,7 +142,7 @@ class TCPDF_IMAGES {
 	 * @param $quality (int) JPEG quality.
 	 * @param $tempfile (string) Temporary file name.
 	 * return image JPEG image object.
-	 * @public static
+	 * @storage static
 	 */
 	public static function _toJPEG($image, $quality, $tempfile) {
 		imagejpeg($image, $tempfile, $quality);
@@ -157,7 +157,7 @@ class TCPDF_IMAGES {
 	 * Extract info from a JPEG file without using the GD library.
 	 * @param $file (string) image file to parse
 	 * @return array structure containing the image data
-	 * @public static
+	 * @storage static
 	 */
 	public static function _parsejpeg($file) {
 		// check if is a local file
@@ -240,7 +240,7 @@ class TCPDF_IMAGES {
 	 * Extract info from a PNG file without using the GD library.
 	 * @param $file (string) image file to parse
 	 * @return array structure containing the image data
-	 * @public static
+	 * @storage static
 	 */
 	public static function _parsepng($file) {
 		$f = @fopen($file, 'rb');

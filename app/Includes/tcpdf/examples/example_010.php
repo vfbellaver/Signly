@@ -39,7 +39,7 @@ class MC_TCPDF extends TCPDF {
 	 * @param $title (string) chapter title
 	 * @param $file (string) name of the file containing the chapter body
 	 * @param $mode (boolean) if true the chapter body is in HTML, otherwise in simple text.
-	 * @public
+	 * @storage
 	 */
 	public function PrintChapter($num, $title, $file, $mode=false) {
 		// add a new page
@@ -58,7 +58,7 @@ class MC_TCPDF extends TCPDF {
 	 * Set chapter title
 	 * @param $num (int) chapter number
 	 * @param $title (string) chapter title
-	 * @public
+	 * @storage
 	 */
 	public function ChapterTitle($num, $title) {
 		$this->SetFont('helvetica', '', 14);
@@ -71,7 +71,7 @@ class MC_TCPDF extends TCPDF {
 	 * Print chapter body
 	 * @param $file (string) name of the file containing the chapter body
 	 * @param $mode (boolean) if true the chapter body is in HTML, otherwise in simple text.
-	 * @public
+	 * @storage
 	 */
 	public function ChapterBody($file, $mode=false) {
 		$this->selectColumn();

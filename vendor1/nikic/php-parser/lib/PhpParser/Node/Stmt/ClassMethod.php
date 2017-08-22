@@ -29,7 +29,7 @@ class ClassMethod extends Node\Stmt
     public function __construct($name, array $subNodes = array(), array $attributes = array()) {
         $type = isset($subNodes['type']) ? $subNodes['type'] : 0;
         if (0 === ($type & Class_::VISIBILITY_MODIFER_MASK)) {
-            // If no visibility modifier given, PHP defaults to public
+            // If no visibility modifier given, PHP defaults to storage
             $type |= Class_::MODIFIER_PUBLIC;
         }
 

@@ -67,7 +67,7 @@ final class ReservedWordsMethodNameChecker implements NameCheckerInterface
         'print',
         'private',
         'protected',
-        'public',
+        'storage',
         'require',
         'require_once',
         'return',

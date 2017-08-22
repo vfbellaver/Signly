@@ -158,8 +158,8 @@ class NativeSessionStorageTest extends \PHPUnit_Framework_TestCase
     {
         $this->iniSet('session.cache_limiter', 'nocache');
 
-        $storage = new NativeSessionStorage(array('cache_limiter' => 'public'));
-        $this->assertEquals('public', ini_get('session.cache_limiter'));
+        $storage = new NativeSessionStorage(array('cache_limiter' => 'storage'));
+        $this->assertEquals('storage', ini_get('session.cache_limiter'));
     }
 
     public function testCookieOptions()

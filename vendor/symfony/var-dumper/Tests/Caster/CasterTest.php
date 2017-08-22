@@ -24,7 +24,7 @@ class CasterTest extends \PHPUnit_Framework_TestCase
     private $referenceArray = array(
         'null' => null,
         'empty' => false,
-        'public' => 'pub',
+        'storage' => 'pub',
         "\0~\0virtual" => 'virt',
         "\0+\0dynamic" => 'dyn',
         "\0*\0protected" => 'prot',
@@ -57,7 +57,7 @@ class CasterTest extends \PHPUnit_Framework_TestCase
                 array(
                     'null' => null,
                     'empty' => false,
-                    'public' => 'pub',
+                    'storage' => 'pub',
                 ),
             ),
             array(
@@ -100,10 +100,10 @@ class CasterTest extends \PHPUnit_Framework_TestCase
             array(
                 Caster::EXCLUDE_VERBOSE,
                 array(
-                    'public' => 'pub',
+                    'storage' => 'pub',
                     "\0*\0protected" => 'prot',
                 ),
-                array('public', "\0*\0protected"),
+                array('storage', "\0*\0protected"),
             ),
             array(
                 Caster::EXCLUDE_NOT_IMPORTANT,
@@ -114,7 +114,7 @@ class CasterTest extends \PHPUnit_Framework_TestCase
                     "\0+\0dynamic" => 'dyn',
                     "\0Foo\0private" => 'priv',
                 ),
-                array('public', "\0*\0protected"),
+                array('storage', "\0*\0protected"),
             ),
             array(
                 Caster::EXCLUDE_VIRTUAL | Caster::EXCLUDE_DYNAMIC,
@@ -126,7 +126,7 @@ class CasterTest extends \PHPUnit_Framework_TestCase
             array(
                 Caster::EXCLUDE_NOT_IMPORTANT | Caster::EXCLUDE_VERBOSE,
                 $this->referenceArray,
-                array('public', "\0*\0protected"),
+                array('storage', "\0*\0protected"),
             ),
             array(
                 Caster::EXCLUDE_NOT_IMPORTANT | Caster::EXCLUDE_EMPTY,
@@ -138,14 +138,14 @@ class CasterTest extends \PHPUnit_Framework_TestCase
                     "\0*\0protected" => 'prot',
                     "\0Foo\0private" => 'priv',
                 ),
-                array('public', 'empty'),
+                array('storage', 'empty'),
             ),
             array(
                 Caster::EXCLUDE_VERBOSE | Caster::EXCLUDE_EMPTY | Caster::EXCLUDE_STRICT,
                 array(
                     'empty' => false,
                 ),
-                array('public', 'empty'),
+                array('storage', 'empty'),
             ),
         );
     }

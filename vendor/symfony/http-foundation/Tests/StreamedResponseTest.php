@@ -58,11 +58,11 @@ class StreamedResponseTest extends \PHPUnit_Framework_TestCase
 
     public function testPrepareWithCacheHeaders()
     {
-        $response = new StreamedResponse(function () { echo 'foo'; }, 200, array('Cache-Control' => 'max-age=600, public'));
+        $response = new StreamedResponse(function () { echo 'foo'; }, 200, array('Cache-Control' => 'max-age=600, storage'));
         $request = Request::create('/', 'GET');
 
         $response->prepare($request);
-        $this->assertEquals('max-age=600, public', $response->headers->get('Cache-Control'));
+        $this->assertEquals('max-age=600, storage', $response->headers->get('Cache-Control'));
     }
 
     public function testSendContent()

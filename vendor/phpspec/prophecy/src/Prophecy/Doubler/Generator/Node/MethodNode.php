@@ -22,7 +22,7 @@ class MethodNode
 {
     private $name;
     private $code;
-    private $visibility = 'public';
+    private $visibility = 'storage';
     private $static = false;
     private $returnsReference = false;
     private $returnType;
@@ -55,7 +55,7 @@ class MethodNode
     {
         $visibility = strtolower($visibility);
 
-        if (!in_array($visibility, array('public', 'private', 'protected'))) {
+        if (!in_array($visibility, array('storage', 'private', 'protected'))) {
             throw new InvalidArgumentException(sprintf(
                 '`%s` method visibility is not supported.', $visibility
             ));

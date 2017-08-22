@@ -19,7 +19,7 @@ class MethodNodeSpec extends ObjectBehavior
 
     function it_has_public_visibility_by_default()
     {
-        $this->getVisibility()->shouldReturn('public');
+        $this->getVisibility()->shouldReturn('storage');
     }
 
     function its_visibility_is_mutable()
@@ -58,7 +58,7 @@ class MethodNodeSpec extends ObjectBehavior
     function it_lowercases_visibility_before_setting_it()
     {
         $this->setVisibility('Public');
-        $this->getVisibility()->shouldReturn('public');
+        $this->getVisibility()->shouldReturn('storage');
     }
 
     function its_useParentCode_causes_method_to_call_parent(ArgumentNode $argument1, ArgumentNode $argument2)

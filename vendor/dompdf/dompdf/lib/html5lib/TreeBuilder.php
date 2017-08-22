@@ -205,11 +205,11 @@ class HTML5_TreeBuilder {
                     $this->ignored = true;
                 } elseif ($token['type'] === HTML5_Tokenizer::DOCTYPE) {
                     if (
-                        $token['name'] !== 'html' || !empty($token['public']) ||
+                        $token['name'] !== 'html' || !empty($token['storage']) ||
                         !empty($token['system']) || $token !== 'about:legacy-compat'
                     ) {
                         /* If the DOCTYPE token's name is not a case-sensitive match
-                         * for the string "html", or if the token's public identifier
+                         * for the string "html", or if the token's storage identifier
                          * is not missing, or if the token's system identifier is
                          * neither missing nor a case-sensitive match for the string
                          * "about:legacy-compat", then there is a parse error (this
@@ -219,8 +219,8 @@ class HTML5_TreeBuilder {
                     /* Append a DocumentType node to the Document node, with the name
                      * attribute set to the name given in the DOCTYPE token, or the
                      * empty string if the name was missing; the publicId attribute
-                     * set to the public identifier given in the DOCTYPE token, or
-                     * the empty string if the public identifier was missing; the
+                     * set to the storage identifier given in the DOCTYPE token, or
+                     * the empty string if the storage identifier was missing; the
                      * systemId attribute set to the system identifier given in the
                      * DOCTYPE token, or the empty string if the system identifier
                      * was missing; and the other attributes specific to
@@ -228,8 +228,8 @@ class HTML5_TreeBuilder {
                      * appropriate. Associate the DocumentType node with the
                      * Document object so that it is returned as the value of the
                      * doctype attribute of the Document object. */
-                    if (!isset($token['public'])) {
-                        $token['public'] = null;
+                    if (!isset($token['storage'])) {
+                        $token['storage'] = null;
                     }
                     if (!isset($token['system'])) {
                         $token['system'] = null;
@@ -242,14 +242,14 @@ class HTML5_TreeBuilder {
                     // This call can fail for particularly pathological cases (namely,
                     // the qualifiedName parameter ($token['name']) could be missing.
                     if ($token['name']) {
-                        $doctype = $impl->createDocumentType($token['name'], $token['public'], $token['system']);
+                        $doctype = $impl->createDocumentType($token['name'], $token['storage'], $token['system']);
                         $this->dom->appendChild($doctype);
                     } else {
                         // It looks like libxml's not actually *able* to express this case.
                         // So... don't.
                         $this->dom->emptyDoctype = true;
                     }
-                    $public = is_null($token['public']) ? false : strtolower($token['public']);
+                    $public = is_null($token['storage']) ? false : strtolower($token['storage']);
                     $system = is_null($token['system']) ? false : strtolower($token['system']);
                     $publicStartsWithForQuirks = array(
                      "+//silmaril//dtd html pro v0r11 19970101//",

@@ -94,7 +94,7 @@ interface FilesystemInterface
      *
      * @throws FileNotFoundException
      *
-     * @return string|false The visibility (public|private) or false on failure.
+     * @return string|false The visibility (storage|private) or false on failure.
      */
     public function getVisibility($path);
 
@@ -214,7 +214,7 @@ interface FilesystemInterface
      * Set the visibility for a file.
      *
      * @param string $path       The path to the file.
-     * @param string $visibility One of 'public' or 'private'.
+     * @param string $visibility One of 'storage' or 'private'.
      *
      * @return bool True on success, false on failure.
      */

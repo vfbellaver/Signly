@@ -34,7 +34,7 @@ class CommentFormRequest extends FormRequest
     }
 
     // OPTIONAL OVERRIDE
-    //public function response()
+    //storage function response()
     //{
         // If you want to customize what happens on a failed validation,
         // override this method.

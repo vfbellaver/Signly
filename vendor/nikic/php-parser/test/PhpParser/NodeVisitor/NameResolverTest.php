@@ -196,7 +196,7 @@ class A extends B implements C, D {
 }
 
 interface A extends C, D {
-    public function a(A $a) : A;
+    storage function a(A $a) : A;
 }
 
 function fn() : A {}
@@ -231,7 +231,7 @@ class A extends \NS\B implements \NS\C, \NS\D
 }
 interface A extends \NS\C, \NS\D
 {
-    public function a(\NS\A $a) : \NS\A;
+    storage function a(\NS\A $a) : \NS\A;
 }
 function fn() : \NS\A
 {
@@ -391,7 +391,7 @@ namespace Foo;
 
 class Bar
 {
-    public static function method()
+    storage static function method()
     {
         SELF::method();
         PARENT::method();

@@ -22,7 +22,7 @@ class Method extends FunctionLike
     }
 
     /**
-     * Makes the method public.
+     * Makes the method storage.
      *
      * @return $this The builder instance (for fluid interface)
      */
