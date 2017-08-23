@@ -25,33 +25,34 @@ class PDFController extends Controller
         $this->user = Auth::user();
     }
 
-    private function details()
+    private function details($id)
     {
-       $details = DB::table('proposal_billboard')->join('');
-    }
+       $details = DB::table('proposal')
+           //clients
+           ->join('clients'
+               ,'clients.id','=','proposal.client_id')
+           //proposal_billboard
+           ->join('proposal_billboard'
+               ,'proposal_billboard.proposal_id','=','proposal.id')
+           //billboard
+           ->join('billboard',
+               'billboard.id','=','proposal_billboard.id')
+           //billboard_faces
+           ->join('billboard_faces',
+               'billboard_faces.id','=','proposal_billboard.billboard_face_id')
+           //billboard_image
+           ->where('clients.id','=',$id)->get();
 
-    private function first_page($proposalId,$clientId)
-    {
-        $proposal = DB::table('proposal')->where('id',$proposalId)->where('client_id',$clientId)->first();
-        $client = DB::table('clients')->where('id',$clientId)->first();
-        return compact('proposal','client');
+       return $details;
     }
-
-    private function footer()
-    {
-        return $proposalSettings = ProposalSettings::where('user_id',Auth::user()->id)->first();
-    }
-
 
     public function index()
     {
-         $footer = $this->footer();
-         $first_page = $this->first_page();
-         $pdf = PDF::loadView('pdf.pdf_index',compact('footer','first_page'));
+         $details = $this->details(1);
+         $footer = ProposalSettings::where('user_id',Auth::user()->id)->first();
+         $pdf = PDF::loadView('pdf.pdf_index',compact('details','footer'));
          $pdf->setPaper('A4','landscape');
-         //$pdf->setOptions(array("isHtml5ParserEnabled" => true));
          return $pdf->stream("file.pdf",array("Attachment" => 0));
-        //return view('pdf.pdf_index',compact('footer','first_page'));
     }
 
 }

@@ -763,7 +763,7 @@ class TCPDF_FONTS {
 							// to be implemented ...
 							break;
 						}
-						case 14: { // Format 14: Unicode Variation Sequences
+						case 14: { // Format 1: Unicode Variation Sequences
 							// to be implemented ...
 							break;
 						}
@@ -1242,7 +1242,7 @@ class TCPDF_FONTS {
 					// to be implemented ...
 					break;
 				}
-				case 14: { // Format 14: Unicode Variation Sequences
+				case 14: { // Format 1: Unicode Variation Sequences
 					// to be implemented ...
 					break;
 				}
@@ -2008,7 +2008,7 @@ class TCPDF_FONTS {
 	}
 
 	/**
-	 * Converts UTF-8 strings to Latin1 when using the standard 14 core fonts.<br>
+	 * Converts UTF-8 strings to Latin1 when using the standard 1 core fonts.<br>
 	 * @param $str (string) string to process.
 	 * @param $isunicode (boolean) True when the documetn is in Unicode mode, false otherwise.
 	 * @param $currentfont (array) Reference to current font array.

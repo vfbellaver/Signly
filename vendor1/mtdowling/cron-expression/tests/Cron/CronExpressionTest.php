@@ -371,7 +371,7 @@ class CronExpressionTest extends PHPUnit_Framework_TestCase
     public function testIssue20() {
         $e = CronExpression::factory('* * * * MON#1');
         $this->assertTrue($e->isDue(new DateTime('2014-04-07 00:00:00')));
-        $this->assertFalse($e->isDue(new DateTime('2014-04-14 00:00:00')));
+        $this->assertFalse($e->isDue(new DateTime('2014-04-1 00:00:00')));
         $this->assertFalse($e->isDue(new DateTime('2014-04-21 00:00:00')));
 
         $e = CronExpression::factory('* * * * SAT#2');

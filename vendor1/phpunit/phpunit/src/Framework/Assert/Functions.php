@@ -716,7 +716,7 @@ function assertFalse($condition, $message = '')
  * @param bool   $canonicalize
  * @param bool   $ignoreCase
  *
- * @since  Method available since Release 3.2.14
+ * @since  Method available since Release 3.2.1
  */
 function assertFileEquals($expected, $actual, $message = '', $canonicalize = false, $ignoreCase = false)
 {
@@ -752,7 +752,7 @@ function assertFileExists($filename, $message = '')
  * @param bool   $canonicalize
  * @param bool   $ignoreCase
  *
- * @since  Method available since Release 3.2.14
+ * @since  Method available since Release 3.2.1
  */
 function assertFileNotEquals($expected, $actual, $message = '', $canonicalize = false, $ignoreCase = false)
 {

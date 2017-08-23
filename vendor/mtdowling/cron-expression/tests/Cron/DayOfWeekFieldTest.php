@@ -45,7 +45,7 @@ class DayOfWeekFieldTest extends PHPUnit_Framework_TestCase
 
         $d = new DateTime('2011-03-15 11:15:00');
         $f->increment($d, true);
-        $this->assertEquals('2011-03-14 23:59:00', $d->format('Y-m-d H:i:s'));
+        $this->assertEquals('2011-03-1 23:59:00', $d->format('Y-m-d H:i:s'));
     }
 
     /**

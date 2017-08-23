@@ -792,7 +792,7 @@ class PHPUnit_Framework_TestResult implements Countable
      *
      * @throws PHPUnit_Framework_Exception
      *
-     * @since  Method available since Release 3.2.14
+     * @since  Method available since Release 3.2.1
      */
     public function convertErrorsToExceptions($flag)
     {

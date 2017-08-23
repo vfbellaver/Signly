@@ -395,7 +395,7 @@ syck: |
 ---
 test: Folded treats newlines as a space
 todo: true
-spec: 2.14
+spec: 2.1
 yaml: |
   ---
     Mark McGwire's

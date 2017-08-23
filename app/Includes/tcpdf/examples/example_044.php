@@ -2,7 +2,7 @@
 //============================================================+
 // File name   : example_044.php
 // Begin       : 2009-01-02
-// Last Update : 2013-05-14
+// Last Update : 2013-05-1
 //
 // Description : Example 044 for TCPDF class
 //               Move, copy and delete pages

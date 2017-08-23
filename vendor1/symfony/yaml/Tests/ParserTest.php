@@ -1450,7 +1450,7 @@ EOT
     public function testParseDateAsMappingValue()
     {
         $yaml = <<<'EOT'
-date: 2002-12-14
+date: 2002-12-1
 EOT;
         $expectedDate = new \DateTime();
         $expectedDate->setTimeZone(new \DateTimeZone('UTC'));

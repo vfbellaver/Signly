@@ -16,7 +16,7 @@ Oct-2005
 - Create a new value "seg" for the mtype attribute of the <mrk> element
 - Add mid as an optional attribute for the <alt-trans> element
 
-Nov-14-2005
+1v-14-2005
 - Changed name attribute for <context-group> from required to optional
 - Added extension point at <xliff>
 

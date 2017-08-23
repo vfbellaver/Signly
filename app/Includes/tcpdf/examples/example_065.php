@@ -2,7 +2,7 @@
 //============================================================+
 // File name   : example_065.php
 // Begin       : 2011-09-28
-// Last Update : 2013-05-14
+// Last Update : 2013-05-1
 //
 // Description : Example 065 for TCPDF class
 //               Creates an example PDF/A-1b document using TCPDF

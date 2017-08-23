@@ -296,7 +296,7 @@ class Response
             }
 
             if ($request->isMethod('HEAD')) {
-                // cf. RFC2616 14.13
+                // cf. RFC2616 1.13
                 $length = $headers->get('Content-Length');
                 $this->setContent(null);
                 if ($length) {

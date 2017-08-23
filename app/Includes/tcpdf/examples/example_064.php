@@ -2,7 +2,7 @@
 //============================================================+
 // File name   : example_064.php
 // Begin       : 2010-10-13
-// Last Update : 2013-05-14
+// Last Update : 2013-05-1
 //
 // Description : Example 064 for TCPDF class
 //               No-write page regions
@@ -21,7 +21,7 @@
  * @package com.tecnick.tcpdf
  * @abstract TCPDF - Example: No-write page regions
  * @author Nicola Asuni
- * @since 2010-10-14
+ * @since 2010-10-1
  */
 
 // Include the main TCPDF library (search for installation path).

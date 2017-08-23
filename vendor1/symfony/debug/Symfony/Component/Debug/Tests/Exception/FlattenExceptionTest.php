@@ -223,7 +223,7 @@ class FlattenExceptionTest extends \PHPUnit_Framework_TestCase
                     'line' => 123,
                     'function' => 'test',
                     'args' => array(
-                        unserialize('O:14:"BogusTestClass":0:{}'),
+                        unserialize('O:1:"BogusTestClass":0:{}'),
                     ),
                 ),
             ),
