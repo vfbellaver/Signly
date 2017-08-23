@@ -25,9 +25,9 @@ class PDFController extends Controller
         $this->user = Auth::user();
     }
 
-    private function header()
+    private function details()
     {
-
+       $details = DB::table('proposal_billboard')->join('');
     }
 
     private function first_page($proposalId,$clientId)
@@ -39,17 +39,19 @@ class PDFController extends Controller
 
     private function footer()
     {
-       return $proposalSettings = ProposalSettings::where('user_id',Auth::user()->id)->first();
+        return $proposalSettings = ProposalSettings::where('user_id',Auth::user()->id)->first();
     }
 
 
     public function index()
     {
-     $footer = $this->footer();
-     $first_page = $this->first_page(7,2);
-     $pdf = PDF::loadView('pdf.pdf_index',compact('footer','first_page'));
-     $pdf->setPaper('A4','landscape');
-     return $pdf->stream("file",array("Attachment" => 0));
+         $footer = $this->footer();
+         $first_page = $this->first_page();
+         $pdf = PDF::loadView('pdf.pdf_index',compact('footer','first_page'));
+         $pdf->setPaper('A4','landscape');
+         //$pdf->setOptions(array("isHtml5ParserEnabled" => true));
+         return $pdf->stream("file.pdf",array("Attachment" => 0));
+        //return view('pdf.pdf_index',compact('footer','first_page'));
     }
 
 }

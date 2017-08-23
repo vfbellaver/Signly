@@ -112,7 +112,6 @@
 				<form class="navbar-form navbar-left">
 					<div class="form-group">
 						<button type="button" id="active-proposal" class="btn btn-default">Show/Hide Proposal</button>
-						
 					</div>
 				</form>
 				<div class="pull-right">

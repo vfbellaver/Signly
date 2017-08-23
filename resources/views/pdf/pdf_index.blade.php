@@ -6,8 +6,7 @@
 
     <link rel="stylesheet" href="{{asset('css/app.css')}}">
     <link rel="stylesheet" href="{{asset('css/pdf.css')}}">
-
-    <script type="javascript" src="{{asset('js/js/pdf_maps/principal.js')}}"></script>
+    <script type="text/javascript" src="{{asset('js/js/pdf_maps/principal.js')}}"></script>
 
 
 
@@ -59,7 +58,8 @@
                  <!-- principal -->
                  <article class="col-lg-12">
                      <h3>My Google Maps Demo</h3>
-                     <div id="map"></div>
+                     <div id="map">
+                     </div>
                  </article>
                  <!-- description -->
 
@@ -91,8 +91,10 @@
              </div>
          </div>
 
+         <script type="text/javascript" async defer
+                 src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAECe-JaASIc4HpIae-cFuFDtyX3K2GI_Q&callback=initMap">
+         </script>
+
     </body>
-        <script async defer
-                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAECe-JaASIc4HpIae-cFuFDtyX3K2GI_Q&callback=initMap">
-        </script>
+
 </html>
