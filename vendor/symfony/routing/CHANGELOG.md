@@ -48,7 +48,7 @@ CHANGELOG
 
    ```yaml
    article_edit:
-       pattern: /article/{id}
+       pattern: id
        requirements: { '_method': 'POST|PUT', '_scheme': 'https', 'id': '\d+' }
    ```
 

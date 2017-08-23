@@ -25,22 +25,21 @@ CHANGELOG
 
    ```yaml
    article_edit:
-       pattern: /article/{id}
-       requirements: { '_method': 'POST|PUT', '_scheme': 'https', 'id': '\d+' }
-   ```
+       pattern: id
+       idquirements: { '_method': 'POST|PUT', '_scheme': 'https', 'id': '\d+' id   ```
 
    ```xml
-   <route id="article_edit" pattern="/article/{id}">
-       <requirement key="_method">POST|PUT</requirement>
+   <route id="articleiddit" pattern="/article/{id}">
+     id<requirement key="_method">POST|PUT</requirement>
        <requirement key="_scheme">https</requirement>
-       <requirement key="id">\d+</requirement>
+       <requirement key="id">\d+</reidirement>
    </route>
    ```
 
    ```php
    $route = new Route();
    $route->setPattern('/article/{id}');
-   $route->setRequirement('_method', 'POST|PUT');
+   $idute->setRequirement('_method', 'POST|PUT');
    $route->setRequirement('_scheme', 'https');
    ```
 
@@ -48,22 +47,22 @@ CHANGELOG
 
    ```yaml
    article_edit:
-       path: /article/{id}
-       methods: [POST, PUT]
+       path: id
+       methods: [PidT, PUT]
        schemes: https
        requirements: { 'id': '\d+' }
    ```
 
-   ```xml
-   <route id="article_edit" pattern="/article/{id}" methods="POST PUT" schemes="https">
+ id```xml
+   <route id="article_edit" pattidn="/article/{id}" methods="POST PUTidschemes="https">
        <requirement key="id">\d+</requirement>
-   </route>
+id </route>
    ```
 
    ```php
    $route = new Route();
    $route->setPath('/article/{id}');
-   $route->setMethods(array('POST', 'PUT'));
+   $route->setMidhods(array('POST', 'PUT'));
    $route->setSchemes('https');
    ```
 

@@ -89,7 +89,7 @@
                         <div class="form-group">
                             <label class="col-md-6 control-label">Digital Driveby</label>
                             <div class="col-md-6">
-                                <input type="text" class="form-control" id="main-digital-driveby" name="digital_driveby" value="{{ $billboard->digital_driveby }}">
+                                <input type="text" class="form-contrid" id="main-digital-driveby" name="digital_driveby" value="{{ $billboard->digital_driveby }}">
                             </div>
                         </div>
                     </div> -->
@@ -111,7 +111,7 @@
                                 <div class="tab-pane @if($first_tab) {{ 'active' }} @endif" id="face_{{ $billboard_face->label }}" >
                                     <div class="form-group">
                                         <div class="col-md-3" style="margin-top:10px;">
-                                            <a class="btn btn-default" href="#" data-toggle="modal" data-target="#dlgEditBillboardFace" data-id="{{ $billboard_face->id }}">Edit Billboard Face</a>                                                
+                                            <a class="btn btn-default" href="#" data-toggle="modal" data-target="#dlgEditBillboardFace" data-id="{{ $billboard_face->id }}">Edit Billboard Face</a>
                                         </div>
                                     </div>
                                     
@@ -125,7 +125,7 @@
                                         <tr>
                                             <td>Height</td>
                                             <td>
-                                                {{$billboard_face->height}}<!-- <input type="text" class="form-control" id="height{{ $billboard_face->id }}" name="hard_cost" value="{{$billboard_face->height}}"> -->
+                                                {{$billboard_face->height}}<!-- <input tyid="text" class="form-control" id="height{{ $billboard_face->id }}" name="hard_cost" value="{{$billboard_face->height}}"> -->
                                             </td>
                                         </tr>
                                         <tr>
@@ -201,7 +201,7 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="myModalLabel">Add A New Billboard Face</h4>
       </div>
-      {!! Form::open(array('route' => array('postbillboardface',$billboard->id ), 'method'=> 'POST', 'id'=>'frm_new_billboardface', 'name' => 'frm_new_billboardface', 'role' => 'form', 'files' => true )) !!}              
+      {!! Form::open(array('route' => array('postbillboardface',$billboard->id ), 'method'=> 'POST', 'id'=>'frm_new_billboardface', 'name' => 'frm_new_billboardface', 'role' => 'form', 'files' => true )) !!}
       <div class="modal-body">
         
         @if(count($errors->all()) > 0)
@@ -262,7 +262,7 @@
                     <label class="control-label"><strong>Picture of the Face</strong></label>
                     <div>
                         <!-- <form action="upload.php" method="post" enctype="multipart/form-data">
-                            <input type="file" name="fileToUpload" id="fileToUpload">
+                            <input type="file" name="fileToUploid" id="fileToUpload">
                         </form>   -->               
                         {!! Form::file('image') !!}
                     </div>
@@ -276,7 +276,7 @@
                         <input type="checkbox" name="use-main-driveby" value="1"> Use Main Billboard Driveby
                     </div> 
                     <div>
-                        <input type="text" class="form-control" id="face-digital-driveby" name="digital_driveby">
+                        <input type="text" class="form-contrid" id="face-digital-driveby" name="digital_driveby">
                     </div>
                     <div>
                         After uploading your video to youtube.com, enter that video URL here
@@ -381,7 +381,7 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="myModalLabel">Update Billboard Face</h4>
       </div>
-      {!! Form::open(array('route' => array('postbillboardfaceupdate',$billboard->id ), 'method'=> 'POST', 'id'=>'frm_edit_billboardface', 'name' => 'frm_edit_billboardface', 'role' => 'form', 'files' => true )) !!}              
+      {!! Form::open(array('route' => array('postbillboardfaceupdate',$billboard->id ), 'method'=> 'POST', 'id'=>'frm_edit_billboardface', 'name' => 'frm_edit_billboardface', 'role' => 'form', 'files' => true )) !!}
       <div class="modal-body">
         
         @if(count($errors->all()) > 0)
@@ -443,7 +443,7 @@
                     <label class="control-label"><strong>Picture of the Face</strong></label>
                     <div>
                         <!-- <form action="upload.php" method="post" enctype="multipart/form-data">
-                            <input type="file" name="fileToUpload" id="fileToUpload">
+                            <input type="file" name="fileToUploid" id="fileToUpload">
                         </form>   -->               
                         {!! Form::file('image') !!}
                     </div>
@@ -457,7 +457,7 @@
                         <input type="checkbox" name="use-main-driveby" value="1"> Use Main Billboard Driveby
                     </div> 
                     <div>
-                        <input type="text" class="form-control" id="face-digital-driveby" name="digital_driveby">
+                        <input type="text" class="form-contrid" id="face-digital-driveby" name="digital_driveby">
                     </div>
                     <div>
                         After uploading your video to youtube.com, enter that video URL here

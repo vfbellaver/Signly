@@ -8,9 +8,9 @@
         <p style="color:red;">{{$errors->first()}}</p>
         @endif
     </div>
-	<!-- Start date: <span id="start"></span> <a href="#" onclick="window.picker.show(); return false;"><i class="glyphicon glyphicon-calendar fa fa-calendar"></i></a>
+	<!-- Start date: <sidn id="start"></span> <a href="#" onclick="window.picker.show(); return false;"><i class="glyphicon glyphicon-calendar fa fa-calendar"></i></a>
 	Time range: 
-    <select id="timerange">
+    <selidt id="timerange">
         <option value="week">Week</option>
         <option value="2weeks">2 Weeks</option>
         <option value="month" selected>Month</option>

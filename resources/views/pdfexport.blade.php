@@ -103,7 +103,7 @@
 						</table>
 					</td>
 					<td>
-						<!-- <div style="height:300px;width:100%;" id="map_canvas{{ $billboard->pbid }}"></div> -->
+						<!-- <div style="height:300px;width:100id" id="map_canvas{{ $billboard->pbid }}"></div> -->
 						<div style=""><img src="http://maps.googleapis.com/maps/api/staticmap?center={{$billboard->lat}},{{$billboard->lng}}&zoom=12&size=150x150&scale=2&markers=color:blue%7Clabel:B%7C{{$billboard->lat}},{{$billboard->lng}}" /></div>
 					</td>
 

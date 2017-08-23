@@ -14,6 +14,9 @@
 	<link href="{{ URL::to('/') }}/css/daterangepicker-bs3.css" rel="stylesheet">
 	<link href="{{ URL::to('/') }}/css/jquery.qtip.min.css" rel="stylesheet">
 
+	<!-- dropzone js -->
+	<link href="//cdnjs.cloudflare.com/ajax/libs/dropzone/5.1.1/min/dropzone.min.css" rel="stylesheet">
+
 	<link href="{{ URL::to('/') }}/css/magnific-popup.css" rel="stylesheet">
 
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
@@ -72,6 +75,8 @@
 						<ul class="dropdown-menu" role="menu">
 							<li><a href="{{ URL::to('/') }}/add-proposal">Add New Proposal</a></li>
 							<li><a href="{{ URL::to('/') }}/proposals">Proposals</a></li>
+							<!-- proposals-settings -->
+							<li><a href="{{ URL::to('/') }}/proposals-settings">Settings</a></li>
 							<!-- <li><a href="{{ URL::to('/') }}/proposal-signature">Sign Proposal</a></li> -->
 						</ul>
 					</li>
@@ -110,7 +115,7 @@
 					</div>
 				</form>
 				<div class="pull-right">
-					<!-- <div id="daterange" class="btn">
+					<!-- <idv id="daterange" class="btn">
 	                  <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
 	                  <span></span> <b class="caret"></b>
 	               	</div> -->
@@ -143,7 +148,7 @@
 		</div>
 	</nav>
 
-	<!-- Modal Create Proposal-->
+<!-- Modal Create Proposal-->
 <div class="modal fade" id="bugReport" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -154,20 +159,20 @@
       <div class="modal-body">
         {!! Form::open(array('route' => 'postbugreport', 'method'=> 'POST', 'id'=>'frm_new_bug', 'name' => 'frm_new_bug', 'class' => 'form-horizontal', 'role' => 'form' )) !!}
 
-        <div class="form-group" style="padding:20px;">
-        	<div>
-				<label class="control-label">Short description of the bug</label>
+			<div class="form-group" style="padding:20px;">
+				<div>
+					<label class="control-label">Short description of the bug</label>
+				</div>
+				<div>
+					<textarea class="form-control" name="bugdescription"></textarea>
+				</div>
 			</div>
-			<div>
-				<textarea class="form-control" name="bugdescription"></textarea>
-			</div>
-		</div>
-      
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary">Send Report</button>
-      </div>
+
+	  </div>
+		  <div class="modal-footer">
+			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			<button type="submit" class="btn btn-primary">Send Report</button>
+		  </div>
        {!! Form::close() !!}
     </div>
   </div>
@@ -176,13 +181,14 @@
 	@yield('content')
 
 
-
 	<!-- Scripts -->
 	<!---<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script> -->
 	<!---<script src="//code.jquery.com/jquery-1.10.2.js"></script>-->
 	<script src="{{ URL::to('/') }}/js/jquery-1.9.1.min.js"></script>
 	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
+	<!-- drop zone -->
+	<script src="//cdnjs.cloudflare.com/ajax/libs/dropzone/5.1.1/min/dropzone.min.js"></script>
 
 	<script src="{{ URL::to('/') }}/js/moment.min.js"></script>
 	<script src="{{ URL::to('/') }}/js/daterangepicker.js"></script>
@@ -1300,7 +1306,7 @@
 			    $('.sidr-class-table').addClass('table');
 
 
-				$('#sidr-id-copy_link').click( function() {  
+				$('#sidr-id-copy_link').click( function() {
 
 					$.ajax({
 						 method: "POST",
@@ -1317,7 +1323,7 @@
 				});
 
 				//var copyEmailBtn = document.querySelector('.copy_link');  
-				// var copyEmailBtn = document.querySelector('#sidr-id-copy_link');  
+				// var copyEmailBtn = document.querySelector('#sidr-id-copy_link');
 				
 
 				// copyEmailBtn.addEventListener('click', function(event) {  
@@ -1693,7 +1699,7 @@
 
 		</script>
 
-		<script type="text/javascript">
+	<script type="text/javascript">
 		    $(function(){
 		    	
 		        // $('.slide-out-div').tabSlideOut({

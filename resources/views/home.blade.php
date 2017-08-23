@@ -2,7 +2,7 @@
 
 @section('content')
 <div id="panel">
-	<!-- <input type="textbox" name="searchText" id="searchText" placeholder="Address"> -->
+	<!-- <input type="textbox" name="searchTeid" id="searchText" placeholder="Address"> -->
 	<input type="textbox" name="searchBillboard" id="searchBillboard" class="form-control" placeholder="Search">
 	<!-- <input type="button" value="Search" onclick="codeAddress()"> -->
 
@@ -28,7 +28,7 @@
 	<input type="button" value="Create Proposal" data-toggle="modal" data-target="#createProposal">
 </div>
 
-<!-- <div id="key-legend">
+<!-- <idv id="key-legend">
 	<input type="button" value="Keys" data-toggle="modal" data-target="#keyLegend">
 </div> -->
 
@@ -44,10 +44,10 @@
         
         <div class="proposal-top">
           <ul class="proposal-menu">
-            <!-- <li class="proposal-save"><a id="save_proposal" title="Save Proposal" style="cursor:pointer;"><img src="{{URL::to('/')}}/images/save.png"></a></li> -->
-            <!-- <li class="proposal-pdf"><a id="generate_pdf" title="Generate PDF" style="cursor:pointer;"><img src="{{URL::to('/')}}/images/pdf.png"></a></li> -->
-            <!-- <li class="proposal-send"><a id="send_proposal" title="Send Proposal to Client" style="cursor:pointer;"><img src="{{URL::to('/')}}/images/emailicon.png"></a></li> -->
-            <!-- <li class="proposal-print"><a id="print_proposal" title="Print Preview of proposal" style="cursor:pointer;"><img src="{{URL::to('/')}}/images/printer-icon.jpg"></a></li> -->
+            <!-- <li class="proposal-save"ida id="save_proposal" title="Save Proposal" style="cursor:pointer;"><img src="{{URL::to('/')}}/images/save.png"></a></li> -->
+            <!-- <li class="proposal-pdf"ida id="generate_pdf" title="Generate PDF" style="cursor:pointer;"><img src="{{URL::to('/')}}/images/pdf.png"></a></li> -->
+            <!-- <li class="proposal-send"ida id="send_proposal" title="Send Proposal to Client" style="cursor:pointer;"><img src="{{URL::to('/')}}/images/emailicon.png"></a></li> -->
+            <!-- <li class="proposal-print"ida id="print_proposal" title="Print Preview of proposal" style="cursor:pointer;"><img src="{{URL::to('/')}}/images/printer-icon.jpg"></a></li> -->
             <!-- <li class="proposal-minimize"><a href="#" title="Minimize Window"><img src="{{URL::to('/')}}/images/proposal-minimize.png"></a></li>
             <li class="proposal-maximize"><a href="#" title="Maximize Window"><img src="{{URL::to('/')}}/images/proposal-maximize.png"></a></li> 
             <li class="proposal-close"><a id="close_proposal" href="#">Close</a></li>-->
@@ -295,7 +295,7 @@
 
 
 <!-- Modal Add Proposal Comment-->
-<!--<div class="modal fade" id="proposalComment" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<!--<div class="modal faid" id="proposalComment" tabiidex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
        <div class="modal-header">
