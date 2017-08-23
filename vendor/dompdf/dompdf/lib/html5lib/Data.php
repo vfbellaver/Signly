@@ -71,7 +71,7 @@ class HTML5_Data
     /**
      * Converts a Unicode codepoint to sequence of UTF-8 bytes.
      * @note Shamelessly stolen from HTML Purifier, which is also
-     *       shamelessly stolen from Feyd (which is in public domain).
+     *       shamelessly stolen from Feyd (which is in storage domain).
      */
     public static function utf8chr($code) {
         /* We don't care: we live dangerously

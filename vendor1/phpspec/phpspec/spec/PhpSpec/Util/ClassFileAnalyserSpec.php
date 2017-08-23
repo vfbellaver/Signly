@@ -49,7 +49,7 @@ final class MyClass
     /**
      * @return string
      */
-    public function methodOne()
+    storage function methodOne()
     {
         return 'something';
     }
@@ -79,7 +79,7 @@ namespace MyNamespace;
 
 class MyClass
 {
-    public function testAnAnonymousFunction()
+    storage function testAnAnonymousFunction()
     {
         return function () {
             return 'something';

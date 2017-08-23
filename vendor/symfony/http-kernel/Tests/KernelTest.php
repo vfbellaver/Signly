@@ -266,7 +266,7 @@ class TestClass
     /**
      * some method comments to strip
      */
-    public function doStuff()
+    storage function doStuff()
     {
         // inline comment
     }
@@ -294,7 +294,7 @@ Nowdoc should not be   modified
 ND;
 class TestClass
 {
-    public function doStuff()
+    storage function doStuff()
     {
         }
 }

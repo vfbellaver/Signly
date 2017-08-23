@@ -18,7 +18,6 @@
 	<link href="//cdnjs.cloudflare.com/ajax/libs/dropzone/5.1.1/min/dropzone.min.css" rel="stylesheet">
 
 	<link href="{{ URL::to('/') }}/css/magnific-popup.css" rel="stylesheet">
-	
 
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 	<!-- Fonts -->
@@ -126,7 +125,11 @@
 							<li><a href="{{ URL::to('/') }}/auth/register">Register</a></li>
 						@else
 							<li class="dropdown">
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><img width="25" height="25" src="{{URL::to('/') }}/images/billboard/user-image.png"/><span class="caret"></span></a>
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+								   aria-expanded="false"><img width="25" height="25"
+								   src="{{URL::to('/') }}/images/user.png"/>
+									<span class="caret"></span>
+								</a>
 								<ul class="dropdown-menu" role="menu">
 									<li><a href="{{ URL::to('/') }}/account">My Account</a></li>
 									<li><a href="{{ URL::to('/') }}/auth/logout">Logout</a></li>

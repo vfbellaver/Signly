@@ -825,7 +825,7 @@ class Standard extends PrettyPrinterAbstract
     }
 
     protected function pModifiers($modifiers) {
-        return ($modifiers & Stmt\Class_::MODIFIER_PUBLIC    ? 'public '    : '')
+        return ($modifiers & Stmt\Class_::MODIFIER_PUBLIC    ? 'storage '    : '')
              . ($modifiers & Stmt\Class_::MODIFIER_PROTECTED ? 'protected ' : '')
              . ($modifiers & Stmt\Class_::MODIFIER_PRIVATE   ? 'private '   : '')
              . ($modifiers & Stmt\Class_::MODIFIER_STATIC    ? 'static '    : '')

@@ -82,14 +82,14 @@ class TCPDF2DBarcode {
 	 * @param $w (int) Width of a single rectangle element in user units.
 	 * @param $h (int) Height of a single rectangle element in user units.
 	 * @param $color (string) Foreground color (in SVG format) for bar elements (background is transparent).
- 	 * @public
+ 	 * @storage
 	 */
 	public function getBarcodeSVG($w=3, $h=3, $color='black') {
 		// send headers
 		$code = $this->getBarcodeSVGcode($w, $h, $color);
 		header('Content-Type: application/svg+xml');
-		header('Cache-Control: public, must-revalidate, max-age=0'); // HTTP/1.1
-		header('Pragma: public');
+		header('Cache-Control: storage, must-revalidate, max-age=0'); // HTTP/1.1
+		header('Pragma: storage');
 		header('Expires: Sat, 26 Jul 1997 05:00:00 GMT'); // Date in the past
 		header('Last-Modified: '.gmdate('D, d M Y H:i:s').' GMT');
 		header('Content-Disposition: inline; filename="'.md5($code).'.svg";');
@@ -103,7 +103,7 @@ class TCPDF2DBarcode {
 	 * @param $h (int) Height of a single rectangle element in user units.
 	 * @param $color (string) Foreground color (in SVG format) for bar elements (background is transparent).
  	 * @return string SVG code.
- 	 * @public
+ 	 * @storage
 	 */
 	public function getBarcodeSVGcode($w=3, $h=3, $color='black') {
 		// replace table for special characters
@@ -139,7 +139,7 @@ class TCPDF2DBarcode {
 	 * @param $h (int) Height of a single rectangle element in pixels.
 	 * @param $color (string) Foreground color for bar elements (background is transparent).
  	 * @return string HTML code.
- 	 * @public
+ 	 * @storage
 	 */
 	public function getBarcodeHTML($w=10, $h=10, $color='black') {
 		$html = '<div style="font-size:0;position:relative;width:'.($w * $this->barcode_array['num_cols']).'px;height:'.($h * $this->barcode_array['num_rows']).'px;">'."\n";
@@ -167,14 +167,14 @@ class TCPDF2DBarcode {
 	 * @param $w (int) Width of a single rectangle element in pixels.
 	 * @param $h (int) Height of a single rectangle element in pixels.
 	 * @param $color (array) RGB (0-255) foreground color for bar elements (background is transparent).
- 	 * @public
+ 	 * @storage
 	 */
 	public function getBarcodePNG($w=3, $h=3, $color=array(0,0,0)) {
 		$data = $this->getBarcodePngData($w, $h, $color);
 		// send headers
 		header('Content-Type: image/png');
-		header('Cache-Control: public, must-revalidate, max-age=0'); // HTTP/1.1
-		header('Pragma: public');
+		header('Cache-Control: storage, must-revalidate, max-age=0'); // HTTP/1.1
+		header('Pragma: storage');
 		header('Expires: Sat, 26 Jul 1997 05:00:00 GMT'); // Date in the past
 		header('Last-Modified: '.gmdate('D, d M Y H:i:s').' GMT');
 		//header('Content-Length: '.strlen($data));
@@ -188,7 +188,7 @@ class TCPDF2DBarcode {
 	 * @param $h (int) Height of a single rectangle element in pixels.
 	 * @param $color (array) RGB (0-255) foreground color for bar elements (background is transparent).
  	 * @return image or false in case of error.
- 	 * @public
+ 	 * @storage
 	 */
 	public function getBarcodePngData($w=3, $h=3, $color=array(0,0,0)) {
 		// calculate image size
