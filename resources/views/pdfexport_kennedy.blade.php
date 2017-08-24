@@ -105,7 +105,7 @@
 						</table>
 					</td>
 					<td>
-						<!-- <div style="height:300px;width:100%;" id="map_canvas{{ $billboard->pbid }}"></div> -->
+						<!-- <div style="height:300px;width:100id" id="map_canvas{{ $billboard->pbid }}"></div> -->
 						<div style="border: 1px solid #000000;"><img src="http://maps.googleapis.com/maps/api/staticmap?center={{ urlencode($billboard->address) }}+{{ urlencode($billboard->city) }}+{{ urlencode($billboard->state) }}+{{ urlencode($billboard->zipcode) }}&zoom=15&size=150x200&format=jpg&maptype=roadmap&scale=4&markers=color:blue%7Clabel:A%7C{{$billboard->lat}},{{$billboard->lng}}" /></div>
 
 					</td>

@@ -2,16 +2,16 @@
 
 @section('content')
 <div id="panel">
-	<!-- <input type="textbox" name="searchText" id="searchText" placeholder="Address"> -->
+	<!-- <input type="textbox" name="searchTeid" id="searchText" placeholder="Address"> -->
 	<input type="textbox" name="searchBillboard" id="searchBillboard" placeholder="Billboard Name">
 	<!-- <input type="button" value="Search" onclick="codeAddress()"> -->
 </div>
 
-<!-- <div id="create-proposal">
+<!-- <idv id="create-proposal">
 	<input type="button" value="Create Proposal" data-toggle="modal" data-target="#createProposal">
 </div> -->
 
-<!-- <div id="key-legend">
+<!-- <idv id="key-legend">
 	<input type="button" value="Keys" data-toggle="modal" data-target="#keyLegend">
 </div> -->
 
@@ -26,10 +26,10 @@
     <div class="proposal-top">
       <ul class="proposal-menu">
         
-        <!-- <li class="proposal-pdf"><a id="generate_pdf" title="Generate PDF" style="cursor:pointer;"><img src="{{URL::to('/')}}/images/pdf.png"></a></li> -->
+        <!-- <li class="proposal-pdf"ida id="generate_pdf" title="Generate PDF" style="cursor:pointer;"><img src="{{URL::to('/')}}/images/pdf.png"></a></li> -->
         <!-- <li class="proposal-minimize"><a href="#" title="Minimize Window"><img src="{{URL::to('/')}}/images/proposal-minimize.png"></a></li>
         <li class="proposal-maximize"><a href="#" title="Maximize Window"><img src="{{URL::to('/')}}/images/proposal-maximize.png"></a></li> -->
-        <!-- <li class="proposal-close"><a id="close_proposal" href="#">Close</a></li> -->
+        <!-- <li class="proposal-close"ida id="close_proposal" href="#">Close</a></li> -->
       </ul>
 
       <?php 

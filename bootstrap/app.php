@@ -1,4 +1,4 @@
-<?php
+ <?php
 
 /*
 |--------------------------------------------------------------------------
@@ -42,9 +42,9 @@ $app->singleton(
 );
 
 
-// $app->register('\Barryvdh\DomPDF\ServiceProvider');
+//$app->register('\Barryvdh\DomPDF\ServiceProvider');
 
-// $app->configure('dompdf');
+//$app->configure('dompdf');
 /*
 |--------------------------------------------------------------------------
 | Return The Application

@@ -11,6 +11,9 @@
 |
 */
 
+
+use PDF;
+
 Route::get('/get-comments/{id}', ['uses' => 'HomeController@getComments']);
 Route::get('/get-comments-client/{id}', ['uses' => 'HomeController@getCommentsClient']);
 
@@ -89,18 +92,22 @@ Route::get('/billboards/tooltip/{id}', 'BillboardController@tooltip');
 Route::delete('/billboard/delete/{id}',array('uses' => 'BillboardController@destroy', 'as' => 'deletebillboard'));
 
 //Proposal
-Route::get('/proposals', 'ProposalController@index');
-
-Route::get('/proposal-signature', 'ProposalController@proposalForm');
-Route::get('/proposals/book/{id}', 'ProposalController@bookProposal');
-
-
-
 Route::get('/add-proposal', 'ProposalController@add');
 Route::get('/edit-proposal-billboards/{id}', 'ProposalController@edit');
 Route::post('/post-proposal', ['as' => 'postproposal', 'uses' => 'ProposalController@store']);
 Route::get('/active-proposal/remove-billboard/{id}', 'ProposalController@removebillboard');
 Route::get('/active-proposal/add-billboard/{id}/{faceid}', 'ProposalController@addbillboard');
+Route::get('/proposals', 'ProposalController@index');
+Route::get('/proposals-settings', 'ProposalController@settings');
+Route::get('/proposal-signature', 'ProposalController@proposalForm');
+Route::get('/proposals/book/{id}', 'ProposalController@bookProposal');
+
+//Proposal settings
+Route::post('/logo-proposal', ['as' => 'setthings', 'uses' => 'ProposalSettingsController@settings']);
+
+// PDF
+Route::get('my_pdf','PDFController@index');
+
 
 
 Route::post('/save-active-proposal-billboards', ['as' => 'postproposalbillboards', 'uses' => 'ProposalController@saveProposalBillbaord']);
@@ -109,12 +116,9 @@ Route::post('/copy-active-proposal', ['as' => 'copyproposal', 'uses' => 'Proposa
 Route::post('/generate-pdf-proposal', ['as' => 'pdfproposal', 'uses' => 'ProposalController@pdfProposal']);
 Route::post('/generate-print-proposal', ['as' => 'printproposal', 'uses' => 'ProposalController@printProposal']);
 Route::post('/post-proposal-billboard', ['as' => 'postproposalbillboard', 'uses' => 'ProposalController@addbillboard']);
-
 Route::post('/post-proposal-billboard-comment', ['as' => 'postproposalcomment', 'uses' => 'ProposalController@addComment']);
-
 Route::get('/proposal/make-contract/{id}', 'ProposalController@proposalSignature');
 Route::post('/post-proposal-contract', ['as' => 'postproposalcontract', 'uses' => 'ProposalController@signContract']);
-
 Route::delete('/proposal/delete/{id}',array('uses' => 'ProposalController@destroy', 'as' => 'deleteproposal'));
 
 Route::controllers([
@@ -128,7 +132,7 @@ Route::get('images/billboard/{imageName}', function($imageName){
 	return Response::download($filepath);
 });
 
-Route::get('/proposals', 'ProposalController@index');
+
 
 Route::get('/billboard-upload', 'BillboardController@getUploadBillboard');
 Route::post('/save-upload-billboards', ['as' => 'postbillboarduploads', 'uses' => 'BillboardController@saveUploadBillbaord']);

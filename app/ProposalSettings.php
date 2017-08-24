@@ -6,14 +6,21 @@ use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
-class User extends Model implements AuthenticatableContract, CanResetPasswordContract {
+class ProposalSettings extends Model  {
 
 	use Authenticatable, CanResetPassword;
 
-	protected $table = 'users';
+	protected $table = 'proposal_settings';
 
-	protected $fillable = ['first_name','last_name','email', 'password','photo','instance_id'];
+    public $timestamps = false;
 
-	protected $hidden = ['password', 'remember_token'];
+	protected $fillable = [
+	    'path_image',
+        'user_street',
+        'user_state',
+        'user_city',
+        'user_zipcode',
+        'website'
+    ];
 
 }
