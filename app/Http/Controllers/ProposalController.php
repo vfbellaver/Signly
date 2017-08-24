@@ -58,6 +58,7 @@ class ProposalController extends Controller {
 		return view('proposal.proposals',array('proposals' => $proposals, 'clients' => $clients ) );
 	}
 
+
 	public function add(){
 		$clients = DB::table('clients')->where('instance_id',$this->user->instance_id)->get();
 		return view('proposal.add',array('clients' => $clients));	
@@ -79,6 +80,7 @@ class ProposalController extends Controller {
 			);
 
 		foreach ($proposal_billboards as $proposal_billboard) {
+
 			$active_proposal_billboard_id = DB::table('active_proposal_billboards')->insertGetId(
 			    	array(
 					    'active_proposal_id' => $active_proposal_id,
@@ -87,6 +89,7 @@ class ProposalController extends Controller {
 					    'user_id'  => $this->user->id,
 					    'proposal_price' => $proposal_billboard->proposal_price,
 					    'billboard_face_id' => $proposal_billboard->billboard_face_id
+
 			    	  )
 				);
 		}
@@ -102,6 +105,7 @@ class ProposalController extends Controller {
 	}
 
 	public function addbillboard(ProposalFaceBillboardRequest $request){
+
 		$active_proposal = DB::table('active_proposal')
 						->where('user_id',$this->user->id)
 						->first();
@@ -116,6 +120,13 @@ class ProposalController extends Controller {
 						->first();
 			
 			if (!isset($test_exitence->id)){
+			    // -- Search last order record to set the next order_proposal_billboards -- //
+                $active_proposal_billboards = DB::table('active_proposal_billboards')
+                    ->where('active_proposal_billboards.user_id', $user->id)
+                    ->orderBy('order_proposal_billboards', 'ASC')->get();
+
+                $ultimo = end($active_proposal_billboards);
+                $order = $ultimo->order_proposal_billboards + 1;
 
 				$proposal_id = DB::table('active_proposal_billboards')->insertGetId(
 			    	array(
@@ -124,7 +135,8 @@ class ProposalController extends Controller {
 			            'billboard_id' => $request->input('pb_billboard_id'),
 			            'billboard_face_id' => $request->input('pb_face_id'),
 			            'user_id' => $this->user->id,
-			            'proposal_price' => $request->input('pb_price_per_month')
+			            'proposal_price' => $request->input('pb_price_per_month'),
+                        'order_proposal_billboards' => $order
 			    	  )
 				);
 			}

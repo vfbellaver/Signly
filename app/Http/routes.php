@@ -23,7 +23,7 @@ Route::get('/add-instance', 'HomeController@addInstance');
 Route::post('/post-instance', ['as' => 'postinstance', 'uses' => 'HomeController@storeInstance']);
 Route::get('/add-instance-user/{instanceId}', 'HomeController@addInstanceUser');
 Route::post('/post-instance-user', ['as' => 'postinstanceuser', 'uses' => 'HomeController@storeInstanceUser']);
-
+Route::post('/reoder-active-proposal', 'HomeController@sortable');
 
 Route::post('/delete-instance-user/{id}',array('uses' => 'HomeController@deleteOwner', 'as' => 'deleteuser'));
 
@@ -101,6 +101,7 @@ Route::get('/edit-proposal-billboards/{id}', 'ProposalController@edit');
 Route::post('/post-proposal', ['as' => 'postproposal', 'uses' => 'ProposalController@store']);
 Route::get('/active-proposal/remove-billboard/{id}', 'ProposalController@removebillboard');
 Route::get('/active-proposal/add-billboard/{id}/{faceid}', 'ProposalController@addbillboard');
+
 
 Route::post('/save-active-proposal-billboards', ['as' => 'postproposalbillboards', 'uses' => 'ProposalController@saveProposalBillbaord']);
 Route::post('/send-active-proposal', ['as' => 'sendproposal', 'uses' => 'ProposalController@sendProposal']);
