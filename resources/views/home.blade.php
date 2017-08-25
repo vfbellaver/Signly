@@ -206,9 +206,6 @@
                                 var ac_proposalId = el.id;
                                 var ac_proposalIndex = $(el).index();
                                 var token = $(el).attr('token');
-                                console.log(ac_proposalId);
-                                console.log(ac_proposalIndex);
-                                console.log(token);
 
                               $.ajax({
                                   beforeSend: function(xhr){xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));},
