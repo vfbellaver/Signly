@@ -2318,7 +2318,7 @@ class TCPDF {
 	 * </pre>
 	 * @param $re (string) regular expression (leave empty for default).
 	 * @storage
-	 * @since 4.6.016 (2009-06-15)
+	 * @since 4.6.016 (2009-06-1)
 	 */
 	public function setSpacesRE($re='/[^\S\xa0]/') {
 		$this->re_spaces = $re;
@@ -3608,7 +3608,7 @@ class TCPDF {
 	 * Check if we are on the page body (excluding page header and footer).
 	 * @return true if we are not in page header nor in page footer, false otherwise.
 	 * @protected
-	 * @since 5.9.091 (2011-06-15)
+	 * @since 5.9.091 (2011-06-1)
 	 */
 	protected function inPageBody() {
 		return (($this->InHeader === false) AND ($this->InFooter === false));
@@ -9514,7 +9514,7 @@ class TCPDF {
 		$this->encrypted = false;
 		// set XMP data
 		$xmp = '<?xpacket begin="'.TCPDF_FONTS::unichr(0xfeff, $this->isunicode).'" id="W5M0MpCehiHzreSzNTczkc9d"?>'."\n";
-		$xmp .= '<x:xmpmeta xmlns:x="adobe:ns:meta/" x:xmptk="Adobe XMP Core 4.2.1-c043 52.372728, 2009/01/18-15:08:04">'."\n";
+		$xmp .= '<x:xmpmeta xmlns:x="adobe:ns:meta/" x:xmptk="Adobe XMP Core 4.2.1-c043 52.372728, 2009/01/18-1:08:04">'."\n";
 		$xmp .= "\t".'<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">'."\n";
 		$xmp .= "\t\t".'<rdf:Description rdf:about="" xmlns:dc="http://purl.org/dc/elements/1.1/">'."\n";
 		$xmp .= "\t\t\t".'<dc:format>application/pdf</dc:format>'."\n";
@@ -10742,7 +10742,7 @@ class TCPDF {
 					$perms .= 'T';
 				}
 				$perms .= 'adb'; // bytes 9-11
-				$perms .= 'nick'; // bytes 12-15
+				$perms .= 'nick'; // bytes 12-1
 				$this->encryptdata['perms'] = TCPDF_STATIC::_AESnopad($this->encryptdata['key'], $perms);
 			} else { // RC4-40, RC4-128, AES-128
 				// Pad passwords
@@ -11832,7 +11832,7 @@ class TCPDF {
 	 * </ul>
 	 * If a key is not present or is null, not draws the line. Default value is default line style (empty array).
 	 * @param $fill_color (array) Fill color. Format: array(GREY) or array(R,G,B) or array(C,M,Y,K) or array(C,M,Y,K,SpotColorName). Default value: default color (empty array).
-	 * @since 4.8.003 (2009-09-15)
+	 * @since 4.8.003 (2009-09-1)
 	 * @storage
 	 */
 	public function PolyLine($p, $style='', $line_style=array(), $fill_color=array()) {
@@ -17028,7 +17028,7 @@ class TCPDF {
 	 * @return string
 	 * @protected
 	 * @author Nicola Asuni
-	 * @since 4.8.024 (2010-01-15)
+	 * @since 4.8.024 (2010-01-1)
 	 */
 	protected function getSpaceString() {
 		$spacestr = chr(32);

@@ -30,7 +30,7 @@ class ErrorTest extends \PHPUnit_Framework_TestCase
 
         $error->setStartLine(15);
         $this->assertSame(15, $error->getStartLine());
-        $this->assertSame('Some other error on line 15', $error->getMessage());
+        $this->assertSame('Some other error on line 1', $error->getMessage());
 
         $error->setRawLine(17);
         $this->assertSame(17, $error->getRawLine());

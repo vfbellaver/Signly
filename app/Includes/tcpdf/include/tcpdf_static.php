@@ -2390,7 +2390,7 @@ class TCPDF_STATIC {
 		'EN_LARGE_POST'          => array( 1188.000,  1512.000), // = (  419 x 533  ) mm  = ( 16.50 x 21.00 ) in
 		'EN_COPY_DRAUGHT'        => array( 1152.000,  1440.000), // = (  406 x 508  ) mm  = ( 16.00 x 20.00 ) in
 		'EN_POST'                => array( 1116.000,  1386.000), // = (  394 x 489  ) mm  = ( 15.50 x 19.25 ) in
-		'EN_CROWN'               => array( 1080.000,  1440.000), // = (  381 x 508  ) mm  = ( 15.00 x 20.00 ) in
+		'EN_CROWN'               => array( 1080.000,  1440.000), // = (  381 x 508  ) mm  = ( 1.00 x 20.00 ) in
 		'EN_PINCHED_POST'        => array( 1062.000,  1332.000), // = (  375 x 470  ) mm  = ( 14.75 x 18.50 ) in
 		'EN_BRIEF'               => array(  972.000,  1152.000), // = (  343 x 406  ) mm  = ( 13.50 x 16.00 ) in
 		'EN_FOOLSCAP'            => array(  972.000,  1224.000), // = (  343 x 432  ) mm  = ( 13.50 x 17.00 ) in
@@ -2411,7 +2411,7 @@ class TCPDF_STATIC {
 		'BE_PETIT_MEDIAN'        => array( 1176.378,  1502.362), // = (  415 x 530  ) mm  = ( 16.34 x 20.87 ) in
 		'BE_RUCHE'               => array( 1020.472,  1303.937), // = (  360 x 460  ) mm  = ( 14.17 x 18.11 ) in
 		'BE_PROPATRIA'           => array(  977.953,  1218.898), // = (  345 x 430  ) mm  = ( 13.58 x 16.93 ) in
-		'BE_LYS'                 => array(  898.583,  1125.354), // = (  317 x 397  ) mm  = ( 12.48 x 15.63 ) in
+		'BE_LYS'                 => array(  898.583,  1125.354), // = (  317 x 397  ) mm  = ( 12.48 x 1.63 ) in
 		'BE_POT'                 => array(  870.236,  1088.504), // = (  307 x 384  ) mm  = ( 12.09 x 15.12 ) in
 		'BE_ROSETTE'             => array(  765.354,   983.622), // = (  270 x 347  ) mm  = ( 10.63 x 13.66 ) in
 		// - Old Imperial French Sizes
@@ -2438,11 +2438,11 @@ class TCPDF_STATIC {
 		'FR_COQUILLE'            => array( 1247.244,  1587.402), // = (  440 x 560  ) mm  = ( 17.32 x 22.05 ) in
 		'FR_DOUBLE_TELLIERE'     => array( 1247.244,  1927.559), // = (  440 x 680  ) mm  = ( 17.32 x 26.77 ) in
 		'FR_DOUBLE_CLOCHE'       => array( 1133.858,  1700.787), // = (  400 x 600  ) mm  = ( 15.75 x 23.62 ) in
-		'FR_DOUBLE_POT'          => array( 1133.858,  1757.480), // = (  400 x 620  ) mm  = ( 15.75 x 24.41 ) in
+		'FR_DOUBLE_POT'          => array( 1133.858,  1757.480), // = (  400 x 620  ) mm  = ( 1.75 x 24.41 ) in
 		'FR_ECU'                 => array( 1133.858,  1474.016), // = (  400 x 520  ) mm  = ( 15.75 x 20.47 ) in
 		'FR_COURONNE'            => array( 1020.472,  1303.937), // = (  360 x 460  ) mm  = ( 14.17 x 18.11 ) in
 		'FR_TELLIERE'            => array(  963.780,  1247.244), // = (  340 x 440  ) mm  = ( 13.39 x 17.32 ) in
-		'FR_POT'                 => array(  878.740,  1133.858), // = (  310 x 400  ) mm  = ( 12.20 x 15.75 ) in
+		'FR_POT'                 => array(  878.740,  1133.858), // = (  310 x 400  ) mm  = ( 12.20 x 1.75 ) in
 	);
 
 

@@ -3,7 +3,7 @@
 // File name   : tcpdf_images.php
 // Version     : 1.0.005
 // Begin       : 2002-08-03
-// Last Update : 2014-11-15
+// Last Update : 2014-11-1
 // Author      : Nicola Asuni - Tecnick.com LTD - www.tecnick.com - info@tecnick.com
 // License     : GNU-LGPL v3 (http://www.gnu.org/copyleft/lesser.html)
 // -------------------------------------------------------------------
@@ -291,7 +291,7 @@ class TCPDF_IMAGES {
 		}
 		fread($f, 4);
 		$channels = ($ct == 2 ? 3 : 1);
-		$parms = '/DecodeParms << /Predictor 15 /Colors '.$channels.' /BitsPerComponent '.$bpc.' /Columns '.$w.' >>';
+		$parms = '/DecodeParms << /Predictor 1 /Colors '.$channels.' /BitsPerComponent '.$bpc.' /Columns '.$w.' >>';
 		//Scan chunks looking for palette, transparency and image data
 		$pal = '';
 		$trns = '';

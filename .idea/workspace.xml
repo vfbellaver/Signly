@@ -2,106 +2,101 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7129f10d-41db-4689-9202-dec5cc8b0bf9" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/outdoor.jpg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources/f46386a0-4b96-4d10-b1ff-c8dc19c632f4.xml" afterPath="$PROJECT_DIR$/.idea/dataSources/f46386a0-4b96-4d10-b1ff-c8dc19c632f4.xml" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/storage" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/storage/public/php0TDH6a" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/storage/public/phpK6bmBH" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/PDFController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/PDFController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Includes/tcpdf/examples/example_001.php" afterPath="$PROJECT_DIR$/app/Includes/tcpdf/examples/example_001.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Includes/tcpdf/examples/example_004.php" afterPath="$PROJECT_DIR$/app/Includes/tcpdf/examples/example_004.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Includes/tcpdf/examples/example_005.php" afterPath="$PROJECT_DIR$/app/Includes/tcpdf/examples/example_005.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Includes/tcpdf/examples/example_006.php" afterPath="$PROJECT_DIR$/app/Includes/tcpdf/examples/example_006.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Includes/tcpdf/examples/example_008.php" afterPath="$PROJECT_DIR$/app/Includes/tcpdf/examples/example_008.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Includes/tcpdf/examples/example_010.php" afterPath="$PROJECT_DIR$/app/Includes/tcpdf/examples/example_010.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Includes/tcpdf/examples/example_012.php" afterPath="$PROJECT_DIR$/app/Includes/tcpdf/examples/example_012.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Includes/tcpdf/examples/example_013.php" afterPath="$PROJECT_DIR$/app/Includes/tcpdf/examples/example_013.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Includes/tcpdf/examples/example_016.php" afterPath="$PROJECT_DIR$/app/Includes/tcpdf/examples/example_016.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Includes/tcpdf/examples/example_017.php" afterPath="$PROJECT_DIR$/app/Includes/tcpdf/examples/example_017.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Includes/tcpdf/examples/example_021.php" afterPath="$PROJECT_DIR$/app/Includes/tcpdf/examples/example_021.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Includes/tcpdf/examples/example_022.php" afterPath="$PROJECT_DIR$/app/Includes/tcpdf/examples/example_022.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Includes/tcpdf/examples/example_023.php" afterPath="$PROJECT_DIR$/app/Includes/tcpdf/examples/example_023.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Includes/tcpdf/examples/example_030.php" afterPath="$PROJECT_DIR$/app/Includes/tcpdf/examples/example_030.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Includes/tcpdf/examples/example_033.php" afterPath="$PROJECT_DIR$/app/Includes/tcpdf/examples/example_033.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Includes/tcpdf/examples/example_034.php" afterPath="$PROJECT_DIR$/app/Includes/tcpdf/examples/example_034.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Includes/tcpdf/examples/example_040.php" afterPath="$PROJECT_DIR$/app/Includes/tcpdf/examples/example_040.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Includes/tcpdf/examples/example_044.php" afterPath="$PROJECT_DIR$/app/Includes/tcpdf/examples/example_044.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Includes/tcpdf/examples/example_047.php" afterPath="$PROJECT_DIR$/app/Includes/tcpdf/examples/example_047.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Includes/tcpdf/examples/example_048.php" afterPath="$PROJECT_DIR$/app/Includes/tcpdf/examples/example_048.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Includes/tcpdf/examples/example_051.php" afterPath="$PROJECT_DIR$/app/Includes/tcpdf/examples/example_051.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Includes/tcpdf/examples/example_052.php" afterPath="$PROJECT_DIR$/app/Includes/tcpdf/examples/example_052.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Includes/tcpdf/examples/example_053.php" afterPath="$PROJECT_DIR$/app/Includes/tcpdf/examples/example_053.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Includes/tcpdf/examples/example_057.php" afterPath="$PROJECT_DIR$/app/Includes/tcpdf/examples/example_057.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Includes/tcpdf/examples/example_060.php" afterPath="$PROJECT_DIR$/app/Includes/tcpdf/examples/example_060.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Includes/tcpdf/examples/example_064.php" afterPath="$PROJECT_DIR$/app/Includes/tcpdf/examples/example_064.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Includes/tcpdf/examples/example_065.php" afterPath="$PROJECT_DIR$/app/Includes/tcpdf/examples/example_065.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Includes/tcpdf/examples/tcpdf_include.php" afterPath="$PROJECT_DIR$/app/Includes/tcpdf/examples/tcpdf_include.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Includes/tcpdf/include/tcpdf_fonts.php" afterPath="$PROJECT_DIR$/app/Includes/tcpdf/include/tcpdf_fonts.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/ProposalController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/ProposalController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/ProposalSettingsController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/ProposalSettingsController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Includes/tcpdf/examples/example_003.php" afterPath="$PROJECT_DIR$/app/Includes/tcpdf/examples/example_003.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Includes/tcpdf/examples/example_038.php" afterPath="$PROJECT_DIR$/app/Includes/tcpdf/examples/example_038.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Includes/tcpdf/include/barcodes/qrcode.php" afterPath="$PROJECT_DIR$/app/Includes/tcpdf/include/barcodes/qrcode.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Includes/tcpdf/include/tcpdf_font_data.php" afterPath="$PROJECT_DIR$/app/Includes/tcpdf/include/tcpdf_font_data.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Includes/tcpdf/include/tcpdf_images.php" afterPath="$PROJECT_DIR$/app/Includes/tcpdf/include/tcpdf_images.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Includes/tcpdf/include/tcpdf_static.php" afterPath="$PROJECT_DIR$/app/Includes/tcpdf/include/tcpdf_static.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Includes/tcpdf/tcpdf.php" afterPath="$PROJECT_DIR$/app/Includes/tcpdf/tcpdf.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Includes/tcpdf/tcpdf_barcodes_1d.php" afterPath="$PROJECT_DIR$/app/Includes/tcpdf/tcpdf_barcodes_1d.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Includes/tcpdf/tcpdf_parser.php" afterPath="$PROJECT_DIR$/app/Includes/tcpdf/tcpdf_parser.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/composer.json" afterPath="$PROJECT_DIR$/composer.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/composer.lock" afterPath="$PROJECT_DIR$/composer.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/dompdf.php" afterPath="$PROJECT_DIR$/config/dompdf.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/css/pdf.css" afterPath="$PROJECT_DIR$/public/css/pdf.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/assets/less/bootstrap/variables.less" afterPath="$PROJECT_DIR$/resources/assets/less/bootstrap/variables.less" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/app.blade.php" afterPath="$PROJECT_DIR$/resources/views/app.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/pdf/details.blade.php" afterPath="$PROJECT_DIR$/resources/views/pdf/details.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/pdf/first_page.blade.php" afterPath="$PROJECT_DIR$/resources/views/pdf/first_page.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/pdf/pdf_footer.blade.php" afterPath="$PROJECT_DIR$/resources/views/pdf/pdf_footer.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/pdf/pdf_index.blade.php" afterPath="$PROJECT_DIR$/resources/views/pdf/pdf_index.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/pdf/proposals_table.blade.php" afterPath="$PROJECT_DIR$/resources/views/pdf/proposals_table.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/proposal/settings.blade.php" afterPath="$PROJECT_DIR$/resources/views/proposal/settings.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/signly.sql" afterPath="$PROJECT_DIR$/signly.sql" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/signlydb5000.sql" afterPath="$PROJECT_DIR$/signlydb5000.sql" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/barryvdh/laravel-dompdf/config/dompdf.php" afterPath="$PROJECT_DIR$/vendor/barryvdh/laravel-dompdf/config/dompdf.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/composer/autoload_namespaces.php" afterPath="$PROJECT_DIR$/vendor/composer/autoload_namespaces.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" afterPath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/composer/autoload_files.php" afterPath="$PROJECT_DIR$/vendor/composer/autoload_files.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/composer/autoload_psr4.php" afterPath="$PROJECT_DIR$/vendor/composer/autoload_psr4.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/composer/installed.json" afterPath="$PROJECT_DIR$/vendor/composer/installed.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/dompdf/dompdf/lib/Cpdf.php" afterPath="$PROJECT_DIR$/vendor/dompdf/dompdf/lib/Cpdf.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/dompdf/dompdf/lib/html5lib/TreeBuilder.php" afterPath="$PROJECT_DIR$/vendor/dompdf/dompdf/lib/html5lib/TreeBuilder.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/monolog/monolog/tests/Monolog/Formatter/ChromePHPFormatterTest.php" afterPath="$PROJECT_DIR$/vendor/monolog/monolog/tests/Monolog/Formatter/ChromePHPFormatterTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/monolog/monolog/tests/Monolog/Formatter/WildfireFormatterTest.php" afterPath="$PROJECT_DIR$/vendor/monolog/monolog/tests/Monolog/Formatter/WildfireFormatterTest.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/monolog/monolog/src/Monolog/Formatter/NormalizerFormatter.php" afterPath="$PROJECT_DIR$/vendor/monolog/monolog/src/Monolog/Formatter/NormalizerFormatter.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/monolog/monolog/src/Monolog/Handler/HipChatHandler.php" afterPath="$PROJECT_DIR$/vendor/monolog/monolog/src/Monolog/Handler/HipChatHandler.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/mtdowling/cron-expression/README.md" afterPath="$PROJECT_DIR$/vendor/mtdowling/cron-expression/README.md" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/mtdowling/cron-expression/tests/Cron/AbstractFieldTest.php" afterPath="$PROJECT_DIR$/vendor/mtdowling/cron-expression/tests/Cron/AbstractFieldTest.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/mtdowling/cron-expression/tests/Cron/CronExpressionTest.php" afterPath="$PROJECT_DIR$/vendor/mtdowling/cron-expression/tests/Cron/CronExpressionTest.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/mtdowling/cron-expression/tests/Cron/DayOfMonthFieldTest.php" afterPath="$PROJECT_DIR$/vendor/mtdowling/cron-expression/tests/Cron/DayOfMonthFieldTest.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/mtdowling/cron-expression/tests/Cron/DayOfWeekFieldTest.php" afterPath="$PROJECT_DIR$/vendor/mtdowling/cron-expression/tests/Cron/DayOfWeekFieldTest.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/mtdowling/cron-expression/tests/Cron/HoursFieldTest.php" afterPath="$PROJECT_DIR$/vendor/mtdowling/cron-expression/tests/Cron/HoursFieldTest.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/mtdowling/cron-expression/tests/Cron/MinutesFieldTest.php" afterPath="$PROJECT_DIR$/vendor/mtdowling/cron-expression/tests/Cron/MinutesFieldTest.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/mtdowling/cron-expression/tests/Cron/MonthFieldTest.php" afterPath="$PROJECT_DIR$/vendor/mtdowling/cron-expression/tests/Cron/MonthFieldTest.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/mtdowling/cron-expression/tests/Cron/YearFieldTest.php" afterPath="$PROJECT_DIR$/vendor/mtdowling/cron-expression/tests/Cron/YearFieldTest.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/nikic/php-parser/test/PhpParser/ErrorTest.php" afterPath="$PROJECT_DIR$/vendor/nikic/php-parser/test/PhpParser/ErrorTest.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/phenx/php-font-lib/src/FontLib/Table/Type/name.php" afterPath="$PROJECT_DIR$/vendor/phenx/php-font-lib/src/FontLib/Table/Type/name.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/phenx/php-svg-lib/src/Svg/Surface/CPdf.php" afterPath="$PROJECT_DIR$/vendor/phenx/php-svg-lib/src/Svg/Surface/CPdf.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/phenx/php-svg-lib/tests/Svg/StyleTest.php" afterPath="$PROJECT_DIR$/vendor/phenx/php-svg-lib/tests/Svg/StyleTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/phpspec/phpspec/appveyor.yml" afterPath="$PROJECT_DIR$/vendor/phpspec/phpspec/appveyor.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/phpunit/phpunit/src/Framework/Assert.php" afterPath="$PROJECT_DIR$/vendor/phpunit/phpunit/src/Framework/Assert.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/phpunit/phpunit/src/Framework/Assert/Functions.php" afterPath="$PROJECT_DIR$/vendor/phpunit/phpunit/src/Framework/Assert/Functions.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/phpunit/phpunit/src/Framework/TestResult.php" afterPath="$PROJECT_DIR$/vendor/phpunit/phpunit/src/Framework/TestResult.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/phpunit/phpunit/src/Util/Configuration.php" afterPath="$PROJECT_DIR$/vendor/phpunit/phpunit/src/Util/Configuration.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/phpunit/phpunit/tests/Framework/AssertTest.php" afterPath="$PROJECT_DIR$/vendor/phpunit/phpunit/tests/Framework/AssertTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/sebastian/comparator/tests/DateTimeComparatorTest.php" afterPath="$PROJECT_DIR$/vendor/sebastian/comparator/tests/DateTimeComparatorTest.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/phpspec/phpspec/spec/PhpSpec/Formatter/DotFormatterSpec.php" afterPath="$PROJECT_DIR$/vendor/phpspec/phpspec/spec/PhpSpec/Formatter/DotFormatterSpec.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/phpspec/prophecy/spec/Prophecy/Argument/Token/LogicalAndTokenSpec.php" afterPath="$PROJECT_DIR$/vendor/phpspec/prophecy/spec/Prophecy/Argument/Token/LogicalAndTokenSpec.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/swiftmailer/swiftmailer/lib/classes/Swift/Encoder/QpEncoder.php" afterPath="$PROJECT_DIR$/vendor/swiftmailer/swiftmailer/lib/classes/Swift/Encoder/QpEncoder.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/symfony/debug/Tests/Exception/FlattenExceptionTest.php" afterPath="$PROJECT_DIR$/vendor/symfony/debug/Tests/Exception/FlattenExceptionTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/symfony/http-foundation/Response.php" afterPath="$PROJECT_DIR$/vendor/symfony/http-foundation/Response.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/symfony/http-foundation/Tests/ResponseHeaderBagTest.php" afterPath="$PROJECT_DIR$/vendor/symfony/http-foundation/Tests/ResponseHeaderBagTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/symfony/http-foundation/Tests/ResponseTest.php" afterPath="$PROJECT_DIR$/vendor/symfony/http-foundation/Tests/ResponseTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/symfony/polyfill-php56/bootstrap.php" afterPath="$PROJECT_DIR$/vendor/symfony/polyfill-php56/bootstrap.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/symfony/routing/Tests/RouteTest.php" afterPath="$PROJECT_DIR$/vendor/symfony/routing/Tests/RouteTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/symfony/translation/Loader/schema/dic/xliff-core/xliff-core-1.2-strict.xsd" afterPath="$PROJECT_DIR$/vendor/symfony/translation/Loader/schema/dic/xliff-core/xliff-core-1.2-strict.xsd" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/symfony/var-dumper/Tests/Caster/ReflectionCasterTest.php" afterPath="$PROJECT_DIR$/vendor/symfony/var-dumper/Tests/Caster/ReflectionCasterTest.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/swiftmailer/swiftmailer/lib/classes/Swift/Mime/MimePart.php" afterPath="$PROJECT_DIR$/vendor/swiftmailer/swiftmailer/lib/classes/Swift/Mime/MimePart.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/swiftmailer/swiftmailer/lib/classes/Swift/Transport/Esmtp/Auth/NTLMAuthenticator.php" afterPath="$PROJECT_DIR$/vendor/swiftmailer/swiftmailer/lib/classes/Swift/Transport/Esmtp/Auth/NTLMAuthenticator.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/symfony/console/Tests/Helper/ProgressBarTest.php" afterPath="$PROJECT_DIR$/vendor/symfony/console/Tests/Helper/ProgressBarTest.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/symfony/finder/Finder.php" afterPath="$PROJECT_DIR$/vendor/symfony/finder/Finder.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/symfony/finder/Tests/Comparator/DateComparatorTest.php" afterPath="$PROJECT_DIR$/vendor/symfony/finder/Tests/Comparator/DateComparatorTest.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/symfony/finder/Tests/Iterator/RealIteratorTestCase.php" afterPath="$PROJECT_DIR$/vendor/symfony/finder/Tests/Iterator/RealIteratorTestCase.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/symfony/finder/Tests/Iterator/SortableIteratorTest.php" afterPath="$PROJECT_DIR$/vendor/symfony/finder/Tests/Iterator/SortableIteratorTest.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/symfony/http-foundation/JsonResponse.php" afterPath="$PROJECT_DIR$/vendor/symfony/http-foundation/JsonResponse.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/symfony/http-foundation/Tests/CookieTest.php" afterPath="$PROJECT_DIR$/vendor/symfony/http-foundation/Tests/CookieTest.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/symfony/http-kernel/Tests/ClientTest.php" afterPath="$PROJECT_DIR$/vendor/symfony/http-kernel/Tests/ClientTest.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/symfony/http-kernel/Tests/EventListener/ResponseListenerTest.php" afterPath="$PROJECT_DIR$/vendor/symfony/http-kernel/Tests/EventListener/ResponseListenerTest.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/symfony/translation/Tests/PluralizationRulesTest.php" afterPath="$PROJECT_DIR$/vendor/symfony/translation/Tests/PluralizationRulesTest.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/symfony/yaml/Tests/Fixtures/YtsSpecificationExamples.yml" afterPath="$PROJECT_DIR$/vendor/symfony/yaml/Tests/Fixtures/YtsSpecificationExamples.yml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/symfony/yaml/Tests/InlineTest.php" afterPath="$PROJECT_DIR$/vendor/symfony/yaml/Tests/InlineTest.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/symfony/yaml/Tests/ParserTest.php" afterPath="$PROJECT_DIR$/vendor/symfony/yaml/Tests/ParserTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor1/monolog/monolog/tests/Monolog/Formatter/ChromePHPFormatterTest.php" afterPath="$PROJECT_DIR$/vendor1/monolog/monolog/tests/Monolog/Formatter/ChromePHPFormatterTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor1/monolog/monolog/tests/Monolog/Formatter/WildfireFormatterTest.php" afterPath="$PROJECT_DIR$/vendor1/monolog/monolog/tests/Monolog/Formatter/WildfireFormatterTest.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor1/monolog/monolog/src/Monolog/Formatter/NormalizerFormatter.php" afterPath="$PROJECT_DIR$/vendor1/monolog/monolog/src/Monolog/Formatter/NormalizerFormatter.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor1/monolog/monolog/src/Monolog/Handler/HipChatHandler.php" afterPath="$PROJECT_DIR$/vendor1/monolog/monolog/src/Monolog/Handler/HipChatHandler.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor1/mtdowling/cron-expression/README.md" afterPath="$PROJECT_DIR$/vendor1/mtdowling/cron-expression/README.md" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor1/mtdowling/cron-expression/tests/Cron/AbstractFieldTest.php" afterPath="$PROJECT_DIR$/vendor1/mtdowling/cron-expression/tests/Cron/AbstractFieldTest.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor1/mtdowling/cron-expression/tests/Cron/CronExpressionTest.php" afterPath="$PROJECT_DIR$/vendor1/mtdowling/cron-expression/tests/Cron/CronExpressionTest.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor1/mtdowling/cron-expression/tests/Cron/DayOfMonthFieldTest.php" afterPath="$PROJECT_DIR$/vendor1/mtdowling/cron-expression/tests/Cron/DayOfMonthFieldTest.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor1/mtdowling/cron-expression/tests/Cron/DayOfWeekFieldTest.php" afterPath="$PROJECT_DIR$/vendor1/mtdowling/cron-expression/tests/Cron/DayOfWeekFieldTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor1/phpspec/phpspec/appveyor.yml" afterPath="$PROJECT_DIR$/vendor1/phpspec/phpspec/appveyor.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor1/phpunit/phpunit/src/Framework/Assert.php" afterPath="$PROJECT_DIR$/vendor1/phpunit/phpunit/src/Framework/Assert.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor1/phpunit/phpunit/src/Framework/Assert/Functions.php" afterPath="$PROJECT_DIR$/vendor1/phpunit/phpunit/src/Framework/Assert/Functions.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor1/phpunit/phpunit/src/Framework/TestResult.php" afterPath="$PROJECT_DIR$/vendor1/phpunit/phpunit/src/Framework/TestResult.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor1/phpunit/phpunit/src/Util/Configuration.php" afterPath="$PROJECT_DIR$/vendor1/phpunit/phpunit/src/Util/Configuration.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor1/phpunit/phpunit/tests/Framework/AssertTest.php" afterPath="$PROJECT_DIR$/vendor1/phpunit/phpunit/tests/Framework/AssertTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor1/sebastian/comparator/tests/DateTimeComparatorTest.php" afterPath="$PROJECT_DIR$/vendor1/sebastian/comparator/tests/DateTimeComparatorTest.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor1/mtdowling/cron-expression/tests/Cron/HoursFieldTest.php" afterPath="$PROJECT_DIR$/vendor1/mtdowling/cron-expression/tests/Cron/HoursFieldTest.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor1/mtdowling/cron-expression/tests/Cron/MinutesFieldTest.php" afterPath="$PROJECT_DIR$/vendor1/mtdowling/cron-expression/tests/Cron/MinutesFieldTest.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor1/mtdowling/cron-expression/tests/Cron/MonthFieldTest.php" afterPath="$PROJECT_DIR$/vendor1/mtdowling/cron-expression/tests/Cron/MonthFieldTest.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor1/mtdowling/cron-expression/tests/Cron/YearFieldTest.php" afterPath="$PROJECT_DIR$/vendor1/mtdowling/cron-expression/tests/Cron/YearFieldTest.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor1/phpspec/phpspec/spec/PhpSpec/Formatter/DotFormatterSpec.php" afterPath="$PROJECT_DIR$/vendor1/phpspec/phpspec/spec/PhpSpec/Formatter/DotFormatterSpec.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor1/phpspec/prophecy/spec/Prophecy/Argument/Token/LogicalAndTokenSpec.php" afterPath="$PROJECT_DIR$/vendor1/phpspec/prophecy/spec/Prophecy/Argument/Token/LogicalAndTokenSpec.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor1/phpunit/php-code-coverage/src/CodeCoverage/Report/HTML/Renderer.php" afterPath="$PROJECT_DIR$/vendor1/phpunit/php-code-coverage/src/CodeCoverage/Report/HTML/Renderer.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor1/swiftmailer/swiftmailer/lib/classes/Swift/Encoder/QpEncoder.php" afterPath="$PROJECT_DIR$/vendor1/swiftmailer/swiftmailer/lib/classes/Swift/Encoder/QpEncoder.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor1/symfony/debug/Symfony/Component/Debug/Tests/Exception/FlattenExceptionTest.php" afterPath="$PROJECT_DIR$/vendor1/symfony/debug/Symfony/Component/Debug/Tests/Exception/FlattenExceptionTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor1/symfony/http-foundation/Symfony/Component/HttpFoundation/Response.php" afterPath="$PROJECT_DIR$/vendor1/symfony/http-foundation/Symfony/Component/HttpFoundation/Response.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor1/symfony/http-foundation/Symfony/Component/HttpFoundation/Tests/ResponseHeaderBagTest.php" afterPath="$PROJECT_DIR$/vendor1/symfony/http-foundation/Symfony/Component/HttpFoundation/Tests/ResponseHeaderBagTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor1/symfony/http-foundation/Symfony/Component/HttpFoundation/Tests/ResponseTest.php" afterPath="$PROJECT_DIR$/vendor1/symfony/http-foundation/Symfony/Component/HttpFoundation/Tests/ResponseTest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor1/symfony/polyfill-php56/bootstrap.php" afterPath="$PROJECT_DIR$/vendor1/symfony/polyfill-php56/bootstrap.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor1/symfony/routing/Symfony/Component/Routing/Tests/RouteTest.php" afterPath="$PROJECT_DIR$/vendor1/symfony/routing/Symfony/Component/Routing/Tests/RouteTest.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor1/swiftmailer/swiftmailer/lib/classes/Swift/Mime/MimePart.php" afterPath="$PROJECT_DIR$/vendor1/swiftmailer/swiftmailer/lib/classes/Swift/Mime/MimePart.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor1/swiftmailer/swiftmailer/lib/classes/Swift/Transport/Esmtp/Auth/NTLMAuthenticator.php" afterPath="$PROJECT_DIR$/vendor1/swiftmailer/swiftmailer/lib/classes/Swift/Transport/Esmtp/Auth/NTLMAuthenticator.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor1/symfony/console/Symfony/Component/Console/Tests/Helper/LegacyProgressHelperTest.php" afterPath="$PROJECT_DIR$/vendor1/symfony/console/Symfony/Component/Console/Tests/Helper/LegacyProgressHelperTest.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor1/symfony/console/Symfony/Component/Console/Tests/Helper/ProgressBarTest.php" afterPath="$PROJECT_DIR$/vendor1/symfony/console/Symfony/Component/Console/Tests/Helper/ProgressBarTest.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor1/symfony/finder/Symfony/Component/Finder/Finder.php" afterPath="$PROJECT_DIR$/vendor1/symfony/finder/Symfony/Component/Finder/Finder.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor1/symfony/finder/Symfony/Component/Finder/Tests/Comparator/DateComparatorTest.php" afterPath="$PROJECT_DIR$/vendor1/symfony/finder/Symfony/Component/Finder/Tests/Comparator/DateComparatorTest.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor1/symfony/finder/Symfony/Component/Finder/Tests/Iterator/RealIteratorTestCase.php" afterPath="$PROJECT_DIR$/vendor1/symfony/finder/Symfony/Component/Finder/Tests/Iterator/RealIteratorTestCase.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor1/symfony/finder/Symfony/Component/Finder/Tests/Iterator/SortableIteratorTest.php" afterPath="$PROJECT_DIR$/vendor1/symfony/finder/Symfony/Component/Finder/Tests/Iterator/SortableIteratorTest.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor1/symfony/http-foundation/Symfony/Component/HttpFoundation/JsonResponse.php" afterPath="$PROJECT_DIR$/vendor1/symfony/http-foundation/Symfony/Component/HttpFoundation/JsonResponse.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor1/symfony/http-foundation/Symfony/Component/HttpFoundation/Tests/CookieTest.php" afterPath="$PROJECT_DIR$/vendor1/symfony/http-foundation/Symfony/Component/HttpFoundation/Tests/CookieTest.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor1/symfony/http-kernel/Symfony/Component/HttpKernel/Tests/ClientTest.php" afterPath="$PROJECT_DIR$/vendor1/symfony/http-kernel/Symfony/Component/HttpKernel/Tests/ClientTest.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor1/symfony/http-kernel/Symfony/Component/HttpKernel/Tests/EventListener/ResponseListenerTest.php" afterPath="$PROJECT_DIR$/vendor1/symfony/http-kernel/Symfony/Component/HttpKernel/Tests/EventListener/ResponseListenerTest.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor1/symfony/translation/Symfony/Component/Translation/Tests/PluralizationRulesTest.php" afterPath="$PROJECT_DIR$/vendor1/symfony/translation/Symfony/Component/Translation/Tests/PluralizationRulesTest.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor1/symfony/yaml/Tests/Fixtures/YtsSpecificationExamples.yml" afterPath="$PROJECT_DIR$/vendor1/symfony/yaml/Tests/Fixtures/YtsSpecificationExamples.yml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor1/symfony/yaml/Tests/InlineTest.php" afterPath="$PROJECT_DIR$/vendor1/symfony/yaml/Tests/InlineTest.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor1/symfony/yaml/Tests/ParserTest.php" afterPath="$PROJECT_DIR$/vendor1/symfony/yaml/Tests/ParserTest.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -146,68 +141,15 @@
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="pdf.css" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/css/pdf.css">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="PDFController.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/PDFController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="40" column="22" lean-forward="false" selection-start-line="40" selection-start-column="22" selection-end-line="40" selection-end-column="22" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="signly_br.owners" pinned="false" current-in-tab="false">
-        <entry file="dbDummy://dbtable:/941f4086/f46386a0-4b96-4d10-b1ff-c8dc19c632f4/signly_br.owners">
-          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-            <state>
-              <filtering enabled="true" />
-            </state>
-          </provider>
-          <provider editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="signly_br.instance" pinned="false" current-in-tab="true">
-        <entry file="dbDummy://dbtable:/941f4086/f46386a0-4b96-4d10-b1ff-c8dc19c632f4/signly_br.instance">
-          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-            <state>
-              <filtering enabled="true" />
-            </state>
-          </provider>
-          <provider editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="signly_br.proposal_billboard" pinned="false" current-in-tab="false">
-        <entry file="dbDummy://dbtable:/941f4086/f46386a0-4b96-4d10-b1ff-c8dc19c632f4/signly_br.proposal_billboard">
-          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-            <state>
-              <filtering enabled="true" />
-            </state>
-          </provider>
-          <provider editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="pdf_index.blade.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/views/pdf/pdf_index.blade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="368">
-              <caret line="79" column="36" lean-forward="false" selection-start-line="79" selection-start-column="36" selection-end-line="79" selection-end-column="36" />
-              <folding />
+            <state relative-caret-position="770">
+              <caret line="103" column="11" lean-forward="false" selection-start-line="103" selection-start-column="11" selection-end-line="103" selection-end-column="11" />
+              <folding>
+                <element signature="e#38#81#0#PHP" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -215,23 +157,21 @@
       <file leaf-file-name="details.blade.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/views/pdf/details.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="20">
-              <caret line="1" column="42" lean-forward="true" selection-start-line="1" selection-start-column="42" selection-end-line="1" selection-end-column="42" />
-              <folding />
+            <state relative-caret-position="340">
+              <caret line="20" column="25" lean-forward="false" selection-start-line="20" selection-start-column="25" selection-end-line="20" selection-end-column="25" />
+              <folding>
+                <element signature="n#style#0;n#div#1;n#div#1;n#div#1;n#!!top" expanded="true" />
+                <marker date="1503683134889" expanded="true" signature="683:686" ph="..." />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="signly_br.billboard_faces" pinned="false" current-in-tab="false">
-        <entry file="dbDummy://dbtable:/941f4086/f46386a0-4b96-4d10-b1ff-c8dc19c632f4/signly_br.billboard_faces">
-          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-            <state>
-              <filtering enabled="true" />
-            </state>
-          </provider>
-          <provider editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+      <file leaf-file-name="pdf_index.blade.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/resources/views/pdf/pdf_index.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1330">
+              <caret line="1" column="8" lean-forward="false" selection-start-line="1" selection-start-column="8" selection-end-line="1" selection-end-column="8" />
               <folding />
             </state>
           </provider>
@@ -265,6 +205,8 @@
       <find>unique</find>
       <find>vendor</find>
       <find>active-proposal</find>
+      <find>DOMPDF_ENABLE_CSS_FLOAT</find>
+      <find>dpi</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -279,8 +221,6 @@
         <option value="$PROJECT_DIR$/resources/views/home.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/ProposalController.php" />
         <option value="$PROJECT_DIR$/database/migrations/2014_10_12_200000_create_proposal_settings_table.php" />
-        <option value="$PROJECT_DIR$/config/filesystems.php" />
-        <option value="$PROJECT_DIR$/resources/views/proposal/settings.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/pdf/phf_index.php" />
         <option value="$PROJECT_DIR$/bootstrap/app.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/BillboardController.php" />
@@ -288,8 +228,6 @@
         <option value="$PROJECT_DIR$/app/Http/routes.php" />
         <option value="$PROJECT_DIR$/resources/views/pdf/pdf_index.php" />
         <option value="$PROJECT_DIR$/resources/views/pdf/pdf_layout.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/pdf/pdf_footer.blade.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/ProposalSettingsController.php" />
         <option value="$PROJECT_DIR$/resources/views/pdf/second_page.blade.php" />
         <option value="$PROJECT_DIR$/public/js/map/pdf_maps.js" />
         <option value="$PROJECT_DIR$/public/js/js/pdf_maps/pricipal.js" />
@@ -301,15 +239,20 @@
         <option value="$PROJECT_DIR$/config/database.php" />
         <option value="dbtable:/941f4086/f46386a0-4b96-4d10-b1ff-c8dc19c632f4/signly_br.proposal_comments" />
         <option value="$PROJECT_DIR$/signly.sql" />
-        <option value="$PROJECT_DIR$/resources/views/app.blade.php" />
-        <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$APPLICATION_CONFIG_DIR$/consoles/db/f46386a0-4b96-4d10-b1ff-c8dc19c632f4/console.sql" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/PDFController.php" />
         <option value="$PROJECT_DIR$/resources/views/pdf/proposals_table.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/pdf/first_page.blade.php" />
+        <option value="$PROJECT_DIR$/vendor/dompdf/dompdf/src/Options.php" />
+        <option value="$PROJECT_DIR$/resources/views/proposal/settings.blade.php" />
+        <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/resources/views/app.blade.php" />
+        <option value="$PROJECT_DIR$/config/filesystems.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/ProposalSettingsController.php" />
+        <option value="$PROJECT_DIR$/public/css/pdf.css" />
+        <option value="$PROJECT_DIR$/resources/views/pdf/pdf_footer.blade.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/PDFController.php" />
         <option value="$PROJECT_DIR$/resources/views/pdf/details.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/pdf/pdf_index.blade.php" />
-        <option value="$PROJECT_DIR$/public/css/pdf.css" />
       </list>
     </option>
   </component>
@@ -329,10 +272,10 @@
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectFrameBounds">
-    <option name="x" value="1431" />
-    <option name="y" value="-4" />
-    <option name="width" value="1855" />
-    <option name="height" value="1084" />
+    <option name="x" value="64" />
+    <option name="y" value="-11" />
+    <option name="width" value="1303" />
+    <option name="height" value="780" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -350,6 +293,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -362,77 +306,8 @@
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="signly" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="signly" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="storage" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="signly" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="signly" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="storage" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="signly" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="signly" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="storage" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="signly" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="signly" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
       <pane id="Scope" />
     </panes>
   </component>
@@ -444,12 +319,16 @@
     <property name="nodejs_interpreter_path" value="/usr/bin/node" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/storage/app/public" />
+      <recent name="$PROJECT_DIR$/storage/app" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/storage/app/public/clients_logo/1" />
       <recent name="$PROJECT_DIR$/public/images" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/app/Http/Controllers" />
       <recent name="$PROJECT_DIR$/app" />
-      <recent name="$PROJECT_DIR$/database/migrations" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -550,28 +429,37 @@
       <workItem from="1503319173481" duration="8567000" />
       <workItem from="1503334936966" duration="14497000" />
       <workItem from="1503405964214" duration="25955000" />
-      <workItem from="1503492979003" duration="25418000" />
+      <workItem from="1503492979003" duration="25752000" />
+      <workItem from="1503579441311" duration="26311000" />
+      <workItem from="1503649948462" duration="11168000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="107639000" />
+    <option name="totallyTimeSpent" value="145452000" />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="1431" y="-4" width="1855" height="1084" extended-state="6" />
-    <editor active="true" />
+    <frame x="64" y="-11" width="1303" height="780" extended-state="6" />
     <layout>
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.38247013" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32972136" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.60796815" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32662538" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32972136" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.75156575" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33126935" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.19347706" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.42178" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32776618" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33126935" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -579,31 +467,10 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" x="164" y="89" width="1103" height="580" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33126935" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
-    <layout-to-restore>
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" x="164" y="89" width="1103" height="580" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32972136" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.75156575" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33126935" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19347706" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.42178" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32776618" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="processedProjectFiles" value="true" />
@@ -616,204 +483,27 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/vendor/dompdf/dompdf/src/Options.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="186">
-          <caret line="198" column="13" lean-forward="true" selection-start-line="198" selection-start-column="13" selection-end-line="198" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="dbDummy://dbtable:/941f4086/a3bcefd9-3ebf-4a43-88e6-0b654a8a4a0d/signly.user_role_permission" />
-    <entry file="dbDummy://dbtable:/941f4086/a3bcefd9-3ebf-4a43-88e6-0b654a8a4a0d/signly.proposal_settings" />
-    <entry file="dbDummy://dbtable:/941f4086/a3bcefd9-3ebf-4a43-88e6-0b654a8a4a0d/signly.proposal_permissions" />
-    <entry file="dbDummy://dbtable:/941f4086/a3bcefd9-3ebf-4a43-88e6-0b654a8a4a0d/signly.billboard_image" />
-    <entry file="dbDummy://dbtable:/941f4086/a3bcefd9-3ebf-4a43-88e6-0b654a8a4a0d/signly.billboard_faces" />
-    <entry file="dbDummy://dbtable:/941f4086/a3bcefd9-3ebf-4a43-88e6-0b654a8a4a0d/signly.clients" />
-    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/a3bcefd9-3ebf-4a43-88e6-0b654a8a4a0d/console.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="140">
-          <caret line="7" column="4" lean-forward="false" selection-start-line="7" selection-start-column="4" selection-end-line="7" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="dbDummy://dbtable:/941f4086/a3bcefd9-3ebf-4a43-88e6-0b654a8a4a0d/signly.proposal" />
-    <entry file="dbDummy://dbtable:/941f4086/a3bcefd9-3ebf-4a43-88e6-0b654a8a4a0d/signly.billboard" />
-    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/a3bcefd9-3ebf-4a43-88e6-0b654a8a4a0d/console_1.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="80">
-          <caret line="4" column="0" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="6" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="dbDummy://dbtable:/941f4086/a3bcefd9-3ebf-4a43-88e6-0b654a8a4a0d/signly.proposal_billboard" />
-    <entry file="file://$PROJECT_DIR$/database/migrations/2014_10_12_200000_create_proposal_settings_table.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/ProposalSettings.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/signlydb5000.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="460">
-          <caret line="411" column="9" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="1131" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="dbDummy://dbtable:/941f4086/f46386a0-4b96-4d10-b1ff-c8dc19c632f4/signly_br.users_roles">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/signly.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="73">
-          <caret line="496" column="21" lean-forward="true" selection-start-line="496" selection-start-column="21" selection-end-line="496" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="dbDummy://dbtable:/941f4086/f46386a0-4b96-4d10-b1ff-c8dc19c632f4/signly_br.proposal_permissions">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="dbDummy://dbtable:/941f4086/f46386a0-4b96-4d10-b1ff-c8dc19c632f4/signly_br.proposal_settings">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="dbDummy://dbtable:/941f4086/f46386a0-4b96-4d10-b1ff-c8dc19c632f4/signly_br.user_role_permission">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/HomeController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-320">
-          <caret line="83" column="34" lean-forward="false" selection-start-line="83" selection-start-column="22" selection-end-line="83" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/routes.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="280">
-          <caret line="44" column="34" lean-forward="false" selection-start-line="44" selection-start-column="34" selection-end-line="44" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/home.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="620">
-          <caret line="136" column="24" lean-forward="false" selection-start-line="136" selection-start-column="24" selection-end-line="136" selection-end-column="24" />
-          <folding>
-            <marker date="1503066364789" expanded="true" signature="8867:8896" ph="..." />
-            <marker date="1503066364789" expanded="true" signature="9022:9049" ph="..." />
-            <marker date="1503066364789" expanded="true" signature="14105:14310" ph="..." />
-            <marker date="1503066364789" expanded="true" signature="14117:14308" ph="..." />
-            <marker date="1503066364789" expanded="true" signature="15865:16064" ph="..." />
-            <marker date="1503066364789" expanded="true" signature="20622:20816" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/app.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="466">
-          <caret line="643" column="17" lean-forward="true" selection-start-line="643" selection-start-column="17" selection-end-line="643" selection-end-column="17" />
-          <folding>
-            <marker date="1503500776765" expanded="true" signature="32883:32895" ph="..." />
-            <marker date="1503500776765" expanded="true" signature="54087:54094" ph="×" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="5" lean-forward="false" selection-start-line="0" selection-start-column="5" selection-end-line="0" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="dbDummy://dbtable:/941f4086/f46386a0-4b96-4d10-b1ff-c8dc19c632f4/signly_br.users">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="dbDummy://dbtable:/941f4086/f46386a0-4b96-4d10-b1ff-c8dc19c632f4/signly_br.proposal_comments">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
       <provider editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
         </state>
       </provider>
     </entry>
     <entry file="dbDummy://dbtable:/941f4086/f46386a0-4b96-4d10-b1ff-c8dc19c632f4/signly_br.active_proposal">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
       <provider editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
         </state>
       </provider>
     </entry>
@@ -826,15 +516,14 @@
       </provider>
     </entry>
     <entry file="dbDummy://dbtable:/941f4086/f46386a0-4b96-4d10-b1ff-c8dc19c632f4/signly_br.active_proposal_billboards">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
       <provider editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
         </state>
       </provider>
     </entry>
@@ -842,25 +531,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="389">
           <caret line="24" column="23" lean-forward="false" selection-start-line="24" selection-start-column="23" selection-end-line="24" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/pdf/pdf_footer.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="12" column="14" lean-forward="true" selection-start-line="12" selection-start-column="14" selection-end-line="12" selection-end-column="21" />
-          <folding>
-            <marker date="1503337954555" expanded="true" signature="335:449" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/proposal/settings.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="18" column="111" lean-forward="false" selection-start-line="18" selection-start-column="72" selection-end-line="18" selection-end-column="111" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -868,49 +538,30 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="360">
           <caret line="138" column="26" lean-forward="false" selection-start-line="138" selection-start-column="26" selection-end-line="138" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/pdf/proposals_table.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="3" column="39" lean-forward="false" selection-start-line="3" selection-start-column="39" selection-end-line="3" selection-end-column="39" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/PDFController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="410">
-          <caret line="54" column="63" lean-forward="false" selection-start-line="54" selection-start-column="63" selection-end-line="54" selection-end-column="63" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="dbDummy://dbtable:/941f4086/f46386a0-4b96-4d10-b1ff-c8dc19c632f4/signly_br.proposal">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
       <provider editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
         </state>
       </provider>
     </entry>
     <entry file="dbDummy://dbtable:/941f4086/f46386a0-4b96-4d10-b1ff-c8dc19c632f4/signly_br.billboard_image">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
       <provider editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
         </state>
       </provider>
     </entry>
@@ -922,122 +573,283 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/storage/app/public/engineer.png">
+    <entry file="file://$PROJECT_DIR$/storage/app/public/engineer.png" />
+    <entry file="file://$PROJECT_DIR$/storage/app/public/650x520-oe-logo.jpg">
       <provider selected="true" editor-type-id="images">
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/storage/app/public/650x520-oe-logo.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
+    <entry file="dbDummy://dbtable:/941f4086/f46386a0-4b96-4d10-b1ff-c8dc19c632f4/signly_br.billboard">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
       </provider>
-    </entry>
-    <entry file="dbDummy://dbtable:/941f4086/f46386a0-4b96-4d10-b1ff-c8dc19c632f4/signly_br.clients">
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
           <filtering enabled="true" />
         </state>
       </provider>
+    </entry>
+    <entry file="dbDummy://dbtable:/941f4086/f46386a0-4b96-4d10-b1ff-c8dc19c632f4/signly_br.instance">
       <provider editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
+      </provider>
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="dbDummy://dbtable:/941f4086/f46386a0-4b96-4d10-b1ff-c8dc19c632f4/signly_br.owners">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="dbDummy://dbtable:/941f4086/f46386a0-4b96-4d10-b1ff-c8dc19c632f4/signly_br.proposal_billboard">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/pdf/mpdf.blade.php" />
+    <entry file="file://$PROJECT_DIR$/resources/views/pdf/proposals_table.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="3" column="39" lean-forward="false" selection-start-line="3" selection-start-column="39" selection-end-line="3" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/pdf/map.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="4" lean-forward="false" selection-start-line="0" selection-start-column="4" selection-end-line="0" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/composer.lock">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="3" column="40" lean-forward="false" selection-start-line="3" selection-start-column="39" selection-end-line="3" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/storage/app/public/public/ha.jpg" />
+    <entry file="file://$PROJECT_DIR$/storage/app/public/ha.jpg" />
+    <entry file="file://$PROJECT_DIR$/vendor/barryvdh/laravel-dompdf/src/PDF.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2060">
+          <caret line="11" column="3" lean-forward="true" selection-start-line="11" selection-start-column="3" selection-end-line="11" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/storage/app/public/mainMap.png" />
+    <entry file="file://$PROJECT_DIR$/storage/ola.png" />
+    <entry file="file://$PROJECT_DIR$/vendor/dompdf/dompdf/src/Options.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="386">
+          <caret line="131" column="21" lean-forward="false" selection-start-line="131" selection-start-column="21" selection-end-line="131" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/storage/app/public/map.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/pdf/first_page.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="40">
-          <caret line="2" column="55" lean-forward="false" selection-start-line="2" selection-start-column="55" selection-end-line="2" selection-end-column="55" />
+          <caret line="2" column="12" lean-forward="false" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="18" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="dbDummy://dbtable:/941f4086/f46386a0-4b96-4d10-b1ff-c8dc19c632f4/signly_br.billboard">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
+    <entry file="file://$PROJECT_DIR$/resources/views/proposal/settings.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="19" column="62" lean-forward="false" selection-start-line="19" selection-start-column="62" selection-end-line="19" selection-end-column="62" />
+          <folding />
         </state>
       </provider>
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="40">
+          <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/routes.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="160">
+          <caret line="44" column="34" lean-forward="false" selection-start-line="44" selection-start-column="34" selection-end-line="44" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/HomeController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-320">
+          <caret line="129" column="42" lean-forward="false" selection-start-line="129" selection-start-column="42" selection-end-line="129" selection-end-column="42" />
         </state>
       </provider>
     </entry>
     <entry file="dbDummy://dbtable:/941f4086/f46386a0-4b96-4d10-b1ff-c8dc19c632f4/signly_br.billboard_faces">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
           <filtering enabled="true" />
         </state>
       </provider>
-      <provider editor-type-id="text-editor">
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/app.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1700">
+          <caret line="203" column="91" lean-forward="false" selection-start-line="203" selection-start-column="91" selection-end-line="203" selection-end-column="91" />
+          <folding>
+            <marker date="1503606979027" expanded="true" signature="32547:32559" ph="..." />
+            <marker date="1503606979027" expanded="true" signature="53437:53444" ph="×" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/storage/map16img3.png" />
+    <entry file="file://$PROJECT_DIR$/public/storage/map16img2.png" />
+    <entry file="file://$PROJECT_DIR$/public/storage/map16img1.png" />
+    <entry file="file://$PROJECT_DIR$/storage/map16img1.png" />
+    <entry file="file://$PROJECT_DIR$/storage/app/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/pdf/details.blade.php">
+    <entry file="file://$PROJECT_DIR$/config/filesystems.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="20">
-          <caret line="1" column="42" lean-forward="true" selection-start-line="1" selection-start-column="42" selection-end-line="1" selection-end-column="42" />
+        <state relative-caret-position="340">
+          <caret line="47" column="48" lean-forward="false" selection-start-line="47" selection-start-column="48" selection-end-line="47" selection-end-column="48" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/pdf/pdf_index.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="368">
-          <caret line="79" column="36" lean-forward="false" selection-start-line="79" selection-start-column="36" selection-end-line="79" selection-end-column="36" />
+    <entry file="file://$PROJECT_DIR$/storage/app/public/clients_logo/1/Adobe-logo.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="dbDummy://dbtable:/941f4086/f46386a0-4b96-4d10-b1ff-c8dc19c632f4/signly_br.clients">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ProposalSettingsController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="47" column="0" lean-forward="false" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="dbDummy://dbtable:/941f4086/f46386a0-4b96-4d10-b1ff-c8dc19c632f4/signly_br.proposal_settings">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/css/pdf.css">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="35" column="1" lean-forward="true" selection-start-line="35" selection-start-column="1" selection-end-line="35" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/pdf/pdf_footer.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="3" column="92" lean-forward="false" selection-start-line="3" selection-start-column="92" selection-end-line="3" selection-end-column="92" />
+          <folding>
+            <marker date="1503669446814" expanded="true" signature="273:387" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/storage/app/public/map16img3.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/storage/app/public/map16img2.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/storage/app/public/map16img1.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/PDFController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="770">
+          <caret line="103" column="11" lean-forward="false" selection-start-line="103" selection-start-column="11" selection-end-line="103" selection-end-column="11" />
+          <folding>
+            <element signature="e#38#81#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/pdf/details.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="340">
-          <caret line="40" column="22" lean-forward="false" selection-start-line="40" selection-start-column="22" selection-end-line="40" selection-end-column="22" />
-          <folding />
+          <caret line="20" column="25" lean-forward="false" selection-start-line="20" selection-start-column="25" selection-end-line="20" selection-end-column="25" />
+          <folding>
+            <element signature="n#style#0;n#div#1;n#div#1;n#div#1;n#!!top" expanded="true" />
+            <marker date="1503683134889" expanded="true" signature="683:686" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="dbDummy://dbtable:/941f4086/f46386a0-4b96-4d10-b1ff-c8dc19c632f4/signly_br.owners">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="dbDummy://dbtable:/941f4086/f46386a0-4b96-4d10-b1ff-c8dc19c632f4/signly_br.proposal_billboard">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="dbDummy://dbtable:/941f4086/f46386a0-4b96-4d10-b1ff-c8dc19c632f4/signly_br.instance">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+    <entry file="file://$PROJECT_DIR$/resources/views/pdf/pdf_index.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1330">
+          <caret line="1" column="8" lean-forward="false" selection-start-line="1" selection-start-column="8" selection-end-line="1" selection-end-column="8" />
           <folding />
         </state>
       </provider>

@@ -1,7 +1,7 @@
 <?php
 //============================================================+
 // File name   : example_038.php
-// Begin       : 2008-09-15
+// Begin       : 2008-09-1
 // Last Update : 2013-05-14
 //
 // Description : Example 038 for TCPDF class
@@ -21,7 +21,7 @@
  * @package com.tecnick.tcpdf
  * @abstract TCPDF - Example: CID-0 CJK unembedded font
  * @author Nicola Asuni
- * @since 2008-09-15
+ * @since 2008-09-1
  */
 
 // Include the main TCPDF library (search for installation path).

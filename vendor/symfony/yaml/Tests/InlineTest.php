@@ -591,8 +591,8 @@ class InlineTest extends TestCase
         return array(
             'canonical' => array('2001-12-15T02:59:43.1Z', 2001, 12, 15, 2, 59, 43.1, '+0000'),
             'ISO-8601' => array('2001-12-15t21:59:43.10-05:00', 2001, 12, 16, 2, 59, 43.1, '-0500'),
-            'spaced' => array('2001-12-15 21:59:43.10 -5', 2001, 12, 16, 2, 59, 43.1, '-0500'),
-            'date' => array('2001-12-15', 2001, 12, 15, 0, 0, 0, '+0000'),
+            'spaced' => array('2001-12-1 21:59:43.10 -5', 2001, 12, 16, 2, 59, 43.1, '-0500'),
+            'date' => array('2001-12-1', 2001, 12, 15, 0, 0, 0, '+0000'),
         );
     }
 
@@ -628,10 +628,10 @@ class InlineTest extends TestCase
     {
         $tests = array();
 
-        $dateTime = new \DateTime('2001-12-15 21:59:43', new \DateTimeZone('UTC'));
+        $dateTime = new \DateTime('2001-12-1 21:59:43', new \DateTimeZone('UTC'));
         $tests['date-time-utc'] = array($dateTime, '2001-12-15T21:59:43+00:00');
 
-        $dateTime = new \DateTimeImmutable('2001-07-15 21:59:43', new \DateTimeZone('Europe/Berlin'));
+        $dateTime = new \DateTimeImmutable('2001-07-1 21:59:43', new \DateTimeZone('Europe/Berlin'));
         $tests['immutable-date-time-europe-berlin'] = array($dateTime, '2001-07-15T21:59:43+02:00');
 
         return $tests;

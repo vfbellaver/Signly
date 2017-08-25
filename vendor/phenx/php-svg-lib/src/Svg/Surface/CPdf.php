@@ -1594,7 +1594,7 @@ EOT;
                 } else {
                     if ($options['type'] === 'png') {
                         $info['Filter'] = '/FlateDecode';
-                        $info['DecodeParms'] = '<< /Predictor 15 /Colors ' . $options['ncolor'] . ' /Columns ' . $options['iw'] . ' /BitsPerComponent ' . $options['bitsPerComponent'] . '>>';
+                        $info['DecodeParms'] = '<< /Predictor 1 /Colors ' . $options['ncolor'] . ' /Columns ' . $options['iw'] . ' /BitsPerComponent ' . $options['bitsPerComponent'] . '>>';
 
                         if ($options['isMask']) {
                             $info['ColorSpace'] = '/DeviceGray';

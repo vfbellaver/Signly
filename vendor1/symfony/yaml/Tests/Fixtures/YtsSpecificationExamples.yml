@@ -416,7 +416,7 @@ syck: |
 ---
 test: Newlines preserved for indented and blank lines
 todo: true
-spec: 2.15
+spec: 2.1
 yaml: |
   --- >
    Sammy Sosa completed another

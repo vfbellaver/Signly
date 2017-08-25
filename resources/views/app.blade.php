@@ -209,7 +209,7 @@
 
 		function getNewMessages(){
 			var id = $('#proposal_id').val();
-		    
+
 		    if(id != ''){
 		    	ajaxurl = "{{URL::to('/')}}/get-comments/" + id;
 			    $.ajax({
@@ -222,7 +222,7 @@
 			        }
 			    });
 		    }
-		    
+
 		}
 
 		setInterval(function(){
@@ -234,10 +234,10 @@
 			if($('#billboardListvendor').length != 0){
 
 					window.picker = new DayPilot.DatePicker({
-		                            target: 'start', 
-		                            pattern: 'M/d/yyyy', 
+		                            target: 'start',
+		                            pattern: 'M/d/yyyy',
 		                            date: new DayPilot.Date().firstDayOfMonth(),
-		                            onTimeRangeSelected: function(args) { 
+		                            onTimeRangeSelected: function(args) {
 		                                dp.startDate = args.start;
 		                                loadTimeline(args.start);
 		                                loadEvents();
@@ -261,7 +261,7 @@
 
 		                            loadTimeline(DayPilot.Date.today());
 		                            loadEvents();
-		                            
+
 		                        });
 
 				 	window.dp = new DayPilot.Scheduler("billboardListvendor");
@@ -273,7 +273,7 @@
 						      args.cell.backColor = "#f8f8f8";
 						  }
 					  };
-						
+
 					  currentYearDate = new Date(new Date().getFullYear(), 0, 1);
 					  window.dp.startDate = currentYearDate;
 					  //window.dp.days = 365; //window.dp.startDate.daysInMonth();
@@ -288,7 +288,7 @@
 		              window.dp.cellGroupBy = 'Month';
 		              window.dp.treeEnabled = true;
 		              window.dp.theme = 'scheduler_8';
-		                    
+
 		              window.dp.rowHeaderColumns = [
 		              	{title: "Client", width: 220},
 		              ];
@@ -301,12 +301,12 @@
 					    ]});
 
 						window.dp.init();
-					
+
 
 
 					loadResources();
 					loadEvents();
-					
+
 					}
 
 
@@ -315,10 +315,10 @@
 
 
 						window.picker = new DayPilot.DatePicker({
-		                            target: 'start', 
-		                            pattern: 'M/d/yyyy', 
+		                            target: 'start',
+		                            pattern: 'M/d/yyyy',
 		                            date: new DayPilot.Date().firstDayOfMonth(),
-		                            onTimeRangeSelected: function(args) { 
+		                            onTimeRangeSelected: function(args) {
 		                                window.dp.startDate = args.start;
 		                                loadTimeline(args.start);
 		                                loadEvents();
@@ -342,7 +342,7 @@
 
 		                            loadTimeline(DayPilot.Date.today());
 		                            loadEvents();
-		                            
+
 		                        });
 
 				 	window.dp = new DayPilot.Scheduler("billboardList");
@@ -353,9 +353,9 @@
 						      args.cell.backColor = "#f8f8f8";
 						  }
 					  };
-						
+
 					  window.dp.cellWidthSpec = "Auto";
-					  //window.dp.scale = "Month";	
+					  //window.dp.scale = "Month";
 					  currentYearDate = new Date(new Date().getFullYear()-3, 0, 1);
 					  window.dp.startDate = currentYearDate;
 					  window.dp.days = 2556; //window.dp.startDate.daysInMonth();
@@ -371,7 +371,7 @@
 		              window.dp.rowMinHeight = 32;
 		              window.dp.treeEnabled = false;
 		              window.dp.theme = 'scheduler_8';
-		                    
+
 		              window.dp.rowHeaderColumns = [
 		              	{title: "ID", width: 30},
 		              	{title: "Name", width: 200},
@@ -383,22 +383,22 @@
 		              ];
 
 		              window.dp.contextMenu = new DayPilot.Menu({items: [
-					        {text:"Edit", onclick: function() { 
-					        		window.events.edit(this.source); 
+					        {text:"Edit", onclick: function() {
+					        		window.events.edit(this.source);
 					        	} },
-					        {text:"Delete", onclick: function() { 
+					        {text:"Delete", onclick: function() {
 					        		var r = confirm("Delete this booking?");
 									if (r == true) {
-									    //window.events.remove(this.source); 
+									    //window.events.remove(this.source);
 									    //alert(this.source.value());
 									    manualPost("{{ URL::to('/') }}/billboard-booking/delete/"+this.source.value(),{_token: '{{ csrf_token() }}'});
-									} 					        		
+									}
 					        	} },
-					     
+
 					    ]});
 
 						window.dp.init();
-					
+
 
 
 					loadResources();
@@ -409,13 +409,13 @@
 					  // window.dp.clearSelection();
 					  // if (!name) return;
 
-					  // $.post("backend_create.php", 
+					  // $.post("backend_create.php",
 					  //     {
 					  //         start: args.start.toString(),
 					  //         end: args.end.toString(),
 					  //         resource: args.resource,
 					  //         name: name
-					  //     }, 
+					  //     },
 					  //     function(data) {
 					  //         var e = new DayPilot.Event({
 					  //             start: args.start,
@@ -428,7 +428,7 @@
 
 					  //         dp.message(data.message);
 					  //     });
-						
+
 
 						$('#billboard_face_id').val(args.resource);
 						//var d = $.datepicker.parseDate("MM-DD-YYYY",  args.start.toString());
@@ -443,11 +443,11 @@
 
 						if(dd<10) {
 						    dd='0'+dd
-						} 
+						}
 
 						if(mm<10) {
 						    mm='0'+mm
-						} 
+						}
 
 						momentDateStartString = mm+'/'+dd+'/'+yyyy;
 						window.momentDateStartStringVal = yyyy+'-'+mm+'-'+dd;
@@ -460,11 +460,11 @@
 
 						if(dd<10) {
 						    dd='0'+dd
-						} 
+						}
 
 						if(mm<10) {
 						    mm='0'+mm
-						} 
+						}
 
 						momentDateEndString = mm+'/'+dd+'/'+yyyy;
 						window.momentDateEndStringVal = yyyy+'-'+mm+'-'+dd;
@@ -474,8 +474,8 @@
 						$('#bend_date').val(momentDateEndString);
 
 						$('#nsbdaterange').daterangepicker(
-							{ 
-								startDate: momentDateStartString, 
+							{
+								startDate: momentDateStartString,
 								endDate: momentDateEndString
 							},
 							function(start, end, label) {
@@ -488,11 +488,11 @@
 						$('#newSchedule').modal('show');
 						window.dp.clearSelection();
 					};
-			
+
 			}
 
 			function loadResources() {
-			  $.get("{{ URL::to('/') }}/billboards/daypilot/json", 
+			  $.get("{{ URL::to('/') }}/billboards/daypilot/json",
 			  function(data) {
 			      window.dp.resources = data;
 			      window.dp.update();
@@ -503,7 +503,7 @@
 			  var start = window.dp.startDate;
 			  var end = window.dp.startDate.addDays(window.dp.days);
 
-			  $.post("{{ URL::to('/') }}/billboards/daypilotevents/json", 
+			  $.post("{{ URL::to('/') }}/billboards/daypilotevents/json",
 			      {
 			          start: start.toString(),
 			          end: end.toString(),
@@ -520,7 +520,7 @@
                     window.dp.scale = "Day";
                     window.dp.timeline = [];
                     var start = date.getDatePart().addHours(12);
-                    
+
                     for (var i = 0; i < window.dp.days; i++) {
                         window.dp.timeline.push({start: start.addDays(i), end: start.addDays(i+1)});
                     }
@@ -550,7 +550,7 @@
 			    document.body.appendChild(form);
 			    form.submit();
 			}
-			
+
 	 	</script>
 
 	<script type="text/javascript">
@@ -572,7 +572,7 @@
 		    	$('#active-proposal').hide();
 		    }
 
-			
+
 
 		    // $('#active-proposal-comments').sidr({
 		    //   name: 'sidr-comments',
@@ -593,11 +593,11 @@
 
 			if(dd<10) {
 			    dd='0'+dd
-			} 
+			}
 
 			if(mm<10) {
 			    mm='0'+mm
-			} 
+			}
 
 			today = mm+'/'+dd+'/'+yyyy;
 
@@ -614,16 +614,16 @@
             	jsEnd_date = today;
             <?php } ?>
 
-			
-			
 
-						
+
+
+
 
 			$('#bdaterange').find('span').html('<strong>' + today + ' - ' + today + '</strong>');
-			
+
 			$('#bdaterange').daterangepicker(
-				{ 
-					startDate: today, 
+				{
+					startDate: today,
 					endDate: today
 				},
 				function(start, end, label) {
@@ -634,10 +634,10 @@
 			);
 
 			$('#cpdaterange').find('span').html('<strong>' + today + ' - ' + today + '</strong>');
-			
+
 			$('#cpdaterange').daterangepicker(
-				{ 
-					startDate: today, 
+				{
+					startDate: today,
 					endDate: today
 				},
 				function(start, end, label) {
@@ -648,17 +648,17 @@
 			);
 
 			//$('#daterange').find('span').html('<strong>' + jsStart_date + ' to ' + jsEnd_date + '</strong>');
-			
+
 			// $('#daterange').daterangepicker(
-			// 	{ 
-			// 		startDate: jsStart_date, 
+			// 	{
+			// 		startDate: jsStart_date,
 			// 		endDate: jsEnd_date
 			// 	},
 			// 	function(start, end, label) {
 			// 		$('#daterange').find('span').html('<strong>' + start.format('MM/DD/YYYY') + ' to ' + end.format('MM/DD/YYYY') + '</strong>');
-					
+
 			// 		manualPost("{{ URL::to('/') }}/dateset",{start_date: start.format('MM/DD/YYYY'),end_date: end.format('MM/DD/YYYY'),_token: '{{ csrf_token() }}'});
-					 
+
 			//         return false;
 			// 	}
 			// );
@@ -675,7 +675,7 @@
 		      }
 		   });
 
-			
+
 			function manualPost(path, params, method) {
 			    method = method || "post"; // Set method to post by default if not specified.
 
@@ -699,7 +699,7 @@
 			    document.body.appendChild(form);
 			    form.submit();
 			}
-			
+
 			//tool tip code
 			$('.billboard-tip').each(function() {
 		         $(this).qtip({
@@ -715,7 +715,7 @@
 		                        // Upon failure... set the tooltip content to error
 		                        api.set('content.text', status + ': ' + error);
 		                    });
-		        
+
 		                    return 'Loading...'; // Set some initial text
 		                }
 		            },
@@ -756,7 +756,7 @@
 		        } else {
 		        	$('#face-hard-cost').val('');
 		        }
-		    });	
+		    });
 
 		    $('input[name=use-main-driveby]').change(function() {
 		        if($(this).is(":checked")) {
@@ -764,9 +764,9 @@
 		        } else {
 		        	$('#face-digital-driveby').val('');
 		        }
-		    });			
+		    });
 
-		    
+
 
 			$('#billboard_address').blur(function(){
 			  	if ( $('#billboard_address').val() != '' ){
@@ -774,7 +774,7 @@
 				  	geocoder.geocode( { 'address': address}, function(results, status) {
 							if (status == google.maps.GeocoderStatus.OK) {
 							  globalMap.setCenter(results[0].geometry.location);
-							  
+
 							  var marker = new google.maps.Marker({
 								  map: globalMap,
 								  position: results[0].geometry.location
@@ -810,17 +810,17 @@
 			}
 
 
-				function saveMapState() { 
-				    var mapZoom = globalMap.getZoom(); 
-				    var mapCentre = globalMap.getCenter(); 
-				    var mapLat = mapCentre.lat(); 
-				    var mapLng = mapCentre.lng(); 
-				    var cookiestring=mapLat+"_"+mapLng+"_"+mapZoom; 
-				    setCookie("myMapCookie",cookiestring, 30); 
+				function saveMapState() {
+				    var mapZoom = globalMap.getZoom();
+				    var mapCentre = globalMap.getCenter();
+				    var mapLat = mapCentre.lat();
+				    var mapLng = mapCentre.lng();
+				    var cookiestring=mapLat+"_"+mapLng+"_"+mapZoom;
+				    setCookie("myMapCookie",cookiestring, 30);
 				}
 
-				function loadMapState() { 
-				    var gotCookieString=getCookie("myMapCookie"); 
+				function loadMapState() {
+				    var gotCookieString=getCookie("myMapCookie");
 				    var splitStr = gotCookieString.split("_");
 				    var savedMapLat = parseFloat(splitStr[0]);
 				    var savedMapLng = parseFloat(splitStr[1]);
@@ -855,8 +855,8 @@
 
 				function initialize() {
 					geocoder = new google.maps.Geocoder();
-					
-					var gotCookieString=getCookie("myMapCookie"); 
+
+					var gotCookieString=getCookie("myMapCookie");
 				    var splitStr = gotCookieString.split("_");
 				    var savedMapLat = parseFloat(splitStr[0]);
 				    var savedMapLng = parseFloat(splitStr[1]);
@@ -872,7 +872,7 @@
 							  zoomControl:true,
 							  mapTypeControl:false,
 							  center: latlng,
-							  mapTypeId: google.maps.MapTypeId.SATELLITE  
+							  mapTypeId: google.maps.MapTypeId.SATELLITE
 							};
 						} else {
 							var myOptions = {
@@ -881,7 +881,7 @@
 							  mapTypeControl:false,
 							  center: latlng,
 							  mapTypeId: google.maps.MapTypeId.ROADMAP
-							};	
+							};
 						}
 				    } else {
 				    	var latlng = new google.maps.LatLng(40.7607793, -111.89104739999999);
@@ -892,7 +892,7 @@
 							  zoomControl:true,
 							  mapTypeControl:false,
 							  center: latlng,
-							  mapTypeId: google.maps.MapTypeId.SATELLITE  
+							  mapTypeId: google.maps.MapTypeId.SATELLITE
 							};
 						} else {
 							var myOptions = {
@@ -901,16 +901,16 @@
 							  mapTypeControl:false,
 							  center: latlng,
 							  mapTypeId: google.maps.MapTypeId.ROADMAP
-							};	
+							};
 						}
 				    }
 
-					
-					
+
+
 
 					var map = new google.maps.Map(document.getElementById("map_canvas"),
 						myOptions);
-					
+
 					globalMap = map;
 
 					google.maps.event.addListener(map, 'zoom_changed', saveMapState);
@@ -923,20 +923,20 @@
 
 							window.contentString = '<div id="content" style="width:550px;">'+
 								'<ul id="billboard+'+val.billboard.id+'" class="nav nav-tabs" role="tablist">';
-								
+
 								if ( val.faces != null){
 									if ( val.faces.length){
 										var activeHeader = 1;
 										$.each( val.faces, function( facekey, faceval ) {
-											window.contentString = window.contentString + '  <li';									
+											window.contentString = window.contentString + '  <li';
 											if (activeHeader){
 												window.contentString = window.contentString + ' class="active"';
-											} 
+											}
 											activeHeader = 0;
-											window.contentString = window.contentString + '  ><a href="#'+faceval.id+faceval.label+'" role="tab" data-toggle="tab">'+faceval.label+'</a></li>';									
-										});	
+											window.contentString = window.contentString + '  ><a href="#'+faceval.id+faceval.label+'" role="tab" data-toggle="tab">'+faceval.label+'</a></li>';
+										});
 									} else {
-										window.contentString = window.contentString + '  <li class="active"><a href="#'+val.billboard.id+'main" role="tab" data-toggle="tab">Main Billboard</a></li>';	
+										window.contentString = window.contentString + '  <li class="active"><a href="#'+val.billboard.id+'main" role="tab" data-toggle="tab">Main Billboard</a></li>';
 									}
 								}
 
@@ -948,12 +948,12 @@
 								// 		window.contentString = window.contentString + '  <li><a href="#'+val.id+val.label+'" role="tab" data-toggle="tab">'+val.label+'</a></li>';
 								// 	});
 								// });
-							  
+
 							  '<div class="tab-content">';
 
 						      if ( val.faces != null){
 						      		if ( val.faces.length){
-						      			
+
 						      			var activeCounter = 1;
 
 										$.each( val.faces, function( facekey, faceval ) {
@@ -962,20 +962,20 @@
 
 											if (activeCounter){
 												window.contentString = window.contentString + ' active';
-											} 
+											}
 
 											var videoIdStr = faceval.digital_driveby;
 											var videoIdArr = videoIdStr.split('/');
 											var videoId = videoIdArr[videoIdArr.length-1];
 
 											activeCounter = 0;
-											
+
 											window.contentString = window.contentString + '" id="'+faceval.id+faceval.label+'" >'+
 										      '<div id="siteNotice">'+
 										      '</div>'+
 										      '<div class="firstHeading">'+val.billboard.name+'</div>'+
 										      '<div class="bodyContent">'+
-										      
+
 										      '<div class="row">'+
 										      '<div class="col-md-4">'+
 										      '<a class="billboard_face_image" ';
@@ -998,7 +998,7 @@
 
 										      window.contentString = window.contentString + ' width="100%" />'+
 										      //'<a class="ddb-link" href="#" data-id="'+ videoId +'" data-toggle="modal" data-target="#digitalDriveby" ><i class="fa fa-youtube-play"></i> Watch Digital Driveby</a>'+
-										      
+
 										      '</a><br><p class="center">Click to enlarge</p>'+
 										      '</div>'+
 										      '<div class="col-md-8">'+
@@ -1011,12 +1011,12 @@
 											  } else {
 											  	window.contentString = window.contentString + '<tr><td>Type</td><td>Static</td></tr>';
 											  }
-											  
+
 										      window.contentString = window.contentString +'<tr><td>Reads</td><td>'+capitalizeFirstLetter(faceval.reads)+'</td></tr>'+
 										      '<tr><td>Dimension</td><td>'+faceval.height+' x '+faceval.width+'</td></tr>'+
 										      '<tr><td>DEC</td><td>'+addCommas(val.billboard.monthly_impressions)+'</td></tr>'+
 										      '<tr><td>Rate Card</td><td>$'+addCommas(faceval.hard_cost)+'</td></tr>'+
-										      
+
 										      '</tbody></table>'+
 										      //'<a href="#" data-id="'+ faceval.id +'" data-bid="'+faceval.billboard_id+'" data-toggle="modal" data-target="#instantBook" class="btn btn-success">Instant Book/Hold</a> '+
 										      //'<a href="#" data-id="'+ faceval.id +'" data-toggle="modal" data-target="#billboardBooking" class="btn btn-success"><i class="glyphicon glyphicon-calendar fa fa-calendar"></i> Billboard Availability</a> '+
@@ -1028,7 +1028,7 @@
 										      '</div>'+
 
 										      '</div>';
-										});	
+										});
 							  		} else {
 
 
@@ -1037,10 +1037,10 @@
 								      '</div>'+
 								      '<div class="firstHeading">'+val.billboard.name+' <a href="{{ URL::to('/billboards/') }}/'+ val.billboard.id +'">Edit</a> <a>Delete</a></div>'+
 								      '<div class="bodyContent">'+
-								      
+
 								      '<div class="row">'+
 								      '<div class="col-md-4">'+
-								      
+
 								      '<img id="bi_'+ val.billboard.id +'" class="billboard_images" src="{{ URL::to('/images/') }}/no-preview.jpg" width="100%" />'+
 								      '<a class="ddb-link" href="#" data-toggle="modal" data-target="#digitalDriveby" ><i class="fa fa-youtube-play"></i> Watch Digital Driveby</a>'+
 								      //'<a href="{{ URL::to('/') }}/active-proposal/add-billboard/'+ val.billboard.id +'" class="btn btn-primary center-block">Add to Proposal</a> '+
@@ -1106,12 +1106,12 @@
 						          image: {
 						            verticalFit: true
 						          }
-						          
+
 						        }).on('mfpBeforeOpen', function() {
 								   $.sidr('close', 'sidr-existing-content');
 								}).on('mfpClose', function() {
 								   $.sidr('open', 'sidr-existing-content');
-								});    
+								});
 
 							});
 
@@ -1126,9 +1126,9 @@
 									  geocoder.geocode({'location': latlng}, function(results, status) {
 									    if (status === google.maps.GeocoderStatus.OK) {
 									      if (results[1]) {
-									       
+
 									       $('#billboard_address').val(results[1].formatted_address);
-									       
+
 
 									      } else {
 									        //window.alert('No results found');
@@ -1138,7 +1138,7 @@
 									    }
 									  });
 							    }
-							    
+
 							});
 
 					  });
@@ -1176,7 +1176,7 @@
 				    	$("#dlgEditBillboardFace").find("input[name=width]").val(data.width);
 
 				    	$('.reads').each(function(){
-						     if( $(this).val() == data.reads ) { 
+						     if( $(this).val() == data.reads ) {
 						     	$(this).prop("checked", true)
 						     }
 						});
@@ -1184,7 +1184,7 @@
 				    	var counter = 0;
 				    	var blabel = data.label;
 						$('.blabel').each(function(){
-						     if( $(this).val() == blabel.toLowerCase() ) { 
+						     if( $(this).val() == blabel.toLowerCase() ) {
 						     	$(this).prop("checked", true)
 						     	counter = 1;
 						     }
@@ -1195,10 +1195,10 @@
 						}
 
 						$('.sign_type').each(function(){
-						     if( $(this).val() == 'static' && data.sign_type == 0) { 
+						     if( $(this).val() == 'static' && data.sign_type == 0) {
 						     	$(this).prop("checked", true)
 						     }
-						     if( $(this).val() == 'digital' && data.sign_type == 1) { 
+						     if( $(this).val() == 'digital' && data.sign_type == 1) {
 						     	$(this).prop("checked", true)
 						     }
 						});
@@ -1245,7 +1245,7 @@
 				});
 
 				$('#save_proposal').click(function() {
-			        $.post("{{ URL::to('/') }}/save-active-proposal-billboards", 
+			        $.post("{{ URL::to('/') }}/save-active-proposal-billboards",
 					      {
 					          proposal_id: $('#proposal_id').val(),
 					          proposal_billboards: $("[name^='proposal_billboards[']").serializeArray(),
@@ -1259,10 +1259,10 @@
 					      }
 					  );
 			        return false;
-			    });	
+			    });
 
 			    $('#sidr-id-save_proposal').click(function() {
-			        $.post("{{ URL::to('/') }}/save-active-proposal-billboards", 
+			        $.post("{{ URL::to('/') }}/save-active-proposal-billboards",
 					      {
 					          proposal_id: $('#proposal_id').val(),
 					          proposal_billboards: $("[name^='proposal_billboards[']").serializeArray(),
@@ -1276,12 +1276,12 @@
 					      }
 					  );
 			        return false;
-			    });	
+			    });
 
-			    
+
 
 				$('#send_proposal').click(function() {
-				    $.post("{{ URL::to('/') }}/send-active-proposal", 
+				    $.post("{{ URL::to('/') }}/send-active-proposal",
 					      {
 					          proposal_id: $('#proposal_id').val(),
 			          		  _token: '{{ csrf_token() }}'
@@ -1294,8 +1294,8 @@
 					      }
 					  );
 				    return false;
-			    });	
-			    				
+			    });
+
 			    $('#sidr-id-copy_link').addClass('btn');
 			    $('#sidr-id-copy_link').addClass('btn-success');
 			    $('#sidr-id-generate_pdf').addClass('btn');
@@ -1316,16 +1316,16 @@
 				                    $('#sidr-id-proposal_link').val("{{ URL::to('/')}}/clientview/" + data);
 				                  },
 				         async:   false
-				    });      
+				    });
 
 				  copyToClipboard($('#sidr-id-proposal_link').val());
 				});
 
-				//var copyEmailBtn = document.querySelector('.copy_link');  
+				//var copyEmailBtn = document.querySelector('.copy_link');
 				// var copyEmailBtn = document.querySelector('#sidr-id-copy_link');
-				
 
-				// copyEmailBtn.addEventListener('click', function(event) {  
+
+				// copyEmailBtn.addEventListener('click', function(event) {
 
 				// 	$.ajax({
 				// 		 method: "POST",
@@ -1336,13 +1336,13 @@
 				//                     $('#proposal_link').val("{{ URL::to('/')}}/clientview/" + data);
 				//                   },
 				//          async:   false
-				//     });      
+				//     });
 
 				//   copyToClipboard($('#proposal_link').val());
 				// });
 
 				// $('#copy_link').click(function() {
-				//     $.post("{{ URL::to('/') }}/copy-active-proposal", 
+				//     $.post("{{ URL::to('/') }}/copy-active-proposal",
 				// 	      {
 				// 	          proposal_id: $('#proposal_id').val(),
 			 //          		  _token: '{{ csrf_token() }}'
@@ -1357,12 +1357,12 @@
 				// 	      }
 				// 	  );
 				//     return false;
-			 //    });	
+			 //    });
 
 				// $("body")
 			 //      .on("copy", "#copy_link", function(/* ClipboardEvent */ e) {
 			 //      	e.clipboardData.clearData();
-			 //      	$.post("{{ URL::to('/') }}/copy-active-proposal", 
+			 //      	$.post("{{ URL::to('/') }}/copy-active-proposal",
 				// 	      {
 				// 	          proposal_id: $('#proposal_id').val(),
 			 //          		  _token: '{{ csrf_token() }}'
@@ -1382,7 +1382,7 @@
 				function copyToClipboardFF(text) {
 				  window.prompt ("Copy to clipboard: Ctrl C, Enter", text);
 				}
-				
+
 				function copyToClipboard(copyText) {
 				  var success   = true,
 				      range     = document.createRange(),
@@ -1390,7 +1390,7 @@
 
 				  // For IE.
 				  if (window.clipboardData) {
-				    window.clipboardData.setData("Text", copyText);        
+				    window.clipboardData.setData("Text", copyText);
 				  } else {
 				    // Create a temporary element off screen.
 				    var tmpElem = $('<div>');
@@ -1408,7 +1408,7 @@
 				    selection.removeAllRanges();
 				    selection.addRange(range);
 				    // Lets copy.
-				    try { 
+				    try {
 				      success = document.execCommand("copy", false, null);
 				    }
 				    catch (e) {
@@ -1424,8 +1424,8 @@
 
 
 			    $('#sidr-id-generate_pdf').click(function() {
-			    	
-			    	$.post("{{ URL::to('/') }}/save-active-proposal-billboards", 
+
+			    	$.post("{{ URL::to('/') }}/save-active-proposal-billboards",
 					      {
 					          proposal_id: $('#proposal_id').val(),
 					          proposal_billboards: $("[name^='proposal_billboards[']").serializeArray(),
@@ -1438,9 +1438,9 @@
 					         }
 					      }
 					  );
-			        
+
 			    	manualPost("{{ URL::to('/') }}/generate-pdf-proposal",{proposal_id: $('#proposal_id').val(), _token: '{{ csrf_token() }}'});
-				   	  //  $.post("{{ URL::to('/') }}/generate-pdf-proposal", 
+				   	  //  $.post("{{ URL::to('/') }}/generate-pdf-proposal",
 					  //     {
 					  //         proposal_id: $('#proposal_id').val(),
 			    	  //       	 _token: '{{ csrf_token() }}'
@@ -1450,25 +1450,25 @@
 					  //     }
 					  // );
 				    return false;
-			    });	
+			    });
 
 			    $('#print_proposal').click(function() {
 			    	manualPost("{{ URL::to('/') }}/generate-print-proposal",{proposal_id: $('#proposal_id').val(), _token: '{{ csrf_token() }}'});
-				   	
+
 				    return false;
-			    });	
+			    });
 
 
 				$('#close_proposal').click(function() {
 				    $('#proposal_window').slideUp();
 				    return false;
-			    });	
+			    });
 
 			    $('a[data-confirm]').click(function(ev) {
 					var href = $(this).attr('href');
 					if (!$('#dataConfirmModal').length) {
 						$('body').append('<div id="dataConfirmModal" tabindex="-1"  class="modal fade" role="dialog" aria-labelledby="dataConfirmLabel" aria-hidden="true"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button><h4 class="modal-title" id="myModalLabel">Confirm Action</h4><div class="modal-body"></div><div class="modal-footer"><button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button><a class="btn btn-primary" id="dataConfirmOK">OK</a></div></div></div></div>');
-					} 
+					}
 					$('#dataConfirmModal').find('.modal-body').text($(this).attr('data-confirm'));
 					$('#dataConfirmOK').attr('href', href);
 					$('#dataConfirmModal').modal({show:true});
@@ -1484,7 +1484,7 @@
 						  geocoder.geocode({'location': latlng}, function(results, status) {
 						    if (status === google.maps.GeocoderStatus.OK) {
 						      if (results[1]) {
-						       
+
 						       $('#billboard_address').val(results[1].formatted_address);
 						       globalMap.setCenter(new google.maps.LatLng(mapLat, mapLng));
 
@@ -1523,7 +1523,7 @@
 			    $(".filter_check").change(function() {
 			    	if(this.name != 'show_all' ){
 			    		$("input[name=show_all]").prop('checked', false);
-			    	} 
+			    	}
 
 			    	if(this.name == 'show_all' ){
 			    		$("input[name=left_read]").prop('checked', false);
@@ -1543,11 +1543,11 @@
 						globalMap.setCenter(new google.maps.LatLng($(this).attr('billboardLat'), $(this).attr('billboardLng')));
 						    var billboard_id = $(this).attr('billboardid');
 						    var billboard_face_id = $(this).attr('billboardfaceid');
-						   	
+
 						   	var closest = 0;
 
-						    for( i=0;i<markersArray.length; i++ ) {  
-						        
+						    for( i=0;i<markersArray.length; i++ ) {
+
 						        if ( markersArray[i].id == billboard_id ) {
 						            closest = i;
 						        }
@@ -1560,9 +1560,9 @@
 							$('a[href="#' + billboard_face_id + '"]').tab('show');
 					    	return false;
 				});
-			   					
+
 			    $( "#searchBillboard" ).autocomplete({
-			      
+
 			      source: function( request, response ) {
 
 			        $.ajax({
@@ -1576,14 +1576,14 @@
 			            response( data );
 			          }
 			        });
-			       
+
 			      },
 			      select: function( event, ui ){
 
-			      // 	for (i = 0; i < availableTags.length; i++) { 
+			      // 	for (i = 0; i < availableTags.length; i++) {
 					    // if(availableTags[i]['id'] == ui.item.id){
 					    	globalMap.setCenter(new google.maps.LatLng(ui.item.lat, ui.item.lng));
-					    	
+
 					    	var pi = Math.PI;
 						    var R = 6371; //equatorial radius
 						    var distances = [];
@@ -1591,7 +1591,7 @@
 						    var lat1 = ui.item.lat;
 						    var lon1 = ui.item.lng;
 
-						    for( i=0;i<markersArray.length; i++ ) {  
+						    for( i=0;i<markersArray.length; i++ ) {
 						        var lat2 = markersArray[i].position.lat();
 						        var lon2 = markersArray[i].position.lng();
 
@@ -1604,9 +1604,9 @@
 						        var rLat1 = lat1*(pi/180);
 						        var rLat2 = lat2*(pi/180);
 
-						        var a = Math.sin(dLat/2) * Math.sin(dLat/2) + 
-						                    Math.sin(dLon/2) * Math.sin(dLon/2) * Math.cos(rLat1) * Math.cos(rLat2); 
-						        var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+						        var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+						                    Math.sin(dLon/2) * Math.sin(dLon/2) * Math.cos(rLat1) * Math.cos(rLat2);
+						        var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
 						        var d = R * c;
 
 						        distances[i] = d;
@@ -1621,17 +1621,17 @@
 					//     }
 					// }
 
-			      	
+
 			      }
 			    });
 
-				
+
 				//AJAX messages
 
 				$('#sidr-id-frm_comments').submit(function(e) {
 					e.preventDefault();
 
-			        $.post("{{ URL::to('/') }}/post-proposal-billboard-comment", 
+			        $.post("{{ URL::to('/') }}/post-proposal-billboard-comment",
 					      {
 					          proposal_id: $('#sidr-id-c_proposal_id').val(),
 					          user_id: $('#sidr-id-c_user_id').val(),
@@ -1650,8 +1650,8 @@
 					      }
 					  );
 			        return false;
-			    });	
-			    
+			    });
+
 				$('#sidr-id-adminTextArea').keypress(function(e){
                     if( e.which === 13){
                       $('#sidr-id-frm_comments').submit();
@@ -1665,11 +1665,11 @@
                 var divScroll = $('#sidr-id-proposalComments');
     			divScroll.animate({"scrollTop": $('#sidr-id-proposalComments')[0].scrollHeight}, "slow");
 
-    			
-			   
-			  								
+
+
+
 		});
-		
+
 		$(document).click(function(e){
             if(e.target.className !== "sidr-class-form-control")
             {
@@ -1677,7 +1677,7 @@
                 console.log(e);
             }
         });
-				
+
 		 //$(function() {
 		 // $(".billboard_images").draggable({
 		 //        revert: "invalid",

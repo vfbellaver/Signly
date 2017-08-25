@@ -46,7 +46,6 @@ class ProposalSettingsController extends Controller {
 
         $file = $request->file('path_image');
 
-
         if ($saveOrUpdate) {
             $proposalSettings = ProposalSettings::find($saveOrUpdate);
             Storage::delete($proposalSettings->path_image);
