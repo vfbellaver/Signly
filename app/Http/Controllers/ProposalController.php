@@ -56,7 +56,7 @@ class ProposalController extends Controller {
 	{
 		$proposals = DB::table('proposal')
 					->where('user_id',$this->user->id)
-					->get();
+					->paginate(10);
 		$clients = DB::table('clients')->where('instance_id',$this->user->instance_id)->get();
 		return view('proposal.proposals',array('proposals' => $proposals, 'clients' => $clients ) );
 	}

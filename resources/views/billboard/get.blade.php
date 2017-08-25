@@ -30,7 +30,21 @@
             <input type="hidden" id="main-digital-driveby" name="digital_driveby" value="">
 
             <div class="row">
+
                 <div class="col-md-6">
+                    <div class="form-group">
+                        <div class="form-group">
+                            <label class="col-md-6 control-label">Billboard Owner *</label>
+                            <div class="col-md-6">
+                                <select class="form-control" name="billboard_owner">
+                                    <option value=""> --- </option>
+                                    @foreach($owners as $owner)
+                                        <option value="{{ $owner->id }}">{{ $owner->company }} ({{ $owner->first_name.' '.$owner->last_name }})</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                    </div>
                     <div class="form-group">
                         <div class="form-group">
                             <label class="col-md-6 control-label">Name this Billboard *</label>
