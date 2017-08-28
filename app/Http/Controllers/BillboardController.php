@@ -42,7 +42,7 @@ class BillboardController extends Controller {
      */
     public function index()
     {
-        $billboards = DB::table('billboard')->where('instance_id',$this->user->instance_id)->get();
+        $billboards = DB::table('billboard')->where('instance_id',$this->user->instance_id)->paginate(7);
         return view('billboard.billboards',array('billboards' => $billboards ) );
     }
     public function billboardlist()
@@ -297,8 +297,9 @@ class BillboardController extends Controller {
     {
         $storagePath  = Storage::disk('local')->getDriver()->getAdapter()->getPathPrefix();
         $billboard = DB::table('billboard')->where('id',$id )->first();
+        $owners = DB::table('owners')->where('instance_id',$this->user->instance_id)->get();
         $billboard_faces = DB::table('billboard_faces')->where('billboard_id',$id )->get();
-        return view('billboard.get',array('billboard' => $billboard , 'billboard_faces' => $billboard_faces, 'storage_path' => $storagePath) );
+        return view('billboard.get',array('billboard' => $billboard , 'billboard_faces' => $billboard_faces, 'storage_path' => $storagePath, 'owners' => $owners) );
     }
     public function add(){
         $owners = DB::table('owners')->where('instance_id',$this->user->instance_id)->get();

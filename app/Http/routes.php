@@ -26,7 +26,7 @@ Route::get('/add-instance', 'HomeController@addInstance');
 Route::post('/post-instance', ['as' => 'postinstance', 'uses' => 'HomeController@storeInstance']);
 Route::get('/add-instance-user/{instanceId}', 'HomeController@addInstanceUser');
 Route::post('/post-instance-user', ['as' => 'postinstanceuser', 'uses' => 'HomeController@storeInstanceUser']);
-
+Route::post('/reoder-active-proposal', 'HomeController@sortable');
 
 Route::post('/delete-instance-user/{id}',array('uses' => 'HomeController@deleteOwner', 'as' => 'deleteuser'));
 
@@ -107,6 +107,7 @@ Route::post('/logo-proposal', ['as' => 'setthings', 'uses' => 'ProposalSettingsC
 
 // PDF
 Route::get('my_pdf','PDFController@index');
+
 
 
 Route::post('/save-active-proposal-billboards', ['as' => 'postproposalbillboards', 'uses' => 'ProposalController@saveProposalBillbaord']);
