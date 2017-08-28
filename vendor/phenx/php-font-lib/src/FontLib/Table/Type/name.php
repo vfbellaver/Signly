@@ -59,7 +59,7 @@ class name extends Table {
     12 => "FontDesignerURL",
     13 => "LicenseDescription",
     14 => "LicenseURL",
-    // 15
+    // 1
     16 => "PreferredFamily",
     17 => "PreferredSubfamily",
     18 => "CompatibleFullName",

@@ -2,7 +2,7 @@
 //============================================================+
 // File name   : example_030.php
 // Begin       : 2008-06-09
-// Last Update : 2013-05-14
+// Last Update : 2013-05-1
 //
 // Description : Example 030 for TCPDF class
 //               Colour gradients

@@ -23,7 +23,7 @@
 					@foreach($clients as $client)
 						<tr>
 							<td>{{ $client->id }}</td>
-							<td><img height="35" src="{{ asset('storage/clients_logo/'.$client->id.'/'.$client->logo) }}"></td>
+							<td><img height="40" src="{{ asset('storage/clients_logo/'.$client->id.'/'.$client->logo) }}"></td>
 							<td>{{ $client->company }}</td>
 							<th>{{ $client->first_name.' '.$client->last_name }}</th>
 							<td>{{ $client->email }}</td>

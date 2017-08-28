@@ -3,8 +3,10 @@ use App\Http\Requests\BillboardFormRequest;
 use App\Http\Requests\BillboardFaceFormRequest;
 use App\Http\Requests\EventFormRequest;
 use App\Http\Requests\BillboardBookingFormRequest;
+use App\Http\Requests\Request;
 use App\Http\Requests\SearchBillboardRequest;
 use App\Http\Requests\BillboardUploadRequest;
+use Illuminate\Support\Facades\Input;
 use Response;
 use View;
 use DB;
@@ -307,7 +309,10 @@ class BillboardController extends Controller {
     }
     public function store(BillboardFormRequest $request){
 
-        //DB::insert('insert into users (id, name) values (?, ?)', [1, 'Dayle']);
+        $file = $request->file('billboard_image');
+        dd($file->getClientOriginalName());
+
+
         $id = DB::table('billboard')->insertGetId(
             array(
                 'owner_id' => $request->input('billboard_owner'),

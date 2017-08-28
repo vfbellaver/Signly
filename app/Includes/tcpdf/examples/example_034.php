@@ -2,7 +2,7 @@
 //============================================================+
 // File name   : example_034.php
 // Begin       : 2008-07-18
-// Last Update : 2013-05-14
+// Last Update : 2013-05-1
 //
 // Description : Example 034 for TCPDF class
 //               Clipping

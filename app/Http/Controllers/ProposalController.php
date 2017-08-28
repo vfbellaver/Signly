@@ -679,7 +679,7 @@ UNAUTHORIZED REPRESENTATIONS	Neither party hereto shall be bound by any agreemen
 		// *** set signature appearance ***
 
 		// create content for signature (image and/or text)
-		//$pdf->Image('../images/tcpdf_signature.png', 180, 60, 15, 15, 'PNG');
+		//$pdf->Image('../images/tcpdf_signature.png', 180, 60, 1, 1, 'PNG');
 
 		// define active area for signature appearance
 		$pdf->setSignatureAppearance(180, 60, 15, 15);

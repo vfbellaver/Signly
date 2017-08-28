@@ -2,7 +2,7 @@
 //============================================================+
 // File name   : example_057.php
 // Begin       : 2010-04-03
-// Last Update : 2013-05-14
+// Last Update : 2013-05-1
 //
 // Description : Example 057 for TCPDF class
 //               Cell vertical alignments

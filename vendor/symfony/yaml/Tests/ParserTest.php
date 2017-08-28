@@ -647,7 +647,7 @@ EOF;
     {
         $yamls = array(
             iconv('UTF-8', 'ISO-8859-1', "foo: 'äöüß'"),
-            iconv('UTF-8', 'ISO-8859-15', "euro: '€'"),
+            iconv('UTF-8', 'ISO-8859-1', "euro: '€'"),
             iconv('UTF-8', 'CP1252', "cp1252: '©ÉÇáñ'"),
         );
 
@@ -1450,7 +1450,7 @@ EOT
     public function testParseDateAsMappingValue()
     {
         $yaml = <<<'EOT'
-date: 2002-12-14
+date: 2002-12-1
 EOT;
         $expectedDate = new \DateTime();
         $expectedDate->setTimeZone(new \DateTimeZone('UTC'));

@@ -120,7 +120,7 @@ class HomeController extends Controller {
             ->select('active_proposal.id as apid','proposal.*')
             ->where('proposal.id',$proposal->id)
             ->first();
-        
+
         $active_proposal_billboards = array();
 
         if(isset($proposals)){

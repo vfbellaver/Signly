@@ -1782,7 +1782,7 @@ EOT;
                 } else {
                     if ($options['type'] === 'png') {
                         $info['Filter'] = '/FlateDecode';
-                        $info['DecodeParms'] = '<< /Predictor 15 /Colors ' . $options['ncolor'] . ' /Columns ' . $options['iw'] . ' /BitsPerComponent ' . $options['bitsPerComponent'] . '>>';
+                        $info['DecodeParms'] = '<< /Predictor 1 /Colors ' . $options['ncolor'] . ' /Columns ' . $options['iw'] . ' /BitsPerComponent ' . $options['bitsPerComponent'] . '>>';
 
                         if ($options['isMask']) {
                             $info['ColorSpace'] = '/DeviceGray';
@@ -2886,7 +2886,7 @@ EOT;
                     $this->o_font($fontObj, 'add', $tmp);
                 } else {
                     $this->addMessage(
-                        'selectFont: pfb or ttf file not found, ok if this is one of the 14 standard fonts'
+                        'selectFont: pfb or ttf file not found, ok if this is one of the 1 standard fonts'
                     );
                 }
 

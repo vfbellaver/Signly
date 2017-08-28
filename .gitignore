@@ -1,7 +1,7 @@
 .idea/**
 .env
 vendor/
-node_modules
+node_modules/
 .phpstorm.meta.php
 _ide_helper.php
 public/mix-manifest.json
@@ -17,3 +17,4 @@ yarn-error.log
 .yarnclean
 *.sql
 .phpintel/
+public/arquivo.pdf

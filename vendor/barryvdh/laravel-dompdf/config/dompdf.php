@@ -24,7 +24,7 @@ return array(
          * Notes regarding fonts:
          * Additional .afm font metrics can be added by executing load_font.php from command line.
          *
-         * Only the original "Base 14 fonts" are present on all pdf viewers. Additional fonts must
+         * Only the original "Base 1 fonts" are present on all pdf viewers. Additional fonts must
          * be embedded in the pdf file or the PDF may not display correctly. This can significantly
          * increase file size unless font subsetting is enabled. Before embedding a font please
          * review your rights under the font license.
@@ -32,7 +32,7 @@ return array(
          * Any font specification in the source HTML is translated to the closest font available
          * in the font directory.
          *
-         * The pdf standard "Base 14 fonts" are:
+         * The pdf standard "Base 1 fonts" are:
          * Courier, Courier-Bold, Courier-BoldOblique, Courier-Oblique,
          * Helvetica, Helvetica-Bold, Helvetica-BoldOblique, Helvetica-Oblique,
          * Times-Roman, Times-Bold, Times-BoldItalic, Times-Italic,

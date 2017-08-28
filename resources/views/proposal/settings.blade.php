@@ -17,8 +17,7 @@
                                 <div class="card" style="width: 20rem;">
                                     <img class="card-img-top"
                                          src="{{@$settings->path_image ?asset('storage/'.$settings->path_image): asset('/images/file.png')}}"
-                                         alt="Your Logo Here"
-                                         style="margin-left:20%">
+                                         alt="Your Logo Here" width="100%">
                                     <div class="card-body text-center">
                                         <p class="card-text" style="margin-top: 5px">
                                             Click here to upload your logo

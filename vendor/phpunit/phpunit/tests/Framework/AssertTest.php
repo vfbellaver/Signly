@@ -904,7 +904,7 @@ class Framework_AssertTest extends PHPUnit_Framework_TestCase
             ),
             array(
                 new DateTime('2013-03-29 04:13:35', new DateTimeZone('America/New_York')),
-                new DateTime('2013-03-29 04:14:40', new DateTimeZone('America/New_York')),
+                new DateTime('2013-03-29 04:1:40', new DateTimeZone('America/New_York')),
                 65
             ),
             array(

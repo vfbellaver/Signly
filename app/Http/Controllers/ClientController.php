@@ -2,6 +2,7 @@
 
 use App\Http\Requests\ClientFormRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 use Response;
@@ -81,18 +82,17 @@ class ClientController extends Controller {
 
 
         if ($id > 0){
-//            if(Image::make($request->file('logo'))->height() < 300
-//                ||  Image::make($request->file('logo'))->width() < 250){
-//                dd(Image::make($request->file('logo'))->height(), '-' , Image::make($request->file('logo'))->width());
-//            }
-//            dd('erro');
 
-//            $file = $request->file('logo');
-//            $fileName = $file->getClientOriginalName();
-//            $path = storage_path('app/public/clients_logo/').$id;
-
-//            $file->move($path,$fileName);
-//            DB::table('clients')->where('id',$id)->update(['logo' => $fileName]);
+            $path = storage_path('app/public/clients_logo/').$id;
+            File::makeDirectory($path);
+            $img1 = Image::canvas(600, 400, '#ffffff');
+            $file = $request->file('logo');
+            $array = explode('.',$file->getClientOriginalName());
+            $fileName = $array[0].'.jpg';
+            $img = Image::make($file)->resize(350, 240);
+            $img1->insert($img,'center');
+            $img1->save('storage/clients_logo/'.$id.'/'.$fileName);
+            DB::table('clients')->where('id',$id)->update(['logo' => $fileName]);
 
             return redirect('/clients');
         } else {

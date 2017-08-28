@@ -2,7 +2,7 @@
 //============================================================+
 // File name   : example_012.php
 // Begin       : 2008-03-04
-// Last Update : 2013-05-14
+// Last Update : 2013-05-1
 //
 // Description : Example 012 for TCPDF class
 //               Graphic Functions
