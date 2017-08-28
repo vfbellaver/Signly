@@ -504,6 +504,7 @@ CREATE TABLE proposal_settings
   path_image VARCHAR(50) NULL,
   user_street VARCHAR(100) NULL,
   user_state  VARCHAR(100) NULL,
+  user_phone  VARCHAR(15) NULL,
   user_city   VARCHAR(100) NULL,
   user_zipcode VARCHAR(15) NULL,
   website      VARCHAR(50) NULL

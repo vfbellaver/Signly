@@ -1,7 +1,7 @@
 <hr>
 <!-- logo -->
 <div class="col-xs-2">
-    <img class="img_details" src="{{asset('storage/'.$footer->path_image)}}" alt="Your Logo">
+    <img class="img_footer my_float" src="{{asset('storage/'.$footer->path_image)}}" alt="Your Logo">
 </div>
 
 <!-- info -->

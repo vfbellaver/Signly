@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "067c5e97edeb2cce925451d4b8d5cd9c",
-    "content-hash": "53c17b52841787799273d4fc606a92db",
+    "hash": "f52737c02b16894f7253eb427ed6623b",
+    "content-hash": "dad972e05ed3deb141686e258ba2e286",
     "packages": [
         {
             "name": "barryvdh/laravel-dompdf",
@@ -1139,6 +1139,42 @@
                 "php"
             ],
             "time": "2016-09-16 12:04:44"
+        },
+        {
+            "name": "niklasravnsborg/laravel-pdf",
+            "version": "v1.5.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/niklasravnsborg/laravel-pdf.git",
+                "reference": "68a24e8ddc0b981f41b9b80dcae5ee3466a0a998"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/niklasravnsborg/laravel-pdf/zipball/68a24e8ddc0b981f41b9b80dcae5ee3466a0a998",
+                "reference": "68a24e8ddc0b981f41b9b80dcae5ee3466a0a998",
+                "shasum": ""
+            },
+            "require": {
+                "mpdf/mpdf": "^6.1.3",
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "niklasravnsborg\\LaravelPdf\\": "src/LaravelPdf"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Generate PDFs in Laravel with this mPDF wrapper.",
+            "keywords": [
+                "laravel",
+                "mpdf",
+                "pdf"
+            ],
+            "time": "2017-02-08 20:24:49"
         },
         {
             "name": "paragonie/random_compat",

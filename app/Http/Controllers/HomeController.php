@@ -229,12 +229,14 @@ class HomeController extends Controller {
 				Session::put('static', '0');
 			}
 
+
+
 		}
 		
 		$user = \Auth::user();
 
 		$clients = DB::table('clients')->where('instance_id',$this->user->instance_id)->get();
-		
+        $clientsAll = DB::table('clients')->get();
 		$billboards = DB::table('billboard')->where('instance_id',$this->user->instance_id)->get();
 
 		$proposals = array();
@@ -275,7 +277,8 @@ class HomeController extends Controller {
 								'active_proposal_billboards' => $active_proposal_billboards, 
 								'billboards' => $billboards,
 								'comments' => $comments,
-								'user' => $user ));
+								'user' => $user,
+                                 'clientsAll' => $clientsAll));
 	}
 
 	public function indexFilter(BillboardFilterDashboardRequest $request)

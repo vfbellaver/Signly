@@ -1,4 +1,5 @@
 <?php namespace App\Http\Controllers;
+
 use App\Http\Requests\BillboardFormRequest;
 use App\Http\Requests\BillboardFaceFormRequest;
 use App\Http\Requests\EventFormRequest;
@@ -9,6 +10,8 @@ use App\ProposalSettings;
 use GuzzleHttp\Client;
 use function GuzzleHttp\Psr7\stream_for;
 use GuzzleHttp\RequestOptions;
+use Illuminate\Support\Facades\Request;
+use mPDF;
 use PDF;
 use Response;
 use View;
@@ -22,6 +25,8 @@ class PDFController extends Controller
 {
 
     private $points;
+    private $client;
+    private $myIcon = 'https://goo.gl/usznMp';
 
     public function __construct()
     {
@@ -31,77 +36,86 @@ class PDFController extends Controller
 
     private function details($id)
     {
-       $details = DB::table('proposal')
-           //clients
-           ->join('clients'
-               ,'clients.id','=','proposal.client_id')
-           //proposal_billboard
-           ->join('proposal_billboard'
-               ,'proposal_billboard.proposal_id','=','proposal.id')
-           //billboard
-           ->join('billboard',
-               'billboard.id','=','proposal_billboard.id')
-           //billboard_faces
-           ->join('billboard_faces',
-               'billboard_faces.id','=','proposal_billboard.billboard_face_id')
-           //billboard_image
-           ->where('clients.id','=',$id)->get();
+        $details = DB::table('proposal')
+            //clients
+            ->join('clients'
+                , 'clients.id', '=', 'proposal.client_id')
+            //proposal_billboard
+            ->join('proposal_billboard'
+                , 'proposal_billboard.proposal_id', '=', 'proposal.id')
+            //billboard
+            ->join('billboard',
+                'billboard.id', '=', 'proposal_billboard.id')
+            //billboard_faces
+            ->join('billboard_faces',
+                'billboard_faces.id', '=', 'proposal_billboard.billboard_face_id')
+            //billboard_image
+            ->where('clients.id', '=', $id)->get();
 
-       return $details;
+        return $details;
     }
 
-    public function getDetailMap () {
-     $img = 1;
+    public function getDetailMap()
+    {
+        $img = 1;
 
-     foreach ($this->points as $point) {
-         //$myIcon = 'http://i.imgur.com/T7Q1dCN.png';
-         $myIcon = 'goo.gl/bAaFjF';
-         $myIcon = 'https://goo.gl/cGZpyq';
-         $link =
-             'https://maps.googleapis.com/maps/api/staticmap?'
-             . 'center='.$point->lat.','.$point->lng
-             . '&zoom=13'
-             .'&maptype=roadmap'
-             .'&markers=icon:'.$myIcon.'%7C'.$point->lat.','.$point->lng
-             . '&size=400x300'
-             .'&key=AIzaSyAECe-JaASIc4HpIae-cFuFDtyX3K2GI_Q';
+        foreach ($this->points as $point) {
+            $link =
+                'https://maps.googleapis.com/maps/api/staticmap?'
+                . 'center=' . $point->lat . ',' . $point->lng
+                . '&zoom=17'
+                . '&format=jpg'
+                . '&maptype=roadmap'
+                . '&markers=icon:' . $this->myIcon . '%7C' . $point->lat . ',' . $point->lng
+                . '&size=300x250'
+                . '&key=AIzaSyAECe-JaASIc4HpIae-cFuFDtyX3K2GI_Q';
 
-         $client = new Client();
+            $client = new Client();
 
-         $resource = fopen(storage_path('app/public/map'.Auth::user()->id.'img'.$img.'.png'), 'w');
-         $stream = stream_for($resource);
-         $client->request('GET', $link, ['save_to' => $stream]);
-             $img ++;
-     }
+            $resource = fopen(storage_path('app/public/map' . Auth::user()->id . 'img' . $img . '.jpg'), 'w');
+            $stream = stream_for($resource);
+            $client->request('GET', $link, ['save_to' => $stream]);
+            $img++;
+        }
 
     }
 
-    public function getMap () {
+    public function getMap()
+    {
+        $img = 1;
 
-        $link = 'https://maps.googleapis.com/maps/api/staticmap?'
-        .'center=40.69984970000001,-111.8809402'
-        .'&zoom=13'
-        .'&size=400x400&key=AIzaSyAECe-JaASIc4HpIae-cFuFDtyX3K2GI_Q';
+        foreach ($this->points as $point) {
+            $link = 'https://maps.googleapis.com/maps/api/staticmap?';
+            $link .= 'center=' . $point->map_area_lat . ',' . $point->map_area_long;
+            $link .= '&zoom=9&format=jpg';
 
-        $client = new Client();
+            foreach ($this->points as $p) {
+                $link .= '&markers=color:yellow%7Clabel:S:S%%7C' . $p->lat . ',' . $p->lng;
+            }
+                $link .= '&size=500x350&key=AIzaSyAECe-JaASIc4HpIae-cFuFDtyX3K2GI_Q';
 
-        $resource = fopen(storage_path('app/public/map.png'), 'w');
-        $stream = stream_for($resource);
-        $client->request('GET', $link, ['save_to' => $stream]);
+                $this->client = new Client();
 
+                $resource = fopen(storage_path('app/public/'.$img.'map.jpg'), 'w');
+                $stream = stream_for($resource);
+                $this->client->request('GET', $link, ['sink' => storage_path('app/public/'.$img.'map.jpg')]);
 
+            $img++;
+        }
     }
 
     public function index()
     {
-         $this->points = $details = $this->details(1);
-         $this->getMap();
-         $this->getDetailMap();
-         $footer = ProposalSettings::where('user_id',Auth::user()->id)->first();
-         $pdf = PDF::loadView('pdf.pdf_index',compact('details','footer'));
-         $pdf->setPaper('A4','landscape');
-         return $pdf->stream("file.pdf",array("Attachment" => 0));
-         //return view('pdf.pdf_index',compact('details','footer','img'));
+        $id = Request::input('id');
+        $this->points = $details = $this->details($id);
+        $this->getMap();
+        $this->getDetailMap();
+        $footer = ProposalSettings::where('user_id', Auth::user()->id)->first();
+        $pdf = PDF::loadView('pdf.pdf_index', compact('details', 'footer'));
+        $pdf->setPaper('A4', 'landscape');
+        return $pdf->stream("file.pdf", array("Attachment" => 0));
+        //return view('pdf.pdf_index',compact('details','footer','img'));
     }
+
 
 }

@@ -18,9 +18,8 @@
     </div>
     <div class="col-xs-4 pull-right">
         <div class="col-xs-12">
-            {{$img += 1}}
             <img
-              src="{{asset('storage/map'.Auth::user()->id.'img'.$img.'.png')}}" width="100%"
+              src="{{asset('storage/map'.Auth::user()->id.'img'.$img.'.jpg')}}"
             >
         </div>
         <div style="height: 280px"></div>
@@ -31,7 +30,7 @@
                {{'Size: '.$detail->width.' X '.$detail->height}}<br>
                {{'Latitude: '.$detail->lat}}<br>
                {{'Longitude: '.$detail->lng}}<br>
-               Iluminaned: {{($detail->is_iluminated = 1) ? 'YES' : 'NO'}}<br>
+               Iluminaned: {{($detail->is_iluminated) ? 'YES' : 'NO'}}<br>
            </p>
         </div>
     </div>

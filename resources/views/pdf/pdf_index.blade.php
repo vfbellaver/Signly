@@ -1,5 +1,6 @@
 <?php
-$img = 0;
+$img = 1;
+$i = 1;
 ?>
 <html>
 <head>
@@ -12,7 +13,7 @@ $img = 0;
     <!-- first page -->
     <div class="container my_border">
         <div class="row">
-            <article class="col-xs-12">
+            <article class="col-xs-12 first_page my_float">
                 @include('pdf.first_page')
             </article>
             <!-- description cliente description -->
@@ -48,27 +49,26 @@ $img = 0;
         </div>
     </div>
 
-    <div style="page-break-after: always;"></div>
+    @foreach($details as $map)
+        <div style="page-break-after: always;"></div>
+        <!-- 3rt page -->
+        <div class="container my_border">
+            <div class="row">
+                <!-- principal -->
+                <article class="col-xs-12 my_float">
+                   @include('pdf.main_map')
+                </article>
 
+                <div class="my_clear"></div>
 
-    <!-- 3rt page -->
-    <div class="container my_border">
-        <div class="row">
-            <!-- principal -->
-            <article class="col-xs-12 my_float">
-                <img src="{{asset('storage/map.png')}}">
-            </article>
-
-            <div class="my_clear"></div>
-
-            <!-- footer -->
-            <footer class="col-xs-12 my_float">
-                @include('pdf.pdf_footer')
-            </footer>
+                <!-- footer -->
+                <footer class="col-xs-12 my_float">
+                    @include('pdf.pdf_footer')
+                </footer>
+            </div>
         </div>
-    </div>
 
-    @foreach($details as $detail)
+     @foreach($details as $detail)
         <div style="page-break-after: always;"></div>
         <!-- Others pages -->
         <div class="container my_border">
@@ -86,6 +86,12 @@ $img = 0;
                 </footer>
             </div>
         </div>
+        <?php $img++ ?>
+    @endforeach
+        <?php
+            $img = 1;
+            $i++;
+        ?>
     @endforeach
 </body>
 

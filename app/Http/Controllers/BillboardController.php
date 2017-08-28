@@ -1,10 +1,12 @@
 <?php namespace App\Http\Controllers;
+use App\BillboardImage;
 use App\Http\Requests\BillboardFormRequest;
 use App\Http\Requests\BillboardFaceFormRequest;
 use App\Http\Requests\EventFormRequest;
 use App\Http\Requests\BillboardBookingFormRequest;
 use App\Http\Requests\SearchBillboardRequest;
 use App\Http\Requests\BillboardUploadRequest;
+use Illuminate\Support\Facades\Request;
 use Response;
 use View;
 use DB;
@@ -304,9 +306,22 @@ class BillboardController extends Controller {
         $owners = DB::table('owners')->where('instance_id',$this->user->instance_id)->get();
         return view('billboard.add', array('owners' => $owners));
     }
-    public function store(BillboardFormRequest $request){
 
-        //DB::insert('insert into users (id, name) values (?, ?)', [1, 'Dayle']);
+    public function store(BillboardFormRequest $request)
+    {
+
+        $file = $request->file('image');
+        dd($file);
+
+        if($file){
+            $image = new BillboardImage();
+            $image->image_name = $picture->getClientOriginalName();
+            $image->location = "Default";
+            $image->save();
+        }
+
+
+            //DB::insert('insert into users (id, name) values (?, ?)', [1, 'Dayle']);
         $id = DB::table('billboard')->insertGetId(
             array(
                 'owner_id' => $request->input('billboard_owner'),
