@@ -315,7 +315,7 @@ class BillboardController extends Controller {
 
         if($file){
             $image = new BillboardImage();
-            $image->image_name = $picture->getClientOriginalName();
+            $image->image_name = $file->getClientOriginalName();
             $image->location = "Default";
             $image->save();
         }

@@ -250,7 +250,6 @@ class HomeController extends Controller {
         
         $active_proposal_billboards = array();
 
-
         if(isset($proposals)){
 	        if($proposals->apid > 0){
 	        	$active_proposal_billboards = DB::table('active_proposal_billboards')

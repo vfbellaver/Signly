@@ -24,6 +24,7 @@
 
     <div class="col-xs-4">
         <label class="control-label">{{$footer->user_zipcode}}</label>
+        <label class="control-label">{{$footer->user_phone}}</label>
         <label class="control-label">{{$footer->website}}</label>
     </div>
     <br>
