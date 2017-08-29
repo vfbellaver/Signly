@@ -119,7 +119,7 @@ class SortableIteratorTest extends RealIteratorTestCase
         );
 
         $sortByAccessedTime = array(
-            // For these two files the access time was set to 2005-10-15
+            // For these two files the access time was set to 2005-10-1
             array('foo/bar.tmp', 'test.php'),
             // These files were created more or less at the same time
             array(

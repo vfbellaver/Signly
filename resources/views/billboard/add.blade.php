@@ -86,7 +86,7 @@
 						<div class="form-group">
 							<label class="col-md-6 control-label"></label>
 							<div class="col-md-6">
-								<input type="checkbox" id="havelatlong" name="havelatlong"> I have the Lat/Long numbers 
+								<input type="checkbox" id="havelatlong" name="havelatlong"> I have the Lat/Long numbers
 								<button id="generate_address" disabled="disabled">Generate Address</button>
 							</div>
 						</div>
@@ -103,6 +103,15 @@
 
 					<div class="form-group">
 						<div class="form-group">
+							<label class="col-md-6 control-label">Picture *</label>
+							<div class="col-md-6">
+								<input type="file" class="form-control" name="image" value="{{ old('image') }}">
+							</div>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<div class="form-group">
 							<label class="col-md-6 control-label">Monthly Impressions</label>
 							<div class="col-md-6">
 								<input type="text" class="form-control" name="monthly_impressions" value="{{ old('monthly_impressions') }}">
@@ -110,21 +119,11 @@
 						</div>
 					</div>
 
-					<!-- <div class="form-group">
-						<div class="form-group">
-							<label class="col-md-6 control-label">Digital Driveby</label>
-							<div class="col-md-6">
-								<input type="text" class="form-control" name="digital_driveby" value="{{ old('digital_driveby') }}">
-							</div>
-						</div>
-					</div> -->
-					
 		    	</div>
 
 		    	<div class="col-md-6">
 		    		<div id="map_canvas" class="small-map"></div>
-		    		<div class="well well-sm" id="geocode_message"></div
-		    		
+		    		<div class="well well-sm" id="geocode_message"></div>
 		    	</div>
 
 		    </div>

@@ -2,7 +2,7 @@
 //============================================================+
 // File name   : example_048.php
 // Begin       : 2009-03-20
-// Last Update : 2013-05-14
+// Last Update : 2013-05-1
 //
 // Description : Example 048 for TCPDF class
 //               HTML tables and table headers

@@ -162,7 +162,7 @@ class DotFormatterSpec extends ObjectBehavior
 
         $this->afterSuite($event);
 
-        $io->writeln('15 specs')->shouldHaveBeenCalled();
+        $io->writeln('1 specs')->shouldHaveBeenCalled();
         $io->writeln("\n12345ms")->shouldHaveBeenCalled();
         $io->write('1 example ')->shouldHaveBeenCalled();
         $expected = '(<passed>1 passed</passed>, <failed>2 failed</failed>)';

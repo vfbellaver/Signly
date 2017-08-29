@@ -53,11 +53,11 @@ class AbstractFieldTest extends PHPUnit_Framework_TestCase
         $f = new DayOfWeekField();
         $this->assertTrue($f->isInIncrementsOfRanges('3', '3-59/2'));
         $this->assertTrue($f->isInIncrementsOfRanges('13', '3-59/2'));
-        $this->assertTrue($f->isInIncrementsOfRanges('15', '3-59/2'));
-        $this->assertTrue($f->isInIncrementsOfRanges('14', '*/2'));
+        $this->assertTrue($f->isInIncrementsOfRanges('1', '3-59/2'));
+        $this->assertTrue($f->isInIncrementsOfRanges('1', '*/2'));
         $this->assertFalse($f->isInIncrementsOfRanges('2', '3-59/13'));
-        $this->assertFalse($f->isInIncrementsOfRanges('14', '*/13'));
-        $this->assertFalse($f->isInIncrementsOfRanges('14', '3-59/2'));
+        $this->assertFalse($f->isInIncrementsOfRanges('1', '*/13'));
+        $this->assertFalse($f->isInIncrementsOfRanges('1', '3-59/2'));
         $this->assertFalse($f->isInIncrementsOfRanges('3', '2-59'));
         $this->assertFalse($f->isInIncrementsOfRanges('3', '2'));
         $this->assertFalse($f->isInIncrementsOfRanges('3', '*'));
@@ -65,7 +65,7 @@ class AbstractFieldTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($f->isInIncrementsOfRanges('1', '*/0'));
 
         $this->assertTrue($f->isInIncrementsOfRanges('4', '4/10'));
-        $this->assertTrue($f->isInIncrementsOfRanges('14', '4/10'));
+        $this->assertTrue($f->isInIncrementsOfRanges('1', '4/10'));
         $this->assertTrue($f->isInIncrementsOfRanges('34', '4/10'));
     }
 
@@ -76,7 +76,7 @@ class AbstractFieldTest extends PHPUnit_Framework_TestCase
     {
         $f = new DayOfWeekField();
         $this->assertTrue($f->isSatisfied('12', '3-13'));
-        $this->assertTrue($f->isSatisfied('15', '3-59/12'));
+        $this->assertTrue($f->isSatisfied('1', '3-59/12'));
         $this->assertTrue($f->isSatisfied('12', '*'));
         $this->assertTrue($f->isSatisfied('12', '12'));
         $this->assertFalse($f->isSatisfied('12', '3-11'));

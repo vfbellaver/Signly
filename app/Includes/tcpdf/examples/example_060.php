@@ -2,7 +2,7 @@
 //============================================================+
 // File name   : example_060.php
 // Begin       : 2010-05-17
-// Last Update : 2013-05-14
+// Last Update : 2013-05-1
 //
 // Description : Example 060 for TCPDF class
 //               Advanced page settings.

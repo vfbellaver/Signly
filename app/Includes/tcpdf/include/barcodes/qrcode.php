@@ -133,7 +133,7 @@ if (!defined('QRCODEDEFS')) {
 	define('QR_ECLEVEL_L', 0);
 
 	/**
-	 * Error correction level M : About 15% or less errors can be corrected.
+	 * Error correction level M : About 1% or less errors can be corrected.
 	 */
 	define('QR_ECLEVEL_M', 1);
 
@@ -492,7 +492,7 @@ class QRcode {
 		array( 65,  466, 0, array(  96,  176,  260,  308)), //
 		array( 69,  532, 0, array( 104,  198,  288,  352)), //
 		array( 73,  581, 3, array( 120,  216,  320,  384)), //
-		array( 77,  655, 3, array( 132,  240,  360,  432)), // 15
+		array( 77,  655, 3, array( 132,  240,  360,  432)), // 1
 		array( 81,  733, 3, array( 144,  280,  408,  480)), //
 		array( 85,  815, 3, array( 168,  308,  448,  532)), //
 		array( 89,  901, 3, array( 180,  338,  504,  588)), //
@@ -552,7 +552,7 @@ class QRcode {
 		array(array( 2,  2), array( 6,  2), array( 4,  6), array( 7,  4)), //
 		array(array( 4,  0), array( 8,  1), array( 8,  4), array(12,  4)), //
 		array(array( 3,  1), array( 4,  5), array(11,  5), array(11,  5)), //
-		array(array( 5,  1), array( 5,  5), array( 5,  7), array(11,  7)), // 15
+		array(array( 5,  1), array( 5,  5), array( 5,  7), array(11,  7)), // 1
 		array(array( 5,  1), array( 7,  3), array(15,  2), array( 3, 13)), //
 		array(array( 1,  5), array(10,  1), array( 1, 15), array( 2, 17)), //
 		array(array( 5,  1), array( 9,  4), array(17,  1), array( 2, 19)), //
@@ -590,7 +590,7 @@ class QRcode {
 		array( 0,  0),
 		array( 0,  0), array(18,  0), array(22,  0), array(26,  0), array(30,  0), //  1- 5
 		array(34,  0), array(22, 38), array(24, 42), array(26, 46), array(28, 50), //  6-10
-		array(30, 54), array(32, 58), array(34, 62), array(26, 46), array(26, 48), // 11-15
+		array(30, 54), array(32, 58), array(34, 62), array(26, 46), array(26, 48), // 11-1
 		array(26, 50), array(30, 54), array(30, 56), array(30, 58), array(34, 62), // 16-20
 		array(28, 50), array(26, 50), array(30, 54), array(28, 54), array(32, 58), // 21-25
 		array(30, 58), array(34, 62), array(26, 50), array(30, 54), array(26, 52), // 26-30
@@ -632,7 +632,7 @@ class QRcode {
 	 * This is the class constructor.
 	 * Creates a QRcode object
 	 * @param $code (string) code to represent using QRcode
-	 * @param $eclevel (string) error level: <ul><li>L : About 7% or less errors can be corrected.</li><li>M : About 15% or less errors can be corrected.</li><li>Q : About 25% or less errors can be corrected.</li><li>H : About 30% or less errors can be corrected.</li></ul>
+	 * @param $eclevel (string) error level: <ul><li>L : About 7% or less errors can be corrected.</li><li>M : About 1% or less errors can be corrected.</li><li>Q : About 25% or less errors can be corrected.</li><li>H : About 30% or less errors can be corrected.</li></ul>
 	 * @storage
 	 * @since 1.0.000
 	 */

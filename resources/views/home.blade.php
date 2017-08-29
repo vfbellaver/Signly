@@ -286,21 +286,18 @@
 
                             </div>
 
-                        </div>
-                        <div>
+        </div>
+        <div>
+          
+        </div>
+        <div>
+          <input id="proposal_link" style="display:none;" value="@if(isset($active_proposal)) {{URL::to('/').'/clientview/'.$active_proposal->hash}} @endif">
+        </div>
+        <div style="text-align:right;">
+<div style="text-align:right;">          <a id="copy_link" title="Copy Link" style="cursor:pointer;" class="copy_link btn btn-success">Copy Link</a>
+          <a  id="save_proposal" title="Save Current Proposal" style="cursor:pointer;" class="btn btn-info">Save</a><a  href="{{route('pdf')}}" class="btn btn-primary">Generate Proposal</a>
 
-                        </div>
-                        <div>
-                            <input id="proposal_link" style="display:none;"
-                                   value="@if(isset($active_proposal)) {{URL::to('/').'/clientview/'.$active_proposal->hash}} @endif">
-                        </div>
-                        <div style="text-align:right;">
-                            <a id="copy_link" title="Copy Link" style="cursor:pointer;"
-                               class="copy_link btn btn-success">Copy Link</a>
-                            <a id="generate_pdf" title="Generate PDF" style="cursor:pointer;"
-                               class="generate_pdf btn btn-primary">Generate Proposal</a>
-                            <a id="save_proposal" title="Save Current Proposal" style="cursor:pointer;"
-                               class="btn btn-info">Save</a>
+            </div>
 
                         </div>
                         <div class="clear"></div>

@@ -1,14 +1,13 @@
 <hr>
 <!-- logo -->
-<div class="col-lg-4 pull-left">
-    <img src="{{asset('storage/'.$footer->path_image)}}" alt="Your Logo" height="80">
+<div class="col-xs-2">
+    <img class="img_footer my_float" src="{{asset('storage/'.$footer->path_image)}}" alt="Your Logo">
 </div>
 
 <!-- info -->
-<div class="col-lg-8">
+<div class="col-xs-10 pull-right">
 
-    <div class="col-lg-8">
-        <label class="control-label my_strong">Address Street: </label>
+    <div class="col-xs-4">
         <label class="control-label">
             {{$footer->user_street.', '
             .$footer->user_city.' , '
@@ -16,17 +15,17 @@
             }}
         </label>
     </div>
+    <br>
 
-    <div class="col-lg-4">
-        <label class="control-label my_strong">Email : </label> <label
-                class="control-label">{{Auth::user()->email}}</label>
+    <div class="col-xs-4">
+     <label class="control-label">{{Auth::user()->email}}</label>
     </div>
+    <br>
 
-    <div class="col-lg-4">
+    <div class="col-xs-4">
         <label class="control-label">{{$footer->user_zipcode}}</label>
-
-        <label class="control-label my_strong">Website : </label>
+        <label class="control-label">{{$footer->user_phone}}</label>
         <label class="control-label">{{$footer->website}}</label>
     </div>
-
+    <br>
 </div>

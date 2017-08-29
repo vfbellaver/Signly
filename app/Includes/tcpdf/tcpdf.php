@@ -535,7 +535,7 @@ class TCPDF {
 
 	/**
 	 * Adjusting factor to convert pixels to user units.
-	 * @since 2004-06-14
+	 * @since 2004-06-1
 	 * @author Nicola Asuni
 	 * @protected
 	 */
@@ -1108,7 +1108,7 @@ class TCPDF {
 	/**
 	 * Boolean flag to indicate if the border of the cell sides that cross the page should be removed.
 	 * @protected
-	 * @since 4.2.010 (2008-11-14)
+	 * @since 4.2.010 (2008-11-1)
 	 */
 	protected $opencell = true;
 
@@ -1550,7 +1550,7 @@ class TCPDF {
 	 * Array of no-write regions.
 	 * ('page' => page number or empy for current page, 'xt' => X top, 'yt' => Y top, 'xb' => X bottom, 'yb' => Y bottom, 'side' => page side 'L' = left or 'R' = right)
 	 * @protected
-	 * @since 5.9.003 (2010-10-14)
+	 * @since 5.9.003 (2010-10-1)
 	 */
 	protected $page_regions = array();
 
@@ -2318,7 +2318,7 @@ class TCPDF {
 	 * </pre>
 	 * @param $re (string) regular expression (leave empty for default).
 	 * @storage
-	 * @since 4.6.016 (2009-06-15)
+	 * @since 4.6.016 (2009-06-1)
 	 */
 	public function setSpacesRE($re='/[^\S\xa0]/') {
 		$this->re_spaces = $re;
@@ -3120,7 +3120,7 @@ class TCPDF {
 	 * Terminate the current page
 	 * @param $tocpage (boolean) if true set the tocpage state to false (end the page used to display Table Of Content).
 	 * @storage
-	 * @since 4.2.010 (2008-11-14)
+	 * @since 4.2.010 (2008-11-1)
 	 * @see AddPage(), startPage(), addTOCPage(), endTOCPage()
 	 */
 	public function endPage($tocpage=false) {
@@ -3145,7 +3145,7 @@ class TCPDF {
 	 * @param $orientation (string) page orientation. Possible values are (case insensitive):<ul><li>P or PORTRAIT (default)</li><li>L or LANDSCAPE</li></ul>
 	 * @param $format (mixed) The format used for pages. It can be either: one of the string values specified at getPageSizeFromFormat() or an array of parameters specified at setPageFormat().
 	 * @param $tocpage (boolean) if true the page is designated to contain the Table-Of-Content.
-	 * @since 4.2.010 (2008-11-14)
+	 * @since 4.2.010 (2008-11-1)
 	 * @see AddPage(), endPage(), addTOCPage(), endTOCPage(), getPageSizeFromFormat(), setPageFormat()
 	 * @storage
 	 */
@@ -3608,7 +3608,7 @@ class TCPDF {
 	 * Check if we are on the page body (excluding page header and footer).
 	 * @return true if we are not in page header nor in page footer, false otherwise.
 	 * @protected
-	 * @since 5.9.091 (2011-06-15)
+	 * @since 5.9.091 (2011-06-1)
 	 */
 	protected function inPageBody() {
 		return (($this->InHeader === false) AND ($this->InFooter === false));
@@ -9440,7 +9440,7 @@ class TCPDF {
 
 	/**
 	 * Adds some Metadata information (Document Information Dictionary)
-	 * (see Chapter 14.3.3 Document Information Dictionary of PDF32000_2008.pdf Reference)
+	 * (see Chapter 1.3.3 Document Information Dictionary of PDF32000_2008.pdf Reference)
 	 * @return int object id
 	 * @protected
 	 */
@@ -9514,7 +9514,7 @@ class TCPDF {
 		$this->encrypted = false;
 		// set XMP data
 		$xmp = '<?xpacket begin="'.TCPDF_FONTS::unichr(0xfeff, $this->isunicode).'" id="W5M0MpCehiHzreSzNTczkc9d"?>'."\n";
-		$xmp .= '<x:xmpmeta xmlns:x="adobe:ns:meta/" x:xmptk="Adobe XMP Core 4.2.1-c043 52.372728, 2009/01/18-15:08:04">'."\n";
+		$xmp .= '<x:xmpmeta xmlns:x="adobe:ns:meta/" x:xmptk="Adobe XMP Core 4.2.1-c043 52.372728, 2009/01/18-1:08:04">'."\n";
 		$xmp .= "\t".'<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">'."\n";
 		$xmp .= "\t\t".'<rdf:Description rdf:about="" xmlns:dc="http://purl.org/dc/elements/1.1/">'."\n";
 		$xmp .= "\t\t\t".'<dc:format>application/pdf</dc:format>'."\n";
@@ -10742,7 +10742,7 @@ class TCPDF {
 					$perms .= 'T';
 				}
 				$perms .= 'adb'; // bytes 9-11
-				$perms .= 'nick'; // bytes 12-15
+				$perms .= 'nick'; // bytes 12-1
 				$this->encryptdata['perms'] = TCPDF_STATIC::_AESnopad($this->encryptdata['key'], $perms);
 			} else { // RC4-40, RC4-128, AES-128
 				// Pad passwords
@@ -11832,7 +11832,7 @@ class TCPDF {
 	 * </ul>
 	 * If a key is not present or is null, not draws the line. Default value is default line style (empty array).
 	 * @param $fill_color (array) Fill color. Format: array(GREY) or array(R,G,B) or array(C,M,Y,K) or array(C,M,Y,K,SpotColorName). Default value: default color (empty array).
-	 * @since 4.8.003 (2009-09-15)
+	 * @since 4.8.003 (2009-09-1)
 	 * @storage
 	 */
 	public function PolyLine($p, $style='', $line_style=array(), $fill_color=array()) {
@@ -17028,7 +17028,7 @@ class TCPDF {
 	 * @return string
 	 * @protected
 	 * @author Nicola Asuni
-	 * @since 4.8.024 (2010-01-15)
+	 * @since 4.8.024 (2010-01-1)
 	 */
 	protected function getSpaceString() {
 		$spacestr = chr(32);
@@ -20212,7 +20212,7 @@ Putting 1 is equivalent to putting 0 and calling Ln() just after. Default value:
 	 * Set the top/bottom cell sides to be open or closed when the cell cross the page.
 	 * @param $isopen (boolean) if true keeps the top/bottom border open for the cell sides that cross the page.
 	 * @storage
-	 * @since 4.2.010 (2008-11-14)
+	 * @since 4.2.010 (2008-11-1)
 	 */
 	public function setOpenCell($isopen) {
 		$this->opencell = $isopen;
@@ -20524,7 +20524,7 @@ Putting 1 is equivalent to putting 0 and calling Ln() just after. Default value:
 	 * Returns current graphic variables as array.
 	 * @return array of graphic variables
 	 * @protected
-	 * @since 4.2.010 (2008-11-14)
+	 * @since 4.2.010 (2008-11-1)
 	 */
 	protected function getGraphicVars() {
 		$grapvars = array(
@@ -20585,7 +20585,7 @@ Putting 1 is equivalent to putting 0 and calling Ln() just after. Default value:
 	 * @param $gvars (array) array of graphic variablesto restore
 	 * @param $extended (boolean) if true restore extended graphic variables
 	 * @protected
-	 * @since 4.2.010 (2008-11-14)
+	 * @since 4.2.010 (2008-11-1)
 	 */
 	protected function setGraphicVars($gvars, $extended=false) {
 		if ($this->state != 2) {
@@ -22163,7 +22163,7 @@ Putting 1 is equivalent to putting 0 and calling Ln() just after. Default value:
 	 * @return true for unicode font, false otherwise.
 	 * @author Nicola Asuni
 	 * @storage
-	 * @since 5.8.002 (2010-08-14)
+	 * @since 5.8.002 (2010-08-1)
 	 */
 	public function isUnicodeFont() {
 		return (($this->CurrentFont['type'] == 'TrueTypeUnicode') OR ($this->CurrentFont['type'] == 'cidfont0'));

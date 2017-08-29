@@ -159,6 +159,7 @@ class ProposalController extends Controller {
 		            'client_id' => $request->input('client_id'),
 		            'start_date' => $request->input('start_date'),
 		            'end_date' => $request->input('end_date'),
+		            'instance_id' => $request->input('instance_id'),
 		            'hash' => md5($request->input('name').time()),
 		            'user_id' => $this->user->id
 		    	  )
@@ -679,7 +680,7 @@ UNAUTHORIZED REPRESENTATIONS	Neither party hereto shall be bound by any agreemen
 		// *** set signature appearance ***
 
 		// create content for signature (image and/or text)
-		//$pdf->Image('../images/tcpdf_signature.png', 180, 60, 15, 15, 'PNG');
+		//$pdf->Image('../images/tcpdf_signature.png', 180, 60, 1, 1, 'PNG');
 
 		// define active area for signature appearance
 		$pdf->setSignatureAppearance(180, 60, 15, 15);

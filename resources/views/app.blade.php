@@ -39,6 +39,7 @@
 	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 	})(window,document,'script','dataLayer','GTM-5P2KSHJ');</script>
 	<!-- End Google Tag Manager -->
+
 </head>
 <body>
 <!-- Google Tag Manager (noscript) -->
@@ -111,7 +112,6 @@
 				<form class="navbar-form navbar-left">
 					<div class="form-group">
 						<button type="button" id="active-proposal" class="btn btn-default">Show/Hide Proposal</button>
-						
 					</div>
 				</form>
 				<div class="pull-right">
@@ -167,7 +167,7 @@
 				<textarea class="form-control" name="bugdescription"></textarea>
 			</div>
 		</div>
-      
+
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -197,10 +197,10 @@
 <script src="{{ URL::to('/') }}/js/jquery.qtip.min.js"></script>
 <script src="{{ URL::to('/') }}/js/daypilot/daypilot-all.min.js"></script>
 
-<script src="{{ URL::to('/') }}/js/jquery.magnific-popup.min.js"></script>
-<script src="{{ URL::to('/') }}/js/jquery.zeroclipboard.min.js"></script>
-
-<script src="https://cdn.jsdelivr.net/jquery.sidr/2.2.1/jquery.sidr.min.js"></script>
+	<script src="{{ URL::to('/') }}/js/jquery.magnific-popup.min.js"></script>
+	<script src="{{ URL::to('/') }}/js/jquery.zeroclipboard.min.js"></script>
+	<script type="text/javascript" src="{{asset('js/masks.js')}}"></script>
+	<script src="https://cdn.jsdelivr.net/jquery.sidr/2.2.1/jquery.sidr.min.js"></script>
 
 <script type='text/javascript' src='https://maps.google.com/maps/api/js?sensor=false&#038;ver=3.0&key=AIzaSyBUaQHyneq6J_6N8BW5MT50BM9riXkI5oM'>
     <!--<script type='text/javascript' src='https://maps.google.com/maps/api/js?sensor=false&#038;ver=3.0'>-->
@@ -304,7 +304,6 @@
         window.dp.init();
 
 
-
         loadResources();
         loadEvents();
 
@@ -401,7 +400,6 @@
         window.dp.init();
 
 
-
         loadResources();
         loadEvents();
 
@@ -429,7 +427,6 @@
 
             //         dp.message(data.message);
             //     });
-
 
             $('#billboard_face_id').val(args.resource);
             //var d = $.datepicker.parseDate("MM-DD-YYYY",  args.start.toString());
@@ -1130,7 +1127,6 @@ $('#bdaterange').find('span').html('<strong>' + today + ' - ' + today + '</stron
 
                                         $('#billboard_address').val(results[1].formatted_address);
 
-
                                     } else {
                                         //window.alert('No results found');
                                     }
@@ -1322,8 +1318,9 @@ $('#bdaterange').find('span').html('<strong>' + today + ' - ' + today + '</stron
             copyToClipboard($('#sidr-id-proposal_link').val());
         });
 
-        //var copyEmailBtn = document.querySelector('.copy_link');
-        // var copyEmailBtn = document.querySelector('#sidr-id-copy_link');
+				//var copyEmailBtn = document.querySelector('.copy_link');  
+				// var copyEmailBtn = document.querySelector('#sidr-id-copy_link');
+
 
         // copyEmailBtn.addEventListener('click', function(event) {
 

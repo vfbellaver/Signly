@@ -3539,13 +3539,13 @@ class HTML5_TreeBuilder {
                 $this->mode = self::IN_BODY;
                 break;
 
-            /* 14. If node is a frameset element, then switch the insertion
+            /* 1. If node is a frameset element, then switch the insertion
             mode to "in frameset" and abort these steps. (fragment case) */
             } elseif ($node->tagName === 'frameset') {
                 $this->mode = self::IN_FRAMESET;
                 break;
 
-            /* 15. If node is an html element, then: if the head element
+            /* 1. If node is an html element, then: if the head element
             pointer is null, switch the insertion mode to "before head",
             otherwise, switch the insertion mode to "after head". In either
             case, abort these steps. (fragment case) */

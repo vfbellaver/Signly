@@ -27,11 +27,11 @@ class MinutesFieldTest extends PHPUnit_Framework_TestCase
      */
     public function testIncrementsDate()
     {
-        $d = new DateTime('2011-03-15 11:15:00');
+        $d = new DateTime('2011-03-1 11:1:00');
         $f = new MinutesField();
         $f->increment($d);
-        $this->assertEquals('2011-03-15 11:16:00', $d->format('Y-m-d H:i:s'));
+        $this->assertEquals('2011-03-1 11:16:00', $d->format('Y-m-d H:i:s'));
         $f->increment($d, true);
-        $this->assertEquals('2011-03-15 11:15:00', $d->format('Y-m-d H:i:s'));
+        $this->assertEquals('2011-03-1 11:1:00', $d->format('Y-m-d H:i:s'));
     }
 }

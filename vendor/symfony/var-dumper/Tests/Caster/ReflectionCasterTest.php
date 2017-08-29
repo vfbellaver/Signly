@@ -156,7 +156,7 @@ Generator {
   this: Symfony\Component\VarDumper\Tests\Fixtures\GeneratorDemo { …}
   executing: {
     Symfony\Component\VarDumper\Tests\Fixtures\GeneratorDemo->baz(): {
-      %sGeneratorDemo.php:14: """
+      %sGeneratorDemo.php:1: """
         {\n
             yield from bar();\n
         }\n
@@ -197,7 +197,7 @@ array:2 [
       }
       1. Symfony\Component\VarDumper\Tests\Fixtures\GeneratorDemo->baz() ==> Symfony\Component\VarDumper\Tests\Fixtures\bar(): {
         src: {
-          %sGeneratorDemo.php:14: """
+          %sGeneratorDemo.php:1: """
             {\n
                 yield from bar();\n
             }\n

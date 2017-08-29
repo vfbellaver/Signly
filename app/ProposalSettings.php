@@ -18,6 +18,7 @@ class ProposalSettings extends Model  {
 	    'path_image',
         'user_street',
         'user_state',
+        'user_phone',
         'user_city',
         'user_zipcode',
         'website'

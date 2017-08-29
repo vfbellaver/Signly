@@ -28,12 +28,12 @@ class MonthFieldTest extends PHPUnit_Framework_TestCase
      */
     public function testIncrementsDate()
     {
-        $d = new DateTime('2011-03-15 11:15:00');
+        $d = new DateTime('2011-03-1 11:1:00');
         $f = new MonthField();
         $f->increment($d);
         $this->assertEquals('2011-04-01 00:00:00', $d->format('Y-m-d H:i:s'));
 
-        $d = new DateTime('2011-03-15 11:15:00');
+        $d = new DateTime('2011-03-1 11:1:00');
         $f->increment($d, true);
         $this->assertEquals('2011-02-28 23:59:00', $d->format('Y-m-d H:i:s'));
     }
@@ -50,7 +50,7 @@ class MonthFieldTest extends PHPUnit_Framework_TestCase
         $f->increment($d);
         $this->assertEquals('2011-04-01 00:00:00', $d->format('Y-m-d H:i:s'));
 
-        $d = new DateTime('2011-03-15 11:15:00');
+        $d = new DateTime('2011-03-1 11:1:00');
         $f->increment($d, true);
         $this->assertEquals('2011-02-28 23:59:00', $d->format('Y-m-d H:i:s'));
         date_default_timezone_set($tz);
@@ -63,7 +63,7 @@ class MonthFieldTest extends PHPUnit_Framework_TestCase
     public function testIncrementsYearAsNeeded()
     {
         $f = new MonthField();
-        $d = new DateTime('2011-12-15 00:00:00');
+        $d = new DateTime('2011-12-1 00:00:00');
         $f->increment($d);
         $this->assertEquals('2012-01-01 00:00:00', $d->format('Y-m-d H:i:s'));
     }
@@ -74,7 +74,7 @@ class MonthFieldTest extends PHPUnit_Framework_TestCase
     public function testDecrementsYearAsNeeded()
     {
         $f = new MonthField();
-        $d = new DateTime('2011-01-15 00:00:00');
+        $d = new DateTime('2011-01-1 00:00:00');
         $f->increment($d, true);
         $this->assertEquals('2010-12-31 23:59:00', $d->format('Y-m-d H:i:s'));
     }
