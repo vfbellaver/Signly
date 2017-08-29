@@ -308,6 +308,7 @@ CREATE TABLE `active_proposal_billboards` (
   `billboard_face_id`  INT(11) NOT NULL,
   `user_id`            INT(11) NOT NULL,
   `proposal_price`     DOUBLE  NOT NULL,
+  `order_proposal_billboards` INT(11) NOT NULL,
   `instance_id`        INT(11) NOT NULL DEFAULT '0',
 
   FOREIGN KEY (user_id)
