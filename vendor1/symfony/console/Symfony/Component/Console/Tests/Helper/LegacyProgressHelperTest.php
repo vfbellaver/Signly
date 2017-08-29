@@ -116,7 +116,7 @@ class LegacyProgressHelperTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(
             $this->generateOutput('  0/50 [>---------------------------]   0%').
             $this->generateOutput('  1/50 [>---------------------------]   2%').
-            $this->generateOutput(' 1/50 [========>-------------------]  30%').
+            $this->generateOutput(' 15/50 [========>-------------------]  30%').
             $this->generateOutput(' 25/50 [==============>-------------]  50%'),
             stream_get_contents($output->getStream())
         );

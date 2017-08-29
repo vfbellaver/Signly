@@ -38,7 +38,7 @@ class OwnerController extends Controller {
 	 */
 	public function index()
 	{
-		$owners = DB::table('owners')->where('instance_id',$this->user->instance_id)->get();
+		$owners = DB::table('owners')->where('instance_id',$this->user->instance_id)->paginate(10);
 		return view('owner.owners',array('owners' => $owners ) );
 	}
 

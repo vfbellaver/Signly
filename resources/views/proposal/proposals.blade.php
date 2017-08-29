@@ -60,6 +60,9 @@
 	 			</tbody>
 	 		</table>
 	 	</div>
+		<div class="text-center">
+			{{ $proposals->links() }}
+		</div>
 	</div>
 	
     

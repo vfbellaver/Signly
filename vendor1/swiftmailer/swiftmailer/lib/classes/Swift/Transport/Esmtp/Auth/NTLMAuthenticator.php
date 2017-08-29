@@ -393,7 +393,7 @@ class Swift_Transport_Esmtp_Auth_NTLMAuthenticator implements Swift_Transport_Es
     protected function createLMv2Password($password, $username, $domain, $challenge, $client)
     {
         $lmPass = '00'; // by default 00
-        // if $password > 1 than we can't use this method
+        // if $password > 15 than we can't use this method
         if (strlen($password) <= 15) {
             $ntlmHash = $this->md4Encrypt($password);
             $ntml2Hash = $this->md5Encrypt($ntlmHash, $this->convertTo16bit(strtoupper($username).$domain));

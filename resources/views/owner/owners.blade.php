@@ -40,6 +40,9 @@
 	 			</tbody>
 	 		</table>
 	 	</div>
+		<div class="text-center">
+			{{ $owners->links() }}
+		</div>
 	</div>
 	
     

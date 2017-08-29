@@ -79,11 +79,11 @@ class ResponseHeaderBagTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($bag->hasCacheControlDirective('must-revalidate'));
         $this->assertFalse($bag->hasCacheControlDirective('max-age'));
 
-        $bag = new ResponseHeaderBag(array('Expires' => 'Wed, 16 Feb 2011 1:17:43 GMT'));
+        $bag = new ResponseHeaderBag(array('Expires' => 'Wed, 16 Feb 2011 14:17:43 GMT'));
         $this->assertEquals('private, must-revalidate', $bag->get('Cache-Control'));
 
         $bag = new ResponseHeaderBag(array(
-            'Expires' => 'Wed, 16 Feb 2011 1:17:43 GMT',
+            'Expires' => 'Wed, 16 Feb 2011 14:17:43 GMT',
             'Cache-Control' => 'max-age=3600',
         ));
         $this->assertEquals('max-age=3600, private', $bag->get('Cache-Control'));

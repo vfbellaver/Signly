@@ -548,7 +548,7 @@ class PHPUnit_Util_Configuration
      *
      * @return array
      *
-     * @since  Method available since Release 3.2.1
+     * @since  Method available since Release 3.2.14
      */
     public function getPHPUnitConfiguration()
     {

@@ -395,7 +395,7 @@ syck: |
 ---
 test: Folded treats newlines as a space
 todo: true
-spec: 2.1
+spec: 2.14
 yaml: |
   ---
     Mark McGwire's
@@ -416,7 +416,7 @@ syck: |
 ---
 test: Newlines preserved for indented and blank lines
 todo: true
-spec: 2.1
+spec: 2.15
 yaml: |
   --- >
    Sammy Sosa completed another

@@ -1,9 +1,10 @@
 <?php namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Input;
 use Mail;
 use Response;
 use View;
-use DB;
 use Session;
 use URL;
 use App\Http\Requests\BillboardFilterDashboardRequest;
@@ -247,7 +248,7 @@ class HomeController extends Controller {
             ->select('active_proposal.id as apid','proposal.*')
             ->where('active_proposal.user_id',$user->id)
             ->first();
-        
+
         $active_proposal_billboards = array();
 
         if(isset($proposals)){
@@ -257,14 +258,16 @@ class HomeController extends Controller {
 	            ->join('billboard_faces', 'active_proposal_billboards.billboard_face_id','=', 'billboard_faces.id')
 	            ->select('active_proposal_billboards.id as apbid',
 	            	'active_proposal_billboards.proposal_price as monthly_price',
+                    'active_proposal_billboards.order_proposal_billboards as order',
 	            	'billboard.*',
 	            	'billboard_faces.id as billboard_face_id', 
 	            	'billboard_faces.label')
 	            ->where('active_proposal_id',$proposals->apid)
 	            ->where('active_proposal_billboards.user_id',$user->id)
+                ->orderBy('order_proposal_billboards','ASC')
 	            ->get();	
 	        }
-       
+
 	        $comments = DB::table('proposal_comments')
 	            ->where('proposal_id',$proposals->id)
 	            ->orderBy('id','asc')
@@ -449,13 +452,35 @@ class HomeController extends Controller {
 	    return view('comments',array('comments' => $comments));
 	}
 
-	public function getCommentsClient($proposal_id){
-		$comments = DB::table('proposal_comments')
-	            ->where('proposal_id',$proposal_id)
-	            ->orderBy('id','asc')
-	            ->get();
+	public function getCommentsClient($proposal_id)
+    {
+        $comments = DB::table('proposal_comments')
+            ->where('proposal_id', $proposal_id)
+            ->orderBy('id', 'asc')
+            ->get();
 
-	    return view('comments_client',array('comments' => $comments));
-	}
+        return view('comments_client', array('comments' => $comments));
 
-}
+    }
+	public function sortable()
+        {
+            $user = \Auth::user();
+            $active_proposal_billboards = DB::table('active_proposal_billboards')
+                ->where('active_proposal_billboards.user_id', $user->id)
+                ->orderBy('order_proposal_billboards', 'ASC')->get();
+
+
+            $ac_proposalIndex = explode('-',Input::get('ac_proposalIndex'));
+            $ac_proposalId = explode('-',Input::get('ac_proposalId'));
+            $id = end($ac_proposalId);
+            $order = end($ac_proposalIndex);
+
+
+            foreach ($active_proposal_billboards as $item) {
+               return DB::table('active_proposal_billboards')->where('id', $id)
+                    ->update(['order_proposal_billboards' => $order]);
+            }
+        }
+    }
+
+

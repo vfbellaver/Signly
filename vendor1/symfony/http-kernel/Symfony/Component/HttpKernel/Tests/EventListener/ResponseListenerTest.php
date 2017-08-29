@@ -52,7 +52,7 @@ class ResponseListenerTest extends \PHPUnit_Framework_TestCase
 
     public function testFilterSetsNonDefaultCharsetIfNotOverridden()
     {
-        $listener = new ResponseListener('ISO-8859-1');
+        $listener = new ResponseListener('ISO-8859-15');
         $this->dispatcher->addListener(KernelEvents::RESPONSE, array($listener, 'onKernelResponse'), 1);
 
         $response = new Response('foo');
@@ -60,12 +60,12 @@ class ResponseListenerTest extends \PHPUnit_Framework_TestCase
         $event = new FilterResponseEvent($this->kernel, Request::create('/'), HttpKernelInterface::MASTER_REQUEST, $response);
         $this->dispatcher->dispatch(KernelEvents::RESPONSE, $event);
 
-        $this->assertEquals('ISO-8859-1', $response->getCharset());
+        $this->assertEquals('ISO-8859-15', $response->getCharset());
     }
 
     public function testFilterDoesNothingIfCharsetIsOverridden()
     {
-        $listener = new ResponseListener('ISO-8859-1');
+        $listener = new ResponseListener('ISO-8859-15');
         $this->dispatcher->addListener(KernelEvents::RESPONSE, array($listener, 'onKernelResponse'), 1);
 
         $response = new Response('foo');
@@ -79,7 +79,7 @@ class ResponseListenerTest extends \PHPUnit_Framework_TestCase
 
     public function testFiltersSetsNonDefaultCharsetIfNotOverriddenOnNonTextContentType()
     {
-        $listener = new ResponseListener('ISO-8859-1');
+        $listener = new ResponseListener('ISO-8859-15');
         $this->dispatcher->addListener(KernelEvents::RESPONSE, array($listener, 'onKernelResponse'), 1);
 
         $response = new Response('foo');
@@ -89,6 +89,6 @@ class ResponseListenerTest extends \PHPUnit_Framework_TestCase
         $event = new FilterResponseEvent($this->kernel, $request, HttpKernelInterface::MASTER_REQUEST, $response);
         $this->dispatcher->dispatch(KernelEvents::RESPONSE, $event);
 
-        $this->assertEquals('ISO-8859-1', $response->getCharset());
+        $this->assertEquals('ISO-8859-15', $response->getCharset());
     }
 }
