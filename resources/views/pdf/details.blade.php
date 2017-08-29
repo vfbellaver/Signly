@@ -10,7 +10,7 @@
 <div class="my_clear"></div>
 <div class="col-xs-12">
     <div class="col-xs-8">
-       <img src="{{asset('images/'.$detail->photo)}}" width="80%">
+        <img src="{{asset('images/'.$detail->photo)}}" width="80%">
         <br>
        <p>
          {{$detail->description}}

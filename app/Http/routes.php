@@ -106,7 +106,7 @@ Route::get('/proposals/book/{id}', 'ProposalController@bookProposal');
 Route::post('/logo-proposal', ['as' => 'setthings', 'uses' => 'ProposalSettingsController@settings']);
 
 // PDF
-Route::get('my_pdf/{id?}',['as' => 'pdf', 'uses' => 'PDFController@index']);
+Route::get('pdf',['as' => 'pdf', 'uses' => 'PDFController@index']);
 
 
 Route::post('/save-active-proposal-billboards', ['as' => 'postproposalbillboards', 'uses' => 'ProposalController@saveProposalBillbaord']);

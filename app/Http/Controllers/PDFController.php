@@ -34,7 +34,19 @@ class PDFController extends Controller
         $this->user = Auth::user();
     }
 
-    private function details($id)
+    private function details()
+    {
+       $detalhes = DB::table('active_proposal_billboards')
+       ->join('proposal','proposal.id', '=', 'active_proposal_billboards.proposal_id')
+       ->join('billboard','billboard.id','=','active_proposal_billboards.billboard_id')
+       ->join('billboard_faces', 'billboard_faces.id', '=' , 'active_proposal_billboards.billboard_face_id')
+       ->join('clients','clients.id','=','proposal.client_id')
+       ->where('active_proposal_billboards.user_id','=',Auth::user()->id)->get();
+
+       return $detalhes;
+    }
+
+    private function details1 ($id)
     {
         $details = DB::table('proposal')
             //clients
@@ -83,7 +95,6 @@ class PDFController extends Controller
     public function getMap()
     {
         $img = 1;
-
         foreach ($this->points as $point) {
             $link = 'https://maps.googleapis.com/maps/api/staticmap?';
             $link .= 'center=' . $point->map_area_lat . ',' . $point->map_area_long;
@@ -106,8 +117,7 @@ class PDFController extends Controller
 
     public function index()
     {
-        $id = Request::input('id');
-        $this->points = $details = $this->details($id);
+        $this->points = $details = $this->details();
         $this->getMap();
         $this->getDetailMap();
         $footer = ProposalSettings::where('user_id', Auth::user()->id)->first();

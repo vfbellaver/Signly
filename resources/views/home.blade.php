@@ -190,18 +190,14 @@
         </div>
         <div style="text-align:right;">
 
-            <form class="form-horizontal" method="GET" action="{{route('pdf')}}">
-                <div class="form-group">
-                    <a id="copy_link" title="Copy Link" style="cursor:pointer;" class="copy_link form-control btn btn-success">Copy Link</a>
-                    <a id="save_proposal" title="Save Current Proposal" style="cursor:pointer;" class="btn form-control btn-info">Save</a>
-                    <select class="form-control" style="margin-top: 5px" name="id">
-                        @foreach($clientsAll as $client)
-                         <option value="{{$client->id}}">{{$client->first_name.' '.$client->last_name}}</option>
-                        @endforeach
-                    </select>
-                    <button title="Generate PDF" style="cursor:pointer;" class="generate_pdf btn btn-primary">Generate Proposal</button>
-                </div>
-            </form>
+            <div style="text-align:right;">
+                <a id="copy_link" title="Copy Link" style="cursor:pointer;"
+                   class="copy_link btn btn-success">Copy Link</a>
+                <a id="save_proposal" title="Save Current Proposal" style="cursor:pointer;"
+                   class="btn btn-info">Save</a>
+                <a  href="{{route('pdf')}}" class="btn btn-primary">Generate Proposal</a>
+
+            </div>
 
         </div>
         <div class="clear"></div>
