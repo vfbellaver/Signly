@@ -44,6 +44,7 @@ class ClientController extends Controller {
     {
         $user = Auth::user();
         $clients = DB::table('clients')->where('instance_id',$user->instance_id)->paginate(10);
+
         return view('client.clients',array('clients' => $clients ) );
     }
 

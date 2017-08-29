@@ -22,15 +22,15 @@
 					<tbody>
 					@foreach($clients as $client)
 						<tr>
-							<td>{{ $client->id }}</td>
-							<td><img height="40" src="{{ asset('storage/clients_logo/'.$client->id.'/'.$client->logo) }}"></td>
-							<td>{{ $client->company }}</td>
-							<th>{{ $client->first_name.' '.$client->last_name }}</th>
-							<td>{{ $client->email }}</td>
-							<td>{{ $client->phone1 }}</td>
-							<td>{{ $client->phone2 }}</td>
-							<td>{{ $client->fax }}</td>
-							<td>
+							<td id="aligntd">{{ $client->id }}</td>
+							<td id="aligntd"><img height="50" src="{{ asset('storage/clients_logo/'.$client->id.'/'.$client->logo) }}"></td>
+							<td id="aligntd">{{ $client->company }}</td>
+							<td id="aligntd">{{ $client->first_name.' '.$client->last_name }}</td>
+							<td id="aligntd">{{ $client->email }}</td>
+							<td id="aligntd">{{ $client->phone1 }}</td>
+							<td id="aligntd">{{ $client->phone2 }}</td>
+							<td id="aligntd">{{ $client->fax }}</td>
+							<td id="aligntd">
 								{!! Form::open(['method' => 'DELETE', 'route' => ['deleteclient', $client->id],'class'=>'frmDeleteClient']) !!}
 								{!! Form::button('Delete', ['class' => 'btn btn-danger btnDeleteClient']) !!}
 								{!! Form::close() !!}

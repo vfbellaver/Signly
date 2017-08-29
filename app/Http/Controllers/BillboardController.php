@@ -3,10 +3,9 @@ use App\Http\Requests\BillboardFormRequest;
 use App\Http\Requests\BillboardFaceFormRequest;
 use App\Http\Requests\EventFormRequest;
 use App\Http\Requests\BillboardBookingFormRequest;
-use App\Http\Requests\Request;
 use App\Http\Requests\SearchBillboardRequest;
 use App\Http\Requests\BillboardUploadRequest;
-use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\File;
 use Response;
 use View;
 use DB;
@@ -310,14 +309,25 @@ class BillboardController extends Controller {
     public function store(BillboardFormRequest $request){
 
         $file = $request->file('billboard_image');
-        dd($file->getClientOriginalName());
 
+        $idimg = DB::table('billboard_image')->insertGetId(
+            array(
+                'image_name' => $file->getClientOriginalName()
+            )
+        );
+
+        $path = storage_path('app/public/billboards_image/').$idimg;
+        File::makeDirectory($path,0777,true);
+        $file->move($path,$file->getClientOriginalName());
+
+        DB::table('billboard_image')->where('id',$idimg)->update(['image_location' => $path]);
 
         $id = DB::table('billboard')->insertGetId(
             array(
                 'owner_id' => $request->input('billboard_owner'),
                 'name' => $request->input('name'),
                 'address' => $request->input('address'),
+                'billboard_image_id' => $idimg,
                 'digital_driveby' => $request->input('digital_driveby'),
                 'lat' => $request->input('lat'),
                 'lng' => $request->input('long'),

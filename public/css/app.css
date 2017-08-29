@@ -6651,3 +6651,7 @@ html, body, #map-canvas {
     width: 100%;
     padding: 2px;
 }
+
+#aligntd{
+    vertical-align: middle;
+}
