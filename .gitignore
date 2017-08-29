@@ -1,8 +1,8 @@
 .idea/
 .env
-/vendor
-/vendor1
-/node_modules
+.vendor/
+.vendor1/
+.node_modules/
 .phpstorm.meta.php
 _ide_helper.php
 public/mix-manifest.json
