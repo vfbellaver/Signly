@@ -4728,7 +4728,56 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf>
+<<<<<<< HEAD
       <file leaf-file-name="routes.php" pinned="false" current-in-tab="true">
+=======
+      <file leaf-file-name="PDFController.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/PDFController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="230">
+              <caret line="118" column="5" lean-forward="false" selection-start-line="118" selection-start-column="5" selection-end-line="118" selection-end-column="5" />
+              <folding>
+                <element signature="e#826#1378#0#PHP" expanded="false" />
+                <element signature="e#1384#2100#0#PHP" expanded="false" />
+                <element signature="e#2106#2943#0#PHP" expanded="false" />
+                <element signature="e#2949#3805#0#PHP" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="home.blade.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/views/home.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="246">
+              <caret line="199" column="18" lean-forward="false" selection-start-line="199" selection-start-column="18" selection-end-line="206" selection-end-column="33" />
+              <folding>
+                <element signature="e#9582#9607#0#HTML" expanded="true" />
+                <element signature="e#9661#9684#0#HTML" expanded="true" />
+                <element signature="e#9820#9843#0#HTML" expanded="true" />
+                <marker date="1504014045339" expanded="true" signature="8867:8896" ph="..." />
+                <marker date="1504014045339" expanded="true" signature="9022:9049" ph="..." />
+                <marker date="1504014045339" expanded="true" signature="14175:14380" ph="..." />
+                <marker date="1504014045339" expanded="true" signature="14187:14378" ph="..." />
+                <marker date="1504014045339" expanded="true" signature="15935:16134" ph="..." />
+                <marker date="1504014045339" expanded="true" signature="20692:20886" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="100">
+              <caret line="5" column="18" lean-forward="false" selection-start-line="5" selection-start-column="18" selection-end-line="5" selection-end-column="18" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="routes.php" pinned="false" current-in-tab="false">
+>>>>>>> 88971bff6fa21d20919cd24a266eb8c14b042830
         <entry file="file://$PROJECT_DIR$/app/Http/routes.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="142">
@@ -4738,6 +4787,19 @@
           </provider>
         </entry>
       </file>
+<<<<<<< HEAD
+=======
+      <file leaf-file-name="pdf_index.blade.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/views/pdf/pdf_index.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="282">
+              <caret line="77" column="38" lean-forward="false" selection-start-line="77" selection-start-column="38" selection-end-line="77" selection-end-column="38" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+>>>>>>> 88971bff6fa21d20919cd24a266eb8c14b042830
     </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
@@ -4785,9 +4847,42 @@
         <option value="$PROJECT_DIR$/app/Http/Controllers/PDFController.php" />
         <option value="$PROJECT_DIR$/resources/views/pdf/details.blade.php" />
         <option value="$PROJECT_DIR$/public/js/js/pdf_maps/principal.js" />
+<<<<<<< HEAD
         <option value="$PROJECT_DIR$/resources/views/pdf/map.blade.php" />
+=======
+        <option value="$PROJECT_DIR$/resources/views/pdf/teste.blade.php" />
+        <option value="$APPLICATION_CONFIG_DIR$/consoles/db/a3bcefd9-3ebf-4a43-88e6-0b654a8a4a0d/console.sql" />
+        <option value="$PROJECT_DIR$/signlydb5000.sql" />
+        <option value="$PROJECT_DIR$/config/database.php" />
+        <option value="dbtable:/941f4086/f46386a0-4b96-4d10-b1ff-c8dc19c632f4/signly_br.proposal_comments" />
+        <option value="$PROJECT_DIR$/resources/views/pdf/proposals_table.blade.php" />
+        <option value="$PROJECT_DIR$/vendor/dompdf/dompdf/src/Options.php" />
+        <option value="$PROJECT_DIR$/config/filesystems.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/ProposalSettingsController.php" />
+        <option value="$PROJECT_DIR$/resources/views/pdf/mpdf_index.blade.php" />
+        <option value="$PROJECT_DIR$/app/SLCPDF.php" />
+        <option value="$PROJECT_DIR$/config/app.php" />
+>>>>>>> 88971bff6fa21d20919cd24a266eb8c14b042830
         <option value="$PROJECT_DIR$/resources/views/pdf/pdf_index.blade.php" />
         <option value="$PROJECT_DIR$/public/css/pdf.css" />
+<<<<<<< HEAD
+=======
+        <option value="$PROJECT_DIR$/resources/views/proposal/add.blade.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/ProposalController.php" />
+        <option value="$PROJECT_DIR$/app/Http/Requests/ProposalFormRequest.php" />
+        <option value="$PROJECT_DIR$/app/BillboardImage.php" />
+        <option value="$PROJECT_DIR$/resources/views/billboard/add.blade.php" />
+        <option value="$PROJECT_DIR$/app/Http/Requests/BillboardFormRequest.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/BillboardController.php" />
+        <option value="$APPLICATION_CONFIG_DIR$/consoles/db/f46386a0-4b96-4d10-b1ff-c8dc19c632f4/console.sql" />
+        <option value="$PROJECT_DIR$/resources/views/pdf/pdf_footer.blade.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" />
+        <option value="$PROJECT_DIR$/resources/views/pdf/details.blade.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/PDFController.php" />
+        <option value="$PROJECT_DIR$/app/Http/routes.php" />
+        <option value="$PROJECT_DIR$/resources/views/home.blade.php" />
+        <option value="$PROJECT_DIR$/.gitignore" />
+>>>>>>> 88971bff6fa21d20919cd24a266eb8c14b042830
       </list>
     </option>
   </component>
@@ -4956,12 +5051,37 @@
       <workItem from="1503078429457" duration="12197000" />
       <workItem from="1503319173481" duration="8567000" />
       <workItem from="1503334936966" duration="14497000" />
+<<<<<<< HEAD
       <workItem from="1503405964214" duration="3909000" />
+=======
+      <workItem from="1503405964214" duration="25955000" />
+      <workItem from="1503492979003" duration="25752000" />
+      <workItem from="1503579441311" duration="26311000" />
+      <workItem from="1503649948462" duration="23534000" />
+      <workItem from="1503699234350" duration="634000" />
+      <workItem from="1503780538695" duration="11190000" />
+      <workItem from="1503940989622" duration="9032000" />
+      <workItem from="1503952017011" duration="2307000" />
+      <workItem from="1504009701256" duration="4621000" />
+>>>>>>> 88971bff6fa21d20919cd24a266eb8c14b042830
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
+<<<<<<< HEAD
     <option name="totallyTimeSpent" value="60219000" />
+=======
+    <option name="totallyTimeSpent" value="186724000" />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+>>>>>>> 88971bff6fa21d20919cd24a266eb8c14b042830
   </component>
   <component name="ToolWindowManager">
     <frame x="1431" y="-4" width="1855" height="1084" extended-state="6" />
@@ -5010,7 +5130,20 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/app/Http/Requests/BillboardBookingFormRequest.php">
+=======
+    <entry file="file://$PROJECT_DIR$/storage/app/public/map16img1.jpg">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/storage/app/public/map3.jpg" />
+    <entry file="file://$PROJECT_DIR$/storage/app/public/map2.jpg" />
+    <entry file="file://$PROJECT_DIR$/storage/app/public/map.png" />
+    <entry file="file://$PROJECT_DIR$/storage/app/public/map1.jpg" />
+    <entry file="file://$PROJECT_DIR$/resources/views/billboard/billboards-list.blade - Copy.php">
+>>>>>>> 88971bff6fa21d20919cd24a266eb8c14b042830
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="340">
           <caret line="36" column="24" lean-forward="false" selection-start-line="36" selection-start-column="24" selection-end-line="36" selection-end-column="24" />
@@ -5246,8 +5379,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/PDFController.php">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="396">
           <caret line="51" column="58" lean-forward="false" selection-start-line="51" selection-start-column="58" selection-end-line="51" selection-end-column="58" />
+=======
+        <state relative-caret-position="282">
+          <caret line="77" column="38" lean-forward="false" selection-start-line="77" selection-start-column="38" selection-end-line="77" selection-end-column="38" />
+          <folding />
+>>>>>>> 88971bff6fa21d20919cd24a266eb8c14b042830
         </state>
       </provider>
     </entry>
@@ -5267,8 +5406,32 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Requests/ProposalSettingsFormRequest.php">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="139">
           <caret line="16" column="39" lean-forward="false" selection-start-line="16" selection-start-column="39" selection-end-line="16" selection-end-column="39" />
+=======
+        <state relative-caret-position="246">
+          <caret line="199" column="18" lean-forward="false" selection-start-line="199" selection-start-column="18" selection-end-line="206" selection-end-column="33" />
+          <folding>
+            <element signature="e#9582#9607#0#HTML" expanded="true" />
+            <element signature="e#9661#9684#0#HTML" expanded="true" />
+            <element signature="e#9820#9843#0#HTML" expanded="true" />
+            <marker date="1504014045339" expanded="true" signature="8867:8896" ph="..." />
+            <marker date="1504014045339" expanded="true" signature="9022:9049" ph="..." />
+            <marker date="1504014045339" expanded="true" signature="14175:14380" ph="..." />
+            <marker date="1504014045339" expanded="true" signature="14187:14378" ph="..." />
+            <marker date="1504014045339" expanded="true" signature="15935:16134" ph="..." />
+            <marker date="1504014045339" expanded="true" signature="20692:20886" ph="..." />
+          </folding>
+>>>>>>> 88971bff6fa21d20919cd24a266eb8c14b042830
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="100">
+          <caret line="5" column="18" lean-forward="false" selection-start-line="5" selection-start-column="18" selection-end-line="5" selection-end-column="18" />
+          <folding />
         </state>
       </provider>
     </entry>
