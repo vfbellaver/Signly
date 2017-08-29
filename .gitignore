@@ -1,7 +1,6 @@
-.idea/**
+
 .env
-vendor/
-vendor1/
+vendor
 node_modules
 .phpstorm.meta.php
 _ide_helper.php
