@@ -46,6 +46,7 @@ class PDFController extends Controller
                'billboard_faces.id','=','proposal_billboard.billboard_face_id')
            //billboard_image
            ->where('clients.id','=',$id)->get();
+
        return $details;
     }
 

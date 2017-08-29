@@ -14,10 +14,10 @@ class ProposalSettingsFormRequest extends FormRequest
     {
         return [
             'website' => 'required',
-            'path_image' => 'required',
             'user_street' => 'required',
             'user_city' => 'required',
             'user_state' => 'required',
+            'user_phone' => 'required',
             'user_zipcode' => 'required'
         ];
     }

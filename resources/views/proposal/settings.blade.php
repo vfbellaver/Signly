@@ -1,11 +1,19 @@
 
 @extends('app')
 @section('content')
+
     <div class="container">
         <div class="row">
             <div class="panel panel-default">
                 <div class="panel-heading">Settings</div>
                 <div class="panel-body">
+                    @if(count($errors->all()) > 0)
+                        <ul>
+                            @foreach($errors->all() as $error)
+                                <li>{{$error}}</li>
+                            @endforeach
+                        </ul>
+                    @endif
                         <form class="form-horizontal" method="POST" action="{{route('setthings')}}" enctype="multipart/form-data">
                             {{csrf_field()}}
                             {{method_field('POST')}}
@@ -37,19 +45,19 @@
                             <div class="col-lg-8">
 
                                 <h3>Personal Configurations</h3>
+                                <h3>{{'Email: '. Auth::user()->email }}</h3>
                                 <hr>
                                 <div class="form-group">
-                                    <!-- Email -->
+                                    <!-- Phone -->
                                     <div class="col-lg-1">
-                                        <label class="control-label"><strong>Email</strong></label>
+                                        <label class="control-label"><strong>Phone</strong></label>
                                     </div>
                                     <div class="col-lg-5">
-                                        <h4>{{ Auth::user()->email }}</h4>
                                         <input name="email" type="hidden" value="{{ Auth::user()->email }}" class="form-control">
-
+                                        <input name="user_phone" type="text" value="{{@$settings->user_phone}}" class="form-control" onkeyup="Masks.tel(this)">
                                         <div class="help-block">
-                                            @if ($errors->has('email'))
-                                                {{$errors->first('email')}}
+                                            @if ($errors->has('user_phone'))
+                                                {{$errors->first('user_phone')}}
                                             @endif
                                         </div>
 

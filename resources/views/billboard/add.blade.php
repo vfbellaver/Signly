@@ -96,7 +96,7 @@
 							<div class="form-group">
 								<label class="col-md-6 control-label">Billboard Image</label>
 								<div class="col-md-6">
-									<input type="file"  name="billboard_image" value="{{ old('billboard_image') }}">
+									<input type="file"  name="image" value="{{ old('billboard_image') }}">
 								</div>
 							</div>
 						</div>

@@ -106,7 +106,7 @@ Route::get('/proposals/book/{id}', 'ProposalController@bookProposal');
 Route::post('/logo-proposal', ['as' => 'setthings', 'uses' => 'ProposalSettingsController@settings']);
 
 // PDF
-Route::get('my_pdf','PDFController@index');
+Route::get('pdf',['as' => 'pdf', 'uses' => 'PDFController@index']);
 
 
 

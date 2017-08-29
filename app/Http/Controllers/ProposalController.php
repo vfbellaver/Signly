@@ -159,6 +159,7 @@ class ProposalController extends Controller {
 		            'client_id' => $request->input('client_id'),
 		            'start_date' => $request->input('start_date'),
 		            'end_date' => $request->input('end_date'),
+		            'instance_id' => $request->input('instance_id'),
 		            'hash' => md5($request->input('name').time()),
 		            'user_id' => $this->user->id
 		    	  )
