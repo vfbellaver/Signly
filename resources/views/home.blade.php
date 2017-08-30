@@ -148,8 +148,8 @@
 
 
             <?php
-            $cpm_total += ($active_proposal_billboard->monthly_price * $months_between) / (($active_proposal_billboard->monthly_impressions * $days_between) / 1000);
-            $impressions_total += $active_proposal_billboard->monthly_impressions;
+//            $cpm_total += ($active_proposal_billboard->monthly_price * $months_between) / (($active_proposal_billboard->monthly_impressions * $days_between) / 1000);
+//            $impressions_total += $active_proposal_billboard->monthly_impressions;
             $quoted_cost += $active_proposal_billboard->monthly_price;
             $overall_cost += $active_proposal_billboard->monthly_price * $months_between;
             $final_savings += $cpm_total;

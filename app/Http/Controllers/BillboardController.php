@@ -43,8 +43,15 @@ class BillboardController extends Controller {
      */
     public function index()
     {
-        $billboards = DB::table('billboard')->where('instance_id',$this->user->instance_id)->paginate(7);
-        return view('billboard.billboards',array('billboards' => $billboards ) );
+        $billboards = DB::table('billboard')
+                ->join('billboard_faces', 'billboard_faces.billboard_id','=','billboard.id')
+                ->select(
+                    'billboard.*',
+                    'billboard_faces.monthly_impressions as monthly_impressions')
+                ->where('billboard.instance_id',$this->user->instance_id)->paginate(7);
+        //$billboards = DB::table('billboard')->where('instance_id',$this->user->instance_id)->get();
+
+        return view('billboard.billboards',array('billboards' => $billboards ));
     }
     public function billboardlist()
     {
@@ -276,16 +283,22 @@ class BillboardController extends Controller {
 
         return response()->json($events);
     }
+
+
     public function facesJson($id)
     {
         $billboard_faces = DB::table('billboard_faces')->where('billboard_id',$id)->get();
         return response()->json($billboard_faces);
     }
+
+
     public function faceJson($id)
     {
         $billboard_face = DB::table('billboard_faces')->where('id',$id)->first();
         return response()->json($billboard_face);
     }
+
+
     public function tooltip($id)
     {
         $billboard = DB::table('billboard')->where('id',$id)->first();
@@ -294,45 +307,36 @@ class BillboardController extends Controller {
             '<p>'.$billboard->description.'</p>';
         return $data_text;
     }
+
+
     public function get($id)
     {
         $storagePath  = Storage::disk('local')->getDriver()->getAdapter()->getPathPrefix();
         $billboard = DB::table('billboard')->where('id',$id )->first();
+        $owner = DB::table('owners')->where('id',$billboard->owner_id)->first();
         $owners = DB::table('owners')->where('instance_id',$this->user->instance_id)->get();
         $billboard_faces = DB::table('billboard_faces')->where('billboard_id',$id )->get();
-        return view('billboard.get',array('billboard' => $billboard , 'billboard_faces' => $billboard_faces, 'storage_path' => $storagePath, 'owners' => $owners) );
+        return view('billboard.get',array('billboard' => $billboard , 'billboard_faces' => $billboard_faces, 'storage_path' => $storagePath, 'owner' => $owner, 'owners' => $owners) );
     }
+
+
     public function add(){
         $owners = DB::table('owners')->where('instance_id',$this->user->instance_id)->get();
         return view('billboard.add', array('owners' => $owners));
     }
+
+
     public function store(BillboardFormRequest $request){
-
-        $file = $request->file('billboard_image');
-
-        $idimg = DB::table('billboard_image')->insertGetId(
-            array(
-                'image_name' => $file->getClientOriginalName()
-            )
-        );
-
-        $path = storage_path('app/public/billboards_image/').$idimg;
-        File::makeDirectory($path,0777,true);
-        $file->move($path,$file->getClientOriginalName());
-
-        DB::table('billboard_image')->where('id',$idimg)->update(['image_location' => $path]);
 
         $id = DB::table('billboard')->insertGetId(
             array(
                 'owner_id' => $request->input('billboard_owner'),
                 'name' => $request->input('name'),
                 'address' => $request->input('address'),
-                'billboard_image_id' => $idimg,
                 'digital_driveby' => $request->input('digital_driveby'),
                 'lat' => $request->input('lat'),
                 'lng' => $request->input('long'),
                 'hard_cost' => $request->input('hard_cost'),
-                'monthly_impressions' => $request->input('monthly_impressions'),
                 'instance_id' => $this->user->instance_id,
                 'created_at' => date('Y-m-d')
             )
@@ -344,6 +348,8 @@ class BillboardController extends Controller {
         }
 
     }
+
+
     public function addbillboardface(BillboardFaceFormRequest $request,$id){
         $destinationPath = '';
         $extension = '';
@@ -379,7 +385,8 @@ class BillboardController extends Controller {
                 'notes' => $request->input('notes'),
                 'max_ads' => $request->input('max_ads'),
                 'duration' => $request->input('duration'),
-                'photo' => $fileName
+                'photo' => $fileName,
+                'instance_id' => $this->user->instance_id
             )
         );
         if ($id > 0){
@@ -388,6 +395,8 @@ class BillboardController extends Controller {
             $request::flash('Error encountered');
         }
     }
+
+
     public function updatebillboardface(BillboardFaceFormRequest $request,$id){
         $destinationPath = '';
         $extension = '';
@@ -674,9 +683,38 @@ class BillboardController extends Controller {
         $delete_id = DB::table('billboard_faces')->where('billboard_id',$id)->delete();
         return redirect('/billboards');
     }
+
+
     function deleteBooking($id){
         $delete_id = DB::table('client_booking')->where('id',$id)->delete();
         return redirect('/billboard-booking');
+    }
+
+    function editBillboard($id){
+        $billboard = DB::table('billboard')->where('id',$id )->first();
+        $owner = DB::table('owners')->where('id',$billboard->owner_id)->first();
+        $owners = DB::table('owners')->where('instance_id',$this->user->instance_id)->get();
+        return view('billboard.upload',array('billboard' => $billboard , 'owner' => $owner, 'owners' => $owners) );
+    }
+
+    function updateBillboard(BillboardFormRequest $request,$id){
+
+        DB::table('billboard')
+            ->where('id',$id)
+            ->update(
+            [
+                'owner_id' => $request->input('billboard_owner'),
+                'name' => $request->input('name'),
+                'address' => $request->input('address'),
+                'digital_driveby' => $request->input('digital_driveby'),
+                'lat' => $request->input('lat'),
+                'lng' => $request->input('long'),
+                'hard_cost' => $request->input('hard_cost'),
+                'instance_id' => $this->user->instance_id,
+                'updated_at' => date('Y-m-d')
+            ]
+        );
+            return redirect('/billboards/'.$id);
     }
 
 }

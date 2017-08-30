@@ -22,81 +22,58 @@
     @endif
 
     <div class="panel panel-default">
-        <div class="panel-heading">Add New Billboard</div>
+        <div class="panel-heading">Billboard Face</div>
         <div class="panel-body">
-            
-            {!! Form::open(array('route' => 'postbillboard', 'method'=> 'POST', 'id'=>'frm_new_billboard', 'name' => 'frm_new_billboard', 'class' => 'form-horizontal', 'role' => 'form' )) !!}
+
+            <form class="form-horizontal">
 
             <input type="hidden" id="main-digital-driveby" name="digital_driveby" value="">
 
             <div class="row">
 
                 <div class="col-md-6">
+                    <div class="panel text-center"><label><h4>Bilboard Information</h4></label></div>
+
                     <div class="form-group">
-                        <div class="form-group">
-                            <label class="col-md-6 control-label">Billboard Owner *</label>
-                            <div class="col-md-6">
-                                <select class="form-control" name="billboard_owner">
-                                    <option value=""> --- </option>
-                                    @foreach($owners as $owner)
-                                        <option value="{{ $owner->id }}">{{ $owner->company }} ({{ $owner->first_name.' '.$owner->last_name }})</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="form-group">
-                            <label class="col-md-6 control-label">Name this Billboard *</label>
-                            <div class="col-md-6">
-                                <input type="text" class="form-control" name="name" value="{{ $billboard->name }}">
-                            </div>
-                        </div>
+                        <label class="col-md-4 control-label"><b>Billboard Owner :</b></label>
+                        <label class="control-label">
+                                {{ $owner->company }} ({{ $owner->first_name.' '.$owner->last_name }})
+                        </label>
                     </div>
 
                     <div class="form-group">
-                        <div class="form-group">
-                            <label class="col-md-6 control-label">Address</label>
-                            <div class="col-md-6">
-                                <input type="text" id="billboard_address" class="form-control" name="address" value="{{ $billboard->address }}">
-                            </div>
-                        </div>
+                        <label class="col-md-4 control-label"><b>Name this Billboard :</b></label>
+                        <label class="control-label">
+                            {{ $billboard->name }}
+                        </label>
                     </div>
 
                     <div class="form-group">
-                        <div class="form-group">
-                            <label class="col-md-6 control-label">Lat</label>
-                            <div class="col-md-6">
-                                <input type="text" id="lat" class="form-control" name="lat" value="{{ $billboard->lat }}" readonly="readonly">
-                            </div>
-                        </div>
+                        <label class="col-md-4 control-label"><b>Address :</b></label>
+                        <label class="control-label">
+                            {{ $billboard->address }}
+                        </label>
                     </div>
 
                     <div class="form-group">
-                        <div class="form-group">
-                            <label class="col-md-6 control-label">Long</label>
-                            <div class="col-md-6">
-                                <input type="text" id="long" class="form-control" name="long" value="{{ $billboard->lng }}" readonly="readonly">
-                            </div>
-                        </div>
+                        <label class="col-md-4 control-label"><b>Lat :</b></label>
+                        <label class="control-label">
+                            {{ $billboard->lat }}
+                        </label>
                     </div>
 
                     <div class="form-group">
-                        <div class="form-group">
-                            <label class="col-md-6 control-label">Rate Card</label>
-                            <div class="col-md-6">
-                                <input type="text" class="form-control" id="main-hard-cost" name="hard_cost" value="{{ $billboard->hard_cost }}">
-                            </div>
-                        </div>
+                        <label class="col-md-4 control-label"><b>Long :</b></label>
+                        <label class="control-label">
+                            {{ $billboard->lng }}
+                        </label>
                     </div>
 
                     <div class="form-group">
-                        <div class="form-group">
-                            <label class="col-md-6 control-label">Monthly Impressions</label>
-                            <div class="col-md-6">
-                                <input type="text" class="form-control" id="main-monthly-impressions" name="monthly_impressions" value="{{ $billboard->monthly_impressions }}">
-                            </div>
-                        </div>
+                        <label class="col-md-4 control-label"><b>Rate Card :</b></label>
+                        <label class="control-label">
+                            {{ $billboard->hard_cost }}
+                        </label>
                     </div>
 
                     <!-- <div class="form-group">
@@ -107,99 +84,94 @@
                             </div>
                         </div>
                     </div> -->
-                    
-                    <a href="#" data-toggle="modal" data-target="#myModal">Add a Face (You must have at least one)</a>
-
-                    <div>
-                        <ul class="nav nav-tabs" role="tablist">
-                            <?php $first_tab = 1; ?>
-                            @foreach($billboard_faces as $billboard_face)
-                                <li class="@if($first_tab) {{ 'active' }} @endif"><a href="#face_{{ $billboard_face->label }}" role="tab" data-toggle="tab" >{{ $billboard_face->label }}</a></li>
-                                <?php $first_tab = 0; ?>
-                            @endforeach
-                        </ul>
-
-                        <div id="my-tab-content" class="tab-content">
-                            <?php $first_tab = 1; ?>
-                            @foreach($billboard_faces as $billboard_face)
-                                <div class="tab-pane @if($first_tab) {{ 'active' }} @endif" id="face_{{ $billboard_face->label }}" >
-                                    <div class="form-group">
-                                        <div class="col-md-3" style="margin-top:10px;">
-                                            <a class="btn btn-default" href="#" data-toggle="modal" data-target="#dlgEditBillboardFace" data-id="{{ $billboard_face->id }}">Edit Billboard Face</a>
-                                        </div>
-                                    </div>
-                                    
-                                    <table class="table">
-                                        @if ($billboard_face->photo != '')
-                                        <tr>
-                                            <td>Photo</td>
-                                            <td><img src="{{ URL::to('/images/billboard/'.$billboard_face->photo) }}" height="100"></td>
-                                        </tr>
-                                        @endif
-                                        <tr>
-                                            <td>Height</td>
-                                            <td>
-                                                {{$billboard_face->height}}<!-- <input tyid="text" class="form-control" id="height{{ $billboard_face->id }}" name="hard_cost" value="{{$billboard_face->height}}"> -->
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Width</td>
-                                            <td>{{$billboard_face->width}}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Reads</td>
-                                            <td>{{$billboard_face->reads}}</td>
-                                        </tr>
-                                        
-                                        <tr>
-                                            <td>Illuminated</td>
-                                            <td>{{$billboard_face->reads}}</td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>Type</td>
-                                            <td>{{$billboard_face->sign_type}}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Rate Card</td>
-                                            <td>{{$billboard_face->hard_cost}}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Monthly Impressions</td>
-                                            <td>{{$billboard_face->monthly_impressions}}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Notes</td>
-                                            <td>{{$billboard_face->notes}}</td>
-                                        </tr>
-
-                                    </table>
-                                </div>
-                                <?php $first_tab = 0; ?>
-                            @endforeach
-                        </div>
-
+                    <div class="form-group col-md-12">
+                    <div class="col-md-4">
+                    <a href="{{route('editBillboard',$billboard->id)}}" class="btn btn-primary pull-right">Edit Billboard</a>
                     </div>
-
+                    <div class="col-md-8">
+                    <a href="#" data-toggle="modal" data-target="#myModal"><button class=" btn btn-primary pull-right">Add a Face (You must have at least one)</button></a>
+                    </div>
+                    </div>
                 </div>
 
                 <div class="col-md-6">
                     <div id="map_canvas" class="small-map"></div>
                     <div class="well well-sm" id="geocode_message"></div>
-                    
+
+                </div>
+
+            </div>
+            <div class="col-md-12">
+                <div>
+                    <ul class="nav nav-tabs" role="tablist">
+                        <?php $first_tab = 1; ?>
+                        @foreach($billboard_faces as $billboard_face)
+                            <li class="@if($first_tab) {{ 'active' }} @endif"><a href="#face_{{ $billboard_face->label }}" role="tab" data-toggle="tab" >{{ $billboard_face->label }}</a></li>
+                            <?php $first_tab = 0; ?>
+                        @endforeach
+                    </ul>
+
+                    <div id="my-tab-content" class="tab-content">
+                        <?php $first_tab = 1; ?>
+                        @foreach($billboard_faces as $billboard_face)
+                            <div class="tab-pane @if($first_tab) {{ 'active' }} @endif" id="face_{{ $billboard_face->label }}" >
+                                <div class="form-group">
+                                    <div class="col-md-3" style="margin-top:10px;">
+                                        <a class="btn btn-default" href="#" data-toggle="modal" data-target="#dlgEditBillboardFace" data-id="{{ $billboard_face->id }}">Edit Billboard Face</a>
+                                    </div>
+                                </div>
+
+                                <table class="table">
+                                    @if ($billboard_face->photo != '')
+                                        <tr>
+                                            <td>Photo</td>
+                                            <td><img src="{{ URL::to('/images/billboard/'.$billboard_face->photo) }}" height="100"></td>
+                                        </tr>
+                                    @endif
+                                    <tr bgcolor="#CACACA">
+                                        <td>Height</td>
+                                        <td>Width</td>
+                                        <td>Reads</td>
+                                        <td>Illuminated</td>
+                                        <td>Type</td>
+                                        <td>Rate Card</td>
+                                        <td>Monthly Impressions</td>
+                                        <td>Notes</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                        {{$billboard_face->height}}<!-- <input tyid="text" class="form-control" id="height{{ $billboard_face->id }}" name="hard_cost" value="{{$billboard_face->height}}"> -->
+                                        </td>
+                                        <td>{{$billboard_face->width}}</td>
+                                        <td>{{$billboard_face->reads}}</td>
+                                        <td>{{$billboard_face->reads}}</td>
+                                        <td>{{$billboard_face->sign_type}}</td>
+                                        <td>{{$billboard_face->hard_cost}}</td>
+                                        <td>{{$billboard_face->monthly_impressions}}</td>
+                                        <td width="400px" class="text-justify">{{$billboard_face->notes}}</td>
+                                    </tr>
+
+
+
+                                </table>
+                            </div>
+                            <?php $first_tab = 0; ?>
+                        @endforeach
+                    </div>
+
                 </div>
 
             </div>
 
-            
              <div class="form-group">
-                    <div>
-                        <button type="submit" role="submit" class="btn btn-primary center-block">Save Billboard Data</button>
+                    <div class="text-center">
+                        <a href="{{url('/')}}" class="btn btn-primary">
+                        Return Dashboard
+                        </a>
                     </div>
             </div>
-            
 
-            {!! Form::close() !!}
+            </form>
 
         </div>
     </div>
@@ -213,11 +185,11 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Add A New Billboard Face</h4>
+        <h4 class="modal-title" id="myModalLabel">Add a New Billboard Face</h4>
       </div>
       {!! Form::open(array('route' => array('postbillboardface',$billboard->id ), 'method'=> 'POST', 'id'=>'frm_new_billboardface', 'name' => 'frm_new_billboardface', 'role' => 'form', 'files' => true )) !!}
       <div class="modal-body">
-        
+
         @if(count($errors->all()) > 0)
             <p class="alert alert-danger">
         @endif
@@ -250,7 +222,7 @@
                     <div class="col-md-4">
                         <input type="text" class="form-control" name="width">
                         <span>width</span>
-                    </div>        
+                    </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-md-3 control-label" ><strong>Reads</strong></label>
@@ -259,16 +231,16 @@
                     </div>
                     <div class="col-md-4">
                         <input type="radio" name="reads" value="cross"> Cross
-                    </div>        
+                    </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-md-3 control-label"><strong>Label *</strong></label>
                     <div class="col-md-5">
                         <input type="radio" name="label" value="north"> North <br/>
-                        <input type="radio" name="label" value="east"> East <br/>   
+                        <input type="radio" name="label" value="east"> East <br/>
                         <input type="radio" name="label" value="south"> South <br/>
                         <input type="radio" name="label" value="west"> West <br/>
-                        <input type="radio" name="label"> 
+                        <input type="radio" name="label">
                         <input type="text" placeholder="custom">
                     </div>
                 </div>
@@ -277,7 +249,7 @@
                     <div>
                         <!-- <form action="upload.php" method="post" enctype="multipart/form-data">
                             <input type="file" name="fileToUploid" id="fileToUpload">
-                        </form>   -->               
+                        </form>   -->
                         {!! Form::file('image') !!}
                     </div>
                     <div>
@@ -288,7 +260,7 @@
                     <label><strong>Digital Driveby</strong></label>
                     <!-- <div>
                         <input type="checkbox" name="use-main-driveby" value="1"> Use Main Billboard Driveby
-                    </div> 
+                    </div>
                     <div>
                         <input type="text" class="form-contrid" id="face-digital-driveby" name="digital_driveby">
                     </div>
@@ -300,9 +272,9 @@
             <div class="col-md-6">
 
                <div class="form-group row">
-                    <label class="col-md-5 control-label" ><strong>Illuminated? *</strong></label>  
+                    <label class="col-md-5 control-label" ><strong>Illuminated? *</strong></label>
                     <div class="col-md-1">
-                        <input type="checkbox" name="illuminated" value="1"> 
+                        <input type="checkbox" name="illuminated" value="1">
                     </div>
                 </div>
 
@@ -314,7 +286,7 @@
                     <label class="col-md-2 control-label" ><strong>To</strong></label>
                     <div class="col-md-4">
                         <input type="text" class="form-control" name="illuminated_to">
-                    </div>        
+                    </div>
 
                 </div>
 
@@ -325,13 +297,13 @@
                     </div>
                     <div class="col-md-4">
                         <input type="radio" name="sign_type" value="digital" > Digital
-                    </div>        
+                    </div>
                 </div>
 
                 <div id="digital-info" style="display:none;">
                     <label class="control-label" ><strong>Rotation Information</strong></label>
                     <div class="form-group row">
-                        
+
                         <div class="col-md-4">
                             <input type="text" class="form-control" name="max_ads">
                             <span>Max # of ads</span>
@@ -342,7 +314,7 @@
                         <div class="col-md-4">
                             <input type="text" class="form-control" name="duration">
                             <span>seconds</span>
-                        </div>        
+                        </div>
                     </div>
                 </div>
 
@@ -375,9 +347,9 @@
                 </div>
             </div>
         </div>
-        
+
       </div>
-      
+
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         <input type="button" class="btn btn-primary" onclick="$('#frm_new_billboardface').submit();" value="Add Face">

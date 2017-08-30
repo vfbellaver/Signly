@@ -83,6 +83,8 @@ Route::post('/billboards/daypilotevents/json', 'BillboardController@jsonDaypilot
 Route::post('/billboards/search', 'BillboardController@searchBillboard');
 
 Route::get('/billboards/{id}', ['uses' => 'BillboardController@get', function($id){}])->where('id', '[0-9]+');
+Route::get('/billboards/{id}/edit',['as' => 'editBillboard', 'uses' => 'BillboardController@editBillboard']);
+Route::post('/billboards/update/{id}',['as' => 'uploadbillboard', 'uses' => 'BillboardController@updateBillboard']);
 Route::get('/add-billboard', 'BillboardController@add');
 Route::post('/post-billboard', ['as' => 'postbillboard', 'uses' => 'BillboardController@store']);
 Route::post('/post-book-billboard', ['as' => 'postbookbillboard', 'uses' => 'BillboardController@book']);
