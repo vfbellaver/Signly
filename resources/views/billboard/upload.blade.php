@@ -108,7 +108,7 @@
 					</div> -->
 						<div class="col-md-12">
 							<div class="row text-center">
-								<button type="submit" role="submit" class="btn-primary pull-right">Upload Billboard and open Billboard Faces</button>
+								<button type="submit" role="submit" class=" btn btn-primary pull-right">Upload Billboard and open Billboard Faces</button>
 							</div>
 						</div>
 					</div>
@@ -120,9 +120,6 @@
 					</div>
 				</div>
 				<!-- Finish of billboard information -->
-
-
-
 
 				</form>
 
