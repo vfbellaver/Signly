@@ -14,7 +14,7 @@ use URL;
 use Session;
 use Maatwebsite\Excel\Facades\Excel;
 use Auth;
-class BillboardController extends Controller {
+class BillboardFacesController extends Controller {
     private $user;
     /*
     |--------------------------------------------------------------------------
@@ -351,12 +351,13 @@ class BillboardController extends Controller {
 
 
     public function addbillboardface(BillboardFaceFormRequest $request,$id){
-
+        $destinationPath = '';
+        $extension = '';
+        $fileName = '';
         $storagePath  = Storage::disk('local')->getDriver()->getAdapter()->getPathPrefix();
-
         // checking file is valid.
         if ($request->file('image')->isValid()) {
-            $destinationPath = $storagePath.'/billboard_images/'.$id; // upload path
+            $destinationPath = $storagePath.'/images'; // upload path
             $extension = $request->file('image')->getClientOriginalExtension(); // getting image extension
             $fileName = md5(time()).'.'.$extension; // renameing image
             $request->file('image')->move($destinationPath, $fileName); // uploading file to given path
@@ -397,27 +398,19 @@ class BillboardController extends Controller {
 
 
     public function updatebillboardface(BillboardFaceFormRequest $request,$id){
+        $destinationPath = '';
+        $extension = '';
         $fileName = '';
         $storagePath  = Storage::disk('local')->getDriver()->getAdapter()->getPathPrefix();
-        // checking existing image.
-        $file = $request->file('image');
-        $billboardface = DB::table('billboard_faces')
-            ->where('id',$request->input('billboard_face_id'))->first();
-
-
-        $destinationPath = $storagePath.'/billboard_images/'.$id; // upload path
-        File::delete($destinationPath.DIRECTORY_SEPARATOR.$billboardface->photo);
-        if($file != null){
-            if ($file->isValid()) {
-                return 'teste 123';
-                $destinationPath = $storagePath.'/billboard_images/'.$id; // upload path
+        // checking file is valid.
+        if($request->has('image')){
+            if ($request->file('image')->isValid()) {
+                $destinationPath = $storagePath.'/images'; // upload path
                 $extension = $request->file('image')->getClientOriginalExtension(); // getting image extension
                 $fileName = md5(time()).'.'.$extension; // renameing image
                 $request->file('image')->move($destinationPath, $fileName); // uploading file to given path
             }
         }
-
-        dd('to aqui');
 
         $sign_type = 0;
         if($request->has('sign_type')){
@@ -427,8 +420,7 @@ class BillboardController extends Controller {
                 $sign_type = 1;
             }
         }
-        if($fileName){
-
+        if($fileName != ''){
             $id = DB::table('billboard_faces')
                 ->where('id',$request->input('billboard_face_id'))
                 ->update(
@@ -450,7 +442,6 @@ class BillboardController extends Controller {
                     ]
                 );
         } else {
-
             $id = DB::table('billboard_faces')
                 ->where('id',$request->input('billboard_face_id'))
                 ->update(
@@ -603,7 +594,7 @@ class BillboardController extends Controller {
 
         return response()->json(array_merge($billboards,$billboard_faces));
     }
-
+ 
     function saveUploadBillbaord(BillboardUploadRequest $request){
         $storagePath  = Storage::disk('local')->getDriver()->getAdapter()->getPathPrefix();
         // checking file is valid.

@@ -73,25 +73,27 @@ Route::get('/billboards', 'BillboardController@index');
 Route::get('/billboard-booking', 'BillboardController@billboardlist');
 Route::get('/billboard-booking-vendor', 'BillboardController@billboardlistbyvendor');
 Route::post('/billboard-booking/delete/{id}',array('uses' => 'BillboardController@deleteBooking', 'as' => 'deletebillboardbooking'));
-
 Route::get('/billboards/json', 'BillboardController@json');
 Route::get('/billboards/jsonhash/{hash}', 'BillboardController@jsonHash');
-Route::get('/billboard-faces/json/{id}', 'BillboardController@facesJson');
-Route::get('/billboard-face/json/{id}', 'BillboardController@faceJson');
 Route::get('/billboards/daypilot/json', 'BillboardController@jsonDaypilot');
 Route::post('/billboards/daypilotevents/json', 'BillboardController@jsonDaypilotEvents');
 Route::post('/billboards/search', 'BillboardController@searchBillboard');
-
-Route::get('/billboards/{id}', ['uses' => 'BillboardController@get', function($id){}])->where('id', '[0-9]+');
 Route::get('/billboards/{id}/edit',['as' => 'editBillboard', 'uses' => 'BillboardController@editBillboard']);
 Route::post('/billboards/update/{id}',['as' => 'uploadbillboard', 'uses' => 'BillboardController@updateBillboard']);
+Route::get('/billboards/{id}', ['uses' => 'BillboardController@get', function($id){}])->where('id', '[0-9]+');
 Route::get('/add-billboard', 'BillboardController@add');
 Route::post('/post-billboard', ['as' => 'postbillboard', 'uses' => 'BillboardController@store']);
+Route::delete('/billboard/delete/{id}',array('uses' => 'BillboardController@destroy', 'as' => 'deletebillboard'));
+Route::get('/billboards/tooltip/{id}', 'BillboardController@tooltip');
+
+//Billboard Faces
+Route::get('/billboard-faces/json/{id}', 'BillboardController@facesJson');
+Route::get('/billboard-face/json/{id}', 'BillboardController@faceJson');
 Route::post('/post-book-billboard', ['as' => 'postbookbillboard', 'uses' => 'BillboardController@book']);
 Route::post('/post-billboard-face/{id}', ['as' => 'postbillboardface', 'uses' => 'BillboardController@addbillboardface']);
 Route::post('/post-billboard-face-update/{id}', ['as' => 'postbillboardfaceupdate', 'uses' => 'BillboardController@updatebillboardface']);
-Route::get('/billboards/tooltip/{id}', 'BillboardController@tooltip');
-Route::delete('/billboard/delete/{id}',array('uses' => 'BillboardController@destroy', 'as' => 'deletebillboard'));
+
+
 
 //Proposal
 Route::get('/add-proposal', 'ProposalController@add');
