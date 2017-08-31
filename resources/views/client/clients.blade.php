@@ -31,8 +31,9 @@
 							<td id="aligntd">{{ $client->phone2 }}</td>
 							<td id="aligntd">{{ $client->fax }}</td>
 							<td id="aligntd">
-								{!! Form::open(['method' => 'DELETE', 'route' => ['deleteclient', $client->id],'class'=>'frmDeleteClient']) !!}
-								{!! Form::button('Delete', ['class' => 'btn btn-danger btnDeleteClient']) !!}
+								{!! Form::open(array('method' => 'POST', 'route' => array('deleteclient', $client->id),'class'=>'frmDeleteClient')) !!}
+								    <input type="hidden" value="DELETE">
+                                {!! Form::button('Delete', array('class' => 'btn btn-danger btnDeleteClient', 'type'=>'submit')) !!}
 								{!! Form::close() !!}
 							</td>
 						</tr>

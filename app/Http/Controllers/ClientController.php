@@ -43,7 +43,7 @@ class ClientController extends Controller {
     public function index()
     {
         $user = Auth::user();
-        $clients = DB::table('clients')->where('instance_id',$user->instance_id)->paginate(10);
+        $clients = DB::table('clients')->where('instance_id',$user->instance_id)->where('deleted',0)->paginate(10);
 
         return view('client.clients',array('clients' => $clients ) );
     }
@@ -59,9 +59,6 @@ class ClientController extends Controller {
     }
 
     public function store(ClientFormRequest $request){
-
-        //DB::insert('insert into users (id, name) values (?, ?)', [1, 'Dayle']);
-
 
         $user = Auth::user();
         $id = DB::table('clients')->insertGetId(

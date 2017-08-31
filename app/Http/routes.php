@@ -80,7 +80,7 @@ Route::post('/billboards/daypilotevents/json', 'BillboardController@jsonDaypilot
 Route::post('/billboards/search', 'BillboardController@searchBillboard');
 Route::get('/billboards/{id}/edit',['as' => 'editBillboard', 'uses' => 'BillboardController@editBillboard']);
 Route::post('/billboards/update/{id}',['as' => 'uploadbillboard', 'uses' => 'BillboardController@updateBillboard']);
-Route::get('/billboards/{id}', ['uses' => 'BillboardController@get', function($id){}])->where('id', '[0-9]+');
+Route::get('/billboards/{id}', ['uses' => 'BillboardController@getBillboard', function($id){}])->where('id', '[0-9]+');
 Route::get('/add-billboard', 'BillboardController@add');
 Route::post('/post-billboard', ['as' => 'postbillboard', 'uses' => 'BillboardController@store']);
 Route::delete('/billboard/delete/{id}',array('uses' => 'BillboardController@destroy', 'as' => 'deletebillboard'));
@@ -107,7 +107,7 @@ Route::get('/proposal-signature', 'ProposalController@proposalForm');
 Route::get('/proposals/book/{id}', 'ProposalController@bookProposal');
 
 //Proposal settings
-Route::post('/logo-proposal', ['as' => 'setthings', 'uses' => 'ProposalSettingsController@settings']);
+Route::post('/logo-proposal', ['as' => 'settings', 'uses' => 'ProposalSettingsController@updateSettings']);
 
 // PDF
 Route::get('pdf',['as' => 'pdf', 'uses' => 'PDFController@index']);

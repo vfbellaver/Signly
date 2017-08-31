@@ -76,14 +76,6 @@
                                 </label>
                             </div>
 
-                        <!-- <div class="form-group">
-                        <div class="form-group">
-                            <label class="col-md-6 control-label">Digital Driveby</label>
-                            <div class="col-md-6">
-                                <input type="text" class="form-contrid" id="main-digital-driveby" name="digital_driveby" value="{{ $billboard->digital_driveby }}">
-                            </div>
-                        </div>
-                    </div> -->
                             <div class="form-group col-md-12">
                                 <div class="col-md-4">
                                     <a href="{{route('editBillboard',$billboard->id)}}"
@@ -113,7 +105,7 @@
                                 @foreach($billboard_faces as $billboard_face)
                                     <li class="@if($first_tab) {{ 'active' }} @endif"><a
                                                 href="#face_{{ $billboard_face->label }}" role="tab"
-                                                data-toggle="tab">{{ $billboard_face->label }}</a></li>
+                                                data-toggle="tab"><b>{{ $billboard_face->label }}</b></a></li>
                                     <?php $first_tab = 0; ?>
                                 @endforeach
                             </ul>
@@ -134,7 +126,17 @@
                                             </div>
                                         </div>
                                         <div class="col-md-6">
-                                            <div class=" panel-title text-center">Billboard Faces Informations</div>
+                                            <div class=" panel-title">
+                                                    Billboard Faces Informations
+                                               <a class="btn btn-default pull-right" href="#" data-toggle="modal"
+                                                                    data-target="#dlgEditBillboardFace"
+                                                                    data-id="{{ $billboard_face->id }}"
+                                                                    style="margin-top: 0px">
+                                                   Edit Billboard Face
+                                               </a>
+
+                                            </div>
+                                            <br>
                                             <table class="table table-stripped table-hover">
                                                 <tr>
                                                     <td><b>Height</b></td>
@@ -179,6 +181,7 @@
                                                 </tr>
 
 
+
                                             </table>
                                         </div>
 
@@ -192,9 +195,7 @@
                     <div class="col-md-12">
                         <div class="col-md-10"">
                         <div class="form-group">
-                                <a class="btn btn-default pull-right" href="#" data-toggle="modal"
-                                   data-target="#dlgEditBillboardFace"
-                                   data-id="{{ $billboard_face->id }}">Edit Billboard Face</a>
+
                             </div>
                         </div>
                         <div class="form-group">
@@ -239,6 +240,8 @@
 
                     <input type="hidden" name="billboard_id" value="{{ $billboard->id }}">
                     <input type="hidden" id="face-digital-driveby" name="digital_driveby">
+                    <input type="hidden" name="_token" value="{{csrf_token()}}">
+
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
@@ -423,7 +426,7 @@
                     @endif
 
                     <input type="hidden" name="billboard_id" value="{{ $billboard->id }}">
-                    <input type="hidden" id="billboard_face_id" name="billboard_face_id" value="">
+                    <input type="hidden" id="billboard_face_id" name="billboard_face_id" value="{{isset($billboard_face) ? $billboard_face->id : ''}}">
                     <input type="hidden" id="face-digital-driveby" name="digital_driveby">
                     <div class="row">
                         <div class="col-md-6">
