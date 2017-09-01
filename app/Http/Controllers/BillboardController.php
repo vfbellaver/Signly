@@ -367,7 +367,7 @@ class BillboardController extends Controller {
             $extension = $request->file('image')->getClientOriginalExtension(); // getting image extension
             $fileName = md5(time()).'.'.$extension; // renameing image
             $request->file('image')->move($destinationPath, $fileName); // uploading file to given path
-        }
+
         $sign_type = 0;
         if($request->has('sign_type')){
             if($request->input('sign_type') == 'static'){
@@ -376,8 +376,10 @@ class BillboardController extends Controller {
                 $sign_type = 1;
             }
         }
+
         $id = DB::table('billboard_faces')->insertGetId(
             array(
+
                 'billboard_id' => $request->input('billboard_id'),
                 'unique_id' => $request->input('unique_id'),
                 'height' => $request->input('height'),
@@ -398,9 +400,12 @@ class BillboardController extends Controller {
         if ($id > 0){
             return redirect('/billboards/'.$request->input('billboard_id'));
         } else {
+
             $request::flash('Error encountered');
         }
+     }
     }
+
 
 
     public function updatebillboardface(BillboardFaceFormRequest $request,$id)

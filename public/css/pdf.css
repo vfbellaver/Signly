@@ -39,6 +39,10 @@
     background-repeat: no-repeat;
 
 }
+.div_footer {
+    position: absolute;
+    bottom: 92px;
+}
 
 .img_first_page {
     position: relative;
@@ -46,7 +50,12 @@
     margin-left: 25%;
     margin-right: 25%;
 }
+.img_billboard{
+    margin-bottom: 13px;
+    max-height: 60%;
+    max-width: 100%;
 
+}
 .logo_header {
     background-repeat: no-repeat;
 }
@@ -74,6 +83,8 @@
 
 .my_border {
     width: 100%;
+    height: 96%;
+    position: relative;
     padding: 10px;
     border-style: solid;
     border-color: #4879a3;

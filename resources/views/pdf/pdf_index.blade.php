@@ -26,7 +26,7 @@ set_time_limit(120);
                 {{$details[0]->start_date}}<br>
             </h3>
             <!-- footer -->
-            <footer class="col-xs-12 my_float">
+            <footer class="col-xs-12 my_float div_footer">
                 @include('pdf.pdf_footer')
             </footer>
         </div>
@@ -44,7 +44,7 @@ set_time_limit(120);
 
             <div class="my_clear"></div>
 
-            <footer class="col-xs-12 my_float">
+            <footer class="col-xs-12 my_float div_footer">
                 @include('pdf.pdf_footer')
             </footer>
         </div>
@@ -63,7 +63,7 @@ set_time_limit(120);
                 <div class="my_clear"></div>
 
                 <!-- footer -->
-                <footer class="col-xs-12 my_float">
+                <footer class="col-xs-12 my_float div_footer">
                     @include('pdf.pdf_footer')
                 </footer>
             </div>
@@ -82,7 +82,7 @@ set_time_limit(120);
                 <div class="my_clear"></div>
 
                 <!-- footer -->
-                <footer class="col-xs-12 my_float">
+                <footer class="col-xs-12 my_float div_footer">
                     @include('pdf.pdf_footer')
                 </footer>
             </div>

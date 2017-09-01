@@ -16,12 +16,12 @@
     <tbody>
     @foreach($details as $detail)
       <tr>
-          <td>{{$detail->unique_id}}</td>
-          <td>{{$detail->city}}</td>
-          <td>{{$detail->label}}</td>
-          <td>{{$detail->address}}</td>
-          <td>{{$detail->digital_driveby}}</td>
-          <td>{{$detail->rate}}</td>
+          <td>{{@$detail->unique_id}}</td>
+          <td>{{@$detail->city}}</td>
+          <td>{{@$detail->label}}</td>
+          <td>{{@$detail->address}}</td>
+          <td>{{@$detail->digital_driveby}}</td>
+          <td>{{@$detail->rate}}</td>
       </tr>
     @endforeach
     </tbody>
