@@ -1,6 +1,7 @@
 <?php
 $img = 1;
 $i = 1;
+set_time_limit(120);
 ?>
 <html>
 <head>

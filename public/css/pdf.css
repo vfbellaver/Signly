@@ -37,20 +37,18 @@
 
 .img_footer {
     background-repeat: no-repeat;
-    margin-bottom: 10px;
-    width: 80%;
-    margin: auto;
+
 }
 
 .img_first_page {
     position: relative;
-    width: 80%;
-    margin-left: 10%;
-    margin-right: 10%;
+    width: 50%;
+    margin-left: 25%;
+    margin-right: 25%;
 }
 
 .logo_header {
-   height: 80px;
+    background-repeat: no-repeat;
 }
 
 /* box */
