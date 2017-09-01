@@ -83,13 +83,11 @@ class ClientController extends Controller {
 
             $path = storage_path('app/public/clients_logo/').$id;
             File::makeDirectory($path);
-            $img1 = Image::canvas(600, 400, '#ffffff');
             $file = $request->file('logo');
             $array = explode('.',$file->getClientOriginalName());
             $fileName = $array[0].'.jpg';
-            $img = Image::make($file)->resize(350, 240);
-            $img1->insert($img,'center');
-            $img1->save('storage/clients_logo/'.$id.'/'.$fileName);
+            $img = Image::make($file);
+            $img->save('storage/clients_logo/'.$id.'/'.$fileName);
             DB::table('clients')->where('id',$id)->update(['logo' => $fileName]);
 
             return redirect('/clients');

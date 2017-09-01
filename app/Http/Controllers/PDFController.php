@@ -99,6 +99,7 @@ class PDFController extends Controller
     public function index()
     {
         $this->points = $details = $this->details();
+
         $this->getMap();
         $this->getDetailMap();
         $footer = ProposalSettings::where('user_id', Auth::user()->id)->first();

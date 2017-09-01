@@ -14,6 +14,7 @@ class BillboardFormRequest extends FormRequest
             'lat' => 'required',
             'long' => 'required',
             'hard_cost' => 'required',
+
         ];
     }
 

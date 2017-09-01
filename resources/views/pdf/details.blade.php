@@ -14,7 +14,7 @@
              src="{{asset('billboard_images/'.$detail->billboard_id.'/'.$detail->photo)}}">
         <br>
        <p class="text-justify">
-         {{$detail->description}}
+         {{$detail->notes}}
        </p>
     </div>
     <div class="col-xs-6 pull-right">
