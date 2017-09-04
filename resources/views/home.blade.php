@@ -148,8 +148,8 @@
 
 
             <?php
-            $cpm_total += ($active_proposal_billboard->monthly_price * $months_between) / (($active_proposal_billboard->monthly_impressions * $days_between) / 1000);
-            $impressions_total += $active_proposal_billboard->monthly_impressions;
+//            $cpm_total += ($active_proposal_billboard->monthly_price * $months_between) / (($active_proposal_billboard->monthly_impressions * $days_between) / 1000);
+//            $impressions_total += $active_proposal_billboard->monthly_impressions;
             $quoted_cost += $active_proposal_billboard->monthly_price;
             $overall_cost += $active_proposal_billboard->monthly_price * $months_between;
             $final_savings += $cpm_total;
@@ -206,7 +206,7 @@
                                 var ac_proposalId = el.id;
                                 var ac_proposalIndex = $(el).index();
                                 var token = $(el).attr('token');
-
+                                //each drag and drop triggers an ajax request for each item in the table
                               $.ajax({
                                   beforeSend: function(xhr){xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));},
                                   url: '{{url('/')}}/reoder-active-proposal',
@@ -294,9 +294,10 @@
           <input id="proposal_link" style="display:none;" value="@if(isset($active_proposal)) {{URL::to('/').'/clientview/'.$active_proposal->hash}} @endif">
         </div>
         <div style="text-align:right;">
-<div style="text-align:right;">          <a id="copy_link" title="Copy Link" style="cursor:pointer;" class="copy_link btn btn-success">Copy Link</a>
-          <a  id="save_proposal" title="Save Current Proposal" style="cursor:pointer;" class="btn btn-info">Save</a><a  href="{{route('pdf')}}" class="btn btn-primary">Generate Proposal</a>
-
+            <div style="text-align:right;">
+              <a id="copy_link" title="Copy Link" style="cursor:pointer;" class="copy_link btn btn-success">Copy Link</a>
+              <a  id="save_proposal" title="Save Current Proposal" style="cursor:pointer;" class="btn btn-info">Save</a>
+              <a  id="generate_pdf" href="{{route('pdf')}}" class="btn btn-primary">Generate Proposal</a>
             </div>
 
                         </div>

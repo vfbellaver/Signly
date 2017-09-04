@@ -2,7 +2,9 @@
 
 use App\Http\Requests\ClientFormRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
 use Response;
 use View;
 use DB;
@@ -41,7 +43,8 @@ class ClientController extends Controller {
     public function index()
     {
         $user = Auth::user();
-        $clients = DB::table('clients')->where('instance_id',$user->instance_id)->paginate(10);
+        $clients = DB::table('clients')->where('instance_id',$user->instance_id)->where('deleted',0)->paginate(10);
+
         return view('client.clients',array('clients' => $clients ) );
     }
 
@@ -56,9 +59,6 @@ class ClientController extends Controller {
     }
 
     public function store(ClientFormRequest $request){
-
-        //DB::insert('insert into users (id, name) values (?, ?)', [1, 'Dayle']);
-
 
         $user = Auth::user();
         $id = DB::table('clients')->insertGetId(
@@ -80,11 +80,14 @@ class ClientController extends Controller {
 
 
         if ($id > 0){
-            $file = $request->file('logo');
-            $fileName = $file->getClientOriginalName();
-            $path = storage_path('app/public/clients_logo/').$id;
 
-            $file->move($path,$fileName);
+            $path = storage_path('app/public/clients_logo/').$id;
+            File::makeDirectory($path);
+            $file = $request->file('logo');
+            $array = explode('.',$file->getClientOriginalName());
+            $fileName = $array[0].'.jpg';
+            $img = Image::make($file);
+            $img->save('storage/clients_logo/'.$id.'/'.$fileName);
             DB::table('clients')->where('id',$id)->update(['logo' => $fileName]);
 
             return redirect('/clients');

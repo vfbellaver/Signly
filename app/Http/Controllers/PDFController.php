@@ -36,36 +36,17 @@ class PDFController extends Controller
 
     private function details()
     {
-       $detalhes = DB::table('active_proposal_billboards')
-       ->join('proposal','proposal.id', '=', 'active_proposal_billboards.proposal_id')
-       ->join('billboard','billboard.id','=','active_proposal_billboards.billboard_id')
-       ->join('billboard_faces', 'billboard_faces.id', '=' , 'active_proposal_billboards.billboard_face_id')
-       ->join('clients','clients.id','=','proposal.client_id')
-       ->where('active_proposal_billboards.user_id','=',Auth::user()->id)->get();
+        $detalhes = DB::table('active_proposal_billboards')
+            ->join('proposal','proposal.id', '=', 'active_proposal_billboards.proposal_id')
+            ->join('billboard','billboard.id','=','active_proposal_billboards.billboard_id')
+            ->join('billboard_faces', 'billboard_faces.id', '=' , 'active_proposal_billboards.billboard_face_id')
+            ->join('clients','clients.id','=','proposal.client_id')
+            ->where('active_proposal_billboards.user_id','=',Auth::user()->id)
+            ->orderBy('active_proposal_billboards.order_proposal_billboards','asc')->get();
 
-       return $detalhes;
+        return $detalhes;
     }
 
-    private function details1 ($id)
-    {
-        $details = DB::table('proposal')
-            //clients
-            ->join('clients'
-                , 'clients.id', '=', 'proposal.client_id')
-            //proposal_billboard
-            ->join('proposal_billboard'
-                , 'proposal_billboard.proposal_id', '=', 'proposal.id')
-            //billboard
-            ->join('billboard',
-                'billboard.id', '=', 'proposal_billboard.id')
-            //billboard_faces
-            ->join('billboard_faces',
-                'billboard_faces.id', '=', 'proposal_billboard.billboard_face_id')
-            //billboard_image
-            ->where('clients.id', '=', $id)->get();
-
-        return $details;
-    }
 
     public function getDetailMap()
     {
@@ -103,13 +84,13 @@ class PDFController extends Controller
             foreach ($this->points as $p) {
                 $link .= '&markers=color:yellow%7Clabel:S:S%%7C' . $p->lat . ',' . $p->lng;
             }
-                $link .= '&size=500x350&key=AIzaSyAECe-JaASIc4HpIae-cFuFDtyX3K2GI_Q';
+            $link .= '&size=500x350&key=AIzaSyAECe-JaASIc4HpIae-cFuFDtyX3K2GI_Q';
 
-                $this->client = new Client();
+            $this->client = new Client();
 
-                $resource = fopen(storage_path('app/public/'.$img.'map.jpg'), 'w');
-                $stream = stream_for($resource);
-                $this->client->request('GET', $link, ['sink' => storage_path('app/public/'.$img.'map.jpg')]);
+            $resource = fopen(storage_path('app/public/'.$img.'map.jpg'), 'w');
+            $stream = stream_for($resource);
+            $this->client->request('GET', $link, ['sink' => storage_path('app/public/'.$img.'map.jpg')]);
 
             $img++;
         }
@@ -123,7 +104,9 @@ class PDFController extends Controller
         $footer = ProposalSettings::where('user_id', Auth::user()->id)->first();
         $pdf = PDF::loadView('pdf.pdf_index', compact('details', 'footer'));
         $pdf->setPaper('A4', 'landscape');
+
         return $pdf->stream("file.pdf", array("Attachment" => 0));
+        //if you want to view pdf in html interface, comment the pdf return and return the view below
         //return view('pdf.pdf_index',compact('details','footer','img'));
     }
 

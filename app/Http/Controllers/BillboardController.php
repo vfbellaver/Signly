@@ -1,12 +1,11 @@
 <?php namespace App\Http\Controllers;
-use App\BillboardImage;
 use App\Http\Requests\BillboardFormRequest;
 use App\Http\Requests\BillboardFaceFormRequest;
 use App\Http\Requests\EventFormRequest;
 use App\Http\Requests\BillboardBookingFormRequest;
 use App\Http\Requests\SearchBillboardRequest;
 use App\Http\Requests\BillboardUploadRequest;
-use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Facades\File;
 use Response;
 use View;
 use DB;
@@ -44,8 +43,15 @@ class BillboardController extends Controller {
      */
     public function index()
     {
-        $billboards = DB::table('billboard')->where('instance_id',$this->user->instance_id)->paginate(7);
-        return view('billboard.billboards',array('billboards' => $billboards ) );
+        $billboards = DB::table('billboard')
+                ->join('billboard_faces', 'billboard_faces.billboard_id','=','billboard.id')
+                ->select(
+                    'billboard.*',
+                    'billboard_faces.monthly_impressions as monthly_impressions')
+                ->where('billboard.instance_id',$this->user->instance_id)->paginate(7);
+        //$billboards_faces = DB::table('billboard')->where('instance_id',$this->user->instance_id)->get();
+
+        return view('billboard.billboards',array('billboards' => $billboards ));
     }
     public function billboardlist()
     {
@@ -179,6 +185,8 @@ class BillboardController extends Controller {
         }
         return response()->json($billboard_data);
     }
+
+
     public function jsonHash($hash)
     {
         $proposal = DB::table('proposal')->where('hash',$hash)->first();
@@ -196,6 +204,8 @@ class BillboardController extends Controller {
         }
         return response()->json($billboard_data);
     }
+
+
     public function jsonDaypilot()
     {
         $billboards = DB::table('billboard')->select('id','name','billboard_id','address','monthly_impressions')->where('instance_id',$this->user->instance_id)->get();
@@ -223,6 +233,8 @@ class BillboardController extends Controller {
         }
         return response()->json($billboard_data);
     }
+
+
     private function facingConverter($billboard_label){
         switch (strtolower($billboard_label) ) {
             case 'north':
@@ -240,6 +252,7 @@ class BillboardController extends Controller {
 
         }
     }
+
     public function jsonDaypilotEvents(EventFormRequest $request)
     {
         $image_url = URL::to('/images/billboard/');
@@ -277,16 +290,22 @@ class BillboardController extends Controller {
 
         return response()->json($events);
     }
+
+
     public function facesJson($id)
     {
         $billboard_faces = DB::table('billboard_faces')->where('billboard_id',$id)->get();
         return response()->json($billboard_faces);
     }
+
+
     public function faceJson($id)
     {
         $billboard_face = DB::table('billboard_faces')->where('id',$id)->first();
         return response()->json($billboard_face);
     }
+
+
     public function tooltip($id)
     {
         $billboard = DB::table('billboard')->where('id',$id)->first();
@@ -295,34 +314,27 @@ class BillboardController extends Controller {
             '<p>'.$billboard->description.'</p>';
         return $data_text;
     }
-    public function get($id)
+
+
+    public function getBillboard($id)
     {
         $storagePath  = Storage::disk('local')->getDriver()->getAdapter()->getPathPrefix();
         $billboard = DB::table('billboard')->where('id',$id )->first();
+        $owner = DB::table('owners')->where('id',$billboard->owner_id)->first();
         $owners = DB::table('owners')->where('instance_id',$this->user->instance_id)->get();
         $billboard_faces = DB::table('billboard_faces')->where('billboard_id',$id )->get();
-        return view('billboard.get',array('billboard' => $billboard , 'billboard_faces' => $billboard_faces, 'storage_path' => $storagePath, 'owners' => $owners) );
+        return view('billboard.get',array('billboard' => $billboard , 'billboard_faces' => $billboard_faces, 'storage_path' => $storagePath, 'owner' => $owner, 'owners' => $owners) );
     }
+
+
     public function add(){
         $owners = DB::table('owners')->where('instance_id',$this->user->instance_id)->get();
         return view('billboard.add', array('owners' => $owners));
     }
 
-    public function store(BillboardFormRequest $request)
-    {
 
-        $file = $request->file('image');
-        dd($file);
+    public function store(BillboardFormRequest $request){
 
-        if($file){
-            $image = new BillboardImage();
-            $image->image_name = $file->getClientOriginalName();
-            $image->location = "Default";
-            $image->save();
-        }
-
-
-            //DB::insert('insert into users (id, name) values (?, ?)', [1, 'Dayle']);
         $id = DB::table('billboard')->insertGetId(
             array(
                 'owner_id' => $request->input('billboard_owner'),
@@ -332,7 +344,6 @@ class BillboardController extends Controller {
                 'lat' => $request->input('lat'),
                 'lng' => $request->input('long'),
                 'hard_cost' => $request->input('hard_cost'),
-                'monthly_impressions' => $request->input('monthly_impressions'),
                 'instance_id' => $this->user->instance_id,
                 'created_at' => date('Y-m-d')
             )
@@ -344,18 +355,19 @@ class BillboardController extends Controller {
         }
 
     }
+
+
     public function addbillboardface(BillboardFaceFormRequest $request,$id){
-        $destinationPath = '';
-        $extension = '';
-        $fileName = '';
+
         $storagePath  = Storage::disk('local')->getDriver()->getAdapter()->getPathPrefix();
+
         // checking file is valid.
         if ($request->file('image')->isValid()) {
-            $destinationPath = $storagePath.'/images'; // upload path
+            $destinationPath = $storagePath.'/billboard_images/'.$id; // upload path
             $extension = $request->file('image')->getClientOriginalExtension(); // getting image extension
             $fileName = md5(time()).'.'.$extension; // renameing image
             $request->file('image')->move($destinationPath, $fileName); // uploading file to given path
-        }
+
         $sign_type = 0;
         if($request->has('sign_type')){
             if($request->input('sign_type') == 'static'){
@@ -364,8 +376,10 @@ class BillboardController extends Controller {
                 $sign_type = 1;
             }
         }
+
         $id = DB::table('billboard_faces')->insertGetId(
             array(
+
                 'billboard_id' => $request->input('billboard_id'),
                 'unique_id' => $request->input('unique_id'),
                 'height' => $request->input('height'),
@@ -379,86 +393,99 @@ class BillboardController extends Controller {
                 'notes' => $request->input('notes'),
                 'max_ads' => $request->input('max_ads'),
                 'duration' => $request->input('duration'),
-                'photo' => $fileName
+                'photo' => $fileName,
+                'instance_id' => $this->user->instance_id
             )
         );
         if ($id > 0){
             return redirect('/billboards/'.$request->input('billboard_id'));
         } else {
+
             $request::flash('Error encountered');
         }
+     }
     }
-    public function updatebillboardface(BillboardFaceFormRequest $request,$id){
-        $destinationPath = '';
-        $extension = '';
+
+
+
+    public function updatebillboardface(BillboardFaceFormRequest $request,$id)
+    {
         $fileName = '';
-        $storagePath  = Storage::disk('local')->getDriver()->getAdapter()->getPathPrefix();
-        // checking file is valid.
-        if($request->has('image')){
-            if ($request->file('image')->isValid()) {
-                $destinationPath = $storagePath.'/images'; // upload path
-                $extension = $request->file('image')->getClientOriginalExtension(); // getting image extension
-                $fileName = md5(time()).'.'.$extension; // renameing image
-                $request->file('image')->move($destinationPath, $fileName); // uploading file to given path
-            }
-        }
+        $storagePath = Storage::disk('local')->getDriver()->getAdapter()->getPathPrefix();
+        // checking existing image.
+        $file = $request->file('image');
+        // search the billboard to delete image if new image is coming in update
+        $billboardface = DB::table('billboard_faces')
+            ->where('id', $request->input('billboard_face_id'))->first();
+
 
         $sign_type = 0;
-        if($request->has('sign_type')){
-            if($request->input('sign_type') == 'static'){
+        if ($request->has('sign_type')) {
+            if ($request->input('sign_type') == 'static') {
                 $sign_type = 0;
-            }else{
+            } else {
                 $sign_type = 1;
             }
         }
-        if($fileName != ''){
-            $id = DB::table('billboard_faces')
-                ->where('id',$request->input('billboard_face_id'))
-                ->update(
-                    [
-                        'billboard_id' => $request->input('billboard_id'),
-                        'unique_id' => $request->input('unique_id'),
-                        'height' => $request->input('height'),
-                        'width' => $request->input('width'),
-                        'reads' => $request->input('reads'),
-                        'label' => strtoupper($request->input('label')),
-                        'hard_cost' => $request->input('hard_cost'),
-                        'monthly_impressions' => $request->input('monthly_impressions'),
-                        'digital_driveby' => $request->input('digital_driveby'),
-                        'sign_type' => $sign_type,
-                        'notes' => $request->input('notes'),
-                        'max_ads' => $request->input('max_ads'),
-                        'duration' => $request->input('duration'),
-                        'photo' => $fileName
-                    ]
-                );
-        } else {
-            $id = DB::table('billboard_faces')
-                ->where('id',$request->input('billboard_face_id'))
-                ->update(
-                    [
-                        'billboard_id' => $request->input('billboard_id'),
-                        'unique_id' => $request->input('unique_id'),
-                        'height' => $request->input('height'),
-                        'width' => $request->input('width'),
-                        'reads' => $request->input('reads'),
-                        'label' => strtoupper($request->input('label')),
-                        'hard_cost' => $request->input('hard_cost'),
-                        'monthly_impressions' => $request->input('monthly_impressions'),
-                        'digital_driveby' => $request->input('digital_driveby'),
-                        'sign_type' => $sign_type,
-                        'notes' => $request->input('notes'),
-                        'max_ads' => $request->input('max_ads'),
-                        'duration' => $request->input('duration')
-                    ]
-                );
-        }
 
-        if ($id > 0){
-            return redirect('/billboards/'.$request->input('billboard_id'));
-        } else {
-            $request::flash('Error encountered');
-        }
+        if ($file != null) {
+            if ($file->isValid()) {
+                $destinationPath = $storagePath . '/billboard_images/' . $id; // path for image
+                File::delete($destinationPath . DIRECTORY_SEPARATOR . $billboardface->photo); // delete existing file
+                $extension = $request->file('image')->getClientOriginalExtension(); // getting image extension
+                $fileName = md5(time()) . '.' . $extension; // renameing image
+                $request->file('image')->move($destinationPath, $fileName); // uploading file to given path
+
+                // update instruction if existing image in request
+                $id = DB::table('billboard_faces')
+                    ->where('id', $request->input('billboard_face_id'))
+                    ->update(
+                        [
+                            'billboard_id' => $request->input('billboard_id'),
+                            'unique_id' => $request->input('unique_id'),
+                            'height' => $request->input('height'),
+                            'width' => $request->input('width'),
+                            'reads' => $request->input('reads'),
+                            'label' => strtoupper($request->input('label')),
+                            'hard_cost' => $request->input('hard_cost'),
+                            'monthly_impressions' => $request->input('monthly_impressions'),
+                            'digital_driveby' => $request->input('digital_driveby'),
+                            'sign_type' => $sign_type,
+                            'notes' => $request->input('notes'),
+                            'max_ads' => $request->input('max_ads'),
+                            'duration' => $request->input('duration'),
+                            'photo' => $fileName
+                        ]
+                    );
+                }
+            } else {  // update instruction if not existing image in request
+                $id = DB::table('billboard_faces')
+                    ->where('id', $request->input('billboard_face_id'))
+                    ->update(
+                        [
+                            'billboard_id' => $request->input('billboard_id'),
+                            'unique_id' => $request->input('unique_id'),
+                            'height' => $request->input('height'),
+                            'width' => $request->input('width'),
+                            'reads' => $request->input('reads'),
+                            'label' => strtoupper($request->input('label')),
+                            'hard_cost' => $request->input('hard_cost'),
+                            'monthly_impressions' => $request->input('monthly_impressions'),
+                            'digital_driveby' => $request->input('digital_driveby'),
+                            'sign_type' => $sign_type,
+                            'notes' => $request->input('notes'),
+                            'max_ads' => $request->input('max_ads'),
+                            'duration' => $request->input('duration')
+                        ]
+                    );
+                 }
+
+            if ($id > 0) {
+                return redirect('/billboards/' . $request->input('billboard_id'));
+            } else {
+                $request::flash('Error encountered');
+            }
+
     }
     public function book(BillboardBookingFormRequest $request){
         $booking_exists = 0;
@@ -585,9 +612,7 @@ class BillboardController extends Controller {
 
         return response()->json(array_merge($billboards,$billboard_faces));
     }
-    function getUploadBillboard(){
-        return view('billboard.upload');
-    }
+
     function saveUploadBillbaord(BillboardUploadRequest $request){
         $storagePath  = Storage::disk('local')->getDriver()->getAdapter()->getPathPrefix();
         // checking file is valid.
@@ -674,9 +699,38 @@ class BillboardController extends Controller {
         $delete_id = DB::table('billboard_faces')->where('billboard_id',$id)->delete();
         return redirect('/billboards');
     }
+
+
     function deleteBooking($id){
         $delete_id = DB::table('client_booking')->where('id',$id)->delete();
         return redirect('/billboard-booking');
+    }
+
+    function editBillboard($id){
+        $billboard = DB::table('billboard')->where('id',$id )->first();
+        $owner = DB::table('owners')->where('id',$billboard->owner_id)->first();
+        $owners = DB::table('owners')->where('instance_id',$this->user->instance_id)->get();
+        return view('billboard.upload',array('billboard' => $billboard , 'owner' => $owner, 'owners' => $owners) );
+    }
+
+    function updateBillboard(BillboardFormRequest $request,$id){
+
+        DB::table('billboard')
+            ->where('id',$id)
+            ->update(
+            [
+                'owner_id' => $request->input('billboard_owner'),
+                'name' => $request->input('name'),
+                'address' => $request->input('address'),
+                'digital_driveby' => $request->input('digital_driveby'),
+                'lat' => $request->input('lat'),
+                'lng' => $request->input('long'),
+                'hard_cost' => $request->input('hard_cost'),
+                'instance_id' => $this->user->instance_id,
+                'updated_at' => date('Y-m-d')
+            ]
+        );
+            return redirect('/billboards/'.$id);
     }
 
 }

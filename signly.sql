@@ -7,6 +7,7 @@
 -- Server version: 5.6.34-log
 -- PHP Version: 7.1.0
 
+
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
@@ -718,5 +719,5 @@ INSERT INTO `proposal_comments` (`user_id`, `proposal_id`, `client_id`, `message
   (16, 1, 4, 'Hello! this is a test.', 'client', '2017-08-23 10:11:07', '2017-08-23 10:11:07', '2017-08-25 10:11:23');
 
 INSERT INTO `active_proposal_billboards` (`active_proposal_id`, `proposal_id`, `billboard_id`, `billboard_face_id`, `user_id`, `proposal_price`, `instance_id`) VALUES
-  (1, 1, 1, 16, 200000, 600, 4)
+  (1, 1, 1, 16, 2, 600, 4)
 

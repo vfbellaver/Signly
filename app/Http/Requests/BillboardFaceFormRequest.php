@@ -17,7 +17,7 @@ class BillboardFaceFormRequest extends FormRequest
             'sign_type' => 'required',
             'hard_cost' => 'required',
             'monthly_impressions' => 'required',
-            'notes' => 'required'
+            'notes' => 'required|max:400'
             
         ];
     }
