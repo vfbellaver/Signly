@@ -121,7 +121,7 @@
                                             <div>
                                                 @if (isset($billboard_face->photo))
                                                     <img src="{{ asset('storage/billboard_images/'.$billboard->id.'/'.$billboard_face->photo) }}"
-                                                         style="height: auto; width:100%;">
+                                                         style="height: 100%; width:100%;">
                                                 @endif
                                             </div>
                                         </div>

@@ -99,7 +99,6 @@ class PDFController extends Controller
     public function index()
     {
         $this->points = $details = $this->details();
-
         $this->getMap();
         $this->getDetailMap();
         $footer = ProposalSettings::where('user_id', Auth::user()->id)->first();
@@ -107,6 +106,7 @@ class PDFController extends Controller
         $pdf->setPaper('A4', 'landscape');
 
         return $pdf->stream("file.pdf", array("Attachment" => 0));
+        //if you want to view pdf in html interface, comment the pdf return and return the view below
         //return view('pdf.pdf_index',compact('details','footer','img'));
     }
 

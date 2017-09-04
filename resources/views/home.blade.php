@@ -206,7 +206,7 @@
                                 var ac_proposalId = el.id;
                                 var ac_proposalIndex = $(el).index();
                                 var token = $(el).attr('token');
-
+                                //each drag and drop triggers an ajax request for each item in the table
                               $.ajax({
                                   beforeSend: function(xhr){xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));},
                                   url: '{{url('/')}}/reoder-active-proposal',
