@@ -180,9 +180,11 @@ class BillboardController extends Controller {
             }
             if ($billboard_included == 1){
                 $billboard_data[] = array('billboard'=>$billboard,'faces'=>$billboard_faces);
+
             }
 
         }
+
         return response()->json($billboard_data);
     }
 
