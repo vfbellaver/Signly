@@ -460,7 +460,7 @@
                 </div>
                 {!! Form::open(array('route' => 'postproposalbillboard', 'method'=> 'POST', 'id'=>'frm_new_proposal_billboard', 'name' => 'frm_new_proposal_billboard', 'class' => 'form-horizontal', 'role' => 'form' )) !!}
                 <div class="modal-body">
-
+                    <input type="hidden" name="instance_id" value="{{Auth::user()->instance_id}}">
 
                     <div class="form-group">
                         <label class="col-md-3 control-label">Billboard</label>
@@ -501,7 +501,7 @@
                 </div>
                 <div class="modal-body">
                     {!! Form::open(array('route' => 'postproposal', 'method'=> 'POST', 'id'=>'frm_new_proposal', 'name' => 'frm_new_proposal', 'class' => 'form-horizontal', 'role' => 'form' )) !!}
-
+                    <input type="hidden" name="instance_id" value="{{Auth::user()->instance_id}}">
                     <div class="form-group">
                         <label class="col-md-3 control-label">1. Set Timeframe</label>
                         <div class="col-md-6">

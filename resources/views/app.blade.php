@@ -178,8 +178,8 @@
 <script src="{{ URL::to('/') }}/js/jquery.zeroclipboard.min.js"></script>
 <script type="text/javascript" src="{{asset('js/masks.js')}}"></script>
 <script src="https://cdn.jsdelivr.net/jquery.sidr/2.2.1/jquery.sidr.min.js"></script>
-<script type='text/javascript' src='https://maps.google.com/maps/api/js?sensor=false&#038;ver=3.0&key=AIzaSyBUaQHyneq6J_6N8BW5MT50BM9riXkI5oM'>
-    <!--<script type='text/javascript' src='https://maps.google.com/maps/api/js?sensor=false&#038;ver=3.0'>-->
+<script type='text/javascript' src='https://maps.google.com/maps/api/js?ver=3.0&key=AIzaSyBUaQHyneq6J_6N8BW5MT50BM9riXkI5oM'>
+    <!--<script type='text/javascript' src='https://maps.google.com/maps/api/js?ver=3.0'>-->
 </script>
 <script type="text/javascript">
     function getNewMessages(){
@@ -882,7 +882,7 @@ $('#bdaterange').find('span').html('<strong>' + today + ' - ' + today + '</stron
                     var marker = new google.maps.Marker({
                         position: point,
                         map: globalMap,
-                        icon: 'https://www.signly.com/app/images/digital-board.png'
+                        icon: '{{url('/')}}/images/digital-board.png'
                     });
                     marker.id = val.billboard.id;
                     markersArray.push(marker);

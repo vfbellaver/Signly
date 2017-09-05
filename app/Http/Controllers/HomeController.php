@@ -239,7 +239,6 @@ class HomeController extends Controller {
 		$clients = DB::table('clients')->where('instance_id',$this->user->instance_id)->get();
         $clientsAll = DB::table('clients')->get();
 		$billboards = DB::table('billboard')->where('instance_id',$this->user->instance_id)->get();
-
 		$proposals = array();
 		$comments = array();
 
