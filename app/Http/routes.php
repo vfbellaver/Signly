@@ -12,8 +12,6 @@
 */
 
 
-use PDF;
-
 Route::get('/get-comments/{id}', ['uses' => 'HomeController@getComments']);
 Route::get('/get-comments-client/{id}', ['uses' => 'HomeController@getCommentsClient']);
 
