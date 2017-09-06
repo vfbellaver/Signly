@@ -30,39 +30,60 @@ class ProposalSettingsController extends Controller {
     }
     
 
-    public function settings (ProposalSettingsFormRequest $request) {
+    public function updateSettings(ProposalSettingsFormRequest $request) {
 
         $saveOrUpdate = $request->input('proposal_settings_id');
-
-        $data = $request->only(
-            'path_image',
-            'user_street',
-            'user_state',
-            'user_city',
-            'user_zipcode',
-            'website'
-        );
-
-
-        $file = $request->file('path_image');
-
-        if ($saveOrUpdate) {
+        if(isset($saveOrUpdate))
+        {
+            $data = $request->only(
+                'user_street',
+                'user_state',
+                'user_phone',
+                'user_city',
+                'user_zipcode',
+                'website'
+            );
+            $file = $request->file('path_image');
             $proposalSettings = ProposalSettings::find($saveOrUpdate);
-            Storage::delete($proposalSettings->path_image);
-            $file->move(storage_path('app/public'),$file->getClientOriginalName());
-            $data['path_image'] = $file->getClientOriginalName();
-            $proposalSettings->update($data);
 
-        } else
+            if($file!=null)
             {
-                $proposalSettings = new ProposalSettings();
-                $file->move(storage_path('app/public'),$file->getClientOriginalName());
+                $destinationPath = storage_path('app/public/proposal_settings/').Auth::user()->id;
+                File::delete($destinationPath . DIRECTORY_SEPARATOR . $proposalSettings->path_image);
+                $file->move($destinationPath,$file->getClientOriginalName());
                 $data['path_image'] = $file->getClientOriginalName();
-                $proposalSettings->fill($data);
-                $proposalSettings->user_id = Auth::user()->id;
-                $proposalSettings->save();
+                $proposalSettings->update($data);
             }
+            else
+            {
+                $proposalSettings = ProposalSettings::find($saveOrUpdate);
+                $proposalSettings->update($data);
+            }
+
+        }
+        else
+        {
+            $data = $request->only(
+                'user_street',
+                'user_state',
+                'user_phone',
+                'user_city',
+                'user_zipcode',
+                'website'
+            );
+
+            $file = $request->file('path_image');
+            $proposalSettings = new ProposalSettings();
+            $destinationPath = storage_path('app/public/proposal_settings/').\Auth::user()->id;
+            $file->move($destinationPath,$file->getClientOriginalName());
+            $data['path_image'] = $file->getClientOriginalName();
+            $proposalSettings->fill($data);
+            $proposalSettings->user_id = Auth::user()->id;
+            $proposalSettings->save();
+        }
+
 
         return redirect('/home');
     }
+
 }

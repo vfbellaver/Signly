@@ -120,7 +120,7 @@ class HomeController extends Controller {
             ->select('active_proposal.id as apid','proposal.*')
             ->where('proposal.id',$proposal->id)
             ->first();
-        
+
         $active_proposal_billboards = array();
 
         if(isset($proposals)){
@@ -239,7 +239,6 @@ class HomeController extends Controller {
 		$clients = DB::table('clients')->where('instance_id',$this->user->instance_id)->get();
         $clientsAll = DB::table('clients')->get();
 		$billboards = DB::table('billboard')->where('instance_id',$this->user->instance_id)->get();
-
 		$proposals = array();
 		$comments = array();
 
@@ -260,7 +259,7 @@ class HomeController extends Controller {
 	            	'active_proposal_billboards.proposal_price as monthly_price',
                     'active_proposal_billboards.order_proposal_billboards as order',
 	            	'billboard.*',
-	            	'billboard_faces.id as billboard_face_id', 
+	            	'billboard_faces.id as billboard_face_id',
 	            	'billboard_faces.label')
 	            ->where('active_proposal_id',$proposals->apid)
 	            ->where('active_proposal_billboards.user_id',$user->id)

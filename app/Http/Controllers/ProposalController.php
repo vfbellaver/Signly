@@ -114,7 +114,7 @@ class ProposalController extends Controller {
 						->first();
 
 		if (isset($active_proposal->id)){
-		
+
 			$test_exitence = DB::table('active_proposal_billboards')
 						->where('active_proposal_id', $active_proposal->id)
 						->where('proposal_id', $active_proposal->proposal_id)
@@ -125,11 +125,17 @@ class ProposalController extends Controller {
 			if (!isset($test_exitence->id)){
 			    // -- Search last order record to set the next order_proposal_billboards -- //
                 $active_proposal_billboards = DB::table('active_proposal_billboards')
-                    ->where('active_proposal_billboards.user_id', $user->id)
+                    ->where('active_proposal_billboards.user_id', $this->user->id)
                     ->orderBy('order_proposal_billboards', 'ASC')->get();
 
                 $ultimo = end($active_proposal_billboards);
-                $order = $ultimo->order_proposal_billboards + 1;
+
+                if($ultimo){
+                    $order = $ultimo->order_proposal_billboards + 1;
+                }else{
+                    $order = 0;
+                }
+
 
 				$proposal_id = DB::table('active_proposal_billboards')->insertGetId(
 			    	array(
@@ -138,6 +144,7 @@ class ProposalController extends Controller {
 			            'billboard_id' => $request->input('pb_billboard_id'),
 			            'billboard_face_id' => $request->input('pb_face_id'),
 			            'user_id' => $this->user->id,
+                        'instance_id' => $request->input('instance_id'),
 			            'proposal_price' => $request->input('pb_price_per_month'),
                         'order_proposal_billboards' => $order
 			    	  )
@@ -166,12 +173,13 @@ class ProposalController extends Controller {
 		);
 
 		if ($request->input('setasactive') == '1'){
-			DB::table('active_proposal')->where('user_id',$this->user->id)->delete();
-			DB::table('active_proposal_billboards')->where('user_id',$this->user->id)->delete();
-			$id = DB::table('active_proposal')->insertGetId(
+            DB::table('active_proposal_billboards')->where('user_id',$this->user->id)->delete();
+            DB::table('active_proposal')->where('user_id',$this->user->id)->delete();
+            $id = DB::table('active_proposal')->insertGetId(
 			    array(
 					    'proposal_id' => $proposal_id ,
-					    'user_id' => $this->user->id
+					    'user_id' => $this->user->id,
+                        'instance_id' => $request->input('instance_id'),
 			    	 )
 			);
 		}

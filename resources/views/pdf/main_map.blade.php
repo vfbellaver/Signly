@@ -1,8 +1,8 @@
 <article class="col-xs-12 my_float">
     <div class="col-xs-1">
         <img class="logo_header"
-             src="{{asset('storage/clients_logo/'.$details[0]->client_id.'/'.$details[0]->logo)}}"
-             width="150">
+             src="{{asset('storage/clients_logo/'.@$details[0]->client_id.'/'.@$details[0]->logo)}}"
+             height="70">
     </div>
     <div class="col-xs-12 my_float"  style="margin-left: 50px">
        <h2 class="main_map_text">{{$map->name}}</h2>

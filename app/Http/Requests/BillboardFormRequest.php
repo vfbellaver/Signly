@@ -13,9 +13,8 @@ class BillboardFormRequest extends FormRequest
             'address' => 'required',
             'lat' => 'required',
             'long' => 'required',
-            'image' => 'required',
             'hard_cost' => 'required',
-            'monthly_impressions' => 'required'
+
         ];
     }
 

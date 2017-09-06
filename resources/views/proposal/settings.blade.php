@@ -14,7 +14,7 @@
                             @endforeach
                         </ul>
                     @endif
-                        <form class="form-horizontal" method="POST" action="{{route('setthings')}}" enctype="multipart/form-data">
+                        <form class="form-horizontal" method="POST" action="{{route('settings')}}" enctype="multipart/form-data">
                             {{csrf_field()}}
                             {{method_field('POST')}}
                             <input  type="hidden" name="customer_id" value="{{Auth::user()->id}}">
@@ -24,7 +24,7 @@
                             <div class="col-lg-4">
                                 <div class="card" style="width: 20rem;">
                                     <img class="card-img-top"
-                                         src="{{@$settings->path_image ?asset('storage/'.$settings->path_image): asset('/images/file.png')}}"
+                                         src="{{@$settings->path_image ?asset('proposal_settings/'.Auth::user()->id.'/'.$settings->path_image): asset('/images/file.png')}}"
                                          alt="Your Logo Here" width="100%">
                                     <div class="card-body text-center">
                                         <p class="card-text" style="margin-top: 5px">

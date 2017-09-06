@@ -1,6 +1,7 @@
 <?php
 $img = 1;
 $i = 1;
+set_time_limit(120);
 ?>
 <html>
 <head>
@@ -25,7 +26,7 @@ $i = 1;
                 {{$details[0]->start_date}}<br>
             </h3>
             <!-- footer -->
-            <footer class="col-xs-12 my_float">
+            <footer class="col-xs-12 my_float div_footer">
                 @include('pdf.pdf_footer')
             </footer>
         </div>
@@ -43,7 +44,7 @@ $i = 1;
 
             <div class="my_clear"></div>
 
-            <footer class="col-xs-12 my_float">
+            <footer class="col-xs-12 my_float div_footer">
                 @include('pdf.pdf_footer')
             </footer>
         </div>
@@ -62,7 +63,7 @@ $i = 1;
                 <div class="my_clear"></div>
 
                 <!-- footer -->
-                <footer class="col-xs-12 my_float">
+                <footer class="col-xs-12 my_float div_footer">
                     @include('pdf.pdf_footer')
                 </footer>
             </div>
@@ -81,7 +82,7 @@ $i = 1;
                 <div class="my_clear"></div>
 
                 <!-- footer -->
-                <footer class="col-xs-12 my_float">
+                <footer class="col-xs-12 my_float div_footer">
                     @include('pdf.pdf_footer')
                 </footer>
             </div>
