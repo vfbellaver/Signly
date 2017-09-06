@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.7.19, for Linux (x86_64)
+-- MySQL dump 10.13  Distrib 5.6.34, for osx10.12 (x86_64)
 --
--- Host: localhost    Database: signly1
+-- Host: localhost    Database: signly
 -- ------------------------------------------------------
--- Server version	5.7.19-0ubuntu0.16.04.1
+-- Server version	5.6.35
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -32,8 +32,8 @@ CREATE TABLE `active_proposal` (
   PRIMARY KEY (`id`),
   KEY `proposal_id` (`proposal_id`),
   KEY `instance_id` (`instance_id`),
-  CONSTRAINT `active_proposal_ibfk_1` FOREIGN KEY (`proposal_id`) REFERENCES `proposal` (`id`),
-  CONSTRAINT `active_proposal_ibfk_2` FOREIGN KEY (`instance_id`) REFERENCES `instance` (`id`)
+  CONSTRAINT `active_proposal_ibfk_1` FOREIGN KEY (`proposal_id`) REFERENCES `proposal` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `active_proposal_ibfk_2` FOREIGN KEY (`instance_id`) REFERENCES `instance` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -71,12 +71,12 @@ CREATE TABLE `active_proposal_billboards` (
   KEY `billboard_face_id` (`billboard_face_id`),
   KEY `proposal_id` (`proposal_id`),
   KEY `instance_id` (`instance_id`),
-  CONSTRAINT `active_proposal_billboards_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
-  CONSTRAINT `active_proposal_billboards_ibfk_2` FOREIGN KEY (`active_proposal_id`) REFERENCES `active_proposal` (`id`),
-  CONSTRAINT `active_proposal_billboards_ibfk_3` FOREIGN KEY (`billboard_id`) REFERENCES `billboard` (`id`),
-  CONSTRAINT `active_proposal_billboards_ibfk_4` FOREIGN KEY (`billboard_face_id`) REFERENCES `billboard_faces` (`id`),
-  CONSTRAINT `active_proposal_billboards_ibfk_5` FOREIGN KEY (`proposal_id`) REFERENCES `proposal` (`id`),
-  CONSTRAINT `active_proposal_billboards_ibfk_6` FOREIGN KEY (`instance_id`) REFERENCES `instance` (`id`)
+  CONSTRAINT `active_proposal_billboards_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `active_proposal_billboards_ibfk_2` FOREIGN KEY (`active_proposal_id`) REFERENCES `active_proposal` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `active_proposal_billboards_ibfk_3` FOREIGN KEY (`billboard_id`) REFERENCES `billboard` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `active_proposal_billboards_ibfk_4` FOREIGN KEY (`billboard_face_id`) REFERENCES `billboard_faces` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `active_proposal_billboards_ibfk_5` FOREIGN KEY (`proposal_id`) REFERENCES `proposal` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `active_proposal_billboards_ibfk_6` FOREIGN KEY (`instance_id`) REFERENCES `instance` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=65 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -119,8 +119,8 @@ CREATE TABLE `billboard` (
   PRIMARY KEY (`id`),
   KEY `owner_id` (`owner_id`),
   KEY `instance_id` (`instance_id`),
-  CONSTRAINT `billboard_ibfk_1` FOREIGN KEY (`owner_id`) REFERENCES `owners` (`id`),
-  CONSTRAINT `billboard_ibfk_3` FOREIGN KEY (`instance_id`) REFERENCES `instance` (`id`)
+  CONSTRAINT `billboard_ibfk_1` FOREIGN KEY (`owner_id`) REFERENCES `owners` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `billboard_ibfk_2` FOREIGN KEY (`instance_id`) REFERENCES `instance` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=139 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -162,8 +162,8 @@ CREATE TABLE `billboard_faces` (
   PRIMARY KEY (`id`),
   KEY `billboard_id` (`billboard_id`),
   KEY `instance_id` (`instance_id`),
-  CONSTRAINT `billboard_faces_ibfk_1` FOREIGN KEY (`billboard_id`) REFERENCES `billboard` (`id`),
-  CONSTRAINT `billboard_faces_ibfk_3` FOREIGN KEY (`instance_id`) REFERENCES `instance` (`id`)
+  CONSTRAINT `billboard_faces_ibfk_1` FOREIGN KEY (`billboard_id`) REFERENCES `billboard` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `billboard_faces_ibfk_2` FOREIGN KEY (`instance_id`) REFERENCES `instance` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=59 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='billboard faces for each billboard view';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -209,12 +209,12 @@ CREATE TABLE `client_booking` (
   KEY `billboard_face_id` (`billboard_face_id`),
   KEY `client_id` (`client_id`),
   KEY `instance_id` (`instance_id`),
-  CONSTRAINT `client_booking_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
-  CONSTRAINT `client_booking_ibfk_2` FOREIGN KEY (`proposal_id`) REFERENCES `proposal` (`id`),
-  CONSTRAINT `client_booking_ibfk_3` FOREIGN KEY (`billboard_id`) REFERENCES `billboard` (`id`),
-  CONSTRAINT `client_booking_ibfk_4` FOREIGN KEY (`billboard_face_id`) REFERENCES `billboard_faces` (`id`),
-  CONSTRAINT `client_booking_ibfk_5` FOREIGN KEY (`client_id`) REFERENCES `clients` (`id`),
-  CONSTRAINT `client_booking_ibfk_6` FOREIGN KEY (`instance_id`) REFERENCES `instance` (`id`)
+  CONSTRAINT `client_booking_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `client_booking_ibfk_2` FOREIGN KEY (`proposal_id`) REFERENCES `proposal` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `client_booking_ibfk_3` FOREIGN KEY (`billboard_id`) REFERENCES `billboard` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `client_booking_ibfk_4` FOREIGN KEY (`billboard_face_id`) REFERENCES `billboard_faces` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `client_booking_ibfk_5` FOREIGN KEY (`client_id`) REFERENCES `clients` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `client_booking_ibfk_6` FOREIGN KEY (`instance_id`) REFERENCES `instance` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -257,7 +257,7 @@ CREATE TABLE `clients` (
   `deleted` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `instance_id` (`instance_id`),
-  CONSTRAINT `clients_ibfk_1` FOREIGN KEY (`instance_id`) REFERENCES `instance` (`id`)
+  CONSTRAINT `clients_ibfk_1` FOREIGN KEY (`instance_id`) REFERENCES `instance` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=59 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -292,7 +292,7 @@ CREATE TABLE `contract` (
   `created_at` datetime NOT NULL,
   PRIMARY KEY (`id`),
   KEY `proposal_id` (`proposal_id`),
-  CONSTRAINT `contract_ibfk_1` FOREIGN KEY (`proposal_id`) REFERENCES `proposal` (`id`)
+  CONSTRAINT `contract_ibfk_1` FOREIGN KEY (`proposal_id`) REFERENCES `proposal` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -358,7 +358,7 @@ CREATE TABLE `owners` (
   `instance_id` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `instance_id` (`instance_id`),
-  CONSTRAINT `owners_ibfk_1` FOREIGN KEY (`instance_id`) REFERENCES `instance` (`id`)
+  CONSTRAINT `owners_ibfk_1` FOREIGN KEY (`instance_id`) REFERENCES `instance` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -401,9 +401,9 @@ CREATE TABLE `proposal` (
   KEY `user_id` (`user_id`),
   KEY `client_id` (`client_id`),
   KEY `instance_id` (`instance_id`),
-  CONSTRAINT `proposal_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
-  CONSTRAINT `proposal_ibfk_2` FOREIGN KEY (`client_id`) REFERENCES `clients` (`id`),
-  CONSTRAINT `proposal_ibfk_3` FOREIGN KEY (`instance_id`) REFERENCES `instance` (`id`)
+  CONSTRAINT `proposal_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `proposal_ibfk_2` FOREIGN KEY (`client_id`) REFERENCES `clients` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `proposal_ibfk_3` FOREIGN KEY (`instance_id`) REFERENCES `instance` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -446,8 +446,8 @@ CREATE TABLE `proposal_billboard` (
   CONSTRAINT `proposal_billboard_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
   CONSTRAINT `proposal_billboard_ibfk_2` FOREIGN KEY (`proposal_id`) REFERENCES `proposal` (`id`),
   CONSTRAINT `proposal_billboard_ibfk_3` FOREIGN KEY (`billboard_id`) REFERENCES `billboard` (`id`),
-  CONSTRAINT `proposal_billboard_ibfk_4` FOREIGN KEY (`billboard_face_id`) REFERENCES `billboard_faces` (`id`),
-  CONSTRAINT `proposal_billboard_ibfk_5` FOREIGN KEY (`instance_id`) REFERENCES `instance` (`id`)
+  CONSTRAINT `proposal_billboard_ibfk_4` FOREIGN KEY (`billboard_face_id`) REFERENCES `billboard_faces` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `proposal_billboard_ibfk_5` FOREIGN KEY (`instance_id`) REFERENCES `instance` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -482,9 +482,9 @@ CREATE TABLE `proposal_comments` (
   KEY `user_id` (`user_id`),
   KEY `client_id` (`client_id`),
   KEY `proposal_id` (`proposal_id`),
-  CONSTRAINT `proposal_comments_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
-  CONSTRAINT `proposal_comments_ibfk_2` FOREIGN KEY (`client_id`) REFERENCES `clients` (`id`),
-  CONSTRAINT `proposal_comments_ibfk_3` FOREIGN KEY (`proposal_id`) REFERENCES `proposal` (`id`)
+  CONSTRAINT `proposal_comments_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `proposal_comments_ibfk_2` FOREIGN KEY (`client_id`) REFERENCES `clients` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `proposal_comments_ibfk_3` FOREIGN KEY (`proposal_id`) REFERENCES `proposal` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -604,8 +604,8 @@ CREATE TABLE `users` (
   PRIMARY KEY (`id`),
   KEY `role_id` (`role_id`),
   KEY `instance_id` (`instance_id`),
-  CONSTRAINT `users_ibfk_1` FOREIGN KEY (`role_id`) REFERENCES `users_roles` (`id`),
-  CONSTRAINT `users_ibfk_2` FOREIGN KEY (`instance_id`) REFERENCES `instance` (`id`)
+  CONSTRAINT `users_ibfk_1` FOREIGN KEY (`role_id`) REFERENCES `users_roles` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `users_ibfk_2` FOREIGN KEY (`instance_id`) REFERENCES `instance` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -664,7 +664,7 @@ CREATE TABLE `users_settings` (
   `deleted_at` datetime NOT NULL,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
-  CONSTRAINT `users_settings_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+  CONSTRAINT `users_settings_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -686,4 +686,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-09-06 12:20:38
+-- Dump completed on 2017-09-06 12:06:46
