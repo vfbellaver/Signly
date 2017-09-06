@@ -7,8 +7,6 @@ _ide_helper.php
 public/mix-manifest.json
 public/storage
 .php_cs.cache
-composer.lock
-yarn.lock
 .DS_Store
 .vagrant
 Homestead.yaml
