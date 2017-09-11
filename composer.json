@@ -22,6 +22,7 @@
   "require": {
     "php": ">=7.0.0",
     "artesaos/defender": "dev-master@dev",
+    "bugsnag/bugsnag-laravel": "2.6.*",
     "cesarfelip3/scaffolding": "dev-master",
     "fideloper/proxy": "~3.3",
     "laravel/cashier": "7.0.*",
@@ -36,7 +37,6 @@
   "require-dev": {
     "barryvdh/laravel-debugbar": "2.4.*",
     "barryvdh/laravel-ide-helper": "2.4.*",
-    "bugsnag/bugsnag-laravel": "2.6.*",
     "deployer/deployer": "^5.1",
     "deployer/recipes": "^4.0",
     "filp/whoops": "~2.0",

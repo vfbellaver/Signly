@@ -2,15 +2,12 @@
 
 namespace Deployer;
 
-require __DIR__ . '/vendor/autoload.php';
 require 'recipe/laravel.php';
 
-$env = readEnv();
+$env = readEnv(__DIR__);
 
 // Configuration
-set('repository', function () {
-    return (string)run('git config --get remote.origin.url');
-});
+set('repository', 'git@github.com:' . $env['DEPLOY_REPOSITORY']);
 set('git_tty', false);
 set('bin/yarn', function () {
     return (string)run('which yarn');
