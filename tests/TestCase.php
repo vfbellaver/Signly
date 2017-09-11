@@ -1,23 +1,32 @@
 <?php
 
+namespace Tests;
 
-class TestCase extends Illuminate\Foundation\Testing\TestCase {
+use Exception;
+use Illuminate\Contracts\Debug\ExceptionHandler;
+use Illuminate\Foundation\Exceptions\Handler;
+use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 
-	/**
-	 * Creates the application.
-	 *
-	 * @return \Illuminate\Foundation\Application
-	 */
+abstract class TestCase extends BaseTestCase
+{
+    use CreatesApplication, CreatesUsers, HttpAssertions;
 
-	protected $baseUrl = 'http://localhost';
-	
-	public function createApplication()
-	{
-		$app = require __DIR__.'/../bootstrap/app.php';
+    protected function disableExceptionHandling()
+    {
+        $this->app->instance(ExceptionHandler::class, new class extends Handler
+        {
+            public function __construct()
+            {
+            }
 
-		$app->make('Illuminate\Contracts\Console\Kernel')->bootstrap();
+            public function report(Exception $e)
+            {
+            }
 
-		return $app;
-	}
-
+            public function render($request, Exception $e)
+            {
+                throw $e;
+            }
+        });
+    }
 }

@@ -1,44 +1,30 @@
-<?php namespace App\Http\Requests;
+<?php
 
-use Illuminate\Foundation\Http\FormRequest;
-use Response;
+namespace App\Http\Requests;
 
-class UserUpdateRequest extends FormRequest
+use App\Forms\UserForm;
+
+class UserUpdateRequest extends BaseRequest
 {
-    public function rules()
+    public function form(): UserForm
     {
-        return [
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'email' => 'required|email',
-            'password' => 'required|confirmed',
-        ];
+        return new UserForm($this);
     }
 
     public function authorize()
     {
-        // Only allow logged in users
-        // return \Auth::check();
-        // Allows all users in
         return true;
     }
 
-    // OPTIONAL OVERRIDE
-    public function forbiddenResponse()
+    public function rules()
     {
-        // Optionally, send a custom response on authorize failure 
-        // (default is to just redirect to initial page with errors)
-        // 
-        // Can return a response, a view, a redirect, or whatever else
-        return Response::make('Access denied', 403);
+        $id = request('id');
+
+        return [
+			'name' => 'required|min:3',
+			'email' => "required|email|unique:users,id,{$id}"
+        ];
     }
 
-    // OPTIONAL OVERRIDE
-    //storage function response()
-    //{
-        // If you want to customize what happens on a failed validation,
-        // override this method.
-        // See what it does natively here: 
-        // https://github.com/laravel/framework/blob/master/src/Illuminate/Foundation/Http/FormRequest.php
-    //}
+
 }

@@ -1,39 +1,114 @@
 {
-	"name": "laravel/laravel",
-	"description": "The Laravel Framework.",
-	"keywords": ["framework", "laravel"],
-	"license": "MIT",
-	"type": "project",
-	"require": {
-		"laravel/framework": "5.2",
-		"laravelcollective/html": "^5.0@dev",
-		"barryvdh/laravel-dompdf": "^0.8.0",
-		"guzzlehttp/guzzle": "^6.3",
-		"intervention/image": "^2.4"
-	},
-	"require-dev": {
-		"phpunit/phpunit": "~4.0",
-		"phpspec/phpspec": "~2.1",
-		"symfony/dom-crawler": "~3.0",
-		"symfony/css-selector": "~3.0",
-		"xethron/migrations-generator": "^2.0"
-	},
-	"autoload": {
-		"classmap": [
-			"database"
-		],
-		"psr-4": {
-			"App\\": "app/"
-		}
-	},
-	"autoload-dev": {
-		"classmap": [
-			"tests/TestCase.php"
-		]
-	},
-	"scripts": {
-	},
-	"config": {
-		"preferred-install": "dist"
-	}
+  "name": "cesarfelip3/laravel",
+  "description": "Laravel Kickstart Project",
+  "keywords": [
+    "framework",
+    "laravel",
+    "SLC DevShop"
+  ],
+  "version": "1.0.0",
+  "license": "MIT",
+  "type": "project",
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/SLCDevShop/laroute"
+    },
+    {
+      "type": "vcs",
+      "url": "https://github.com/cesarfelip3/scaffolding"
+    }
+  ],
+  "require": {
+    "php": ">=7.0.0",
+    "artesaos/defender": "dev-master@dev",
+    "cesarfelip3/scaffolding": "dev-master",
+    "fideloper/proxy": "~3.3",
+    "laravel/cashier": "7.0.*",
+    "laravel/dusk": "^1.1",
+    "laravel/framework": "5.5.*",
+    "laravel/passport": "3.0.*",
+    "laravel/scout": "3.0.*",
+    "laravel/tinker": "~1.0",
+    "lord/laroute": "dev-master",
+    "predis/predis": "^1.1"
+  },
+  "require-dev": {
+    "barryvdh/laravel-debugbar": "2.4.*",
+    "barryvdh/laravel-ide-helper": "2.4.*",
+    "bugsnag/bugsnag-laravel": "2.6.*",
+    "deployer/deployer": "^5.1",
+    "deployer/recipes": "^4.0",
+    "filp/whoops": "~2.0",
+    "fzaninotto/faker": "~1.4",
+    "mockery/mockery": "0.9.*",
+    "pdepend/pdepend": "2.5.*",
+    "phploc/phploc": "4.0.*",
+    "phpmd/phpmd": "2.6.*",
+    "phpmetrics/phpmetrics": "2.2.*",
+    "phpunit/phpunit": "~6.0",
+    "sebastian/phpcpd": "3.0.*",
+    "squizlabs/php_codesniffer": "3.0.*",
+    "theseer/phpdox": "0.10.*"
+  },
+  "autoload": {
+    "files": [
+      "app/Helpers/General.php"
+    ],
+    "classmap": [
+      "database",
+      "app/Models",
+      "app/Services"
+    ],
+    "psr-4": {
+      "App\\": "app/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\": "tests/"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "dont-discover": [
+      ]
+    }
+  },
+  "scripts": {
+    "test": [
+      "App\\Helpers\\ComposerProjectSetup::postProjectCrete"
+    ],
+    "setup": [
+      "php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
+      "php artisan key:generate",
+      "php artisan storage:link",
+      "php artisan clear-compiled",
+      "php artisan ide-helper:generate",
+      "php artisan optimize",
+      "yarn install",
+      "yarn run dev"
+    ],
+    "post-root-package-install": [
+      "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+    ],
+    "post-create-project-cmd": [
+      "@setup",
+      "App\\Helpers\\ComposerProjectSetup::postProjectCrete"
+    ],
+    "post-autoload-dump": [
+      "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
+      "php artisan ide-helper:generate",
+      "php artisan ide-helper:meta",
+      "php artisan optimize",
+      "@php artisan package:discover"
+    ]
+  },
+  "config": {
+    "preferred-install": "dist",
+    "sort-packages": true,
+    "optimize-autoloader": true
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
 }

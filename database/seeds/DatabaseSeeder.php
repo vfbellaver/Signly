@@ -1,20 +1,16 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use Illuminate\Database\Eloquent\Model;
 
-class DatabaseSeeder extends Seeder {
+class DatabaseSeeder extends Seeder
+{
+    public function run()
+    {
+        if (app()->environment('production')) {
+            exit('I just stopped you getting fired. Love Jeremias! S2');
+        }
 
-	/**
-	 * Run the database seeds.
-	 *
-	 * @return void
-	 */
-	public function run()
-	{
-		Model::unguard();
-
-		// $this->call('UserTableSeeder');
-	}
-
+        $this->call(RolesTableSeeder::class);
+        $this->call(UsersTableSeeder::class);
+    }
 }

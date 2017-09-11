@@ -1,32 +1,23 @@
-<?php namespace App\Providers;
+<?php
 
-use Illuminate\Contracts\Events\Dispatcher as DispatcherContract;
+namespace App\Providers;
+
+use Illuminate\Support\Facades\Event;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
-class EventServiceProvider extends ServiceProvider {
+class EventServiceProvider extends ServiceProvider
+{
+    protected $listen = [
+        'App\Events\UserCreated' => [
+            'App\Listeners\SendInvitation',
+        ],
+        'App\Events\UserUpdated' => [
+            'App\Listeners\SendInvitation',
+        ],
+    ];
 
-	/**
-	 * The event handler mappings for the application.
-	 *
-	 * @var array
-	 */
-	protected $listen = [
-		'event.name' => [
-			'EventListener',
-		],
-	];
-
-	/**
-	 * Register any other events for your application.
-	 *
-	 * @param  \Illuminate\Contracts\Events\Dispatcher  $events
-	 * @return void
-	 */
-	public function boot(DispatcherContract $events)
-	{
-		parent::boot($events);
-
-		//
-	}
-
+    public function boot()
+    {
+        parent::boot();
+    }
 }

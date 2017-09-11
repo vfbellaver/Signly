@@ -1,750 +1,412 @@
-@extends('app')
+@extends('layouts.app')
 
 @section('content')
-
-    <div id="panel">
-        <!-- <input type="textbox" name="searchTeid" id="searchText" placeholder="Address"> -->
-        <input type="textbox" name="searchBillboard" id="searchBillboard" class="form-control" placeholder="Search">
-        <!-- <input type="button" value="Search" onclick="codeAddress()"> -->
-
-        <ul class="searchfilter">
-            <form id="dashboard_filter" name="dashboard_filter">
-                <li><input type="checkbox" class="filter_check" name="show_all"
-                           value="1" <?php if (Session::get('show_all') == '1') {
-                        echo 'checked="checked"';
-                    } ?> > Show All
-                </li>
-                <li><input type="checkbox" class="filter_check" name="left_read"
-                           value="1" <?php if (Session::get('left_read') == '1') {
-                        echo 'checked="checked"';
-                    } ?> > Left Read
-                </li>
-                <li><input type="checkbox" class="filter_check" name="right_read"
-                           value="1" <?php if (Session::get('right_read') == '1') {
-                        echo 'checked="checked"';
-                    } ?> > Right Read
-                </li>
-                <li><input type="checkbox" class="filter_check" name="north_facing"
-                           value="1" <?php if (Session::get('north_facing') == '1') {
-                        echo 'checked="checked"';
-                    } ?> > North Facing
-                </li>
-                <li><input type="checkbox" class="filter_check" name="south_facing"
-                           value="1" <?php if (Session::get('south_facing') == '1') {
-                        echo 'checked="checked"';
-                    } ?> > South Facing
-                </li>
-                <li><input type="checkbox" class="filter_check" name="east_facing"
-                           value="1" <?php if (Session::get('east_facing') == '1') {
-                        echo 'checked="checked"';
-                    } ?> > East Facing
-                </li>
-                <li><input type="checkbox" class="filter_check" name="west_facing"
-                           value="1" <?php if (Session::get('west_facing') == '1') {
-                        echo 'checked="checked"';
-                    } ?> > West Facing
-                </li>
-                <li><input type="checkbox" class="filter_check" name="digital"
-                           value="1" <?php if (Session::get('digital') == '1') {
-                        echo 'checked="checked"';
-                    } ?> > Digital Board
-                </li>
-                <li><input type="checkbox" class="filter_check" name="static"
-                           value="1" <?php if (Session::get('static') == '1') {
-                        echo 'checked="checked"';
-                    } ?> > Static Board
-                </li>
-            </form>
-        </ul>
-
-
-    </div>
-
-    <div id="create-proposal">
-        <input type="button" value="Create Proposal" data-toggle="modal" data-target="#createProposal">
-    </div>
-
-    <!-- <idv id="key-legend">
-        <input type="button" value="Keys" data-toggle="modal" data-target="#keyLegend">
-    </div> -->
-
-
-    <div style="height:100%; width:100%;">
-        <div class="parent-container">
-
-            <div id="active-proposal-window" style="display:none;">
-
-                <div class="proposal-container" style="padding-left:0px !important;">
-                    <!-- Proposal Window -->
-                    <div id="proposal_window">
-
-                        <div class="proposal-top">
-                            <ul class="proposal-menu">
-                            <!-- <li class="proposal-save"ida id="save_proposal" title="Save Proposal" style="cursor:pointer;"><img src="{{URL::to('/')}}/images/save.png"></a></li> -->
-                            <!-- <li class="proposal-pdf"ida id="generate_pdf" title="Generate PDF" style="cursor:pointer;"><img src="{{URL::to('/')}}/images/pdf.png"></a></li> -->
-                            <!-- <li class="proposal-send"ida id="send_proposal" title="Send Proposal to Client" style="cursor:pointer;"><img src="{{URL::to('/')}}/images/emailicon.png"></a></li> -->
-                            <!-- <li class="proposal-print"ida id="print_proposal" title="Print Preview of proposal" style="cursor:pointer;"><img src="{{URL::to('/')}}/images/printer-icon.jpg"></a></li> -->
-                            <!-- <li class="proposal-minimize"><a href="#" title="Minimize Window"><img src="{{URL::to('/')}}/images/proposal-minimize.png"></a></li>
-            <li class="proposal-maximize"><a href="#" title="Maximize Window"><img src="{{URL::to('/')}}/images/proposal-maximize.png"></a></li> 
-            <li class="proposal-close"><a id="close_proposal" href="#">Close</a></li>-->
-                            </ul>
-
-                            <?php
-                            $days_between = 0;
-                            $months_between = 0;
-                            ?>
-                            @if(isset($active_proposal))
-
-                                <?php
-
-                                $total_budget = 0;
-                                $date1 = new DateTime($active_proposal->start_date);
-                                $date2 = new DateTime($active_proposal->end_date);
-
-                                $diff = $date1->diff($date2);
-                                $months_between = round($diff->y * 12 + $diff->m + $diff->d / 30);
-                                $days_between = (int)$date2->diff($date1)->format("%a") + 2;
-
-                                if ($months_between < 1) {
-                                    $months_between = 1;
-                                }
-
-                                if ($days_between < 1) {
-                                    $days_between = 1;
-                                }
-                                ?>
-                                <strong>{{ $active_proposal->name }}</strong>
-                                <input type="hidden" id="proposal_id" name="proposal_id"
-                                       value="{{ $active_proposal->id }}">
-                            @else
-                                <?php
-                                $total_budget = 0;
-                                ?>
-                                <strong>No Active Proposal</strong>
-                            @endif
-                            <br/>
-                            @if(isset($active_proposal))
-                                <strong>Date Covered:</strong> {{ $date1->format('m/d/Y') }}
-                                - {{ $date2->format('m/d/Y') }}
-                                <?php $total_budget = $active_proposal->budget; ?>
-                            @endif
-<div id="proposalBillboards">
-
-    <?php $counter = 1; ?>
-    <?php
-    $cpm_total = 0;
-    $impressions_total = 0;
-    $quoted_cost = 0;
-    $overall_cost = 0;
-    $final_savings = 0;
-    $cpm_final = 0;
-
-    ?>
-
-    @if(count($active_proposal_billboards))
-<table class="table">
-    <tbody id="tabela">
-        @foreach($active_proposal_billboards as $active_proposal_billboard)
-
-
-            <?php
-//            $cpm_total += ($active_proposal_billboard->monthly_price * $months_between) / (($active_proposal_billboard->monthly_impressions * $days_between) / 1000);
-//            $impressions_total += $active_proposal_billboard->monthly_impressions;
-            $quoted_cost += $active_proposal_billboard->monthly_price;
-            $overall_cost += $active_proposal_billboard->monthly_price * $months_between;
-            $final_savings += $cpm_total;
-
-            if ($overall_cost > 0 && $impressions_total > 0) {
-                $cpm_final = $overall_cost / (($impressions_total * $days_between) / 1000);
-            }
-
-            ?>
-
-    <tr id="{{$active_proposal_billboard->apbid}}">
-        <td> <meta id="token" name="token" content="{{ csrf_token() }}"> </td>
-        <td>
-            <?php echo $counter++; ?>
-                <input type="text"
-                        class="billboard_text_box"
-                        name="proposal_billboards[]"
-                        style="display:none;"
-                        value="{{ $active_proposal_billboard->id }}">
-        </td>
-
-        <td><img width="30" src="{{URL::to('/')}}/images/billboard.jpg"></td>
-
-        <td>
-            <a href="#" class="billboard_link"
-               billboardfaceid="{{ $active_proposal_billboard->billboard_face_id.$active_proposal_billboard->label }}"
-               billboardid="{{ $active_proposal_billboard->id }}"
-               billboardLat="{{ $active_proposal_billboard->lat }}"
-               billboardLng="{{ $active_proposal_billboard->lng }}">
-                <?php echo $active_proposal_billboard->name; ?>
-            </a>
-        </td>
-        <td>
-            $<?php echo number_format($active_proposal_billboard->monthly_price, 2); ?></td>
-        <td>
-            <a href="{{ URL::to('/') }}/active-proposal/remove-billboard/<?php echo $active_proposal_billboard->apbid; ?>"
-               data-confirm="Are you sure you want to remove this billboard?">Remove</a>
-        </td>
-    </tr>
-    @endforeach
-</tbody>
-</table>
-            <!--   Required table pro sortable scripts    -->
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-            <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-            <script>
-
-                $(function () {
-                    $('#sidr-id-tabela').sortable({
-
-                        axis: 'y',
-                        stop: function (event, ui) {
-                            $.map($(this).find('tr'),function (el) {
-                                var ac_proposalId = el.id;
-                                var ac_proposalIndex = $(el).index();
-                                var token = $(el).attr('token');
-                                //each drag and drop triggers an ajax request for each item in the table
-                              $.ajax({
-                                  beforeSend: function(xhr){xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));},
-                                  url: '{{url('/')}}/reoder-active-proposal',
-                                  type: 'POST',
-                                  dataType: 'json',
-                                  data: {'_token': token, 'ac_proposalId': ac_proposalId, 'ac_proposalIndex': ac_proposalIndex},
-                              })
-
-                            })
-                        }
-                    });
-
-                });
-            </script>
-    @endif
-</div>
-
-                            <div id="proposal_totals">
-                                <table class="table">
-                                    <tr>
-                                        <td>CPM</td>
-                                        <td>
-                                            <div id="proposal_cpm">${{ number_format($cpm_final,2) }}</div>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>DEC Impressions</td>
-                                        <td>
-                                            <div id="proposal_impressions">{{ number_format($impressions_total) }}</div>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>DEC Total</td>
-                                        <td>
-                                            <div id="proposal_impressions">{{ number_format($impressions_total*$days_between) }}</div>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>Monthly Cost</td>
-                                        <td>
-                                            <div id="proposal_quoted_cost">${{ number_format($quoted_cost,2) }}</div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Overall Cost</td>
-                                        <td>
-                                            <div id="proposal_overall_cost">${{ number_format($overall_cost,2) }}</div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Monthly Budget</td>
-                                        <td>
-                                            <div id="proposal_final_savings">${{ number_format($total_budget,2) }}</div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Available Budget</td>
-                                        <td>
-                                            <div id="proposal_monthly_cost">
-                                                @if(isset($active_proposal))
-                                                    <?php
-                                                    $available_budget = $active_proposal->budget - $quoted_cost;
-                                                    if ($available_budget > 0) {
-                                                        echo '<font style="color:green;font-weight:bold;">$' . number_format($available_budget, 2) . '</font>';
-                                                    } else {
-                                                        echo '<font style="color:red;font-weight:bold;">$' . number_format($available_budget, 2) . '</font>';
-                                                    }
-                                                    ?>
-                                                @endif
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <span class="label label-success pull-right">Monthly</span>
+                        <h5>Views</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <h1 class="no-margins">386,200</h1>
+                        <div class="stat-percent font-bold text-success">98% <i class="fa fa-bolt"></i></div>
+                        <small>Total views</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <span class="label label-info pull-right">Annual</span>
+                        <h5>Orders</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <h1 class="no-margins">80,800</h1>
+                        <div class="stat-percent font-bold text-info">20% <i class="fa fa-level-up"></i></div>
+                        <small>New orders</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <span class="label label-primary pull-right">Today</span>
+                        <h5>visits</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h1 class="no-margins">$ 406,420</h1>
+                                <div class="font-bold text-navy">44% <i class="fa fa-level-up"></i>
+                                    <small>Rapid pace</small>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <h1 class="no-margins">206,120</h1>
+                                <div class="font-bold text-navy">22% <i class="fa fa-level-up"></i>
+                                    <small>Slow pace</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Monthly income</h5>
+                        <div class="ibox-tools">
+                            <span class="label label-primary">Updated 12.2015</span>
+                        </div>
+                    </div>
+                    <div class="ibox-content no-padding">
+                        <div class="flot-chart m-t-lg" style="height: 55px;">
+                            <div class="flot-chart-content" id="flot-chart1"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-content">
+                        <div>
+                                        <span class="pull-right text-right">
+                                        <small>Average value of sales in the past month in: <strong>United states</strong></small>
+                                            <br/>
+                                            All sales: 162,862
+                                        </span>
+                            <h3 class="font-bold no-margins">
+                                Half-year revenue margin
+                            </h3>
+                            <small>Sales marketing.</small>
+                        </div>
+                        <div class="m-t-sm">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div>
+                                        <canvas id="lineChart" height="114"></canvas>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <ul class="stat-list m-t-lg">
+                                        <li>
+                                            <h2 class="no-margins">2,346</h2>
+                                            <small>Total orders in period</small>
+                                            <div class="progress progress-mini">
+                                                <div class="progress-bar" style="width: 48%;"></div>
                                             </div>
-                                        </td>
-                                    </tr>
-                                </table>
-
-                            </div>
-
-        </div>
-        <div>
-          
-        </div>
-        <div>
-          <input id="proposal_link" style="display:none;" value="@if(isset($active_proposal)) {{URL::to('/').'/clientview/'.$active_proposal->hash}} @endif">
-        </div>
-        <div style="text-align:right;">
-            <div style="text-align:right;">
-              <a id="copy_link" title="Copy Link" style="cursor:pointer;" class="copy_link btn btn-success">Copy Link</a>
-              <a  id="save_proposal" title="Save Current Proposal" style="cursor:pointer;" class="btn btn-info">Save</a>
-              <a  id="generate_pdf" href="{{route('pdf')}}" class="btn btn-primary">Generate Proposal</a>
-            </div>
-
-                        </div>
-                        <div class="clear"></div>
-
-                        <hr/>
-
-                        <div class="clear"></div>
-
-
-                    </div>
-
-                    <div id="proposal-comments-window">
-                        <!--        <div style="text-align:right;">
-                                      <input type="button" value="Add Comment" data-toggle="modal" class="btn btn-info" data-target="#proposalComment">
-                                    </div>
-                                    <div style="text-align:left;">
-                                      <strong>Comments</strong>
-                                    </div>-->
-                        <div id="proposalComments">
-                            @if(count($comments))
-                                @foreach($comments as $comment)
-
-                                    @if($comment->message_from == 'client')
-                                        <div class="client_message" style="float:left;border-radius: 8px;
-        border: 1px solid #73AD21;margin:2px;padding:5px; background-color:#a1dba1;width:50%;">
-                                            {{$comment->message}}
-
-                                        </div>
-                                    @endif
-                                    @if($comment->message_from == 'admin')
-                                        <div class="admin_message" style="float:right;border-radius: 8px;
-        border: 1px solid #73AD21;margin:2px;padding:5px; background-color:#5bc0de;width:50%;">
-                                            {{$comment->message}}
-
-                                        </div>
-                                    @endif
-                                @endforeach
-                            @endif
-                        </div>
-                        <div class="comments-wrapper">
-                            <form method="POST" id="frm_comments" name="frm_comments">
-                                <div class="comments-wrapper-contents">
-
-                                    @if(count($active_proposal))
-                                        <input type="hidden" id="c_proposal_id" name="proposal_id"
-                                               value="{{ $active_proposal->id }}">
-                                        <input type="hidden" id="c_user_id" name="user_id" value="{{ $user->id }}">
-                                        <input type="hidden" id="c_client_id" name="client_id"
-                                               value="{{ $active_proposal->client_id }}">
-                                    @endif
-
-                                    <div class="form-group" style="padding:20px;">
-                                        <div>
-                                            <textarea id="adminTextArea" class="form-control"
-                                                      name="proposalComment"></textarea>
-                                            <button type="submit" id="submitAdminMessage" class="btn btn-primary"><i
-                                                        class="fa fa-paper-plane"></i></button>
-                                        </div>
-                                    </div>
+                                        </li>
+                                        <li>
+                                            <h2 class="no-margins ">4,422</h2>
+                                            <small>Orders in last month</small>
+                                            <div class="progress progress-mini">
+                                                <div class="progress-bar" style="width: 60%;"></div>
+                                            </div>
+                                        </li>
+                                    </ul>
                                 </div>
-                            </form>
-                        </div>
-                    </div>
-                    <!-- Proposal Window -->
-                </div>
-
-            </div>
-
-            <div id="proposal-comments-window" style="display:none;">
-                <div style="text-align:right;">
-                    <input type="button" value="Add Comment" data-toggle="modal" class="btn btn-info"
-                           data-target="#proposalComment">
-                </div>
-                <div style="text-align:left;">
-                    <strong>Comments</strong>
-                </div>
-                <div id="proposalComments">
-                    @if(count($comments))
-                        @foreach($comments as $comment)
-
-                            @if($comment->message_from == 'client')
-                                <div style="float:left;border-radius: 8px;
-    border: 1px solid #73AD21;margin:2px;padding:5px; background-color:#a1dba1;width:50%;">
-                                    {{$comment->message}}
-                                </div>
-                            @endif
-                            @if($comment->message_from == 'admin')
-                                <div style="float:right;border-radius: 8px;
-    border: 1px solid #73AD21;margin:2px;padding:5px; background-color:#5bc0de;width:50%;">
-                                    {{$comment->message}}
-                                </div>
-                            @endif
-                        @endforeach
-                    @endif
-                </div>
-            </div>
-
-            <div class="map-container" style="height:100%;">
-                <div id="map_canvas" style="width:100%; height:100%"></div>
-            </div>
-
-        </div>
-    </div>
-
-    <div id="test"></div>
-
-
-    <!-- Modal Add Proposal Comment-->
-    <!--<div class="modal faid" id="proposalComment" tabiidex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-       <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="myModalLabel">Add Comment</h4>
-            </div>
-
-            {!! Form::open(array('route' => 'postproposalcomment', 'method'=> 'POST', 'id'=>'frm_new_proposal_billboard_comment', 'name' => 'frm_new_proposal_billboard', 'class' => 'form-horizontal', 'role' => 'form' )) !!}
-
-
-
-
-            <div class="modal-body">
-              
-            @if(count($active_proposal))
-        <input type="hidden" name="proposal_id" value="{{ $active_proposal->id }}">
-            <input type="hidden" name="user_id" value="{{ $user->id }}">
-            <input type="hidden" name="client_id" value="{{ $active_proposal->client_id }}">
-            @endif
-
-            <div class="form-group" style="padding:20px;">
-                <div>
-              <label class="control-label">Comment</label>
-            </div>
-            <div>
-              <textarea class="form-control" name="proposalComment"></textarea>
-            </div>
-          </div>
-
-
-          </div>
-          <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-              <button type="submit" class="btn btn-primary">Save Comment</button>
-          </div>
-{!! Form::close() !!}
-            </div>
-          </div>
-        </div>-->
-
-    <!-- Modal Add Proposal Billboard-->
-    <div class="modal fade" id="proposalBillboard" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-         aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Add This Billboard</h4>
-                </div>
-                {!! Form::open(array('route' => 'postproposalbillboard', 'method'=> 'POST', 'id'=>'frm_new_proposal_billboard', 'name' => 'frm_new_proposal_billboard', 'class' => 'form-horizontal', 'role' => 'form' )) !!}
-                <div class="modal-body">
-                    <input type="hidden" name="instance_id" value="{{Auth::user()->instance_id}}">
-
-                    <div class="form-group">
-                        <label class="col-md-3 control-label">Billboard</label>
-                        <div class="col-md-6">
-                            <div id="billboardtobeadded" style="font-weight:bold; font-size:16px;"></div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-md-3 control-label">Price Per Month</label>
-                        <div class="col-md-6">
-                            <input type="text" name="pb_price_per_month" class="form-control">
-                            <input type="hidden" name="pb_billboard_id" id="pb_billboard_id" class="form-control">
-                            <input type="hidden" name="pb_face_id" id="pb_face_id" class="form-control">
-                        </div>
-                    </div>
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-primary">Add Billboard</button>
-                </div>
-                {!! Form::close() !!}
-            </div>
-        </div>
-    </div>
-
-
-
-    <!-- Modal Create Proposal-->
-    <div class="modal fade" id="createProposal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-         aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Let's Get Started</h4>
-                </div>
-                <div class="modal-body">
-                    {!! Form::open(array('route' => 'postproposal', 'method'=> 'POST', 'id'=>'frm_new_proposal', 'name' => 'frm_new_proposal', 'class' => 'form-horizontal', 'role' => 'form' )) !!}
-                    <input type="hidden" name="instance_id" value="{{Auth::user()->instance_id}}">
-                    <div class="form-group">
-                        <label class="col-md-3 control-label">1. Set Timeframe</label>
-                        <div class="col-md-6">
-                            <div id="cpdaterange" class="btn">
-                                <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
-                                <span></span> <b class="caret"></b>
                             </div>
-                            <input type="hidden" name="start_date" value="<?php echo date('Y-m-d'); ?>">
-                            <input type="hidden" name="end_date" value="<?php echo date('Y-m-d'); ?>">
+                        </div>
+                        <div class="m-t-md">
+                            <small class="pull-right">
+                                <i class="fa fa-clock-o"> </i>
+                                Update on 16.07.2015
+                            </small>
+                            <small>
+                                <strong>Analysis of sales:</strong> The value has been changed over time, and last month
+                                reached a level over $50,000.
+                            </small>
                         </div>
                     </div>
-
-                    <div class="form-group">
-                        <label class="col-md-3 control-label">2. Choose Client</label>
-                        <div class="col-md-6">
-                            <select class="form-control" name="client_id">
-                                @if(isset($clients))
-                                    @foreach($clients as $client)
-                                        <option value="{{ $client->id }}">{{ $client->first_name.' '.$client->last_name }}</option>
-                                    @endforeach
-                                @endif
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-md-3 control-label">3. Set Budget</label>
-                        <div class="col-md-6">
-                            <input type="text" class="form-control" name="budget">
-                        </div>
-                        <!-- <div class="col-md-3"> -->
-                        <select class="form-control" name="budget_validity" style="display:none;">
-                            <option>Week</option>
-                            <option>Month</option>
-                            <option>Year</option>
-                        </select>
-                        <!-- </div> -->
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-md-3 control-label">4. Proposal Name</label>
-                        <div class="col-md-6">
-                            <input type="text" name="name" class="form-control">
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-md-3 control-label">5. Set as Active Proposal</label>
-                        <div class="col-md-6">
-                            <select name="setasactive" class="form-control">
-                                <option value="1">Yes</option>
-                                <option value="0">No</option>
-                            </select> (Note: this will overwrite any existing active proposal)
-                        </div>
-                    </div>
-
-
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Create Now</button>
-                </div>
-                {!! Form::close() !!}
             </div>
-        </div>
-    </div>
-
-
-
-    <!-- Modal Book Billboard-->
-    <div class="modal fade" id="instantBook" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-         aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Book Billboard</h4>
-                </div>
-                <div class="modal-body">
-                    {!! Form::open(array('route' => 'postbookbillboard', 'method'=> 'POST', 'id'=>'frm_book_billboard', 'name' => 'frm_book_billboard', 'class' => 'form-horizontal', 'role' => 'form', 'files'=>true )) !!}
-                    <input type="hidden" id="billboard_id" name="billboard_id" value="">
-                    <input type="hidden" id="billboard_face_id" name="billboard_face_id" value="">
-
-
-                    <div class="form-group">
-                        <label class="col-md-4 control-label">1. Client</label>
-                        <div class="col-md-6">
-                            <select class="form-control" name="client">
-                                @if(isset($clients))
-                                    @foreach($clients as $client)
-                                        <option value="{{ $client->id }}">{{ $client->company }}</option>
-                                    @endforeach
-                                @endif
-                            </select>
-                        </div>
+            <div class="col-lg-4">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <span class="label label-warning pull-right">Data has changed</span>
+                        <h5>User activity</h5>
                     </div>
-
-                    <div class="form-group">
-                        <label class="col-md-4 control-label">2. Date Range</label>
-                        <div class="col-md-6">
-                            <div id="bdaterange" class="btn">
-                                <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
-                                <span></span> <b class="caret"></b>
+                    <div class="ibox-content">
+                        <div class="row">
+                            <div class="col-xs-4">
+                                <small class="stats-label">Pages / Visit</small>
+                                <h4>236 321.80</h4>
                             </div>
-                            <input type="hidden" name="bstart_date" value="<?php echo date('Y-m-d'); ?>">
-                            <input type="hidden" name="bend_date" value="<?php echo date('Y-m-d'); ?>">
+                            <div class="col-xs-4">
+                                <small class="stats-label">% New Visits</small>
+                                <h4>46.11%</h4>
+                            </div>
+                            <div class="col-xs-4">
+                                <small class="stats-label">Last week</small>
+                                <h4>432.021</h4>
+                            </div>
                         </div>
                     </div>
-
-                    <div class="form-group">
-                        <label class="col-md-4 control-label">3. Set Price</label>
-                        <div class="col-md-6">
-                            <input type="text" class="form-control" name="set_price">
+                    <div class="ibox-content">
+                        <div class="row">
+                            <div class="col-xs-4">
+                                <small class="stats-label">Pages / Visit</small>
+                                <h4>643 321.10</h4>
+                            </div>
+                            <div class="col-xs-4">
+                                <small class="stats-label">% New Visits</small>
+                                <h4>92.43%</h4>
+                            </div>
+                            <div class="col-xs-4">
+                                <small class="stats-label">Last week</small>
+                                <h4>564.554</h4>
+                            </div>
                         </div>
                     </div>
-
-                    <div class="form-group">
-                        <label class="col-md-4 control-label">4. Description</label>
-                        <div class="col-md-6">
-                            <textarea class="form-control" name="description"></textarea>
+                    <div class="ibox-content">
+                        <div class="row">
+                            <div class="col-xs-4">
+                                <small class="stats-label">Pages / Visit</small>
+                                <h4>436 547.20</h4>
+                            </div>
+                            <div class="col-xs-4">
+                                <small class="stats-label">% New Visits</small>
+                                <h4>150.23%</h4>
+                            </div>
+                            <div class="col-xs-4">
+                                <small class="stats-label">Last week</small>
+                                <h4>124.990</h4>
+                            </div>
                         </div>
                     </div>
-
-                    <div class="form-group">
-                        <label class="col-md-3 control-label">5. Upload Billboard Photo</label>
-                        <div class="col-md-6">
-                            {!! Form::file('image') !!}
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Custom responsive table </h5>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                <i class="fa fa-wrench"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-user">
+                                <li><a href="#">Config option 1</a>
+                                </li>
+                                <li><a href="#">Config option 2</a>
+                                </li>
+                            </ul>
+                            <a class="close-link">
+                                <i class="fa fa-times"></i>
+                            </a>
                         </div>
                     </div>
-
+                    <div class="ibox-content">
+                        <div class="row">
+                            <div class="col-sm-9 m-b-xs">
+                                <div data-toggle="buttons" class="btn-group">
+                                    <label class="btn btn-sm btn-white">
+                                        <input type="radio" id="option1" name="options"> Day </label>
+                                    <label class="btn btn-sm btn-white active">
+                                        <input type="radio" id="option2" name="options"> Week </label>
+                                    <label class="btn btn-sm btn-white">
+                                        <input type="radio" id="option3" name="options"> Month </label>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="input-group">
+                                    <input type="text" placeholder="Search" class="input-sm form-control"> <span
+                                            class="input-group-btn">
+                                        <button type="button" class="btn btn-sm btn-primary"> Go!</button> </span></div>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Project</th>
+                                    <th>Name</th>
+                                    <th>Phone</th>
+                                    <th>Company</th>
+                                    <th>Completed</th>
+                                    <th>Task</th>
+                                    <th>Date</th>
+                                    <th>Action</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Project
+                                        <small>This is example of project</small>
+                                    </td>
+                                    <td>Patrick Smith</td>
+                                    <td>0800 051213</td>
+                                    <td>Inceptos Hymenaeos Ltd</td>
+                                    <td><span class="pie">0.52/1.561</span></td>
+                                    <td>20%</td>
+                                    <td>Jul 14, 2013</td>
+                                    <td><a href="#"><i class="fa fa-check text-navy"></i></a></td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>Alpha project</td>
+                                    <td>Alice Jackson</td>
+                                    <td>0500 780909</td>
+                                    <td>Nec Euismod In Company</td>
+                                    <td><span class="pie">6,9</span></td>
+                                    <td>40%</td>
+                                    <td>Jul 16, 2013</td>
+                                    <td><a href="#"><i class="fa fa-check text-navy"></i></a></td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>Betha project</td>
+                                    <td>John Smith</td>
+                                    <td>0800 1111</td>
+                                    <td>Erat Volutpat</td>
+                                    <td><span class="pie">3,1</span></td>
+                                    <td>75%</td>
+                                    <td>Jul 18, 2013</td>
+                                    <td><a href="#"><i class="fa fa-check text-navy"></i></a></td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>Gamma project</td>
+                                    <td>Anna Jordan</td>
+                                    <td>(016977) 0648</td>
+                                    <td>Tellus Ltd</td>
+                                    <td><span class="pie">4,9</span></td>
+                                    <td>18%</td>
+                                    <td>Jul 22, 2013</td>
+                                    <td><a href="#"><i class="fa fa-check text-navy"></i></a></td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>Alpha project</td>
+                                    <td>Alice Jackson</td>
+                                    <td>0500 780909</td>
+                                    <td>Nec Euismod In Company</td>
+                                    <td><span class="pie">6,9</span></td>
+                                    <td>40%</td>
+                                    <td>Jul 16, 2013</td>
+                                    <td><a href="#"><i class="fa fa-check text-navy"></i></a></td>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Project
+                                        <small>This is example of project</small>
+                                    </td>
+                                    <td>Patrick Smith</td>
+                                    <td>0800 051213</td>
+                                    <td>Inceptos Hymenaeos Ltd</td>
+                                    <td><span class="pie">0.52/1.561</span></td>
+                                    <td>20%</td>
+                                    <td>Jul 14, 2013</td>
+                                    <td><a href="#"><i class="fa fa-check text-navy"></i></a></td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>Gamma project</td>
+                                    <td>Anna Jordan</td>
+                                    <td>(016977) 0648</td>
+                                    <td>Tellus Ltd</td>
+                                    <td><span class="pie">4,9</span></td>
+                                    <td>18%</td>
+                                    <td>Jul 22, 2013</td>
+                                    <td><a href="#"><i class="fa fa-check text-navy"></i></a></td>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Project
+                                        <small>This is example of project</small>
+                                    </td>
+                                    <td>Patrick Smith</td>
+                                    <td>0800 051213</td>
+                                    <td>Inceptos Hymenaeos Ltd</td>
+                                    <td><span class="pie">0.52/1.561</span></td>
+                                    <td>20%</td>
+                                    <td>Jul 14, 2013</td>
+                                    <td><a href="#"><i class="fa fa-check text-navy"></i></a></td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>Alpha project</td>
+                                    <td>Alice Jackson</td>
+                                    <td>0500 780909</td>
+                                    <td>Nec Euismod In Company</td>
+                                    <td><span class="pie">6,9</span></td>
+                                    <td>40%</td>
+                                    <td>Jul 16, 2013</td>
+                                    <td><a href="#"><i class="fa fa-check text-navy"></i></a></td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>Betha project</td>
+                                    <td>John Smith</td>
+                                    <td>0800 1111</td>
+                                    <td>Erat Volutpat</td>
+                                    <td><span class="pie">3,1</span></td>
+                                    <td>75%</td>
+                                    <td>Jul 18, 2013</td>
+                                    <td><a href="#"><i class="fa fa-check text-navy"></i></a></td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>Gamma project</td>
+                                    <td>Anna Jordan</td>
+                                    <td>(016977) 0648</td>
+                                    <td>Tellus Ltd</td>
+                                    <td><span class="pie">4,9</span></td>
+                                    <td>18%</td>
+                                    <td>Jul 22, 2013</td>
+                                    <td><a href="#"><i class="fa fa-check text-navy"></i></a></td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>Alpha project</td>
+                                    <td>Alice Jackson</td>
+                                    <td>0500 780909</td>
+                                    <td>Nec Euismod In Company</td>
+                                    <td><span class="pie">6,9</span></td>
+                                    <td>40%</td>
+                                    <td>Jul 16, 2013</td>
+                                    <td><a href="#"><i class="fa fa-check text-navy"></i></a></td>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Project
+                                        <small>This is example of project</small>
+                                    </td>
+                                    <td>Patrick Smith</td>
+                                    <td>0800 051213</td>
+                                    <td>Inceptos Hymenaeos Ltd</td>
+                                    <td><span class="pie">0.52/1.561</span></td>
+                                    <td>20%</td>
+                                    <td>Jul 14, 2013</td>
+                                    <td><a href="#"><i class="fa fa-check text-navy"></i></a></td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>Gamma project</td>
+                                    <td>Anna Jordan</td>
+                                    <td>(016977) 0648</td>
+                                    <td>Tellus Ltd</td>
+                                    <td><span class="pie">4,9</span></td>
+                                    <td>18%</td>
+                                    <td>Jul 22, 2013</td>
+                                    <td><a href="#"><i class="fa fa-check text-navy"></i></a></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Hold</button>
-                    <button type="button" onclick="$('#frm_book_billboard').submit();" class="btn btn-primary">Book
-                        Now
-                    </button>
-                </div>
-                {!! Form::close() !!}
             </div>
         </div>
     </div>
-
-
-    <!-- Modal Create Proposal-->
-    <div class="modal fade" id="digitalDriveby" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-         aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Digital Driveby Video</h4>
-                </div>
-                <div class="modal-body">
-
-
-                    <iframe id="videoFrame" width="560" height="315" src="" frameborder="0" allowfullscreen></iframe>
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <!-- Modal Keys-->
-    <div class="modal fade" id="keyLegend" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-         aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Key Legend</h4>
-                </div>
-                <div class="modal-body">
-
-                    <table class="table">
-                        <tr>
-                            <td><img width="30" src="{{URL::to('/')}}/images/digital-board.png"></td>
-                            <td><span>Digital</span></td>
-                        </tr>
-                        <tr>
-                            <td><img width="30" src="{{URL::to('/')}}/images/static-board.png"></td>
-                            <td><span>Static</span></td>
-                        </tr>
-                    </table>
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <!-- Modal Create Proposal-->
-    <div class="modal fade" id="confirmDelete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-         aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Delete</h4>
-                </div>
-                <div class="modal-body">
-                    Are you sure you want to delete this record?
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-danger btn-ok">Delete</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <!-- Modal View/Create Booking-->
-    <div class="modal fade" id="billboardBooking" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-         aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Billboard Booking</h4>
-                </div>
-                <div class="modal-body">
-
-                    <div id="dp"></div>
-
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
 @endsection

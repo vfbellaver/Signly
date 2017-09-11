@@ -1,73 +1,51 @@
-@extends('initial')
+@extends('layouts.login')
 
 @section('content')
-<div class="container-fluid">
-	<div class="row">
+    <div class="middle-box text-center loginscreen">
+        <div>
+            <h3>Welcome to</h3>
+            <div>
+                <h1 class="logo-name">{{env('APP_NAME')}}</h1>
+            </div>
+            <br/>
+            <p>
+                Login in. To see it in action.
+            </p>
+            <form class="m-t" role="form" method="POST" action="{{ route('login') }}">
+                {{ csrf_field() }}
+                <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                    <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required
+                           autofocus placeholder="Email">
+                    @if ($errors->has('email'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('email') }}</strong>
+                        </span>
+                    @endif
+                </div>
+                <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+                    <input id="password" type="password" class="form-control" name="password" required
+                           placeholder="Password">
 
-		<div class="col-md-6 col-md-offset-3">
-			<div class="panel panel-default">
-				<div class="panel-body">
-					<div class="row">
-						<div style="margin-bottom:20px;">
-							<img src="{{ URL::to('/') }}/images/login-logo.png" style="margin:0 auto;display:block;">
-						</div>
-						<div>
-							@if (count($errors) > 0)
-								<div class="alert alert-danger">
-									<strong>Whoops!</strong> There were some problems with your input.<br><br>
-									<ul>
-										@foreach ($errors->all() as $error)
-											<li>{{ $error }}</li>
-										@endforeach
-									</ul>
-								</div>
-							@endif
+                    @if ($errors->has('password'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('password') }}</strong>
+                        </span>
+                    @endif
+                </div>
+                <div class="form-group">
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}>
+                            Remember Me
+                        </label>
+                    </div>
+                </div>
 
-							<form class="form-horizontal" role="form" method="POST" action="{{ URL::to('/') }}/auth/login">
-								<input type="hidden" name="_token" value="{{ csrf_token() }}">
-
-								<div class="form-group">
-									<label class="col-md-4 control-label">E-Mail Address</label>
-									<div class="col-md-6">
-										<input type="email" class="form-control" name="email" value="{{ old('email') }}">
-									</div>
-								</div>
-
-								<div class="form-group">
-									<label class="col-md-4 control-label">Password</label>
-									<div class="col-md-6">
-										<input type="password" class="form-control" name="password">
-									</div>
-								</div>
-
-								<div class="form-group">
-									<div class="col-md-6 col-md-offset-4">
-										<div class="checkbox">
-											<label>
-												<input type="checkbox" name="remember"> Remember Me
-											</label>
-										</div>
-									</div>
-								</div>
-
-								<div class="form-group">
-									<div class="col-md-6 col-md-offset-4">
-										<button type="submit" class="btn btn-primary" style="margin-right: 15px;">
-											Login
-										</button>
-
-										<a href="/password/email">Forgot Your Password?</a>
-									</div>
-								</div>
-							</form>
-						</div>
-					</div>
-
-
-					
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
+                <button type="submit" class="btn btn-primary block full-width m-b">Login</button>
+                <a href="{{ route('password.request') }}" id="forgot_password">
+                    <small>Forgot Your Password?</small>
+                </a>
+            </form>
+        </div>
+    </div>
 @endsection

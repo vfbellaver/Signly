@@ -1,34 +1,32 @@
-<?php namespace App\Providers;
+<?php
 
+namespace App\Providers;
+
+use Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider;
 use Illuminate\Support\ServiceProvider;
+use Laravel\Dusk\DuskServiceProvider;
+use Schema;
 
-class AppServiceProvider extends ServiceProvider {
+class AppServiceProvider extends ServiceProvider
+{
+    public function boot()
+    {
+        Schema::defaultStringLength(128);
+    }
 
-	/**
-	 * Bootstrap any application services.
-	 *
-	 * @return void
-	 */
-	public function boot()
-	{
-		//
-	}
+    public function register()
+    {
+        if (!class_exists('Slc')) {
+            class_alias('App\Slc', 'Slc');
+        }
 
-	/**
-	 * Register any application services.
-	 *
-	 * This service provider is a great spot to register your various container
-	 * bindings with the application. As you can see, we are registering our
-	 * "Registrar" implementation here. You can add your own bindings too!
-	 *
-	 * @return void
-	 */
-	public function register()
-	{
-		$this->app->bind(
-			'Illuminate\Contracts\Auth\Registrar',
-			'App\Services\Registrar'
-		);
-	}
+        if ($this->app->environment('local')) {
+            $this->app->register(IdeHelperServiceProvider::class);
+            $this->app->register(\Barryvdh\Debugbar\ServiceProvider::class);
+        }
 
+        if ($this->app->environment('local', 'testing')) {
+            $this->app->register(DuskServiceProvider::class);
+        }
+    }
 }
