@@ -16,15 +16,6 @@ class AppServiceProvider extends ServiceProvider
 
     public function register()
     {
-        if (!class_exists('Slc')) {
-            class_alias('App\Slc', 'Slc');
-        }
-
-        if ($this->app->environment('local')) {
-            $this->app->register(IdeHelperServiceProvider::class);
-            $this->app->register(\Barryvdh\Debugbar\ServiceProvider::class);
-        }
-
         if ($this->app->environment('local', 'testing')) {
             $this->app->register(DuskServiceProvider::class);
         }
