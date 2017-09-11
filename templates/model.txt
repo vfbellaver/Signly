@@ -1,0 +1,40 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class {pascalName} extends Model
+{
+    protected $fillable = [{fillable}
+    ];
+
+    protected $casts = [{casts}
+    ];
+
+    protected $dates = [{dates}
+    ];
+
+    #region Relationships{relationships}
+    #region
+
+    #region Custom Attributes
+
+    #endregion
+
+    #region Queries
+
+    #endregion
+
+    #region Conversions
+    public function toArray()
+    {
+        return [
+            'id' => $this->id,{transformerFields}
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at
+        ];
+    }
+    #endregion
+
+}

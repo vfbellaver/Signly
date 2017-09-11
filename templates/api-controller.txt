@@ -1,0 +1,58 @@
+<?php
+
+namespace App\Http\Controllers\Api;
+
+use App\Http\Controllers\Controller;
+use App\Http\Requests\{pascalName}CreateRequest;
+use App\Http\Requests\{pascalName}UpdateRequest;
+use App\Models\{pascalName};
+use App\Services\{pascalName}Service;
+
+class {pluralPascalName}Controller extends Controller
+{
+    private $service;
+
+    public function __construct({pascalName}Service $service)
+    {
+        $this->middleware('needsRole:admin');
+        $this->service = $service;
+    }
+
+    public function index()
+    {
+        return {pascalName}::all();
+    }
+
+    public function store({pascalName}CreateRequest $request)
+    {
+        $data = $this->service->create($request->form());
+
+        $response = [
+            'message' => '{pascalName} created.',
+            'data' => $data
+        ];
+
+        return $response;
+    }
+
+    public function update({pascalName}UpdateRequest $request, {pascalName} ${camelCaseName})
+    {
+        $obj = $this->service->update($request->form(), ${camelCaseName});
+
+        $response = [
+            'message' => '{pascalName} updated.',
+            'data' => $obj,
+        ];
+
+        return $response;
+    }
+
+    public function destroy({pascalName} ${camelCaseName})
+    {
+        $this->service->delete(${camelCaseName});
+
+        return [
+            'message' => '{pascalName} deleted.'
+        ];
+    }
+}
