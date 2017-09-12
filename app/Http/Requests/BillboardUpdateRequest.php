@@ -20,6 +20,8 @@ class BillboardUpdateRequest extends BaseRequest
     {
         return [
 			'name' => 'required',
+			'description' => 'required',
+			'digital_driveby' => 'required',
 			'address' => 'required',
 			'lat' => 'required',
 			'lng' => 'required',

@@ -23,9 +23,14 @@ class BillboardsController extends Controller
         return Billboard::all();
     }
 
+
+
+
     public function store(BillboardCreateRequest $request)
     {
         $data = $this->service->create($request->form());
+
+
 
         $response = [
             'message' => 'Billboard created.',

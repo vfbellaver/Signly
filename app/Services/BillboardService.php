@@ -15,6 +15,8 @@ class BillboardService
         return \DB::transaction(function () use ($form) {
             $data = [
 				'name' => $form->name(),
+				'description' => $form->description(),
+				'digital_driveby' => $form->digitalDriveby(),
 				'address' => $form->address(),
 				'lat' => $form->lat(),
 				'lng' => $form->lng(),
@@ -35,6 +37,8 @@ class BillboardService
         return \DB::transaction(function () use ($form, $billboard) {
             
 			$billboard->name = $form->name();
+			$billboard->description = $form->description();
+			$billboard->digital_driveby = $form->digitalDriveby();
 			$billboard->address = $form->address();
 			$billboard->lat = $form->lat();
 			$billboard->lng = $form->lng();

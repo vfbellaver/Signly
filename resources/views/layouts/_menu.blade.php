@@ -1,5 +1,10 @@
+
+
+
+
 @is(['slc', 'admin'])
-<li class="{!! (route_contains('users', 'IN')) ? 'active' : '' !!}">
-    <a href="{{ route('users.index') }}">Users</a>
+<li class="{!! (route_contains('users','IN')) ? 'active' : '' !!}">
+    <a class="nav-link" href="{{ route('users.index') }}">Users</a>
+    <a class="nav-link" href="{{ route('billboards.index') }}">Billboard</a>
 </li>
 @endis

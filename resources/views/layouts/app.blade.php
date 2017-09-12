@@ -10,6 +10,13 @@
     <script>
         window.Slc = {!! json_encode(array_merge(Slc::scriptVariables(), [])) !!};
     </script>
+    <style>
+        #map {
+            height: 400px;
+            width: 100%;
+            margin-bottom: 15px;
+        }
+    </style>
 </head>
 <body class="top-navigation">
 <div id="app">
@@ -68,5 +75,8 @@
 
 <!-- Scripts -->
 <script src="{{ mix('js/app.js') }}"></script>
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC2z5mUPBMQj4xb6VNzX32Iv-5xFzcpxu4&libraries=places">
+</script>
 </body>
 </html>

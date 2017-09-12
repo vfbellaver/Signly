@@ -9,6 +9,7 @@ window.Layout = Layout();
 import Laroute from './commons/laroute';
 window.laroute = Laroute;
 
+window.Maps = require('./maps');
 
 window.Vue = require('vue');
 require('./components/bootstrap');

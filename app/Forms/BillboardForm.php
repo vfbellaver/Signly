@@ -9,6 +9,16 @@ class BillboardForm extends BaseForm
 		return $this->request->get('name');
 	}
 
+	public function description()
+	{
+		return $this->request->get('description');
+	}
+
+	public function digitalDriveby()
+	{
+		return $this->request->get('digital_driveby');
+	}
+
 	public function address()
 	{
 		return $this->request->get('address');

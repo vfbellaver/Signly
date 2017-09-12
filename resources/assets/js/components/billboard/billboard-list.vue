@@ -23,7 +23,6 @@
                          <tr v-for="( billboard, index ) in billboards">
                             <td>{{ index + 1 }}</td>
 							<td>{{ billboard.name }}</td>
-							<td>{{ billboard.address }}</td>
 							<td>{{ billboard.lat }}</td>
 							<td>{{ billboard.lng }}</td>
                             <td>
