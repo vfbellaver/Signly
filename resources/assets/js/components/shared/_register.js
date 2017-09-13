@@ -31,7 +31,8 @@ Vue.component('input-label', require('./Inputs/InputLabel'));
 Vue.component('input-text', require('./Inputs/InputText'));
 Vue.component('input-email', require('./Inputs/InputEmail'));
 Vue.component('text-area', require('./Inputs/TextArea'));
-Vue.component('input-file',require('./Inputs/InputFile.vue'));
+Vue.component('input-file', require('./Inputs/InputFile'));
+Vue.component('image-upload', require('./Inputs/ImageUpload'));
 
 // ------------------------------------------------------------------------
 // Boxes

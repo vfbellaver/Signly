@@ -60,21 +60,21 @@
                             <column size="5">
                                 <form-group :form="form" field="zipcode">
                                     <input-label for="zipcode">Zipcode: </input-label>
-                                    <input-text v-model="form.zipcode" id="zipcode" name="zipcode"/>
+                                    <input-text v-model="form.zipcode" id="zipcode" name="zipcode" v-zipcode/>
                                 </form-group>
                             </column>
 
                             <column size="4">
                                 <form-group :form="form" field="phone1">
                                     <input-label for="phone1">Phone 1: </input-label>
-                                    <input-text v-model="form.phone1" id="phone1" name="phone1" type="tel" maxlength="14" onkeyup="Masks.tel(this)"/>
+                                    <input-text v-model="form.phone1" id="phone1" name="phone1" type="tel" v-tel/>
                                 </form-group>
                             </column>
 
                             <column size="4">
                                 <form-group :form="form" field="phone2">
                                     <input-label for="phone2">Phone 2: </input-label>
-                                    <input-text v-model="form.phone2" id="phone2" name="phone2" type="tel" maxlength="14" onkeyup="Masks.tel(this)"/>
+                                    <input-text v-model="form.phone2" id="phone2" name="phone2" type="tel" v-tel/>
                                 </form-group>
                             </column>
                             <column size="4">
