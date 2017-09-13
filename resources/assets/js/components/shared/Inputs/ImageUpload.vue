@@ -3,7 +3,7 @@
         <div>
             <div>
                 <div>
-                    <input id="url" ref="file" type="file" @change="onFileChange" class="hidden" :multiple="multiple"/>
+                    <input ref="file" type="file" @change="onFileChange" class="hidden" :multiple="multiple"/>
                     <div v-if="value" class="preview" :style="{ 'background-image': 'url(' + value + ')' }"
                          @click="replaceImage">
                     </div>
@@ -56,6 +56,7 @@
                         background-size: contain;
                         width: 100%;
                         height: 100%;
+                        border: none;
                     }
                 }
             }
