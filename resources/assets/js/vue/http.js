@@ -1,6 +1,6 @@
 module.exports = {
 
-    get (uri) {
+    get(uri) {
         return Slc.fetch('get', uri);
     },
 
@@ -47,7 +47,7 @@ module.exports = {
     upload(uri, files) {
         const data = new FormData();
         for (let i = 0; i < files.length; i++) {
-            let file = files.item(i);
+            let file = files[i];
             data.append(`file[${i}]`, file);
         }
 
@@ -109,7 +109,7 @@ module.exports = {
                     if (data.message) {
                         toastr.success('', data.message);
                     }
-                    if( _.has(data, 'data') ) {
+                    if (_.has(data, 'data')) {
                         data.data.editForm = new SlcForm({});
                         data.data.destroyForm = new SlcForm({});
                     }
