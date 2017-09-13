@@ -7,4 +7,7 @@
     <a class="nav-link" href="{{ route('users.index') }}">Users</a>
     <a class="nav-link" href="{{ route('billboards.index') }}">Billboard</a>
 </li>
+<li class="{!! (route_contains('clients', 'IN')) ? 'active' : '' !!}">
+    <a href="{{ route('clients.index') }}">Clients</a>
+</li>
 @endis
