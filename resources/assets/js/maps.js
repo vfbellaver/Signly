@@ -7,10 +7,11 @@ $(document).ready(function () {
     var options = {
         zoom: 12,
         center: position
-    }
+    };
+
 
     // search input
-    //var search = new google.maps.places.SearchBox(document.getElementById('address'));
+    var search = new google.maps.places.SearchBox(document.getElementById('address'));
 
     google.maps.event.addListener(search, 'places_changed', function () {
 
@@ -27,6 +28,7 @@ $(document).ready(function () {
         map.setZoom(12);
     });
 
+
     // isntance of map
     var map = new google.maps.Map(document.getElementById('map'), options);
 
@@ -37,14 +39,35 @@ $(document).ready(function () {
         draggable: true
     });
 
+
+
     // latitude and logitude
     google.maps.event.addListener(marker, 'position_changed', function () {
 
+        var address =   marker.getPosition();
         var lat = marker.getPosition().lat();
         var lng = marker.getPosition().lng();
 
-        $('#lat').val(lat);
-        $('#lng').val(lng);
-    });
 
+        var geocoder = new google.maps.Geocoder();
+
+        geocoder.geocode({'latLng':address},function (results,status) {
+
+            if(status == google.maps.GeocoderStatus.OK) {
+                if(results[0]) {
+                    $('#address').val(results[0].formatted_address);
+                    $('#lat').val(lat);
+                    $('#lng').val(lng);
+                } else {
+                    $('#address').val('No results found');
+                }
+            } else {
+                var error = {
+                    'ZERO_RESULTS': 'Kunde inte hitta adress'
+
+                }
+                console.log('Kunde inte hitta adress');
+            }
+        });
+    });
 });

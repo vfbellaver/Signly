@@ -10,6 +10,7 @@ import Laroute from './commons/laroute';
 window.laroute = Laroute;
 
 window.Maps = require('./maps');
+window.Masks = require('./masks');
 
 window.Vue = require('vue');
 require('./components/bootstrap');

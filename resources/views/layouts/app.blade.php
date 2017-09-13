@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ config('app.name', 'Laravel') }}</title>
+    <link rel="shortcut icon" href="{{asset('images/pin-6-64.png')}}">
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
     <script>
         window.Slc = {!! json_encode(array_merge(Slc::scriptVariables(), [])) !!};
@@ -75,7 +76,7 @@
 
 <!-- Scripts -->
 <script src="{{ mix('js/app.js') }}"></script>
-<script async defer
+<script
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC2z5mUPBMQj4xb6VNzX32Iv-5xFzcpxu4&libraries=places">
 </script>
 </body>

@@ -13,7 +13,7 @@
 
                         <form-group :form="form" field="description">
                             <input-label for="description">Description: </input-label>
-                            <input-text v-model="form.description" id="description" name="description"/>
+                            <text-area v-model="form.description" id="description" name="description"/>
                         </form-group>     
 
                         <form-group :form="form" field="address">
@@ -32,12 +32,12 @@
 
                         <form-group :form="form" field="lat">
                             <input-label for="lat">Latitude: </input-label>
-                            <input-text v-model="form.lat" id="lat" name="lat" disabled="disabled"/>
+                            <input-text v-model="form.lat" id="lat" name="lat"/>
                         </form-group>     
 
                         <form-group :form="form" field="lng">
                             <input-label for="lng">Longitude: </input-label>
-                            <input-text v-model="form.lng" id="lng" name="lng" disabled="disabled"/>
+                            <input-text v-model="form.lng" id="lng" name="lng"/>
                         </form-group>
 
                         <form-group :form="form" field="digital_driveby">
