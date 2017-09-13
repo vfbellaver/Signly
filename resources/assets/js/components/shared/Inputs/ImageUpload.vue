@@ -27,7 +27,7 @@
         border: 1px solid #E3E3E3;
 
         > div {
-            height: 100%;
+                height: 100%;
             position: absolute;
             width: 100%;
 

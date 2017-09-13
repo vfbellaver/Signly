@@ -18,7 +18,6 @@ require('./components/bootstrap');
 window.Bus = new Vue();
 require('./vue/bootstrap');
 
-window.Masks = require ('./directives/masks');
 
 const app = new Vue({
         el: '#app',

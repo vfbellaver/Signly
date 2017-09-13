@@ -7,6 +7,7 @@ use App\Events\ClientDeleted;
 use App\Events\ClientUpdated;
 use App\Forms\ClientForm;
 use App\Models\Client;
+use Storage;
 
 class ClientService
 {
@@ -67,6 +68,7 @@ class ClientService
     public function delete(Client $client)
     {
         return \DB::transaction(function() use ($client) {
+           \File::delete($client->logo);
            $client->delete();
 
            event(new ClientDeleted($client));

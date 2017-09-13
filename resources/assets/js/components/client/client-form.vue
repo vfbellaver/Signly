@@ -5,30 +5,26 @@
             <modal-body>
                 <row>
                     <column size="12">
-                        <row>
-                        <column size="7">
+
                             <form-group :form="form" field="company_name">
                                 <input-label for="company_name">Company_Name: </input-label>
                                 <input-text v-model="form.company_name" id="company_name" name="company_name"/>
                             </form-group>
-                        </column>
-                        <column size="5">
-                            <form-group :form="form" field="logo">
-                                <input-label for="logo">Logo: </input-label>
-                                <image-upload id="logo" v-model="form.logo"></image-upload>
-                            </form-group>
-                        </column>
+                        <row>
+                            <column size="5">
+                                <form-group :form="form" field="first_name">
+                                    <input-label for="first_name">First Name: </input-label>
+                                    <input-text v-model="form.first_name" id="first_name" name="first_name"/>
+                                </form-group>
+                            </column>
+
+                            <column size="7">
+                                <form-group :form="form" field="last_name">
+                                    <input-label for="last_name">Last Name: </input-label>
+                                    <input-text v-model="form.last_name" id="last_name" name="last_name"/>
+                                </form-group>
+                            </column>
                         </row>
-                        <form-group :form="form" field="first_name">
-                            <input-label for="first_name">First Name: </input-label>
-                            <input-text v-model="form.first_name" id="first_name" name="first_name"/>
-                        </form-group>
-
-                        <form-group :form="form" field="last_name">
-                            <input-label for="last_name">Last Name: </input-label>
-                            <input-text v-model="form.last_name" id="last_name" name="last_name"/>
-                        </form-group>
-
                         <form-group :form="form" field="email">
                             <input-label for="email">Email: </input-label>
                             <input-text v-model="form.email" id="email" name="email"/>
@@ -41,8 +37,8 @@
 
 
                         <form-group :form="form" field="address_line2">
-                            <input-label for="address_line2">Address Line 2 (Optional): </input-label>
-                            <input-text v-model="form.address_line2" id="address_line2" name="address_line2"/>
+                            <input-label for="address_line2">Address Line 2: </input-label>
+                            <input-text v-model="form.address_line2" id="address_line2" name="address_line2" placeholder="(Optional)"/>
                         </form-group>
 
                         <form-group :form="form" field="city">
@@ -51,40 +47,50 @@
                         </form-group>
 
                         <row>
-                            <column size="7">
+
+                            <column size="6">
                                 <form-group :form="form" field="state">
                                     <input-label for="state">State: </input-label>
                                     <input-text v-model="form.state" id="state" name="state"/>
                                 </form-group>
                             </column>
-                            <column size="5">
+                            <column size="6">
                                 <form-group :form="form" field="zipcode">
                                     <input-label for="zipcode">Zipcode: </input-label>
                                     <input-text v-model="form.zipcode" id="zipcode" name="zipcode" v-zipcode/>
                                 </form-group>
                             </column>
+                            <column size="6">
 
-                            <column size="4">
-                                <form-group :form="form" field="phone1">
-                                    <input-label for="phone1">Phone 1: </input-label>
-                                    <input-text v-model="form.phone1" id="phone1" name="phone1" type="tel" v-tel/>
+                                    <form-group :form="form" field="phone1">
+                                        <input-label for="phone1">Phone 1: </input-label>
+                                        <input-text v-model="form.phone1" id="phone1" name="phone1" type="tel" v-tel/>
+                                    </form-group>
+
+                                    <form-group :form="form" field="phone2">
+                                        <input-label for="phone2">Phone 2: </input-label>
+                                        <input-text v-model="form.phone2" id="phone2" name="phone2" placeholder="(Optional)" type="tel" v-tel/>
+                                    </form-group>
+
+                                    <form-group :form="form" field="fax">
+                                        <input-label for="fax">Fax: </input-label>
+                                        <input-text v-model="form.fax" id="fax" name="fax"/>
+                                    </form-group>
+
+
+                            </column>
+                            <column size="6">
+                                <form-group :form="form" field="logo">
+                                    <input-label for="logo">Logo: </input-label>
+                                    <image-upload id="logo" v-model="form.logo"></image-upload>
                                 </form-group>
                             </column>
 
-                            <column size="4">
-                                <form-group :form="form" field="phone2">
-                                    <input-label for="phone2">Phone 2: </input-label>
-                                    <input-text v-model="form.phone2" id="phone2" name="phone2" type="tel" v-tel/>
-                                </form-group>
-                            </column>
-                            <column size="4">
-                                <form-group :form="form" field="fax">
-                                    <input-label for="fax">Fax: </input-label>
-                                    <input-text v-model="form.fax" id="fax" name="fax"/>
-                                </form-group>
-                            </column>
+
+
+
+
                         </row>
-
                    </column>
                 </row>
             </modal-body>
