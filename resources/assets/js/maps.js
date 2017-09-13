@@ -40,24 +40,22 @@ $(document).ready(function () {
     });
 
 
-
     // latitude and logitude
     google.maps.event.addListener(marker, 'position_changed', function () {
 
-        var address =   marker.getPosition();
+        var address = marker.getPosition();
         var lat = marker.getPosition().lat();
         var lng = marker.getPosition().lng();
 
 
         var geocoder = new google.maps.Geocoder();
 
-        geocoder.geocode({'latLng':address},function (results,status) {
+        geocoder.geocode({'latLng': address}, function (results, status) {
 
-            if(status == google.maps.GeocoderStatus.OK) {
-                if(results[0]) {
+            if (status == google.maps.GeocoderStatus.OK) {
+                if (results[0]) {
                     $('#address').val(results[0].formatted_address);
-                    $('#lat').val(lat);
-                    $('#lng').val(lng);
+                    Bus.$emit('markerChanged', {lat: lat, lng: lng});
                 } else {
                     $('#address').val('No results found');
                 }

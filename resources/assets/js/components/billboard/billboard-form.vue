@@ -9,12 +9,12 @@
                         <form-group :form="form" field="name">
                             <input-label for="name">Name: </input-label>
                             <input-text v-model="form.name" id="name" name="name"/>
-                        </form-group>     
+                        </form-group>
 
                         <form-group :form="form" field="description">
                             <input-label for="description">Description: </input-label>
                             <text-area v-model="form.description" id="description" name="description"/>
-                        </form-group>     
+                        </form-group>
 
                         <form-group :form="form" field="address">
                             <input-label for="address">Address: </input-label>
@@ -33,7 +33,7 @@
                         <form-group :form="form" field="lat">
                             <input-label for="lat">Latitude: </input-label>
                             <input-text v-model="form.lat" id="lat" name="lat"/>
-                        </form-group>     
+                        </form-group>
 
                         <form-group :form="form" field="lng">
                             <input-label for="lng">Longitude: </input-label>
@@ -68,6 +68,14 @@
                 api: 'billboard'
             }
         },
+        created() {
+            const self = this;
+            Bus.$on('markerChanged', (pos) => {
+                console.log("Marker positions changed", pos);
+                self.form.lat = pos.lat;
+                self.form.lng = pos.lng;
+            });
+        },
         computed: {
             title() {
                 return `${(this.form.id ? 'Edit' : 'Add')} Billboard`;
@@ -76,13 +84,13 @@
         methods: {
             buildForm(billboard) {
                 return new SlcForm({
-					id: billboard ? billboard.id : null,
-					name: billboard ? billboard.name : null,
-					description: billboard ? billboard.description : null,
-					digital_driveby: billboard ? billboard.digital_driveby : null,
-					address: billboard ? billboard.address : null,
-					lat: billboard ? billboard.lat : null,
-					lng: billboard ? billboard.lng : null,
+                    id: billboard ? billboard.id : null,
+                    name: billboard ? billboard.name : null,
+                    description: billboard ? billboard.description : null,
+                    digital_driveby: billboard ? billboard.digital_driveby : null,
+                    address: billboard ? billboard.address : null,
+                    lat: billboard ? billboard.lat : null,
+                    lng: billboard ? billboard.lng : null,
                 });
             }
         }
