@@ -25,6 +25,7 @@ class ClientsController extends Controller
 
     public function store(ClientCreateRequest $request)
     {
+
         $data = $this->service->create($request->form());
 
         $response = [

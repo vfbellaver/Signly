@@ -30,7 +30,6 @@ class ClientService
             ];
 
             $client = new Client($data);
-
             $client->save();
 
             event(new ClientCreated($client));
