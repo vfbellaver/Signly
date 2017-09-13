@@ -15,7 +15,7 @@
                         <column size="5">
                             <form-group :form="form" field="logo">
                                 <input-label for="logo">Logo: </input-label>
-                                <input-file type="file" v-model="form.logo" id="logo" name="logo"/>
+                                <image-upload id="logo" v-model="form.logo"></image-upload>
                             </form-group>
                         </column>
                         </row>
