@@ -9,6 +9,16 @@ $(document).ready(function () {
         center: position
     };
 
+    // isntance of map
+    var map = new google.maps.Map(document.getElementById('map'), options);
+
+    // marker
+    var marker = new google.maps.Marker({
+        position: position,
+        map: map,
+        draggable: true
+    });
+
 
     // search input
     var search = new google.maps.places.SearchBox(document.getElementById('address'));
@@ -27,19 +37,6 @@ $(document).ready(function () {
         map.fitBounds(bounds);
         map.setZoom(12);
     });
-
-
-    // isntance of map
-    var map = new google.maps.Map(document.getElementById('map'), options);
-
-    // marker
-    var marker = new google.maps.Marker({
-        position: position,
-        map: map,
-        draggable: true
-    });
-
-
 
     // latitude and logitude
     google.maps.event.addListener(marker, 'position_changed', function () {
