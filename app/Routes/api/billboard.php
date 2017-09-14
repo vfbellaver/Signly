@@ -1,3 +1,4 @@
 <?php
 
-Route::resource('billboard', 'Api\BillboardsController', ['except' => ['show', 'create', 'edit']]);
+Route::resource('billboard', 'Api\BillboardsController',
+    ['except' => ['show', 'create', 'edit']]);

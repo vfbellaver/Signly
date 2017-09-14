@@ -2,7 +2,7 @@
     <div>
         <box>
             <box-title>
-                Billboards
+                Clients
                 <box-tools slot="tools">
                     <box-tool icon="plus" @click.native="add">New</box-tool>
                 </box-tools>
@@ -13,30 +13,32 @@
                         <thead>
                         <tr>
                             <th></th>
-							<th>Name</th>
-							<th>Address</th>
-							<th>Digital Driveby</th>
+							<th>Company Name</th>
+							<th>First Name</th>
+							<th>Last Name</th>
+							<th>Email</th>
                         </tr>
                         </thead>
                         <tbody>
-                         <tr v-for="( billboard, index ) in billboards">
+                         <tr v-for="( client, index ) in clients">
                             <td>{{ index + 1 }}</td>
-							<td><a>{{ billboard.name }}</a></td>
-							<td>{{ billboard.address }}</td>
-							<td>{{ billboard.digital_driveby }}</td>
+							<td>{{ client.company_name }}</td>
+							<td>{{ client.first_name }}</td>
+							<td>{{ client.last_name }}</td>
+							<td>{{ client.email }}</td>
                             <td>
                                 <btn-success
                                     size="xs"
-                                    @click.native="edit(billboard)"
+                                    @click.native="edit(client)"
                                 >
                                     <icon icon="edit"/>
                                 </btn-success>
 
-                                <btn-danger @click.native="destroy(billboard)"
-                                            :disabled="billboard.destroyForm.busy"
+                                <btn-danger @click.native="destroy(client)"
+                                            :disabled="client.destroyForm.busy"
                                             size="xs"
                                 >
-                                    <spinner v-if="billboard.destroyForm.busy"></spinner>
+                                    <spinner v-if="client.destroyForm.busy"></spinner>
                                     <icon icon="trash" v-else/>
                                 </btn-danger>
 
@@ -47,20 +49,20 @@
                 </div>
             </box-content>
         </box>
-        <billboard-form ref="form" @saved="formSaved"></billboard-form>
+        <client-form ref="form" @saved="formSaved"></client-form>
     </div>
 </template>
 
 <script>
-    import BillboardForm from './billboard-form';
+    import ClientForm from './client-form';
 
     export default {
         components:{
-            BillboardForm
+            ClientForm
         },
         data() {
             return {
-                billboards: []
+                clients: []
             }
         },
 
@@ -74,39 +76,39 @@
                 this.$refs.form.show();
             },
 
-            edit(billboard) {
-                this.$refs.form.show(billboard);
+            edit(client) {
+                this.$refs.form.show(client);
             },
 
             reload() {
                 let self = this;
-                Slc.get(laroute.route('api.billboard.index'))
+                Slc.get(laroute.route('api.client.index'))
                     .then((response) => {
-                        self.billboards = response;
+                        self.clients = response;
                     });
             },
 
-            formSaved(billboard) {
-                let index = this.findIndex(billboard);
-                index > -1 ? this.billboards[index] = billboard : this.billboards.push(billboard);
+            formSaved(client) {
+                let index = this.findIndex(client);
+                index > -1 ? this.clients[index] = client : this.clients.push(client);
                 this.$forceUpdate();
             },
 
-            destroy(billboard) {
+            destroy(client) {
                 let self = this;
-                Slc.delete(laroute.route('api.billboard.destroy', {billboard: billboard.id}), billboard.destroyForm)
+                Slc.delete(laroute.route('api.client.destroy', {client: client.id}), client.destroyForm)
                     .then(() => {
-                        self.removeBillboard(billboard);
+                        self.removeClient(client);
                     });
             },
 
-            removeBillboard(billboard) {
-                this.billboards.splice(this.findIndex(billboard), 1);
+            removeClient(client) {
+                this.clients.splice(this.findIndex(client), 1);
             },
 
-            findIndex(billboard) {
-                return this.billboards.findIndex((_billboard) => {
-                    return _billboard.id === billboard.id;
+            findIndex(client) {
+                return this.clients.findIndex((_client) => {
+                    return _client.id === client.id;
                 });
             }
         }

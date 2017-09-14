@@ -19,6 +19,7 @@ class AppServiceProvider extends ServiceProvider
         if (!class_exists('Slc')) {
             class_alias('App\Slc', 'Slc');
         }
+
         if ($this->app->environment('local', 'testing')) {
             $this->app->register(DuskServiceProvider::class);
         }

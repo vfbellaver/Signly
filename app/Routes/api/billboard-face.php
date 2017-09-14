@@ -1,3 +1,5 @@
 <?php
 
-Route::resource('billboard-face', 'Api\BillboardFacesController', ['except' => ['show', 'create', 'edit']]);
+
+Route::resource('billboard-face', 'Api\BillboardFacesController',
+    ['except' => ['show', 'create', 'edit']]);

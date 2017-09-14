@@ -15,22 +15,21 @@ class ClientService
         return \DB::transaction(function () use ($form) {
             $data = [
 				'company_name' => $form->companyName(),
+				'logo' => $form->logo(),
 				'first_name' => $form->firstName(),
 				'last_name' => $form->lastName(),
 				'email' => $form->email(),
 				'address_line1' => $form->addressLine1(),
 				'address_line2' => $form->addressLine2(),
-				'state' => $form->state(),
 				'city' => $form->city(),
-				'logo' => $form->logo(),
-				'phone_1' => $form->phone1(),
-				'phone_2' => $form->phone2(),
-				'fax' => $form->fax(),
 				'zipcode' => $form->zipcode(),
+				'state' => $form->state(),
+				'phone1' => $form->phone1(),
+				'phone2' => $form->phone2(),
+				'fax' => $form->fax(),
             ];
 
             $client = new Client($data);
-
             $client->save();
 
             event(new ClientCreated($client));
@@ -44,18 +43,18 @@ class ClientService
         return \DB::transaction(function () use ($form, $client) {
             
 			$client->company_name = $form->companyName();
+			$client->logo = $form->logo();
 			$client->first_name = $form->firstName();
 			$client->last_name = $form->lastName();
 			$client->email = $form->email();
 			$client->address_line1 = $form->addressLine1();
 			$client->address_line2 = $form->addressLine2();
-			$client->state = $form->state();
 			$client->city = $form->city();
-			$client->logo = $form->logo();
-			$client->phone_1 = $form->phone1();
-			$client->phone_2 = $form->phone2();
-			$client->fax = $form->fax();
 			$client->zipcode = $form->zipcode();
+			$client->state = $form->state();
+			$client->phone1 = $form->phone1();
+			$client->phone2 = $form->phone2();
+			$client->fax = $form->fax();
 
             $client->save();
 

@@ -27,7 +27,6 @@ class BillboardService
             $billboard->save();
 
             event(new BillboardCreated($billboard));
-
             return $billboard;
         });
     }

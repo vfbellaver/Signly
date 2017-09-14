@@ -9,20 +9,19 @@ class CreateClientsTable extends Migration
     {
         Schema::create('clients', function (BluePrint $table) {
             $table->increments('id');
-
             $table->string('company_name',128);
+            $table->string('logo',256)->nullable();
             $table->string('first_name',64)->nullable();
             $table->string('last_name',64)->nullable();
             $table->string('email',128)->nullable();
             $table->string('address_line1',64)->nullable();
             $table->string('address_line2',64)->nullable();
-            $table->string('state',64)->nullable();
             $table->string('city',64)->nullable();
-            $table->string('logo',256)->nullable();
-            $table->string('phone_1',14)->nullable();
-            $table->string('phone_2',14)->nullable();
-            $table->string('fax',14)->nullable();
             $table->string('zipcode',8)->nullable();
+            $table->string('state',64)->nullable();
+            $table->string('phone1',14)->nullable();
+            $table->string('phone2',14)->nullable();
+            $table->string('fax',14)->nullable();
 
             $table->timestamps();
         });

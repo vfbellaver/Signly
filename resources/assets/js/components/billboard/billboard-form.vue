@@ -3,7 +3,9 @@
         <modal-header>{{ title }}</modal-header>
         <form-submit v-model="form" @submit="save">
             <modal-body>
+
                 <row>
+
                     <column size="12">
 
                         <form-group :form="form" field="name">
@@ -22,6 +24,7 @@
                         </form-group>
 
                     </column>
+
 
                     <!--Google map-->
                     <column size="12">
@@ -50,7 +53,6 @@
                         </form-group>
                     </column>
 
-
                 </row>
             </modal-body>
 
@@ -67,11 +69,29 @@
     import ModalForm from '../shared/Mixins/ModalForm';
 
     export default {
+
         mixins: [ModalForm],
+
         data() {
             return {
                 api: 'billboard'
             }
+        },
+
+        created() {
+
+            const self = this;
+
+            Bus.$on('markerChanged', (pos) => {
+                self.form.lat = pos.lat;
+                self.form.lng = pos.lng;
+            });
+
+            Bus.$on('addressChanged', (address) => {
+                self.form.address = address;
+            });
+
+            Bus.$on('initialPosition', (self.form.lat, self.form.lat));
         },
         computed: {
             title() {
@@ -89,11 +109,6 @@
                     lat: billboard ? billboard.lat : null,
                     lng: billboard ? billboard.lng : null,
                 });
-            },
-
-            updateStatus(value, item) {
-                let form = new SlcForm(item);
-                return form.digital_driveby = value;
             },
 
         }

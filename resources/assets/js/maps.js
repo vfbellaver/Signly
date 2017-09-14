@@ -1,7 +1,8 @@
 $(document).ready(function () {
 
     // initial position
-    var position = {lat: 40.7579945, lng: -111.9708345};
+    var position = {lat: 40.757994, lng: -111.970834};
+    var latLng = new google.maps.LatLng(position);
 
     // my options
     var options = {
@@ -19,42 +20,58 @@ $(document).ready(function () {
         draggable: true
     });
 
+    // Geocoding
+    var geocoder = new google.maps.Geocoder();
 
-    // search input
+    // isntance of map
+    var map = new google.maps.Map(document.getElementById('map'), options);
+
+    // marker
+    var marker = new google.maps.Marker({
+        position: position,
+        map: map,
+        draggable: true
+    })
+
     var search = new google.maps.places.SearchBox(document.getElementById('address'));
 
-    google.maps.event.addListener(search, 'places_changed', function () {
+    /*
+    $("#address").keypress (function(event) {
 
-        var places = search.getPlaces();
-        var bounds = new google.maps.LatLngBounds();
-        var i, place;
+        var t = event.;
 
-        for (i = 0; place = places [i]; i++) {
-            bounds.extend(place.geometry.location);
-            marker.setPosition(place.geometry.location());
+        if (event.keyCode == 39) {
+
+            var address = document.getElementById('address').value;
+
+            geocoder.geocode({'address': address}, function (results, status) {
+
+                if (status === 'OK') {
+
+                    map.setCenter(results[0].geometry.location);
+
+                    marker.setPosition(results[0].geometry.location);
+
+                }
+            });
         }
 
-        map.fitBounds(bounds);
-        map.setZoom(12);
     });
+    */
 
     // latitude and logitude
     google.maps.event.addListener(marker, 'position_changed', function () {
 
-        var address =   marker.getPosition();
+        var address = marker.getPosition();
         var lat = marker.getPosition().lat();
         var lng = marker.getPosition().lng();
 
+        geocoder.geocode({'latLng': address}, function (results, status) {
 
-        var geocoder = new google.maps.Geocoder();
-
-        geocoder.geocode({'latLng':address},function (results,status) {
-
-            if(status == google.maps.GeocoderStatus.OK) {
-                if(results[0]) {
-                    $('#address').val(results[0].formatted_address);
-                    $('#lat').val(lat);
-                    $('#lng').val(lng);
+            if (status == google.maps.GeocoderStatus.OK) {
+                if (results[0]) {
+                    Bus.$emit('addressChanged', results[0].formatted_address);
+                    Bus.$emit('markerChanged', {lat: lat, lng: lng});
                 } else {
                     $('#address').val('No results found');
                 }
@@ -63,7 +80,6 @@ $(document).ready(function () {
                     'ZERO_RESULTS': 'Kunde inte hitta adress'
 
                 }
-                console.log('Kunde inte hitta adress');
             }
         });
     });

@@ -9,6 +9,11 @@ class ClientForm extends BaseForm
 		return $this->request->get('company_name');
 	}
 
+	public function logo()
+	{
+		return $this->request->get('logo');
+	}
+
 	public function firstName()
 	{
 		return $this->request->get('first_name');
@@ -34,39 +39,34 @@ class ClientForm extends BaseForm
 		return $this->request->get('address_line2');
 	}
 
-	public function state()
-	{
-		return $this->request->get('state');
-	}
-
 	public function city()
 	{
 		return $this->request->get('city');
 	}
 
-	public function logo()
+	public function zipcode()
 	{
-		return $this->request->get('logo');
+		return $this->request->get('zipcode');
+	}
+
+	public function state()
+	{
+		return $this->request->get('state');
 	}
 
 	public function phone1()
 	{
-		return $this->request->get('phone_1');
+		return $this->request->get('phone1');
 	}
 
 	public function phone2()
 	{
-		return $this->request->get('phone_2');
+		return $this->request->get('phone2');
 	}
 
 	public function fax()
 	{
 		return $this->request->get('fax');
-	}
-
-	public function zipcode()
-	{
-		return $this->request->get('zipcode');
 	}
 
 

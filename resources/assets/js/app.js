@@ -10,14 +10,18 @@ import Laroute from './commons/laroute';
 window.laroute = Laroute;
 
 window.Maps = require('./maps');
+//window.Search = require('./search');
 window.Masks = require('./masks');
 
 window.Vue = require('vue');
+
+require('./directives/bootstrap');
 require('./components/bootstrap');
 
 window.Bus = new Vue();
 require('./vue/bootstrap');
 
+window.Masks = require ('./masks');
 
 const app = new Vue({
         el: '#app',
