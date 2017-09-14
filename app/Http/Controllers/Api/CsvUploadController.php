@@ -12,6 +12,7 @@ namespace App\Http\Controllers\Api;
 class CsvUploadController
 {
     public function CsvUpload(){
+        $files = request()->file('file');
 
     }
 }

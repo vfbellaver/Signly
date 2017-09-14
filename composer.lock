@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "42c9a2cb6fe97a8ff85c379c5f74bf94",
+    "content-hash": "f7a6d043d7ef7a043707e9ffa941c5c5",
     "packages": [
         {
             "name": "artesaos/defender",
@@ -412,64 +412,6 @@
                 "tracking"
             ],
             "time": "2016-08-09T08:02:38+00:00"
-        },
-        {
-            "name": "cesarfelip3/scaffolding",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/cesarfelip3/scaffolding.git",
-                "reference": "07a4fe623c1555c11be9ca082532096464f84b78"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/cesarfelip3/scaffolding/zipball/07a4fe623c1555c11be9ca082532096464f84b78",
-                "reference": "07a4fe623c1555c11be9ca082532096464f84b78",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.5.9"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "DevSquad\\Scaffolding\\ScaffoldingServiceProvider"
-                    ],
-                    "aliases": {
-                        "Slc": "DevSquad\\Scaffolding\\Slc"
-                    }
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "DevSquad\\Scaffolding\\": "src/"
-                }
-            },
-            "autoload-dev": {
-                "psr-4": {
-                    "Tests\\": "tests/"
-                }
-            },
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Rafael Lunardeli",
-                    "email": "rafael@slcdevshop.com"
-                }
-            ],
-            "description": "CRUD Generator",
-            "keywords": [
-                "laravel",
-                "scaffolding"
-            ],
-            "support": {
-                "issues": "https://github.com/cesarfelip3/scaffolding/issues",
-                "source": "https://github.com/cesarfelip3/scaffolding"
-            },
-            "time": "2017-09-10T19:03:37+00:00"
         },
         {
             "name": "composer/ca-bundle",
@@ -6825,7 +6767,6 @@
     "minimum-stability": "dev",
     "stability-flags": {
         "artesaos/defender": 20,
-        "cesarfelip3/scaffolding": 20,
         "lord/laroute": 20
     },
     "prefer-stable": true,

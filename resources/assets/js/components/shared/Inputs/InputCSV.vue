@@ -52,7 +52,7 @@
 
                     .dropzone {
                         cursor: pointer;
-                        background: url('/images/fileupload-bg.jpg') no-repeat center center;
+                        background: url('/images/csv-icon.png') no-repeat center center;
                         background-size: contain;
                         width: 100%;
                         height: 100%;
@@ -73,7 +73,7 @@
             maxSize: {required: false},
             allowedTypes: {required: false}
         },
-        mixins: [require('../Mixins/Model')],
+
         data() {
             return {
                 internalAllowedTypes: []

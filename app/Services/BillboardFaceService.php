@@ -1,0 +1,78 @@
+<?php
+
+namespace App\Services;
+
+use App\Events\BillboardFaceCreated;
+use App\Events\BillboardFaceDeleted;
+use App\Events\BillboardFaceUpdated;
+use App\Forms\BillboardFaceForm;
+use App\Models\BillboardFace;
+
+class BillboardFaceService
+{
+    public function create(BillboardFaceForm $form): BillboardFace
+    {
+        return \DB::transaction(function () use ($form) {
+            $data = [
+				'height' => $form->height(),
+				'width' => $form->width(),
+				'reads' => $form->reads(),
+				'label' => $form->label(),
+				'sign_type' => $form->signType(),
+				'hard_cost' => $form->hardCost(),
+				'monthly_impressions' => $form->monthlyImpressions(),
+				'notes' => $form->notes(),
+				'max_ads' => $form->maxAds(),
+				'duration' => $form->duration(),
+				'photo' => $form->photo(),
+				'is_iluminated' => $form->isIluminated(),
+            ];
+
+            $billboardFace = new BillboardFace($data);
+			$billboardFace->unique()->associate($form->unique());
+			$billboardFace->billboard()->associate($form->billboard());
+
+            $billboardFace->save();
+
+            event(new BillboardFaceCreated($billboardFace));
+
+            return $billboardFace;
+        });
+    }
+
+    public function update(BillboardFaceForm $form, BillboardFace $billboardFace): BillboardFace
+    {
+        return \DB::transaction(function () use ($form, $billboardFace) {
+            
+			$billboardFace->height = $form->height();
+			$billboardFace->width = $form->width();
+			$billboardFace->reads = $form->reads();
+			$billboardFace->label = $form->label();
+			$billboardFace->sign_type = $form->signType();
+			$billboardFace->hard_cost = $form->hardCost();
+			$billboardFace->monthly_impressions = $form->monthlyImpressions();
+			$billboardFace->notes = $form->notes();
+			$billboardFace->max_ads = $form->maxAds();
+			$billboardFace->duration = $form->duration();
+			$billboardFace->photo = $form->photo();
+			$billboardFace->is_iluminated = $form->isIluminated();
+			$billboardFace->unique()->associate($form->unique());
+			$billboardFace->billboard()->associate($form->billboard());
+
+            $billboardFace->save();
+
+            event(new BillboardFaceUpdated($billboardFace));
+
+            return $billboardFace;
+        });
+    }
+
+    public function delete(BillboardFace $billboardFace)
+    {
+        return \DB::transaction(function() use ($billboardFace) {
+           $billboardFace->delete();
+
+           event(new BillboardFaceDeleted($billboardFace));
+        });
+    }
+}
