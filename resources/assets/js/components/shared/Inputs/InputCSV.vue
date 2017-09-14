@@ -1,5 +1,5 @@
 <template>
-    <div class="image-upload">
+    <div class="csv-upload">
         <div>
             <div>
                 <div>
@@ -18,7 +18,7 @@
 
     @import "../../../../sass/variables";
 
-    .image-upload {
+    .csv-upload {
         overflow: hidden;
         padding-bottom: 75%;
         position: relative;
@@ -82,7 +82,7 @@
 
         mounted() {
             if (!this.allowedTypes) {
-                this.internalAllowedTypes = ['jpg', 'jpeg', 'png'];
+                this.internalAllowedTypes = ['csv'];
                 return;
             }
             let types = this.allowedTypes.split(',');
@@ -119,7 +119,7 @@
                     return;
                 }
                 this.$emit('uploading');
-                const uri = laroute.route('api.image.upload');
+                const uri = laroute.route('api.csv.upload');
                 Slc.upload(uri, allowedFiles).then((response) => {
                     const file = response.data[0];
                     this.internalValue = file.url;
