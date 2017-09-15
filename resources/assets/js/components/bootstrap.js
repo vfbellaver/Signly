@@ -9,7 +9,3 @@ Vue.component('billboard-face-list', require('./billboard-face/billboard-face-li
 Vue.component('csv-upload-billboard-list',require('./billboard/billboard-csv-upload.vue'));
 
 Vue.component('client-list', require('./client/client-list.vue'));
-
-Vue.component('client-list', require('./client/client-list.vue'));
-
-Vue.component('client-list', require('./client/client-list.vue'));

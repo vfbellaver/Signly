@@ -105,6 +105,7 @@
 
     export default {
         mixins: [ModalForm],
+        props: {},
         data() {
             return {
                 api: 'client'

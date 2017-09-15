@@ -1,54 +1,23 @@
 <template>
-    <div>
-        <box>
-            <box-title>
-                Upload Billboards CSV File
-            </box-title>
-            <box-content>
-                <form-submit v-model="form">
-                    <row>
-                        <column size="8">
-                            <h2>Orientations when uploading</h2>
-                            <ul>
-                                <li>Orientation 1</li>
-                                <li>Orientation 2</li>
-                                <li>Orientation 3</li>
-                            </ul>
-                        </column>
+    <div class="container" style="background: white">
+        <div class="panel">
+            <div class="panel-title">
+                Import CSV Billboards
+            </div>
+            <div class="panel-body">
 
-                        <column size="4">
-                            <form-group :form="form" field="csv">
-                                <input-label for="csv">Csv File: </input-label>
-                                <input-csv id="csv" v-model="form.csv"></input-csv>
-                            </form-group>
-                            <btn-submit :disabled="form.busy">
-                                <spinner v-if="form.busy"></spinner>
-                            </btn-submit>
-                        </column>
-                    </row>
+                <form-submit v-model="form" @submit="save">
+                    <div class="form-group">
+                        <label for="file"> Select file:</label>
+                        <input type="file" name="file" id="file" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-primary">
+                            <i class="fa fa-upload"></i> Upload
+                        </button>
+                    </div>
                 </form-submit>
-                <row>
-
-                </row>
-
-            </box-content>
-        </box>
-
+            </div>
+        </div>
     </div>
 </template>
-<script>
-    import ModalForm from '../shared/Mixins/ModalForm';
-    export default {
-        mixins: [ModalForm],
-        data() {
-            return {
-                api: 'billboard'
-            }
-        },
-        methods: {
-            buildForm() {
-                return new SlcForm({});
-            }
-        }
-    }
-</script>
