@@ -66,6 +66,7 @@
 </template>
 
 <script>
+
     import ModalForm from '../shared/Mixins/ModalForm';
 
     export default {
@@ -93,11 +94,13 @@
 
             Bus.$on('initialPosition', (self.form.lat, self.form.lat));
         },
+
         computed: {
             title() {
                 return `${(this.form.id ? 'Edit' : 'Add')} Billboard`;
             }
         },
+
         methods: {
             buildForm(billboard) {
                 return new SlcForm({

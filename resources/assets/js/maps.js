@@ -23,18 +23,6 @@ $(document).ready(function () {
     // Geocoding
     var geocoder = new google.maps.Geocoder();
 
-    // isntance of map
-    var map = new google.maps.Map(document.getElementById('map'), options);
-
-    // marker
-    var marker = new google.maps.Marker({
-        position: position,
-        map: map,
-        draggable: true
-    })
-
-    var search = new google.maps.places.SearchBox(document.getElementById('address'));
-
     /*
     $("#address").keypress (function(event) {
 

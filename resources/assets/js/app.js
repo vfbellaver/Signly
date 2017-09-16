@@ -10,7 +10,6 @@ import Laroute from './commons/laroute';
 window.laroute = Laroute;
 
 window.Maps = require('./maps');
-//window.Search = require('./search');
 window.Masks = require('./masks');
 
 window.Vue = require('vue');
@@ -20,6 +19,16 @@ require('./components/bootstrap');
 
 window.Bus = new Vue();
 require('./vue/bootstrap');
+
+import * as VueGoogleMaps from 'vue2-google-maps';
+
+window.Vue.use(VueGoogleMaps, {
+    load: {
+        key: 'AIzaSyC2z5mUPBMQj4xb6VNzX32Iv-5xFzcpxu4',
+        v: 'v=3', //Optional
+        libraries: 'places', //// If you need to use place input
+    }
+});
 
 window.Masks = require ('./masks');
 
