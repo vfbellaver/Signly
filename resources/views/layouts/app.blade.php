@@ -77,9 +77,5 @@
 <!-- Scripts -->
 <script src="{{ mix('js/app.js') }}"></script>
 
-<script
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC2z5mUPBMQj4xb6VNzX32Iv-5xFzcpxu4&libraries=places">
-</script>
-
 </body>
 </html>
