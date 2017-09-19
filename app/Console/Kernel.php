@@ -11,7 +11,11 @@ use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 class Kernel extends ConsoleKernel
 {
 
-    protected $commands = [];
+    protected $commands = [
+        ProjectSetup::class,
+        Scaffolding::class,
+        ScaffoldingRollback::class,
+    ];
 
     protected function schedule(Schedule $schedule)
     {
