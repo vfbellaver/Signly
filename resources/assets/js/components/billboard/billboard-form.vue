@@ -15,7 +15,7 @@
                         </form-group>
                         <form-group :form="form" field="address">
                             <input-label for="address">Address: </input-label>
-                            <input-text v-model="address" id="address" name="address"></input-text>
+                            <input-text v-model="form.address" id="address" name="address"></input-text>
                         </form-group>
                     </column>
                     <column size="12">
@@ -84,14 +84,12 @@
                 mapOptions: {
                     mapTypeControl: false,
                 },
-                address: null,
                 zoomChanged: false,
             }
         },
 
         watch: {
-            address() {
-                this.form.address = this.address;
+            'form.address': function () {
                 this.onAddressChange();
             }
         },
@@ -164,7 +162,7 @@
 
                 this.marker = pos;
                 this.center = pos;
-                if (self.zoomChanged){
+                if (self.zoomChanged) {
                     return;
                 }
                 this.zoom = 15;
@@ -174,9 +172,10 @@
                 this.zoomChanged = true;
             },
             onAddressChange: _.debounce(function (e) {
+                console.log("OnAddressChange", e);
                 const self = this;
                 const geocoder = new google.maps.Geocoder;
-                geocoder.geocode({address: self.address}, (results, status) => {
+                geocoder.geocode({address: self.form.address}, (results, status) => {
                     console.log("Geocode From Address", results, status);
                     if (!results.length || status !== 'OK') {
                         return;
@@ -191,7 +190,7 @@
                     self.form.lng = pos.lng;
                     self.marker = pos;
                     self.center = pos;
-                    if (self.zoomChanged){
+                    if (self.zoomChanged) {
                         return;
                     }
                     self.zoom = 15;
