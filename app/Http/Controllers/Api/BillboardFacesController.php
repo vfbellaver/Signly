@@ -20,7 +20,8 @@ class BillboardFacesController extends Controller
 
     public function index()
     {
-        return BillboardFace::all();
+        $billboardId = request()->get('bid');
+        return BillboardFace::query()->where('billboard_id', $billboardId)->get()->toArray();
     }
 
     public function store(BillboardFaceCreateRequest $request)
