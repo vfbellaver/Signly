@@ -12,34 +12,29 @@
                     <table class="table table-striped">
                         <thead>
                         <tr>
-                            <th></th>
-							<th>Name</th>
-							<th>Address</th>
-							<th>Digital Driveby</th>
+                            <th style="width: 50px"></th>
+                            <th>Name</th>
+                            <th style="width: 200px" class="hidden-sm">Address</th>
+                            <th style="width: 100px">Driveby</th>
+                            <th style="width: 100px"></th>
                         </tr>
                         </thead>
                         <tbody>
-                         <tr v-for="( billboard, index ) in billboards">
+                        <tr v-for="( billboard, index ) in billboards">
                             <td>{{ index + 1 }}</td>
-							<td><a>{{ billboard.name }}</a></td>
-							<td>{{ billboard.address }}</td>
-							<td>{{ billboard.digital_driveby }}</td>
+                            <td>{{ billboard.name }}</td>
+                            <td class="hidden-sm">{{ billboard.address }}</td>
+                            <td>{{ billboard.digital_driveby }}</td>
                             <td>
-                                <btn-success
-                                    size="xs"
-                                    @click.native="edit(billboard)"
-                                >
-                                    <icon icon="edit"/>
+                                <btn-success size="xs" @click.native="edit(billboard)">
+                                    <icon icon="edit"></icon>
                                 </btn-success>
-
                                 <btn-danger @click.native="destroy(billboard)"
                                             :disabled="billboard.destroyForm.busy"
-                                            size="xs"
-                                >
+                                            size="xs">
                                     <spinner v-if="billboard.destroyForm.busy"></spinner>
-                                    <icon icon="trash" v-else/>
+                                    <icon icon="trash" v-else></icon>
                                 </btn-danger>
-
                             </td>
                         </tr>
                         </tbody>
@@ -55,7 +50,7 @@
     import BillboardForm from './billboard-form';
 
     export default {
-        components:{
+        components: {
             BillboardForm
         },
         data() {
