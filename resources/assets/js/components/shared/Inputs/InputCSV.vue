@@ -3,66 +3,16 @@
         <div>
             <div>
                 <div>
-                    <input ref="file" type="file" @change="onFileChange" class="hidden" :multiple="multiple"/>
-                    <div v-if="value" class="preview" :style="{ 'background-image': 'url(' + value + ')' }"
-                         @click="replaceImage">
+                    <input ref="file" type="file" @change="onFileChange" :multiple="multiple"/>
+                    <div v-if="internalValue" class="preview"
+                         @click="replaceCsv ">
                     </div>
-                    <div v-else class="dropzone" @click="replaceImage"></div>
                 </div>
             </div>
         </div>
     </div>
 </template>
 
-<style lang="scss">
-
-    @import "../../../../sass/variables";
-
-    .csv-upload {
-        overflow: hidden;
-        padding-bottom: 75%;
-        position: relative;
-        background: $white;
-        border-radius: 4px;
-        border: 1px solid #E3E3E3;
-
-        > div {
-            height: 100%;
-            position: absolute;
-            width: 100%;
-
-            > div {
-                display: table;
-                height: 100%;
-                width: 100%;
-
-                > div {
-                    padding: 12px;
-                    display: table-cell;
-                    text-align: center;
-                    vertical-align: middle;
-
-                    .preview {
-                        cursor: pointer;
-                        background: no-repeat center center;
-                        background-size: contain;
-                        width: 100%;
-                        height: 100%;
-                    }
-
-                    .dropzone {
-                        cursor: pointer;
-                        background: url('/images/csv-icon.png') no-repeat center center;
-                        background-size: contain;
-                        width: 100%;
-                        height: 100%;
-                        border: none;
-                    }
-                }
-            }
-        }
-    }
-</style>
 
 <script>
     import * as Slc from "../../../vue/http";
@@ -73,7 +23,7 @@
             maxSize: {required: false},
             allowedTypes: {required: false}
         },
-
+        mixins: [require('../Mixins/Model')],
         data() {
             return {
                 internalAllowedTypes: []
@@ -119,8 +69,9 @@
                     return;
                 }
                 this.$emit('uploading');
-                const uri = laroute.route('api.csv.upload');
+                const uri = laroute.route('api.image.upload');
                 Slc.upload(uri, allowedFiles).then((response) => {
+                    console.log("Uploaded image", response);
                     const file = response.data[0];
                     this.internalValue = file.url;
                     this.$emit('uploaded');

@@ -5,6 +5,7 @@
                 Billboards
                 <box-tools slot="tools">
                     <box-tool icon="plus" @click.native="add">New</box-tool>
+                    <box-tool icon="plus" @click.native="importBillboards">Import Billboards</box-tool>
                 </box-tools>
             </box-title>
             <box-content>
@@ -48,10 +49,13 @@
 
 <script>
     import BillboardForm from './billboard-form';
+    import BillboardFormCsv from './billboard-form-csv.vue'
+
 
     export default {
         components: {
-            BillboardForm
+            BillboardForm,
+            BillboardFormCsv
         },
         data() {
             return {
@@ -68,10 +72,13 @@
             add() {
                 this.$refs.form.show();
             },
+            importBillboards(){
+                window.location = laroute.route("csv-upload.index");
+            },
 
 
             edit(billboard) {
-                this.$refs.form.show(billboard);
+                window.location = laroute.route("billboards.edit", {billboard: billboard.id});
             },
 
             reload() {
@@ -83,9 +90,7 @@
             },
 
             formSaved(billboard) {
-                let index = this.findIndex(billboard);
-                index > -1 ? this.billboards[index] = billboard : this.billboards.push(billboard);
-                this.$forceUpdate();
+                window.location = laroute.route("billboards.edit", {billboard: billboard.id});
             },
 
             destroy(billboard) {

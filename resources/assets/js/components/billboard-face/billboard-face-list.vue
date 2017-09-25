@@ -13,27 +13,27 @@
                         <thead>
                         <tr>
                             <th></th>
-							<th>Unique</th>
-							<th>Height</th>
-							<th>Width</th>
-							<th>Monthly Impressions</th>
-							<th>Duration</th>
-							<th>Billboard</th>
+                            <th>Unique</th>
+                            <th>Height</th>
+                            <th>Width</th>
+                            <th>Monthly Impressions</th>
+                            <th>Duration</th>
+                            <th>Billboard</th>
                         </tr>
                         </thead>
                         <tbody>
-                         <tr v-for="( billboardface, index ) in billboardFaces">
+                        <tr v-for="( billboardface, index ) in billboardFaces">
                             <td>{{ index + 1 }}</td>
-							<td>{{ billboardface.unique.name }}</td>
-							<td>{{ billboardface.height }}</td>
-							<td>{{ billboardface.width }}</td>
-							<td>{{ billboardface.monthly_impressions }}</td>
-							<td>{{ billboardface.duration }}</td>
-							<td>{{ billboardface.billboard.name }}</td>
+                            <td>{{ billboardface.unique.name }}</td>
+                            <td>{{ billboardface.height }}</td>
+                            <td>{{ billboardface.width }}</td>
+                            <td>{{ billboardface.monthly_impressions }}</td>
+                            <td>{{ billboardface.duration }}</td>
+                            <td>{{ billboardface.billboard.name }}</td>
                             <td>
                                 <btn-success
-                                    size="xs"
-                                    @click.native="edit(billboardface)"
+                                        size="xs"
+                                        @click.native="edit(billboardface)"
                                 >
                                     <icon icon="edit"/>
                                 </btn-success>
@@ -61,7 +61,12 @@
     import BillboardFaceForm from './billboard-face-form';
 
     export default {
-        components:{
+
+        props: {
+            billboardId: {required: true}
+        },
+
+        components: {
             BillboardFaceForm
         },
         data() {
@@ -77,7 +82,7 @@
         methods: {
 
             add() {
-                this.$refs.form.show();
+                this.$refs.form.show({billboard_id: this.billboardId});
             },
 
             edit(billboardFace) {
@@ -86,7 +91,7 @@
 
             reload() {
                 let self = this;
-                Slc.get(laroute.route('api.billboard-face.index'))
+                Slc.get(laroute.route('api.billboard-face.index', {bid: this.billboardId}))
                     .then((response) => {
                         self.billboardFaces = response;
                     });

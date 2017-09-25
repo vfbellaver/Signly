@@ -2,6 +2,6 @@
 
 @section('content')
     @component('components.default-page')
-        <billboard-form-csv></billboard-form-csv>
+        <billboard-edit id="{{$billboard->id}}"></billboard-edit>
     @endcomponent
 @endsection
