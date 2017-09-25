@@ -10,43 +10,23 @@ namespace App\Services;
 
 
 
+use App\Events\BillboardCreated;
+use App\Forms\BillboardForm;
+use App\Models\Billboard;
+
 class BillboardsImportService
 {
 
     protected $valid = true;
 
-    public function checkImportCsv(array $data){
-
-        // verifies that the data already exists in the DB
-        $exist = $this->checkBillboardsExists($data);
-
-        //if the data exist, it informs the existence
-        if(count($exist) > 0){
-            $this->valid = false;
-            $this->addBillboardExistErrorMessage($data);
-        }
-        return $this->valid;
-    }
-
-
-    // check if it already exists in DB
-    private function checkBillboardsExists($address)
-    {
-
-    }
-
-    // add message error case billboard exists
-    private function addBillboardExistErrorMessage($exist, $header, $rows)
-    {
-
-    }
-
-
-
     // save Billboards
-    public function createBillboards($header, $rows)
+    public function createBillboards(array $data)
     {
+        foreach ($data as $billboard){
 
+                $billboard = new Billboard($billboard);
+                $billboard->save();
+
+            }
+        }
     }
-
-}

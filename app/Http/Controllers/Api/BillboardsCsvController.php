@@ -13,7 +13,7 @@ use App\Http\Requests\BillboardCreateRequest;
 use App\Services\BillboardsImportService;
 use Validator;
 
-class CsvUploadController
+class BillboardsCsvController
 {
     public function CsvUpload(BillboardCreateRequest $request, BillboardsImportService $billboardImport){
 

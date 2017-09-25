@@ -12,12 +12,21 @@ export default {
                 store: null,
                 update: null
             },
-
+            isShown: false,
         }
     },
 
     mounted() {
+        const self = this;
         this.reset();
+        $(this.$el).on('shown.bs.modal', () => {
+            self.$emit('shown');
+            self.isShown = true;
+        });
+        $(this.$el).on('hidden.bs.modal', () => {
+            self.$emit('hidden');
+            self.isShown = false;
+        });
     },
 
     computed: {
@@ -47,7 +56,8 @@ export default {
         reset() {
             this.form = this.buildForm();
         },
-        buildForm() {},
+        buildForm() {
+        },
         save() {
             this.form.id ? this.update() : this.add();
         },

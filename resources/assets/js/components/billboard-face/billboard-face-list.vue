@@ -2,7 +2,7 @@
     <div>
         <box>
             <box-title>
-                BillboardFaces
+                Billboard Faces
                 <box-tools slot="tools">
                     <box-tool icon="plus" @click.native="add">New</box-tool>
                 </box-tools>
@@ -16,16 +16,8 @@
 							<th>Unique</th>
 							<th>Height</th>
 							<th>Width</th>
-							<th>Reads</th>
-							<th>Label</th>
-							<th>Sign Type</th>
-							<th>Hard Cost</th>
 							<th>Monthly Impressions</th>
-							<th>Notes</th>
-							<th>Max Ads</th>
 							<th>Duration</th>
-							<th>Photo</th>
-							<th>Is Iluminated</th>
 							<th>Billboard</th>
                         </tr>
                         </thead>
@@ -35,16 +27,8 @@
 							<td>{{ billboardface.unique.name }}</td>
 							<td>{{ billboardface.height }}</td>
 							<td>{{ billboardface.width }}</td>
-							<td>{{ billboardface.reads }}</td>
-							<td>{{ billboardface.label }}</td>
-							<td>{{ billboardface.sign_type }}</td>
-							<td>{{ billboardface.hard_cost }}</td>
 							<td>{{ billboardface.monthly_impressions }}</td>
-							<td>{{ billboardface.notes }}</td>
-							<td>{{ billboardface.max_ads }}</td>
 							<td>{{ billboardface.duration }}</td>
-							<td>{{ billboardface.photo }}</td>
-							<td>{{ billboardface.is_iluminated }}</td>
 							<td>{{ billboardface.billboard.name }}</td>
                             <td>
                                 <btn-success

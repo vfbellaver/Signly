@@ -3,13 +3,19 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\BillboardCreateRequest;
 use App\Services\BillboardsImportService;
 use Illuminate\Http\Request;
-use Validator;
 
-class CsvUploadController extends Controller
+class BillboardsCsvController extends Controller
 {
+    private $service;
+
+    public function __construct(BillboardsImportService $service)
+    {
+        $this->middleware('needsRole:admin');
+        $this->service = $service;
+    }
+
     public function index()
     {
         return view('billboard.upload-csv');
@@ -33,31 +39,31 @@ class CsvUploadController extends Controller
             fclose($handle);
         }
 
-        dd($data);
         return $data;
     }
 
     public function CsvUpload(Request $request){
+                $validator = \Validator::make($request->all(),[
+                   'file' => 'required'
+                ]);
+
+                if($validator->fails()){
+                    return redirect()->back()->withErrors($validator);
+                }
 
                 $file = $request->file('file');
-                $this->csv_to_array($file);
+                $data = $this->csv_to_array($file);
 
+                $this->service->createBillboards($data);
 
-//
-//            if(!$billboardImport->checkImportCsv($rows,$header)){
-//                $request->session()->flash('errors_rows',$billboardImport->getErrorRows());
-//                flash()->error('Error in data. Correct and re-upload');
-//                return redirect()->back();
-//            }
-//
-//
-//            $billboardImport->createBillboards($header,$rows);
-//
-//            //return message after insertion
-//            //flash('billboards imported')
-//            return redirect()->back();
+                $response = [
+                    'message' => 'Billboard created.',
+                    'data' => $data
+                ];
 
+                return $response;
 
 
         }
+
 }

@@ -1,3 +1,3 @@
 <?php
 
-Route::resource('csv-upload', 'Web\CsvUploadController', ['only' => ['index']]);
+Route::resource('csv-upload', 'Web\BillboardsCsvController', ['only' => ['index']]);
