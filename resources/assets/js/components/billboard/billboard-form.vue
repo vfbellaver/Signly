@@ -119,6 +119,7 @@
         },
 
         methods: {
+
             buildForm(billboard) {
                 this.marker = null;
                 this.address = null;
@@ -136,7 +137,9 @@
                     lng: billboard ? billboard.lng : null,
                 });
             },
+
             onMapClick(e) {
+
                 const self = this;
                 console.log(e);
                 if (this.marker) {
@@ -169,10 +172,12 @@
                 }
                 this.zoom = 15;
             },
+
             onZoomChanged(e) {
                 console.log("On Zoom Changed", e);
                 this.zoomChanged = true;
             },
+
             onAddressChange: _.debounce(function (e) {
                 const self = this;
                 const geocoder = new google.maps.Geocoder;
@@ -197,6 +202,7 @@
                     self.zoom = 15;
                 });
             }, 500),
+
             onMarkerMoved: _.debounce(function (e) {
                 console.log('On Marker Moved', e);
                 const pos = {
