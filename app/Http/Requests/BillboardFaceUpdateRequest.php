@@ -19,7 +19,7 @@ class BillboardFaceUpdateRequest extends BaseRequest
     public function rules()
     {
         return [
-			'unique' => 'required',
+			'code' => 'required',
 			'height' => 'required',
 			'width' => 'required',
 			'reads' => 'required',
@@ -31,8 +31,8 @@ class BillboardFaceUpdateRequest extends BaseRequest
 			'max_ads' => 'required|numeric',
 			'duration' => 'required|numeric',
 			'photo' => 'required',
-			'is_iluminated' => 'required|numeric',
-			'billboard' => 'nullable|numeric',
+			'is_iluminated' => 'required',
+			'billboard' => 'required|numeric',
         ];
     }
 }

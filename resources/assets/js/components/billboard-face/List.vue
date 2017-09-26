@@ -8,48 +8,25 @@
                 </box-tools>
             </box-title>
             <box-content>
-                <div class="table-responsive">
-                    <table class="table table-striped">
-                        <thead>
-                        <tr>
-                            <th></th>
-                            <th>Code</th>
-                            <th>Height</th>
-                            <th>Width</th>
-                            <th>Monthly Impressions</th>
-                            <th>Duration</th>
-                            <th>Billboard</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr v-for="( billboardface, index ) in billboardFaces">
-                            <td>{{ index + 1 }}</td>
-                            <td>{{ billboardface.code }}</td>
-                            <td>{{ billboardface.height }}</td>
-                            <td>{{ billboardface.width }}</td>
-                            <td>{{ billboardface.monthly_impressions }}</td>
-                            <td>{{ billboardface.duration }}</td>
-                            <td>{{ billboardface.billboard.name }}</td>
-                            <td>
-                                <btn-success
-                                        size="xs"
-                                        @click.native="edit(billboardface)"
-                                >
-                                    <icon icon="edit"/>
-                                </btn-success>
+                <div v-for="(billboardFace, index) in billboardFaces">
+                    <billboard-face-card
+                            :billboard-face="billboardFace"
+                    >
+                        <btn-success
+                                size="xs"
+                                @click.native="edit(billboardFace)"
+                        >
+                            <icon icon="edit"/>
+                        </btn-success>
 
-                                <btn-danger @click.native="destroy(billboardface)"
-                                            :disabled="billboardface.destroyForm.busy"
-                                            size="xs"
-                                >
-                                    <spinner v-if="billboardface.destroyForm.busy"></spinner>
-                                    <icon icon="trash" v-else/>
-                                </btn-danger>
-
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
+                        <btn-danger @click.native="destroy(billboardFace)"
+                                    :disabled="billboardFace.destroyForm.busy"
+                                    size="xs"
+                        >
+                            <spinner v-if="billboardFace.destroyForm.busy"></spinner>
+                            <icon icon="trash" v-else/>
+                        </btn-danger>
+                    </billboard-face-card>
                 </div>
             </box-content>
         </box>
@@ -58,7 +35,7 @@
 </template>
 
 <script>
-    import BillboardFaceForm from './billboard-face-form';
+    import BillboardFaceForm from './billboard-face-form.vue';
 
     export default {
 
@@ -69,6 +46,7 @@
         components: {
             BillboardFaceForm
         },
+
         data() {
             return {
                 billboardFaces: []

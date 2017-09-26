@@ -4,7 +4,6 @@
         <form-submit v-model="form" @submit="save">
             <modal-body>
                 <row>
-
                     <column size="6">
                         <form-group :form="form" field="photo">
                             <input-label for="photo">Photo: </input-label>
@@ -14,40 +13,38 @@
 
                     <column size="6">
                         <column size="12">
-                            <form-group :form="form" field="unique">
-                                <input-label for="unique">Unique: </input-label>
-                                <!--<unique-select v-model="form.unique" id="unique" name="unique"/>-->
-                               <input-text v-model="form.unique" id="unique" name="unique"/>
+                            <form-group :form="form" field="code">
+                                <input-label for="code">Code: </input-label>
+                                <input-text v-model="form.code" id="code" name="code"></input-text>
                             </form-group>
                         </column>
 
                         <column size="12">
                             <form-group :form="form" field="height">
                                 <input-label for="height">Height: </input-label>
-                                <input-text v-model="form.height" id="height" name="height"/>
+                                <input-text v-model="form.height" id="height" name="height"></input-text>
                             </form-group>
                         </column>
 
                         <column size="12">
                             <form-group :form="form" field="width">
                                 <input-label for="width">Width: </input-label>
-                                <input-text v-model="form.width" id="width" name="width"/>
+                                <input-text v-model="form.width" id="width" name="width"></input-text>
                             </form-group>
                         </column>
                     </column>
 
-
                     <column size="12">
                         <form-group :form="form" field="notes">
                             <input-label for="notes">Notes: </input-label>
-                            <text-area v-model="form.notes" id="notes" name="notes"/>
+                            <text-area v-model="form.notes" id="notes" name="notes"></text-area>
                         </form-group>
                     </column>
 
                     <column size="4">
                         <form-group :form="form" field="reads">
                             <input-label for="reads">Reads: </input-label>
-                            <input-text v-model="form.reads" id="reads" name="reads"/>
+                            <input-text v-model="form.reads" id="reads" name="reads"></input-text>
                         </form-group>
                     </column>
 
@@ -61,14 +58,14 @@
                     <column size="4">
                         <form-group :form="form" field="sign_type">
                             <input-label for="sign_type">Sign_Type: </input-label>
-                            <input-text v-model="form.sign_type" id="sign_type" name="sign_type"/>
+                            <input-text v-model="form.sign_type" id="sign_type" name="sign_type"></input-text>
                         </form-group>
                     </column>
 
                     <column size="4">
                         <form-group :form="form" field="hard_cost">
                             <input-label for="hard_cost">Hard_Cost: </input-label>
-                            <input-text v-model="form.hard_cost" id="hard_cost" name="hard_cost"/>
+                            <input-text v-model="form.hard_cost" id="hard_cost" name="hard_cost"></input-text>
                         </form-group>
                     </column>
 
@@ -76,39 +73,32 @@
                         <form-group :form="form" field="monthly_impressions">
                             <input-label for="monthly_impressions">Monthly_Impressions: </input-label>
                             <input-text v-model="form.monthly_impressions" id="monthly_impressions"
-                                        name="monthly_impressions"/>
+                                        name="monthly_impressions"></input-text>
                         </form-group>
                     </column>
 
                     <column size="4">
                         <form-group :form="form" field="duration">
                             <input-label for="duration">Duration: </input-label>
-                            <input-text v-model="form.duration" id="duration" name="duration"/>
+                            <input-text v-model="form.duration" id="duration" name="duration"></input-text>
                         </form-group>
                     </column>
-
 
 
                     <column size="12">
                         <form-group :form="form" field="max_ads">
                             <input-label for="max_ads">Max_Ads: </input-label>
-                            <input-text v-model="form.max_ads" id="max_ads" name="max_ads"/>
+                            <input-text v-model="form.max_ads" id="max_ads" name="max_ads"></input-text>
                         </form-group>
 
 
                         <form-group :form="form" field="is_iluminated">
                             <input-label for="is_iluminated">Is_Iluminated: </input-label>
                             <toggle-button
-                                    :value="form.status"
+                                    :value="form.is_iluminated"
+                                    @change="setStatus($event.value, form)"
                                     :sync="true"
-                            />
-                        </form-group>
-                    </column>
-
-                    <column size="12">
-                        <form-group :form="form" field="billboard">
-                            <input-label for="billboard">Billboard: </input-label>
-                            <billboard-select v-model="form.billboard" id="billboard" name="billboard"/>
+                            ></toggle-button>
                         </form-group>
                     </column>
                 </row>
@@ -125,31 +115,38 @@
 
 <script>
     import ModalForm from '../shared/Mixins/ModalForm';
-    //import UniqueSelect from '../unique/unique-select';
     import BillboardSelect from '../billboard/billboard-select';
 
     export default {
+
+        props: {
+            billboardId: {required: true},
+        },
+
         mixins: [ModalForm],
+
+
         components: {
-            //UniqueSelect,
             BillboardSelect,
         },
+
         data() {
             return {
-                api: 'billboard-face'
+                api: 'billboard-face',
             }
         },
+
         computed: {
             title() {
                 return `${(this.form.id ? 'Edit' : 'Add')} BillboardFace`;
             }
         },
+
         methods: {
             buildForm(billboard_face) {
                 return new SlcForm({
                     id: billboard_face ? billboard_face.id : null,
-                    unique: billboard_face ? billboard_face.unique : null,
-                    unique_id: billboard_face ? billboard_face.unique_id : null,
+                    code: billboard_face ? billboard_face.code : null,
                     height: billboard_face ? billboard_face.height : null,
                     width: billboard_face ? billboard_face.width : null,
                     reads: billboard_face ? billboard_face.reads : null,
@@ -162,10 +159,14 @@
                     duration: billboard_face ? billboard_face.duration : null,
                     photo: billboard_face ? billboard_face.photo : null,
                     is_iluminated: billboard_face ? billboard_face.is_iluminated : null,
-                    billboard: billboard_face ? billboard_face.billboard : null,
-                    billboard_id: billboard_face ? billboard_face.billboard_id : null,
+                    billboard: this.billboardId,
                 });
-            }
+            },
+
+            setStatus(value, item) {
+                item.is_iluminated = value;
+            },
+
         }
     }
 </script>

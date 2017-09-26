@@ -1,31 +1,64 @@
 <template>
-    <modal>
-        <modal-header>{{ title }}</modal-header>
-        <form-submit v-model="form" @submit="save">
-            <modal-body>
-                <row>
+    <div>
+        <box>
+            <box-title>
+                Billboards DashBoard
+            </box-title>
+            <box-body>
+
+                <!-- billboard  -->
+                <column size="5">
                     <column size="12">
                         <form-group :form="form" field="name">
                             <input-label for="name">Name: </input-label>
                             <input-text v-model="form.name" id="name" name="name"></input-text>
                         </form-group>
+
                         <form-group :form="form" field="description">
                             <input-label for="description">Description: </input-label>
                             <text-area v-model="form.description" id="description" name="description"></text-area>
                         </form-group>
+                    </column>
+
+                    <column size="12">
                         <form-group :form="form" field="address">
                             <input-label for="address">Address: </input-label>
                             <input-text v-model="form.address" id="address" name="address"></input-text>
                         </form-group>
                     </column>
+
+                    <column size="6">
+                        <form-group :form="form" field="lat">
+                            <input-label for="lat">Latitude: </input-label>
+                            <input-text v-model="form.lat" id="lat" name="lat"></input-text>
+                        </form-group>
+                    </column>
+
+                    <column size="6">
+                        <form-group :form="form" field="lng">
+                            <input-label for="lng">Longitude: </input-label>
+                            <input-text v-model="form.lng" id="lng" name="lng"></input-text>
+                        </form-group>
+                    </column>
+
                     <column size="12">
-                        <gmap-map v-if="isShown"
-                                  :center="center"
-                                  :zoom="zoom"
-                                  @click="onMapClick"
-                                  @zoom_changed="onZoomChanged"
-                                  :options="mapOptions"
-                                  style="width: 95%; min-height: 320px">
+                        <form-group :form="form" field="digital_driveby">
+                            <input-label for="digital_driveby">Digital Driveby: </input-label>
+                            <input-text v-model="form.digital_driveby" id="digital_driveby"
+                                        name="digital_driveby"></input-text>
+                        </form-group>
+                    </column>
+
+                    <!-- map -->
+
+                    <column size="12">
+                        <gmap-map
+                                :center="center"
+                                :zoom="zoom"
+                                @click="onMapClick"
+                                @zoom_changed="onZoomChanged"
+                                :options="mapOptions"
+                                style="width: 100%; min-height: 364px; margin-bottom: 50px">
                             <gmap-marker
                                     v-if="marker"
                                     :position="marker"
@@ -36,48 +69,49 @@
                             ></gmap-marker>
                         </gmap-map>
                     </column>
-                    <column size="6">
-                        <form-group :form="form" field="lat">
-                            <input-label for="lat">Latitude: </input-label>
-                            <input-text v-model="form.lat" id="lat" name="lat"></input-text>
-                        </form-group>
-                    </column>
-                    <column size="6">
-                        <form-group :form="form" field="lng">
-                            <input-label for="lng">Longitude: </input-label>
-                            <input-text v-model="form.lng" id="lng" name="lng"></input-text>
-                        </form-group>
-                    </column>
+
                     <column size="12">
-                        <form-group :form="form" field="digital_driveby">
-                            <input-label for="digital_driveby">Digital Driveby: </input-label>
-                            <input-text v-model="form.digital_driveby" id="digital_driveby"
-                                        name="digital_driveby"></input-text>
-                        </form-group>
+                        <btn-submit :disabled="form.busy">
+                            <spinner v-if="form.busy"></spinner>
+                        </btn-submit>
                     </column>
-                </row>
-            </modal-body>
-            <modal-footer>
-                <btn-submit
-                  @click=""
-                >
-                </btn-submit>
-            </modal-footer>
-        </form-submit>
-    </modal>
+
+                </column>
+
+                <!-- faces  -->
+                <column size="7">
+                    <column size="12">
+                      <billboard-face-list-card
+                       :billboard-id="id"
+                      >
+                      </billboard-face-list-card>
+                    </column>
+                </column>
+            </box-body>
+        </box>
+    </div>
 </template>
+
 
 <script>
 
     import * as Slc from "../../vue/http";
-    import ModalForm from '../shared/Mixins/ModalForm';
+    import BillboardFaceForm from '../billboard-face/billboard-face-form.vue';
 
     export default {
 
-        mixins: [ModalForm],
+        props: {
+            id: {required: true}
+        },
+
+        components: {
+            BillboardFaceForm
+        },
 
         data() {
             return {
+                form: new SlcForm({}),
+                loading: false,
                 api: 'billboard',
                 marker: null,
                 zoom: 7,
@@ -86,7 +120,12 @@
                     mapTypeControl: false,
                 },
                 zoomChanged: false,
+                billboardFaces: []
             }
+        },
+
+        mounted() {
+            this.reload();
         },
 
         watch: {
@@ -95,10 +134,9 @@
             }
         },
 
-        computed: {
-            title() {
-                return `${(this.form.id ? 'Edit' : 'Add')} Billboard`;
-            }
+        created() {
+            const self = this;
+            this.load();
         },
 
         methods: {
@@ -198,6 +236,47 @@
                 this.marker = pos;
                 this.center = pos;
             }),
+
+            load() {
+                this.loading = true;
+
+                const uri = laroute.route('api.billboard.show', {billboard: this.id});
+
+                Slc.find(uri).then((billboard) => {
+                    console.log(billboard);
+                    this.loading = false;
+                    this.form = new SlcForm({
+                        id: billboard.id,
+                        name: billboard.name,
+                        description: billboard.description,
+                        digital_driveby: billboard.digital_driveby,
+                        address: billboard.address,
+                        lat: billboard.lat,
+                        lng: billboard.lng,
+                    });
+                });
+            },
+
+            edit(billboardFace) {
+                this.$refs.form.show(billboardFace);
+            },
+
+            add() {
+                this.$refs.form.show({billboard_id: id});
+            },
+
+            reload() {
+                let self = this;
+                Slc.get(laroute.route('api.billboard-face.index', {bid: this.id}))
+                    .then((response) => {
+                        self.billboardFaces = response;
+                    });
+            },
+
+            update() {
+
+            }
         }
     }
+
 </script>
