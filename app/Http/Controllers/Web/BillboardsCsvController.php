@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Web;
 use App\Http\Controllers\Controller;
 use App\Services\BillboardsImportService;
 use Illuminate\Http\Request;
+use Symfony\Component\Finder\SplFileInfo;
 
 class BillboardsCsvController extends Controller
 {
@@ -23,12 +24,13 @@ class BillboardsCsvController extends Controller
 
     private function csv_to_array($filename, $delimiter = ',')
     {
-        if (!file_exists($filename) || !is_readable($filename)) {
+        if (!$filename){
             return false;
         }
         $header = null;
         $data = array();
-        if (($handle = fopen($filename, 'r')) !== false) {
+
+        if (($handle = @fopen($filename, 'r')) !== false) {
             while (($row = fgetcsv($handle, 1000, $delimiter)) !== false) {
                 if (!$header) {
                     $header = $row;
@@ -38,30 +40,17 @@ class BillboardsCsvController extends Controller
             }
             fclose($handle);
         }
-
         return $data;
     }
 
-    public function CsvUpload(Request $request){
-                $validator = \Validator::make($request->all(),[
-                   'file' => 'required'
-                ]);
-
-                if($validator->fails()){
-                    return redirect()->back()->withErrors($validator);
-                }
+    public function CsvConvertArray(Request $request){
 
                 $file = $request->file('file');
-                $data = $this->csv_to_array($file);
+                $data = $this->csv_to_array($file[0]);
 
-                $this->service->createBillboards($data);
+                //$this->service->createBillboards($data);
 
-                $response = [
-                    'message' => 'Billboard created.',
-                    'data' => $data
-                ];
-
-                return $response;
+                return $data;
 
 
         }

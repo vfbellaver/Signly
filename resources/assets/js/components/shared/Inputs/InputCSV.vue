@@ -7,6 +7,7 @@
                     <div v-if="internalValue" class="preview"
                          @click="replaceCsv ">
                     </div>
+                    <div v-else  @click="replaceImage"></div>
                 </div>
             </div>
         </div>
@@ -26,7 +27,8 @@
         mixins: [require('../Mixins/Model')],
         data() {
             return {
-                internalAllowedTypes: []
+                internalAllowedTypes: [],
+                allowedFiles: [],
             }
         },
 
@@ -69,11 +71,10 @@
                     return;
                 }
                 this.$emit('uploading');
-                const uri = laroute.route('api.image.upload');
+                const uri = laroute.route('csv.upload');
                 Slc.upload(uri, allowedFiles).then((response) => {
-                    console.log("Uploaded image", response);
-                    const file = response.data[0];
-                    this.internalValue = file.url;
+                    console.log("Uploaded csv", response);
+
                     this.$emit('uploaded');
                 });
             },

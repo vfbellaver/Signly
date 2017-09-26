@@ -1,32 +1,25 @@
 <template>
-    <div>
+
         <box>
             <column size="12">
             <box-title>
                 Import Billboards File Csv
             </box-title>
             <box-content>
-                <form-submit v-model="form">
+                <form-submit v-model="form" @submit="save">
                     <row>
-                    <column size="6">
-                        <h2>Instructions Upload</h2>
-
-                        <ul>
-                            <li>Inst 1</li>
-                            <li>Inst 2</li>
-                            <li>Inst 3</li>
-                        </ul>
-                    </column>
                     <column size="3">
-                        <div class="form-group">
-                            <label> Select file:</label>
-                            <input-csv id="csv" v-model="csv"></input-csv>
-                        </div>
-                        <div class="form-group">
-                            <button  type="submit" class="btn btn-primary" v-on:click="submitImport">
-                                <i class="fa fa-upload"></i> Upload
-                            </button>
-                        </div>
+                        <form-group :form="form" field="filecsv">
+                            <input-label for="filecsv">Select File: </input-label>
+                            <input-csv  v-model="form.filecsv" id="filecsv"></input-csv>
+                        </form-group>
+
+                        <btn-submit :disabled="form.busy">
+                            <spinner v-if="form.busy"></spinner>
+                        </btn-submit>
+                    </column>
+                    <column size="9">
+
                     </column>
                     </row>
 
@@ -43,16 +36,22 @@
 
     export default{
         mixins: [ModalForm],
+        props: {},
         data() {
             return {
-                internalAllowedTypes: [],
-                files: []
+                api: 'billboardcsv'
             }
         },
 
         methods: {
-            buildForm(){
+            buildForm(billboard) {
+                this.filecsv = null;
 
+
+                return new SlcForm({
+                    filecsv: billboard ? billboard.filecsv : null,
+
+                });
             },
 
             submitImport(){
