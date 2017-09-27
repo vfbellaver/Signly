@@ -7,22 +7,14 @@
             </box-title>
             <box-content>
                 <form-submit v-model="form" @submit="save">
-                    <row>
-                    <column size="3">
+
                         <form-group :form="form" field="filecsv">
                             <input-label for="filecsv">Select File: </input-label>
                             <input-csv  v-model="form.filecsv" id="filecsv"></input-csv>
                         </form-group>
-
                         <btn-submit :disabled="form.busy">
                             <spinner v-if="form.busy"></spinner>
                         </btn-submit>
-                    </column>
-                    <column size="9">
-
-                    </column>
-                    </row>
-
                 </form-submit>
             </box-content>
             </column>

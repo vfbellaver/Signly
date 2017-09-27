@@ -1,15 +1,42 @@
 <template>
     <div class="csv-upload">
         <div>
-            <div>
-                <div>
-                    <input ref="file" type="file" @change="onFileChange" :multiple="multiple"/>
-                    <div v-if="internalValue" class="preview"
-                         @click="replaceCsv ">
-                    </div>
-                    <div v-else  @click="replaceImage"></div>
-                </div>
-            </div>
+            <row>
+                <column size="12">
+                        <div>
+                            <input ref="file" type="file" @change="onFileChange" :multiple="multiple"/>
+                            <div v-if="internalValue" class="preview"
+                                 @click="replaceCsv ">
+                            </div>
+                            <div v-else  @click="replaceCsv"></div>
+                        </div>
+                </column>
+
+                <column size="12">
+                        <div v-if="internalValue">
+                            <table  class="table table-responsive table-striped">
+                                <thead>
+                                <tr>
+                                    <th style="width: 50px"></th>
+                                    <th style="width: 300px">Name</th>
+                                    <th style="width: 600px" class="hidden-sm">Address</th>
+                                    <th>Driveby</th>
+
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr v-for="( billboard,index ) in billboardsArrayCsv">
+                                    <td>{{ index + 1 }}</td>
+                                    <td>{{ billboard.name }}</td>
+                                    <td class="hidden-sm">{{ billboard.address }}</td>
+                                    <td>{{ billboard.digital_driveby }}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div v-else> <h2>Upload your file Csv</h2></div>
+                </column>
+            </row>
         </div>
     </div>
 </template>
@@ -28,7 +55,7 @@
         data() {
             return {
                 internalAllowedTypes: [],
-                allowedFiles: [],
+                billboardsArrayCsv: [],
             }
         },
 
@@ -73,12 +100,13 @@
                 this.$emit('uploading');
                 const uri = laroute.route('csv.upload');
                 Slc.upload(uri, allowedFiles).then((response) => {
-                    console.log("Uploaded csv", response);
-
+                    console.log('Uploaded Csv:',response);
+                    this.internalValue=true;
+                    this.billboardsArrayCsv = response.data;
                     this.$emit('uploaded');
                 });
             },
-            replaceImage() {
+            replaceCsv() {
                 $(this.$refs.file).trigger('click');
             }
         }
