@@ -145,10 +145,6 @@
             },
         },
 
-        mounted (){
-            this.setUpdate()
-        },
-
         methods: {
             buildForm(billboard_face) {
                 return new SlcForm({
@@ -174,11 +170,6 @@
             setStatus(value, item) {
                 item.is_iluminated = value;
             },
-
-            setUpdate() {
-                this.billboard_face =  this.form.id
-            },
-
         }
     }
 </script>

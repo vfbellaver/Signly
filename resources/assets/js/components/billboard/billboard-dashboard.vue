@@ -89,12 +89,15 @@
 
     import * as Slc from "../../vue/http";
     import BillboardFaceForm from '../billboard-face/billboard-face-form.vue';
+    import ModalForm from '../shared/Mixins/ModalForm';
 
     export default {
 
         props: {
             id: {required: true}
         },
+
+        mixins: [ModalForm],
 
         components: {
             BillboardFaceForm
