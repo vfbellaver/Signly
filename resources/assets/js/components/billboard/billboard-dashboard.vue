@@ -31,7 +31,7 @@
                                               @click="onMapClick"
                                               @zoom_changed="onZoomChanged"
                                               :options="mapOptions"
-                                              style="width: 95%; min-height: 320px">
+                                              style="width: 100%; min-height: 320px">
                                         <gmap-marker
                                                 v-if="marker"
                                                 :position="marker"
@@ -62,11 +62,11 @@
                                     </form-group>
                                 </column>
                             </row>
-                        <modal-footer>
+                            <hr>
                             <btn-submit :disabled="form.busy">
                                 <spinner v-if="form.busy"></spinner>
                             </btn-submit>
-                        </modal-footer>
+
                     </form-submit>
                 </column>
 
