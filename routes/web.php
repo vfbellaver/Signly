@@ -22,5 +22,3 @@ Route::group(['middleware' => ['auth']], function () {
         require $file;
     }
 });
-Route::post('csv/upload', 'Web\BillboardsCsvController@CsvConvertArray')->name('csv.upload');
-Route::post('csv/save', 'Web\BillboardsCsvController@SaveBillboardsCsv')->name('csv.save');

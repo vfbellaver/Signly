@@ -10,13 +10,18 @@
 
                         <form-group :form="form" field="filecsv">
                             <input-label for="filecsv">Select File: </input-label>
-                            <input-csv  v-model="form.filecsv" id="filecsv"></input-csv>
+                            <input-csv  v-model="form.csv" id="filecsv"></input-csv>
                         </form-group>
-                        <btn-submit :disabled="form.busy">
-                            <spinner v-if="form.busy"></spinner>
-                        </btn-submit>
+                    <box-title>
+                        <column size="12" >
+                            <btn-submit :disabled="form.busy">Save Billboards
+                                <spinner v-if="form.busy"></spinner>
+                            </btn-submit>
+                        </column>
+                    </box-title>
                 </form-submit>
             </box-content>
+
             </column>
         </box>
     </div>
@@ -31,24 +36,22 @@
         props: {},
         data() {
             return {
-                api: 'billboardcsv'
+                api: 'billboardcsv',
             }
         },
 
+
         methods: {
-            buildForm(billboard) {
-                this.filecsv = null;
-
-
+            buildForm(billboardcsv) {
                 return new SlcForm({
-                    filecsv: billboard ? billboard.filecsv : null,
+                    csv: billboardcsv ? billboardcsv.csv : null,
 
                 });
             },
 
-            submitImport(){
+            save(){
 
-            }
+             }
         }
     }
 </script>

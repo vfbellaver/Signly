@@ -11,42 +11,42 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Requests\BillboardCreateRequest;
 use App\Services\BillboardsImportService;
+use Illuminate\Http\Request;
 use Validator;
 
 class BillboardsCsvController
 {
-    public function CsvUpload(BillboardCreateRequest $request, BillboardsImportService $billboardImport){
+
+    public function CsvConvertArray(Request $request){
+
+        $file = $request->file('file');
+        $data = $this->csv_to_array($file[0]);
+
+        //$this->service->createBillboards($data);
+
+        return $data;
 
 
-        $validator = Validator::make($request->all(),[
-            'file'=> 'required',
-        ]);
+    }
 
-        if ($validator->fails()){
-            return redirect()->back()->withErrors($validator);
+    private function csv_to_array($filename, $delimiter = ',')
+    {
+        if (!$filename){
+            return false;
         }
+        $header = null;
+        $data = array();
 
-
-        $file = request()->file('file');
-        $csvData = file_get_contents($file);
-
-        $rows = array_map('str_getcsv',explode("\n",$csvData));
-        $header = array_shift($rows);
-
-        if(!$billboardImport->checkImportCsv($rows,$header)){
-            $request->session()->flash('errors_rows',$billboardImport->getErrorRows());
-            \Session::flash()->error('Error in data. Correct and re-upload');
-            return redirect()->back();
+        if (($handle = @fopen($filename, 'r')) !== false) {
+            while (($row = fgetcsv($handle, 1000, $delimiter)) !== false) {
+                if (!$header) {
+                    $header = $row;
+                    continue;
+                }
+                $data[] = array_combine($header, $row);
+            }
+            fclose($handle);
         }
-
-
-        $billboardImport->createBillboards($header,$rows);
-
-        //return message after insertion
-        //flash('billboards imported')
-        return redirect()->back();
-
-
-
+        return $data;
     }
 }

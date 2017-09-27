@@ -14,6 +14,7 @@
 
                 <column size="12">
                         <div v-if="internalValue">
+                            <p class="text-center">List Billboards from Csv File</p>
                             <table  class="table table-responsive table-striped">
                                 <thead>
                                 <tr>
@@ -34,7 +35,8 @@
                                 </tbody>
                             </table>
                         </div>
-                        <div v-else> <h2>Upload your file Csv</h2></div>
+                        <div v-else class="text-center"> <p>Select your Csv File and check for any errors.
+                            If there is an error, correct and resubmit the file.</p></div>
                 </column>
             </row>
         </div>
@@ -98,7 +100,7 @@
                     return;
                 }
                 this.$emit('uploading');
-                const uri = laroute.route('csv.upload');
+                const uri = laroute.route('api.csv.upload');
                 Slc.upload(uri, allowedFiles).then((response) => {
                     console.log('Uploaded Csv:',response);
                     this.internalValue=true;
@@ -107,6 +109,7 @@
                 });
             },
             replaceCsv() {
+                this.billboardsArrayCsv = [];
                 $(this.$refs.file).trigger('click');
             }
         }
