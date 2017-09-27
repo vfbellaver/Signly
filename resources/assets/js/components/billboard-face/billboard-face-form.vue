@@ -116,7 +116,6 @@
 
 <script>
     import ModalForm from '../shared/Mixins/ModalForm';
-    import BillboardSelect from '../billboard/billboard-select';
 
     export default {
 
@@ -127,15 +126,10 @@
         mixins: [ModalForm],
 
 
-        components: {
-            BillboardSelect,
-        },
-
-
         data() {
             return {
                 api: 'billboard-face',
-                isIlluminated: false
+                isIlluminated: false,
             }
         },
 

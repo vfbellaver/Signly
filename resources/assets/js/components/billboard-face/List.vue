@@ -17,7 +17,8 @@
                                 size="xs"
                                 @click.native="edit(billboardface)"
                         >
-                           EDIT &nbsp <icon icon="edit"/>
+                            EDIT &nbsp
+                            <icon icon="edit"/>
                         </btn-success>
 
 
@@ -39,12 +40,15 @@
 
 <script>
     import BillboardFaceForm from './billboard-face-form.vue';
+    import ModalForm from '../shared/Mixins/ModalForm';
 
     export default {
 
         props: {
             billboardId: {required: true},
         },
+
+        mixins: [ModalForm],
 
         components: {
             BillboardFaceForm
@@ -86,6 +90,7 @@
 
             destroy(billboardFace) {
                 let self = this;
+                debugger;
                 Slc.delete(laroute.route('api.billboard-face.destroy', {billboardFace: billboardFace.id}), billboardFace.destroyForm)
                     .then(() => {
                         self.removeBillboardFace(billboardFace);
@@ -97,6 +102,7 @@
             },
 
             findIndex(billboardFace) {
+                debugger;
                 return this.billboardFaces.findIndex((_billboardFace) => {
                     return _billboardFace.id === billboardFace.id;
                 });

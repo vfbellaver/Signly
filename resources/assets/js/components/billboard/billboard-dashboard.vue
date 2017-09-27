@@ -8,7 +8,7 @@
 
                 <!-- billboard  -->
                 <column size="5">
-                    <form-submit v-model="form" @submit="update(form)">
+                    <form-submit v-model="form" @submit="save">
                             <row>
                                 <column size="12">
                                     <form-group :form="form" field="name">
@@ -117,10 +117,6 @@
                 zoomChanged: false,
                 billboardFaces: []
             }
-        },
-
-        mounted() {
-            this.reload();
         },
 
         watch: {
@@ -252,26 +248,6 @@
                 });
             },
 
-            edit(billboardFace) {
-                this.$refs.form.show(billboardFace);
-            },
-
-            add() {
-                this.$refs.form.show({billboard_id: id});
-            },
-
-            reload() {
-                let self = this;
-                Slc.get(laroute.route('api.billboard-face.index', {bid: this.id}))
-                    .then((response) => {
-                        self.billboardFaces = response;
-                    });
-            },
-
-            update(form) {
-                this.form = form ? form : this.form;
-                this.send('put', this.updateRoute);
-            },
         }
     }
 
