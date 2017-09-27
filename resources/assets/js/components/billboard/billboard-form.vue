@@ -58,9 +58,8 @@
                 </row>
             </modal-body>
             <modal-footer>
-                <btn-submit
-                  @click=""
-                >
+                <btn-submit :disabled="form.busy">
+                    <spinner v-if="form.busy"></spinner>
                 </btn-submit>
             </modal-footer>
         </form-submit>

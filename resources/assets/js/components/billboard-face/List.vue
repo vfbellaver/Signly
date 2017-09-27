@@ -8,22 +8,22 @@
                 </box-tools>
             </box-title>
             <box-content>
-                <div v-for="(billboardFace, index) in billboardFaces">
+                <div v-for="(billboardface, index) in billboardFaces">
                     <billboard-face-card
-                            :billboard-face="billboardFace"
+                            :billboard-face="billboardface"
                     >
                         <btn-success
                                 size="xs"
-                                @click.native="edit(billboardFace)"
+                                @click.native="edit(billboardface)"
                         >
                             <icon icon="edit"/>
                         </btn-success>
 
-                        <btn-danger @click.native="destroy(billboardFace)"
-                                    :disabled="billboardFace.destroyForm.busy"
+                        <btn-danger @click.native="destroy(billboardface)"
+                                    :disabled="billboardface.destroyForm.busy"
                                     size="xs"
                         >
-                            <spinner v-if="billboardFace.destroyForm.busy"></spinner>
+                            <spinner v-if="billboardface.destroyForm.busy"></spinner>
                             <icon icon="trash" v-else/>
                         </btn-danger>
                     </billboard-face-card>

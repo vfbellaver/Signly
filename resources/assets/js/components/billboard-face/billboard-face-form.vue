@@ -93,8 +93,9 @@
 
 
                         <form-group :form="form" field="is_iluminated">
-                            <input-label for="is_iluminated">Is_Iluminated: </input-label>
+                            <input-label for="is_iluminated">Is Illuminated: </input-label>
                             <toggle-button
+                                    v-model="form.is_iluminated"
                                     :value="form.is_iluminated"
                                     @change="setStatus($event.value, form)"
                                     :sync="true"
@@ -130,16 +131,22 @@
             BillboardSelect,
         },
 
+
         data() {
             return {
                 api: 'billboard-face',
+                isIlluminated: false
             }
         },
 
         computed: {
             title() {
                 return `${(this.form.id ? 'Edit' : 'Add')} BillboardFace`;
-            }
+            },
+        },
+
+        mounted (){
+            this.setUpdate()
         },
 
         methods: {
@@ -158,13 +165,18 @@
                     max_ads: billboard_face ? billboard_face.max_ads : null,
                     duration: billboard_face ? billboard_face.duration : null,
                     photo: billboard_face ? billboard_face.photo : null,
-                    is_iluminated: billboard_face ? billboard_face.is_iluminated : null,
+                    is_iluminated: billboard_face ? billboard_face.is_iluminated : this.isIlluminated,
+                    billboard_face: billboard_face ? billboard_face.id : null,
                     billboard: this.billboardId,
                 });
             },
 
             setStatus(value, item) {
                 item.is_iluminated = value;
+            },
+
+            setUpdate() {
+                this.billboard_face =  this.form.id
             },
 
         }

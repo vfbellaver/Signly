@@ -31,7 +31,6 @@ class BillboardFaceCreateRequest extends BaseRequest
 			'max_ads' => 'required|numeric',
 			'duration' => 'required|numeric',
 			'photo' => 'required',
-			'is_iluminated' => 'required',
 			'billboard' => 'required|numeric',
         ];
     }
