@@ -65,6 +65,8 @@
                 const uri = laroute.route('api.csv.store');
                 Slc.post(uri,this.form).then((response)=> {
                     console.log('Post Billboards:',response);
+                    this.saved(response.data,'post');
+
                 });
             }
 
