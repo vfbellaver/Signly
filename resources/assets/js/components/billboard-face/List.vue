@@ -90,8 +90,7 @@
 
             destroy(billboardFace) {
                 let self = this;
-                debugger;
-                Slc.delete(laroute.route('api.billboard-face.destroy', {billboardFace: billboardFace.id}), billboardFace.destroyForm)
+                Slc.delete(laroute.route('api.billboard-face.destroy', {billboard_face: billboardFace.id}), billboardFace.destroyForm)
                     .then(() => {
                         self.removeBillboardFace(billboardFace);
                     });
