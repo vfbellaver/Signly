@@ -9,21 +9,20 @@
 namespace App\Http\Controllers\Api;
 
 
-use App\Http\Requests\BillboardCreateRequest;
 use App\Services\BillboardsImportService;
 use Illuminate\Http\Request;
-use Validator;
 
 class BillboardsCsvController
 {
+    public function __construct(BillboardsImportService $service)
+    {
+        $this->service = $service;
+    }
 
     public function CsvConvertArray(Request $request){
 
         $file = $request->file('file');
         $data = $this->csv_to_array($file[0]);
-
-        //$this->service->createBillboards($data);
-
         return $data;
 
 
@@ -54,7 +53,12 @@ class BillboardsCsvController
     public function store(Request $request)
     {
         $data = $request->all();
+        $this->service->createBillboards($data);
+        $response = [
+            'message' => 'Billboards imported.',
+        ];
 
+        return $response;
     }
 
 }

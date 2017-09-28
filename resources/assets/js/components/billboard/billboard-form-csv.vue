@@ -69,11 +69,10 @@
             },
 
             save(){
-
                 const uri = laroute.route('api.csv.store');
-                Slc.post(uri,).then((response)=> {
+                Slc.post(uri,this.form).then((response)=> {
                     console.log('Post Billboards:',response);
-
+                    window.location = laroute.route("billboards.index");
                 });
             }
 

@@ -22,7 +22,7 @@ class BillboardsImportService
     // save Billboards
     public function createBillboards(array $data)
     {
-        foreach ($data as $billboard){
+        foreach ($data['billboards'] as $billboard){
 
                 $billboard = new Billboard($billboard);
                 $billboard->save();
