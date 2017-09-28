@@ -88,6 +88,7 @@
             }
         },
 
+
         watch: {
             'form.address': function () {
                 this.onAddressChange();
@@ -98,6 +99,7 @@
             title() {
                 return `${(this.form.id ? 'Edit' : 'Add')} Billboard`;
             }
+
         },
 
         methods: {
@@ -133,7 +135,8 @@
                     lat: e.latLng.lat(),
                     lng: e.latLng.lng(),
                 };
-                geocoder.geocode({'location': pos}, (results, status) => {
+
+               geocoder.geocode({'location': pos}, (results, status) => {
                     console.log("Geocode", results, status);
                     if (!results.length || status !== 'OK') {
                         return;
