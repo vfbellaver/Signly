@@ -31,7 +31,7 @@ class BillboardsCsvController
 
     private function csv_to_array($filename, $delimiter = ',')
     {
-        if (!$filename){
+        if (!$filename) {
             return false;
         }
         $header = null;
@@ -48,5 +48,13 @@ class BillboardsCsvController
             fclose($handle);
         }
         return $data;
+
     }
+
+    public function store(Request $request)
+    {
+        $data = $request->all();
+
+    }
+
 }

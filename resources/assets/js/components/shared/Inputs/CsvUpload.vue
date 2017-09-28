@@ -1,46 +1,5 @@
 <template>
-    <div class="csv-upload">
-        <div>
-            <row>
-                <column size="12">
-                        <div>
-                            <input ref="file" type="file" @change="onFileChange" :multiple="multiple"/>
-                            <div v-if="internalValue" class="preview"
-                                 @click="replaceCsv ">
-                            </div>
-                            <div v-else  @click="replaceCsv"></div>
-                        </div>
-                </column>
-
-                <column size="12">
-                        <div v-if="internalValue">
-                            <p class="text-center">List Billboards from Csv File</p>
-                            <table  class="table table-responsive table-striped">
-                                <thead>
-                                <tr>
-                                    <th style="width: 50px"></th>
-                                    <th style="width: 300px">Name</th>
-                                    <th style="width: 600px" class="hidden-sm">Address</th>
-                                    <th>Driveby</th>
-
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr v-for="( billboard,index ) in billboardsArrayCsv">
-                                    <td>{{ index + 1 }}</td>
-                                    <td>{{ billboard.name }}</td>
-                                    <td class="hidden-sm">{{ billboard.address }}</td>
-                                    <td>{{ billboard.digital_driveby }}</td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div v-else class="text-center"> <p>Select your Csv File and check for any errors.
-                            If there is an error, correct and resubmit the file.</p></div>
-                </column>
-            </row>
-        </div>
-    </div>
+    <input class="csv-upload" ref="file" type="file" @change="onFileChange" :multiple="multiple"/>
 </template>
 
 
@@ -51,13 +10,14 @@
         props: {
             multiple: {required: false, 'default': false},
             maxSize: {required: false},
-            allowedTypes: {required: false}
+            allowedTypes: {required: false},
+
+
         },
         mixins: [require('../Mixins/Model')],
         data() {
             return {
                 internalAllowedTypes: [],
-                billboardsArrayCsv: [],
             }
         },
 
@@ -103,15 +63,10 @@
                 const uri = laroute.route('api.csv.upload');
                 Slc.upload(uri, allowedFiles).then((response) => {
                     console.log('Uploaded Csv:',response);
-                    this.internalValue=true;
-                    this.billboardsArrayCsv = response.data;
-                    this.$emit('uploaded');
+                    this.internalValue=response.data;
+                    this.$emit('postcsv');
                 });
             },
-            replaceCsv() {
-                this.billboardsArrayCsv = [];
-                $(this.$refs.file).trigger('click');
-            }
         }
     }
 </script>

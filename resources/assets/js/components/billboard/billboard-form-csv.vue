@@ -1,57 +1,82 @@
 <template>
-
         <box>
             <column size="12">
             <box-title>
                 Import Billboards File Csv
             </box-title>
-            <box-content>
-                <form-submit v-model="form" @submit="save">
+                <box-content>
+                    <form-submit v-model="form" @submit="save">
 
-                        <form-group :form="form" field="filecsv">
-                            <input-label for="filecsv">Select File: </input-label>
-                            <input-csv  v-model="form.csv" id="filecsv"></input-csv>
-                        </form-group>
-                    <box-title>
-                        <column size="12" >
-                            <btn-submit :disabled="form.busy">Save Billboards
-                                <spinner v-if="form.busy"></spinner>
-                            </btn-submit>
-                        </column>
-                    </box-title>
-                </form-submit>
-            </box-content>
+                            <form-group :form="form" field="filecsv">
+                                <input-label for="filecsv">Select File: </input-label>
+                                <input-csv  v-model="form.billboards" id="billboards"></input-csv>
+                            </form-group>
+                        <div>
+                            <table  v-if="form.billboards" class="table table-responsive table-striped">
+                                <thead>
+                                <tr>
+                                    <th style="width: 50px"></th>
+                                    <th style="width: 300px">Name</th>
+                                    <th style="width: 600px" class="hidden-sm">Address</th>
+                                    <th>Driveby</th>
 
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr v-for="( billboard,index ) in form.billboards">
+                                    <td>{{ index + 1 }}</td>
+                                    <td>{{ billboard.name }}</td>
+                                    <td class="hidden-sm">{{ billboard.address }}</td>
+                                    <td>{{ billboard.digital_driveby }}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <box-title>
+                            <column size="12" >
+                                <btn-submit :disabled="form.busy">Save Billboards
+                                    <spinner v-if="form.busy"></spinner>
+                                </btn-submit>
+                            </column>
+                        </box-title>
+                    </form-submit>
+                </box-content>
             </column>
         </box>
-    </div>
-
 </template>
 <script>
     import * as Slc from "../../vue/http";
     import ModalForm from '../shared/Mixins/ModalForm';
 
+
     export default{
         mixins: [ModalForm],
-        props: {},
+        props: {
+
+        },
         data() {
             return {
-                api: 'billboardcsv',
+                api: 'csv',
             }
         },
 
-
         methods: {
-            buildForm(billboardcsv) {
-                return new SlcForm({
-                    csv: billboardcsv ? billboardcsv.csv : null,
 
+            buildForm() {
+                return new SlcForm({
+                    billboards: []
                 });
             },
 
             save(){
 
-             }
+                const uri = laroute.route('api.csv.store');
+                Slc.post(uri,).then((response)=> {
+                    console.log('Post Billboards:',response);
+
+                });
+            }
+
         }
     }
 </script>
