@@ -57,21 +57,21 @@
 
                     <column size="4">
                         <form-group :form="form" field="sign_type">
-                            <input-label for="sign_type">Sign_Type: </input-label>
+                            <input-label for="sign_type">Sign Type: </input-label>
                             <input-text v-model="form.sign_type" id="sign_type" name="sign_type"></input-text>
                         </form-group>
                     </column>
 
                     <column size="4">
                         <form-group :form="form" field="hard_cost">
-                            <input-label for="hard_cost">Hard_Cost: </input-label>
-                            <input-text v-model="form.hard_cost" id="hard_cost" name="hard_cost"></input-text>
+                            <input-label for="hard_cost">Hard Cost: </input-label>
+                            <input-text v-model="form.hard_cost" id="hard_cost" name="hard_cost" v-float></input-text>
                         </form-group>
                     </column>
 
                     <column size="4">
                         <form-group :form="form" field="monthly_impressions">
-                            <input-label for="monthly_impressions">Monthly_Impressions: </input-label>
+                            <input-label for="monthly_impressions">Monthly Impressions: </input-label>
                             <input-text v-model="form.monthly_impressions" id="monthly_impressions"
                                         name="monthly_impressions"></input-text>
                         </form-group>
@@ -87,7 +87,7 @@
 
                     <column size="12">
                         <form-group :form="form" field="max_ads">
-                            <input-label for="max_ads">Max_Ads: </input-label>
+                            <input-label for="max_ads">Max Ads: </input-label>
                             <input-text v-model="form.max_ads" id="max_ads" name="max_ads"></input-text>
                         </form-group>
 
@@ -164,6 +164,8 @@
             setStatus(value, item) {
                 item.is_iluminated = value;
             },
+
+
         }
     }
 </script>

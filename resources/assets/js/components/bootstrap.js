@@ -13,8 +13,8 @@ Vue.component('billboard-dashboard', require('./billboard/billboard-dashboard'))
 Vue.component('billboard-face-list', require('./billboard-face/billboard-face-list'));
 // ------------------------------------------------------------------------
 // Billboard-face-cards-list
-Vue.component('billboard-face-list-card', require('./billboard-face/List'));
-Vue.component('billboard-face-card', require('./billboard-face/Card'));
+Vue.component('billboard-face-list-card', require('./billboard-face/billboard-face-card-list.vue'));
+Vue.component('billboard-face-card', require('./billboard-face/billboard-face-card.vue'));
 
 Vue.component('billboard-form-csv',require('./billboard/billboard-form-csv.vue'));
 
