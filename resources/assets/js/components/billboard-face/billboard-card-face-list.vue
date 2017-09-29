@@ -37,7 +37,11 @@
         <billboard-face-form ref="form" :billboard-id="billboardId" @saved="formSaved"></billboard-face-form>
     </div>
 </template>
-
+<style lang="scss" scoped="scoped">
+        .ibox  {
+            margin-top: 22px;
+        }
+</style>
 <script>
     import BillboardFaceForm from './billboard-face-form.vue';
     import ModalForm from '../shared/Mixins/ModalForm';
@@ -101,7 +105,6 @@
             },
 
             findIndex(billboardFace) {
-                debugger;
                 return this.billboardFaces.findIndex((_billboardFace) => {
                     return _billboardFace.id === billboardFace.id;
                 });

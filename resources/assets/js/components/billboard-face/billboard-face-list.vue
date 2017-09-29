@@ -57,6 +57,7 @@
     </div>
 </template>
 
+
 <script>
     import BillboardFaceForm from './billboard-face-form';
 
@@ -90,7 +91,6 @@
             },
 
             reload() {
-                let self = this;
                 Slc.get(laroute.route('api.billboard-face.index', {bid: this.billboardId}))
                     .then((response) => {
                         self.billboardFaces = response;

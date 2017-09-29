@@ -35,7 +35,6 @@
                         <spinner v-if="form.busy"></spinner>
                     </btn-submit>
                 </modal-footer>
-
             </form-submit>
     </modal>
 </template>
@@ -46,6 +45,7 @@
 
     export default{
         mixins: [ModalForm],
+        props: {},
         data() {
             return {
                 api: 'csv',
@@ -53,20 +53,22 @@
         },
 
         methods: {
-
             buildForm() {
                 return new SlcForm({
                     billboards: []
                 });
+            },
+            reload() {
+                window.location = laroute.route("billboards.index");
             },
 
             save(){
                 const uri = laroute.route('api.csv.store');
                 Slc.post(uri,this.form).then((response)=> {
                     console.log('Post Billboards:',response);
-                    this.saved(response.data,'post');
-
+                    this.saved(response.data,'saved');
                 });
+
             }
 
         }

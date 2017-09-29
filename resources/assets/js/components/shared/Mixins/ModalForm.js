@@ -72,6 +72,7 @@ export default {
             this.send('put', this.updateRoute);
         },
         send(method, route) {
+
             let event = method === 'post' ? 'created' : 'updated';
             Slc[method](route, this.form)
                 .then((response) => {

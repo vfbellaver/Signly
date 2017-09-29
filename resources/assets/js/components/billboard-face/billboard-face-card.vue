@@ -68,7 +68,6 @@
             },
 
             format(valor){
-                debugger;
                 var tmp = valor + '';
                 tmp = tmp.replace(/([0-9]{3})$/g, ".$1");
                 if (tmp.length > 6)

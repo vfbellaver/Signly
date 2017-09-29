@@ -13,20 +13,17 @@ namespace App\Services;
 use App\Events\BillboardCreated;
 use App\Forms\BillboardForm;
 use App\Models\Billboard;
+use function Deployer\add;
 
 class BillboardsImportService
 {
-
-    protected $valid = true;
 
     // save Billboards
     public function createBillboards(array $data)
     {
         foreach ($data['billboards'] as $billboard){
-
                 $billboard = new Billboard($billboard);
                 $billboard->save();
-
             }
-        }
     }
+}

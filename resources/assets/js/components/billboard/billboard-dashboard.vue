@@ -72,12 +72,10 @@
 
                 <!-- faces  -->
                 <column size="7">
-                    <column size="12">
                       <billboard-face-list-card
                        :billboard-id="id"
                       >
                       </billboard-face-list-card>
-                    </column>
                 </column>
             </box-body>
         </box>
