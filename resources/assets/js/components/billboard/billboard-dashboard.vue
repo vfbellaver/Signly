@@ -112,6 +112,7 @@
                 center: {lat: 39.3209801, lng: -111.09373110000001},
                 mapOptions: {
                     mapTypeControl: false,
+                    scrollwheel:  true
                 },
                 zoomChanged: false,
                 billboardFaces: []

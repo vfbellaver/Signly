@@ -95,6 +95,7 @@
                         <form-group :form="form" field="is_iluminated">
                             <input-label for="is_iluminated">Is Illuminated: </input-label>
                             <toggle-button
+                                    :disabled="form.is_iluminated"
                                     v-model="form.is_iluminated"
                                     :value="form.is_iluminated"
                                     @change="setStatus($event.value, form)"
@@ -121,6 +122,7 @@
 
         props: {
             billboardId: {required: true},
+            value: false,
         },
 
         mixins: [ModalForm],
@@ -129,7 +131,7 @@
         data() {
             return {
                 api: 'billboard-face',
-                isIlluminated: false,
+
             }
         },
 
@@ -137,8 +139,8 @@
             title() {
                 return `${(this.form.id ? 'Edit' : 'Add')} BillboardFace`;
             },
-        },
 
+        },
         methods: {
             buildForm(billboard_face) {
                 return new SlcForm({
@@ -155,7 +157,7 @@
                     max_ads: billboard_face ? billboard_face.max_ads : null,
                     duration: billboard_face ? billboard_face.duration : null,
                     photo: billboard_face ? billboard_face.photo : null,
-                    is_iluminated: billboard_face ? billboard_face.is_iluminated : this.isIlluminated,
+                    is_iluminated: billboard_face ? billboard_face.is_iluminated :  false,
                     billboard_face: billboard_face ? billboard_face.id : null,
                     billboard: this.billboardId,
                 });

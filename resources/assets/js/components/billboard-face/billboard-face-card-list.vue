@@ -105,7 +105,6 @@
             },
 
             findIndex(billboardFace) {
-                debugger;
                 return this.billboardFaces.findIndex((_billboardFace) => {
                     return _billboardFace.id === billboardFace.id;
                 });
