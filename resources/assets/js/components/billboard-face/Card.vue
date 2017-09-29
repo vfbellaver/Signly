@@ -15,7 +15,7 @@
                         </column>
                         <column size="12">
                             <h4>Monthly Impressions: {{billboardFace.monthly_impressions}} &nbsp</h4>
-                            <h4>Hard Cost: {{billboardFace.height}} &nbsp </h4>
+                            <h4>Hard Cost U$ : {{getMoney}} &nbsp </h4>
                         </column>
                         <column size="12">
                             <slot></slot>
@@ -33,5 +33,36 @@
         props: {
             billboardFace: {required:true}
         },
+
+        computed: {
+
+            getMoney(){
+
+                let valor = this.billboardFace.hard_cost.toString();
+                valor = valor.replace('.', '');
+                return this.formatMoney(valor);
+
+            }
+        },
+
+        mounted() {
+          this.reload();
+        },
+
+        methods: {
+
+            reload() {
+                money: this.billboardFace.hard_cost
+            },
+
+            formatMoney(valor){
+                var tmp = valor + '';
+                tmp = tmp.replace(/([0-9]{2})$/g, ",$1");
+                if (tmp.length > 6)
+                    tmp = tmp.replace(/([0-9]{3}),([0-9]{2}$)/g, ".$1,$2");
+                return tmp;
+            }
+
+        }
     }
 </script>
