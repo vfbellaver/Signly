@@ -9,79 +9,99 @@
                 <!-- billboard  -->
                 <column size="5">
                     <form-submit v-model="form" @submit="save">
-                            <row>
-                                <column size="12">
-                                    <form-group :form="form" field="name">
-                                        <input-label for="name">Name: </input-label>
-                                        <input-text v-model="form.name" id="name" name="name"></input-text>
-                                    </form-group>
-                                    <form-group :form="form" field="description">
-                                        <input-label for="description">Description: </input-label>
-                                        <text-area v-model="form.description" id="description" name="description"></text-area>
-                                    </form-group>
-                                    <form-group :form="form" field="address">
-                                        <input-label for="address">Address: </input-label>
-                                        <input-text v-model="form.address" id="address" name="address"></input-text>
-                                    </form-group>
+                        <row>
+                            <column size="12">
+                                <form-group :form="form" field="name">
+                                    <input-label for="name">Name: </input-label>
+                                    <input-text v-model="form.name" id="name" name="name"></input-text>
+                                </form-group>
+                                <form-group :form="form" field="description">
+                                    <input-label for="description">Description: </input-label>
+                                    <text-area v-model="form.description" id="description"
+                                               name="description"></text-area>
+                                </form-group>
+                                <form-group :form="form" field="address">
+                                    <input-label for="address">Address: </input-label>
+                                    <input-text v-model="form.address" id="address" name="address"></input-text>
+                                </form-group>
+                            </column>
+                            <column size="12">
+                                <gmap-map
+                                        :center="center"
+                                        :zoom="zoom"
+                                        @click="onMapClick"
+                                        @zoom_changed="onZoomChanged"
+                                        :options="mapOptions"
+                                        style="width: 100%; min-height: 320px">
+                                    <gmap-marker
+                                            v-if="marker"
+                                            :position="marker"
+                                            :clickable="true"
+                                            :draggable="true"
+                                            @dragend="onMarkerMoved"
+                                            @click="center=marker"
+                                    ></gmap-marker>
+                                </gmap-map>
+                            </column>
+                            <column size="6">
+                                <form-group :form="form" field="lat">
+                                    <input-label for="lat">Latitude: </input-label>
+                                    <input-text v-model="form.lat" id="lat" name="lat"></input-text>
+                                </form-group>
+                            </column>
+                            <column size="6">
+                                <form-group :form="form" field="lng">
+                                    <input-label for="lng">Longitude: </input-label>
+                                    <input-text v-model="form.lng" id="lng" name="lng"></input-text>
+                                </form-group>
+                            </column>
+                            <column size="12">
+                                <form-group :form="form" field="digital_driveby">
+                                    <input-label for="digital_driveby">Digital Driveby: </input-label>
+                                    <input-text v-model="form.digital_driveby" id="digital_driveby"
+                                                name="digital_driveby"></input-text>
+                                </form-group>
+                            </column>
+                        </row>
+                        <hr>
+                        <column size="12">
+                            <form-group :form="form" field="name">
+                                <column size="7">
                                 </column>
-                                <column size="12">
-                                    <gmap-map
-                                              :center="center"
-                                              :zoom="zoom"
-                                              @click="onMapClick"
-                                              @zoom_changed="onZoomChanged"
-                                              :options="mapOptions"
-                                              style="width: 100%; min-height: 320px">
-                                        <gmap-marker
-                                                v-if="marker"
-                                                :position="marker"
-                                                :clickable="true"
-                                                :draggable="true"
-                                                @dragend="onMarkerMoved"
-                                                @click="center=marker"
-                                        ></gmap-marker>
-                                    </gmap-map>
+                                <column size="3">
+                                    <btn-default
+                                    >
+                                        <a href="http://signly.dev/billboards">CANCEL</a>
+                                    </btn-default>
                                 </column>
-                                <column size="6">
-                                    <form-group :form="form" field="lat">
-                                        <input-label for="lat">Latitude: </input-label>
-                                        <input-text v-model="form.lat" id="lat" name="lat"></input-text>
-                                    </form-group>
+                                <column size="2">
+                                    <btn-submit :disabled="form.busy">
+                                        <spinner v-if="form.busy"></spinner>
+                                    </btn-submit>
                                 </column>
-                                <column size="6">
-                                    <form-group :form="form" field="lng">
-                                        <input-label for="lng">Longitude: </input-label>
-                                        <input-text v-model="form.lng" id="lng" name="lng"></input-text>
-                                    </form-group>
-                                </column>
-                                <column size="12">
-                                    <form-group :form="form" field="digital_driveby">
-                                        <input-label for="digital_driveby">Digital Driveby: </input-label>
-                                        <input-text v-model="form.digital_driveby" id="digital_driveby"
-                                                    name="digital_driveby"></input-text>
-                                    </form-group>
-                                </column>
-                            </row>
-                            <hr>
-                            <btn-submit :disabled="form.busy">
-                                <spinner v-if="form.busy"></spinner>
-                            </btn-submit>
+                            </form-group>
+                        </column>
 
                     </form-submit>
                 </column>
 
                 <!-- faces  -->
                 <column size="7">
-                      <billboard-face-list-card
-                       :billboard-id="id"
-                      >
-                      </billboard-face-list-card>
+                    <billboard-face-list-card
+                            :billboard-id="id"
+                    >
+                    </billboard-face-list-card>
                 </column>
             </box-body>
         </box>
     </div>
 </template>
 
+<style lang="scss" scoped="scoped">
+    .margin-billboard-edit {
+        margin-right: 5px;
+    }
+</style>
 
 <script>
 
@@ -111,6 +131,8 @@
                 center: {lat: 39.3209801, lng: -111.09373110000001},
                 mapOptions: {
                     mapTypeControl: false,
+                    scrollWell: true,
+                    gestureHandling: 'greedy'
                 },
                 zoomChanged: false,
                 billboardFaces: []
@@ -127,6 +149,7 @@
             const self = this;
             this.load();
         },
+
 
         methods: {
 
