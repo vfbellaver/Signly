@@ -16,7 +16,6 @@
                                     <th style="width: 300px">Name</th>
                                     <th style="width: 600px" class="hidden-sm">Address</th>
                                     <th>Driveby</th>
-
                                 </tr>
                             </thead>
                             <tbody>

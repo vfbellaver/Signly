@@ -164,6 +164,8 @@
             setStatus(value, item) {
                 item.is_iluminated = value;
             },
+
+
         }
     }
 </script>
