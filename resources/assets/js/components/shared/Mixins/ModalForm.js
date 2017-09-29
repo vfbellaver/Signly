@@ -39,12 +39,13 @@ export default {
         },
         updateRoute() {
             let data = {};
-            data[!this.route.model ? this.api : this.route.model] = this.form.id;
 
-            if (!this.route.update)
-                return laroute.route(`api.${this.api}.update`, data);
+            data[!this.route.model ? this.api.replace("-","_") : this.route.model] = this.form.id;
 
-            return laroute.route(this.route.update, data);
+            let uri = (!this.route.update) ? laroute.route(`api.${this.api}.update`, data) : laroute.route(this.route.update, data);
+
+            return uri;
+
         }
     },
 

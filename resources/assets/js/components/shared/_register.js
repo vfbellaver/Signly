@@ -41,5 +41,6 @@ Vue.component('box-title', require('./Boxes/BoxTitle'));
 Vue.component('box-tools', require('./Boxes/BoxTools'));
 Vue.component('box-tool', require('./Boxes/BoxTool'));
 Vue.component('box-content', require('./Boxes/BoxContent'));
+Vue.component('box-body', require('./Boxes/BoxBody'));
 
 // ------------------------------------------------------------------------

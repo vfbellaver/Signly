@@ -14,6 +14,7 @@ class BillboardFaceService
     {
         return \DB::transaction(function () use ($form) {
             $data = [
+				'code' => $form->code(),
 				'height' => $form->height(),
 				'width' => $form->width(),
 				'reads' => $form->reads(),
@@ -29,7 +30,6 @@ class BillboardFaceService
             ];
 
             $billboardFace = new BillboardFace($data);
-			$billboardFace->unique()->associate($form->unique());
 			$billboardFace->billboard()->associate($form->billboard());
 
             $billboardFace->save();
@@ -43,7 +43,8 @@ class BillboardFaceService
     public function update(BillboardFaceForm $form, BillboardFace $billboardFace): BillboardFace
     {
         return \DB::transaction(function () use ($form, $billboardFace) {
-            
+
+            $billboardFace->code = $form->code();
 			$billboardFace->height = $form->height();
 			$billboardFace->width = $form->width();
 			$billboardFace->reads = $form->reads();
@@ -56,7 +57,6 @@ class BillboardFaceService
 			$billboardFace->duration = $form->duration();
 			$billboardFace->photo = $form->photo();
 			$billboardFace->is_iluminated = $form->isIluminated();
-			$billboardFace->unique()->associate($form->unique());
 			$billboardFace->billboard()->associate($form->billboard());
 
             $billboardFace->save();

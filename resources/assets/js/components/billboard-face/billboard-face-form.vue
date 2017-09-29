@@ -13,9 +13,9 @@
 
                     <column size="6">
                         <column size="12">
-                            <form-group :form="form" field="unique">
-                                <input-label for="unique">Unique: </input-label>
-                                <input-text v-model="form.unique" id="unique" name="unique"></input-text>
+                            <form-group :form="form" field="code">
+                                <input-label for="code">Code: </input-label>
+                                <input-text v-model="form.code" id="code" name="code"></input-text>
                             </form-group>
                         </column>
 
@@ -93,9 +93,11 @@
 
 
                         <form-group :form="form" field="is_iluminated">
-                            <input-label for="is_iluminated">Is_Iluminated: </input-label>
+                            <input-label for="is_iluminated">Is Illuminated: </input-label>
                             <toggle-button
-                                    :value="form.status"
+                                    v-model="form.is_iluminated"
+                                    :value="form.is_iluminated"
+                                    @change="setStatus($event.value, form)"
                                     :sync="true"
                             ></toggle-button>
                         </form-group>
@@ -114,29 +116,34 @@
 
 <script>
     import ModalForm from '../shared/Mixins/ModalForm';
-    import BillboardSelect from '../billboard/billboard-select';
 
     export default {
-        mixins: [ModalForm],
-        components: {
-            BillboardSelect,
+
+        props: {
+            billboardId: {required: true},
         },
+
+        mixins: [ModalForm],
+
+
         data() {
             return {
-                api: 'billboard-face'
+                api: 'billboard-face',
+                isIlluminated: false,
             }
         },
+
         computed: {
             title() {
                 return `${(this.form.id ? 'Edit' : 'Add')} BillboardFace`;
-            }
+            },
         },
+
         methods: {
             buildForm(billboard_face) {
                 return new SlcForm({
                     id: billboard_face ? billboard_face.id : null,
-                    unique: billboard_face ? billboard_face.unique : null,
-                    unique_id: billboard_face ? billboard_face.unique_id : null,
+                    code: billboard_face ? billboard_face.code : null,
                     height: billboard_face ? billboard_face.height : null,
                     width: billboard_face ? billboard_face.width : null,
                     reads: billboard_face ? billboard_face.reads : null,
@@ -148,11 +155,15 @@
                     max_ads: billboard_face ? billboard_face.max_ads : null,
                     duration: billboard_face ? billboard_face.duration : null,
                     photo: billboard_face ? billboard_face.photo : null,
-                    is_iluminated: billboard_face ? billboard_face.is_iluminated : null,
-                    billboard: billboard_face ? billboard_face.billboard : null,
-                    billboard_id: billboard_face ? billboard_face.billboard_id : null,
+                    is_iluminated: billboard_face ? billboard_face.is_iluminated : this.isIlluminated,
+                    billboard_face: billboard_face ? billboard_face.id : null,
+                    billboard: this.billboardId,
                 });
-            }
+            },
+
+            setStatus(value, item) {
+                item.is_iluminated = value;
+            },
         }
     }
 </script>

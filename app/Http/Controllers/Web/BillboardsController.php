@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
 use App\Models\Billboard;
+use App\Models\BillboardFace;
 
 class BillboardsController extends Controller
 {
@@ -14,8 +15,8 @@ class BillboardsController extends Controller
 
     public function edit($id)
     {
-        $billboard = Billboard::query()->findOrFail($id);
 
+        $billboard = Billboard::query()->findOrFail($id);
         return view('billboard.edit', [
             'billboard' => $billboard
         ]);

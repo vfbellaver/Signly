@@ -44,7 +44,7 @@
             </box-content>
         </box>
         <billboard-form ref="form" @saved="formSaved"></billboard-form>
-        <billboard-form-csv ref="formcsv"></billboard-form-csv>
+        <billboard-form-csv @saved="reload" ref="formcsv"></billboard-form-csv>
     </div>
 </template>
 

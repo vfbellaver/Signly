@@ -11,13 +11,6 @@
     <script>
         window.Slc = {!! json_encode(array_merge(Slc::scriptVariables(), [])) !!};
     </script>
-    <style>
-        #map {
-            height: 400px;
-            width: 100%;
-            margin-bottom: 15px;
-        }
-    </style>
 </head>
 <body class="top-navigation">
 <div id="app">
@@ -35,7 +28,7 @@
                                 data-toggle="collapse" class="navbar-toggle collapsed" type="button">
                             <i class="fa fa-reorder"></i>
                         </button>
-                        <a href="#" class="navbar-brand">{{env('APP_NAME')}}</a>
+                        <a href="{{route('home')}}" class="navbar-brand">{{env('APP_NAME')}}</a>
                     </div>
                     <div class="navbar-collapse collapse" id="navbar">
                         <ul class="nav navbar-nav">
@@ -61,9 +54,13 @@
                     </div>
                 </nav>
             </div>
-            <div class="wrapper wrapper-content">
+            @if(route('home'))
                 @yield('content')
-            </div>
+            @else
+                <div class="wrapper wrapper-content">
+                    @yield('content')
+                </div>
+            @endif
             <div class="footer">
                 <div>
                     <strong>Copyright</strong> Slc DevShop &copy; 2014-2017

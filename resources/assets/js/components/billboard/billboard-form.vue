@@ -88,35 +88,22 @@
             }
         },
 
+
         watch: {
             'form.address': function () {
                 this.onAddressChange();
             }
         },
 
-        created() {
-
-            const self = this;
-
-            Bus.$on('markerChanged', (pos) => {
-                self.form.lat = pos.lat;
-                self.form.lng = pos.lng;
-            });
-
-            Bus.$on('addressChanged', (address) => {
-                self.form.address = address;
-            });
-
-            Bus.$on('initialPosition', (self.form.lat, self.form.lat));
-        },
-
         computed: {
             title() {
                 return `${(this.form.id ? 'Edit' : 'Add')} Billboard`;
             }
+
         },
 
         methods: {
+
             buildForm(billboard) {
                 this.marker = null;
                 this.address = null;
@@ -134,7 +121,9 @@
                     lng: billboard ? billboard.lng : null,
                 });
             },
+
             onMapClick(e) {
+
                 const self = this;
                 console.log(e);
                 if (this.marker) {
@@ -146,7 +135,8 @@
                     lat: e.latLng.lat(),
                     lng: e.latLng.lng(),
                 };
-                geocoder.geocode({'location': pos}, (results, status) => {
+
+               geocoder.geocode({'location': pos}, (results, status) => {
                     console.log("Geocode", results, status);
                     if (!results.length || status !== 'OK') {
                         return;
@@ -167,10 +157,12 @@
                 }
                 this.zoom = 15;
             },
+
             onZoomChanged(e) {
                 console.log("On Zoom Changed", e);
                 this.zoomChanged = true;
             },
+
             onAddressChange: _.debounce(function (e) {
                 console.log("OnAddressChange", e);
                 const self = this;
@@ -196,6 +188,7 @@
                     self.zoom = 15;
                 });
             }, 500),
+
             onMarkerMoved: _.debounce(function (e) {
                 console.log('On Marker Moved', e);
                 const pos = {

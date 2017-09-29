@@ -13,7 +13,7 @@
                         <thead>
                         <tr>
                             <th></th>
-                            <th>Unique</th>
+                            <th>Code</th>
                             <th>Height</th>
                             <th>Width</th>
                             <th>Monthly Impressions</th>
@@ -24,7 +24,7 @@
                         <tbody>
                         <tr v-for="( billboardface, index ) in billboardFaces">
                             <td>{{ index + 1 }}</td>
-                            <td>{{ billboardface.unique.name }}</td>
+                            <td>{{ billboardface.code }}</td>
                             <td>{{ billboardface.height }}</td>
                             <td>{{ billboardface.width }}</td>
                             <td>{{ billboardface.monthly_impressions }}</td>
@@ -53,9 +53,10 @@
                 </div>
             </box-content>
         </box>
-        <billboard-face-form ref="form" @saved="formSaved"></billboard-face-form>
+        <billboard-face-form ref="form" :billboard-id="billboardId" @saved="formSaved"></billboard-face-form>
     </div>
 </template>
+
 
 <script>
     import BillboardFaceForm from './billboard-face-form';
@@ -63,7 +64,7 @@
     export default {
 
         props: {
-            billboardId: {required: true}
+            billboardId: {required: true},
         },
 
         components: {
@@ -90,7 +91,6 @@
             },
 
             reload() {
-                let self = this;
                 Slc.get(laroute.route('api.billboard-face.index', {bid: this.billboardId}))
                     .then((response) => {
                         self.billboardFaces = response;
