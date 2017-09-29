@@ -12,7 +12,7 @@ import Laroute from './commons/laroute';
 
 window.laroute = Laroute;
 
-window.Masks = require('./masks');
+
 
 window.Vue = require('vue');
 
@@ -31,7 +31,6 @@ window.Vue.use(VueGoogleMaps, {
     }
 });
 
-window.Masks = require('./masks');
 
 const app = new Vue({
         el: '#app',

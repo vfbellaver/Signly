@@ -5,6 +5,7 @@
                 Billboards
                 <box-tools slot="tools">
                     <box-tool icon="plus" @click.native="add">New</box-tool>
+                    <box-tool icon="upload" @click.native="importBillboards">Import Billboards</box-tool>
                 </box-tools>
             </box-title>
             <box-content>
@@ -13,8 +14,8 @@
                         <thead>
                         <tr>
                             <th style="width: 50px"></th>
-                            <th>Name</th>
-                            <th style="width: 200px" class="hidden-sm">Address</th>
+                            <th style="width: 300px">Name</th>
+                            <th style="width: 600px" class="hidden-sm">Address</th>
                             <th style="width: 100px">Driveby</th>
                             <th style="width: 100px"></th>
                         </tr>
@@ -43,15 +44,19 @@
             </box-content>
         </box>
         <billboard-form ref="form" @saved="formSaved"></billboard-form>
+        <billboard-form-csv ref="formcsv" @saved=""></billboard-form-csv>
     </div>
 </template>
 
 <script>
     import BillboardForm from './billboard-form';
+    import BillboardFormCsv from './billboard-form-csv.vue'
+
 
     export default {
         components: {
-            BillboardForm
+            BillboardForm,
+            BillboardFormCsv
         },
         data() {
             return {
@@ -68,6 +73,10 @@
             add() {
                 this.$refs.form.show();
             },
+            importBillboards(){
+                this.$refs.formcsv.show();
+            },
+
 
             edit(billboard) {
                 window.location = laroute.route("billboards.edit", {billboard: billboard.id});

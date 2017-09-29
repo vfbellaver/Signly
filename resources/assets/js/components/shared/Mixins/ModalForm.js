@@ -27,6 +27,7 @@ export default {
             self.$emit('hidden');
             self.isShown = false;
         });
+
     },
 
     computed: {
@@ -53,6 +54,7 @@ export default {
             console.log("Show form");
             this.form = this.buildForm(obj);
             $(this.$el).modal('show');
+
         },
         reset() {
             this.form = this.buildForm();

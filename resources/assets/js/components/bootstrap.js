@@ -16,5 +16,6 @@ Vue.component('billboard-face-list', require('./billboard-face/billboard-face-li
 Vue.component('billboard-face-list-card', require('./billboard-face/List'));
 Vue.component('billboard-face-card', require('./billboard-face/Card'));
 
-Vue.component('client-list', require('./client/client-list.vue'));
+Vue.component('billboard-form-csv',require('./billboard/billboard-form-csv.vue'));
 
+Vue.component('client-list', require('./client/client-list.vue'));
