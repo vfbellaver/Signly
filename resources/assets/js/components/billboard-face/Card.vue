@@ -15,7 +15,7 @@
                         </column>
                         <column size="12">
                             <h4>Monthly Impressions: {{billboardFace.monthly_impressions}} &nbsp</h4>
-                            <h4>Hard Cost: {{billboardFace.height}} &nbsp </h4>
+                            <h4 v-form="money">Hard Cost U$ : {{billboardFace.hard_cost}} &nbsp </h4>
                         </column>
                         <column size="12">
                             <slot></slot>
