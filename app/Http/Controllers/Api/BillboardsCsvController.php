@@ -56,6 +56,7 @@ class BillboardsCsvController
         $this->service->createBillboards($data);
         $response = [
             'message' => 'Billboards imported.',
+            'data' =>  $data ,
         ];
 
         return $response;
