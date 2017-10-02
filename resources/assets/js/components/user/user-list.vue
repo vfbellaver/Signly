@@ -32,26 +32,20 @@
                                         :sync="true"
                                         @change="updateStatus($event.value, user)"
                                         :disabled="canUpdateStatus(user)"
-                                />
+                                ></toggle-button>
                             </td>
                             <td>
-                                <btn-success
-                                        size="xs"
-                                        @click.native="edit(user)"
-                                >
-                                    <icon icon="edit"/>
+                                <btn-success size="xs" @click.native="edit(user)">
+                                    <icon icon="edit"></icon>
                                 </btn-success>
-
                                 <btn-danger
                                         @click.native="destroy(user)"
                                         :disabled="user.destroyForm.busy"
                                         v-if="canDestroy(user)"
-                                        size="xs"
-                                >
+                                        size="xs">
                                     <spinner v-if="user.destroyForm.busy"></spinner>
-                                    <icon icon="trash" v-else/>
+                                    <icon icon="trash" v-else></icon>
                                 </btn-danger>
-
                             </td>
                         </tr>
                         </tbody>

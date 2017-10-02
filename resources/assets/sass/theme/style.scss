@@ -1,11 +1,3 @@
-/*
- *
- *   INSPINIA - Responsive Admin Theme
- *   version 2.7.1
- *
-*/
-
-// INSPINIA Theme Elements
 @import "typography";
 @import "navigation";
 @import "top_navigation";
@@ -18,19 +10,14 @@
 @import "chat";
 @import "metismenu";
 @import "spinners";
+@import "map";
 
-// INSPINIA Skins
 @import "skins";
 @import "md-skin";
 
-// Media query style
 @import "media";
-
-// Custom style
-// Your custom style to override base style
 @import "custom";
 
-// Clear layout on print mode
 @media print {
   nav.navbar-static-side {
     display: none;
