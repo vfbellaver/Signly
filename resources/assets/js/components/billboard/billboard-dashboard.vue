@@ -1,10 +1,3 @@
-<template>
-    <div>
-        <box>
-            <box-title>
-                Billboards DashBoard
-            </box-title>
-            <box-body>
 
                 <!-- billboard  -->
                 <column size="5">

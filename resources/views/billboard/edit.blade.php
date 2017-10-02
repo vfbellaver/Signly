@@ -3,7 +3,7 @@
 @section('content')
     @component('components.default-page')
 
-       <billboard-dashboard id="{{$billboard->id}}"></billboard-dashboard>
+       <billboard-edit id="{{$billboard->id}}"></billboard-edit>
 
     @endcomponent
 @endsection

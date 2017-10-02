@@ -97,7 +97,7 @@
                             <toggle-button
                                     :disabled="form.is_iluminated"
                                     v-model="form.is_iluminated"
-                                    :value="form.is_iluminated"
+                                    :value="false"
                                     @change="setStatus($event.value, form)"
                                     :sync="true"
                             ></toggle-button>
@@ -157,7 +157,7 @@
                     max_ads: billboard_face ? billboard_face.max_ads : null,
                     duration: billboard_face ? billboard_face.duration : null,
                     photo: billboard_face ? billboard_face.photo : null,
-                    is_iluminated: billboard_face ? billboard_face.is_iluminated :  false,
+                    is_iluminated: billboard_face ? billboard_face.is_iluminated : false,
                     billboard_face: billboard_face ? billboard_face.id : null,
                     billboard: this.billboardId,
                 });
@@ -166,7 +166,6 @@
             setStatus(value, item) {
                 item.is_iluminated = value;
             },
-
 
         }
     }

@@ -8,7 +8,6 @@ Vue.component('info-content', require('./shared/InfoContent'));
 
 Vue.component('billboard-list', require('./billboard/billboard-list'));
 Vue.component('billboard-edit', require('./billboard/billboard-edit'));
-Vue.component('billboard-dashboard', require('./billboard/billboard-dashboard'));
 
 Vue.component('billboard-face-list', require('./billboard-face/billboard-face-list'));
 // ------------------------------------------------------------------------
