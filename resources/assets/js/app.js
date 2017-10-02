@@ -12,8 +12,6 @@ import Laroute from './commons/laroute';
 
 window.laroute = Laroute;
 
-
-
 window.Vue = require('vue');
 
 require('./directives/bootstrap');
