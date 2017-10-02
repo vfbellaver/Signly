@@ -13,7 +13,6 @@ class BillboardFace extends Model
 		'width',
 		'reads',
 		'label',
-		'sign_type',
 		'hard_cost',
 		'monthly_impressions',
 		'notes',
@@ -25,7 +24,6 @@ class BillboardFace extends Model
     ];
 
     protected $casts = [
-		'sign_type' => 'int',
 		'max_ads' => 'int',
 		'duration' => 'int',
 		'is_iluminated' => 'boolean',
@@ -64,7 +62,6 @@ class BillboardFace extends Model
 			'width' => $this->width,
 			'reads' => $this->reads,
 			'label' => $this->label,
-			'sign_type' => $this->sign_type,
 			'hard_cost' => $this->hard_cost,
 			'monthly_impressions' => $this->monthly_impressions,
 			'notes' => $this->notes,

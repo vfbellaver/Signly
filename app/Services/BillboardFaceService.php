@@ -19,7 +19,6 @@ class BillboardFaceService
 				'width' => $form->width(),
 				'reads' => $form->reads(),
 				'label' => $form->label(),
-				'sign_type' => $form->signType(),
 				'hard_cost' => $form->hardCost(),
 				'monthly_impressions' => $form->monthlyImpressions(),
 				'notes' => $form->notes(),
@@ -49,7 +48,6 @@ class BillboardFaceService
 			$billboardFace->width = $form->width();
 			$billboardFace->reads = $form->reads();
 			$billboardFace->label = $form->label();
-			$billboardFace->sign_type = $form->signType();
 			$billboardFace->hard_cost = $form->hardCost();
 			$billboardFace->monthly_impressions = $form->monthlyImpressions();
 			$billboardFace->notes = $form->notes();
