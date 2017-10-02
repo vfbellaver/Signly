@@ -85,11 +85,6 @@
                                     <image-upload id="logo" v-model="form.logo"></image-upload>
                                 </form-group>
                             </column>
-
-
-
-
-
                         </row>
                    </column>
                 </row>
@@ -109,6 +104,7 @@
 
     export default {
         mixins: [ModalForm],
+        props: {},
         data() {
             return {
                 api: 'client'

@@ -15,7 +15,7 @@
                         </form-group>
                         <form-group :form="form" field="address">
                             <input-label for="address">Address: </input-label>
-                            <input-text v-model="address" id="address" name="address"></input-text>
+                            <input-text v-model="form.address" id="address" name="address"></input-text>
                         </form-group>
                     </column>
                     <column size="12">
@@ -79,52 +79,43 @@
             return {
                 api: 'billboard',
                 marker: null,
-                zoom: 7,
+                zoom: 20,
                 center: {lat: 39.3209801, lng: -111.09373110000001},
                 mapOptions: {
                     mapTypeControl: false,
+                    scrollWell: true,
+                    gestureHandling: 'greedy'
                 },
-                address: null,
                 zoomChanged: false,
+                gestureHandling: 'greedy'
             }
         },
+
 
         watch: {
-            address() {
-                this.form.address = this.address;
+            'form.address': function () {
                 this.onAddressChange();
             }
-        },
-
-        created() {
-
-            const self = this;
-
-            Bus.$on('markerChanged', (pos) => {
-                self.form.lat = pos.lat;
-                self.form.lng = pos.lng;
-            });
-
-            Bus.$on('addressChanged', (address) => {
-                self.form.address = address;
-            });
-
-            Bus.$on('initialPosition', (self.form.lat, self.form.lat));
         },
 
         computed: {
             title() {
                 return `${(this.form.id ? 'Edit' : 'Add')} Billboard`;
             }
+
         },
 
         methods: {
+
             buildForm(billboard) {
                 this.marker = null;
                 this.address = null;
-                this.zoom = 7;
-                this.center = {lat: 39.3209801, lng: -111.09373110000001};
+                this.zoom = 10;
+                this.center = {lat: 40.76382, lng: -111.90380399999998};
                 this.zoomChanged = false;
+                this.zoom = 10;
+                this.center = {lat: 40.76182096906601, lng: -111.91085815429688};
+                this.gestureHandling = 'greedy';
 
                 return new SlcForm({
                     id: billboard ? billboard.id : null,
@@ -136,7 +127,9 @@
                     lng: billboard ? billboard.lng : null,
                 });
             },
+
             onMapClick(e) {
+
                 const self = this;
                 console.log(e);
                 if (this.marker) {
@@ -148,7 +141,8 @@
                     lat: e.latLng.lat(),
                     lng: e.latLng.lng(),
                 };
-                geocoder.geocode({'location': pos}, (results, status) => {
+
+               geocoder.geocode({'location': pos}, (results, status) => {
                     console.log("Geocode", results, status);
                     if (!results.length || status !== 'OK') {
                         return;
@@ -164,19 +158,22 @@
 
                 this.marker = pos;
                 this.center = pos;
-                if (self.zoomChanged){
+                if (self.zoomChanged) {
                     return;
                 }
                 this.zoom = 15;
             },
+
             onZoomChanged(e) {
                 console.log("On Zoom Changed", e);
                 this.zoomChanged = true;
             },
+
             onAddressChange: _.debounce(function (e) {
+                console.log("OnAddressChange", e);
                 const self = this;
                 const geocoder = new google.maps.Geocoder;
-                geocoder.geocode({address: self.address}, (results, status) => {
+                geocoder.geocode({address: self.form.address}, (results, status) => {
                     console.log("Geocode From Address", results, status);
                     if (!results.length || status !== 'OK') {
                         return;
@@ -191,12 +188,13 @@
                     self.form.lng = pos.lng;
                     self.marker = pos;
                     self.center = pos;
-                    if (self.zoomChanged){
+                    if (self.zoomChanged) {
                         return;
                     }
                     self.zoom = 15;
                 });
             }, 500),
+
             onMarkerMoved: _.debounce(function (e) {
                 console.log('On Marker Moved', e);
                 const pos = {

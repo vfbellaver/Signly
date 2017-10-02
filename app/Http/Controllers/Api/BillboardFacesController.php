@@ -20,7 +20,8 @@ class BillboardFacesController extends Controller
 
     public function index()
     {
-        return BillboardFace::all();
+        $billboardId = request()->get('bid');
+        return BillboardFace::query()->where('billboard_id', $billboardId)->get()->toArray();
     }
 
     public function store(BillboardFaceCreateRequest $request)
@@ -28,7 +29,7 @@ class BillboardFacesController extends Controller
         $data = $this->service->create($request->form());
 
         $response = [
-            'message' => 'BillboardFace created.',
+            'message' => 'Billboard Face created.',
             'data' => $data
         ];
 
@@ -40,7 +41,7 @@ class BillboardFacesController extends Controller
         $obj = $this->service->update($request->form(), $billboardFace);
 
         $response = [
-            'message' => 'BillboardFace updated.',
+            'message' => 'Billboard Face updated.',
             'data' => $obj,
         ];
 
@@ -52,7 +53,7 @@ class BillboardFacesController extends Controller
         $this->service->delete($billboardFace);
 
         return [
-            'message' => 'BillboardFace deleted.'
+            'message' => 'Billboard Face deleted.'
         ];
     }
 }

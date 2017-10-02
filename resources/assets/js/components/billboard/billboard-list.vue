@@ -5,6 +5,7 @@
                 Billboards
                 <box-tools slot="tools">
                     <box-tool icon="plus" @click.native="add">New</box-tool>
+                    <box-tool icon="upload" @click.native="importBillboards">Import Billboards</box-tool>
                 </box-tools>
             </box-title>
             <box-content>
@@ -13,9 +14,8 @@
                         <thead>
                         <tr>
                             <th style="width: 50px"></th>
-                            <th>Name</th>
-                            <th style="width: 200px" class="hidden-sm">Address</th>
-                            <th style="width: 100px">Driveby</th>
+                            <th style="width: 300px">Name</th>
+                            <th style="width: 600px" class="hidden-sm">Address</th>
                             <th style="width: 100px"></th>
                         </tr>
                         </thead>
@@ -24,7 +24,6 @@
                             <td>{{ index + 1 }}</td>
                             <td>{{ billboard.name }}</td>
                             <td class="hidden-sm">{{ billboard.address }}</td>
-                            <td>{{ billboard.digital_driveby }}</td>
                             <td>
                                 <btn-success size="xs" @click.native="edit(billboard)">
                                     <icon icon="edit"></icon>
@@ -43,15 +42,19 @@
             </box-content>
         </box>
         <billboard-form ref="form" @saved="formSaved"></billboard-form>
+        <billboard-form-csv @saved="reload" ref="formcsv"></billboard-form-csv>
     </div>
 </template>
 
 <script>
     import BillboardForm from './billboard-form';
+    import BillboardFormCsv from './billboard-form-csv.vue'
+
 
     export default {
         components: {
-            BillboardForm
+            BillboardForm,
+            BillboardFormCsv
         },
         data() {
             return {
@@ -68,9 +71,13 @@
             add() {
                 this.$refs.form.show();
             },
+            importBillboards(){
+                this.$refs.formcsv.show();
+            },
+
 
             edit(billboard) {
-                this.$refs.form.show(billboard);
+                window.location = laroute.route("billboards.edit", {billboard: billboard.id});
             },
 
             reload() {
@@ -82,9 +89,7 @@
             },
 
             formSaved(billboard) {
-                let index = this.findIndex(billboard);
-                index > -1 ? this.billboards[index] = billboard : this.billboards.push(billboard);
-                this.$forceUpdate();
+                window.location = laroute.route("billboards.edit", {billboard: billboard.id});
             },
 
             destroy(billboard) {

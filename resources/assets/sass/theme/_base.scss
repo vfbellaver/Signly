@@ -198,8 +198,9 @@ video {
   padding: 20px 10px 40px;
 }
 
+/// here was padding 0 15px
 #page-wrapper {
-  padding: 0 15px;
+  padding: 0 0px;
   min-height: 568px;
   position: relative !important;
 }
@@ -508,10 +509,11 @@ code {
   white-space: nowrap;
 }
 
+// here was margin-top 0 px
 .ibox {
   clear: both;
   margin-bottom: 25px;
-  margin-top: 0;
+  margin-top: 40px;
   padding: 0;
 }
 
