@@ -8,7 +8,7 @@ use Illuminate\Validation\Rules\Unique;
 class BillboardFace extends Model
 {
     protected $fillable = [
-		'unique_id',
+		'code',
 		'height',
 		'width',
 		'reads',
@@ -28,7 +28,7 @@ class BillboardFace extends Model
 		'sign_type' => 'int',
 		'max_ads' => 'int',
 		'duration' => 'int',
-		'is_iluminated' => 'int',
+		'is_iluminated' => 'boolean',
     ];
 
     protected $dates = [
@@ -59,8 +59,7 @@ class BillboardFace extends Model
     {
         return [
             'id' => $this->id,
-			'unique_id' => $this->unique_id,
-			'unique' => $this->unique->toArray(),
+			'code' => $this->code,
 			'height' => $this->height,
 			'width' => $this->width,
 			'reads' => $this->reads,

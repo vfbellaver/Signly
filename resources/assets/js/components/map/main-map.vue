@@ -1,10 +1,14 @@
 <template>
+
     <gmap-map
+
             :center="center"
-            :zoom="16"
-            style="width: 100%; height: 100vmin"
+            :zoom="7"
+            style="width: 100%; height: 90vmin;"
+
     >
             <gmap-info-window :options="infoOptions" :position="infoWindowPos" :opened="infoWinOpen" @closeclick="infoWinOpen=false">
+
                 <info-content
 
                         :name="info.name"
@@ -13,16 +17,16 @@
                 >
 
                 </info-content>
+
             </gmap-info-window>
 
         <gmap-marker :key="i" v-for="(m,i) in markers" :position="m.position" :clickable="true" @click="toggleInfoWindow(m,i)"></gmap-marker>
 
     </gmap-map>
+
 </template>
 
 <script>
-
-
     export default {
 
         data () {
@@ -42,8 +46,6 @@
                         height: -35
                     }
                 },
-
-                ola: 'ola',
 
                 infoWinOpen: false,
 

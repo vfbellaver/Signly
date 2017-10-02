@@ -23,7 +23,10 @@ class BillboardsController extends Controller
         return Billboard::all();
     }
 
-
+    public function show($id)
+    {
+        return Billboard::query()->findOrFail($id)->toArray();
+    }
 
     public function store(BillboardCreateRequest $request)
     {

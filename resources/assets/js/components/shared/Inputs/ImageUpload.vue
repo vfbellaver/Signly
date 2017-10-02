@@ -4,7 +4,7 @@
             <div>
                 <div>
                     <input ref="file" type="file" @change="onFileChange" class="hidden" :multiple="multiple"/>
-                    <div v-if="value" class="preview" :style="{ 'background-image': 'url(' + value + ')' }"
+                    <div v-if="internalValue" class="preview" :style="{ 'background-image': 'url(' + internalValue + ')' }"
                          @click="replaceImage">
                     </div>
                     <div v-else class="dropzone" @click="replaceImage"></div>
@@ -121,6 +121,7 @@
                 this.$emit('uploading');
                 const uri = laroute.route('api.image.upload');
                 Slc.upload(uri, allowedFiles).then((response) => {
+                    console.log("Uploaded image", response);
                     const file = response.data[0];
                     this.internalValue = file.url;
                     this.$emit('uploaded');
