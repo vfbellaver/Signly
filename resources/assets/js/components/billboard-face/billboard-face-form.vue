@@ -95,7 +95,6 @@
                         <form-group :form="form" field="is_iluminated">
                             <input-label for="is_iluminated">Is Illuminated: </input-label>
                             <toggle-button
-                                    :disabled="form.is_iluminated"
                                     v-model="form.is_iluminated"
                                     :value="false"
                                     @change="setStatus($event.value, form)"
