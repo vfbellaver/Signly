@@ -29,7 +29,6 @@ window.Vue.use(VueGoogleMaps, {
     }
 });
 
-
 const app = new Vue({
         el: '#app',
 
