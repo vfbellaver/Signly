@@ -7,15 +7,16 @@
             style="width: 100%; height: 90vmin;"
 
     >
-            <gmap-info-window :options="infoOptions" :position="infoWindowPos" :opened="infoWinOpen" @closeclick="infoWinOpen=false">
+            <gmap-info-window
+                    :options="infoOptions"
+                    :position="infoWindowPos"
+                    :opened="infoWinOpen"
+                    @closeclick="infoWinOpen=false">
 
                 <info-content
 
-                        :name="info.name"
-                        :description="info.description"
-                        :address="info.address"
+                        :billboard="billboard"
                 >
-
                 </info-content>
 
             </gmap-info-window>
@@ -43,7 +44,7 @@
                 infoOptions: {
                     pixelOffset: {
                         width: 0,
-                        height: -35
+                        height: -35,
                     }
                 },
 
@@ -54,11 +55,7 @@
                     lng: 0
                 },
 
-                info: {
-                    name:'',
-                    description:'',
-                    address:'',
-                }
+                billboard:'',
 
             }
         },
@@ -87,10 +84,7 @@
                             lng: parseFloat(this.billboards[i].lng)
                         },
 
-                        infoText: this.billboards[i].name +";"
-                                  +this.billboards[i].description+";"
-                                  +this.billboards[i].address,
-
+                        infoText: this.billboards[i],
                    });
                 }
 
@@ -99,16 +93,7 @@
             toggleInfoWindow: function(marker, idx) {
 
                 this.infoWindowPos = marker.position;
-                let infoContent = marker.infoText;
-
-                let vet;
-
-                vet = infoContent.split(";");
-
-
-                    this.info.name = vet[0];
-                    this.info.description = vet[1];
-                    this.info.address = vet[2];
+                this.billboard = marker.infoText;
 
 
                 //check if its the same marker that was selected if yes toggle

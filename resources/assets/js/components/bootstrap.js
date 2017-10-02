@@ -4,7 +4,7 @@ Vue.component('user-list', require('./user/user-list.vue'));
 
 Vue.component('main-map', require('./map/main-map.vue'));
 
-Vue.component('info-content', require('./shared/InfoContent'));
+Vue.component('info-content', require('./map/InfoContent.vue'));
 
 Vue.component('billboard-list', require('./billboard/billboard-list'));
 Vue.component('billboard-edit', require('./billboard/billboard-edit'));
