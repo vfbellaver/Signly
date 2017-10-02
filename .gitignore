@@ -24,7 +24,7 @@ Homestead.json
 /public/storage
 /.vagrant
 
-_ide_helper.php
+_ide_helpergit .php
 .phpstorm.meta.php
 
 laroute.js
