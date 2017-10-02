@@ -12,12 +12,22 @@ export default {
                 store: null,
                 update: null
             },
-
+            isShown: false,
         }
     },
 
     mounted() {
+        const self = this;
         this.reset();
+        $(this.$el).on('shown.bs.modal', () => {
+            self.$emit('shown');
+            self.isShown = true;
+        });
+        $(this.$el).on('hidden.bs.modal', () => {
+            self.$emit('hidden');
+            self.isShown = false;
+        });
+
     },
 
     computed: {
@@ -29,12 +39,13 @@ export default {
         },
         updateRoute() {
             let data = {};
-            data[!this.route.model ? this.api : this.route.model] = this.form.id;
 
-            if (!this.route.update)
-                return laroute.route(`api.${this.api}.update`, data);
+            data[!this.route.model ? this.api.replace("-","_") : this.route.model] = this.form.id;
 
-            return laroute.route(this.route.update, data);
+            let uri = (!this.route.update) ? laroute.route(`api.${this.api}.update`, data) : laroute.route(this.route.update, data);
+
+            return uri;
+
         }
     },
 
@@ -43,11 +54,14 @@ export default {
             console.log("Show form");
             this.form = this.buildForm(obj);
             $(this.$el).modal('show');
+
+
         },
         reset() {
             this.form = this.buildForm();
         },
-        buildForm() {},
+        buildForm() {
+        },
         save() {
             this.form.id ? this.update() : this.add();
         },
