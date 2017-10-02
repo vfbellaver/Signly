@@ -87,10 +87,10 @@
 
                 <!-- faces  -->
                 <column size="7">
-                    <billboard-face-list-card
+                    <billboard-face-list
                             :billboard-id="id"
                     >
-                    </billboard-face-list-card>
+                    </billboard-face-list>
                 </column>
             </box-body>
         </box>

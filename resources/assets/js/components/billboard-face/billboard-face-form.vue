@@ -142,7 +142,7 @@
         },
         methods: {
             buildForm(billboard_face) {
-                return new SlcForm({
+                const data = {
                     id: billboard_face ? billboard_face.id : null,
                     code: billboard_face ? billboard_face.code : null,
                     height: billboard_face ? billboard_face.height : null,
@@ -159,7 +159,9 @@
                     is_iluminated: billboard_face ? billboard_face.is_iluminated : false,
                     billboard_face: billboard_face ? billboard_face.id : null,
                     billboard: this.billboardId,
-                });
+                };
+                debugger;
+                return new SlcForm(data);
             },
 
             setStatus(value, item) {
