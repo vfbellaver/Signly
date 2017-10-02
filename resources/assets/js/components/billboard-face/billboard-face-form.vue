@@ -15,7 +15,7 @@
                         <column size="12">
                             <form-group :form="form" field="code">
                                 <input-label for="code">Code: </input-label>
-                                <input-text v-model="form.code" id="code" name="code"></input-text>
+                                <input-text :disabled="unique" v-model="form.code" id="code" name="code"></input-text>
                             </form-group>
                         </column>
 
@@ -129,6 +129,10 @@
         computed: {
             title() {
                 return `${(this.form.id ? 'Edit' : 'Add')} BillboardFace`;
+            },
+
+            unique() {
+               return this.form.id ? true : false;
             },
         },
 
