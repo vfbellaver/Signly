@@ -46,13 +46,11 @@
 </template>
 
 <script>
-    import BillboardForm from './billboard-form';
     import BillboardFormCsv from './billboard-form-csv.vue'
 
 
     export default {
         components: {
-            BillboardForm,
             BillboardFormCsv
         },
         data() {

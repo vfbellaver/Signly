@@ -160,7 +160,6 @@
                     billboard_face: billboard_face ? billboard_face.id : null,
                     billboard: this.billboardId,
                 };
-                debugger;
                 return new SlcForm(data);
             },
 
