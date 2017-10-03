@@ -9,10 +9,10 @@ Vue.component('info-content', require('./shared/InfoContent'));
 Vue.component('billboard-list', require('./billboard/billboard-list'));
 Vue.component('billboard-edit', require('./billboard/billboard-edit'));
 
-Vue.component('billboard-face-list', require('./billboard-face/billboard-face-list'));
+
 // ------------------------------------------------------------------------
-// Billboard-face-cards-list
-Vue.component('billboard-face-list-card', require('./billboard-face/billboard-card-face-list.vue'));
+// Billboard-face
+Vue.component('billboard-face-list', require('./billboard-face/billboard-face-list'));
 Vue.component('billboard-face-card', require('./billboard-face/billboard-face-card.vue'));
 
 Vue.component('billboard-form-csv',require('./billboard/billboard-form-csv.vue'));
