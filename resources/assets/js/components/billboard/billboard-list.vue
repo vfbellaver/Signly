@@ -41,17 +41,17 @@
                 </div>
             </box-content>
         </box>
-
+        <billboard-form ref="form" @saved="formSaved"></billboard-form>
         <billboard-form-csv @saved="reload" ref="formcsv"></billboard-form-csv>
     </div>
 </template>
 
 <script>
+    import BillboardForm from './billboard-form';
     import BillboardFormCsv from './billboard-form-csv.vue'
-
-
     export default {
         components: {
+            BillboardForm,
             BillboardFormCsv
         },
         data() {
@@ -59,25 +59,19 @@
                 billboards: []
             }
         },
-
         mounted() {
             this.reload();
         },
-
         methods: {
-
             add() {
-                window.location = laroute.route("billboards.create");
+                this.$refs.form.show();
             },
             importBillboards(){
                 this.$refs.formcsv.show();
             },
-
-
             edit(billboard) {
                 window.location = laroute.route("billboards.edit", {billboard: billboard.id});
             },
-
             reload() {
                 let self = this;
                 Slc.get(laroute.route('api.billboard.index'))
@@ -85,8 +79,9 @@
                         self.billboards = response;
                     });
             },
-
-
+            formSaved(billboard) {
+                window.location = laroute.route("billboards.edit", {billboard: billboard.id});
+            },
             destroy(billboard) {
                 let self = this;
                 Slc.delete(laroute.route('api.billboard.destroy', {billboard: billboard.id}), billboard.destroyForm)
@@ -94,18 +89,14 @@
                         self.removeBillboard(billboard);
                     });
             },
-
             removeBillboard(billboard) {
                 this.billboards.splice(this.findIndex(billboard), 1);
             },
-
             findIndex(billboard) {
                 return this.billboards.findIndex((_billboard) => {
                     return _billboard.id === billboard.id;
                 });
             }
         }
-
     }
-
 </script>

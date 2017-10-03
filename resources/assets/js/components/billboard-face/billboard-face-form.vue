@@ -57,18 +57,10 @@
 
                     <column size="4">
                         <form-group :form="form" field="sign_type">
-                            <input-label for="sign_type">Sign Type: </input-label>
-                            <input-text v-model="form.sign_type" id="sign_type" name="sign_type"></input-text>
+                            <input-label for="sign_type">Hard Cost: </input-label>
+                            <input-text v-model="form.hard_cost" id="hard_cost" name="hard_cost"></input-text>
                         </form-group>
                     </column>
-
-                    <column size="4">
-                        <form-group :form="form" field="hard_cost">
-                            <input-label for="hard_cost">Hard Cost: </input-label>
-                            <input-text v-model="form.hard_cost" id="hard_cost" name="hard_cost" v-float></input-text>
-                        </form-group>
-                    </column>
-
                     <column size="4">
                         <form-group :form="form" field="monthly_impressions">
                             <input-label for="monthly_impressions">Monthly Impressions: </input-label>
@@ -77,7 +69,7 @@
                         </form-group>
                     </column>
 
-                    <column size="4">
+                    <column size="8">
                         <form-group :form="form" field="duration">
                             <input-label for="duration">Duration: </input-label>
                             <input-text v-model="form.duration" id="duration" name="duration"></input-text>
@@ -154,7 +146,7 @@
 
         computed: {
             title() {
-                return `${(this.form.id ? 'Edit' : 'Add')} BillboardFace`;
+                return `${(this.form.id ? 'Edit' : 'Add')} Billboard Face`;
             },
 
         },
