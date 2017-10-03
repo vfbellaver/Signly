@@ -5,41 +5,51 @@
                 Billboards
                 <box-tools slot="tools">
                     <box-tool icon="plus" @click.native="add">New</box-tool>
+                    &nbsp
                     <box-tool icon="upload" @click.native="importBillboards">Import Billboards</box-tool>
+                    &nbsp
+                    <box-tool :class="className" icon="map-marker" @click.native="mapView">Map View</box-tool>
                 </box-tools>
             </box-title>
             <box-content>
-                <div class="table-responsive">
-                    <table class="table table-striped">
-                        <thead>
-                        <tr>
-                            <th style="width: 50px"></th>
-                            <th style="width: 300px">Name</th>
-                            <th style="width: 600px" class="hidden-sm">Address</th>
-                            <th style="width: 100px">Driveby</th>
-                            <th style="width: 100px"></th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr v-for="( billboard, index ) in billboards">
-                            <td>{{ index + 1 }}</td>
-                            <td>{{ billboard.name }}</td>
-                            <td class="hidden-sm">{{ billboard.address }}</td>
-                            <td>{{ billboard.digital_driveby }}</td>
-                            <td>
-                                <btn-success size="xs" @click.native="edit(billboard)">
-                                    <icon icon="edit"></icon>
-                                </btn-success>
-                                <btn-danger @click.native="destroy(billboard)"
-                                            :disabled="billboard.destroyForm.busy"
-                                            size="xs">
-                                    <spinner v-if="billboard.destroyForm.busy"></spinner>
-                                    <icon icon="trash" v-else></icon>
-                                </btn-danger>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
+                <div>
+                    <div id="list" v-show="viewList" class="table-responsive">
+                        <!--table-->
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th style="width: 50px"></th>
+                                <th style="width: 300px">Name</th>
+                                <th style="width: 600px" class="hidden-sm">Address</th>
+                                <th style="width: 100px">Driveby</th>
+                                <th style="width: 100px"></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr v-for="( billboard, index ) in billboards">
+                                <td>{{ index + 1 }}</td>
+                                <td>{{ billboard.name }}</td>
+                                <td class="hidden-sm">{{ billboard.address }}</td>
+                                <td>{{ billboard.digital_driveby }}</td>
+                                <td>
+                                    <btn-success size="xs" @click.native="edit(billboard)">
+                                        <icon icon="edit"></icon>
+                                    </btn-success>
+                                    <btn-danger @click.native="destroy(billboard)"
+                                                :disabled="billboard.destroyForm.busy"
+                                                size="xs">
+                                        <spinner v-if="billboard.destroyForm.busy"></spinner>
+                                        <icon icon="trash" v-else></icon>
+                                    </btn-danger>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <!--table-->
+                    </div>
+                    <div id="map" v-show="viewMap">
+                        <google-map></google-map>
+                    </div>
                 </div>
             </box-content>
         </box>
@@ -47,6 +57,14 @@
         <billboard-form-csv @saved="reload" ref="formcsv"></billboard-form-csv>
     </div>
 </template>
+
+<style lang="scss" scoped="scoped">
+
+    .green {
+        color: #7aa32b;
+    }
+
+</style>
 
 <script>
     import BillboardForm from './billboard-form';
@@ -60,7 +78,10 @@
         },
         data() {
             return {
-                billboards: []
+                billboards: [],
+                viewList: true,
+                viewMap: false,
+                className: ''
             }
         },
 
@@ -73,10 +94,28 @@
             add() {
                 this.$refs.form.show();
             },
+
             importBillboards(){
                 this.$refs.formcsv.show();
             },
 
+            mapView(){
+
+                this.viewList = !this.viewList;
+                this.viewMap = !this.viewMap;
+
+                if(this.viewMap){
+                    this.className = 'green';
+                } else {
+                    this.className = '';
+                }
+            },
+
+            hide(id){
+                $(document).ready(function () {
+                    $(id).hide(30);
+                });
+            },
 
             edit(billboard) {
                 window.location = laroute.route("billboards.edit", {billboard: billboard.id});

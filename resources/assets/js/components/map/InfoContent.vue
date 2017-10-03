@@ -13,7 +13,7 @@
             </div>
             <hr>
             <div class="window-footer">
-                <p>{{billboard.address}}</p>
+               <p> <icon icon="map-marker"></icon> {{billboard.address}}</p>
             </div>
         </div>
     </div>

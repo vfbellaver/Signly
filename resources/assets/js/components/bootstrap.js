@@ -18,3 +18,7 @@ Vue.component('billboard-face-card', require('./billboard-face/billboard-face-ca
 Vue.component('billboard-form-csv',require('./billboard/billboard-form-csv.vue'));
 
 Vue.component('client-list', require('./client/client-list.vue'));
+
+// ------------------------------------------------------------------------
+// Maps
+Vue.component('google-map', require('./map/google-map'));
