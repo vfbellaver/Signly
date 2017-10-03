@@ -16,7 +16,6 @@
                             <th style="width: 50px"></th>
                             <th style="width: 300px">Name</th>
                             <th style="width: 600px" class="hidden-sm">Address</th>
-                            <th style="width: 100px">Driveby</th>
                             <th style="width: 100px"></th>
                         </tr>
                         </thead>
@@ -25,7 +24,6 @@
                             <td>{{ index + 1 }}</td>
                             <td>{{ billboard.name }}</td>
                             <td class="hidden-sm">{{ billboard.address }}</td>
-                            <td>{{ billboard.digital_driveby }}</td>
                             <td>
                                 <btn-success size="xs" @click.native="edit(billboard)">
                                     <icon icon="edit"></icon>

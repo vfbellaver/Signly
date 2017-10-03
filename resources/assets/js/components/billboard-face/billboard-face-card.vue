@@ -1,7 +1,7 @@
 <template>
     <div class="card-container">
         <column size="4">
-              <img width="100%" :src="billboardFace.photo">
+            <img width="100%" :src="billboardFace.photo">
         </column>
         <column size="8">
             <div class="card-body">
@@ -33,32 +33,23 @@
         props: {
             billboardFace: {required:true}
         },
-
         computed: {
-
             getMoney(){
-
                 let valor = this.billboardFace.hard_cost.toString();
                 valor = valor.replace('.', '');
                 return this.formatMoney(valor);
-
             },
-
             formatImpressions(){
-               return this.format(this.billboardFace.monthly_impressions);
+                return this.format(this.billboardFace.monthly_impressions);
             }
         },
-
         mounted() {
-          this.reload();
+            this.reload();
         },
-
         methods: {
-
             reload() {
                 money: this.billboardFace.hard_cost
             },
-
             formatMoney(valor){
                 var tmp = valor + '';
                 tmp = tmp.replace(/([0-9]{2})$/g, ",$1");
@@ -66,16 +57,13 @@
                     tmp = tmp.replace(/([0-9]{3}),([0-9]{2}$)/g, ".$1,$2");
                 return tmp;
             },
-
             format(valor){
-                debugger;
                 var tmp = valor + '';
                 tmp = tmp.replace(/([0-9]{3})$/g, ".$1");
                 if (tmp.length > 6)
                     tmp = tmp.replace(/([0-9]{3}),([0-9]{3}$)/g, ".$1.$2");
                 return tmp;
             }
-
         }
     }
 </script>

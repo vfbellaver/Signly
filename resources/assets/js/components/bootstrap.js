@@ -9,9 +9,6 @@ Vue.component('info-content', require('./shared/InfoContent'));
 Vue.component('billboard-list', require('./billboard/billboard-list'));
 Vue.component('billboard-edit', require('./billboard/billboard-edit'));
 
-
-// ------------------------------------------------------------------------
-// Billboard-face
 Vue.component('billboard-face-list', require('./billboard-face/billboard-face-list'));
 Vue.component('billboard-face-card', require('./billboard-face/billboard-face-card.vue'));
 
