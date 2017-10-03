@@ -28,7 +28,9 @@ class CreateBillboardFacesTable extends Migration
             $table->integer('max_ads');
             $table->integer('duration');
             $table->text('photo');
-            $table->boolean('is_iluminated')->default(false);
+            $table->boolean('is_illuminated')->default(false);
+            $table->time('lights_on')->nullable();
+            $table->time('lights_off')->nullable();
             $table->integer('billboard_id')->unsigned()->nullable();
 
             $table->foreign('billboard_id')->references('id')->on('billboards')->onDelete('set null')->onUpdate('cascade');
