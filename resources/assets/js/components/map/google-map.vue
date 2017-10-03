@@ -1,36 +1,42 @@
 <template>
 
     <gmap-map
-            :options="mapOptions"
+
             :center="center"
-            :zoom="11"
+            :zoom="10"
             style="width: 100%; height: 580px;"
 
     >
 
-        <gmap-info-window
-                :options="infoOptions"
-                :position="infoWindowPos"
-                :opened="infoWinOpen"
-                @closeclick="infoWinOpen=false">
 
-            <info-content
+            <gmap-info-window
+                    :options="infoOptions"
+                    :position="infoWindowPos"
+                    :opened="infoWinOpen"
+                    @closeclick="infoWinOpen=false">
 
-                    :billboard="billboard"
-            >
-            </info-content>
+                <info-content
 
-        </gmap-info-window>
+                        :billboard="billboard"
+                >
+                </info-content>
+
+            </gmap-info-window>
 
 
-        <gmap-marker :key="i" v-for="(m,i) in markers" :position="m.position" :clickable="true" @click="toggleInfoWindow(m,i)"></gmap-marker>
+        <gmap-marker
+                :key="i"
+                v-for="(m,i) in markers"
+                :position="m.position"
+                :clickable="true"
+                @click="toggleInfoWindow(m,i)">
+        </gmap-marker>
 
     </gmap-map>
 
 </template>
 
 <script>
-
     export default {
 
         data () {
@@ -38,24 +44,20 @@
 
                 billboards: [],
 
-                center: {lat: 40.7765867, lng: -111.9906962},
+                infoShow: false,
+
+                center: {lat: 40.757994, lng: -111.970834},
 
                 markers: [],
-
-                billboard:'',
-
-                mapOptions: {
-                    mapTypeControl: false,
-                    scrollWell: true,
-                    gestureHandling: 'greedy'
-                },
 
                 infoOptions: {
                     pixelOffset: {
                         width: 0,
                         height: -35,
+                        maxWidth: 15
                     }
                 },
+
 
                 infoWinOpen: false,
 
@@ -92,6 +94,7 @@
                             lat: parseFloat(this.billboards[i].lat),
                             lng: parseFloat(this.billboards[i].lng)
                         },
+
                         infoText: this.billboards[i],
                     });
                 }
@@ -102,6 +105,7 @@
 
                 this.infoWindowPos = marker.position;
                 this.billboard = marker.infoText;
+
 
                 //check if its the same marker that was selected if yes toggle
                 if (this.currentMidx == idx) {

@@ -21,7 +21,13 @@
 
             </gmap-info-window>
 
-        <gmap-marker :key="i" v-for="(m,i) in markers" :position="m.position" :clickable="true" @click="toggleInfoWindow(m,i)"></gmap-marker>
+        <gmap-marker
+                :key="i"
+                v-for="(m,i) in markers"
+                :position="m.position"
+                :clickable="true"
+                @click="toggleInfoWindow(m,i)">
+        </gmap-marker>
 
     </gmap-map>
 
@@ -45,8 +51,10 @@
                     pixelOffset: {
                         width: 0,
                         height: -35,
+                        maxWidth: 200
                     }
                 },
+
 
                 infoWinOpen: false,
 
