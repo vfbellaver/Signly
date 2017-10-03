@@ -75,10 +75,9 @@
 
     export default {
 
-        mixins: [ModalForm],
-
         data() {
             return {
+                form: new SlcForm({}),
                 api: 'billboard',
                 marker: null,
                 zoom: 20,
@@ -89,7 +88,7 @@
                     gestureHandling: 'greedy'
                 },
                 zoomChanged: false,
-                gestureHandling: 'greedy'
+                gestureHandling: 'greedy',
             }
         },
 

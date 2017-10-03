@@ -90,17 +90,35 @@
                             <input-label for="max_ads">Max Ads: </input-label>
                             <input-text v-model="form.max_ads" id="max_ads" name="max_ads"></input-text>
                         </form-group>
+                    </column>
+                    <column size="12">
+                        <row>
+                            <column size="4">
+                                <form-group :form="form" field="is_illuminated">
+                                    <input-label for="is_illuminated">Is Illuminated: </input-label>
+                                    <toggle-button
+                                            v-model="form.is_illuminated"
+                                            :value="false"
+                                            @change="setStatus($event.value, form)"
+                                            :sync="true"
+                                    ></toggle-button>
+                                </form-group>
+                            </column>
 
+                            <column size="4" v-if="form.is_illuminated">
+                                <form-group :form="form" field="lights_on">
+                                    <input-label for="lights_on">Lights On At: </input-label>
+                                    <input-time v-model="form.lights_on" id="lights_on" name="lights_on" v-time></input-time>
+                                </form-group>
+                            </column>
 
-                        <form-group :form="form" field="is_iluminated">
-                            <input-label for="is_iluminated">Is Illuminated: </input-label>
-                            <toggle-button
-                                    v-model="form.is_iluminated"
-                                    :value="false"
-                                    @change="setStatus($event.value, form)"
-                                    :sync="true"
-                            ></toggle-button>
-                        </form-group>
+                            <column size="4" v-if="form.is_illuminated">
+                                <form-group :form="form" field="lights_off">
+                                    <input-label for="lights_off">Lights Off At: </input-label>
+                                    <input-time v-model="form.lights_off" id="lights_off" name="lights_off" v-time></input-time>
+                                </form-group>
+                            </column>
+                        </row>
                     </column>
                 </row>
             </modal-body>
@@ -156,7 +174,9 @@
                     max_ads: billboard_face ? billboard_face.max_ads : null,
                     duration: billboard_face ? billboard_face.duration : null,
                     photo: billboard_face ? billboard_face.photo : null,
-                    is_iluminated: billboard_face ? billboard_face.is_iluminated : false,
+                    is_illuminated: billboard_face ? billboard_face.is_illuminated : false,
+                    lights_on: billboard_face ? billboard_face.lights_on : null,
+                    lights_off: billboard_face ? billboard_face.lights_off : null,
                     billboard_face: billboard_face ? billboard_face.id : null,
                     billboard: this.billboardId,
                 };
@@ -164,7 +184,7 @@
             },
 
             setStatus(value, item) {
-                item.is_iluminated = value;
+                item.is_illuminated = value;
             },
 
         }

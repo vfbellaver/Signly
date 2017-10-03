@@ -41,6 +41,7 @@
                 </div>
             </box-content>
         </box>
+
         <billboard-form-csv @saved="reload" ref="formcsv"></billboard-form-csv>
     </div>
 </template>
@@ -85,9 +86,6 @@
                     });
             },
 
-            formSaved(billboard) {
-                window.location = laroute.route("billboards.edit", {billboard: billboard.id});
-            },
 
             destroy(billboard) {
                 let self = this;
