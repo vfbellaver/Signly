@@ -30,7 +30,7 @@ class BillboardFace extends Model
 		'sign_type' => 'int',
 		'max_ads' => 'int',
 		'duration' => 'int',
-		'is_iluminated' => 'boolean',
+		'is_illuminated' => 'boolean',
     ];
 
     protected $dates = [

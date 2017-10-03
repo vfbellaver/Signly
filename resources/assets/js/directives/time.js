@@ -15,13 +15,13 @@ Vue.directive('time', {
             if (v === undefined || v === null) {
                 return;
             }
+
             v = v.replace(/\D/g, "");
             if (v) {
                 v = v.replace(/^0*/g, "");
                 v = v.replace(/^(\d)$/, "0:0$1");
                 v = v.replace(/^(\d{2})$/, "0:$1");
                 v = v.replace(/(\d+)(\d{2})$/, "$1:$2");
-
             }
 
             $(el).val(v);
