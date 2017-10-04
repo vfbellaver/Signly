@@ -100,7 +100,7 @@
                             <column size="4">
                                 <form-group :form="form" field="lights_on">
                                     <input-label for="lights_on">Lights On At: </input-label>
-                                    <!--<vue-timepicker v-model="form.lights_on" id="lights_on" name="lights_on"></vue-timepicker>-->
+                                    <input-time v-model="form.lights_on" id="lights_on" name="lights_on"></input-time>
                                 </form-group>
                             </column>
 
