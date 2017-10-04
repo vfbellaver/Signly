@@ -49,17 +49,13 @@
                 </div>
             </box-content>
         </box>
-        <client-form ref="form" @saved="formSaved"></client-form>
     </div>
 </template>
 
 <script>
-    import ClientForm from './client-form';
 
     export default {
-        components:{
-            ClientForm
-        },
+
         data() {
             return {
                 clients: []
@@ -73,7 +69,7 @@
         methods: {
 
             add() {
-                this.$refs.form.show();
+                window.location = laroute.route("clients.create");
             },
 
             edit(client) {

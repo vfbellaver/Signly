@@ -8,10 +8,12 @@ Vue.component('info-content', require('./shared/InfoContent'));
 
 Vue.component('billboard-list', require('./billboard/billboard-list'));
 Vue.component('billboard-edit', require('./billboard/billboard-edit'));
-Vue.component('billboard-form', require('./billboard/billboard-form'));
+Vue.component('billboard-create', require('./billboard/billboard-create'));
 
 Vue.component('billboard-face-list', require('./billboard-face/billboard-face-list'));
-Vue.component('billboard-face-card', require('./billboard-face/billboard-face-card.vue'));
-Vue.component('billboard-form-csv',require('./billboard/billboard-form-csv.vue'));
+Vue.component('billboard-face-card', require('./billboard-face/billboard-face-card'));
+Vue.component('billboard-form-csv',require('./billboard/billboard-form-csv'));
 
-Vue.component('client-list', require('./client/client-list.vue'));
+Vue.component('client-list', require('./client/client-list'));
+Vue.component('client-create', require('./client/client-create'));
+//Vue.component('client-edit', require('./client/client-edit'));

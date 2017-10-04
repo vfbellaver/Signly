@@ -2,6 +2,6 @@
 
 @section('content')
     @component('components.default-page')
-        <billboard-create></billboard-create>
+        <client-create></client-create>
     @endcomponent
 @endsection
