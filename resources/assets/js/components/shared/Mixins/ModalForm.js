@@ -55,7 +55,6 @@ export default {
             this.form = this.buildForm(obj);
             $(this.$el).modal('show');
 
-
         },
         reset() {
             this.form = this.buildForm();
@@ -80,7 +79,6 @@ export default {
                 });
         },
         saved(obj, event) {
-
             $(this.$el).modal('hide');
             this.$emit('saved', obj);
             this.$emit(event, obj);

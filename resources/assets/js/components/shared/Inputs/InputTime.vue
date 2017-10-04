@@ -1,8 +1,10 @@
 <template>
-    <input class="form-control" v-model="internalValue" v-bind:value="value" :name="name"/>
+    <vue-timepicker v-model="internalValue" v-bind:value="value" :name="name"></vue-timepicker>
 </template>
 <script>
+    import VueTimepicker from "../../../../../../node_modules/vue2-timepicker/src/vue-timepicker";
     export default {
-        mixins: [require('../Mixins/Model')]
+        components: {VueTimepicker},
+        mixins: [require('../Mixins/Model')],
     }
 </script>

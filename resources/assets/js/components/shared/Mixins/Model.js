@@ -1,7 +1,7 @@
 module.exports = {
     props: {
         value: {required: true},
-        name: {required: false}
+        name: {required: false},
     },
 
     data() {

@@ -21,11 +21,13 @@ window.Bus = new Vue();
 require('./vue/bootstrap');
 
 import * as VueGoogleMaps from 'vue2-google-maps';
+import * as VueTimePicker from 'vue2-timepicker';
 
+window.Vue.use(VueTimePicker);
 window.Vue.use(VueGoogleMaps, {
     load: {
         key: 'AIzaSyC2z5mUPBMQj4xb6VNzX32Iv-5xFzcpxu4',
-        libraries: 'places',
+        libraries:   'places',
     }
 });
 

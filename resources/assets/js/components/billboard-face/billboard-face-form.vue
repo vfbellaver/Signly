@@ -97,17 +97,17 @@
                                 </form-group>
                             </column>
 
-                            <column size="4" v-if="form.is_illuminated">
+                            <column size="4">
                                 <form-group :form="form" field="lights_on">
                                     <input-label for="lights_on">Lights On At: </input-label>
-                                    <input-time v-model="form.lights_on" id="lights_on" name="lights_on" v-time></input-time>
+                                    <!--<vue-timepicker v-model="form.lights_on" id="lights_on" name="lights_on"></vue-timepicker>-->
                                 </form-group>
                             </column>
 
-                            <column size="4" v-if="form.is_illuminated">
+                            <column size="4"">
                                 <form-group :form="form" field="lights_off">
                                     <input-label for="lights_off">Lights Off At: </input-label>
-                                    <input-time v-model="form.lights_off" id="lights_off" name="lights_off" v-time></input-time>
+                                    <input-time v-model="form.lights_off" id="lights_off" name="lights_off"></input-time>
                                 </form-group>
                             </column>
                         </row>
@@ -126,9 +126,11 @@
 
 <script>
     import ModalForm from '../shared/Mixins/ModalForm';
+    import VueTimepicker from "../../../../../node_modules/vue2-timepicker/src/vue-timepicker";
 
     export default {
 
+        components: {VueTimepicker},
         props: {
             billboardId: {required: true},
             value: false,
@@ -159,7 +161,6 @@
                     width: billboard_face ? billboard_face.width : null,
                     reads: billboard_face ? billboard_face.reads : null,
                     label: billboard_face ? billboard_face.label : null,
-                    sign_type: billboard_face ? billboard_face.sign_type : null,
                     hard_cost: billboard_face ? billboard_face.hard_cost : null,
                     monthly_impressions: billboard_face ? billboard_face.monthly_impressions : null,
                     notes: billboard_face ? billboard_face.notes : null,
@@ -177,6 +178,8 @@
 
             setStatus(value, item) {
                 item.is_illuminated = value;
+                item.lights_on = null;
+                item.lights_off = null;
             },
 
         }
