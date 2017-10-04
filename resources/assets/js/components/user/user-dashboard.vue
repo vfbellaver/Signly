@@ -1,17 +1,18 @@
 <template>
-
-    <div style="background-color: red; height: 320px; margin-bottom: 28px">
-        <br>
-    </div>
-
+    <user-form></user-form>
 </template>
 
+
 <script>
+
+    import UserForm from './user-form';
+
     export default {
         data() {
             return {}
         },
         components: {
+            UserForm
         },
         methods: {}
     }

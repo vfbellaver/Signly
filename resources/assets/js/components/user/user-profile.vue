@@ -5,10 +5,10 @@
             <img src="/images/profile.jpg"/>
 
             <div class="profile-name">
-                <h3>Name: {{user.name}}</h3>
+                <h3>Name: teste</h3>
             </div>
             <hr>
-            <h3><icon icon="envelope"></icon>&nbsp {{user.email}}</h3>
+            <h3><icon icon="envelope"></icon>&nbsp teste</h3>
         </div>
     </div>
 </template>
