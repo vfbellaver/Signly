@@ -87,10 +87,10 @@
 
                 <!-- faces  -->
                 <column size="7">
-                    <billboard-face-list-card
+                    <billboard-face-list
                             :billboard-id="id"
                     >
-                    </billboard-face-list-card>
+                    </billboard-face-list>
                 </column>
             </box-body>
         </box>
@@ -104,23 +104,17 @@
 </style>
 
 <script>
-
     import * as Slc from "../../vue/http";
     import BillboardFaceForm from '../billboard-face/billboard-face-form.vue';
     import ModalForm from '../shared/Mixins/ModalForm';
-
     export default {
-
         props: {
             id: {required: true}
         },
-
         mixins: [ModalForm],
-
         components: {
             BillboardFaceForm
         },
-
         data() {
             return {
                 form: new SlcForm({}),
@@ -138,28 +132,22 @@
                 billboardFaces: []
             }
         },
-
         watch: {
             'form.address': function () {
                 this.onAddressChange();
             }
         },
-
         created() {
             const self = this;
             this.load();
         },
-
-
         methods: {
-
             buildForm(billboard) {
                 this.marker = null;
                 this.address = null;
                 this.zoom = 7;
                 this.center = {lat: 39.3209801, lng: -111.09373110000001};
                 this.zoomChanged = false;
-
                 return new SlcForm({
                     id: billboard ? billboard.id : null,
                     name: billboard ? billboard.name : null,
@@ -170,15 +158,12 @@
                     lng: billboard ? billboard.lng : null,
                 });
             },
-
             onMapClick(e) {
-
                 const self = this;
                 console.log(e);
                 if (this.marker) {
                     return;
                 }
-
                 const geocoder = new google.maps.Geocoder;
                 const pos = {
                     lat: e.latLng.lat(),
@@ -197,7 +182,6 @@
                     self.form.lat = pos.lat;
                     self.form.lng = pos.lng;
                 });
-
                 this.marker = pos;
                 this.center = pos;
                 if (self.zoomChanged) {
@@ -205,12 +189,10 @@
                 }
                 this.zoom = 15;
             },
-
             onZoomChanged(e) {
                 console.log("On Zoom Changed", e);
                 this.zoomChanged = true;
             },
-
             onAddressChange: _.debounce(function (e) {
                 console.log("OnAddressChange", e);
                 const self = this;
@@ -236,7 +218,6 @@
                     self.zoom = 15;
                 });
             }, 500),
-
             onMarkerMoved: _.debounce(function (e) {
                 console.log('On Marker Moved', e);
                 const pos = {
@@ -248,12 +229,9 @@
                 this.marker = pos;
                 this.center = pos;
             }),
-
             load() {
                 this.loading = true;
-
                 const uri = laroute.route('api.billboard.show', {billboard: this.id});
-
                 Slc.find(uri).then((billboard) => {
                     console.log(billboard);
                     this.loading = false;
@@ -268,8 +246,6 @@
                     });
                 });
             },
-
         }
     }
-
 </script>

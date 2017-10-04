@@ -12,40 +12,37 @@
                 </box-tools>
             </box-title>
             <box-content>
-                <div>
+                <div >
                     <div lass="table-responsive">
-                        <!--table-->
+                    <!--table-->
                         <table class="table table-striped">
-                            <thead>
-                            <tr>
-                                <th style="width: 50px"></th>
-                                <th style="width: 300px">Name</th>
-                                <th style="width: 600px" class="hidden-sm">Address</th>
-                                <th style="width: 100px">Driveby</th>
-                                <th style="width: 100px"></th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr v-for="( billboard, index ) in billboards">
-                                <td>{{ index + 1 }}</td>
-                                <td>{{ billboard.name }}</td>
-                                <td class="hidden-sm">{{ billboard.address }}</td>
-                                <td>{{ billboard.digital_driveby }}</td>
-                                <td>
-                                    <btn-success size="xs" @click.native="edit(billboard)">
-                                        <icon icon="edit"></icon>
-                                    </btn-success>
-                                    <btn-danger @click.native="destroy(billboard)"
-                                                :disabled="billboard.destroyForm.busy"
-                                                size="xs">
-                                        <spinner v-if="billboard.destroyForm.busy"></spinner>
-                                        <icon icon="trash" v-else></icon>
-                                    </btn-danger>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                        <!--table-->
+                        <thead>
+                        <tr>
+                            <th style="width: 50px"></th>
+                            <th style="width: 300px">Name</th>
+                            <th style="width: 600px" class="hidden-sm">Address</th>
+                            <th style="width:  100px"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr v-for="( billboard, index ) in billboards">
+                            <td>{{ index + 1 }}</td>
+                            <td>{{ billboard.name }}</td>
+                            <td class="hidden-sm">{{ billboard.address }}</td>
+                            <td>
+                                <btn-success size="xs" @click.native="edit(billboard)">
+                                    <icon icon="edit"></icon>
+                                </btn-success>
+                                <btn-danger @click.native="destroy(billboard)"
+                                            :disabled="billboard.destroyForm.busy"
+                                            size="xs">
+                                    <spinner v-if="billboard.destroyForm.busy"></spinner>
+                                    <icon icon="trash" v-else></icon>
+                                </btn-danger>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table><!--table-->
                     </div>
                 </div>
             </box-content>
