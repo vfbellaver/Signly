@@ -113,7 +113,6 @@
                 const uri = laroute.route('api.billboard.store');
                 Slc.post(uri, this.form).then((response) => {
                     console.log('Billboard Create:',response);
-                    debugger;
                     this.$emit('saved');
                     window.location = laroute.route("billboards.edit", {billboard: response.data.id});
                 });

@@ -57,15 +57,8 @@
 
                     <column size="4">
                         <form-group :form="form" field="sign_type">
-                            <input-label for="sign_type">Sign Type: </input-label>
-                            <input-text v-model="form.sign_type" id="sign_type" name="sign_type"></input-text>
-                        </form-group>
-                    </column>
-
-                    <column size="4">
-                        <form-group :form="form" field="hard_cost">
-                            <input-label for="hard_cost">Hard Cost: </input-label>
-                            <input-text v-model="form.hard_cost" id="hard_cost" name="hard_cost" v-float></input-text>
+                            <input-label for="sign_type">Hard Cost: </input-label>
+                            <input-text v-model="form.hard_cost" id="sign_type" name="sign_type"></input-text>
                         </form-group>
                     </column>
 
@@ -95,7 +88,7 @@
                         <form-group :form="form" field="is_iluminated">
                             <input-label for="is_iluminated">Is Illuminated: </input-label>
                             <toggle-button
-                                    v-model="form.is_iluminated"
+                                    v-model="form.is_illuminated"
                                     :value="false"
                                     @change="setStatus($event.value, form)"
                                     :sync="true"
@@ -136,7 +129,7 @@
 
         computed: {
             title() {
-                return `${(this.form.id ? 'Edit' : 'Add')} BillboardFace`;
+                return `${(this.form.id ? 'Edit' : 'Add')} Billboard Face`;
             },
 
         },
@@ -149,14 +142,13 @@
                     width: billboard_face ? billboard_face.width : null,
                     reads: billboard_face ? billboard_face.reads : null,
                     label: billboard_face ? billboard_face.label : null,
-                    sign_type: billboard_face ? billboard_face.sign_type : null,
                     hard_cost: billboard_face ? billboard_face.hard_cost : null,
                     monthly_impressions: billboard_face ? billboard_face.monthly_impressions : null,
                     notes: billboard_face ? billboard_face.notes : null,
                     max_ads: billboard_face ? billboard_face.max_ads : null,
                     duration: billboard_face ? billboard_face.duration : null,
                     photo: billboard_face ? billboard_face.photo : null,
-                    is_iluminated: billboard_face ? billboard_face.is_iluminated : false,
+                    is_illuminated: billboard_face ? billboard_face.is_illuminated : false,
                     billboard_face: billboard_face ? billboard_face.id : null,
                     billboard: this.billboardId,
                 };
@@ -164,7 +156,7 @@
             },
 
             setStatus(value, item) {
-                item.is_iluminated = value;
+                item.is_illuminated = value;
             },
 
         }

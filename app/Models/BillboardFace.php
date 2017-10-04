@@ -13,14 +13,13 @@ class BillboardFace extends Model
 		'width',
 		'reads',
 		'label',
-		'sign_type',
 		'hard_cost',
 		'monthly_impressions',
 		'notes',
 		'max_ads',
 		'duration',
 		'photo',
-		'is_iluminated',
+		'is_illuminated',
 		'billboard_id',
     ];
 
@@ -28,7 +27,7 @@ class BillboardFace extends Model
 		'sign_type' => 'int',
 		'max_ads' => 'int',
 		'duration' => 'int',
-		'is_iluminated' => 'boolean',
+		'is_illuminated' => 'boolean',
     ];
 
     protected $dates = [
@@ -64,14 +63,13 @@ class BillboardFace extends Model
 			'width' => $this->width,
 			'reads' => $this->reads,
 			'label' => $this->label,
-			'sign_type' => $this->sign_type,
 			'hard_cost' => $this->hard_cost,
 			'monthly_impressions' => $this->monthly_impressions,
 			'notes' => $this->notes,
 			'max_ads' => $this->max_ads,
 			'duration' => $this->duration,
 			'photo' => $this->photo,
-			'is_iluminated' => $this->is_iluminated,
+			'is_illuminated' => $this->is_illuminated,
 			'billboard_id' => $this->billboard_id,
 			'billboard' => $this->billboard->toArray(),
             'created_at' => $this->created_at,

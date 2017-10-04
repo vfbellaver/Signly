@@ -19,14 +19,13 @@ class BillboardFaceService
 				'width' => $form->width(),
 				'reads' => $form->reads(),
 				'label' => $form->label(),
-				'sign_type' => $form->signType(),
 				'hard_cost' => $form->hardCost(),
 				'monthly_impressions' => $form->monthlyImpressions(),
 				'notes' => $form->notes(),
 				'max_ads' => $form->maxAds(),
 				'duration' => $form->duration(),
 				'photo' => $form->photo(),
-				'is_iluminated' => $form->isIluminated(),
+				'is_illuminated' => $form->isIlluminated(),
             ];
 
             $billboardFace = new BillboardFace($data);
@@ -49,14 +48,13 @@ class BillboardFaceService
 			$billboardFace->width = $form->width();
 			$billboardFace->reads = $form->reads();
 			$billboardFace->label = $form->label();
-			$billboardFace->sign_type = $form->signType();
 			$billboardFace->hard_cost = $form->hardCost();
 			$billboardFace->monthly_impressions = $form->monthlyImpressions();
 			$billboardFace->notes = $form->notes();
 			$billboardFace->max_ads = $form->maxAds();
 			$billboardFace->duration = $form->duration();
 			$billboardFace->photo = $form->photo();
-			$billboardFace->is_iluminated = $form->isIluminated();
+			$billboardFace->is_illuminated = $form->isIlluminated();
 			$billboardFace->billboard()->associate($form->billboard());
 
             $billboardFace->save();

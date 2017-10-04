@@ -32,11 +32,6 @@ class BillboardFaceForm extends BaseForm
         return $this->request->get('label');
     }
 
-    public function signType()
-    {
-        return $this->request->get('sign_type');
-    }
-
     public function hardCost()
     {
         return $this->request->get('hard_cost');
@@ -67,9 +62,9 @@ class BillboardFaceForm extends BaseForm
         return $this->request->get('photo');
     }
 
-    public function isIluminated()
+    public function isIlluminated()
     {
-        return $this->request->get('is_iluminated');
+        return $this->request->get('is_illuminated');
     }
 
     public function billboard()

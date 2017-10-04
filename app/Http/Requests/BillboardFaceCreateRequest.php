@@ -24,7 +24,6 @@ class BillboardFaceCreateRequest extends BaseRequest
 			'width' => 'required',
 			'reads' => 'required',
 			'label' => 'required',
-			'sign_type' => 'required|numeric',
 			'hard_cost' => 'required',
 			'monthly_impressions' => 'required',
 			'notes' => 'required',

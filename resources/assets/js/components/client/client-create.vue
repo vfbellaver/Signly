@@ -44,7 +44,7 @@
                             <column size="4">
                                 <form-group :form="form" field="fax">
                                     <input-label for="fax">Fax: </input-label>
-                                    <input-text v-model="form.fax" id="fax" name="fax"/>
+                                    <input-text v-model="form.fax" id="fax" name="fax" v-tel/>
                                 </form-group>
                             </column>
                         </row>
@@ -128,6 +128,14 @@
             }
         },
         methods: {
+            save(){
+                const uri = laroute.route('api.client.store');
+                Slc.post(uri, this.form).then((response) => {
+                    console.log('Client Created:',response);
+                    this.$emit('saved');
+                    window.location = laroute.route("clients.index");
+                });
+            },
             buildForm(client) {
                 return new SlcForm({
 					id: client ? client.id : null,
