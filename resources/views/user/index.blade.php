@@ -2,6 +2,6 @@
 
 @section('content')
     @component('components.default-page')
-        <user-list></user-list>
+        <user-settings></user-settings>
     @endcomponent
 @endsection

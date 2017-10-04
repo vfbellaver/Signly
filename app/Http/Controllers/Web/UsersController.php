@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class UsersController extends Controller
 {
+    private $user;
+
     function __construct()
     {
         $this->middleware('needsRole:admin');
@@ -13,6 +16,7 @@ class UsersController extends Controller
 
     public function index()
     {
-        return view('user.index');
+        $this->user = Auth::user();
+        return view('user.index',['user' => $this->user]);
     }
 }
