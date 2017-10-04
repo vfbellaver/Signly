@@ -7,9 +7,10 @@ $factory->define(App\Models\User::class, function (Faker $faker) {
 
     return [
         'name' => $faker->name,
-        'photo_url' => "https://randomuser.me/api/portraits/men/{$faker->numberBetween(1, 99)}.jpg",
+        'photo_url' => "/images/profile.jpg",
         'email' => $faker->unique()->safeEmail,
         'password' => $password ?: $password = bcrypt('secret'),
         'remember_token' => str_random(10),
+        'team_id' => $faker->numberBetween(2,6),
     ];
 });

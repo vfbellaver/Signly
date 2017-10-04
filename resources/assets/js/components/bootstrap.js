@@ -1,6 +1,7 @@
 require('./shared/_register');
 
 Vue.component('user-list', require('./user/user-list.vue'));
+Vue.component('user-settings', require('./user/user-settings'));
 
 Vue.component('main-map', require('./map/main-map.vue'));
 
@@ -22,3 +23,4 @@ Vue.component('client-list', require('./client/client-list.vue'));
 // ------------------------------------------------------------------------
 // Maps
 Vue.component('google-map', require('./map/google-map'));
+Vue.component('team-list', require('./team/team-list.vue'));

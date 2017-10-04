@@ -34,6 +34,12 @@ class User extends Authenticatable
     ];
 
     #region Attributes
+
+    public function team()
+    {
+        return $this->belongsTo(Team::class);
+    }
+
     public function getRoleAttribute()
     {
         return $this->roles()->first();
@@ -66,7 +72,16 @@ class User extends Authenticatable
                 'id' => $this->role->id,
                 'name' => $this->role->name
             ];
-        }
+        };
+
+        $team = [];
+        if ($this->team) {
+            $team = [
+                'id' => $this->team->id,
+                'name' => $this->team->name
+            ];
+        };
+
         return [
             'id' => (int)$this->id,
             'name' => $this->name,

@@ -22,7 +22,8 @@ class UsersTableSeeder extends Seeder
         $user = factory(\App\Models\User::class)->create([
             'name' => 'Support SLC DevShop',
             'email' => 'support@slcdevshop.com',
-            'password' => bcrypt('slcdev##')
+            'password' => bcrypt('slcdev##'),
+            'team_id' => 1
         ]);
         $user->attachRole($role);
     }

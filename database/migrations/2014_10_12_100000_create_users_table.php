@@ -15,6 +15,9 @@ class CreateUsersTable extends Migration
             $table->string('password')->nullable();
             $table->string('invitation_token')->nullable();
             $table->boolean('status')->default(1);
+            $table->integer('team_id')->unsigned()->nullable();
+            $table->foreign('team_id')->references('id')->on('teams')
+                ->onDelete('set null')->onUpdate('cascade');
             $table->rememberToken();
             $table->timestamps();
         });
