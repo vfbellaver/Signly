@@ -99,17 +99,18 @@
 
                             <column size="4">
                                 <form-group :form="form" field="lights_on">
-                                    <input-label for="lights_on">Lights On At: </input-label>
-                                    <vue-timepicker v-model="lights_on" id="lights_on" name="lights_on"></vue-timepicker>
+                                    <input-label for="lights_on">Lights on: </input-label>
+                                    <vue-timepicker v-model="lights_on" id="lights_on"
+                                                    name="lights_on"></vue-timepicker>
                                 </form-group>
                             </column>
 
-                            <column size="4"">
+                            <column size="4">
                                 <form-group :form="form" field="lights_off">
-                                    <input-label for="lights_off">Lights Off At: </input-label>
+                                    <input-label for="lights_off">Lights off: </input-label>
                                     <vue-timepicker v-model="lights_off" id="lights_off" name="lights_off"></vue-timepicker>
                                 </form-group>
-                            </column>
+                             </column>
                         </row>
                     </column>
                 </row>
@@ -142,7 +143,17 @@
         data() {
             return {
                 api: 'billboard-face',
+                lights_on: {
+                    HH: null,
+                    mm: null,
+                    ss: null,
+                },
 
+                lights_off: {
+                    HH: null,
+                    mm: null,
+                    ss: null,
+                },
             }
         },
 
@@ -150,8 +161,29 @@
             title() {
                 return `${(this.form.id ? 'Edit' : 'Add')} Billboard Face`;
             },
-
         },
+
+        watch: {
+            lights_on: {
+                handler(value){
+                    if(value.HH && value.mm){
+                        this.form.lights_on = value.HH+':'+value.mm+':'+value.ss;
+                    }
+                    return;
+                },
+                deep: true,
+            },
+            lights_off: {
+                handler(value){
+                    if(value.HH && value.mm){
+                        this.form.lights_off = value.HH+':'+value.mm+':'+value.ss;
+                    }
+                    return;
+                },
+                deep: true,
+            },
+        },
+
         methods: {
             buildForm(billboard_face) {
                 const data = {
@@ -173,15 +205,45 @@
                     billboard_face: billboard_face ? billboard_face.id : null,
                     billboard: this.billboardId,
                 };
+                this.setHoras(data);
                 return new SlcForm(data);
             },
+            setHoras(data){
+                if(data.lights_on && data.lights_off){
+                    let light_on = data.lights_on.split(":");
+                    let light_off = data.lights_off.split(":");
 
+                    this.lights_on = {
+                        HH: light_on[0],
+                        mm: light_on[1],
+                        ss: light_on[2],
+                    };
+                    this.lights_off = {
+                        HH: light_off[0],
+                        mm: light_off[1],
+                        ss: light_off[2],
+                    }
+                }
+            },
             setStatus(value, item) {
                 item.is_illuminated = value;
-                item.lights_on = null;
-                item.lights_off = null;
-            },
+                if(!value){
+                    this.form.lights_on = null;
+                    this.form.lights_off = null;
+                    this.lights_on = {
+                        HH: null,
+                        mm: null,
+                        ss: null,
+                    };
+                    this.lights_off = {
+                        HH: null,
+                        mm: null,
+                        ss: null,
+                    };
+                }
+            }
+        },
 
-        }
     }
+
 </script>

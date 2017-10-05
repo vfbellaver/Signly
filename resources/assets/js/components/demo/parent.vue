@@ -1,7 +1,7 @@
 <template>
     <div>
-        <p>parent</p>
-        <child></child>
+        <h1>parent</h1>
+        <child @hello="onHello"></child>
     </div>
 </template>
 <style lang="scss" scoped="true">
@@ -35,7 +35,11 @@
             console.log("Mounted Parent");
         },
 
-        methods: {}
+        methods: {
+            onHello(p){
+                console.log('msg',p);
+            }
+        }
     }
 
 </script>

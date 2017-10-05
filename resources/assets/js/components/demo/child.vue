@@ -24,6 +24,10 @@
 
         created(){
             console.log("Created Child");
+            const self = this;
+            setTimeout(function () {
+                self.$emit('hello',{msg: 'Hello Parent'});
+            },1000)
         },
 
         mounted(){
