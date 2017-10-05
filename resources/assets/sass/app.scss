@@ -1,6 +1,9 @@
 // Google Fonts
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700");
 
+// Google maps info window
+@import "theme/google_maps";
+
 // Variables
 @import "theme/variables";
 
@@ -22,6 +25,7 @@
 @import "theme/base";
 @import "theme/pages";
 @import "theme/map";
+
 //@import "chat";
 @import "theme/metismenu";
 @import "theme/spinners";

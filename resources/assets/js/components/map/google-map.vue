@@ -3,10 +3,12 @@
     <gmap-map
 
             :center="center"
-            :zoom="7"
-            style="width: 100%; height: 90vmin;"
+            :zoom="10"
+            style="width: 100%; height: 580px;"
 
     >
+
+
             <gmap-info-window
                     :options="infoOptions"
                     :position="infoWindowPos"
@@ -20,6 +22,7 @@
                 </info-content>
 
             </gmap-info-window>
+
 
         <gmap-marker
                 :key="i"
@@ -51,7 +54,7 @@
                     pixelOffset: {
                         width: 0,
                         height: -35,
-                        maxWidth: 200
+                        maxWidth: 15
                     }
                 },
 
@@ -86,14 +89,14 @@
             reloadMarkers () {
 
                 for(let i = 0; i < this.billboards.length; i++) {
-                  this.markers.push({
+                    this.markers.push({
                         position: {
                             lat: parseFloat(this.billboards[i].lat),
                             lng: parseFloat(this.billboards[i].lng)
                         },
 
                         infoText: this.billboards[i],
-                   });
+                    });
                 }
 
             },
