@@ -26,4 +26,9 @@ class BillboardsController extends Controller
     {
         return view('billboard.create');
     }
+
+    public function show($id)
+    {
+        return 'teste';
+    }
 }
