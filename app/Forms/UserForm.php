@@ -21,6 +21,11 @@ class UserForm extends BaseForm
         return $this->request->get('email');
     }
 
+    public function password()
+    {
+        return $this->request->get('password');
+    }
+
     public function role()
     {
         if( ! $this->request->has('role') ) return null;
