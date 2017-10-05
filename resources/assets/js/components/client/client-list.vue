@@ -73,7 +73,7 @@
             },
 
             edit(client) {
-                this.$refs.form.show(client);
+                window.location = laroute.route("clients.edit", {client: client.id});
             },
 
             reload() {

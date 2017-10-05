@@ -71,7 +71,6 @@ module.exports = {
     },
 
     delete(uri, form) {
-        debugger
         form.hasSwal = true;
 
         return new Promise((resolve, reject) => {

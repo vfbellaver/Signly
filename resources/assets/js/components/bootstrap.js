@@ -16,4 +16,4 @@ Vue.component('billboard-form-csv',require('./billboard/billboard-form-csv'));
 
 Vue.component('client-list', require('./client/client-list'));
 Vue.component('client-create', require('./client/client-create'));
-//Vue.component('client-edit', require('./client/client-edit'));
+Vue.component('client-edit', require('./client/client-edit'));

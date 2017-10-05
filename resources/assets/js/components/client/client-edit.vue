@@ -117,10 +117,11 @@
     export default {
         mixins: [ModalForm],
         props: {
-            id: {required: false}
+            id: {required: true}
         },
         data() {
             return {
+                form: new SlcForm({}),
                 api: 'client'
             }
         },
@@ -128,6 +129,10 @@
             title() {
                 return `${(this.form.id ? 'Edit' : 'Add')} Client`;
             }
+        },
+        created() {
+            const self = this;
+            this.load();
         },
         methods: {
             save(){
@@ -155,7 +160,32 @@
 					phone2: client ? client.phone2 : null,
 					fax: client ? client.fax : null,
                 });
-            }
+            },
+            load() {
+                this.loading = true;
+                const uri = laroute.route('api.client.show', {client: this.id});
+
+                Slc.find(uri).then((client) => {
+                    console.log(client);
+                    this.loading = false;
+                    this.form = new SlcForm({
+                        id: client.id,
+                        company_name: client.company_name,
+                        logo: client.logo,
+                        first_name: client.first_name,
+                        last_name: client.last_name,
+                        email: client.email,
+                        address_line1: client.address_line1,
+                        address_line2: client.address_line2,
+                        city: client.city,
+                        zipcode: client.zipcode,
+                        state: client.state,
+                        phone1: client.phone1,
+                        phone2: client.phone2,
+                        fax: client.fax,
+                    });
+                });
+            },
         }
     }
 </script>
