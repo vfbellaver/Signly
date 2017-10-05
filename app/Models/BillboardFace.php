@@ -24,7 +24,6 @@ class BillboardFace extends Model
     ];
 
     protected $casts = [
-		'sign_type' => 'int',
 		'max_ads' => 'int',
 		'duration' => 'int',
 		'is_illuminated' => 'boolean',

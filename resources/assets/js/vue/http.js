@@ -72,7 +72,6 @@ module.exports = {
 
     delete(uri, form) {
         form.hasSwal = true;
-
         return new Promise((resolve, reject) => {
             swal({
                 title: "Are you sure?",

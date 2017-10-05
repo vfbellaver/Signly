@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Forms\BillboardFaceForm;
+use Illuminate\Contracts\Validation\Rule;
 
 class BillboardFaceCreateRequest extends BaseRequest
 {
@@ -19,18 +20,13 @@ class BillboardFaceCreateRequest extends BaseRequest
     public function rules()
     {
         return [
-			'code' => 'required',
-			'height' => 'required',
-			'width' => 'required',
-			'reads' => 'required',
-			'label' => 'required',
-			'hard_cost' => 'required',
-			'monthly_impressions' => 'required',
-			'notes' => 'required',
-			'max_ads' => 'required|numeric',
-			'duration' => 'required|numeric',
-			'photo' => 'required',
-			'billboard' => 'required|numeric',
+            'code' => 'required|unique:billboard_faces,code',
+            'label' => 'required',
+            'hard_cost' => 'required',
+            'monthly_impressions' => 'required',
+            'duration' => 'required|numeric',
+            'photo' => 'required',
+            'billboard' => 'required|numeric',
         ];
     }
 }

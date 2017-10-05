@@ -112,17 +112,17 @@
     }
 </style>
 <script>
-    import ModalForm from '../shared/Mixins/ModalForm';
 
     export default {
-        mixins: [ModalForm],
+
         props: {
             id: {required: true}
         },
         data() {
             return {
                 form: new SlcForm({}),
-                api: 'client'
+                api: 'client',
+                loading: false,
             }
         },
         computed: {
@@ -136,14 +136,15 @@
         },
         methods: {
             save(){
-                const uri = laroute.route('api.client.store');
-                Slc.post(uri, this.form).then((response) => {
-                    console.log('Client Created:',response);
+                const uri = laroute.route('api.client.update');
+                Slc.put(uri, this.form).then((response) => {
+                    console.log('Client Update:',response);
                     this.$emit('saved');
                     window.location = laroute.route("clients.index");
                 });
             },
             buildForm(client) {
+                debugger;
                 return new SlcForm({
 					id: client ? client.id : null,
 					company_name: client ? client.company_name : null,

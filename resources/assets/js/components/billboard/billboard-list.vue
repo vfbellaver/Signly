@@ -5,18 +5,23 @@
                 Billboards
                 <box-tools slot="tools">
                     <box-tool icon="plus" @click.native="add">New</box-tool>
+                    &nbsp
                     <box-tool icon="upload" @click.native="importBillboards">Import Billboards</box-tool>
+                    &nbsp
+                    <box-tool class="green" icon="map-marker" @click.native="goToHome">Map View</box-tool>
                 </box-tools>
             </box-title>
             <box-content>
-                <div class="table-responsive">
-                    <table class="table table-striped">
+                <div >
+                    <div lass="table-responsive">
+                    <!--table-->
+                        <table class="table table-striped">
                         <thead>
                         <tr>
                             <th style="width: 50px"></th>
                             <th style="width: 300px">Name</th>
                             <th style="width: 600px" class="hidden-sm">Address</th>
-                            <th style="width: 100px"></th>
+                            <th style="width:  100px"></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -37,7 +42,8 @@
                             </td>
                         </tr>
                         </tbody>
-                    </table>
+                    </table><!--table-->
+                    </div>
                 </div>
             </box-content>
         </box>
@@ -45,26 +51,28 @@
     </div>
 </template>
 
+<style lang="scss" scoped="scoped">
+    .green:hover {
+        color: #7aa32b;
+    }
+</style>
+
 <script>
     import BillboardFormCsv from './billboard-form-csv.vue'
-
-
     export default {
         components: {
             BillboardFormCsv
         },
         data() {
             return {
-                billboards: []
+                billboards: [],
+
             }
         },
-
         mounted() {
             this.reload();
         },
-
         methods: {
-
             add() {
                 window.location = laroute.route("billboards.create");
             },
@@ -72,11 +80,13 @@
                 this.$refs.formcsv.show();
             },
 
+            goToHome(){
+                window.location = "/";
+            },
 
             edit(billboard) {
                 window.location = laroute.route("billboards.edit", {billboard: billboard.id});
             },
-
             reload() {
                 let self = this;
                 Slc.get(laroute.route('api.billboard.index'))
@@ -84,11 +94,9 @@
                         self.billboards = response;
                     });
             },
-
             formSaved(billboard) {
                 window.location = laroute.route("billboards.edit", {billboard: billboard.id});
             },
-
             destroy(billboard) {
                 let self = this;
                 Slc.delete(laroute.route('api.billboard.destroy', {billboard: billboard.id}), billboard.destroyForm)
@@ -96,18 +104,14 @@
                         self.removeBillboard(billboard);
                     });
             },
-
             removeBillboard(billboard) {
                 this.billboards.splice(this.findIndex(billboard), 1);
             },
-
             findIndex(billboard) {
                 return this.billboards.findIndex((_billboard) => {
                     return _billboard.id === billboard.id;
                 });
             }
         }
-
     }
-
 </script>
