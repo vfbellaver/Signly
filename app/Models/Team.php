@@ -33,6 +33,7 @@ class Team extends Model
     public function toArray()
     {
         return [
+            'id' => $this->id,
             'name' => $this->name
         ];
     }

@@ -43,6 +43,7 @@ class TeamService
         });
     }
 
+
     public function delete(Team $team)
     {
         return \DB::transaction(function() use ($team) {

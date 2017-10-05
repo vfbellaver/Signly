@@ -1,18 +1,18 @@
 <template>
-    <user-form></user-form>
+    <user-form2></user-form2>
 </template>
 
 
 <script>
 
-    import UserForm from './user-form';
+    import UserForm2 from './user-form2';
 
     export default {
         data() {
             return {}
         },
         components: {
-            UserForm
+            UserForm2
         },
         methods: {}
     }

@@ -8,12 +8,12 @@
                     &nbsp
                     <box-tool icon="upload" @click.native="importBillboards">Import Billboards</box-tool>
                     &nbsp
-                    <box-tool :class="className" icon="map-marker" @click.native="mapView">Map View</box-tool>
+                    <box-tool class="green" icon="map-marker" @click.native="goToHome">Map View</box-tool>
                 </box-tools>
             </box-title>
             <box-content>
-                <div>
-                    <div id="list" v-show="viewList" class="table-responsive">
+                <div >
+                    <div lass="table-responsive">
                         <!--table-->
                         <table class="table table-striped">
                             <thead>
@@ -21,8 +21,7 @@
                                 <th style="width: 50px"></th>
                                 <th style="width: 300px">Name</th>
                                 <th style="width: 600px" class="hidden-sm">Address</th>
-                                <th style="width: 100px">Driveby</th>
-                                <th style="width: 100px"></th>
+                                <th style="width:  100px"></th>
                             </tr>
                             </thead>
                             <tbody>
@@ -30,7 +29,6 @@
                                 <td>{{ index + 1 }}</td>
                                 <td>{{ billboard.name }}</td>
                                 <td class="hidden-sm">{{ billboard.address }}</td>
-                                <td>{{ billboard.digital_driveby }}</td>
                                 <td>
                                     <btn-success size="xs" @click.native="edit(billboard)">
                                         <icon icon="edit"></icon>
@@ -44,11 +42,7 @@
                                 </td>
                             </tr>
                             </tbody>
-                        </table>
-                        <!--table-->
-                    </div>
-                    <div id="map" v-show="viewMap">
-                        <google-map></google-map>
+                        </table><!--table-->
                     </div>
                 </div>
             </box-content>
@@ -59,18 +53,14 @@
 </template>
 
 <style lang="scss" scoped="scoped">
-
-    .green {
+    .green:hover {
         color: #7aa32b;
     }
-
 </style>
 
 <script>
     import BillboardForm from './billboard-form';
     import BillboardFormCsv from './billboard-form-csv.vue'
-
-
     export default {
         components: {
             BillboardForm,
@@ -79,48 +69,24 @@
         data() {
             return {
                 billboards: [],
-                viewList: true,
-                viewMap: false,
-                className: ''
             }
         },
-
         mounted() {
             this.reload();
         },
-
         methods: {
-
             add() {
                 this.$refs.form.show();
             },
-
             importBillboards(){
                 this.$refs.formcsv.show();
             },
-
-            mapView(){
-
-                this.viewList = !this.viewList;
-                this.viewMap = !this.viewMap;
-
-                if(this.viewMap){
-                    this.className = 'green';
-                } else {
-                    this.className = '';
-                }
+            goToHome(){
+                window.location = "/";
             },
-
-            hide(id){
-                $(document).ready(function () {
-                    $(id).hide(30);
-                });
-            },
-
             edit(billboard) {
                 window.location = laroute.route("billboards.edit", {billboard: billboard.id});
             },
-
             reload() {
                 let self = this;
                 Slc.get(laroute.route('api.billboard.index'))
@@ -128,11 +94,9 @@
                         self.billboards = response;
                     });
             },
-
             formSaved(billboard) {
                 window.location = laroute.route("billboards.edit", {billboard: billboard.id});
             },
-
             destroy(billboard) {
                 let self = this;
                 Slc.delete(laroute.route('api.billboard.destroy', {billboard: billboard.id}), billboard.destroyForm)
@@ -140,18 +104,14 @@
                         self.removeBillboard(billboard);
                     });
             },
-
             removeBillboard(billboard) {
                 this.billboards.splice(this.findIndex(billboard), 1);
             },
-
             findIndex(billboard) {
                 return this.billboards.findIndex((_billboard) => {
                     return _billboard.id === billboard.id;
                 });
             }
         }
-
     }
-
 </script>

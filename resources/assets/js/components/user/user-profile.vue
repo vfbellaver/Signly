@@ -2,13 +2,13 @@
     <div class="card-container">
         <div class="card-body">
             <!--<img :src="user.photo_url"/>-->
-            <img src="/images/profile.jpg"/>
-
+            <img :src="user.photo_url"/>
             <div class="profile-name">
-                <h3>Name: teste</h3>
+                <h3>Name: {{user.name}}</h3>
             </div>
             <hr>
-            <h3><icon icon="envelope"></icon>&nbsp teste</h3>
+            <h3><icon icon="envelope"></icon>&nbsp {{user.email}}</h3>
+            <h3><icon icon="users"></icon>&nbsp {{user.team.name}}</h3>
         </div>
     </div>
 </template>
@@ -34,15 +34,19 @@
 </style>
 
 <script>
+
     export default {
+
         data() {
             return {
                 user: null
             }
         },
+
         created(){
             this.reload();
         },
+
         /*
          mounted(){
          this.reload();
@@ -58,4 +62,5 @@
             },
         }
     }
+
 </script>
