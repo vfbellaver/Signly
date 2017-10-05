@@ -79,7 +79,7 @@
             return {
                 api: 'billboard',
                 marker: null,
-                zoom: 7,
+                zoom: 20,
                 center: {lat: 39.3209801, lng: -111.09373110000001},
                 mapOptions: {
                     mapTypeControl: false,
@@ -110,6 +110,9 @@
             buildForm(billboard) {
                 this.marker = null;
                 this.address = null;
+                this.zoom = 10;
+                this.center = {lat: 40.76382, lng: -111.90380399999998};
+                this.zoomChanged = false;
                 this.zoom = 10;
                 this.center = {lat: 40.76182096906601, lng: -111.91085815429688};
                 this.gestureHandling = 'greedy';

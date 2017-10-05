@@ -15,21 +15,21 @@
                         <column size="12">
                             <form-group :form="form" field="code">
                                 <input-label for="code">Code: </input-label>
-                                <input-text :disabled="unique" v-model="form.code" id="code" name="code"></input-text>
+                                <input-text v-model="form.code" id="code" name="code"></input-text>
                             </form-group>
                         </column>
 
                         <column size="12">
                             <form-group :form="form" field="height">
                                 <input-label for="height">Height: </input-label>
-                                <input-text v-model="form.height" id="height" name="height" placeholder="Optional"></input-text>
+                                <input-text v-model="form.height" id="height" name="height"></input-text>
                             </form-group>
                         </column>
 
                         <column size="12">
                             <form-group :form="form" field="width">
                                 <input-label for="width">Width: </input-label>
-                                <input-text v-model="form.width" id="width" name="width" placeholder="Optional"></input-text>
+                                <input-text v-model="form.width" id="width" name="width"></input-text>
                             </form-group>
                         </column>
                     </column>
@@ -37,14 +37,14 @@
                     <column size="12">
                         <form-group :form="form" field="notes">
                             <input-label for="notes">Notes: </input-label>
-                            <text-area v-model="form.notes" id="notes" name="notes" placeholder="Optional"></text-area>
+                            <text-area v-model="form.notes" id="notes" name="notes"></text-area>
                         </form-group>
                     </column>
 
                     <column size="4">
                         <form-group :form="form" field="reads">
                             <input-label for="reads">Reads: </input-label>
-                            <input-text v-model="form.reads" id="reads" name="reads" placeholder="Optional"></input-text>
+                            <input-text v-model="form.reads" id="reads" name="reads"></input-text>
                         </form-group>
                     </column>
 
@@ -55,6 +55,12 @@
                         </form-group>
                     </column>
 
+                    <column size="4">
+                        <form-group :form="form" field="sign_type">
+                            <input-label for="sign_type">Sign Type: </input-label>
+                            <input-text v-model="form.sign_type" id="sign_type" name="sign_type"></input-text>
+                        </form-group>
+                    </column>
 
                     <column size="4">
                         <form-group :form="form" field="hard_cost">
@@ -71,7 +77,7 @@
                         </form-group>
                     </column>
 
-                    <column size="8">
+                    <column size="4">
                         <form-group :form="form" field="duration">
                             <input-label for="duration">Duration: </input-label>
                             <input-text v-model="form.duration" id="duration" name="duration"></input-text>
@@ -82,7 +88,7 @@
                     <column size="12">
                         <form-group :form="form" field="max_ads">
                             <input-label for="max_ads">Max Ads: </input-label>
-                            <input-text v-model="form.max_ads" id="max_ads" name="max_ads" placeholder="Optional"></input-text>
+                            <input-text v-model="form.max_ads" id="max_ads" name="max_ads"></input-text>
                         </form-group>
 
 
@@ -115,6 +121,7 @@
 
         props: {
             billboardId: {required: true},
+            value: false,
         },
 
         mixins: [ModalForm],
@@ -123,6 +130,7 @@
         data() {
             return {
                 api: 'billboard-face',
+
             }
         },
 
@@ -131,15 +139,7 @@
                 return `${(this.form.id ? 'Edit' : 'Add')} BillboardFace`;
             },
 
-            unique() {
-               return this.form.id ? true : false;
-            },
         },
-
-        mounted() {
-          this.form.is_iluminated = false;
-        },
-
         methods: {
             buildForm(billboard_face) {
                 return new SlcForm({
@@ -149,6 +149,7 @@
                     width: billboard_face ? billboard_face.width : null,
                     reads: billboard_face ? billboard_face.reads : null,
                     label: billboard_face ? billboard_face.label : null,
+                    sign_type: billboard_face ? billboard_face.sign_type : null,
                     hard_cost: billboard_face ? billboard_face.hard_cost : null,
                     monthly_impressions: billboard_face ? billboard_face.monthly_impressions : null,
                     notes: billboard_face ? billboard_face.notes : null,

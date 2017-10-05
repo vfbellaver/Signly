@@ -3,7 +3,7 @@
     <gmap-map
 
             :center="center"
-            :zoom="10"
+            :zoom="7"
             style="width: 100%; height: 90vmin;"
 
     >
