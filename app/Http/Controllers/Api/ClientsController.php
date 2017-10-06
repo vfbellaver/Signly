@@ -23,6 +23,11 @@ class ClientsController extends Controller
         return Client::all();
     }
 
+    public function show($id)
+    {
+        return Client::query()->findOrFail($id)->toArray();
+    }
+
     public function store(ClientCreateRequest $request)
     {
 
