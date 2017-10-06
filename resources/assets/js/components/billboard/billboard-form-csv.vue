@@ -13,8 +13,7 @@
                         <column size="6">
                             <form-group :form="form" field="template">
                                 <input-label for="template">Download a base file to fill the same:</input-label>
-                                <a :href="patchfile"><box-tool icon="download">Download File</box-tool></a>
-
+                                <a :href="pathfile"><box-tool icon="download">Download the Template Import File</box-tool></a>
                             </form-group>
                         </column>
                     </row>
