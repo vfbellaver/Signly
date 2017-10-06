@@ -85,6 +85,7 @@
                                     <image-upload id="logo" v-model="form.logo"></image-upload>
                                 </form-group>
                             </column>
+
                         </row>
                    </column>
                 </row>

@@ -4,7 +4,7 @@
             <!--<img :src="user.photo_url"/>-->
             <img :src="user.photo_url"/>
             <div class="profile-name">
-                <h3>Name: {{user.name}}</h3>
+                <h3>Name: &nbsp {{user.name}}</h3>
             </div>
             <hr>
             <h3><icon icon="envelope"></icon>&nbsp {{user.email}}</h3>
@@ -39,27 +39,15 @@
 
         data() {
             return {
-                user: null
+                user: Slc.user
             }
         },
 
         created(){
-            this.reload();
         },
 
-        /*
-         mounted(){
-         this.reload();
-         },
-         */
         methods: {
-            reload() {
-                Slc.get(laroute.route('api.user.index'))
-                    .then((response) => {
-                        this.user = response;
-                        this.user = this.user[0];
-                    });
-            },
+
         }
     }
 

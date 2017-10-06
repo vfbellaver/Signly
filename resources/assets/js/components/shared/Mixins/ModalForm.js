@@ -55,7 +55,6 @@ export default {
             this.form = this.buildForm(obj);
             $(this.$el).modal('show');
 
-
         },
         reset() {
             this.form = this.buildForm();
@@ -73,6 +72,7 @@ export default {
             this.send('put', this.updateRoute);
         },
         send(method, route) {
+
             let event = method === 'post' ? 'created' : 'updated';
             Slc[method](route, this.form)
                 .then((response) => {

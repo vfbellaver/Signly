@@ -23,7 +23,8 @@
         </div>
     </div>
 </template>
-
+<style>
+</style>
 <script>
 
     import * as Slc from "../../vue/http";

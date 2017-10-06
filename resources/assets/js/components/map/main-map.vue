@@ -3,7 +3,7 @@
     <gmap-map
 
             :center="center"
-            :zoom="7"
+            :zoom="10"
             style="width: 100%; height: 90vmin;"
 
     >
@@ -12,7 +12,6 @@
                     :position="infoWindowPos"
                     :opened="infoWinOpen"
                     @closeclick="infoWinOpen=false">
-
                 <info-content
 
                         :billboard="billboard"
@@ -95,6 +94,10 @@
                         infoText: this.billboards[i],
                    });
                 }
+
+            },
+
+            popovers(){
 
             },
 

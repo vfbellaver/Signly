@@ -29,7 +29,7 @@ class BillboardFacesController extends Controller
         $data = $this->service->create($request->form());
 
         $response = [
-            'message' => 'Billboard Face created.',
+            'message' => 'Billboard face created.',
             'data' => $data
         ];
 
@@ -41,7 +41,7 @@ class BillboardFacesController extends Controller
         $obj = $this->service->update($request->form(), $billboardFace);
 
         $response = [
-            'message' => 'Billboard Face updated.',
+            'message' => 'Billboard face updated.',
             'data' => $obj,
         ];
 
@@ -53,7 +53,7 @@ class BillboardFacesController extends Controller
         $this->service->delete($billboardFace);
 
         return [
-            'message' => 'Billboard Face deleted.'
+            'message' => 'BillboardFace deleted.'
         ];
     }
 }

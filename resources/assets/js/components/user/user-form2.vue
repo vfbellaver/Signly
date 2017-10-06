@@ -2,12 +2,10 @@
     <form-submit v-model="form" @submit="save">
         <row>
             <column size="4">
-
                 <form-group :form="form" field="photo_url">
                     <input-label for="photo_url">Photo: </input-label>
                     <image-upload v-model="form.photo_url" id="photo_url" name="photo_url"></image-upload>
                 </form-group>
-
             </column>
 
             <column size="8">
@@ -24,7 +22,7 @@
 
                 <form-group :form="form" field="password">
                     <input-label for="password">Password: </input-label>
-                    <input-password v-model="form.password" id="password" name="password"/>
+                    <input-text v-model="form.password" id="password" name="password"/>
                 </form-group>
 
                 <form-group :form="form" field="role">
@@ -39,7 +37,6 @@
 
             </column>
         </row>
-
         <modal-footer>
             <btn-submit :disabled="form.busy">
                 <spinner v-if="form.busy"></spinner>
@@ -48,6 +45,7 @@
             </btn-submit>
         </modal-footer>
     </form-submit>
+
 </template>
 
 <script>
@@ -65,9 +63,14 @@
         data() {
             return {
                 api: 'user',
-                user: null
+                form: new SlcForm({}),
             }
         },
+
+        created(){
+
+        },
+
         computed: {
             title() {
                 return `${(this.form.id ? 'Edit' : 'Invite')} User`;
@@ -75,15 +78,7 @@
         },
         methods: {
             buildForm(user) {
-                return new SlcForm({
-                    id: user ? user.id : null,
-                    name: user ? user.name : null,
-                    photo_url: user ? user.photo_url : null,
-                    password: user ? user.password : null,
-                    email: user ? user.email : null,
-                    role: user ? user.role : null,
-                    team: user ? user.team : null
-                });
+                return new SlcForm(Slc.user);
             }
         },
 
@@ -92,12 +87,7 @@
                 .then((response) => {
                     this.user = response;
                     this.user = this.user[0];
-                    console.log(user);
                 });
-        },
-
-        update(user){
-            window.location = laroute.route("billboards.edit", {billboard: user.id});
         },
 
     }
