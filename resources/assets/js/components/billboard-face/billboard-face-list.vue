@@ -15,32 +15,27 @@
                         </column>
                         <column size="8">
                             <div class="card-body">
-                                <box>
-                                    <h3>Code: {{billboardFace.code}} &nbsp Label: {{billboardFace.label}} </h3>
-                                    <box-content>
-                                        <column size="12">
-                                            <h4>Width: {{billboardFace.width}} &nbsp
-                                                &nbsp Heigth: {{billboardFace.height}}
-                                            </h4>
-                                        </column>
-                                        <column size="12">
-                                            <h4>Monthly Impressions: {{formatImpressions}} &nbsp</h4>
-                                            <h4>Hard Cost U$ : {{getMoney}} &nbsp </h4>
-                                        </column>
-                                        <column size="12">
-                                            <btn-success size="xs" @click.native="edit(billboardFace)">
-                                                EDIT &nbsp
-                                                <icon icon="edit"></icon>
-                                            </btn-success>
-                                            <btn-danger @click.native="destroy(billboardFace)"
-                                                        :disabled="billboardFace.destroyForm.busy"
-                                                        size="xs">
-                                                <spinner v-if="billboardFace.destroyForm.busy"></spinner>
-                                                <icon icon="trash" v-else></icon>
-                                            </btn-danger>
-                                        </column>
-                                    </box-content>
-                                </box>
+                                <h3>Code: {{billboardFace.code}} &nbsp Label: {{billboardFace.label}} </h3>
+                                <hr>
+                                    <column size="3">
+                                        <h4>U$ : </h4>
+                                    </column>
+                                    <column size="9">
+                                        <h2>{{formatMoney(billboardFace.hard_cost)}} &nbsp </h2>
+                                    </column>
+
+                                <column size="12">
+                                    <btn-success size="xs" @click.native="edit(billboardFace)">
+                                        EDIT &nbsp
+                                        <icon icon="edit"></icon>
+                                    </btn-success>
+                                    <btn-danger @click.native="destroy(billboardFace)"
+                                                :disabled="billboardFace.destroyForm.busy"
+                                                size="xs">
+                                        <spinner v-if="billboardFace.destroyForm.busy"></spinner>
+                                        <icon icon="trash" v-else></icon>
+                                    </btn-danger>
+                                </column>
                             </div>
                         </column>
                         <div style="clear: both"></div>
@@ -68,6 +63,10 @@
         .ibox-content {
             border: 0;
         }
+
+        > hr {
+           margin: 5px;
+        }
     }
 </style>
 
@@ -81,18 +80,28 @@
         props: {
             billboardId: {required: false},
         },
+        
         components: {
             BillboardFaceForm
         },
+        
         data() {
             return {
-                billboardFaces: []
+                billboardFaces: [],
+                billboardMoney: null
             }
         },
+        
+        computed: {
+
+        },
+        
         mounted() {
             this.reload();
         },
+        
         methods: {
+            
             add() {
                 this.$refs.form.show();
             },
@@ -125,6 +134,16 @@
                 return this.billboardFaces.findIndex((_billboardFace) => {
                     return _billboardFace.id === billboardFace.id;
                 });
+            },
+
+            formatMoney(money) {
+                money = money.toString();
+                var tmp = money.replace(".","");
+                tmp = tmp.replace(/([0-9]{2})$/g, ",$1");
+                if( tmp.length > 6 )
+                    tmp = tmp.replace(/([0-9]{3}),([0-9]{2}$)/g, ".$1,$2");
+
+                return tmp;
             }
         }
     }
