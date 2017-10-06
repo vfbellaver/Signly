@@ -3,11 +3,21 @@
         <modal-header>Import Billboards</modal-header>
             <form-submit v-model="form" @submit="save">
                 <modal-body>
-                    <form-group :form="form" field="filecsv">
-                        <input-label for="filecsv">Select File: </input-label>
-                        <input-csv  v-model="form.billboards" id="billboards"></input-csv>
-                    </form-group>
+                    <row>
+                        <column size="6">
+                            <form-group :form="form" field="filecsv">
+                                <input-label for="filecsv">Select File: </input-label>
+                                <input-csv  v-model="form.billboards" id="billboards"></input-csv>
+                            </form-group>
+                        </column>
+                        <column size="6">
+                            <form-group :form="form" field="template">
+                                <input-label for="template">Download a base file to fill the same:</input-label>
+                                <a :href="patchfile"><box-tool icon="download">Download File</box-tool></a>
 
+                            </form-group>
+                        </column>
+                    </row>
                     <form-group :form="form" field="tablebillboards">
                         <table  v-if="form.billboards" class="table table-responsive table-striped">
                             <thead>
