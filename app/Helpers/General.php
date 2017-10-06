@@ -1,5 +1,26 @@
 <?php
 
+function csv_to_array($filename, $delimiter = ',')
+{
+    if (!$filename) {
+        return false;
+    }
+    $header = null;
+    $data = array();
+
+    if (($handle = @fopen($filename, 'r')) !== false) {
+        while (($row = fgetcsv($handle, 1000, $delimiter)) !== false) {
+            if (!$header) {
+                $header = $row;
+                continue;
+            }
+            $data[] = array_combine($header, $row);
+        }
+        fclose($handle);
+    }
+    return $data;
+
+}
 
 function route_contains($name, $operator = '=')
 {

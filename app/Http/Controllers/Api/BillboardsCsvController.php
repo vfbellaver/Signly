@@ -23,30 +23,8 @@ class BillboardsCsvController
     {
 
         $file = $request->file('file');
-        $data = $this->csv_to_array($file[0]);
+        $data = csv_to_array($file[0]);
         return $data;
-    }
-
-    private function csv_to_array($filename, $delimiter = ',')
-    {
-        if (!$filename) {
-            return false;
-        }
-        $header = null;
-        $data = array();
-
-        if (($handle = @fopen($filename, 'r')) !== false) {
-            while (($row = fgetcsv($handle, 1000, $delimiter)) !== false) {
-                if (!$header) {
-                    $header = $row;
-                    continue;
-                }
-                $data[] = array_combine($header, $row);
-            }
-            fclose($handle);
-        }
-        return $data;
-
     }
 
     public function store(Request $request)
