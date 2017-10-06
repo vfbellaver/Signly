@@ -62,9 +62,9 @@ class BillboardFaceForm extends BaseForm
         return $this->request->get('photo');
     }
 
-    public function isIluminated()
+    public function isIlluminated()
     {
-        return $this->request->get('is_iluminated');
+        return $this->request->get('is_illuminated');
     }
 
     public function billboard()

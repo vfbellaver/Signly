@@ -21,4 +21,9 @@ class BillboardsController extends Controller
             'billboard' => $billboard
         ]);
     }
+
+    public function create()
+    {
+        return view('billboard.create');
+    }
 }

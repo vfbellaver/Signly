@@ -1,3 +1,3 @@
 <?php
 
-Route::resource('billboards', 'Web\BillboardsController', ['only' => ['index', 'edit']]);
+Route::resource('billboards', 'Web\BillboardsController', ['only' => ['index', 'edit','create']]);
