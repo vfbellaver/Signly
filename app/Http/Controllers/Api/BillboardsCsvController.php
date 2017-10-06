@@ -19,13 +19,12 @@ class BillboardsCsvController
         $this->service = $service;
     }
 
-    public function CsvConvertArray(Request $request){
+    public function CsvConvertArray(Request $request)
+    {
 
         $file = $request->file('file');
         $data = $this->csv_to_array($file[0]);
         return $data;
-
-
     }
 
     private function csv_to_array($filename, $delimiter = ',')
@@ -56,7 +55,7 @@ class BillboardsCsvController
         $this->service->createBillboards($data);
         $response = [
             'message' => 'Billboards imported.',
-            'data' =>  $data ,
+            'data' => $data,
         ];
 
         return $response;

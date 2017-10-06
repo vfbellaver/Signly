@@ -18,4 +18,8 @@ module.exports = {
             this.$emit('input', newValue);
         }
     },
+
+    created() {
+        this.internalValue = this.value;
+    }
 };

@@ -26,7 +26,7 @@ trait CreatesUsers
 
     protected function loginAsSuperAdmin(array $attributes = []): User
     {
-        return $this->login($attributes, User::SUPERADMIN);
+        return $this->login($attributes, User::SUPER_ADMIN);
     }
 
     protected function loginAsAdmin(array $attributes = []): User
@@ -42,7 +42,7 @@ trait CreatesUsers
 
     protected function createSuperAdminUser(array $attributes = []): User
     {
-        return $this->createUser($attributes, User::SUPERADMIN);
+        return $this->createUser($attributes, User::SUPER_ADMIN);
     }
 
     protected function createAdminUser(array $attributes = []): User
@@ -84,7 +84,7 @@ trait CreatesUsers
 
     protected function createSuperAdminRole(): Role
     {
-        return $this->createRole(User::SUPERADMIN);
+        return $this->createRole(User::SUPER_ADMIN);
     }
 
     protected function createUserRole()
