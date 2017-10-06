@@ -2,6 +2,6 @@
 
 @section('content')
     @component('components.default-page')
-        <billboard-create></billboard-create>
+        <billboard-create :map-center="settings.map_center"></billboard-create>
     @endcomponent
 @endsection

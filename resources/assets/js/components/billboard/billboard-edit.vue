@@ -5,7 +5,6 @@
                 Billboards DashBoard
             </box-title>
             <box-body>
-
                 <!-- billboard  -->
                 <column size="5">
                     <form-submit v-model="form" @submit="save">
@@ -64,24 +63,24 @@
                             </column>
                         </row>
                         <hr>
-                        <column size="12">
-                            <form-group :form="form" field="name">
-                                <column size="7">
-                                </column>
-                                <column size="3">
-                                    <btn-default
-                                    >
-                                        <a href="http://signly.dev/billboards">CANCEL</a>
-                                    </btn-default>
-                                </column>
-                                <column size="2">
-                                    <btn-submit :disabled="form.busy">
-                                        <spinner v-if="form.busy"></spinner>
-                                    </btn-submit>
-                                </column>
-                            </form-group>
-                        </column>
-
+                        <row>
+                            <column size="12">
+                                <form-group :form="form" field="name">
+                                    <column size="7">
+                                    </column>
+                                    <column size="3">
+                                        <btn-default>
+                                            <a href="http://signly.dev/billboards">CANCEL</a>
+                                        </btn-default>
+                                    </column>
+                                    <column size="2">
+                                        <btn-submit :disabled="form.busy">
+                                            <spinner v-if="form.busy"></spinner>
+                                        </btn-submit>
+                                    </column>
+                                </form-group>
+                            </column>
+                        </row>
                     </form-submit>
                 </column>
 
@@ -105,17 +104,16 @@
 
 <script>
 
+    import _ from 'lodash';
     import * as Slc from "../../vue/http";
     import BillboardFaceForm from '../billboard-face/billboard-face-form.vue';
-    import ModalForm from '../shared/Mixins/ModalForm';
 
     export default {
 
         props: {
-            id: {required: true}
+            id: {required: true},
+            mapCenter: {required: true}
         },
-
-        mixins: [ModalForm],
 
         components: {
             BillboardFaceForm
@@ -146,10 +144,8 @@
         },
 
         created() {
-            const self = this;
             this.load();
         },
-
 
         methods: {
 
@@ -157,7 +153,6 @@
                 this.marker = null;
                 this.address = null;
                 this.zoom = 7;
-                this.center = {lat: 39.3209801, lng: -111.09373110000001};
                 this.zoomChanged = false;
 
                 return new SlcForm({

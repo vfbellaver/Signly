@@ -29,6 +29,7 @@ Vue.component('form-submit', require('./Forms/FormSubmit'));
 // Inputs
 Vue.component('input-label', require('./Inputs/InputLabel'));
 Vue.component('input-text', require('./Inputs/InputText'));
+Vue.component('input-url', require('./Inputs/InputUrl'));
 Vue.component('input-email', require('./Inputs/InputEmail'));
 Vue.component('text-area', require('./Inputs/TextArea'));
 Vue.component('input-csv', require('./Inputs/CsvUpload.vue'));

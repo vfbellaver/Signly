@@ -1,4 +1,3 @@
-
 <template>
     <div>
         <box>
@@ -9,48 +8,66 @@
                 </box-tools>
             </box-title>
             <box-content>
-                <div class="cards-line-separator" v-for="(billboardface, index) in billboardFaces">
-                    <billboard-face-card
-                            :billboard-face="billboardface"
-                    >
-
-                        <btn-success
-                                size="xs"
-                                @click.native="edit(billboardface)"
-                        >
-                            EDIT &nbsp
-                            <icon icon="edit"/>
-                        </btn-success>
-
-
-                        <btn-danger @click.native="destroy(billboardface)"
-                                    :disabled="billboardface.destroyForm.busy"
-                                    size="xs"
-                        >
-                            <spinner v-if="billboardface.destroyForm.busy"></spinner>
-                            <icon icon="trash" v-else/>
-                        </btn-danger>
-
-                    </billboard-face-card>
+                <div class="cards-line-separator" v-for="billboardFace in billboardFaces">
+                    <div class="card-container">
+                        <column size="4">
+                            <img width="100%" :src="billboardFace.photo">
+                        </column>
+                        <column size="8">
+                            <div class="card-body">
+                                <box>
+                                    <h3>Code: {{billboardFace.code}} &nbsp Label: {{billboardFace.label}} </h3>
+                                    <box-content>
+                                        <column size="12">
+                                            <h4>Width: {{billboardFace.width}} &nbsp
+                                                &nbsp Heigth: {{billboardFace.height}}
+                                            </h4>
+                                        </column>
+                                        <column size="12">
+                                            <h4>Monthly Impressions: {{formatImpressions}} &nbsp</h4>
+                                            <h4>Hard Cost U$ : {{getMoney}} &nbsp </h4>
+                                        </column>
+                                        <column size="12">
+                                            <btn-success size="xs" @click.native="edit(billboardFace)">
+                                                EDIT &nbsp
+                                                <icon icon="edit"></icon>
+                                            </btn-success>
+                                            <btn-danger @click.native="destroy(billboardFace)"
+                                                        :disabled="billboardFace.destroyForm.busy"
+                                                        size="xs">
+                                                <spinner v-if="billboardFace.destroyForm.busy"></spinner>
+                                                <icon icon="trash" v-else></icon>
+                                            </btn-danger>
+                                        </column>
+                                    </box-content>
+                                </box>
+                            </div>
+                        </column>
+                        <div style="clear: both"></div>
+                    </div>
                 </div>
             </box-content>
         </box>
-        <billboard-face-form ref="form" :billboard-id="billboardId" @saved="formSaved"></billboard-face-form>
+        <billboard-face-form ref="form" @saved="formSaved" :billboardId="billboardId"></billboard-face-form>
     </div>
 </template>
+
 <style lang="scss" scoped="scoped">
-    .ibox  {
+    .ibox {
         margin-top: 22px;
     }
 </style>
+
 <script>
+
+    import _ from 'lodash';
+    import * as Slc from "../../vue/http";
     import BillboardFaceForm from './billboard-face-form.vue';
-    import ModalForm from '../shared/Mixins/ModalForm';
+
     export default {
         props: {
-            billboardId: {required: true},
+            billboardId: {required: false},
         },
-        mixins: [ModalForm],
         components: {
             BillboardFaceForm
         },

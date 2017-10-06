@@ -19,12 +19,12 @@ class BillboardCreateRequest extends BaseRequest
     public function rules()
     {
         return [
-			'name' => 'required',
-			'description' => 'required',
-			'digital_driveby' => 'required',
-			'address' => 'required',
-			'lat' => 'required',
-			'lng' => 'required',
+            'name' => 'required',
+            'description' => 'nullable',
+            'address' => 'required',
+            'lat' => 'required',
+            'lng' => 'required',
+            'digital_driveby' => 'nullable|url',
         ];
     }
 }

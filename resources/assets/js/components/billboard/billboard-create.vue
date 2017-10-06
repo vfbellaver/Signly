@@ -1,89 +1,105 @@
 <template>
-    <modal>
-        <modal-header>{{ title }}</modal-header>
-        <form-submit v-model="form" @submit="save">
-            <modal-body>
-                <row>
-                    <column size="12">
-                        <form-group :form="form" field="name">
-                            <input-label for="name">Name: </input-label>
-                            <input-text v-model="form.name" id="name" name="name"></input-text>
-                        </form-group>
-                        <form-group :form="form" field="description">
-                            <input-label for="description">Description: </input-label>
-                            <text-area v-model="form.description" id="description" name="description"></text-area>
-                        </form-group>
-                        <form-group :form="form" field="address">
-                            <input-label for="address">Address: </input-label>
-                            <input-text v-model="form.address" id="address" name="address"></input-text>
-                        </form-group>
-                    </column>
-                    <column size="12">
-                        <gmap-map v-if="isShown"
-                                  :center="center"
-                                  :zoom="zoom"
-                                  @click="onMapClick"
-                                  @zoom_changed="onZoomChanged"
-                                  :options="mapOptions"
-                                  style="width: 95%; min-height: 320px">
-                            <gmap-marker
-                                    v-if="marker"
-                                    :position="marker"
-                                    :clickable="true"
-                                    :draggable="true"
-                                    @dragend="onMarkerMoved"
-                                    @click="center=marker"
-                            ></gmap-marker>
-                        </gmap-map>
-                    </column>
-                    <column size="6">
-                        <form-group :form="form" field="lat">
-                            <input-label for="lat">Latitude: </input-label>
-                            <input-text v-model="form.lat" id="lat" name="lat"></input-text>
-                        </form-group>
-                    </column>
-                    <column size="6">
-                        <form-group :form="form" field="lng">
-                            <input-label for="lng">Longitude: </input-label>
-                            <input-text v-model="form.lng" id="lng" name="lng"></input-text>
-                        </form-group>
-                    </column>
-                    <column size="12">
-                        <form-group :form="form" field="digital_driveby">
-                            <input-label for="digital_driveby">Digital Driveby: </input-label>
-                            <input-text v-model="form.digital_driveby" id="digital_driveby"
-                                        name="digital_driveby"></input-text>
-                        </form-group>
-                    </column>
-                </row>
-            </modal-body>
-            <modal-footer>
-                <btn-submit :disabled="form.busy">
-                    <spinner v-if="form.busy"></spinner>
-                </btn-submit>
-            </modal-footer>
-        </form-submit>
-    </modal>
+    <div>
+        <box>
+            <box-title>Create New Billboard</box-title>
+            <box-content>
+                <form-submit v-model="form" @submit="save">
+                    <div class="row">
+                        <div class="col-md-6 col-md-offset-3">
+                            <form-group :form="form" field="name">
+                                <input-label for="name">Name: </input-label>
+                                <input-text v-model="form.name" id="name" name="name"></input-text>
+                            </form-group>
+                            <form-group :form="form" field="description">
+                                <input-label for="description">Description: </input-label>
+                                <text-area v-model="form.description" id="description"
+                                           name="description"></text-area>
+                            </form-group>
+                            <form-group :form="form" field="address">
+                                <input-label for="address">Address: </input-label>
+                                <input-text v-model="form.address" id="address" name="address"></input-text>
+                            </form-group>
+
+                            <gmap-map
+                                    :center="center"
+                                    :zoom="zoom"
+                                    @click="onMapClick"
+                                    @zoom_changed="onZoomChanged"
+                                    :options="mapOptions"
+                                    style="width: 100%; min-height: 320px">
+                                <gmap-marker
+                                        v-if="marker"
+                                        :position="marker"
+                                        :clickable="true"
+                                        :draggable="true"
+                                        @dragend="onMarkerMoved"
+                                        @click="center=marker"
+                                ></gmap-marker>
+                            </gmap-map>
+
+                            <form-group :form="form" field="lat">
+                                <input-label for="lat">Latitude: </input-label>
+                                <input-text v-model="form.lat" id="lat" name="lat"></input-text>
+                            </form-group>
+
+                            <form-group :form="form" field="lng">
+                                <input-label for="lng">Longitude: </input-label>
+                                <input-text v-model="form.lng" id="lng" name="lng"></input-text>
+                            </form-group>
+
+                            <form-group :form="form" field="digital_driveby">
+                                <input-label for="digital_driveby">Digital Driveby: </input-label>
+                                <input-url v-model="form.digital_driveby" id="digital_driveby"
+                                           name="digital_driveby"></input-url>
+                            </form-group>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-md-offset-3">
+                            <hr>
+                            <btn-submit :disabled="form.busy">
+                                <spinner v-if="form.busy"></spinner>
+                            </btn-submit>
+                            <a class="btn btn-default" :href="billboardListRoute">Cancel</a>
+                        </div>
+                    </div>
+                </form-submit>
+            </box-content>
+        </box>
+    </div>
 </template>
 
+<style lang="scss" scoped="true">
+    .vue-map-container {
+        min-height: 320px;
+        margin-bottom: 12px;
+    }
+</style>
+
 <script>
+    import _ from 'lodash';
     import * as Slc from "../../vue/http";
-    import ModalForm from '../shared/Mixins/ModalForm';
+    import BillboardFaceList from '../billboard-face/billboard-face-list';
+
     export default {
-        mixins: [ModalForm],
+        props: {
+            mapCenter: {required: true}
+        },
+        components: {
+            BillboardFaceList,
+        },
         data() {
             return {
-                api: 'billboard',
+                form: null,
                 marker: null,
                 zoom: 7,
-                center: {lat: 39.3209801, lng: -111.09373110000001},
                 mapOptions: {
                     mapTypeControl: false,
                     scrollWell: true,
                     gestureHandling: 'greedy'
                 },
                 zoomChanged: false,
-                gestureHandling: 'greedy'
+                billboardListRoute: laroute.route('billboards.index'),
             }
         },
         watch: {
@@ -96,33 +112,34 @@
                 return `${(this.form.id ? 'Edit' : 'Add')} Billboard`;
             }
         },
-        methods: {
 
-            save(){
+        created() {
+            this.marker = null;
+            this.address = null;
+            this.zoom = 10;
+            this.center = this.mapCenter;
+
+            this.form = new SlcForm({
+                id: null,
+                name: null,
+                description: null,
+                digital_driveby: null,
+                address: null,
+                lat: null,
+                lng: null,
+            });
+        },
+
+        methods: {
+            save() {
                 const uri = laroute.route('api.billboard.store');
                 Slc.post(uri, this.form).then((response) => {
-                    console.log('Billboard Create:',response);
+                    console.log('Billboard Create:', response);
                     this.$emit('saved');
                     window.location = laroute.route("billboards.edit", {billboard: response.data.id});
                 });
-             },
-
-            buildForm(billboard) {
-                this.marker = null;
-                this.address = null;
-                this.zoom = 10;
-                this.center = {lat: 40.76182096906601, lng: -111.91085815429688};
-                this.gestureHandling = 'greedy';
-                return new SlcForm({
-                    id: billboard ? billboard.id : null,
-                    name: billboard ? billboard.name : null,
-                    description: billboard ? billboard.description : null,
-                    digital_driveby: billboard ? billboard.digital_driveby : null,
-                    address: billboard ? billboard.address : null,
-                    lat: billboard ? billboard.lat : null,
-                    lng: billboard ? billboard.lng : null,
-                });
             },
+
             onMapClick(e) {
                 const self = this;
                 console.log(e);
@@ -154,10 +171,12 @@
                 }
                 this.zoom = 15;
             },
+
             onZoomChanged(e) {
                 console.log("On Zoom Changed", e);
                 this.zoomChanged = true;
             },
+
             onAddressChange: _.debounce(function (e) {
                 console.log("OnAddressChange", e);
                 const self = this;
@@ -183,6 +202,7 @@
                     self.zoom = 15;
                 });
             }, 500),
+
             onMarkerMoved: _.debounce(function (e) {
                 console.log('On Marker Moved', e);
                 const pos = {
@@ -193,7 +213,7 @@
                 this.form.lng = pos.lng;
                 this.marker = pos;
                 this.center = pos;
-            }),
+            }, 500),
         }
     }
 </script>
