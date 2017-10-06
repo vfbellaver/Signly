@@ -14,7 +14,7 @@ class User extends Authenticatable
 {
     use Notifiable, HasApiTokens, HasDefender, Billable;
 
-    const SUPERADMIN = 'slc';
+    const SUPER_ADMIN = 'slc';
     const ADMIN = 'admin';
     const USER = 'user';
 
@@ -24,7 +24,11 @@ class User extends Authenticatable
         'password',
         'photo_url',
         'invitation_token',
-        'status'
+        'status',
+        'stripe_id',
+        'card_brand',
+        'card_last_four',
+        'trial_ends_at',
     ];
 
     protected $hidden = [
@@ -62,7 +66,7 @@ class User extends Authenticatable
 
     private static function whereToken($token)
     {
-        return static::where('invitation_token', '=', $token);
+        return static::query()->where('invitation_token', '=', $token);
     }
     #endregion
 
@@ -77,8 +81,6 @@ class User extends Authenticatable
             ];
         };
 
-
-
         return [
             'id' => (int)$this->id,
             'name' => $this->name,
@@ -87,7 +89,11 @@ class User extends Authenticatable
             'role' => $role,
             'status' => $this->status,
             'team' => $this->team->toArray(),
-            'pending' => $this->invitation_token != null
+            'pending' => $this->invitation_token != null,
+            'stripe_id' => $this->stripe_id,
+            'card_brand' => $this->card_brand,
+            'card_last_four' => $this->card_last_four,
+            'trial_ends_at' => $this->trial_ends_at,
         ];
     }
 
