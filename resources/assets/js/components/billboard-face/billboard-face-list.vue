@@ -2,7 +2,7 @@
     <div>
         <box>
             <box-title>
-                Billboard Faces
+                <h5>Billboard Faces</h5>
                 <box-tools slot="tools">
                     <box-tool icon="plus" @click.native="add">New</box-tool>
                 </box-tools>
@@ -54,7 +54,20 @@
 
 <style lang="scss" scoped="scoped">
     .ibox {
-        margin-top: 22px;
+        margin-top: 0px;
+        .ibox-title {
+            margin-top: 0;
+            border: 0;
+            padding-top: 0;
+            h5 {
+                font-size: 13px;
+                font-weight: bold;
+                margin: 0;
+            }
+        }
+        .ibox-content {
+            border: 0;
+        }
     }
 </style>
 

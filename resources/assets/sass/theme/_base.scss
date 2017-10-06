@@ -120,7 +120,10 @@ video {
 .note-editor.fullscreen {
   z-index: 2050;
 }
-.note-editor.note-frame.fullscreen { z-index: 2020; }
+
+.note-editor.note-frame.fullscreen {
+  z-index: 2020;
+}
 
 .note-editor.note-frame .note-editing-area .note-editable {
   color: $text-color;
@@ -200,7 +203,7 @@ video {
 
 /// here was padding 0 15px
 #page-wrapper {
-  padding: 0 0px;
+  padding: 0 0 60px 0;
   min-height: 568px;
   position: relative !important;
 }
@@ -335,8 +338,6 @@ body.body-small .footer.fixed {
 .blank-panel .panel-heading {
   padding-bottom: 0;
 }
-
-
 
 .nav-tabs > li > a {
   color: #A7B1C2;
@@ -656,7 +657,6 @@ table.table-mail tr td {
 }
 
 /* BACKGROUNDS */
-
 
 .gray-bg, .bg-muted {
   background-color: $gray;
@@ -990,6 +990,7 @@ a.close-canvas-menu:hover {
   padding: 0 40px;
 
 }
+
 .p-h-xs {
   padding: 10px 0;
 }
@@ -1018,7 +1019,6 @@ a.close-canvas-menu:hover {
   padding: 40px 0;
 
 }
-
 
 .m-xxs {
   margin: 2px 4px;
@@ -1308,7 +1308,6 @@ a.close-canvas-menu:hover {
   margin: 30px 0;
 }
 
-
 // IMAGES SIZE
 
 .img-sm {
@@ -1392,7 +1391,6 @@ body.fullscreen-ibox-mode {
 body.modal-open {
   padding-right: inherit !important;
 }
-
 
 // Fix modal in Safari browser
 body.modal-open .wrapper-content.animated {

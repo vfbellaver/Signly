@@ -93,6 +93,7 @@
                 form: null,
                 marker: null,
                 zoom: 7,
+                center: this.mapCenter,
                 mapOptions: {
                     mapTypeControl: false,
                     scrollWell: true,
@@ -117,7 +118,6 @@
             this.marker = null;
             this.address = null;
             this.zoom = 10;
-            this.center = this.mapCenter;
 
             this.form = new SlcForm({
                 id: null,
@@ -135,7 +135,6 @@
                 const uri = laroute.route('api.billboard.store');
                 Slc.post(uri, this.form).then((response) => {
                     console.log('Billboard Create:', response);
-                    this.$emit('saved');
                     window.location = laroute.route("billboards.edit", {billboard: response.data.id});
                 });
             },

@@ -1,97 +1,75 @@
 <template>
     <div>
         <box>
-            <box-title>
-                Billboards DashBoard
-            </box-title>
-            <box-body>
-                <!-- billboard  -->
-                <column size="5">
-                    <form-submit v-model="form" @submit="save">
-                        <row>
-                            <column size="12">
-                                <form-group :form="form" field="name">
-                                    <input-label for="name">Name: </input-label>
-                                    <input-text v-model="form.name" id="name" name="name"></input-text>
-                                </form-group>
-                                <form-group :form="form" field="description">
-                                    <input-label for="description">Description: </input-label>
-                                    <text-area v-model="form.description" id="description"
-                                               name="description"></text-area>
-                                </form-group>
-                                <form-group :form="form" field="address">
-                                    <input-label for="address">Address: </input-label>
-                                    <input-text v-model="form.address" id="address" name="address"></input-text>
-                                </form-group>
-                            </column>
-                            <column size="12">
-                                <gmap-map
-                                        :center="center"
-                                        :zoom="zoom"
-                                        @click="onMapClick"
-                                        @zoom_changed="onZoomChanged"
-                                        :options="mapOptions"
-                                        style="width: 100%; min-height: 320px">
-                                    <gmap-marker
-                                            v-if="marker"
-                                            :position="marker"
-                                            :clickable="true"
-                                            :draggable="true"
-                                            @dragend="onMarkerMoved"
-                                            @click="center=marker"
-                                    ></gmap-marker>
-                                </gmap-map>
-                            </column>
-                            <column size="6">
-                                <form-group :form="form" field="lat">
-                                    <input-label for="lat">Latitude: </input-label>
-                                    <input-text v-model="form.lat" id="lat" name="lat"></input-text>
-                                </form-group>
-                            </column>
-                            <column size="6">
-                                <form-group :form="form" field="lng">
-                                    <input-label for="lng">Longitude: </input-label>
-                                    <input-text v-model="form.lng" id="lng" name="lng"></input-text>
-                                </form-group>
-                            </column>
-                            <column size="12">
-                                <form-group :form="form" field="digital_driveby">
-                                    <input-label for="digital_driveby">Digital Driveby: </input-label>
-                                    <input-text v-model="form.digital_driveby" id="digital_driveby"
-                                                name="digital_driveby"></input-text>
-                                </form-group>
-                            </column>
-                        </row>
-                        <hr>
-                        <row>
-                            <column size="12">
-                                <form-group :form="form" field="name">
-                                    <column size="7">
-                                    </column>
-                                    <column size="3">
-                                        <btn-default>
-                                            <a href="http://signly.dev/billboards">CANCEL</a>
-                                        </btn-default>
-                                    </column>
-                                    <column size="2">
-                                        <btn-submit :disabled="form.busy">
-                                            <spinner v-if="form.busy"></spinner>
-                                        </btn-submit>
-                                    </column>
-                                </form-group>
-                            </column>
-                        </row>
-                    </form-submit>
-                </column>
+            <box-title>Edit Billboard</box-title>
+            <box-content>
+                <form-submit v-model="form" @submit="save">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <form-group :form="form" field="name">
+                                <input-label for="name">Name: </input-label>
+                                <input-text v-model="form.name" id="name" name="name"></input-text>
+                            </form-group>
+                            <form-group :form="form" field="description">
+                                <input-label for="description">Description: </input-label>
+                                <text-area v-model="form.description" id="description"
+                                           name="description"></text-area>
+                            </form-group>
+                            <form-group :form="form" field="address">
+                                <input-label for="address">Address: </input-label>
+                                <input-text v-model="form.address" id="address" name="address"></input-text>
+                            </form-group>
 
-                <!-- faces  -->
-                <column size="7">
-                    <billboard-face-list-card
-                            :billboard-id="id"
-                    >
-                    </billboard-face-list-card>
-                </column>
-            </box-body>
+                            <gmap-map
+                                    :center="center"
+                                    :zoom="zoom"
+                                    @click="onMapClick"
+                                    @zoom_changed="onZoomChanged"
+                                    :options="mapOptions"
+                                    style="width: 100%; min-height: 320px">
+                                <gmap-marker
+                                        v-if="marker"
+                                        :position="marker"
+                                        :clickable="true"
+                                        :draggable="true"
+                                        @dragend="onMarkerMoved"
+                                        @click="center=marker"
+                                ></gmap-marker>
+                            </gmap-map>
+
+                            <form-group :form="form" field="lat">
+                                <input-label for="lat">Latitude: </input-label>
+                                <input-text v-model="form.lat" id="lat" name="lat"></input-text>
+                            </form-group>
+
+                            <form-group :form="form" field="lng">
+                                <input-label for="lng">Longitude: </input-label>
+                                <input-text v-model="form.lng" id="lng" name="lng"></input-text>
+                            </form-group>
+
+                            <form-group :form="form" field="digital_driveby">
+                                <input-label for="digital_driveby">Digital Driveby: </input-label>
+                                <input-url v-model="form.digital_driveby" id="digital_driveby"
+                                           name="digital_driveby"></input-url>
+                            </form-group>
+                        </div>
+                        <div class="col-md-6" v-if="form.id">
+                            <form-group :form="form" field="billboardFaces">
+                                <billboard-face-list :billboardId="form.id"></billboard-face-list>
+                            </form-group>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <hr>
+                            <btn-submit :disabled="form.busy">
+                                <spinner v-if="form.busy"></spinner>
+                            </btn-submit>
+                            <a class="btn btn-default" :href="billboardListRoute">Cancel</a>
+                        </div>
+                    </div>
+                </form-submit>
+            </box-content>
         </box>
     </div>
 </template>
@@ -106,7 +84,7 @@
 
     import _ from 'lodash';
     import * as Slc from "../../vue/http";
-    import BillboardFaceForm from '../billboard-face/billboard-face-form.vue';
+    import BillboardFaceList from '../billboard-face/billboard-face-list';
 
     export default {
 
@@ -116,7 +94,7 @@
         },
 
         components: {
-            BillboardFaceForm
+            BillboardFaceList
         },
 
         data() {
@@ -126,14 +104,15 @@
                 api: 'billboard',
                 marker: null,
                 zoom: 7,
-                center: {lat: 39.3209801, lng: -111.09373110000001},
+                center: this.mapCenter,
                 mapOptions: {
                     mapTypeControl: false,
                     scrollWell: true,
                     gestureHandling: 'greedy'
                 },
                 zoomChanged: false,
-                billboardFaces: []
+                billboardFaces: [],
+                billboardListRoute: laroute.route('billboards.index'),
             }
         },
 
@@ -148,6 +127,32 @@
         },
 
         methods: {
+            load() {
+                this.loading = true;
+
+                const uri = laroute.route('api.billboard.show', {billboard: this.id});
+
+                Slc.find(uri).then((billboard) => {
+                    console.log(billboard);
+                    this.loading = false;
+                    this.form = new SlcForm({
+                        id: billboard.id,
+                        name: billboard.name,
+                        description: billboard.description,
+                        digital_driveby: billboard.digital_driveby,
+                        address: billboard.address,
+                        lat: billboard.lat,
+                        lng: billboard.lng,
+                    });
+                });
+            },
+
+            save() {
+                const uri = laroute.route('api.billboard.update', {billboard: this.form.id});
+                Slc.put(uri, this.form).then((response) => {
+                    console.log('Billboard Updated:', response);
+                });
+            },
 
             buildForm(billboard) {
                 this.marker = null;
@@ -156,13 +161,13 @@
                 this.zoomChanged = false;
 
                 return new SlcForm({
-                    id: billboard ? billboard.id : null,
-                    name: billboard ? billboard.name : null,
-                    description: billboard ? billboard.description : null,
-                    digital_driveby: billboard ? billboard.digital_driveby : null,
-                    address: billboard ? billboard.address : null,
-                    lat: billboard ? billboard.lat : null,
-                    lng: billboard ? billboard.lng : null,
+                    id: billboard.id,
+                    name: billboard.name,
+                    description: billboard.description,
+                    digital_driveby: billboard.digital_driveby,
+                    address: billboard.address,
+                    lat: billboard.lat,
+                    lng: billboard.lng,
                 });
             },
 
@@ -243,27 +248,6 @@
                 this.marker = pos;
                 this.center = pos;
             }),
-
-            load() {
-                this.loading = true;
-
-                const uri = laroute.route('api.billboard.show', {billboard: this.id});
-
-                Slc.find(uri).then((billboard) => {
-                    console.log(billboard);
-                    this.loading = false;
-                    this.form = new SlcForm({
-                        id: billboard.id,
-                        name: billboard.name,
-                        description: billboard.description,
-                        digital_driveby: billboard.digital_driveby,
-                        address: billboard.address,
-                        lat: billboard.lat,
-                        lng: billboard.lng,
-                    });
-                });
-            },
-
         }
     }
 
