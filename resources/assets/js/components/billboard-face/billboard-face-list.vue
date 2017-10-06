@@ -88,7 +88,6 @@
         data() {
             return {
                 billboardFaces: [],
-                billboardMoney: null
             }
         },
         

@@ -1,7 +1,12 @@
 <template>
     <div class="info-window">
-        <div class="window-title">
-            <h2>{{billboard.name}}</h2>
+        <div class="title">
+            <column size="4">
+                <img src="/images/pin-6-64.png" width="30px"/>
+            </column>
+            <column size="4">
+                <h2>{{billboard.name}}</h2>
+            </column>
         </div>
         <div class="window-content">
             <div class="window-subTitle">
@@ -24,6 +29,20 @@
     </div>
 </template>
 <style>
+    .info-window {
+        margin: 0px;
+    }
+    .circulo{
+        background: #666;
+        border-radius:100%;
+        width:40px;
+        height:40px;
+    }
+    .circulo > img {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
 </style>
 <script>
 
