@@ -8,7 +8,9 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
     <link rel="shortcut icon" href="{{asset('images/pin-6-64.png')}}">
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
-    <script src="{{route('slc.js')}}" type="text/javascript"></script>
+    <script>
+        window.Slc = {!! json_encode(array_merge(Slc::scriptVariables(), [])) !!};
+    </script>
 </head>
 <body class="top-navigation">
 <div id="app">

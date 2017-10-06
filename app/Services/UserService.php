@@ -16,6 +16,7 @@ class UserService
             $data = [
                 'name' => $form->name(),
                 'email' => $form->email(),
+                'photo_url' => $form->email(),
                 'invitation_token' => hash_hmac('sha256', str_random(40), config('APP_KEY')),
                 'status' => false
             ];
@@ -23,6 +24,7 @@ class UserService
             $user->save();
 
             $user->attachRole($form->role());
+            $user->team()->associate($form->team());
 
             event(new UserCreated($user));
 
@@ -35,6 +37,8 @@ class UserService
         return \DB::transaction(function () use ($form, $user) {
 
             if( $form->name() ) $user->name = $form->name();
+            if( $form->password() ) $user->password = $form->password();
+
             if( $form->email() ) $user->email = $form->email();
             $emailWasChanged = $user->isDirty('email');
 
@@ -43,6 +47,7 @@ class UserService
                 $user->attachRole($form->role());
             }
 
+            $user->team()->associate($form->team());
             $user->save();
 
             event(new UserUpdated($user, $emailWasChanged));

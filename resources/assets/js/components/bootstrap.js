@@ -1,6 +1,7 @@
 require('./shared/_register');
 
 Vue.component('user-list', require('./user/user-list.vue'));
+Vue.component('user-settings', require('./user/user-settings'));
 
 Vue.component('main-map', require('./map/main-map.vue'));
 
@@ -8,19 +9,22 @@ Vue.component('info-content', require('./map/InfoContent.vue'));
 
 Vue.component('billboard-list', require('./billboard/billboard-list'));
 Vue.component('billboard-edit', require('./billboard/billboard-edit'));
-Vue.component('billboard-create', require('./billboard/billboard-create'));
 
 Vue.component('billboard-face-list', require('./billboard-face/billboard-face-list'));
-Vue.component('billboard-face-card', require('./billboard-face/billboard-face-card'));
-Vue.component('billboard-form-csv',require('./billboard/billboard-form-csv'));
+// ------------------------------------------------------------------------
+// Billboard-face-cards-list
+Vue.component('billboard-face-list-card', require('./billboard-face/billboard-card-face-list.vue'));
+Vue.component('billboard-face-card', require('./billboard-face/billboard-face-card.vue'));
+
+Vue.component('billboard-form-csv',require('./billboard/billboard-form-csv.vue'));
 Vue.component('billboard-show',require('./billboard-public/billboard-show'));
 
-Vue.component('client-list', require('./client/client-list'));
-Vue.component('client-create', require('./client/client-create'));
-Vue.component('client-edit', require('./client/client-edit'));
+Vue.component('client-list', require('./client/client-list.vue'));
 
 // ------------------------------------------------------------------------
 // Maps
 Vue.component('google-map', require('./map/google-map'));
 
 Vue.component('parent',require('./demo/parent'));
+
+Vue.component('team-list', require('./team/team-list.vue'));

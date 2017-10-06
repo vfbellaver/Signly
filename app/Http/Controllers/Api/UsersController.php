@@ -7,6 +7,7 @@ use App\Http\Requests\UserCreateRequest;
 use App\Http\Requests\UserUpdateRequest;
 use App\Models\User;
 use App\Services\UserService;
+use Illuminate\Support\Facades\Auth;
 
 class UsersController extends Controller
 {
@@ -20,7 +21,7 @@ class UsersController extends Controller
 
     public function index()
     {
-        return User::all();
+        return User::query()->where('id', Auth::id())->get()->toArray();
     }
 
     public function store(UserCreateRequest $request)

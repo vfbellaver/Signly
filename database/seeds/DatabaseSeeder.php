@@ -9,7 +9,7 @@ class DatabaseSeeder extends Seeder
         if (app()->environment('production')) {
             exit('I just stopped you getting fired. Love Jeremias! S2');
         }
-
+        $this->call(TeamTableSeeder::class);
         $this->call(RolesTableSeeder::class);
         $this->call(UsersTableSeeder::class);
     }

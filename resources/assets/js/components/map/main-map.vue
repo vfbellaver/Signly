@@ -1,7 +1,7 @@
 <template>
     <gmap-map
             :center="center"
-            :zoom="7"
+            :zoom="10"
             style="width: 100%; height: 90vmin;"
 
     >
@@ -88,6 +88,10 @@
                         infoText: this.billboards[i],
                    });
                 }
+
+            },
+
+            popovers(){
 
             },
 

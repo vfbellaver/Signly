@@ -1,6 +1,12 @@
 
 @is(['slc', 'admin'])
 <li>
+    <a class="nav-link" href="{{ route('users.index') }}">Settings</a>
+</li>
+<li>
+    <a class="nav-link" href="{{ route('teams.index') }}">Teams</a>
+</li>
+<li>
     <a class="nav-link" href="{{ route('billboards.index') }}">Billboards</a>
 </li>
 <li class="{!! (route_contains('clients', 'IN')) ? 'active' : '' !!}">

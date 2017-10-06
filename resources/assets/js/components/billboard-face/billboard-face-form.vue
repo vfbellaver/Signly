@@ -10,6 +10,7 @@
                             <image-upload v-model="form.photo" id="photo" name="photo"></image-upload>
                         </form-group>
                     </column>
+
                     <column size="6">
                         <column size="12">
                             <form-group :form="form" field="code">
@@ -17,12 +18,14 @@
                                 <input-text :disabled="unique" v-model="form.code" id="code" name="code"></input-text>
                             </form-group>
                         </column>
+
                         <column size="12">
                             <form-group :form="form" field="height">
                                 <input-label for="height">Height: </input-label>
                                 <input-text v-model="form.height" id="height" name="height" placeholder="Optional"></input-text>
                             </form-group>
                         </column>
+
                         <column size="12">
                             <form-group :form="form" field="width">
                                 <input-label for="width">Width: </input-label>
@@ -30,42 +33,52 @@
                             </form-group>
                         </column>
                     </column>
+
                     <column size="12">
                         <form-group :form="form" field="notes">
                             <input-label for="notes">Notes: </input-label>
                             <text-area v-model="form.notes" id="notes" name="notes" placeholder="Optional"></text-area>
                         </form-group>
                     </column>
+
                     <column size="4">
                         <form-group :form="form" field="reads">
                             <input-label for="reads">Reads: </input-label>
                             <input-text v-model="form.reads" id="reads" name="reads" placeholder="Optional"></input-text>
                         </form-group>
                     </column>
+
                     <column size="4">
                         <form-group :form="form" field="label">
                             <input-label for="label">Label: </input-label>
                             <input-text v-model="form.label" id="label" name="label"/>
                         </form-group>
                     </column>
+
+
                     <column size="4">
                         <form-group :form="form" field="hard_cost">
                             <input-label for="hard_cost">Hard Cost: </input-label>
                             <input-text v-model="form.hard_cost" id="hard_cost" name="hard_cost" v-float></input-text>
                         </form-group>
                     </column>
+
                     <column size="4">
                         <form-group :form="form" field="monthly_impressions">
                             <input-label for="monthly_impressions">Monthly Impressions: </input-label>
-                            <input-text v-model="form.monthly_impressions" id="monthly_impressions" name="monthly_impressions"></input-text>
+                            <input-text v-model="form.monthly_impressions" id="monthly_impressions"
+                                        name="monthly_impressions"></input-text>
                         </form-group>
                     </column>
+
                     <column size="8">
                         <form-group :form="form" field="duration">
                             <input-label for="duration">Duration: </input-label>
                             <input-text v-model="form.duration" id="duration" name="duration"></input-text>
                         </form-group>
                     </column>
+
+
                     <column size="12">
                         <form-group :form="form" field="max_ads">
                             <input-label for="max_ads">Max Ads: </input-label>
@@ -75,10 +88,10 @@
                     <column size="12">
                         <row>
                             <column size="4">
-                                <form-group :form="form" field="is_illuminated">
-                                    <input-label for="is_illuminated">Is Illuminated: </input-label>
+                                <form-group :form="form" field="is_iluminated">
+                                    <input-label for="is_iluminated">Is Illuminated: </input-label>
                                     <toggle-button
-                                            v-model="form.is_illuminated"
+                                            v-model="form.is_iluminated"
                                             :value="false"
                                             @change="setStatus($event.value, form)"
                                             :sync="true"
@@ -123,7 +136,6 @@
         components: {VueTimepicker},
         props: {
             billboardId: {required: true},
-            value: false,
         },
 
         mixins: [ModalForm],
@@ -148,13 +160,18 @@
 
         computed: {
             title() {
-                return `${(this.form.id ? 'Edit' : 'Add')} Billboard Face`;
+                return `${(this.form.id ? 'Edit' : 'Add')} BillboardFace`;
             },
 
             unique() {
-                return this.form.id ? true : false;
+               return this.form.id ? true : false;
             },
-        }
+        },
+
+        mounted() {
+          this.form.is_iluminated = false;
+        },
+
         watch: {
             lights_on: {
                 handler(value){
@@ -191,7 +208,7 @@
                     max_ads: billboard_face ? billboard_face.max_ads : null,
                     duration: billboard_face ? billboard_face.duration : null,
                     photo: billboard_face ? billboard_face.photo : null,
-                    is_illuminated: billboard_face ? billboard_face.is_illuminated : false,
+                    is_iluminated: billboard_face ? billboard_face.is_iluminated : false,
                     lights_on: billboard_face ? billboard_face.lights_on : null,
                     lights_off: billboard_face ? billboard_face.lights_off : null,
                     billboard_face: billboard_face ? billboard_face.id : null,
@@ -218,7 +235,7 @@
                 }
             },
             setStatus(value, item) {
-                item.is_illuminated = value;
+                item.is_iluminated = value;
                 if(!value){
                     this.form.lights_on = null;
                     this.form.lights_off = null;

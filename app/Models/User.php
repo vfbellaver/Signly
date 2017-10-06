@@ -7,6 +7,7 @@ use Artesaos\Defender\Traits\HasDefender;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Passport\HasApiTokens;
+use PHPUnit\Util\Log\TeamCity;
 
 class User extends Authenticatable
 {
@@ -20,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'photo_url',
         'invitation_token',
         'status'
     ];
@@ -34,6 +36,12 @@ class User extends Authenticatable
     ];
 
     #region Attributes
+
+    public function team()
+    {
+        return $this->belongsTo(Team::class);
+    }
+
     public function getRoleAttribute()
     {
         return $this->roles()->first();
@@ -66,13 +74,18 @@ class User extends Authenticatable
                 'id' => $this->role->id,
                 'name' => $this->role->name
             ];
-        }
+        };
+
+
+
         return [
             'id' => (int)$this->id,
             'name' => $this->name,
+            'photo_url' => $this->photo_url,
             'email' => $this->email,
             'role' => $role,
             'status' => $this->status,
+            'team' => $this->team->toArray(),
             'pending' => $this->invitation_token != null
         ];
     }

@@ -2,6 +2,8 @@
 
 namespace App\Forms;
 
+use App\Models\Team;
+
 class UserForm extends BaseForm
 {
     public function name()
@@ -9,9 +11,19 @@ class UserForm extends BaseForm
         return $this->request->get('name');
     }
 
+    public function photo_url()
+    {
+        return $this->request->get('photo_url');
+    }
+
     public function email()
     {
         return $this->request->get('email');
+    }
+
+    public function password()
+    {
+        return $this->request->get('password');
     }
 
     public function role()
@@ -20,5 +32,11 @@ class UserForm extends BaseForm
 
         $role = (object)$this->request->get('role');
         return \Defender::findRoleById($role->id);
+    }
+
+    public function team()
+    {
+        $team = (object)$this->request->get('team');
+        return Team::query()->findOrFail($team->id);
     }
 }
