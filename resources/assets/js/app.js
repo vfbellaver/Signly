@@ -11,7 +11,7 @@ window.Layout = Layout();
 window.laroute = Laroute;
 window.Vue = Vue;
 
-//window.Bus = new Vue();
+window.Bus = new Vue();
 
 require('./directives/bootstrap');
 require('./components/bootstrap');

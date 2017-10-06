@@ -13,6 +13,7 @@ Vue.component('billboard-create', require('./billboard/billboard-create'));
 Vue.component('billboard-face-list', require('./billboard-face/billboard-face-list'));
 Vue.component('billboard-face-card', require('./billboard-face/billboard-face-card'));
 Vue.component('billboard-form-csv',require('./billboard/billboard-form-csv'));
+Vue.component('billboard-show',require('./billboard-public/billboard-show'));
 
 Vue.component('client-list', require('./client/client-list'));
 Vue.component('client-create', require('./client/client-create'));
