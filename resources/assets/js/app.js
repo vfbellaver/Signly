@@ -7,7 +7,9 @@ import Layout from './commons/layout';
 import Laroute from './commons/laroute';
 import axios from 'axios';
 import Vue from 'vue';
+import Moment from 'moment';
 
+window.moment = Moment;
 window.Utils = Utils();
 window.Layout = Layout();
 window.laroute = Laroute;

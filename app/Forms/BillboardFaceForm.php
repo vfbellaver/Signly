@@ -64,7 +64,7 @@ class BillboardFaceForm extends BaseForm
 
     public function isIlluminated()
     {
-        return $this->request->get('is_illuminated');
+        return (bool)$this->request->get('is_illuminated');
     }
 
     public function lightsOn()
