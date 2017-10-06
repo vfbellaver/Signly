@@ -1,10 +1,9 @@
 <template>
     <div class="card-container">
         <div class="card-body">
-            <!--<img :src="user.photo_url"/>-->
             <img :src="user.photo_url"/>
             <div class="profile-name">
-                <h3>Name: &nbsp {{user.name}}</h3>
+                <h3>Name: {{user.name}}</h3>
             </div>
             <hr>
             <h3><icon icon="envelope"></icon>&nbsp {{user.email}}</h3>

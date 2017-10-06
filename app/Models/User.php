@@ -6,12 +6,13 @@ use Artesaos\Defender\Role;
 use Artesaos\Defender\Traits\HasDefender;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Laravel\Cashier\Billable;
 use Laravel\Passport\HasApiTokens;
 use PHPUnit\Util\Log\TeamCity;
 
 class User extends Authenticatable
 {
-    use Notifiable, HasApiTokens, HasDefender;
+    use Notifiable, HasApiTokens, HasDefender, Billable;
 
     const SUPERADMIN = 'slc';
     const ADMIN = 'admin';
