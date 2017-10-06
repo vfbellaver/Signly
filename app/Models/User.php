@@ -29,6 +29,9 @@ class User extends Authenticatable
         'card_brand',
         'card_last_four',
         'trial_ends_at',
+        'address',
+        'lat',
+        'lng',
     ];
 
     protected $hidden = [
@@ -45,6 +48,11 @@ class User extends Authenticatable
     public function team()
     {
         return $this->belongsTo(Team::class);
+    }
+
+    public function subscription()
+    {
+        return $this->hasOne(Subscription::class);
     }
 
     public function getRoleAttribute()
@@ -94,6 +102,9 @@ class User extends Authenticatable
             'card_brand' => $this->card_brand,
             'card_last_four' => $this->card_last_four,
             'trial_ends_at' => $this->trial_ends_at,
+            'address' => $this->address,
+            'lat' => $this->lat,
+            'lng' => $this->lng,
         ];
     }
 

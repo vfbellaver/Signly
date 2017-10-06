@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UserUpdateAddressRequest;
+use App\Http\Requests\UserUpdateCardRequest;
 use App\Http\Requests\UserUpdatePasswordRequest;
 use App\Http\Requests\UserUpdatePhotoRequest;
 use App\Http\Requests\UserCreateRequest;
+use App\Http\Requests\UserUpdatePlanRequest;
 use App\Http\Requests\UserUpdateRequest;
 use App\Models\User;
 use App\Services\UserService;
@@ -80,15 +83,49 @@ class UsersController extends Controller
         return $response;
     }
 
-    public function updateBilling(UserUpdatePhotoRequest $request, User $user)
+    public function updateAddress(UserUpdateAddressRequest $request, User $user)
     {
-        $data = $request->all();
 
-        $user->photo_url = $data['photo_url'];
+        $data = $request->all();
+        $user->address = $data['address'];
+        $user->lat = $data['lat'];
+        $user->lng = $data['lng'];
         $user->save();
 
         $response = [
-            'message' => 'User billing updated.',
+            'message' => 'User plan updated.',
+            'data' => $user,
+        ];
+
+        return $response;
+    }
+
+    public function updatePlan(UserUpdatePlanRequest $request, User $user)
+    {
+        $response = [
+            'message' => 'User plan updated.',
+            'data' => $user,
+        ];
+
+        return $response;
+    }
+
+    public function updateCard(UserUpdateCardRequest $request, User $user)
+    {
+        $response = [
+            'message' => 'User card updated.',
+            'data' => $user,
+        ];
+
+        return $response;
+    }
+
+    public function cancelSubscription(User $user)
+    {
+
+
+        $response = [
+            'message' => 'User subscription canceled.',
             'data' => $user,
         ];
 

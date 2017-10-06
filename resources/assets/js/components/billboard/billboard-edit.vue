@@ -21,6 +21,7 @@
                             </form-group>
 
                             <gmap-map
+                                    v-if="loaded"
                                     :center="center"
                                     :zoom="zoom"
                                     @click="onMapClick"
@@ -90,7 +91,6 @@
 
         props: {
             id: {required: true},
-            mapCenter: {required: true}
         },
 
         components: {
@@ -100,11 +100,10 @@
         data() {
             return {
                 form: new SlcForm({}),
-                loading: false,
-                api: 'billboard',
+                loaded: false,
                 marker: null,
                 zoom: 7,
-                center: this.mapCenter,
+                center: null,
                 mapOptions: {
                     mapTypeControl: false,
                     scrollWell: true,
@@ -128,13 +127,17 @@
 
         methods: {
             load() {
-                this.loading = true;
+                this.loaded = false;
 
                 const uri = laroute.route('api.billboard.show', {billboard: this.id});
-
                 Slc.find(uri).then((billboard) => {
-                    console.log(billboard);
-                    this.loading = false;
+                    console.log("Billboard loaded", billboard);
+                    const lat = Number.parseFloat(billboard.lat);
+                    const lng = Number.parseFloat(billboard.lng);
+
+                    this.center = {lat: lat, lng: lng};
+                    this.marker = {lat: lat, lng: lng};
+
                     this.form = new SlcForm({
                         id: billboard.id,
                         name: billboard.name,
@@ -144,6 +147,7 @@
                         lat: billboard.lat,
                         lng: billboard.lng,
                     });
+                    this.loaded = true;
                 });
             },
 
@@ -155,9 +159,7 @@
             },
 
             buildForm(billboard) {
-                this.marker = null;
                 this.address = null;
-                this.zoom = 7;
                 this.zoomChanged = false;
 
                 return new SlcForm({
