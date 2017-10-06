@@ -29,12 +29,13 @@ Vue.component('form-submit', require('./Forms/FormSubmit'));
 // Inputs
 Vue.component('input-label', require('./Inputs/InputLabel'));
 Vue.component('input-text', require('./Inputs/InputText'));
+Vue.component('input-password', require('./Inputs/InputPassword'));
 Vue.component('input-url', require('./Inputs/InputUrl'));
 Vue.component('input-email', require('./Inputs/InputEmail'));
 Vue.component('text-area', require('./Inputs/TextArea'));
 Vue.component('input-csv', require('./Inputs/CsvUpload.vue'));
 Vue.component('image-upload', require('./Inputs/ImageUpload'));
-Vue.component('input-time',require('./Inputs/InputTime.vue'));
+Vue.component('input-time', require('./Inputs/InputTime.vue'));
 
 // ------------------------------------------------------------------------
 // Boxes

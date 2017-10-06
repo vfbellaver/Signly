@@ -28,7 +28,7 @@ class UserForm extends BaseForm
 
     public function role()
     {
-        if( ! $this->request->has('role') ) return null;
+        if (!$this->request->has('role')) return null;
 
         $role = (object)$this->request->get('role');
         return \Defender::findRoleById($role->id);
@@ -36,6 +36,9 @@ class UserForm extends BaseForm
 
     public function team()
     {
+        if (!$this->request->has('team')) {
+            return null;
+        }
         $team = (object)$this->request->get('team');
         return Team::query()->findOrFail($team->id);
     }

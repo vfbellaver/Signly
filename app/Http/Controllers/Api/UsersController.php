@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UserUpdatePasswordRequest;
+use App\Http\Requests\UserUpdatePhotoRequest;
 use App\Http\Requests\UserCreateRequest;
 use App\Http\Requests\UserUpdateRequest;
 use App\Models\User;
@@ -43,6 +45,51 @@ class UsersController extends Controller
         $response = [
             'message' => 'User updated.',
             'data' => $obj,
+        ];
+
+        return $response;
+    }
+
+    public function updatePhoto(UserUpdatePhotoRequest $request, User $user)
+    {
+        $data = $request->all();
+
+        $user->photo_url = $data['photo_url'];
+        $user->save();
+
+        $response = [
+            'message' => 'User photo updated.',
+            'data' => $user->toArray(),
+        ];
+
+        return $response;
+    }
+
+    public function updatePassword(UserUpdatePasswordRequest $request, User $user)
+    {
+        $data = $request->all();
+
+        $user->password = bcrypt($data['password']);
+        $user->save();
+
+        $response = [
+            'message' => 'User password updated.',
+            'data' => $user,
+        ];
+
+        return $response;
+    }
+
+    public function updateBilling(UserUpdatePhotoRequest $request, User $user)
+    {
+        $data = $request->all();
+
+        $user->photo_url = $data['photo_url'];
+        $user->save();
+
+        $response = [
+            'message' => 'User billing updated.',
+            'data' => $user,
         ];
 
         return $response;

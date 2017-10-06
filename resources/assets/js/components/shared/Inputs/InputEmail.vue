@@ -2,7 +2,7 @@
 
 
 <template>
-    <input class="form-control" v-model="internalValue" v-bind:value="value" :name="name"/>
+    <input class="form-control" v-model="internalValue" :name="name"/>
 </template>
 
 <script>

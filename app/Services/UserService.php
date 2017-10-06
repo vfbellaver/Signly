@@ -36,10 +36,10 @@ class UserService
     {
         return \DB::transaction(function () use ($form, $user) {
 
-            if( $form->name() ) $user->name = $form->name();
-            if( $form->password() ) $user->password = $form->password();
+            if ($form->name()) $user->name = $form->name();
+            if ($form->password()) $user->password = $form->password();
 
-            if( $form->email() ) $user->email = $form->email();
+            if ($form->email()) $user->email = $form->email();
             $emailWasChanged = $user->isDirty('email');
 
             if ($form->role() && $user->role->id !== $form->role()->id) {
@@ -47,7 +47,10 @@ class UserService
                 $user->attachRole($form->role());
             }
 
-            $user->team()->associate($form->team());
+            if ($form->team()) {
+                $user->team()->associate($form->team());
+            }
+
             $user->save();
 
             event(new UserUpdated($user, $emailWasChanged));
@@ -58,7 +61,7 @@ class UserService
 
     public function delete(User $user)
     {
-        return \DB::transaction(function() use ($user) {
+        return \DB::transaction(function () use ($user) {
             $user->delete();
 
             event(new UserDeleted($user));
