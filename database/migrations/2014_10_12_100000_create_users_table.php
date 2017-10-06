@@ -24,6 +24,10 @@ class CreateUsersTable extends Migration
             $table->string('card_last_four')->nullable();
             $table->timestamp('trial_ends_at')->nullable();
 
+            $table->string('address', 256);
+            $table->decimal('lat', 18, 15);
+            $table->decimal('lng', 18, 15);
+
             $table->rememberToken();
             $table->timestamps();
         });

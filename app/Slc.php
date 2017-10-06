@@ -6,12 +6,17 @@ class Slc
 {
     public static function scriptVariables()
     {
-        //TODO[daniel]: get map center from some place else.
+        $user = self::getCurrentUser();
+        if (!$user['lat'] || !$user['lng']) {
+            $user['lat'] = 37;
+            $user['lng'] = -104;
+            $user['zoom'] = 4;
+        } else {
+            $user['zoom'] = 7;
+        }
+
         return [
-            'user' => self::getCurrentUser(),
-            'settings' => [
-                'map_center' => ['lat' => 39.3209801, 'lng' => -111.09373110000001]
-            ],
+            'user' => $user,
             'csrfToken' => csrf_token()
         ];
     }
