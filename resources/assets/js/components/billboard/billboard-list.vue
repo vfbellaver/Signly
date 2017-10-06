@@ -47,7 +47,6 @@
                 </div>
             </box-content>
         </box>
-        <billboard-form ref="form" @saved="formSaved"></billboard-form>
         <billboard-form-csv @saved="reload" ref="formcsv"></billboard-form-csv>
     </div>
 </template>
@@ -59,11 +58,9 @@
 </style>
 
 <script>
-    import BillboardForm from './billboard-form';
     import BillboardFormCsv from './billboard-form-csv.vue'
     export default {
         components: {
-            BillboardForm,
             BillboardFormCsv
         },
         data() {
@@ -76,7 +73,7 @@
         },
         methods: {
             add() {
-                this.$refs.form.show();
+                window.location = laroute.route("billboards.create");
             },
             importBillboards(){
                 this.$refs.formcsv.show();

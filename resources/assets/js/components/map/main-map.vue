@@ -1,7 +1,5 @@
 <template>
-
     <gmap-map
-
             :center="center"
             :zoom="10"
             style="width: 100%; height: 90vmin;"
@@ -17,9 +15,7 @@
                         :billboard="billboard"
                 >
                 </info-content>
-
             </gmap-info-window>
-
         <gmap-marker
                 :key="i"
                 v-for="(m,i) in markers"
@@ -27,9 +23,7 @@
                 :clickable="true"
                 @click="toggleInfoWindow(m,i)">
         </gmap-marker>
-
     </gmap-map>
-
 </template>
 
 <script>

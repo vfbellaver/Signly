@@ -1,69 +1,71 @@
 <template>
-    <modal>
-        <modal-header>{{ title }}</modal-header>
-        <form-submit v-model="form" @submit="save">
-            <modal-body>
-                <row>
-                    <column size="12">
-                        <form-group :form="form" field="name">
-                            <input-label for="name">Name: </input-label>
-                            <input-text v-model="form.name" id="name" name="name"></input-text>
-                        </form-group>
-                        <form-group :form="form" field="description">
-                            <input-label for="description">Description: </input-label>
-                            <text-area v-model="form.description" id="description" name="description"></text-area>
-                        </form-group>
-                        <form-group :form="form" field="address">
-                            <input-label for="address">Address: </input-label>
-                            <input-text v-model="form.address" id="address" name="address"></input-text>
-                        </form-group>
-                    </column>
-                    <column size="12">
-                        <gmap-map v-if="isShown"
-                                  :center="center"
-                                  :zoom="zoom"
-                                  @click="onMapClick"
-                                  @zoom_changed="onZoomChanged"
-                                  :options="mapOptions"
-                                  style="width: 95%; min-height: 320px">
-                            <gmap-marker
-                                    v-if="marker"
-                                    :position="marker"
-                                    :clickable="true"
-                                    :draggable="true"
-                                    @dragend="onMarkerMoved"
-                                    @click="center=marker"
-                            ></gmap-marker>
-                        </gmap-map>
-                    </column>
-                    <column size="6">
-                        <form-group :form="form" field="lat">
-                            <input-label for="lat">Latitude: </input-label>
-                            <input-text v-model="form.lat" id="lat" name="lat"></input-text>
-                        </form-group>
-                    </column>
-                    <column size="6">
-                        <form-group :form="form" field="lng">
-                            <input-label for="lng">Longitude: </input-label>
-                            <input-text v-model="form.lng" id="lng" name="lng"></input-text>
-                        </form-group>
-                    </column>
-                    <column size="12">
-                        <form-group :form="form" field="digital_driveby">
-                            <input-label for="digital_driveby">Digital Driveby: </input-label>
-                            <input-text v-model="form.digital_driveby" id="digital_driveby"
-                                        name="digital_driveby"></input-text>
-                        </form-group>
-                    </column>
-                </row>
-            </modal-body>
-            <modal-footer>
-                <btn-submit :disabled="form.busy">
-                    <spinner v-if="form.busy"></spinner>
-                </btn-submit>
-            </modal-footer>
-        </form-submit>
-    </modal>
+    <box>
+        <box-title>
+            {{ title }}
+        </box-title>
+        <box-content>
+            <form-submit v-model="form" @submit="save">
+                    <row>
+                        <column size="6">
+                            <form-group :form="form" field="name">
+                                <input-label for="name">Name: </input-label>
+                                <input-text v-model="form.name" id="name" name="name"></input-text>
+                            </form-group>
+                            <form-group :form="form" field="description">
+                                <input-label for="description">Description: </input-label>
+                                <text-area v-model="form.description" id="description" name="description"></text-area>
+                            </form-group>
+                            <form-group :form="form" field="address">
+                                <input-label for="address">Address: </input-label>
+                                <input-text v-model="form.address" id="address" name="address"></input-text>
+                            </form-group>
+                            <row>
+                                <column size="6">
+                                    <form-group :form="form" field="lat">
+                                        <input-label for="lat">Latitude: </input-label>
+                                        <input-text v-model="form.lat" id="lat" name="lat"></input-text>
+                                    </form-group>
+                                </column>
+                                <column size="6">
+                                    <form-group :form="form" field="lng">
+                                        <input-label for="lng">Longitude: </input-label>
+                                        <input-text v-model="form.lng" id="lng" name="lng"></input-text>
+                                    </form-group>
+                                </column>
+                            </row>
+                            <form-group :form="form" field="digital_driveby">
+                                <input-label for="digital_driveby">Digital Driveby: </input-label>
+                                <input-text v-model="form.digital_driveby" id="digital_driveby"
+                                            name="digital_driveby"></input-text>
+                            </form-group>
+                        </column>
+                        <column size="6">
+
+                            <gmap-map
+                                      :center="center"
+                                      :zoom="zoom"
+                                      @click="onMapClick"
+                                      @zoom_changed="onZoomChanged"
+                                      :options="mapOptions"
+                                      style="width: 98%; min-height: 367px">
+                                <gmap-marker
+                                        v-if="marker"
+                                        :position="marker"
+                                        :clickable="true"
+                                        :draggable="true"
+                                        @dragend="onMarkerMoved"
+                                        @click="center=marker"
+                                ></gmap-marker>
+                            </gmap-map>
+                        </column>
+                    </row>
+
+                    <btn-submit :disabled="form.busy">
+                        <spinner v-if="form.busy"></spinner>
+                    </btn-submit>
+            </form-submit>
+        </box-content>
+    </box>
 </template>
 
 <script>
@@ -106,6 +108,15 @@
         },
 
         methods: {
+
+            save(){
+                const uri = laroute.route('api.billboard.store');
+                Slc.post(uri, this.form).then((response) => {
+                    console.log('Billboard Create:',response);
+                    this.$emit('saved');
+                    window.location = laroute.route("billboards.edit", {billboard: response.data.id});
+                });
+             },
 
             buildForm(billboard) {
                 this.marker = null;

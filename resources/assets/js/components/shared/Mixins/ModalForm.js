@@ -80,6 +80,7 @@ export default {
                 });
         },
         saved(obj, event) {
+
             $(this.$el).modal('hide');
             this.$emit('saved', obj);
             this.$emit(event, obj);

@@ -25,7 +25,7 @@ class BillboardFaceService
 				'max_ads' => $form->maxAds(),
 				'duration' => $form->duration(),
 				'photo' => $form->photo(),
-				'is_iluminated' => $form->isIluminated(),
+				'is_illuminated' => $form->isIlluminated(),
             ];
 
             $billboardFace = new BillboardFace($data);
@@ -54,7 +54,7 @@ class BillboardFaceService
 			$billboardFace->max_ads = $form->maxAds();
 			$billboardFace->duration = $form->duration();
 			$billboardFace->photo = $form->photo();
-			$billboardFace->is_iluminated = $form->isIluminated();
+			$billboardFace->is_illuminated = $form->isIlluminated();
 			$billboardFace->billboard()->associate($form->billboard());
 
             $billboardFace->save();
