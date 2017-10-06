@@ -23,6 +23,7 @@ add('writable_dirs', []);
 // Hosts
 host('stage')
     ->hostname($env['DEPLOY_STAGE_HOSTNAME'])
+    ->set('keep_releases', 1)
     ->set('branch', $env['DEPLOY_STAGE_BRANCH'])
     ->user($env['DEPLOY_STAGE_USER'])
     ->set('deploy_path', $env['DEPLOY_STAGE_FOLDER']);
