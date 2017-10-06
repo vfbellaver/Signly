@@ -15,7 +15,6 @@ class BillboardsController extends Controller
 
     public function edit($id)
     {
-
         $billboard = Billboard::query()->findOrFail($id);
         return view('billboard.edit', [
             'billboard' => $billboard
@@ -25,5 +24,15 @@ class BillboardsController extends Controller
     public function create()
     {
         return view('billboard.create');
+    }
+
+    public function show($id)
+    {
+        $faces = BillboardFace::query()->get()->where('billboard_id',$id);
+        $billboard = Billboard::query()->findOrFail($id);
+        return view('billboard.show', [
+            'billboard' => $billboard,
+            'faces' => $faces
+        ]);
     }
 }
