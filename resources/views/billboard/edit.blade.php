@@ -2,6 +2,6 @@
 
 @section('content')
     @component('components.default-page')
-       <billboard-edit id="{{$billboard->id}}" :map-center="settings.map_center"></billboard-edit>
+       <billboard-edit id="{{$billboard->id}}"></billboard-edit>
     @endcomponent
 @endsection

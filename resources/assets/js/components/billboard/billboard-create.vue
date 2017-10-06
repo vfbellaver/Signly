@@ -92,8 +92,8 @@
             return {
                 form: null,
                 marker: null,
-                zoom: 7,
-                center: this.mapCenter,
+                zoom: null,
+                center: null,
                 mapOptions: {
                     mapTypeControl: false,
                     scrollWell: true,
@@ -117,7 +117,11 @@
         created() {
             this.marker = null;
             this.address = null;
-            this.zoom = 10;
+
+            this.zoom = this.mapCenter.zoom;
+            const lat = Number.parseFloat(this.mapCenter.lat);
+            const lng = Number.parseFloat(this.mapCenter.lng);
+            this.center = {lat: lat, lng: lng};
 
             this.form = new SlcForm({
                 id: null,
