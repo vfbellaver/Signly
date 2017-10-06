@@ -1,4 +1,7 @@
 <?php
+Route::get('demo', function () {
+    return view('demo');
+});
 
 Route::get('roles', function () {
     $roles = Defender::rolesList();
@@ -30,3 +33,4 @@ Route::group(['middleware' => ['auth']], function () {
         require $file;
     }
 });
+

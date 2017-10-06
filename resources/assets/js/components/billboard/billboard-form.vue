@@ -67,14 +67,10 @@
 </template>
 
 <script>
-
     import * as Slc from "../../vue/http";
     import ModalForm from '../shared/Mixins/ModalForm';
-
     export default {
-
         mixins: [ModalForm],
-
         data() {
             return {
                 api: 'billboard',
@@ -90,23 +86,17 @@
                 gestureHandling: 'greedy'
             }
         },
-
-
         watch: {
             'form.address': function () {
                 this.onAddressChange();
             }
         },
-
         computed: {
             title() {
                 return `${(this.form.id ? 'Edit' : 'Add')} Billboard`;
             }
-
         },
-
         methods: {
-
             buildForm(billboard) {
                 this.marker = null;
                 this.address = null;
@@ -116,7 +106,6 @@
                 this.zoom = 10;
                 this.center = {lat: 40.76182096906601, lng: -111.91085815429688};
                 this.gestureHandling = 'greedy';
-
                 return new SlcForm({
                     id: billboard ? billboard.id : null,
                     name: billboard ? billboard.name : null,
@@ -127,22 +116,18 @@
                     lng: billboard ? billboard.lng : null,
                 });
             },
-
             onMapClick(e) {
-
                 const self = this;
                 console.log(e);
                 if (this.marker) {
                     return;
                 }
-
                 const geocoder = new google.maps.Geocoder;
                 const pos = {
                     lat: e.latLng.lat(),
                     lng: e.latLng.lng(),
                 };
-
-               geocoder.geocode({'location': pos}, (results, status) => {
+                geocoder.geocode({'location': pos}, (results, status) => {
                     console.log("Geocode", results, status);
                     if (!results.length || status !== 'OK') {
                         return;
@@ -155,7 +140,6 @@
                     self.form.lat = pos.lat;
                     self.form.lng = pos.lng;
                 });
-
                 this.marker = pos;
                 this.center = pos;
                 if (self.zoomChanged) {
@@ -163,12 +147,10 @@
                 }
                 this.zoom = 15;
             },
-
             onZoomChanged(e) {
                 console.log("On Zoom Changed", e);
                 this.zoomChanged = true;
             },
-
             onAddressChange: _.debounce(function (e) {
                 console.log("OnAddressChange", e);
                 const self = this;
@@ -194,7 +176,6 @@
                     self.zoom = 15;
                 });
             }, 500),
-
             onMarkerMoved: _.debounce(function (e) {
                 console.log('On Marker Moved', e);
                 const pos = {

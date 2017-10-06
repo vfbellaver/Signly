@@ -19,14 +19,16 @@ class BillboardFace extends Model
 		'max_ads',
 		'duration',
 		'photo',
-		'is_iluminated',
+		'is_illuminated',
+        'lights_on',
+        'lights_off',
 		'billboard_id',
     ];
 
     protected $casts = [
 		'max_ads' => 'int',
 		'duration' => 'int',
-		'is_iluminated' => 'boolean',
+		'is_illuminated' => 'boolean',
     ];
 
     protected $dates = [
@@ -68,7 +70,9 @@ class BillboardFace extends Model
 			'max_ads' => $this->max_ads,
 			'duration' => $this->duration,
 			'photo' => $this->photo,
-			'is_iluminated' => $this->is_iluminated,
+			'is_illuminated' => $this->is_illuminated,
+            'lights_on' => $this->lights_on,
+            'lights_off' => $this->lights_off,
 			'billboard_id' => $this->billboard_id,
 			'billboard' => $this->billboard->toArray(),
             'created_at' => $this->created_at,
