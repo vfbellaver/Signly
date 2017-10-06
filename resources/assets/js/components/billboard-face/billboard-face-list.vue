@@ -15,18 +15,22 @@
                         </column>
                         <column size="8">
                             <div class="card-body">
-                                <h3>Code: {{billboardFace.code}} &nbsp Label: {{billboardFace.label}} </h3>
+                                <h3>
+                                    <small>Code:</small>
+                                    {{billboardFace.code}}
+                                    <small>Label:</small>
+                                    {{billboardFace.label}}
+                                </h3>
                                 <hr>
-                                    <column size="3">
-                                        <h4>U$ : </h4>
-                                    </column>
-                                    <column size="9">
-                                        <h2>{{formatMoney(billboardFace.hard_cost)}} &nbsp </h2>
-                                    </column>
+                                <column size="3">
+                                    <h4>U$ : </h4>
+                                </column>
+                                <column size="9">
+                                    <h2>{{formatMoney(billboardFace.hard_cost)}} &nbsp </h2>
+                                </column>
 
                                 <column size="12">
                                     <btn-success size="xs" @click.native="edit(billboardFace)">
-                                        EDIT &nbsp
                                         <icon icon="edit"></icon>
                                     </btn-success>
                                     <btn-danger @click.native="destroy(billboardFace)"
@@ -65,8 +69,15 @@
         }
 
         > hr {
-           margin: 5px;
+            margin: 5px;
         }
+
+        h3 {
+            small {
+                padding-left: 12px;
+            }
+        }
+
     }
 </style>
 
@@ -80,27 +91,25 @@
         props: {
             billboardId: {required: false},
         },
-        
+
         components: {
             BillboardFaceForm
         },
-        
+
         data() {
             return {
                 billboardFaces: [],
             }
         },
-        
-        computed: {
 
-        },
-        
+        computed: {},
+
         mounted() {
             this.reload();
         },
-        
+
         methods: {
-            
+
             add() {
                 this.$refs.form.show();
             },
@@ -137,9 +146,9 @@
 
             formatMoney(money) {
                 money = money.toString();
-                var tmp = money.replace(".","");
+                var tmp = money.replace(".", "");
                 tmp = tmp.replace(/([0-9]{2})$/g, ",$1");
-                if( tmp.length > 6 )
+                if (tmp.length > 6)
                     tmp = tmp.replace(/([0-9]{3}),([0-9]{2}$)/g, ".$1,$2");
 
                 return tmp;
