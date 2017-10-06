@@ -8,6 +8,7 @@
                 </box-tools>
             </box-title>
             <box-content>
+                {{billboardFaces}}
                 <div class="cards-line-separator" v-for="billboardFace in billboardFaces">
                     <div class="card-container">
                         <column size="4">
@@ -15,32 +16,27 @@
                         </column>
                         <column size="8">
                             <div class="card-body">
-                                <box>
-                                    <h3>Code: {{billboardFace.code}} &nbsp Label: {{billboardFace.label}} </h3>
-                                    <box-content>
-                                        <column size="12">
-                                            <h4>Width: {{billboardFace.width}} &nbsp
-                                                &nbsp Heigth: {{billboardFace.height}}
-                                            </h4>
-                                        </column>
-                                        <column size="12">
-                                            <h4>Monthly Impressions: {{formatImpressions}} &nbsp</h4>
-                                            <h4>Hard Cost U$ : {{getMoney}} &nbsp </h4>
-                                        </column>
-                                        <column size="12">
-                                            <btn-success size="xs" @click.native="edit(billboardFace)">
-                                                EDIT &nbsp
-                                                <icon icon="edit"></icon>
-                                            </btn-success>
-                                            <btn-danger @click.native="destroy(billboardFace)"
-                                                        :disabled="billboardFace.destroyForm.busy"
-                                                        size="xs">
-                                                <spinner v-if="billboardFace.destroyForm.busy"></spinner>
-                                                <icon icon="trash" v-else></icon>
-                                            </btn-danger>
-                                        </column>
-                                    </box-content>
-                                </box>
+                                <h3>Code: {{billboardFace.code}} &nbsp Label: {{billboardFace.label}} </h3>
+                                <column size="12">
+                                    <column size="4">
+                                        <h5>U$ :</h5>
+                                    </column>
+                                    <column size="8">
+                                        <h2 class="money">{{format(billboardFace.hard_cost)}}</h2>
+                                    </column>
+                                </column>
+                                <column size="12">
+                                    <btn-success size="xs" @click.native="edit(billboardFace)">
+                                        EDIT &nbsp
+                                        <icon icon="edit"></icon>
+                                    </btn-success>
+                                    <btn-danger @click.native="destroy(billboardFace)"
+                                                :disabled="billboardFace.destroyForm.busy"
+                                                size="xs">
+                                        <spinner v-if="billboardFace.destroyForm.busy"></spinner>
+                                        <icon icon="trash" v-else></icon>
+                                    </btn-danger>
+                                </column>
                             </div>
                         </column>
                         <div style="clear: both"></div>
@@ -68,6 +64,15 @@
         .ibox-content {
             border: 0;
         }
+
+        .card-container {
+            padding: 15px;
+        }
+
+        .money {
+            font-family: sans-serif;
+            font-weight: 500;
+        }
     }
 </style>
 
@@ -89,8 +94,20 @@
                 billboardFaces: []
             }
         },
-        mounted() {
-            this.reload();
+        created() {
+         this.reload();
+        },
+        mounted(){
+          this.showMeFace();
+        },
+        computed: {
+            format: function (money) {
+                var tmp = money + '';
+                tmp = tmp.replace(/([0-9]{2})$/g, ",$1");
+                if (tmp.length > 6)
+                    tmp = tmp.replace(/([0-9]{3}),([0-9]{2}$)/g, ".$1,$2");
+                return money;
+            }
         },
         methods: {
             add() {
@@ -103,7 +120,7 @@
                 let self = this;
                 Slc.get(laroute.route('api.billboard-face.index', {bid: this.billboardId}))
                     .then((response) => {
-                        self.billboardFaces = response;
+                       self.billboardFaces =  response;
                     });
             },
             formSaved(billboardFace) {
@@ -125,7 +142,11 @@
                 return this.billboardFaces.findIndex((_billboardFace) => {
                     return _billboardFace.id === billboardFace.id;
                 });
+            },
+            showMeFace() {
+                console.log('Show ',BillboardFaces.length);
             }
+
         }
     }
 </script>
