@@ -6,18 +6,31 @@ function csv_to_array($filename, $delimiter = ',')
         return false;
     }
     $header = null;
-    $data = array();
+    $data = null;
 
-    if (($handle = @fopen($filename, 'r')) !== false) {
-        while (($row = fgetcsv($handle, 1000, $delimiter)) !== false) {
-            if (!$header) {
-                $header = $row;
-                continue;
-            }
-            $data[] = array_combine($header, $row);
-        }
-        fclose($handle);
+    $handle = @fopen($filename, 'r');
+    if (!$handle) {
+        return [];
     }
+
+
+    while (($row = fgetcsv($handle, 1000, $delimiter)) !== false) {
+        $normalizedRow = [];
+        foreach ($row as $key => $value) {
+            $normalizedRow[trim($key)] = trim($value);
+        }
+        if (!$header) {
+            $header = $normalizedRow;
+            continue;
+        }
+        for ($i = count($normalizedRow); $i < count($header); $i++) {
+            $normalizedRow[] = null;
+        }
+        $data[] = array_combine($header, $normalizedRow);
+    }
+
+    fclose($handle);
+
     return $data;
 
 }

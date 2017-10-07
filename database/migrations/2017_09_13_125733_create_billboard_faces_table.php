@@ -17,17 +17,18 @@ class CreateBillboardFacesTable extends Migration
             $table->increments('id');
 
             $table->string('code', 6)->unique();
-            $table->float('height', 10)->nullable();
-            $table->float('width', 10)->nullable();
-            $table->string('reads', 50)->nullable();
             $table->string('label', 50);
             $table->float('hard_cost', 10, 0)->default(0);
             $table->float('monthly_impressions', 10, 0)->default(0);
+            $table->integer('duration');
+            $table->boolean('is_illuminated')->default(false);
+
+            $table->float('height', 10)->nullable();
+            $table->float('width', 10)->nullable();
+            $table->string('reads', 50)->nullable();
             $table->text('notes')->nullable();
             $table->integer('max_ads')->nullable();
-            $table->integer('duration');
-            $table->text('photo');
-            $table->boolean('is_illuminated')->default(false);
+            $table->text('photo')->nullable();
             $table->time('lights_on')->nullable();
             $table->time('lights_off')->nullable();
             $table->integer('billboard_id')->unsigned()->nullable();

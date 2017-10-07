@@ -7,7 +7,7 @@
                     <column size="6">
                         <form-group :form="form" field="filecsv">
                             <input-label for="filecsv">Select File: </input-label>
-                            <input-csv v-model="form.billboards" id="billboards"></input-csv>
+                            <billboard-csv-upload v-model="form.billboards" id="billboards"></billboard-csv-upload>
                         </form-group>
                     </column>
                     <column size="6">
@@ -53,11 +53,14 @@
 <script>
     import * as Slc from "../../vue/http";
     import ModalForm from '../shared/Mixins/ModalForm';
-
+    import BillboardCsvUpload from './billboard-csv-upload';
 
     export default {
-        mixins: [ModalForm],
         props: {},
+        components: {
+            BillboardCsvUpload,
+        },
+        mixins: [ModalForm],
         data() {
             return {
                 api: 'csv',

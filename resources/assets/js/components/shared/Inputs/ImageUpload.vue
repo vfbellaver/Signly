@@ -1,10 +1,12 @@
 <template>
     <div class="image-upload">
+        <a @click="remove" v-if="internalValue" title="Remove Image"><i class="fa fa-remove"></i></a>
         <div>
             <div>
                 <div>
-                    <input ref="file" type="file" @change="onFileChange" class="hidden" :multiple="multiple"/>
-                    <div v-if="internalValue" class="preview" :style="{ 'background-image': 'url(' + internalValue + ')' }"
+                    <input ref="file" type="file" @change="onFileChange" class="hidden"/>
+                    <div v-if="internalValue" class="preview"
+                         :style="{ 'background-image': 'url(' + internalValue + ')' }"
                          @click="replaceImage">
                     </div>
                     <div v-else class="dropzone" @click="replaceImage"></div>
@@ -25,6 +27,16 @@
         background: $white;
         border-radius: 4px;
         border: 1px solid #E3E3E3;
+
+        a {
+            position: absolute;
+            cursor: pointer;
+            top: 4px;
+            right: 8px;
+            color: black;
+            text-decoration: none;
+            z-index: 3;
+        }
 
         > div {
             height: 100%;
@@ -69,7 +81,6 @@
 
     export default {
         props: {
-            multiple: {required: false, 'default': false},
             maxSize: {required: false},
             allowedTypes: {required: false}
         },
@@ -98,6 +109,7 @@
                     return;
                 }
 
+                let hasInvalid = false;
                 const allowedFiles = [];
                 for (let i = 0; i < files.length; i++) {
                     let f = files.item(i);
@@ -112,7 +124,19 @@
                     }
                     if (valid) {
                         allowedFiles.push(f);
+                    } else {
+                        hasInvalid = true;
                     }
+                }
+
+                this.$refs.file.value = null;
+
+                if (hasInvalid) {
+                    EventBus.$emit(
+                        'notify',
+                        'error',
+                        'Invalid file type. Choose a valid image file (png, jpg or gif) and try again.'
+                    );
                 }
 
                 if (!allowedFiles.length) {
@@ -129,6 +153,24 @@
             },
             replaceImage() {
                 $(this.$refs.file).trigger('click');
+            },
+            remove() {
+                const self = this;
+
+                swal({
+                    title: 'Are you sure?',
+                    text: 'This operation cannot be undone',
+                    type: "warning",
+                    showCancelButton: true,
+                    cancelButtonText: 'Cancel',
+                    confirmButtonText: 'Yes, proceed',
+                    closeOnConfirm: false
+                }, () => {
+                    swal(`Success`, 'Image was successfully removed', "success");
+                    self.internalValue = null;
+                    self.$refs.file.value = null;
+                    self.$emit('removed');
+                });
             }
         }
     }
