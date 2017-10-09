@@ -1,5 +1,5 @@
 <template>
-    <modal>
+    <modal size="lg">
         <modal-header>Import Billboards</modal-header>
         <form-submit v-model="form" @submit="save">
             <modal-body>
@@ -26,16 +26,18 @@
                         <tr>
                             <th style="width: 50px"></th>
                             <th style="width: 300px">Name</th>
-                            <th style="width: 600px" class="hidden-sm">Address</th>
-                            <th>Driveby</th>
+                            <th>Faces</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr v-for="( billboard,index ) in form.billboards">
                             <td>{{ index + 1 }}</td>
                             <td>{{ billboard.name }}</td>
-                            <td class="hidden-sm">{{ billboard.address }}</td>
-                            <td>{{ billboard.digital_driveby }}</td>
+                            <td>
+                                <ul>
+                                    <li v-for="face in billboard.faces">{{face.code}} - {{face.code}}</li>
+                                </ul>
+                            </td>
                         </tr>
                         </tbody>
                     </table>

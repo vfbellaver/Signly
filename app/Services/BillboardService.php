@@ -112,4 +112,21 @@ class BillboardService
 
         return $billboards;
     }
+
+    public function import($data)
+    {
+        return \DB::transaction(function () use ($data) {
+
+            $billboards = $data['billboards'];
+            $savedBillboards = [];
+
+            foreach ($billboards as $billboard) {
+                //criar o billboard
+
+                //criar as faces relacionadas
+            }
+
+            return $savedBillboards;
+        });
+    }
 }

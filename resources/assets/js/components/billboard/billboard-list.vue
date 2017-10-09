@@ -45,7 +45,7 @@
                 </div>
             </box-content>
         </box>
-        <billboard-form-csv @saved="reload" ref="formCsv"></billboard-form-csv>
+        <billboard-import-form @saved="reload" ref="formCsv"></billboard-import-form>
     </div>
 </template>
 
@@ -58,11 +58,11 @@
 <script>
     import _ from 'lodash';
     import * as Slc from "../../vue/http";
-    import BillboardFormCsv from './billboard-form-csv.vue'
+    import BillboardImportForm from './billboard-import-form'
 
     export default {
         components: {
-            BillboardFormCsv
+            BillboardImportForm
         },
         data() {
             return {

@@ -38,6 +38,16 @@
                                 ></gmap-marker>
                             </gmap-map>
 
+                            <gmap-street-view-panorama
+                                    v-if="loaded"
+                                    class="pano"
+                                    :position="center"
+                                    :pov="pov"
+                                    :zoom="1"
+                                    @pano_changed="updatePano"
+                                    @pov_changed="updatePov">
+                            </gmap-street-view-panorama>
+
                             <form-group :form="form" field="lat">
                                 <input-label for="lat">Latitude: </input-label>
                                 <input-text v-model="form.lat" id="lat" name="lat"></input-text>
@@ -79,6 +89,10 @@
     .margin-billboard-edit {
         margin-right: 5px;
     }
+
+    .vue-street-view-pano-container {
+        min-height: 360px;
+    }
 </style>
 
 <script>
@@ -109,6 +123,8 @@
                     scrollWell: true,
                     gestureHandling: 'greedy'
                 },
+                pov: null,
+                pano: null,
                 zoomChanged: false,
                 billboardFaces: [],
                 billboardListRoute: laroute.route('billboards.index'),
@@ -250,6 +266,14 @@
                 this.marker = pos;
                 this.center = pos;
             }),
+
+            updatePov(pov) {
+                this.pov = pov;
+            },
+
+            updatePano(pano) {
+                this.pano = pano;
+            }
         }
     }
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\BillboardCreateRequest;
+use App\Http\Requests\BillboardImportRequest;
 use App\Http\Requests\BillboardUpdateRequest;
 use App\Models\Billboard;
 use App\Services\BillboardService;
@@ -55,6 +56,11 @@ class BillboardsController extends Controller
         return $data;
     }
 
+    public function import(BillboardImportRequest $request)
+    {
+        $data = $request->all();
+        $this->service->import($data);
+    }
 
     public function update(BillboardUpdateRequest $request, Billboard $billboard)
     {
