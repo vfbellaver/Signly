@@ -138,24 +138,22 @@ class BillboardService
 
             foreach ($billboards as $blb) {
                 //create o billboard
-                $billboard = new Billboard();
-                $billboard->name = $blb['name'];
-                $billboard->description = $blb['description'];
-                $billboard->address = $blb['address'];
-                $billboard->lat = $blb['lat'];
-                $billboard->lng = $blb['lng'];
-                $faces = $blb['faces'];
+                $billboard = Billboard::query()->create([
+                    'name' => $blb['name'],
+                    'description' => $blb['name'],
+                    'address' => $blb['description'],
+                    'lat' => $blb['lat'],
+                    'lng' => $blb['lng'],
+                    'user_id' => $data['user_id'],
+                ]);
 
-                $billboard->save();
-                event(new BillboardCreated($billboard));
+                $faces = $blb['faces'];
 
                 //create as faces relations
                 foreach ($faces as $face) {
                     $billboardFace = new BillboardFace($face);
                     $billboardFace->billboard()->associate($billboard);
                     $billboardFace->save();
-
-                    event(new BillboardFaceCreated($billboardFace));
 
                 }
             }

@@ -59,6 +59,7 @@ class BillboardsController extends Controller
     public function import(BillboardImportRequest $request)
     {
         $data = $request->all();
+        $data['user_id'] = auth()->user()->id;
         $this->service->import($data);
     }
 
