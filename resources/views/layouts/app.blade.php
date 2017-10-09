@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ config('app.name', 'Laravel') }}</title>
-    <link rel="shortcut icon" href="{{asset('images/pin-6-64.png')}}">
+    <link rel="shortcut icon" href="{{asset('favicon.ico')}}">
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
     <script src="{{route('slc.js')}}" type="text/javascript"></script>
 </head>

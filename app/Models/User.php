@@ -40,7 +40,9 @@ class User extends Authenticatable
     ];
 
     protected $casts = [
-        'status' => 'boolean'
+        'status' => 'boolean',
+        'lat' => 'float',
+        'lng' => 'float',
     ];
 
     #region Attributes

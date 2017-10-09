@@ -1,5 +1,5 @@
 @extends('layouts.app')
 
 @section('content')
-    <main-map></main-map>
+    <main-map :user="user"></main-map>
 @endsection

@@ -1,9 +1,9 @@
 <template>
     <gmap-map
+            v-if="loaded"
             :options="mapOptions"
             :center="center"
-            :zoom="10"
-            style="width: 100%; height: 90vmin;">
+            :zoom="10">
         <gmap-info-window
                 :options="infoOptions"
                 :position="infoWindowPos"
@@ -21,13 +21,24 @@
     </gmap-map>
 </template>
 
+<style>
+    .vue-map-container {
+        width: 100%;
+        height: 90vmin;
+    }
+</style>
+
 <script>
 
+    import _ from 'lodash';
+    import * as Slc from "../../vue/http";
     import BillboardInfo from './billboard-info';
 
     export default {
 
-        props: {},
+        props: {
+            user: {required: true}
+        },
 
         components: {
             BillboardInfo
@@ -35,85 +46,71 @@
 
         data() {
             return {
-
+                loaded: false,
                 billboards: [],
                 billboardFaces: [],
+                billboard: null,
 
+                center: null,
+                markers: [],
+                zoom: null,
                 mapOptions: {
-                    mapTypeControl: false,
                     scrollWell: true,
-                    gestureHandling: 'greedy'
+                    mapTypeControl: false,
+                    gestureHandling: 'greedy',
                 },
 
                 infoShow: false,
-
-                center: {lat: 40.757994, lng: -111.970834},
-
-                markers: [],
-
+                infoWinOpen: false,
+                infoWindowPos: null,
                 infoOptions: {
                     maxWidth: 800,
                     width: 800,
                     minHeight: 600,
                     height: 600,
                 },
-
-
-                infoWinOpen: false,
-
-                infoWindowPos: {
-                    lat: 0,
-                    lng: 0
-                },
-
-                billboard: '',
-
             }
         },
 
-        mounted() {
-            this.reload();
+        created() {
+            this.center = {
+                lat: parseFloat(this.user.lat),
+                lng: parseFloat(this.user.lng),
+            };
+            this.zoom = this.user.zoom;
+            this.loaded = true;
+            this.loadMarkers();
         },
 
         methods: {
 
-            reload() {
+            loadMarkers() {
                 Slc.get(laroute.route('api.billboard.index'))
                     .then((response) => {
                         this.billboards = response;
-                        this.reloadMarkers();
+                        for (let i = 0; i < this.billboards.length; i++) {
+                            this.markers.push({
+                                position: {
+                                    lat: parseFloat(this.billboards[i].lat),
+                                    lng: parseFloat(this.billboards[i].lng)
+                                },
+                                infoText: this.billboards[i],
+                            });
+                        }
                     });
-
-            },
-
-            reloadMarkers() {
-                const self = this;
-                for (let i = 0; i < this.billboards.length; i++) {
-                    this.markers.push({
-                        position: {
-                            lat: parseFloat(this.billboards[i].lat),
-                            lng: parseFloat(this.billboards[i].lng)
-                        },
-
-                        infoText: this.billboards[i],
-                    });
-                }
-
             },
 
             toggleInfoWindow: function (marker, idx) {
 
+                console.log('Billboard Id ', this.billboard.id);
+
                 this.infoWindowPos = marker.position;
                 this.billboard = marker.infoText;
-                console.log('Billboard Id ', this.billboard.id);
                 this.loadFaces(this.billboard.id);
 
-
-                //check if its the same marker that was selected if yes toggle
                 if (this.currentMidx === idx) {
                     this.infoWinOpen = !this.infoWinOpen;
                 }
-                //if different marker set infowindow to open and reset current marker index
                 else {
                     this.infoWinOpen = true;
                     this.currentMidx = idx;

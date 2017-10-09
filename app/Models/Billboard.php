@@ -18,6 +18,10 @@ class Billboard extends Model
     ];
 
     protected $casts = [
+        'lat' => 'float',
+        'lng' => 'float',
+        'heading' => 'float',
+        'pitch' => 'float',
     ];
 
     protected $dates = [

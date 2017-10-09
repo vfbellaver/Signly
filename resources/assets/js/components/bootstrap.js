@@ -4,6 +4,7 @@ require('./shared/_register');
 Vue.component('user-list', require('./user/user-list.vue'));
 Vue.component('user-settings', require('./user/user-settings'));
 
+//MAP
 Vue.component('main-map', require('./map/main-map.vue'));
 
 //TEAM
@@ -17,10 +18,6 @@ Vue.component('client-form',require('./client/client-form'));
 Vue.component('billboard-list', require('./billboard/billboard-list'));
 Vue.component('billboard-edit', require('./billboard/billboard-edit'));
 Vue.component('billboard-show', require('./billboard-public/billboard-show'));
-
-// ------------------------------------------------------------------------
-// Maps
-Vue.component('google-map', require('./map/google-map'));
 
 //DEMO
 Vue.component('parent', require('./demo/parent'));
