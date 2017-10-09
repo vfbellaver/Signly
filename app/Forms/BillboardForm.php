@@ -44,7 +44,7 @@ class BillboardForm extends BaseForm
 
     public function user()
     {
-        $user = $this->request->get('user');
+        $user = auth()->user()->id;
         return User::query()->findOrFail($user);
     }
 

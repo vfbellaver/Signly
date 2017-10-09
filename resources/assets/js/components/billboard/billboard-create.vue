@@ -47,16 +47,6 @@
                                 <input-text v-model="form.lng" id="lng" name="lng"></input-text>
                             </form-group>
 
-                            <form-group :form="form" field="team">
-                                <input-label for="team">Team: </input-label>
-                                <teams-select v-model="form.team" id="team" name="team"/>
-                            </form-group>
-
-                            <form-group :form="form" field="user">
-                                <input-label for="user">Team: </input-label>
-                                <users-select v-model="form.user" id="user" name="user"/>
-                            </form-group>
-
                         </div>
                     </div>
                     <div class="row">
@@ -84,8 +74,6 @@
 <script>
     import _ from 'lodash';
     import * as Slc from "../../vue/http";
-    import TeamsSelect from '../team/team-select';
-    import UsersSelect from '../user/user-select';
     import BillboardFaceList from '../billboard-face/billboard-face-list';
 
     export default {
@@ -94,8 +82,6 @@
         },
         components: {
             BillboardFaceList,
-            UsersSelect,
-            TeamsSelect,
         },
         data() {
             return {
@@ -139,8 +125,6 @@
                 address: null,
                 lat: null,
                 lng: null,
-                team: null,
-                user: null,
             });
         },
 

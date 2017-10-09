@@ -57,12 +57,6 @@
                                 <input-label for="lng">Longitude: </input-label>
                                 <input-text v-model="form.lng" id="lng" name="lng"></input-text>
                             </form-group>
-
-                            <form-group :form="form" field="digital_driveby">
-                                <input-label for="digital_driveby">Digital Driveby: </input-label>
-                                <input-url v-model="form.digital_driveby" id="digital_driveby"
-                                           name="digital_driveby"></input-url>
-                            </form-group>
                         </div>
                         <div class="col-md-6" v-if="form.id">
                             <form-group :form="form" field="billboardFaces">
@@ -150,21 +144,29 @@
                     console.log("Billboard loaded", billboard);
                     const lat = Number.parseFloat(billboard.lat);
                     const lng = Number.parseFloat(billboard.lng);
+                    const heading = Number.parseFloat(billboard.heading);
+                    const pitch = Number.parseFloat(billboard.pitch);
 
                     this.center = {lat: lat, lng: lng};
                     this.marker = {lat: lat, lng: lng};
+                    this.pov = {heading: heading, pitch: pitch};
 
                     this.form = new SlcForm({
                         id: billboard.id,
                         name: billboard.name,
                         description: billboard.description,
-                        digital_driveby: billboard.digital_driveby,
                         address: billboard.address,
                         lat: billboard.lat,
                         lng: billboard.lng,
+                        heading: billboard.heading,
+                        pitch: billboard.pitch
                     });
                     this.loaded = true;
                 });
+            },
+
+            reloadForm(){
+               //this.form.he this.pov.heading;
             },
 
             save() {
@@ -269,6 +271,9 @@
 
             updatePov(pov) {
                 this.pov = pov;
+                this.form.heading = pov.heading;
+                console.log('Pov Changed: ',pov);
+                this.form.pitch = pov.pitch;
             },
 
             updatePano(pano) {
