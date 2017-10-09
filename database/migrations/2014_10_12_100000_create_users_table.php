@@ -29,7 +29,7 @@ class CreateUsersTable extends Migration
             $table->foreign('team_id')
                 ->references('id')
                 ->on('teams')
-                ->onDelete('set null')
+                ->onDelete('cascade')
                 ->onUpdate('cascade');
 
             $table->rememberToken();
