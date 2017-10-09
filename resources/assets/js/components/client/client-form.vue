@@ -1,17 +1,16 @@
 <template>
-    <box>
-        <box-title>
-            {{ title }}
-        </box-title>
-        <box-content>
-            <form-submit v-model="form" @submit="save">
+    <modal size="lg">
+        <modal-header>{{title}}</modal-header>
+        <form-submit v-model="form" @submit="save">
+            <modal-body>
                 <row>
-                    <column size="6">
+                    <column size="7">
                         <row>
                             <column size="5">
                                 <form-group :form="form" field="first_name">
                                     <input-label for="first_name">First Name: </input-label>
-                                    <input-text v-model="form.first_name" id="first_name" name="first_name"></input-text>
+                                    <input-text v-model="form.first_name" id="first_name"
+                                                name="first_name"></input-text>
                                 </form-group>
                             </column>
                             <column size="7">
@@ -31,7 +30,8 @@
                             <column size="4">
                                 <form-group :form="form" field="phone1">
                                     <input-label for="phone1">Phone 1: </input-label>
-                                    <input-text v-model="form.phone1" id="phone1" name="phone1" type="tel" v-tel></input-text>
+                                    <input-text v-model="form.phone1" id="phone1" name="phone1" type="tel"
+                                                v-tel></input-text>
                                 </form-group>
                             </column>
                             <column size="4">
@@ -51,7 +51,8 @@
 
                         <form-group :form="form" field="address_line1">
                             <input-label for="address_line1">Address Line 1: </input-label>
-                            <input-text v-model="form.address_line1" id="address_line1" name="address_line1"></input-text>
+                            <input-text v-model="form.address_line1" id="address_line1"
+                                        name="address_line1"></input-text>
                         </form-group>
 
                         <form-group :form="form" field="address_line2">
@@ -74,24 +75,10 @@
                                 </form-group>
                             </column>
                         </row>
-                        <row>
-                            <column size="6">
-                                <form-group :form="form" field="zipcode">
-                                    <input-label for="zipcode">Zipcode: </input-label>
-                                    <input-text v-model="form.zipcode" id="zipcode" name="zipcode" v-zipcode></input-text>
-                                </form-group>
-                            </column>
-                            <column size="6">
-                                <slot></slot>
 
-                            </column>
-                        </row>
-                        <btn-submit :disabled="form.busy">
-                            <spinner v-if="form.busy"></spinner>
-                        </btn-submit>
                     </column>
 
-                    <column size="6">
+                    <column size="5">
                         <form-group :form="form" field="company_name">
                             <input-label for="company_name">Company_Name: </input-label>
                             <input-text v-model="form.company_name" id="company_name" name="company_name"></input-text>
@@ -100,12 +87,21 @@
                             <input-label for="logo">Logo: </input-label>
                             <image-upload id="logo" v-model="form.logo"></image-upload>
                         </form-group>
+                        <form-group :form="form" field="zipcode">
+                            <input-label for="zipcode">Zipcode: </input-label>
+                            <input-text v-model="form.zipcode" id="zipcode" name="zipcode"
+                                        v-zipcode></input-text>
+                        </form-group>
                     </column>
                 </row>
-                </modal-footer>
-            </form-submit>
-        </box-content>
-    </box>
+            </modal-body>
+            <modal-footer>
+                <btn-submit :disabled="form.busy">
+                    <spinner v-if="form.busy"></spinner>
+                </btn-submit>
+            </modal-footer>
+        </form-submit>
+    </modal>
 </template>
 <style lang="scss" scoped="scoped">
     .image-upload {
@@ -131,14 +127,6 @@
             }
         },
         methods: {
-            save() {
-                const uri = laroute.route('api.client.store');
-                Slc.post(uri, this.form).then((response) => {
-                    console.log('Client Created:', response);
-                    this.$emit('saved');
-                    window.location = laroute.route("clients.index");
-                });
-            },
             buildForm(client) {
                 return new SlcForm({
                     id: client ? client.id : null,

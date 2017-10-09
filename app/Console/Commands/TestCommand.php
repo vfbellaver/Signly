@@ -18,6 +18,9 @@ class TestCommand extends Command
 
     public function handle()
     {
+        $dt = 1502265841.1632;
+        $ha = Carbon::createFromTimestamp(1502265841)->format('Y-m-d H:i:s');
+
         $filename = "/Users/ogremagi/Projects/signly/tests/billboards.csv";
         $data = csv_to_array($filename);
         $billboards = [];
