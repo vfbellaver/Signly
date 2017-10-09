@@ -96,7 +96,7 @@ class User extends Authenticatable
             'email' => $this->email,
             'role' => $role,
             'status' => $this->status,
-            'team' => $this->team->toArray(),
+            'team' => $this->team_id ? $this->team->toArray() : null,
             'pending' => $this->invitation_token != null,
             'stripe_id' => $this->stripe_id,
             'card_brand' => $this->card_brand,

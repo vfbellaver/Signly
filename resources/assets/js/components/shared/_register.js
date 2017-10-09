@@ -1,3 +1,5 @@
+require('./Inspinia/_register');
+
 // ------------------------------------------------------------------------
 // Others
 Vue.component('icon', require('./Icon'));
