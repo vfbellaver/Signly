@@ -24,7 +24,6 @@ class Billboard extends Model
     ];
 
     #region Relationships
-    #region
 
     public function user()
     {
@@ -35,6 +34,7 @@ class Billboard extends Model
     {
         return $this->hasMany(BillboardFace::class);
     }
+    #endregion
 
     #region Custom Attributes
 
@@ -51,7 +51,6 @@ class Billboard extends Model
             'id' => $this->id,
             'name' => $this->name,
             'description' => $this->description,
-            'digital_driveby' => $this->digital_driveby,
             'address' => $this->address,
             'lat' => $this->lat,
             'lng' => $this->lng,

@@ -4,9 +4,11 @@ namespace App\Services;
 
 use App\Events\BillboardCreated;
 use App\Events\BillboardDeleted;
+use App\Events\BillboardFaceCreated;
 use App\Events\BillboardUpdated;
 use App\Forms\BillboardForm;
 use App\Models\Billboard;
+use App\Models\BillboardFace;
 use Carbon\Carbon;
 
 class BillboardService
@@ -45,8 +47,7 @@ class BillboardService
             $billboard->lng = $form->lng();
             $billboard->heading = $form->heading();
             $billboard->pitch = $form->pitch();
-            $billboard->zoom = $form->zoom();
-            $billboard->pano = $form->pano();
+            $billboard->user()->associate($form->user());
 
             $billboard->save();
 
@@ -78,8 +79,6 @@ class BillboardService
                 'lng' => null,
                 'heading' => null,
                 'pitch' => null,
-                'zoom' => null,
-                'pano' => null,
 
             ];
             $billboard = array_intersect_key($row, $billboard);
@@ -126,16 +125,39 @@ class BillboardService
     public function import($data)
     {
         return \DB::transaction(function () use ($data) {
-
+            $events = [];
             $billboards = $data['billboards'];
             $savedBillboards = [];
 
-            foreach ($billboards as $billboard) {
-                //criar o billboard
+            foreach ($billboards as $blb) {
+                //create o billboard
+                $billboard = Billboard::query()->create([
+                    'name' => $blb['name'],
+                    'description' => $blb['name'],
+                    'address' => $blb['description'],
+                    'lat' => $blb['lat'],
+                    'lng' => $blb['lng'],
+                    'user_id' => $data['user_id'],
+                ]);
 
-                //criar as faces relacionadas
+                $events[] = new BillboardCreated($billboard);
+
+                $savedBillboards[] = $billboard;
+                $faces = $blb['faces'];
+
+                //create as faces relations
+                foreach ($faces as $face) {
+                    $billboardFace = new BillboardFace($face);
+                    $billboardFace->billboard()->associate($billboard);
+                    $billboardFace->save();
+
+                    $events[] = new BillboardFaceCreated($billboardFace);
+                }
             }
 
+            foreach ($events as $event){
+                event($event);
+            }
             return $savedBillboards;
         });
     }

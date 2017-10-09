@@ -177,6 +177,7 @@
         },
 
         mounted() {
+            this.form.is_illuminated = false;
         },
 
         watch: {
@@ -193,7 +194,7 @@
                 handler(value) {
                     if (value.hh && value.mm && value.A) {
                         const m = moment(`${value.hh}:${value.mm}:${value.A}`, "hh:mm A");
-                        this.form.lights_on = m.format('HH:mm:ss');
+                        this.form.lights_off = m.format('HH:mm:ss');
                     }
                 },
                 deep: true,
