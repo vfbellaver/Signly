@@ -55,12 +55,12 @@ class BillboardForm extends BaseForm
     public function user()
     {
         $user = $this->request->get('user');
-        return User::query()->findOrFail($user->id);
+        return User::query()->findOrFail($user);
     }
 
     public function team()
     {
         $team = $this->request->get('team');
-        return Team::query()->findOrFail($team->id);
+        return Team::query()->findOrFail($team);
     }
 }
