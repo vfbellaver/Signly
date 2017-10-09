@@ -1,13 +1,26 @@
 <template>
-    <div>
-        <box-tools slot="tools" class="white-bg">
-            <box-tool icon="plus" @click.native="create">New</box-tool>
-            <box-tool icon="upload" @click.native="importBillboards">Import</box-tool>
-            <box-tool class="green" icon="map-marker" @click.native="goToHome">Map</box-tool>
-        </box-tools>
-        <div class="row results">
-            <div class="col-md-4" v-for="billboard in billboards">
-                <billboard-card :billboard="billboard" @edit="edit" @destroy="destroy"></billboard-card>
+    <div class="card-list">
+        <nav class="navbar navbar-default" data-spy="affix" data-offset-top="147">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a @click="create">
+                    <icon icon="plus"></icon>
+                    Add</a></li>
+                <li><a @click="importBillboards">
+                    <icon icon="upload"></icon>
+                    Import</a></li>
+                <li><a @click="goToHome">
+                    <icon icon="map-marker"></icon>
+                    Map</a></li>
+            </ul>
+        </nav>
+
+        <div class="wrapper wrapper-content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-4" v-for="billboard in billboards">
+                        <billboard-card :billboard="billboard" @edit="edit" @destroy="destroy"></billboard-card>
+                    </div>
+                </div>
             </div>
         </div>
         <billboard-form ref="form" @saved="edit"></billboard-form>
@@ -16,6 +29,33 @@
 </template>
 
 <style lang="scss" scoped="scoped">
+    .card-list {
+        .navbar {
+            z-index: 1;
+            opacity: 0.9;
+            border-radius: 0;
+            background: #43A3D0;
+            position: absolute;
+            left: 0;
+            right: 0;
+            min-height: 30px;
+            li {
+                a {
+                    color: white;
+                    padding: 5px 20px;
+                    &:hover {
+                        background: transparent;
+                    }
+                }
+            }
+            &.affix {
+                position: fixed;
+                top: 0;
+                width: 100%;
+            }
+        }
+    }
+
     .results {
         .ibox {
             margin-top: 0;

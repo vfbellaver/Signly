@@ -17,7 +17,6 @@ Vue.component('client-form',require('./client/client-form'));
 
 // BILLBOARD
 Vue.component('billboard-list', require('./billboard/billboard-list'));
-Vue.component('billboard-create', require('./billboard/billboard-create'));
 Vue.component('billboard-edit', require('./billboard/billboard-edit'));
 Vue.component('billboard-show', require('./billboard-public/billboard-show'));
 
