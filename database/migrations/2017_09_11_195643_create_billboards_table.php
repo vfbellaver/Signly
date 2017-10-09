@@ -15,14 +15,7 @@ class CreateBillboardsTable extends Migration
             $table->decimal('lng', 18, 15);
             $table->decimal('heading', 18, 14)->nullable();
             $table->decimal('pitch', 16, 15)->nullable();
-            $table->decimal('zoom', 17, 16)->nullable();
-            $table->string('pano')->nullable();
             $table->text('description')->nullable();
-
-
-            $table->integer('team_id')->unsigned()->nullable();
-            $table->foreign('team_id')->references('id')->on('teams')
-                ->onDelete('set null')->onUpdate('cascade');
 
             $table->integer('user_id')->unsigned()->nullable();
             $table->foreign('user_id')->references('id')->on('users')

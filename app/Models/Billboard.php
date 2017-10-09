@@ -32,10 +32,6 @@ class Billboard extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function team()
-    {
-        return $this->belongsTo(Team::class);
-    }
     #region Custom Attributes
 
     #endregion
@@ -57,10 +53,7 @@ class Billboard extends Model
 			'lng' => $this->lng,
             'heading' => $this->heading,
             'pitch' => $this->pitch,
-            'zoom'=> $this->zoom,
-            'pano' => $this->pano,
             'user' => $this->user->toArray(),
-            'team' => $this->team->toArray(),
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at
         ];

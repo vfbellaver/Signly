@@ -42,25 +42,10 @@ class BillboardForm extends BaseForm
         return $this->request->get('pitch');
     }
 
-    public function zoom()
-    {
-        return $this->request->get('zoom');
-    }
-
-    public function pano()
-    {
-        return $this->request->get('pano');
-    }
-
     public function user()
     {
         $user = $this->request->get('user');
         return User::query()->findOrFail($user);
     }
 
-    public function team()
-    {
-        $team = $this->request->get('team');
-        return Team::query()->findOrFail($team);
-    }
 }

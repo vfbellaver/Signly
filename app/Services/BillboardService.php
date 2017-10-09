@@ -22,14 +22,11 @@ class BillboardService
                 'lng' => $form->lng(),
                 'heading' => $form->heading(),
                 'pitch' => $form->pitch(),
-                'zoom' => $form->zoom(),
-                'pano' => $form->pano(),
 
             ];
 
             $billboard = new Billboard($data);
             $billboard->user()->associate($form->user());
-            $billboard->team()->associate($form->team());
 
             $billboard->save();
 
@@ -49,8 +46,7 @@ class BillboardService
             $billboard->lng = $form->lng();
             $billboard->heading = $form->heading();
             $billboard->pitch = $form->pitch();
-            $billboard->zoom = $form->zoom();
-            $billboard->pano = $form->pano();
+            $billboard->user()->associate($form->user());
 
             $billboard->save();
 
@@ -82,8 +78,6 @@ class BillboardService
                 'lng' => null,
                 'heading' => null,
                 'pitch' => null,
-                'zoom' => null,
-                'pano' => null,
 
             ];
             $billboard = array_intersect_key($row, $billboard);
