@@ -69,7 +69,6 @@ class BillboardFace extends Model
             'lights_on' => $this->lights_on,
             'lights_off' => $this->lights_off,
             'billboard_id' => $this->billboard_id,
-            'billboard' => $this->billboard->toArray(),
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at
         ];
