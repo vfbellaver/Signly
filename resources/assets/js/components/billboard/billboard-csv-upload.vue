@@ -2,23 +2,37 @@
     <input class="csv-upload" ref="file" type="file" @change="onFileChange" :multiple="multiple"/>
 </template>
 
-
 <script>
-    import * as Slc from "../../../vue/http";
+    import _ from 'lodash';
+    import * as Slc from "../../vue/http";
 
     export default {
         props: {
+            value: {required: true},
+            name: {required: false},
             multiple: {required: false, 'default': false},
             maxSize: {required: false},
             allowedTypes: {required: false},
-
-
         },
-        mixins: [require('../Mixins/Model')],
+
         data() {
             return {
+                internalValue: null,
                 internalAllowedTypes: [],
             }
+        },
+
+        watch: {
+            value() {
+                this.internalValue = this.value;
+            },
+            internalValue(newValue) {
+                this.$emit('input', newValue);
+            }
+        },
+
+        created() {
+            this.internalValue = this.value;
         },
 
         mounted() {
@@ -39,6 +53,7 @@
                     return;
                 }
 
+                let hasInvalid = false;
                 const allowedFiles = [];
                 for (let i = 0; i < files.length; i++) {
                     let f = files.item(i);
@@ -53,18 +68,30 @@
                     }
                     if (valid) {
                         allowedFiles.push(f);
+                    } else {
+                        hasInvalid = true;
                     }
+                }
+
+                this.$refs.file.value = null;
+
+                if (hasInvalid) {
+                    EventBus.$emit(
+                        'notify',
+                        'error',
+                        'Invalid file type. Choose a valid CSV file and try again.'
+                    );
                 }
 
                 if (!allowedFiles.length) {
                     return;
                 }
                 this.$emit('uploading');
-                const uri = laroute.route('api.csv.upload');
+                const uri = laroute.route('api.billboard.csv-upload');
                 Slc.upload(uri, allowedFiles).then((response) => {
-                    console.log('Uploaded Csv:',response);
-                    this.internalValue=response.data;
-                    this.$emit('postcsv');
+                    console.log('Uploaded Csv:', response);
+                    this.internalValue = response.data;
+                    this.$emit('uploaded');
                 });
             },
         }

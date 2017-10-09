@@ -7,6 +7,7 @@ use App\Http\Requests\BillboardCreateRequest;
 use App\Http\Requests\BillboardUpdateRequest;
 use App\Models\Billboard;
 use App\Services\BillboardService;
+use Carbon\Carbon;
 
 class BillboardsController extends Controller
 {
@@ -39,6 +40,21 @@ class BillboardsController extends Controller
 
         return $response;
     }
+
+    public function csvUpload()
+    {
+        $files = request()->file('file');
+
+        if (!$files) {
+            return [];
+        }
+
+        $file = $files[0];
+        $data = $this->service->extractCsvFile($file->path());
+
+        return $data;
+    }
+
 
     public function update(BillboardUpdateRequest $request, Billboard $billboard)
     {

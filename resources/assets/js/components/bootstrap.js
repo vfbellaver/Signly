@@ -11,7 +11,9 @@ Vue.component('info-content', require('./map/InfoContent.vue'));
 Vue.component('team-list', require('./team/team-list.vue'));
 
 //CLIENT
-Vue.component('client-list', require('./client/client-list.vue'));
+Vue.component('client-list', require('./client/client-list'));
+Vue.component('client-create',require('./client/client-create'));
+Vue.component('client-edit',require('./client/client-edit'));
 
 // BILLBOARD
 Vue.component('billboard-list', require('./billboard/billboard-list'));

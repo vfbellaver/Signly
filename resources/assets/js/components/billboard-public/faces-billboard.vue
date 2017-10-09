@@ -1,10 +1,29 @@
 <template>
     <ul class="nav nav-tabs">
-        <li role="presentation" class="active"><a href="#">Home</a></li>
-        <li role="presentation"><a href="#">Profile</a></li>
-        <li role="presentation"><a href="#">Messages</a></li>
+        <li class="active"><a data-toggle="tab" href="#home">Home</a></li>
+        <li><a data-toggle="tab" href="#menu1">Menu 1</a></li>
+        <li><a data-toggle="tab" href="#menu2">Menu 2</a></li>
     </ul>
+
+
 </template>
+<style lang="scss" scoped="scoped">
+    .nav-tabs {
+        background-color: #eeeeee;
+        padding-top:5px;
+        padding-left:5px;
+        border: 1px solid #ddd;
+
+    }
+
+    .tab-content {
+        color : #000000;
+        background-color: #ffffff;
+        padding : 5px 15px;
+        margin-top: -1px;
+        border: 1px solid #ddd;
+    }
+</style>
 <script>
     export default{
         props: {

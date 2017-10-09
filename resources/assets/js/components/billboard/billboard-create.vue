@@ -5,7 +5,7 @@
             <box-content>
                 <form-submit v-model="form" @submit="save">
                     <div class="row">
-                        <div class="col-md-6 col-md-offset-3">
+                        <div class="col-md-12">
                             <form-group :form="form" field="name">
                                 <input-label for="name">Name: </input-label>
                                 <input-text v-model="form.name" id="name" name="name"></input-text>
@@ -55,7 +55,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-6 col-md-offset-3">
+                        <div class="col-md-12">
                             <hr>
                             <btn-submit :disabled="form.busy">
                                 <spinner v-if="form.busy"></spinner>

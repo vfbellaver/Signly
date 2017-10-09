@@ -1,5 +1,39 @@
 <?php
 
+function csv_to_array($filename, $delimiter = ',')
+{
+    if (!$filename) {
+        return false;
+    }
+    $header = null;
+    $data = null;
+
+    $handle = @fopen($filename, 'r');
+    if (!$handle) {
+        return [];
+    }
+
+
+    while (($row = fgetcsv($handle, 1000, $delimiter)) !== false) {
+        $normalizedRow = [];
+        foreach ($row as $key => $value) {
+            $normalizedRow[trim($key)] = trim($value);
+        }
+        if (!$header) {
+            $header = $normalizedRow;
+            continue;
+        }
+        for ($i = count($normalizedRow); $i < count($header); $i++) {
+            $normalizedRow[] = null;
+        }
+        $data[] = array_combine($header, $normalizedRow);
+    }
+
+    fclose($handle);
+
+    return $data;
+
+}
 
 function route_contains($name, $operator = '=')
 {
