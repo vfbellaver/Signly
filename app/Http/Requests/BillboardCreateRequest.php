@@ -24,7 +24,6 @@ class BillboardCreateRequest extends BaseRequest
             'address' => 'required',
             'lat' => 'required',
             'lng' => 'required',
-            'digital_driveby' => 'nullable|url',
         ];
     }
 }

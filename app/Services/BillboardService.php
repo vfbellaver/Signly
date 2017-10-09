@@ -19,13 +19,19 @@ class BillboardService
             $data = [
                 'name' => $form->name(),
                 'description' => $form->description(),
-                'digital_driveby' => $form->digitalDriveby(),
                 'address' => $form->address(),
                 'lat' => $form->lat(),
                 'lng' => $form->lng(),
+                'heading' => $form->heading(),
+                'pitch' => $form->pitch(),
+                'zoom' => $form->zoom(),
+                'pano' => $form->pano(),
+
             ];
 
             $billboard = new Billboard($data);
+            $billboard->user()->associate($form->user());
+            $billboard->team()->associate($form->team());
 
             $billboard->save();
 
@@ -40,10 +46,13 @@ class BillboardService
 
             $billboard->name = $form->name();
             $billboard->description = $form->description();
-            $billboard->digital_driveby = $form->digitalDriveby();
             $billboard->address = $form->address();
             $billboard->lat = $form->lat();
             $billboard->lng = $form->lng();
+            $billboard->heading = $form->heading();
+            $billboard->pitch = $form->pitch();
+            $billboard->zoom = $form->zoom();
+            $billboard->pano = $form->pano();
 
             $billboard->save();
 
@@ -73,6 +82,11 @@ class BillboardService
                 'address' => null,
                 'lat' => null,
                 'lng' => null,
+                'heading' => null,
+                'pitch' => null,
+                'zoom' => null,
+                'pano' => null,
+
             ];
             $billboard = array_intersect_key($row, $billboard);
             $billboard['faces'] = [];
