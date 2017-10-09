@@ -6,11 +6,6 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateBillboardFacesTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create('billboard_faces', function (Blueprint $table) {
@@ -31,18 +26,18 @@ class CreateBillboardFacesTable extends Migration
             $table->text('photo')->nullable();
             $table->time('lights_on')->nullable();
             $table->time('lights_off')->nullable();
-            $table->integer('billboard_id')->unsigned()->nullable();
 
-            $table->foreign('billboard_id')->references('id')->on('billboards')->onDelete('set null')->onUpdate('cascade');
+            $table->unsignedInteger('billboard_id');
+            $table->foreign('billboard_id')
+                ->references('id')
+                ->on('billboards')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('billboard_faces');

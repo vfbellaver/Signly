@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class BillboardSeeder extends Seeder
+class BillboardsTableSeeder extends Seeder
 {
     public function run()
     {
