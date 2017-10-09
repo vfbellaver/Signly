@@ -23,8 +23,7 @@
                                 <tr>
                                     <th style="width: 50px"></th>
                                     <th style="width: 300px">Name</th>
-                                    <th style="width: 600px" class="hidden-sm">Address</th>
-                                    <th>Driveby</th>
+                                    <th style="width: 600px" class="hidden-sm">Address</th>>
                                 </tr>
                             </thead>
                             <tbody>
