@@ -272,8 +272,8 @@
             updatePov(pov) {
                 this.pov = pov;
                 this.form.heading = pov.heading;
-                console.log('Pov Changed: ',pov);
                 this.form.pitch = pov.pitch;
+                console.log('Pov Changed: ',pov);
             },
 
             updatePano(pano) {
