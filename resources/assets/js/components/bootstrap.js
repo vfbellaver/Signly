@@ -12,7 +12,8 @@ Vue.component('info-content-two', require('./map/InfoContent2'));
 Vue.component('team-list', require('./team/team-list.vue'));
 
 //CLIENT
-Vue.component('client-list', require('./client/client-list.vue'));
+Vue.component('client-list', require('./client/client-list'));
+Vue.component('client-form',require('./client/client-form'));
 
 // BILLBOARD
 Vue.component('billboard-list', require('./billboard/billboard-list'));
@@ -24,4 +25,5 @@ Vue.component('billboard-show', require('./billboard-public/billboard-show'));
 // Maps
 Vue.component('google-map', require('./map/google-map'));
 
+//DEMO
 Vue.component('parent', require('./demo/parent'));

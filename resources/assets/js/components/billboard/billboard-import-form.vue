@@ -65,7 +65,6 @@
         mixins: [ModalForm],
         data() {
             return {
-                api: 'csv',
             }
         },
 
@@ -80,7 +79,7 @@
             },
 
             save() {
-                const uri = laroute.route('api.csv.store');
+                const uri = laroute.route('api.billboard.import');
                 Slc.post(uri, this.form).then((response) => {
                     console.log('Post Billboards:', response);
                     this.saved(response.data, 'saved');

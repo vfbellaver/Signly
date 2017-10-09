@@ -1,35 +1,33 @@
 <template>
     <box>
-        <box-title>
-            Billboard Information
-        </box-title>
+        <box-title></box-title>
         <box-body>
             <column size="12">
                 <row>
                     <column size="7">
-                        <div class="card-body">
-                            <img :src="billboardFaces[0].photo"/>
-                        </div>
+                            <img class="imgface" :src="billboardFaces[0].photo"/>
                     </column>
 
                     <column class="img" size="5">
                         <gmap-map
+                                class="map"
                                 :center="center"
                                 :zoom="zoom"
-                                @click="onMapClick"
-                                @zoom_changed="onZoomChanged"
                                 :options="mapOptions"
                                 style="width: 100%; min-height: 320px">
                             <gmap-marker
                                     v-if="marker"
                                     :position="marker"
-                                    :clickable="true"
+                                    :clickable="false"
                                     :draggable="true"
-                                    @dragend="onMarkerMoved"
-                                    @click="center=marker"
                             ></gmap-marker>
                         </gmap-map>
-                       <h1>BILLBOARD INFORMATION</h1>
+                        <div class="billboard-info">
+                            <div class="card-body">
+                                <h4 class="card-title">Card title</h4>
+                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            </div>
+                        </div>
                     </column>
                 </row>
             </column>
@@ -41,6 +39,15 @@
     </box>
 </template>
 <style lang="scss" scoped="scoped">
+     .imgface {
+        max-width: 100%;
+     }
+
+    .billboard-info {
+        margin-top: 10px;
+        border: 2px solid #00A5E3;
+    }
+
 
 </style>
 <script>
@@ -56,21 +63,52 @@
 
         data(){
             return {
+                loaded: false,
+                marker: null,
+                zoom: 15,
+                center: null,
+                mapOptions: {
+                    mapTypeControl: false,
+                    scrollWell: true,
+                    gestureHandling: 'greedy'
+                },
+                zoomChanged: false,
                 billboardFaces: [],
+                billboard: {},
             }
         },
         mounted(){
-            this.load();
+            this.loadBillboard();
+            this.loadFaces();
         },
 
         methods: {
-            load() {
+            loadBillboard() {
+                this.loaded = false;
+
+                const uri = laroute.route('api.billboard.show', {billboard: this.id});
+                Slc.find(uri).then((billboard) => {
+                    console.log("Billboard loaded", billboard);
+                    this.billboard = billboard;
+                    const lat = Number.parseFloat(billboard.lat);
+                    const lng = Number.parseFloat(billboard.lng);
+
+                    this.center = {lat: lat, lng: lng};
+                    this.marker = {lat: lat, lng: lng};
+
+                    this.loaded = true;
+                });
+            },
+            loadFaces() {
                 let self = this;
                 Slc.get(laroute.route('api.billboard-face.index', {bid: this.id}))
                     .then((response) => {
                         self.billboardFaces = response;
                     });
             },
+            onMapClick(){ return false},
+            onZoomChanged(){ return false},
+            onMarkerMoved(){ return false},
         }
     }
 </script>
