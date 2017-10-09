@@ -9,21 +9,23 @@
                     <box-tool class="green" icon="map-marker" @click.native="goToHome">Map View</box-tool>
                 </box-tools>
             </box-title>
-            <box-content>
-                <div class="row">
-                    <div class="col-md-4" v-for="billboard in billboards">
-                        <billboard-card :key="billboard.id" billboard="billboard"></billboard-card>
-                    </div>
-                </div>
-            </box-content>
         </box>
+
+        <div class="row results">
+            <div class="col-md-4" v-for="billboard in billboards">
+                <billboard-card :billboard="billboard" @edit="edit" @destroy="destroy"></billboard-card>
+            </div>
+        </div>
+
         <billboard-import-form @saved="reload" ref="formCsv"></billboard-import-form>
     </div>
 </template>
 
 <style lang="scss" scoped="scoped">
-    .green:hover {
-        color: #7aa32b;
+    .results {
+        .ibox {
+            margin-top: 0;
+        }
     }
 </style>
 
