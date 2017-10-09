@@ -10,8 +10,11 @@
                 </box-tools>
             </box-title>
             <box-content>
-                <billboard-card :key="billboard.id" billboard="billboard"
-                                v-for="billboard in billboards"></billboard-card>
+                <div class="row">
+                    <div class="col-md-4" v-for="billboard in billboards">
+                        <billboard-card :key="billboard.id" billboard="billboard"></billboard-card>
+                    </div>
+                </div>
             </box-content>
         </box>
         <billboard-import-form @saved="reload" ref="formCsv"></billboard-import-form>
