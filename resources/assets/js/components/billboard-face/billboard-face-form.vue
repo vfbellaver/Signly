@@ -177,7 +177,6 @@
         },
 
         mounted() {
-            this.form.is_iluminated = false;
         },
 
         watch: {
@@ -244,7 +243,7 @@
                 return new SlcForm(data);
             },
             setStatus(value, item) {
-                item.is_iluminated = value;
+                item.is_illuminated = value;
                 if (!value) {
                     this.form.lights_on = null;
                     this.form.lights_off = null;

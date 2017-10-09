@@ -5,7 +5,8 @@ Vue.component('user-list', require('./user/user-list.vue'));
 Vue.component('user-settings', require('./user/user-settings'));
 
 Vue.component('main-map', require('./map/main-map.vue'));
-Vue.component('info-content', require('./map/InfoContent.vue'));
+Vue.component('info-content', require('./map/InfoContent'));
+Vue.component('info-content-two', require('./map/InfoContent2'));
 
 //TEAM
 Vue.component('team-list', require('./team/team-list.vue'));

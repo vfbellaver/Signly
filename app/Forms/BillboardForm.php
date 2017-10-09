@@ -2,6 +2,9 @@
 
 namespace App\Forms;
 
+use App\Models\Team;
+use App\Models\User;
+
 class BillboardForm extends BaseForm
 {
 	public function name()
@@ -12,11 +15,6 @@ class BillboardForm extends BaseForm
 	public function description()
 	{
 		return $this->request->get('description');
-	}
-
-	public function digitalDriveby()
-	{
-		return $this->request->get('digital_driveby');
 	}
 
 	public function address()
@@ -34,5 +32,35 @@ class BillboardForm extends BaseForm
 		return $this->request->get('lng');
 	}
 
+    public function heading()
+    {
+        return $this->request->get('heading');
+    }
 
+    public function pitch()
+    {
+        return $this->request->get('pitch');
+    }
+
+    public function zoom()
+    {
+        return $this->request->get('zoom');
+    }
+
+    public function pano()
+    {
+        return $this->request->get('pano');
+    }
+
+    public function user()
+    {
+        $user = $this->request->get('user');
+        return User::query()->findOrFail($user->id);
+    }
+
+    public function team()
+    {
+        $team = $this->request->get('team');
+        return Team::query()->findOrFail($team->id);
+    }
 }

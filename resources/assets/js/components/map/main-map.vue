@@ -10,11 +10,11 @@
                     :position="infoWindowPos"
                     :opened="infoWinOpen"
                     @closeclick="infoWinOpen=false">
-                <info-content
+                <info-content-two
 
-                        :billboard="billboard"
+                        :billboard-faces="billboardFaces"
                 >
-                </info-content>
+                </info-content-two>
             </gmap-info-window>
         <gmap-marker
                 :key="i"
@@ -33,6 +33,7 @@
             return {
 
                 billboards: [],
+                billboardFaces: [],
 
                 infoShow: false,
 
@@ -77,7 +78,7 @@
             },
 
             reloadMarkers () {
-
+                const self = this;
                 for(let i = 0; i < this.billboards.length; i++) {
                   this.markers.push({
                         position: {
@@ -91,14 +92,12 @@
 
             },
 
-            popovers(){
-
-            },
-
             toggleInfoWindow: function(marker, idx) {
 
                 this.infoWindowPos = marker.position;
                 this.billboard = marker.infoText;
+                console.log('Billboard Id ',this.billboard.id);
+                this.loadFaces(this.billboard.id);
 
 
                 //check if its the same marker that was selected if yes toggle
@@ -110,7 +109,15 @@
                     this.infoWinOpen = true;
                     this.currentMidx = idx;
                 }
-            }
+            },
+
+            loadFaces(billboardId) {
+                Slc.get(laroute.route('api.billboard-face.index', {bid: billboardId}))
+                    .then((response) => {
+                        console.log('Response ', response);
+                        this.billboardFaces = response;
+                    });
+            },
 
         }
     }
