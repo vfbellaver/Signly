@@ -22,14 +22,10 @@ class BillboardService
                 'lng' => $form->lng(),
                 'heading' => $form->heading(),
                 'pitch' => $form->pitch(),
-                'zoom' => $form->zoom(),
-                'pano' => $form->pano(),
-
             ];
 
             $billboard = new Billboard($data);
             $billboard->user()->associate($form->user());
-            $billboard->team()->associate($form->team());
 
             $billboard->save();
 

@@ -52,13 +52,11 @@
                     </div>
                 </nav>
             </div>
-            @if(route('home'))
-                @yield('content')
-            @else
-                <div class="wrapper wrapper-content">
-                    @yield('content')
-                </div>
-            @endif
+
+            <inspinia-page-heading v-if="pageHeading" :data="pageHeading"></inspinia-page-heading>
+
+            @yield('content')
+
             <div class="footer">
                 <div>
                     <strong>Copyright</strong> Slc DevShop &copy; 2014-2017

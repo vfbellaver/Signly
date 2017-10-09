@@ -37,6 +37,7 @@ window.App = new Vue({
         return {
             user: 'Slc' in window ? Slc.user : null,
             settings: 'Slc' in window ? Slc.settings : null,
+            pageHeading: null,
             isMenuVisible: true,
         }
     },
@@ -57,6 +58,10 @@ window.App = new Vue({
                 .then(response => {
                     self.user = response.data;
                 });
+        });
+
+        EventBus.$on('pageHeadingLoaded', (pageHeading) => {
+            self.pageHeading = pageHeading;
         });
     },
 });

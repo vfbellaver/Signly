@@ -10,7 +10,7 @@ class HomeController extends Controller
     public function index()
     {
 
-      return view('map.main_map');
+        return view('home');
 
     }
 }

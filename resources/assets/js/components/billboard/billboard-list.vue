@@ -1,23 +1,17 @@
 <template>
     <div>
-        <box>
-            <box-title>
-                Billboards
-                <box-tools slot="tools">
-                    <box-tool icon="plus" @click.native="create">New</box-tool>
-                    <box-tool icon="upload" @click.native="importBillboards">Import Billboards</box-tool>
-                    <box-tool class="green" icon="map-marker" @click.native="goToHome">Map View</box-tool>
-                </box-tools>
-            </box-title>
-        </box>
-
+        <box-tools slot="tools" class="white-bg">
+            <box-tool icon="plus" @click.native="create">New</box-tool>
+            <box-tool icon="upload" @click.native="importBillboards">Import</box-tool>
+            <box-tool class="green" icon="map-marker" @click.native="goToHome">Map</box-tool>
+        </box-tools>
         <div class="row results">
             <div class="col-md-4" v-for="billboard in billboards">
                 <billboard-card :billboard="billboard" @edit="edit" @destroy="destroy"></billboard-card>
             </div>
         </div>
-
-        <billboard-import-form @saved="reload" ref="formCsv"></billboard-import-form>
+        <billboard-form ref="form" @saved="edit"></billboard-form>
+        <billboard-import-form ref="importForm" @saved="reload"></billboard-import-form>
     </div>
 </template>
 
@@ -34,11 +28,13 @@
     import * as Slc from "../../vue/http";
 
     import BillboardCard from './billboard-card';
+    import BillboardForm from './billboard-form';
     import BillboardImportForm from './billboard-import-form';
 
     export default {
         components: {
             BillboardCard,
+            BillboardForm,
             BillboardImportForm,
         },
         data() {
@@ -46,18 +42,27 @@
                 billboards: [],
             }
         },
+        created() {
+            const pageHeading = {
+                title: 'Billboard List',
+                breadcrumb: [
+                    {title: 'Home', url: laroute.route('home')}
+                ]
+            };
+            EventBus.$emit('pageHeadingLoaded', pageHeading);
+        },
         mounted() {
             this.reload();
         },
         methods: {
             create() {
-                window.location = laroute.route('billboards.create');
+                this.$refs.form.show();
             },
             edit(billboard) {
                 window.location = laroute.route("billboards.edit", {billboard: billboard.id});
             },
             importBillboards() {
-                this.$refs.formCsv.show();
+                this.$refs.importForm.show();
             },
             goToHome() {
                 window.location = "/";
