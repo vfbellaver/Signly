@@ -132,7 +132,7 @@ class BillboardService
     public function import($data)
     {
         return \DB::transaction(function () use ($data) {
-
+            $events = [];
             $billboards = $data['billboards'];
             $savedBillboards = [];
 
@@ -147,6 +147,9 @@ class BillboardService
                     'user_id' => $data['user_id'],
                 ]);
 
+                $events[] = new BillboardCreated($billboard);
+
+                $savedBillboards[] = $billboard;
                 $faces = $blb['faces'];
 
                 //create as faces relations
@@ -155,9 +158,13 @@ class BillboardService
                     $billboardFace->billboard()->associate($billboard);
                     $billboardFace->save();
 
+                    $events[] = new BillboardFaceCreated($billboardFace);
                 }
             }
 
+            foreach ($events as $event){
+                event($event);
+            }
             return $savedBillboards;
         });
     }
