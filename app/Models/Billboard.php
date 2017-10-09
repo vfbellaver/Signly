@@ -9,10 +9,13 @@ class Billboard extends Model
     protected $fillable = [
 		'name',
 		'description',
-		'digital_driveby',
 		'address',
 		'lat',
 		'lng',
+		'heading',
+		'pitch',
+		'zoom',
+		'pano',
     ];
 
     protected $casts = [
@@ -24,6 +27,15 @@ class Billboard extends Model
     #region Relationships
     #region
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function team()
+    {
+        return $this->belongsTo(Team::class);
+    }
     #region Custom Attributes
 
     #endregion
@@ -43,6 +55,12 @@ class Billboard extends Model
 			'address' => $this->address,
 			'lat' => $this->lat,
 			'lng' => $this->lng,
+            'heading' => $this->heading,
+            'pitch' => $this->pitch,
+            'zoom'=> $this->zoom,
+            'pano' => $this->pano,
+            'user' => $this->user->toArray(),
+            'team' => $this->team->toArray(),
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at
         ];
