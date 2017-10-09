@@ -4,9 +4,11 @@ namespace App\Services;
 
 use App\Events\BillboardCreated;
 use App\Events\BillboardDeleted;
+use App\Events\BillboardFaceCreated;
 use App\Events\BillboardUpdated;
 use App\Forms\BillboardForm;
 use App\Models\Billboard;
+use App\Models\BillboardFace;
 use Carbon\Carbon;
 
 class BillboardService
@@ -120,10 +122,28 @@ class BillboardService
             $billboards = $data['billboards'];
             $savedBillboards = [];
 
-            foreach ($billboards as $billboard) {
-                //criar o billboard
+            foreach ($billboards as $blb) {
+                //create o billboard
+                $billboard = new Billboard();
+                $billboard->name = $blb['name'];
+                $billboard->description = $blb['description'];
+                $billboard->address = $blb['address'];
+                $billboard->lat = $blb['lat'];
+                $billboard->lng = $blb['lng'];
+                $faces = $blb['faces'];
 
-                //criar as faces relacionadas
+                $billboard->save();
+                event(new BillboardCreated($billboard));
+
+                //create as faces relations
+                foreach ($faces as $face) {
+                    $billboardFace = new BillboardFace($face);
+                    $billboardFace->billboard()->associate($billboard);
+                    $billboardFace->save();
+
+                    event(new BillboardFaceCreated($billboardFace));
+
+                }
             }
 
             return $savedBillboards;
