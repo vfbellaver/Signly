@@ -15,13 +15,12 @@
             <div class="row  m-t-sm">
                 <div class="col-md-12">
                     <div class="btn-group pull-right">
-                        <button class="btn btn-white btn-xs" @click="edit"><i class="fa fa-edit"></i> Edit</button>
-                        <button class="btn btn-white btn-xs" @click="destroy"><i class="fa fa-trash"></i> Delete
+                        <button class="btn btn-white btn-sm" @click="edit"><i class="fa fa-edit"></i> Edit</button>
+                        <button class="btn btn-white btn-sm" @click="destroy"><i class="fa fa-trash"></i> Delete
                         </button>
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 </template>
