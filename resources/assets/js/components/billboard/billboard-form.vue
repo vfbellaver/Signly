@@ -25,6 +25,7 @@
                             <gmap-marker
                                     v-if="marker"
                                     :position="marker"
+                                    :icon="markerIcon"
                                     :clickable="true"
                                     :draggable="true"
                                     @dragend="onMarkerMoved"
@@ -58,13 +59,17 @@
 <script>
     import * as Slc from "../../vue/http";
     import ModalForm from '../shared/Mixins/ModalForm';
-
     export default {
         mixins: [ModalForm],
         data() {
             return {
                 api: 'billboard',
                 marker: null,
+                markerIcon: {
+                    url: 'http://signly.dev/images/pin.png',
+                    size: {width: 48, height: 48, f: 'px', b: 'px'},
+                    scaledSize: {width: 48, height: 48, f: 'px', b: 'px'}
+                },
                 zoom: 20,
                 center: {lat: 39.3209801, lng: -111.09373110000001},
                 mapOptions: {

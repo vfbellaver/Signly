@@ -35,6 +35,7 @@
                                         <gmap-marker
                                                 v-if="marker"
                                                 :position="marker"
+                                                :icon="markerIcon"
                                                 :clickable="true"
                                                 :draggable="true"
                                                 @dragend="onMarkerMoved"
@@ -43,7 +44,7 @@
                                     </gmap-map>
                                     <hr />
                                     <gmap-street-view-panorama
-                                            v-if="loaded"
+                                            v-if="streetViewLoaded"
                                             class="pano"
                                             :position="center"
                                             :pov="pov"
@@ -89,45 +90,46 @@
     .top-navigation .wrapper.wrapper-content {
         padding-top: 0;
     }
-
     .margin-billboard-edit {
         margin-right: 5px;
     }
-
     .vue-street-view-pano-container {
         min-height: 360px;
     }
 </style>
 
 <script>
-
     import _ from 'lodash';
     import * as Slc from "../../vue/http";
     import BillboardFaceList from '../billboard-face/billboard-face-list';
-
     export default {
-
         props: {
             id: {required: true},
         },
-
         components: {
             BillboardFaceList
         },
-
         data() {
             return {
                 form: new SlcForm({}),
                 loaded: false,
                 marker: null,
+                markerIcon: {
+                    url: '/images/pin.png',
+                    size: {width: 48, height: 48, f: 'px', b: 'px'},
+                    scaledSize: {width: 48, height: 48, f: 'px', b: 'px'}
+                },
                 zoom: 7,
+                showPOV: false,
                 center: null,
+                position: null,
                 mapOptions: {
                     mapTypeControl: false,
                     scrollWell: true,
                     gestureHandling: 'greedy'
                 },
                 pov: null,
+                streetViewLoaded: false,
                 pano: null,
                 zoomChanged: false,
                 billboardFaces: [],
@@ -141,28 +143,23 @@
                 },
             }
         },
-
         watch: {
             'form.address': function () {
                 this.onAddressChange();
             }
         },
-
         created() {
             this.load();
         },
-
         methods: {
             load() {
                 this.loaded = false;
-
                 const uri = laroute.route('api.billboard.show', {billboard: this.id});
                 Slc.find(uri).then((billboard) => {
                     console.log("Billboard loaded", billboard);
                     this.center = billboard.position;
                     this.marker = billboard.position;
                     this.pov = billboard.pov;
-
                     this.form = new SlcForm({
                         id: billboard.id,
                         name: billboard.name,
@@ -173,10 +170,10 @@
                         heading: billboard.heading,
                         pitch: billboard.pitch
                     });
+                    this.streetViewLoaded = true;
                     this.loaded = true;
                 });
             },
-
             reloadForm() {
                 //this.form.he this.pov.heading;
             },
@@ -191,7 +188,6 @@
             buildForm(billboard) {
                 this.address = null;
                 this.zoomChanged = false;
-
                 return new SlcForm({
                     id: billboard.id,
                     name: billboard.name,
@@ -204,13 +200,11 @@
             },
 
             onMapClick(e) {
-
                 const self = this;
                 console.log(e);
                 if (this.marker) {
                     return;
                 }
-
                 const geocoder = new google.maps.Geocoder;
                 const pos = {
                     lat: e.latLng.lat(),
@@ -229,9 +223,9 @@
                     self.form.lat = pos.lat;
                     self.form.lng = pos.lng;
                 });
-
                 this.marker = pos;
                 this.center = pos;
+
                 if (self.zoomChanged) {
                     return;
                 }
@@ -262,6 +256,12 @@
                     self.form.lng = pos.lng;
                     self.marker = pos;
                     self.center = pos;
+
+                    self.streetViewLoaded = false;
+                    self.$nextTick(()=>{
+                        self.streetViewLoaded = true;
+                    });
+
                     if (self.zoomChanged) {
                         return;
                     }
@@ -279,7 +279,13 @@
                 this.form.lng = pos.lng;
                 this.marker = pos;
                 this.center = pos;
+                console.log('Is center chaged', this.center );
+                this.streetViewLoaded = false;
+                this.$nextTick(()=>{
+                    this.streetViewLoaded = true;
+                });
             }),
+
 
             updatePov(pov) {
                 console.log('Pov Changed: ', pov);
@@ -293,5 +299,4 @@
             }
         }
     }
-
 </script>

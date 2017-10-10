@@ -9,6 +9,13 @@
                     <div>{{billboard.address}}</div>
                     <h4>Location</h4>
                     <div>{{billboard.lat}}, {{billboard.lng}}</div>
+                    <div class="pull-right">
+                        <btn-submit
+                         @click.native="edit(billboard)"
+                        >
+                            EDIT
+                        </btn-submit>
+                    </div>
                 </div>
             </tab>
             <tab :key="face.id" v-for="face in billboard.billboard_faces" :name="face.code">
@@ -73,7 +80,12 @@
             console.log("Billboard Info", this.billboard);
         },
 
-        methods: {}
+        methods: {
+
+            edit(billboard) {
+                window.location = laroute.route("billboards.edit", {billboard: billboard.id});
+            },
+        }
 
     }
 </script>

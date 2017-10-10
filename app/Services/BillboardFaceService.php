@@ -28,6 +28,7 @@ class BillboardFaceService
 				'is_illuminated' => $form->isIlluminated(),
                 'lights_on' => $form->lightsOn(),
                 'lights_off' => $form->lightsOff(),
+                'type' => $form->type(),
             ];
 
             $billboardFace = new BillboardFace($data);
@@ -59,6 +60,7 @@ class BillboardFaceService
 			$billboardFace->is_illuminated = $form->isIlluminated();
 			$billboardFace->lights_on = $form->lightsOn();
 			$billboardFace->lights_off = $form->lightsOff();
+			$billboardFace->type = $form->type();
 			$billboardFace->billboard()->associate($form->billboard());
 
             $billboardFace->save();
