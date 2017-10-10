@@ -31,6 +31,7 @@ class ClientService
             ];
 
             $client = new Client($data);
+            $client->user()->associate($form->user());
             $client->save();
 
             event(new ClientCreated($client));

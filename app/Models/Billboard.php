@@ -62,6 +62,10 @@ class Billboard extends Model
             'pitch' => $this->pitch,
             'user' => $this->user->toArray(),
             'billboard_faces' => $this->billboardFaces->toArray(),
+            'position' => [
+                'lat' => $this->lat,
+                'lng' => $this->lng,
+            ]
         ];
     }
     #endregion

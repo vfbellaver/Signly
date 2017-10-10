@@ -16,6 +16,13 @@ class ClientCreateRequest extends BaseRequest
         return true;
     }
 
+    protected function prepareForValidation()
+    {
+        $data = request()->all();
+        $data['user'] = auth()->user();
+        $this->request->replace($data);
+    }
+
     public function rules()
     {
         return [

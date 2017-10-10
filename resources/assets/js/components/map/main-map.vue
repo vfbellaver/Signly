@@ -4,20 +4,21 @@
             :options="mapOptions"
             :center="center"
             :zoom="10">
-        <gmap-info-window
-                :options="infoOptions"
-                :position="infoWindowPos"
-                :opened="infoWinOpen"
-                @closeclick="infoWinOpen=false">
-            <billboard-info :billboardFaces="billboardFaces"></billboard-info>
-        </gmap-info-window>
         <gmap-marker
-                :key="i"
-                v-for="(m,i) in markers"
+                :key="m.billboard.id"
+                v-for="m in markers"
                 :position="m.position"
+                :icon="markerIcon"
                 :clickable="true"
-                @click="toggleInfoWindow(m,i)">
+                @click="openInfoWindow(m)">
         </gmap-marker>
+
+        <gmap-info-window
+                :opened="(billboard !== null)"
+                :position="(billboard !== null) ? billboard.position : null"
+                @closeclick="billboard = null">
+            <billboard-info v-if="billboard" :billboard="billboard"></billboard-info>
+        </gmap-info-window>
     </gmap-map>
 </template>
 
@@ -48,11 +49,9 @@
             return {
                 loaded: false,
                 billboards: [],
-                billboardFaces: [],
                 billboard: null,
 
                 center: null,
-                markers: [],
                 zoom: null,
                 mapOptions: {
                     scrollWell: true,
@@ -60,15 +59,14 @@
                     gestureHandling: 'greedy',
                 },
 
-                infoShow: false,
-                infoWinOpen: false,
-                infoWindowPos: null,
-                infoOptions: {
-                    maxWidth: 800,
-                    width: 800,
-                    minHeight: 600,
-                    height: 600,
+                markerIcon: {
+                    url: 'http://signly.dev/images/pin.png',
+                    size: {width: 48, height: 48, f: 'px', b: 'px'},
+                    scaledSize: {width: 48, height: 48, f: 'px', b: 'px'}
                 },
+                markers: [],
+
+                infoWindowPos: null,
             }
         },
 
@@ -94,37 +92,16 @@
                                     lat: parseFloat(this.billboards[i].lat),
                                     lng: parseFloat(this.billboards[i].lng)
                                 },
-                                infoText: this.billboards[i],
+                                billboard: this.billboards[i],
                             });
                         }
                     });
             },
 
-            toggleInfoWindow: function (marker, idx) {
-
-                console.log('Billboard Id ', this.billboard.id);
-
-                this.infoWindowPos = marker.position;
-                this.billboard = marker.infoText;
-                this.loadFaces(this.billboard.id);
-
-                if (this.currentMidx === idx) {
-                    this.infoWinOpen = !this.infoWinOpen;
-                }
-                else {
-                    this.infoWinOpen = true;
-                    this.currentMidx = idx;
-                }
+            openInfoWindow: function (marker) {
+                console.log("Open Info Window", marker.billboard);
+                this.billboard = marker.billboard;
             },
-
-            loadFaces(billboardId) {
-                Slc.get(laroute.route('api.billboard-face.index', {bid: billboardId}))
-                    .then((response) => {
-                        console.log('Response ', response);
-                        this.billboardFaces = response;
-                    });
-            },
-
         }
     }
 </script>

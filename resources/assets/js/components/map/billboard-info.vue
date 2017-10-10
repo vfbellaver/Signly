@@ -1,54 +1,61 @@
 <template>
     <div class="info-window">
-        <div class="tab-content">
-            <div class="tabs-container">
-                <div class="tabs-left">
-                    <ul class="nav nav-tabs">
-                        <li class="active"><a data-toggle="tab" href="#tab-6" aria-expanded="true"> This is tab</a></li>
-                        <li class=""><a data-toggle="tab" href="#tab-7" aria-expanded="false">This is second tab</a>
-                        </li>
-                    </ul>
-                    <div class="tab-content ">
-                        <div id="tab-6" class="tab-pane active">
-                            <div class="panel-body">
-                                <strong>Lorem ipsum dolor sit amet, consectetuer adipiscing</strong>
-
-                                <p>
-                                    A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart. I am alone, and feel the charm of
-                                    existence in this spot, which was created for the bliss of souls like mine.</p>
-
-                                <p>
-                                    I am so happy, my dear friend, so absorbed in the exquisite sense of mere tranquil existence, that I neglect my talents. I should be incapable of drawing a single stroke at
-                                    the present moment; and yet I feel that I never was a greater artist than now. When.</p>
-                            </div>
-                        </div>
-                        <div id="tab-7" class="tab-pane">
-                            <div class="panel-body">
-                                <strong>Donec quam felis</strong>
-
-                                <p>
-                                    Thousand unknown plants are noticed by me: when I hear the buzz of the little world among the stalks, and grow familiar with the countless indescribable forms of the insects
-                                    and flies, then I feel the presence of the Almighty, who formed us in his own image, and the breath </p>
-
-                                <p>
-                                    I am alone, and feel the charm of existence in this spot, which was created for the bliss of souls like mine. I am so happy, my dear friend, so absorbed in the exquisite
-                                    sense of mere tranquil existence, that I neglect my talents. I should be incapable of drawing a single stroke at the present moment; and yet.</p>
-                            </div>
-                        </div>
-                    </div>
-
+        <tabs>
+            <tab name="Billboard" :selected="true">
+                <div>
+                    <h3>{{billboard.name}}</h3>
+                    <p class="description">{{billboard.description}}</p>
+                    <h4>Address</h4>
+                    <div>{{billboard.address}}</div>
+                    <h4>Location</h4>
+                    <div>{{billboard.lat}}, {{billboard.lng}}</div>
                 </div>
-
-            </div>
-        </div>
+            </tab>
+            <tab :key="face.id" v-for="face in billboard.billboard_faces" :name="face.code">
+                <h3>{{face.label}}</h3>
+                <div class="row">
+                    <div class="col-xs-4 no-padding">
+                        <img class="img-responsive" :src="face.photo" alt="label"/>
+                    </div>
+                    <div class="col-xs-7">
+                        <dl class="dl-horizontal">
+                            <dt>Type:</dt>
+                            <dd>Static</dd>
+                            <dt>Reads:</dt>
+                            <dd>{{face.reads}}</dd>
+                            <dt>Dimensions:</dt>
+                            <dd>{{face.width}} x {{face.height}}</dd>
+                            <dt>DEC:</dt>
+                            <dd>{{face.reads}}</dd>
+                            <dt>Rate Card:</dt>
+                            <dd>{{face.hard_cost}}</dd>
+                        </dl>
+                    </div>
+                </div>
+            </tab>
+        </tabs>
     </div>
 </template>
 
 <style lang="scss" scoped="true">
     .info-window {
-        min-width: 480px;
+        min-width: 600px;
         min-height: 256px;
         padding: 25px;
+        .description {
+            text-align: justify;
+        }
+        .img-responsive {
+            max-width: 100%;
+        }
+        .dl-horizontal {
+            dt {
+                width: 80px;
+            }
+            dd {
+                margin-left: 92px;
+            }
+        }
     }
 </style>
 
@@ -59,47 +66,14 @@
     export default {
 
         props: {
-
-            billboardFaces: {
-                required: true,
-            },
-
+            billboard: {required: true},
         },
 
-        data() {
-            return {
-                pages: {
-                    index: null,
-                    page: {
-                        view: false,
-                    },
-                }
-            }
+        created() {
+            console.log("Billboard Info", this.billboard);
         },
 
-        computed: {},
-
-        mounted() {
-            //this.setCurrentPage();
-        },
-
-        methods: {
-
-            showMe(position) {
-                this.pages.index = position;
-                return this.pages.view = true;
-            },
-
-            formatMoney(money) {
-                money = money.toString();
-                let tmp = money.replace(".", "");
-                tmp = tmp.replace(/([0-9]{2})$/g, ",$1");
-                if (tmp.length > 6)
-                    tmp = tmp.replace(/([0-9]{3}),([0-9]{2}$)/g, ".$1,$2");
-
-                return tmp;
-            }
-        }
+        methods: {}
 
     }
 </script>
