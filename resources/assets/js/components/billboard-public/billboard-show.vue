@@ -1,114 +1,183 @@
 <template>
-    <box>
-        <box-title></box-title>
-        <box-body>
-            <column size="12">
-                <row>
-                    <column size="7">
-                            <img class="imgface" :src="billboardFaces[0].photo"/>
-                    </column>
+    <div>
 
-                    <column class="img" size="5">
-                        <gmap-map
-                                class="map"
-                                :center="center"
-                                :zoom="zoom"
-                                :options="mapOptions"
-                                style="width: 100%; min-height: 320px">
-                            <gmap-marker
-                                    v-if="marker"
-                                    :position="marker"
-                                    :clickable="false"
-                                    :draggable="true"
-                            ></gmap-marker>
-                        </gmap-map>
-                        <div class="billboard-info">
-                            <div class="card-body">
-                                <h4 class="card-title">Card title</h4>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        <inspinia-page-heading v-if="pageHeading" :data="pageHeading"></inspinia-page-heading>
+
+        <div class="wrapper wrapper-content">
+            <div class="container-fluid">
+                <box>
+                    <box-content>
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <h3>
+                                        <small>Name:</small>
+                                        {{billboard.name}}
+                                        <small>Description:</small>
+                                        {{billboard.description}}
+                                    </h3>
+                                    <h4>Description</h4>
+                                    <p class="description">{{billboard.description}}</p>
+                                    <hr/>
+
+                                    <gmap-map
+                                            v-if="loaded"
+                                            :center="center"
+                                            :zoom="zoom"
+                                            @click="onMapClick"
+                                            @zoom_changed="onZoomChanged"
+                                            :options="mapOptions"
+                                            style="width: 100%; min-height: 320px">
+                                        <gmap-marker
+                                                v-if="marker"
+                                                :position="marker"
+                                                :clickable="true"
+                                                :draggable="true"
+                                                @dragend="onMarkerMoved"
+                                                @click="center=marker"
+                                        ></gmap-marker>
+                                    </gmap-map>
+                                    <hr />
+                                    <gmap-street-view-panorama
+                                            v-if="loaded"
+                                            class="pano"
+                                            :position="center"
+                                            :pov="pov"
+                                            :zoom="1"
+                                            @pano_changed="updatePano"
+                                            @pov_changed="updatePov">
+                                    </gmap-street-view-panorama>
+
+                                </div>
+                                <div class="col-md-7" v-if="billboard.id">
+
+                                        <billboard-face-list :billboardId="billboard.id"></billboard-face-list>
+
+                                </div>
                             </div>
-                        </div>
-                    </column>
-                </row>
-            </column>
-            <!-- navbar faces -->
-            <column size="12">
-                <faces-billboard :billboardId="id"></faces-billboard>
-            </column>
-        </box-body>
-    </box>
-</template>
-<style lang="scss" scoped="scoped">
-     .imgface {
-        max-width: 100%;
-     }
 
-    .billboard-info {
-        margin-top: 10px;
-        border: 2px solid #00A5E3;
+
+                    </box-content>
+                </box>
+            </div>
+        </div>
+    </div>
+</template>
+
+<style lang="scss" scoped="scoped">
+    .top-navigation .wrapper.wrapper-content {
+        padding-top: 0;
     }
 
+    .margin-billboard-edit {
+        margin-right: 5px;
+    }
 
+    .vue-street-view-pano-container {
+        min-height: 360px;
+    }
 </style>
+
 <script>
-    import FacesBillboard from './faces-billboard.vue'
+
+    import _ from 'lodash';
+    import * as Slc from "../../vue/http";
+    import BillboardFaceList from '../billboard-face/billboard-face-list';
+
     export default {
+
         props: {
-            id: {required: true}
+            id: {required: true},
         },
 
         components: {
-            FacesBillboard,
+            BillboardFaceList
         },
 
-        data(){
+        data() {
             return {
+
                 loaded: false,
                 marker: null,
-                zoom: 15,
+                zoom: 7,
                 center: null,
                 mapOptions: {
                     mapTypeControl: false,
                     scrollWell: true,
                     gestureHandling: 'greedy'
                 },
+                pov: null,
+                pano: null,
                 zoomChanged: false,
                 billboardFaces: [],
                 billboard: {},
+                billboardListRoute: laroute.route('billboards.index'),
+                pageHeading: {
+                    title: 'Billboard Show',
+                    breadcrumb: [
+                        {title: 'Home', url: laroute.route('home')},
+                        {title: 'Billboard List', url: laroute.route('billboards.index')}
+                    ]
+                },
             }
         },
-        mounted(){
-            this.loadBillboard();
-            this.loadFaces();
+
+        watch: {
+            'form.address': function () {
+                this.onAddressChange();
+            }
+        },
+
+        created() {
+            this.load();
         },
 
         methods: {
-            loadBillboard() {
+            load() {
                 this.loaded = false;
 
                 const uri = laroute.route('api.billboard.show', {billboard: this.id});
                 Slc.find(uri).then((billboard) => {
                     console.log("Billboard loaded", billboard);
                     this.billboard = billboard;
-                    const lat = Number.parseFloat(billboard.lat);
-                    const lng = Number.parseFloat(billboard.lng);
-
-                    this.center = {lat: lat, lng: lng};
-                    this.marker = {lat: lat, lng: lng};
-
+                    this.center = billboard.position;
+                    this.marker = billboard.position;
+                    this.pov = billboard.pov;
                     this.loaded = true;
                 });
             },
-            loadFaces() {
-                let self = this;
-                Slc.get(laroute.route('api.billboard-face.index', {bid: this.id}))
-                    .then((response) => {
-                        self.billboardFaces = response;
-                    });
+
+            reloadForm() {
+                //this.form.he this.pov.heading;
             },
-            onMapClick(){ return false},
-            onZoomChanged(){ return false},
-            onMarkerMoved(){ return false},
+
+
+
+            onMapClick(e) {
+
+                const self = this;
+
+            },
+
+            onZoomChanged(e) {
+
+            },
+
+            onAddressChange: _.debounce(function (e) {
+
+            }, 500),
+
+            onMarkerMoved: _.debounce(function (e) {
+
+            }),
+
+            updatePov(pov) {
+
+            },
+
+            updatePano(pano) {
+
+            }
         }
     }
+
 </script>

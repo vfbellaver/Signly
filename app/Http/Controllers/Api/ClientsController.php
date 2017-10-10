@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ClientCreateRequest;
+use App\Http\Requests\ClientImportRequest;
 use App\Http\Requests\ClientUpdateRequest;
 use App\Models\Client;
 use App\Services\ClientService;
@@ -26,6 +27,27 @@ class ClientsController extends Controller
     public function show($id)
     {
         return Client::query()->findOrFail($id)->toArray();
+    }
+
+    public function csvUpload()
+    {
+        $files = request()->file('file');
+
+        if (!$files) {
+            return [];
+        }
+
+        $file = $files[0];
+        $data = $this->service->extractCsvFile($file->path());
+
+        return $data;
+    }
+
+    public function import(ClientImportRequest $request)
+    {
+        $data = $request->all();
+        $data['user_id'] = auth()->user()->id;
+        $this->service->import($data);
     }
 
     public function store(ClientCreateRequest $request)
