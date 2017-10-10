@@ -53,7 +53,7 @@ class Billboard extends Model
             'heading' => $this->heading,
             'pitch' => $this->pitch,
             'user' => $this->user->toArray(),
-            'billboard_faces' => $this->billboardFaces->toArray(),
+            //'billboard_faces' => $this->billboardFaces->toArray(),
         ];
     }
     #endregion
