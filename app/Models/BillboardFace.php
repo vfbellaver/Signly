@@ -7,8 +7,9 @@ use Illuminate\Validation\Rules\Unique;
 
 class BillboardFace extends Model
 {
-    const TYPE = ['Static' => 'Static','Digital' => 'Digital'];
+
     const READS = ['Left' => 'Left','Right' => 'Right','Across'=> 'Across'];
+    const TYPE = ['Static' => 'Static','Digital' => 'Digital'];
 
     protected $fillable = [
         'code',
