@@ -1,85 +1,95 @@
 <template>
     <div>
-        <box>
-            <box-title>Edit Billboard</box-title>
-            <box-content>
-                <form-submit v-model="form" @submit="save">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <form-group :form="form" field="name">
-                                <input-label for="name">Name: </input-label>
-                                <input-text v-model="form.name" id="name" name="name"></input-text>
-                            </form-group>
-                            <form-group :form="form" field="description">
-                                <input-label for="description">Description: </input-label>
-                                <text-area v-model="form.description" id="description"
-                                           name="description"></text-area>
-                            </form-group>
-                            <form-group :form="form" field="address">
-                                <input-label for="address">Address: </input-label>
-                                <input-text v-model="form.address" id="address" name="address"></input-text>
-                            </form-group>
 
-                            <gmap-map
-                                    v-if="loaded"
-                                    :center="center"
-                                    :zoom="zoom"
-                                    @click="onMapClick"
-                                    @zoom_changed="onZoomChanged"
-                                    :options="mapOptions"
-                                    style="width: 100%; min-height: 320px">
-                                <gmap-marker
-                                        v-if="marker"
-                                        :position="marker"
-                                        :clickable="true"
-                                        :draggable="true"
-                                        @dragend="onMarkerMoved"
-                                        @click="center=marker"
-                                ></gmap-marker>
-                            </gmap-map>
+        <inspinia-page-heading v-if="pageHeading" :data="pageHeading"></inspinia-page-heading>
 
-                            <gmap-street-view-panorama
-                                    v-if="loaded"
-                                    class="pano"
-                                    :position="center"
-                                    :pov="pov"
-                                    :zoom="1"
-                                    @pano_changed="updatePano"
-                                    @pov_changed="updatePov">
-                            </gmap-street-view-panorama>
+        <div class="wrapper wrapper-content">
+            <div class="container-fluid">
+                <box>
+                    <box-content>
+                        <form-submit v-model="form" @submit="save">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <form-group :form="form" field="name">
+                                        <input-label for="name">Name: </input-label>
+                                        <input-text v-model="form.name" id="name" name="name"></input-text>
+                                    </form-group>
+                                    <form-group :form="form" field="description">
+                                        <input-label for="description">Description: </input-label>
+                                        <text-area v-model="form.description" id="description"
+                                                   name="description"></text-area>
+                                    </form-group>
+                                    <form-group :form="form" field="address">
+                                        <input-label for="address">Address: </input-label>
+                                        <input-text v-model="form.address" id="address" name="address"></input-text>
+                                    </form-group>
 
-                            <form-group :form="form" field="lat">
-                                <input-label for="lat">Latitude: </input-label>
-                                <input-text v-model="form.lat" id="lat" name="lat"></input-text>
-                            </form-group>
+                                    <gmap-map
+                                            v-if="loaded"
+                                            :center="center"
+                                            :zoom="zoom"
+                                            @click="onMapClick"
+                                            @zoom_changed="onZoomChanged"
+                                            :options="mapOptions"
+                                            style="width: 100%; min-height: 320px">
+                                        <gmap-marker
+                                                v-if="marker"
+                                                :position="marker"
+                                                :clickable="true"
+                                                :draggable="true"
+                                                @dragend="onMarkerMoved"
+                                                @click="center=marker"
+                                        ></gmap-marker>
+                                    </gmap-map>
+                                    <hr />
+                                    <gmap-street-view-panorama
+                                            v-if="loaded"
+                                            class="pano"
+                                            :position="center"
+                                            :pov="pov"
+                                            :zoom="1"
+                                            @pano_changed="updatePano"
+                                            @pov_changed="updatePov">
+                                    </gmap-street-view-panorama>
 
-                            <form-group :form="form" field="lng">
-                                <input-label for="lng">Longitude: </input-label>
-                                <input-text v-model="form.lng" id="lng" name="lng"></input-text>
-                            </form-group>
-                        </div>
-                        <div class="col-md-6" v-if="form.id">
-                            <form-group :form="form" field="billboardFaces">
-                                <billboard-face-list :billboardId="form.id"></billboard-face-list>
-                            </form-group>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <hr>
-                            <btn-submit :disabled="form.busy">
-                                <spinner v-if="form.busy"></spinner>
-                            </btn-submit>
-                            <a class="btn btn-default" :href="billboardListRoute">Cancel</a>
-                        </div>
-                    </div>
-                </form-submit>
-            </box-content>
-        </box>
+                                    <form-group :form="form" field="lat">
+                                        <input-label for="lat">Latitude: </input-label>
+                                        <input-text v-model="form.lat" id="lat" name="lat"></input-text>
+                                    </form-group>
+
+                                    <form-group :form="form" field="lng">
+                                        <input-label for="lng">Longitude: </input-label>
+                                        <input-text v-model="form.lng" id="lng" name="lng"></input-text>
+                                    </form-group>
+                                </div>
+                                <div class="col-md-6" v-if="form.id">
+                                    <form-group :form="form" field="billboardFaces">
+                                        <billboard-face-list :billboardId="form.id"></billboard-face-list>
+                                    </form-group>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <hr>
+                                    <btn-submit :disabled="form.busy">
+                                        <spinner v-if="form.busy"></spinner>
+                                    </btn-submit>
+                                    <a class="btn btn-default" :href="billboardListRoute">Cancel</a>
+                                </div>
+                            </div>
+                        </form-submit>
+                    </box-content>
+                </box>
+            </div>
+        </div>
     </div>
 </template>
 
 <style lang="scss" scoped="scoped">
+    .top-navigation .wrapper.wrapper-content {
+        padding-top: 0;
+    }
+
     .margin-billboard-edit {
         margin-right: 5px;
     }
@@ -122,6 +132,13 @@
                 zoomChanged: false,
                 billboardFaces: [],
                 billboardListRoute: laroute.route('billboards.index'),
+                pageHeading: {
+                    title: 'Billboard Edit',
+                    breadcrumb: [
+                        {title: 'Home', url: laroute.route('home')},
+                        {title: 'Billboard List', url: laroute.route('billboards.index')}
+                    ]
+                },
             }
         },
 
@@ -142,14 +159,9 @@
                 const uri = laroute.route('api.billboard.show', {billboard: this.id});
                 Slc.find(uri).then((billboard) => {
                     console.log("Billboard loaded", billboard);
-                    const lat = Number.parseFloat(billboard.lat);
-                    const lng = Number.parseFloat(billboard.lng);
-                    const heading = Number.parseFloat(billboard.heading);
-                    const pitch = Number.parseFloat(billboard.pitch);
-
-                    this.center = {lat: lat, lng: lng};
-                    this.marker = {lat: lat, lng: lng};
-                    this.pov = {heading: heading, pitch: pitch};
+                    this.center = billboard.position;
+                    this.marker = billboard.position;
+                    this.pov = billboard.pov;
 
                     this.form = new SlcForm({
                         id: billboard.id,
@@ -165,8 +177,8 @@
                 });
             },
 
-            reloadForm(){
-               //this.form.he this.pov.heading;
+            reloadForm() {
+                //this.form.he this.pov.heading;
             },
 
             save() {
@@ -270,9 +282,9 @@
             }),
 
             updatePov(pov) {
+                console.log('Pov Changed: ', pov);
                 this.pov = pov;
                 this.form.heading = pov.heading;
-                console.log('Pov Changed: ',pov);
                 this.form.pitch = pov.pitch;
             },
 

@@ -59,9 +59,5 @@ window.App = new Vue({
                     self.user = response.data;
                 });
         });
-
-        EventBus.$on('pageHeadingLoaded', (pageHeading) => {
-            self.pageHeading = pageHeading;
-        });
     },
 });

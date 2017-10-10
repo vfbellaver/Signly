@@ -53,8 +53,6 @@
                 </nav>
             </div>
 
-            <inspinia-page-heading v-if="pageHeading" :data="pageHeading"></inspinia-page-heading>
-
             @yield('content')
 
             <div class="footer">

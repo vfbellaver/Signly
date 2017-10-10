@@ -1,6 +1,9 @@
 <template>
     <div class="card-list">
-        <nav class="navbar navbar-default" data-spy="affix" data-offset-top="147">
+
+        <inspinia-page-heading v-if="pageHeading" :data="pageHeading"></inspinia-page-heading>
+
+        <nav class="navbar navbar-in-content navbar-default" data-spy="affix" data-offset-top="147">
             <ul class="nav navbar-nav navbar-right">
                 <li><a @click="create">
                     <icon icon="plus"></icon>
@@ -30,7 +33,7 @@
 
 <style lang="scss" scoped="scoped">
     .card-list {
-        .navbar {
+        .navbar-in-content {
             z-index: 1;
             opacity: 0.9;
             border-radius: 0;
@@ -80,16 +83,13 @@
         data() {
             return {
                 billboards: [],
+                pageHeading: {
+                    title: 'Billboard List',
+                    breadcrumb: [
+                        {title: 'Home', url: laroute.route('home')}
+                    ]
+                },
             }
-        },
-        created() {
-            const pageHeading = {
-                title: 'Billboard List',
-                breadcrumb: [
-                    {title: 'Home', url: laroute.route('home')}
-                ]
-            };
-            EventBus.$emit('pageHeadingLoaded', pageHeading);
         },
         mounted() {
             this.reload();

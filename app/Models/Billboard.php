@@ -65,6 +65,10 @@ class Billboard extends Model
             'position' => [
                 'lat' => $this->lat,
                 'lng' => $this->lng,
+            ],
+            'pov' => [
+                'heading' => $this->heading ? $this->heading : 0,
+                'pitch' => $this->pitch ? $this->pitch : 0,
             ]
         ];
     }
