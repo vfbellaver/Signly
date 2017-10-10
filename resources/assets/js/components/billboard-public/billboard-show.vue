@@ -8,13 +8,12 @@
                 <box>
                     <box-content>
                             <div class="row">
-                                <div class="col-md-5">
-                                    <h3>
-                                        <small>Name:</small>
-                                        {{billboard.name}}
-                                        <small>Description:</small>
-                                        {{billboard.description}}
-                                    </h3>
+                                <div class="col-md-6">
+                                    <h4>Billboard Information</h4>
+                                    <hr/>
+                                    <h4>Name</h4>
+                                    <p class="description">{{billboard.name}}</p>
+                                    <hr/>
                                     <h4>Description</h4>
                                     <p class="description">{{billboard.description}}</p>
                                     <hr/>
@@ -48,9 +47,10 @@
                                     </gmap-street-view-panorama>
 
                                 </div>
-                                <div class="col-md-7" v-if="billboard.id">
+                                <div class="col-md-6" v-if="billboard.id">
+                                    <h4>Billboard Faces</h4>
+                                    <hr/>
 
-                                        <billboard-face-list :billboardId="billboard.id"></billboard-face-list>
 
                                 </div>
                             </div>
@@ -115,7 +115,7 @@
                     title: 'Billboard Show',
                     breadcrumb: [
                         {title: 'Home', url: laroute.route('home')},
-                        {title: 'Billboard List', url: laroute.route('billboards.index')}
+                        {title: 'Billboards', url: laroute.route('billboards.index')}
                     ]
                 },
             }
