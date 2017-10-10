@@ -7,7 +7,7 @@
                 <li><a @click="add">
                     <icon icon="plus"></icon>
                     Add</a></li>
-                <li><a>
+                <li><a @click="importClient">
                     <icon icon="upload"></icon>
                     Import</a></li>
             </ul>
@@ -62,15 +62,18 @@
         </div>
 
         <client-form @saved="formSaved" ref="form"></client-form>
+        <client-import-form ref="importForm" @saved="reload"></client-import-form>
     </div>
 </template>
 
 <script>
     import ClientForm from './client-form';
+    import ClientImportForm from './client-import-form';
 
     export default {
         components: {
-            ClientForm
+            ClientForm,
+            ClientImportForm
         },
         data() {
             return {
@@ -91,6 +94,10 @@
         methods: {
             add() {
                 this.$refs.form.show();
+            },
+
+            importClient(){
+                this.$refs.importForm.show();
             },
 
             edit(client) {

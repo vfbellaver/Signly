@@ -33,6 +33,7 @@
                 </div>
             </box-content>
         </box>
+        <billboard-face-form ref="form" @saved="formSaved" :billboardId="billboardId"></billboard-face-form>
     </div>
 </template>
 
