@@ -24,8 +24,9 @@ class CreateBillboardFacesTable extends Migration
             $table->text('notes')->nullable();
             $table->integer('max_ads')->nullable();
             $table->text('photo')->nullable();
-            $table->time('lights_on')->nullable();
-            $table->time('lights_off')->nullable();
+            $table->string('type',50)->nullable();
+            $table->string('lights_on')->nullable();
+            $table->string('lights_off')->nullable();
 
             $table->unsignedInteger('billboard_id');
             $table->foreign('billboard_id')

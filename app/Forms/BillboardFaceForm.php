@@ -77,6 +77,11 @@ class BillboardFaceForm extends BaseForm
         return $this->request->get('lights_off');
     }
 
+    public function type()
+    {
+        return $this->request->get('type');
+    }
+
     public function billboard()
     {
         $billboard = $this->request->get('billboard');

@@ -7,6 +7,10 @@ use Illuminate\Validation\Rules\Unique;
 
 class BillboardFace extends Model
 {
+
+    const TYPE = ['static','digital'];
+    const READS = ['Left','Right','Across'];
+
     protected $fillable = [
         'code',
         'label',
@@ -22,6 +26,7 @@ class BillboardFace extends Model
         'photo',
         'lights_on',
         'lights_off',
+        'type',
         'billboard_id',
     ];
 
@@ -39,6 +44,7 @@ class BillboardFace extends Model
     {
         return $this->belongsTo(Billboard::class);
     }
+
     #region
 
     #region Custom Attributes
@@ -68,6 +74,7 @@ class BillboardFace extends Model
             'is_illuminated' => $this->is_illuminated,
             'lights_on' => $this->lights_on,
             'lights_off' => $this->lights_off,
+            'type' => $this->type,
             'billboard_id' => $this->billboard_id,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at
