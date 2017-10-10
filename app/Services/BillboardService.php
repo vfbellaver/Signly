@@ -132,8 +132,8 @@ class BillboardService
                 //create o billboard
                 $billboard = Billboard::query()->create([
                     'name' => $blb['name'],
-                    'description' => $blb['name'],
-                    'address' => $blb['description'],
+                    'description' => $blb['description'],
+                    'address' => $blb['address'],
                     'lat' => $blb['lat'],
                     'lng' => $blb['lng'],
                     'user_id' => $data['user_id'],
