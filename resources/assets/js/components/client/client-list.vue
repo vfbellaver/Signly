@@ -7,6 +7,9 @@
                 <li><a @click="add">
                     <icon icon="plus"></icon>
                     Add</a></li>
+                <li><a>
+                    <icon icon="upload"></icon>
+                    Import</a></li>
             </ul>
         </nav>
 

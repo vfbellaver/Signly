@@ -11,7 +11,7 @@ class BillboardsTableSeeder extends Seeder
         if (!$user) {
             return;
         }
-        factory(\App\Models\Billboard::class, 25)
+        factory(\App\Models\Billboard::class, 6)
             ->create([
                 'user_id' => $user->id
             ])
