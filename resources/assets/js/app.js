@@ -37,6 +37,7 @@ window.App = new Vue({
         return {
             user: 'Slc' in window ? Slc.user : null,
             settings: 'Slc' in window ? Slc.settings : null,
+            pageHeading: null,
             isMenuVisible: true,
         }
     },

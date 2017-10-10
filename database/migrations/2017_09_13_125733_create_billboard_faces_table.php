@@ -11,7 +11,7 @@ class CreateBillboardFacesTable extends Migration
         Schema::create('billboard_faces', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->string('code', 6)->unique();
+            $table->string('code', 6);
             $table->string('label', 50);
             $table->float('hard_cost', 10, 0)->default(0);
             $table->float('monthly_impressions', 10, 0)->default(0);

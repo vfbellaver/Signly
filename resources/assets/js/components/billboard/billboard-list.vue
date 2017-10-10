@@ -1,32 +1,38 @@
 <template>
-    <div>
-        <box>
-            <box-title>
-                Billboards
-                <box-tools slot="tools">
-                    <box-tool icon="plus" @click.native="create">New</box-tool>
-                    <box-tool icon="upload" @click.native="importBillboards">Import Billboards</box-tool>
-                    <box-tool class="green" icon="map-marker" @click.native="goToHome">Map View</box-tool>
-                </box-tools>
-            </box-title>
-        </box>
+    <div class="card-list">
 
-        <div class="row results">
-            <div class="col-md-4" v-for="billboard in billboards">
-                <billboard-card :billboard="billboard" @edit="edit" @destroy="destroy"></billboard-card>
+        <inspinia-page-heading v-if="pageHeading" :data="pageHeading"></inspinia-page-heading>
+
+        <nav class="navbar navbar-in-content navbar-default" data-spy="affix" data-offset-top="147">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a @click="create">
+                    <icon icon="plus"></icon>
+                    Add</a></li>
+                <li><a @click="importBillboards">
+                    <icon icon="upload"></icon>
+                    Import</a></li>
+                <li><a @click="goToHome">
+                    <icon icon="map-marker"></icon>
+                    Map</a></li>
+            </ul>
+        </nav>
+
+        <div class="wrapper wrapper-content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-4" v-for="billboard in billboards">
+                        <billboard-card :billboard="billboard" @edit="edit" @destroy="destroy"></billboard-card>
+                    </div>
+                </div>
             </div>
         </div>
-
-        <billboard-import-form @saved="reload" ref="formCsv"></billboard-import-form>
+        <billboard-form ref="form" @saved="edit"></billboard-form>
+        <billboard-import-form ref="importForm" @saved="reload"></billboard-import-form>
     </div>
 </template>
 
 <style lang="scss" scoped="scoped">
-    .results {
-        .ibox {
-            margin-top: 0;
-        }
-    }
+
 </style>
 
 <script>
@@ -34,16 +40,24 @@
     import * as Slc from "../../vue/http";
 
     import BillboardCard from './billboard-card';
+    import BillboardForm from './billboard-form';
     import BillboardImportForm from './billboard-import-form';
 
     export default {
         components: {
             BillboardCard,
+            BillboardForm,
             BillboardImportForm,
         },
         data() {
             return {
                 billboards: [],
+                pageHeading: {
+                    title: 'Billboard List',
+                    breadcrumb: [
+                        {title: 'Home', url: laroute.route('home')}
+                    ]
+                },
             }
         },
         mounted() {
@@ -51,13 +65,13 @@
         },
         methods: {
             create() {
-                window.location = laroute.route('billboards.create');
+                this.$refs.form.show();
             },
             edit(billboard) {
                 window.location = laroute.route("billboards.edit", {billboard: billboard.id});
             },
             importBillboards() {
-                this.$refs.formCsv.show();
+                this.$refs.importForm.show();
             },
             goToHome() {
                 window.location = "/";

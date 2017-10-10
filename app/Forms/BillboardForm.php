@@ -7,30 +7,30 @@ use App\Models\User;
 
 class BillboardForm extends BaseForm
 {
-	public function name()
-	{
-		return $this->request->get('name');
-	}
+    public function name()
+    {
+        return $this->request->get('name');
+    }
 
-	public function description()
-	{
-		return $this->request->get('description');
-	}
+    public function description()
+    {
+        return $this->request->get('description');
+    }
 
-	public function address()
-	{
-		return $this->request->get('address');
-	}
+    public function address()
+    {
+        return $this->request->get('address');
+    }
 
-	public function lat()
-	{
-		return $this->request->get('lat');
-	}
+    public function lat()
+    {
+        return $this->request->get('lat');
+    }
 
-	public function lng()
-	{
-		return $this->request->get('lng');
-	}
+    public function lng()
+    {
+        return $this->request->get('lng');
+    }
 
     public function heading()
     {
@@ -44,8 +44,6 @@ class BillboardForm extends BaseForm
 
     public function user()
     {
-        $user = auth()->user()->id;
-        return User::query()->findOrFail($user);
+        return $this->request->get('user');
     }
-
 }

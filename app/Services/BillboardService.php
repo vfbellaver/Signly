@@ -24,7 +24,6 @@ class BillboardService
                 'lng' => $form->lng(),
                 'heading' => $form->heading(),
                 'pitch' => $form->pitch(),
-
             ];
 
             $billboard = new Billboard($data);
@@ -48,7 +47,6 @@ class BillboardService
             $billboard->lng = $form->lng();
             $billboard->heading = $form->heading();
             $billboard->pitch = $form->pitch();
-            $billboard->user()->associate($form->user());
 
             $billboard->save();
 
@@ -156,7 +154,7 @@ class BillboardService
                 }
             }
 
-            foreach ($events as $event){
+            foreach ($events as $event) {
                 event($event);
             }
             return $savedBillboards;

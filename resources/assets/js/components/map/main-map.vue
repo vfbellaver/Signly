@@ -1,124 +1,107 @@
 <template>
     <gmap-map
+            v-if="loaded"
+            :options="mapOptions"
             :center="center"
-            :zoom="10"
-            style="width: 100%; height: 90vmin;"
-
-    >
-            <gmap-info-window
-                    :options="infoOptions"
-                    :position="infoWindowPos"
-                    :opened="infoWinOpen"
-                    @closeclick="infoWinOpen=false">
-                <info-content-two
-
-                        :billboard-faces="billboardFaces"
-                >
-                </info-content-two>
-            </gmap-info-window>
+            :zoom="10">
         <gmap-marker
-                :key="i"
-                v-for="(m,i) in markers"
+                :key="m.billboard.id"
+                v-for="m in markers"
                 :position="m.position"
+                :icon="markerIcon"
                 :clickable="true"
-                @click="toggleInfoWindow(m,i)">
+                @click="openInfoWindow(m)">
         </gmap-marker>
+
+        <gmap-info-window
+                :opened="(billboard !== null)"
+                :position="(billboard !== null) ? billboard.position : null"
+                @closeclick="billboard = null">
+            <billboard-info v-if="billboard" :billboard="billboard"></billboard-info>
+        </gmap-info-window>
     </gmap-map>
 </template>
 
+<style>
+    .vue-map-container {
+        width: 100%;
+        height: 90vmin;
+    }
+</style>
+
 <script>
+
+    import _ from 'lodash';
+    import * as Slc from "../../vue/http";
+    import BillboardInfo from './billboard-info';
+
     export default {
 
-        data () {
+        props: {
+            user: {required: true}
+        },
+
+        components: {
+            BillboardInfo
+        },
+
+        data() {
             return {
-
+                loaded: false,
                 billboards: [],
-                billboardFaces: [],
+                billboard: null,
 
-                infoShow: false,
+                center: null,
+                zoom: null,
+                mapOptions: {
+                    scrollWell: true,
+                    mapTypeControl: false,
+                    gestureHandling: 'greedy',
+                },
 
-                center: {lat: 40.757994, lng: -111.970834},
-
+                markerIcon: {
+                    url: 'http://signly.dev/images/pin.png',
+                    size: {width: 48, height: 48, f: 'px', b: 'px'},
+                    scaledSize: {width: 48, height: 48, f: 'px', b: 'px'}
+                },
                 markers: [],
 
-                infoOptions: {
-                    pixelOffset: {
-                        width: 0,
-                        height: -35,
-                        maxWidth: 200
-                    }
-                },
-
-
-                infoWinOpen: false,
-
-                infoWindowPos: {
-                    lat: 0,
-                    lng: 0
-                },
-
-                billboard:'',
-
+                infoWindowPos: null,
             }
         },
 
-        mounted () {
-            this.reload();
+        created() {
+            this.center = {
+                lat: parseFloat(this.user.lat),
+                lng: parseFloat(this.user.lng),
+            };
+            this.zoom = this.user.zoom;
+            this.loaded = true;
+            this.loadMarkers();
         },
 
         methods: {
 
-            reload() {
+            loadMarkers() {
                 Slc.get(laroute.route('api.billboard.index'))
                     .then((response) => {
                         this.billboards = response;
-                        this.reloadMarkers();
-                    });
-
-            },
-
-            reloadMarkers () {
-                const self = this;
-                for(let i = 0; i < this.billboards.length; i++) {
-                  this.markers.push({
-                        position: {
-                            lat: parseFloat(this.billboards[i].lat),
-                            lng: parseFloat(this.billboards[i].lng)
-                        },
-
-                        infoText: this.billboards[i],
-                   });
-                }
-
-            },
-
-            toggleInfoWindow: function(marker, idx) {
-
-                this.infoWindowPos = marker.position;
-                this.billboard = marker.infoText;
-                console.log('Billboard Id ',this.billboard.id);
-                this.loadFaces(this.billboard.id);
-
-
-                //check if its the same marker that was selected if yes toggle
-                if (this.currentMidx == idx) {
-                    this.infoWinOpen = !this.infoWinOpen;
-                }
-                //if different marker set infowindow to open and reset current marker index
-                else {
-                    this.infoWinOpen = true;
-                    this.currentMidx = idx;
-                }
-            },
-
-            loadFaces(billboardId) {
-                Slc.get(laroute.route('api.billboard-face.index', {bid: billboardId}))
-                    .then((response) => {
-                        console.log('Response ', response);
-                        this.billboardFaces = response;
+                        for (let i = 0; i < this.billboards.length; i++) {
+                            this.markers.push({
+                                position: {
+                                    lat: parseFloat(this.billboards[i].lat),
+                                    lng: parseFloat(this.billboards[i].lng)
+                                },
+                                billboard: this.billboards[i],
+                            });
+                        }
                     });
             },
 
+            openInfoWindow: function (marker) {
+                console.log("Open Info Window", marker.billboard);
+                this.billboard = marker.billboard;
+            },
         }
     }
 </script>

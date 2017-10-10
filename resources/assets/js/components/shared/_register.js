@@ -48,3 +48,6 @@ Vue.component('box-content', require('./Boxes/BoxContent'));
 Vue.component('box-body', require('./Boxes/BoxBody'));
 
 // ------------------------------------------------------------------------
+//TABS
+Vue.component('Tabs', require('./Tabs/Tabs'));
+Vue.component('Tab', require('./Tabs/Tab'));
