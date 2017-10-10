@@ -17,7 +17,7 @@ class BillboardFaceService
 				'code' => $form->code(),
 				'height' => $form->height(),
 				'width' => $form->width(),
-				'reads' => $form->reads(),
+				//'reads' => $form->reads(),
 				'label' => $form->label(),
 				'hard_cost' => $form->hardCost(),
 				'monthly_impressions' => $form->monthlyImpressions(),
@@ -28,10 +28,12 @@ class BillboardFaceService
 				'is_illuminated' => $form->isIlluminated(),
                 'lights_on' => $form->lightsOn(),
                 'lights_off' => $form->lightsOff(),
-                'type' => $form->type(),
+                //'type' => $form->type(),
             ];
 
             $billboardFace = new BillboardFace($data);
+            $billboardFace->type = BillboardFace::TYPE[$form->type()];
+            $billboardFace->reads = BillboardFace::READS[$form->reads()];
 			$billboardFace->billboard()->associate($form->billboard());
 
             $billboardFace->save();

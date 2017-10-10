@@ -5,7 +5,6 @@ use Faker\Generator as Faker;
 $factory->define(App\Models\BillboardFace::class, function (Faker $faker) {
 
     $isIlluminated = (rand(1, 10) > 4);
-
     return [
         'code' => strtoupper(str_random(6)),
         'height' => 100,
@@ -21,6 +20,7 @@ $factory->define(App\Models\BillboardFace::class, function (Faker $faker) {
         'is_illuminated' => $isIlluminated,
         'lights_on' => $isIlluminated ? $faker->time() : null,
         'lights_off' => $isIlluminated ? $faker->time() : null,
+        'type' => $f,
         'billboard_id' => function () {
             return factory(App\Models\Billboard::class)->create()->id;
         },
