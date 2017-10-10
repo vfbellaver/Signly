@@ -44,7 +44,7 @@
                                     </gmap-map>
                                     <hr />
                                     <gmap-street-view-panorama
-                                            v-if="loaded"
+                                            v-if="streetViewLoaded"
                                             class="pano"
                                             :position="center"
                                             :pov="pov"
@@ -115,18 +115,21 @@
                 loaded: false,
                 marker: null,
                 markerIcon: {
-                    url: 'http://signly.dev/images/pin.png',
+                    url: '/images/pin.png',
                     size: {width: 48, height: 48, f: 'px', b: 'px'},
                     scaledSize: {width: 48, height: 48, f: 'px', b: 'px'}
                 },
                 zoom: 7,
+                showPOV: false,
                 center: null,
+                position: null,
                 mapOptions: {
                     mapTypeControl: false,
                     scrollWell: true,
                     gestureHandling: 'greedy'
                 },
                 pov: null,
+                streetViewLoaded: false,
                 pano: null,
                 zoomChanged: false,
                 billboardFaces: [],
@@ -167,18 +170,21 @@
                         heading: billboard.heading,
                         pitch: billboard.pitch
                     });
+                    this.streetViewLoaded = true;
                     this.loaded = true;
                 });
             },
             reloadForm() {
                 //this.form.he this.pov.heading;
             },
+
             save() {
                 const uri = laroute.route('api.billboard.update', {billboard: this.form.id});
                 Slc.put(uri, this.form).then((response) => {
                     console.log('Billboard Updated:', response);
                 });
             },
+
             buildForm(billboard) {
                 this.address = null;
                 this.zoomChanged = false;
@@ -192,6 +198,7 @@
                     lng: billboard.lng,
                 });
             },
+
             onMapClick(e) {
                 const self = this;
                 console.log(e);
@@ -218,15 +225,18 @@
                 });
                 this.marker = pos;
                 this.center = pos;
+
                 if (self.zoomChanged) {
                     return;
                 }
                 this.zoom = 15;
             },
+
             onZoomChanged(e) {
                 console.log("On Zoom Changed", e);
                 this.zoomChanged = true;
             },
+
             onAddressChange: _.debounce(function (e) {
                 console.log("OnAddressChange", e);
                 const self = this;
@@ -246,12 +256,19 @@
                     self.form.lng = pos.lng;
                     self.marker = pos;
                     self.center = pos;
+
+                    self.streetViewLoaded = false;
+                    self.$nextTick(()=>{
+                        self.streetViewLoaded = true;
+                    });
+
                     if (self.zoomChanged) {
                         return;
                     }
                     self.zoom = 15;
                 });
             }, 500),
+
             onMarkerMoved: _.debounce(function (e) {
                 console.log('On Marker Moved', e);
                 const pos = {
@@ -262,13 +279,21 @@
                 this.form.lng = pos.lng;
                 this.marker = pos;
                 this.center = pos;
+                console.log('Is center chaged', this.center );
+                this.streetViewLoaded = false;
+                this.$nextTick(()=>{
+                    this.streetViewLoaded = true;
+                });
             }),
+
+
             updatePov(pov) {
                 console.log('Pov Changed: ', pov);
                 this.pov = pov;
                 this.form.heading = pov.heading;
                 this.form.pitch = pov.pitch;
             },
+
             updatePano(pano) {
                 this.pano = pano;
             }
