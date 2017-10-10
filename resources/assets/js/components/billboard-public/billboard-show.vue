@@ -50,11 +50,9 @@
                                 <div class="col-md-6" v-if="billboard.id">
                                     <h4>Billboard Faces</h4>
                                     <hr/>
-
-
+                                   <faces-billboard :billboardId="billboard.id"></faces-billboard>
                                 </div>
                             </div>
-
 
                     </box-content>
                 </box>
@@ -81,7 +79,7 @@
 
     import _ from 'lodash';
     import * as Slc from "../../vue/http";
-    import BillboardFaceList from '../billboard-face/billboard-face-list';
+    import FacesBillboard from '../billboard-public/faces-billboard';
 
     export default {
 
@@ -90,7 +88,7 @@
         },
 
         components: {
-            BillboardFaceList
+            FacesBillboard,
         },
 
         data() {
