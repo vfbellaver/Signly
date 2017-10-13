@@ -230,7 +230,7 @@
                     is_illuminated: billboard_face ? billboard_face.is_illuminated : false,
                     lights_on: billboard_face ? billboard_face.lights_on : null,
                     lights_off: billboard_face ? billboard_face.lights_off : null,
-                    type: billboard_face ? billboard_face.type : null,
+                    type: billboard_face ? billboard_face.type : 'Static',
                     billboard_face: billboard_face ? billboard_face.id : null,
                     billboard: this.billboardId,
                 };

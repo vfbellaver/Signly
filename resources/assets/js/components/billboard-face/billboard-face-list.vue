@@ -8,40 +8,46 @@
                 </box-tools>
             </box-title>
             <box-content>
-                <div v-for="billboardFace in billboardFaces">
-                    <div class="contact-box">
-                        <div class="col-sm-4">
-                            <div class="text-center">
-                                <img alt="image" class="img-circle m-t-xs img-responsive" :src="billboardFace.photo">
+                <div style="overflow: auto; max-height: 800px">
+                    <div v-for="billboardFace in billboardFaces">
+                        <div class="contact-box">
+                            <div class="col-sm-4">
+                                <div class="text-center">
+                                    <img alt="image" class="img-circle m-t-xs img-responsive" :src="billboardFace.photo">
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-sm-8">
-                            <h3>
-                                <small>code: &nbsp</small>
-                                <strong>{{billboardFace.code}}</strong>
-                            </h3>
-                            <p>
-                                <i class="fa fa-arrows-v"></i>
-                                <small>Heigth:</small>
-                                {{billboardFace.height}} &nbsp
-                                <i class="fa fa-arrows-h"></i>
-                                <small>Width:</small>
-                                {{billboardFace.width}}
-                            </p>
-                            <h1>
-                                <small><i class="fa fa-money"></i> U$ :</small>
-                                {{formatMoney(billboardFace.hard_cost)}}
-                            </h1>
-                        </div>
-                        <div class="clearfix"></div>
-                        <div class="contact-box-footer">
-                            <div class="m-t-xs btn-group pull-right">
-                                <button @click="edit(billboardFace)" class="btn btn-xs btn-white"><i
-                                        class="fa fa-edit"></i> EDIT
-                                </button>
-                                <button @click="destroy(billboardFace)" class="btn btn-xs btn-white"><i
-                                        class="fa fa-trash"></i> EDIT
-                                </button>
+                            <div class="col-sm-8">
+                                <h4>
+                                    <small>code: &nbsp</small>
+                                    <strong>{{billboardFace.code}}</strong>
+                                </h4>
+                                <h4>
+                                    <small>Type: &nbsp</small>
+                                    <strong>{{billboardFace.type}}</strong>
+                                </h4>
+                                <p>
+                                    <i class="fa fa-arrows-v"></i>
+                                    <small>Heigth:</small>
+                                    {{billboardFace.height}} &nbsp
+                                    <i class="fa fa-arrows-h"></i>
+                                    <small>Width:</small>
+                                    {{billboardFace.width}}
+                                </p>
+                                <h1>
+                                    <small> U$ :</small>
+                                    {{formatMoney(billboardFace.hard_cost)}}
+                                </h1>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="contact-box-footer">
+                                <div class="m-t-xs btn-group pull-right">
+                                    <button @click="edit(billboardFace)" class="btn btn-xs btn-white"><i
+                                            class="fa fa-edit"></i> EDIT
+                                    </button>
+                                    <button @click="destroy(billboardFace)" class="btn btn-xs btn-white"><i
+                                            class="fa fa-trash"></i> DELETE
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -87,7 +93,6 @@
     import _ from 'lodash';
     import * as Slc from "../../vue/http";
     import BillboardFaceForm from './billboard-face-form';
-    import BillboardFaceCard from './billboard-face-card';
 
     export default {
         props: {
@@ -95,8 +100,7 @@
         },
 
         components: {
-            BillboardFaceForm,
-            BillboardFaceCard
+            BillboardFaceForm
         },
 
         data() {

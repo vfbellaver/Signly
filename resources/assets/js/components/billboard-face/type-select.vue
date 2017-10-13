@@ -26,13 +26,7 @@
         },
 
         methods:{
-            selected () {
-                const self = this;
-                if(self.internalValue === null){
-                    return  self.internalValue = 'Static';
-                }
-                return self.internalValue;
-            }
+
         }
     }
 </script>
