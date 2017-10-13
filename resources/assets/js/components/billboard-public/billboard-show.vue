@@ -1,61 +1,62 @@
 <template>
     <div>
-
-        <inspinia-page-heading v-if="pageHeading" :data="pageHeading"></inspinia-page-heading>
-
         <div class="wrapper wrapper-content">
             <div class="container-fluid">
                 <box>
                     <box-content>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <h4>Billboard Information</h4>
-                                    <hr/>
-                                    <h4>Name</h4>
-                                    <p class="description">{{billboard.name}}</p>
-                                    <hr/>
-                                    <h4>Description</h4>
-                                    <p class="description">{{billboard.description}}</p>
-                                    <hr/>
+                        <h2 align="center">Billboard Information</h2>
+                        <hr/>
+                        <h4>Name</h4>
+                        <p class="name">{{billboard.name}}</p>
+                        <hr/>
 
-                                    <gmap-map
-                                            v-if="loaded"
-                                            :center="center"
-                                            :zoom="zoom"
-                                            @click="onMapClick"
-                                            @zoom_changed="onZoomChanged"
-                                            :options="mapOptions"
-                                            style="width: 100%; min-height: 320px">
-                                        <gmap-marker
-                                                v-if="marker"
-                                                :position="marker"
-                                                :clickable="true"
-                                                :draggable="true"
-                                                @dragend="onMarkerMoved"
-                                                @click="center=marker"
-                                        ></gmap-marker>
-                                    </gmap-map>
-                                    <hr />
-                                    <gmap-street-view-panorama
-                                            v-if="loaded"
-                                            class="pano"
-                                            :position="center"
-                                            :pov="pov"
-                                            :zoom="1"
-                                            @pano_changed="updatePano"
-                                            @pov_changed="updatePov">
-                                    </gmap-street-view-panorama>
+                        <h4>Description</h4>
+                        <p class="description">{{billboard.description}}</p>
+                        <hr/>
 
-                                </div>
-                                <div class="col-md-6" v-if="billboard.id">
-                                    <h4>Billboard Faces</h4>
-                                    <hr/>
-                                   <faces-billboard :billboardId="billboard.id"></faces-billboard>
-                                </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h4>Localization in Map</h4>
+                                <hr/>
+                                <gmap-map
+                                        v-if="loaded"
+                                        :center="center"
+                                        :zoom="zoom"
+                                        @click="onMapClick"
+                                        @zoom_changed="onZoomChanged"
+                                        :options="mapOptions"
+                                        style="width: 100%; min-height: 350px">
+                                    <gmap-marker
+                                            v-if="marker"
+                                            :position="marker"
+                                            :icon="markerIcon"
+                                            :clickable="true"
+                                            :draggable="true"
+                                            @dragend="onMarkerMoved"
+                                            @click="center=marker"
+                                    ></gmap-marker>
+                                </gmap-map>
                             </div>
-
+                            <div class="col-md-6">
+                                <h4>Street View</h4>
+                                <hr/>
+                                <gmap-street-view-panorama
+                                        v-if="loaded"
+                                        class="pano"
+                                        :position="center"
+                                        :pov="pov"
+                                        :zoom="1"
+                                        @pano_changed="updatePano"
+                                        @pov_changed="updatePov">
+                                </gmap-street-view-panorama>
+                            </div>
+                        </div>
                     </box-content>
                 </box>
+                <row>
+                    <h2 align="center">Billboard Faces</h2>
+                    <faces-billboard :billboardId="this.id"></faces-billboard>
+                </row>
             </div>
         </div>
     </div>
@@ -73,6 +74,7 @@
     .vue-street-view-pano-container {
         min-height: 360px;
     }
+
 </style>
 
 <script>
@@ -96,7 +98,7 @@
 
                 loaded: false,
                 marker: null,
-                zoom: 7,
+                zoom: 12,
                 center: null,
                 mapOptions: {
                     mapTypeControl: false,
@@ -106,15 +108,12 @@
                 pov: null,
                 pano: null,
                 zoomChanged: false,
-                billboardFaces: [],
                 billboard: {},
                 billboardListRoute: laroute.route('billboards.index'),
-                pageHeading: {
-                    title: 'Billboard Show',
-                    breadcrumb: [
-                        {title: 'Home', url: laroute.route('home')},
-                        {title: 'Billboards', url: laroute.route('billboards.index')}
-                    ]
+                markerIcon: {
+                    url: '/images/pin.png',
+                    size: {width: 48, height: 48, f: 'px', b: 'px'},
+                    scaledSize: {width: 48, height: 48, f: 'px', b: 'px'}
                 },
             }
         },
@@ -147,7 +146,6 @@
             reloadForm() {
                 //this.form.he this.pov.heading;
             },
-
 
 
             onMapClick(e) {
