@@ -91,7 +91,7 @@
                     <column size="6">
                         <form-group :form="form" field="type">
                             <input-label for="type">Type: </input-label>
-                            <type-select v-model="form.type" id="type"></type-select>
+                            <type-select v-model="form.type" name="type" id="type"></type-select>
                         </form-group>
                     </column>
                     <column size="12">
@@ -143,8 +143,8 @@
     import * as Slc from "../../vue/http";
     import ModalForm from '../shared/Mixins/ModalForm';
     import VueTimepicker from "../../../../../node_modules/vue2-timepicker/src/vue-timepicker";
-    import TypeSelect from "./typeSelect";
-    import ReadSelect from "./readSelect.vue";
+    import TypeSelect from "./type-select";
+    import ReadSelect from "./read-select.vue";
 
     export default {
 

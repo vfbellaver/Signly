@@ -1,6 +1,5 @@
 <template>
     <div class="card-list">
-
         <inspinia-page-heading v-if="pageHeading" :data="pageHeading"></inspinia-page-heading>
 
         <nav class="navbar navbar-in-content navbar-default" data-spy="affix" data-offset-top="147">
@@ -95,7 +94,7 @@
                 return this.billboards.findIndex((_billboard) => {
                     return _billboard.id === billboard.id;
                 });
-            }
+            },
         }
     }
 </script>

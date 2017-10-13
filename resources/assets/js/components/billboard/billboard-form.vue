@@ -66,7 +66,7 @@
                 api: 'billboard',
                 marker: null,
                 markerIcon: {
-                    url: 'http://signly.dev/images/pin.png',
+                    url: '/images/pin.png',
                     size: {width: 48, height: 48, f: 'px', b: 'px'},
                     scaledSize: {width: 48, height: 48, f: 'px', b: 'px'}
                 },

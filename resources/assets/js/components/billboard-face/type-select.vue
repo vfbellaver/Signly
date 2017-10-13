@@ -1,7 +1,7 @@
 <template>
     <div>
         <select class="form-control" v-model="internalValue" v-bind:value="value" :name="name">
-            <option selected>Static</option>
+            <option selected="selected">Static</option>
             <option>Digital</option>
         </select>
     </div>
@@ -12,9 +12,16 @@
         mixins: [require('../shared/Mixins/Model')],
 
         computed:{
+
         },
 
-        created(){
+        data(){
+          return{
+            static: 'Static'
+          }
+        },
+
+        mounted(){
             this.selected();
         },
 
@@ -22,7 +29,7 @@
             selected () {
                 const self = this;
                 if(self.internalValue === null){
-                    return  self.internalValue = 'Right';
+                    return  self.internalValue = 'Static';
                 }
                 return self.internalValue;
             }

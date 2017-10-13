@@ -1,7 +1,7 @@
 <template>
     <div>
         <select class="form-control" v-model="internalValue" v-bind:value="value" :name="name">
-            <option>Right</option>
+            <option :selected="selected">Right</option>
             <option>Left</option>
             <option>Across</option>
         </select>
@@ -13,14 +13,6 @@
         mixins: [require('../shared/Mixins/Model')],
 
         computed:{
-
-        },
-
-        mounted(){
-           this.selected();
-        },
-
-        methods:{
             selected () {
                 const self = this;
                 if(self.internalValue === null){
@@ -28,6 +20,14 @@
                 }
                 return self.internalValue;
             }
+        },
+
+        created(){
+           //this.selected();
+        },
+
+        methods:{
+
         }
     }
 </script>

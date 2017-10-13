@@ -20,7 +20,6 @@ $factory->define(App\Models\BillboardFace::class, function (Faker $faker) {
         'is_illuminated' => $isIlluminated,
         'lights_on' => $isIlluminated ? $faker->time() : null,
         'lights_off' => $isIlluminated ? $faker->time() : null,
-        'type' => $f,
         'billboard_id' => function () {
             return factory(App\Models\Billboard::class)->create()->id;
         },

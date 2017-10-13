@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\BillboardCreateRequest;
 use App\Models\Billboard;
 use App\Models\BillboardFace;
 
@@ -34,5 +35,14 @@ class BillboardsController extends Controller
             'billboard' => $billboard,
             'faces' => $faces
         ]);
+    }
+
+    public function publicPage (BillboardCreateRequest $billboard) {
+
+        return $billboard;
+    }
+
+    public function makePublicPage (BillboardCreateRequest $request) {
+        str_slug();
     }
 }

@@ -8,41 +8,42 @@
                 </box-tools>
             </box-title>
             <box-content>
-                <div class="cards-line-separator" v-for="billboardFace in billboardFaces">
-                    <div class="card-container">
-                        <column size="4">
-                            <img width="100%" :src="billboardFace.photo">
-                        </column>
-                        <column size="8">
-                            <div class="card-body">
-                                <h3>
-                                    <small>Code:</small>
-                                    {{billboardFace.code}}
-                                    <small>Label:</small>
-                                    {{billboardFace.label}}
-                                </h3>
-                                <hr>
-                                <column size="3">
-                                    <h4>U$ : </h4>
-                                </column>
-                                <column size="9">
-                                    <h2>{{formatMoney(billboardFace.hard_cost)}} &nbsp </h2>
-                                </column>
-
-                                <column size="12">
-                                    <btn-success size="xs" @click.native="edit(billboardFace)">
-                                        <icon icon="edit"></icon>
-                                    </btn-success>
-                                    <btn-danger @click.native="destroy(billboardFace)"
-                                                :disabled="billboardFace.destroyForm.busy"
-                                                size="xs">
-                                        <spinner v-if="billboardFace.destroyForm.busy"></spinner>
-                                        <icon icon="trash" v-else></icon>
-                                    </btn-danger>
-                                </column>
+                <div v-for="billboardFace in billboardFaces">
+                    <div class="contact-box">
+                        <div class="col-sm-4">
+                            <div class="text-center">
+                                <img alt="image" class="img-circle m-t-xs img-responsive" :src="billboardFace.photo">
                             </div>
-                        </column>
-                        <div style="clear: both"></div>
+                        </div>
+                        <div class="col-sm-8">
+                            <h3>
+                                <small>code: &nbsp</small>
+                                <strong>{{billboardFace.code}}</strong>
+                            </h3>
+                            <p>
+                                <i class="fa fa-arrows-v"></i>
+                                <small>Heigth:</small>
+                                {{billboardFace.height}} &nbsp
+                                <i class="fa fa-arrows-h"></i>
+                                <small>Width:</small>
+                                {{billboardFace.width}}
+                            </p>
+                            <h1>
+                                <small><i class="fa fa-money"></i> U$ :</small>
+                                {{formatMoney(billboardFace.hard_cost)}}
+                            </h1>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="contact-box-footer">
+                            <div class="m-t-xs btn-group pull-right">
+                                <button @click="edit(billboardFace)" class="btn btn-xs btn-white"><i
+                                        class="fa fa-edit"></i> EDIT
+                                </button>
+                                <button @click="destroy(billboardFace)" class="btn btn-xs btn-white"><i
+                                        class="fa fa-trash"></i> EDIT
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </box-content>
@@ -85,7 +86,8 @@
 
     import _ from 'lodash';
     import * as Slc from "../../vue/http";
-    import BillboardFaceForm from './billboard-face-form.vue';
+    import BillboardFaceForm from './billboard-face-form';
+    import BillboardFaceCard from './billboard-face-card';
 
     export default {
         props: {
@@ -93,7 +95,8 @@
         },
 
         components: {
-            BillboardFaceForm
+            BillboardFaceForm,
+            BillboardFaceCard
         },
 
         data() {
