@@ -13,7 +13,7 @@ class CreateBillboardFacesTable extends Migration
 
             $table->string('code', 6);
             $table->string('label', 50);
-            $table->float('hard_cost', 10, 0)->default(0);
+            $table->string('hard_cost')->default(0);
             $table->float('monthly_impressions', 10, 0)->default(0);
             $table->integer('duration');
             $table->boolean('is_illuminated')->default(false);

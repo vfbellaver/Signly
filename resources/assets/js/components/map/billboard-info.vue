@@ -11,7 +11,7 @@
                     <div>{{billboard.lat}}, {{billboard.lng}}</div>
                     <div class="pull-right">
                         <btn-submit
-                         @click.native="edit(billboard)"
+                                @click.native="edit(billboard)"
                         >
                             EDIT
                         </btn-submit>
@@ -67,25 +67,18 @@
 </style>
 
 <script>
-
     import * as Slc from "../../vue/http";
-
     export default {
-
         props: {
             billboard: {required: true},
         },
-
         created() {
             console.log("Billboard Info", this.billboard);
         },
-
         methods: {
-
             edit(billboard) {
                 window.location = laroute.route("billboards.edit", {billboard: billboard.id});
             },
         }
-
     }
 </script>

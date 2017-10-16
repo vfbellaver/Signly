@@ -11,7 +11,7 @@ $factory->define(App\Models\BillboardFace::class, function (Faker $faker) {
         'width' => 200,
         'reads' => rand(1000, 2000),
         'label' => $faker->word,
-        'hard_cost' => 25.00,
+        'hard_cost' => $faker->numberBetween(1,9) .'.'. $faker->numberBetween(100,999) .','. $faker->numberBetween(00,99),
         'monthly_impressions' => rand(1000, 2000),
         'notes' => $faker->text(200),
         'max_ads' => rand(2, 10),

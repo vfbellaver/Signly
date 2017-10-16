@@ -17,12 +17,12 @@
 
         data(){
           return{
-            static: 'Static'
+
           }
         },
 
         mounted(){
-            this.selected();
+
         },
 
         methods:{

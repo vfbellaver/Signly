@@ -8,7 +8,7 @@
                 </box-tools>
             </box-title>
             <box-content>
-                <div style="overflow: auto; max-height: 800px">
+                <div style="overflow: auto; max-height: 1030px">
                     <div v-for="billboardFace in billboardFaces">
                         <div class="contact-box">
                             <div class="col-sm-4">
@@ -35,20 +35,21 @@
                                 </p>
                                 <h1>
                                     <small> U$ :</small>
-                                    {{formatMoney(billboardFace.hard_cost)}}
+                                    {{billboardFace.hard_cost}}
                                 </h1>
                             </div>
                             <div class="clearfix"></div>
-                            <div class="contact-box-footer">
-                                <div class="m-t-xs btn-group pull-right">
-                                    <button @click="edit(billboardFace)" class="btn btn-xs btn-white"><i
-                                            class="fa fa-edit"></i> EDIT
-                                    </button>
-                                    <button @click="destroy(billboardFace)" class="btn btn-xs btn-white"><i
-                                            class="fa fa-trash"></i> DELETE
-                                    </button>
+                                <div class="contact-box-footer">
+                                    <div class="m-t-xs btn-group pull-right">
+                                        <button @click="edit(billboardFace)" class="btn btn-xs btn-white"><i
+                                                class="fa fa-edit"></i> EDIT
+                                        </button>
+                                        <button @click="destroy(billboardFace)" class="btn btn-xs btn-white"><i
+                                                class="fa fa-trash"></i> DELETE
+                                        </button>
+                                    </div>
                                 </div>
-                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -73,6 +74,10 @@
         }
         .ibox-content {
             border: 0;
+        }
+
+        .contact-box-footer{
+            margin-top: 10px;
         }
 
         > hr {
@@ -157,7 +162,6 @@
                 tmp = tmp.replace(/([0-9]{2})$/g, ",$1");
                 if (tmp.length > 6)
                     tmp = tmp.replace(/([0-9]{3}),([0-9]{2}$)/g, ".$1,$2");
-
                 return tmp;
             }
         }

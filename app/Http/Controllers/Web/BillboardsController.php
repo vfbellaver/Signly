@@ -38,7 +38,6 @@ class BillboardsController extends Controller
     }
 
     public function publicPage (BillboardCreateRequest $billboard) {
-
         return $billboard;
     }
 
