@@ -52,7 +52,7 @@
                                     <td>{{face.height}}</td>
                                     <td>{{face.type}}</td>
                                     <td>{{face.duration}}</td>
-                                    <td>{{face.is_illuminated}}</td>
+                                    <td>{{(face.is_illuminated ? 'Yes' : 'No')}}</td>
                                     <td>{{face.lights_on}}</td>
                                     <td>{{face.lights_off}}</td>
                                 </tr>
@@ -68,11 +68,6 @@
 
     </div>
 </template>
-<style lang="scss" scoped="scoped">
-    .img {
-        max-width: 100%;
-    }
-</style>
 
 <script>
 

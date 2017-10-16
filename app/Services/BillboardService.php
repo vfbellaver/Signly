@@ -104,6 +104,7 @@ class BillboardService
                     if (!isset($row["face{$i}_{$o}"]) || !$row["face{$i}_{$o}"]) {
                         continue;
                     }
+
                     if ($o === 'lights_on' || $o === 'lights_off') {
                         $time = $row["face{$i}_{$o}"];
                         $face[$o] = Carbon::createFromFormat('h:i A', $time)->format('H:i:s');
@@ -146,6 +147,11 @@ class BillboardService
 
                 //create as faces relations
                 foreach ($faces as $face) {
+                    if(strtolower($face['is_illuminated']) == strtolower('No')){
+                        $face['is_illuminated'] = false;
+                    }else{
+                        $face['is_illuminated'] = true;
+                    }
                     $billboardFace = new BillboardFace($face);
                     $billboardFace->billboard()->associate($billboard);
                     $billboardFace->save();

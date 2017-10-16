@@ -22,18 +22,13 @@
                                         v-if="loaded"
                                         :center="center"
                                         :zoom="zoom"
-                                        @click="onMapClick"
                                         @zoom_changed="onZoomChanged"
                                         :options="mapOptions"
-                                        style="width: 100%; min-height: 350px">
+                                        style="width: 100%; min-height: 360px;">
                                     <gmap-marker
                                             v-if="marker"
                                             :position="marker"
                                             :icon="markerIcon"
-                                            :clickable="true"
-                                            :draggable="true"
-                                            @dragend="onMarkerMoved"
-                                            @click="center=marker"
                                     ></gmap-marker>
                                 </gmap-map>
                             </div>
@@ -73,6 +68,9 @@
 
     .vue-street-view-pano-container {
         min-height: 360px;
+    }
+    .vue-map-container .map-vue {
+        left: 10px; right: 10px; top: 30px; bottom: 0;
     }
 
 </style>
