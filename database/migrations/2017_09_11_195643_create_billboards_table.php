@@ -24,6 +24,13 @@ class CreateBillboardsTable extends Migration
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
 
+            $table->unsignedInteger('team_id');
+            $table->foreign('team_id')
+                ->references('id')
+                ->on('teams')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+            
             $table->timestamps();
         });
     }

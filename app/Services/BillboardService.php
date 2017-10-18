@@ -28,6 +28,7 @@ class BillboardService
 
             $billboard = new Billboard($data);
             $billboard->user()->associate($form->user());
+            $billboard->team()->associate($form->user()->team_id);
 
             $billboard->save();
 
@@ -138,6 +139,7 @@ class BillboardService
                     'lat' => $blb['lat'],
                     'lng' => $blb['lng'],
                     'user_id' => $data['user_id'],
+                    'team_id' => $data['team_id'],
                 ]);
 
                 $events[] = new BillboardCreated($billboard);
