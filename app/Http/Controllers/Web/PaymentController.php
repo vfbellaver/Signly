@@ -2,17 +2,19 @@
 
 namespace App\Http\Controllers\Web;
 
+use App\Http\Requests\UserRegistrationRequest;
 use App\Models\Team;
 use App\Models\User;
+use Artesaos\Defender\Facades\Defender;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Stripe\{Stripe, Charge, Customer, Plan, Card};
-use laravel\Cashier\Cashier;
+use Stripe\Stripe;
 
 
 class PaymentController extends Controller
 {
     private $key;
+    private $role;
 
 
     public function __construct()
@@ -21,40 +23,43 @@ class PaymentController extends Controller
         // Set your secret key: remember to change this to your live secret key in production
         // See your keys here: https://dashboard.stripe.com/account/apikeys
         $this->key = "sk_test_vKQEgHfPSO1a5eJl2W0ZqUzW";
+        $this->role = Defender::findRole('user');
     }
 
     public function index()
     {
-        $teams = Team::all();
-        if (auth()->check())
-            return view('payment.index',compact('teams'));
+        return view('payment.register');
     }
 
-    public function store() {
+    public function store(UserRegistrationRequest $request) {
 
         Stripe::setApiKey($this->key);
-        $user = User::findOrFail(auth()->id());
-        $plan = request()->input('plan');
 
-        $user->newSubscription('main', $plan)->create(request('stripeToken'), [
-            'email' => request('stripeEmail'),
-        ]);
+        $team = new  Team();
+        $team->name = $request->input('team');
+        $team->save();
 
+        $user = new  User();
+        $user->name = $request->input('name');
+        $user->email = $request->input('stripeEmail');
+        $user->password = bcrypt($request->input('stripeEmail'));
+        $user->remember_token = str_random(10);
+        $user->team_id = $team->id;
 
+        $user->save();
 
-        /*
-        $custumer = Customer::create([
-            'email' => request('stripeEmail'),
-            'source' => request('stripeToken'),
-        ]);
+        if($user->save()) {
+            $plan = $request->input('plan');
+            $email = $request->input('stripeEmail');
 
-        Charge::create([
-           'currency' => 'usd',
-           'customer' => $custumer->id,
-           'amount' => $amount
-        ]);
-        */
-        return dd(request()->toArray());
+            $user->newSubscription('main', $plan)->create(request('stripeToken'), [
+                'email' => $email,
+            ]);
+        }
+
+        $user->attachRole($this->role);
+
+        return redirect('/');
 
     }
 }

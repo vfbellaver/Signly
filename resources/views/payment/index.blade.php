@@ -13,16 +13,17 @@
 
                         <div class="form-group">
                             <div class="col-lg-2">
-                                <label class="control-label">Chose your Plan</label>
+                                <label class="control-label">Choose your Plan</label>
                             </div>
                             <div class="col-lg-10">
                                 <select class="form-control" name="plan">
-                                    <option value="small-team"><strong>Small Team</strong> | $99.00 / Monthly - 14 Day Trial
+                                    <option selected disabled>Choose a Plan</option>
+                                    <option value="small-team">Small Team | $99.00 / Monthly - 14 Day Trial
                                     </option>
-                                    <option value="growing-team"><strong>Growing Team</strong> | $249.00 / Monthly - 14 Day
+                                    <option value="growing-team">Growing Team | $249.00 / Monthly - 14 Day
                                         Trial
                                     </option>
-                                    <option value="enterprise-team"><strong>Entreprise Team</strong> | $499.00 / Monthly - 14 Day
+                                    <option value="enterprise-team">Entreprise Team | $499.00 / Monthly - 14 Day
                                         Trial
                                     </option>
                                 </select>

@@ -14,8 +14,10 @@ class UserRegistrationRequest extends FormRequest
     public function rules()
     {
         return [
-            'invitation_token' => 'required',
-            'password' => 'required|string|min:6|confirmed'
+            'password' => 'required|string|min:6|confirmed',
+            'stripeEmail' => 'required|email|unique:users,email',
+            'team' => 'required|unique:teams,name',
+            'plan' => 'required',
         ];
     }
 }
