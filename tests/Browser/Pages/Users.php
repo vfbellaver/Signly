@@ -29,7 +29,7 @@ class Users extends BasePage
     }
 
     /**
-     * Get the element shortcuts for the page.
+     * Get the elements shortcuts for the page.
      *
      * @return array
      */

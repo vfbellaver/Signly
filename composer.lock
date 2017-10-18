@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "3e06279380b49faa7d2a11141ce3aa54",
-    "content-hash": "f7a6d043d7ef7a043707e9ffa941c5c5",
+    "hash": "fe638b2822ff3c7c2867af60a4f88b3c",
+    "content-hash": "493767c9f4d3d3cbf2f409edd46d74fd",
     "packages": [
         {
             "name": "artesaos/defender",
@@ -17,7 +17,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/artesaos/defender/zipball/a16e03d23bc11a6d6c2900c5026135e1d6b9b18d",
+                "url": "https://api.github.com/repos/artesaos/defender/zipball/e6db04bfefeb8549ec55bab6118848d15b1b5132",
                 "reference": "a16e03d23bc11a6d6c2900c5026135e1d6b9b18d",
                 "shasum": ""
             },
@@ -3103,16 +3103,16 @@
         },
         {
             "name": "stripe/stripe-php",
-            "version": "v5.2.3",
+            "version": "v5.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/stripe/stripe-php.git",
-                "reference": "9e8d565e991ca82c91d708b281063cefd69d7b2c"
+                "reference": "d102a355d8c2e1a00d68659e9b51fb6f63aaa957"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/stripe/stripe-php/zipball/9e8d565e991ca82c91d708b281063cefd69d7b2c",
-                "reference": "9e8d565e991ca82c91d708b281063cefd69d7b2c",
+                "url": "https://api.github.com/repos/stripe/stripe-php/zipball/d102a355d8c2e1a00d68659e9b51fb6f63aaa957",
+                "reference": "d102a355d8c2e1a00d68659e9b51fb6f63aaa957",
                 "shasum": ""
             },
             "require": {
@@ -3154,7 +3154,7 @@
                 "payment processing",
                 "stripe"
             ],
-            "time": "2017-09-27 20:35:23"
+            "time": "2017-10-11 16:41:44"
         },
         {
             "name": "swiftmailer/swiftmailer",

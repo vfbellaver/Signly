@@ -17,7 +17,8 @@ class Slc
 
         return [
             'user' => $user,
-            'csrfToken' => csrf_token()
+            'csrfToken' => csrf_token(),
+            'StripeKey' => 'pk_test_o8pMqMjbYJLnpBp28U2ndxlJ'
         ];
     }
 

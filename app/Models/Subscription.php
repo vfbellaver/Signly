@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+const STRIPE_PLAN = ['Small Team' => 9900,'Growing Team' => 24900,'Entreprise Team' => 49900];
 class Subscription extends Model
 {
     protected $fillable = [

@@ -5,7 +5,11 @@ Vue.component('user-list', require('./user/user-list.vue'));
 Vue.component('user-settings', require('./user/user-settings'));
 
 //MAP
-Vue.component('main-map', require('./map/main-map.vue'));
+Vue.component('main-map', require('./map/main-map'));
+
+//Payment
+Vue.component('subscription', require('./payment/subscription'));
+Vue.component('profile', require('./payment/profile'));
 
 //TEAM
 Vue.component('team-list', require('./team/team-list.vue'));
