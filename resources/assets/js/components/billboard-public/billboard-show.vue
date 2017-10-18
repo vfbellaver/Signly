@@ -6,14 +6,17 @@
                     <box-content>
                         <h2 align="center">Billboard Information</h2>
                         <hr/>
-                        <h4>Name</h4>
-                        <p class="name">{{billboard.name}}</p>
+                        <row>
+                            <column size="6">
+                                <h4>Name</h4>
+                                <p class="name">{{billboard.name}}</p>
+                            </column>
+                            <column size="6">
+                                <h4>Description</h4>
+                                <p class="description">{{billboard.description}}</p>
+                            </column>
+                        </row>
                         <hr/>
-
-                        <h4>Description</h4>
-                        <p class="description">{{billboard.description}}</p>
-                        <hr/>
-
                         <div class="row">
                             <div class="col-md-6">
                                 <h4>Localization in Map</h4>
@@ -49,7 +52,7 @@
                     </box-content>
                 </box>
                 <row>
-                    <h2 align="center">Billboard Faces</h2>
+                    <h1 align="center">Billboard Faces</h1>
                     <faces-billboard :billboardId="this.id"></faces-billboard>
                 </row>
             </div>
@@ -69,8 +72,12 @@
     .vue-street-view-pano-container {
         min-height: 360px;
     }
+
     .vue-map-container .map-vue {
-        left: 10px; right: 10px; top: 30px; bottom: 0;
+        left: 10px;
+        right: 10px;
+        top: 30px;
+        bottom: 0;
     }
 
 </style>

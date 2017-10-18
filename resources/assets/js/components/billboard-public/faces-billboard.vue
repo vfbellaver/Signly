@@ -53,8 +53,8 @@
                                     <td>{{face.type}}</td>
                                     <td>{{face.duration}}</td>
                                     <td>{{(face.is_illuminated ? 'Yes' : 'No')}}</td>
-                                    <td>{{face.lights_on}}</td>
-                                    <td>{{face.lights_off}}</td>
+                                    <td>{{format(face.lights_on)}}</td>
+                                    <td>{{format(face.lights_off)}}</td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -100,7 +100,9 @@
                 let self = this;
                 Slc.get(laroute.route('api.billboard-face.index', {bid: this.billboardId}))
                     .then((response) => {
+                        console.log('Responde Faces',response);
                         self.billboardFaces = response;
+
                     });
             },
 
@@ -121,7 +123,17 @@
                     v = v.replace(/(\d)(\d{3}[.,])/, "$1,$2");
                 }
                 return v;
+            },
+
+            format(hour){
+                if(hour){
+                    console.log('Format Hour - ',hour);
+                    const m = moment(hour,'HH:mm:ss');
+                    return m.format('LT');
+
+                }
             }
+
 
         }
     }
