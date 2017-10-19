@@ -104,7 +104,7 @@
                 Slc.get(laroute.route("make.url", {id: billboard.id}))
                     .then((response) => {
                         console.log('Team billboard', response.data);
-                        window.location = laroute.route('billboard.details',
+                        window.location = laroute.route('public.billboard.details',
                             {teamName: response.data.slugTeam, billboardName: response.data.slugBillboard});
                     });
 

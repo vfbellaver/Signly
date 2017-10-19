@@ -2,7 +2,6 @@ module.exports = {
 
     get(uri) {
         return Slc.fetch('get', uri);
-
     },
 
     find(uri) {

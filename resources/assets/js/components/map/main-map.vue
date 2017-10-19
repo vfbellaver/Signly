@@ -81,12 +81,13 @@
 
                 this.loadMarkers('api.billboard.index');
             }else{
-                this.loadMarkers('billboards.public');
+                this.loadMarkers('public.billboard.page');
             }
         },
 
         methods: {
             loadMarkers(uri) {
+
                 Slc.get(laroute.route(uri))
                     .then((response) => {
                         this.billboards = response;

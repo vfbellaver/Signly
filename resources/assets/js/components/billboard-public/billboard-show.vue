@@ -129,21 +129,20 @@
             }
         },
 
-        created() {
+        mounted() {
             this.load();
         },
 
         methods: {
             load() {
                 this.loaded = false;
-
-                const uri = laroute.route('api.billboard.show', {billboard: this.id});
-                Slc.find(uri).then((billboard) => {
-                    console.log("Billboard loaded", billboard);
-                    this.billboard = billboard;
-                    this.center = billboard.position;
-                    this.marker = billboard.position;
-                    this.pov = billboard.pov;
+                const uri = laroute.route('public.get.billboard', {billboard: this.id});
+                Slc.get(uri).then((response) => {
+                    console.log("Billboard Public", response);
+                    this.billboard = response[0];
+                    this.center = response[0].position;
+                    this.marker = response[0].position;
+                    this.pov = response[0].pov;
                     this.loaded = true;
                 });
             },

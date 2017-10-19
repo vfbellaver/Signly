@@ -6,19 +6,14 @@ use App\Models\Billboard;
 use App\Http\Controllers\Controller;
 use App\Models\BillboardFace;
 use App\Models\Team;
+use function Deployer\get;
 use Illuminate\Support\Facades\Request;
 
 class PublicBillboardsController extends Controller
 {
     public function index()
     {
-        $dados = Billboard::all();
-        $billboards = [];
-        foreach ($dados as $billboard){
-            $billboard['nameSlug'] = str_slug($billboard->name,'-');
-            $billboards[] = $billboard;
-        }
-        return $billboards;
+        return Billboard::all();
     }
 
     public function makeUrl($id)
@@ -45,5 +40,14 @@ class PublicBillboardsController extends Controller
             'billboard' => $billboard,
             'faces' => $faces
         ]);
+    }
+
+    public function getBillboard($id){
+        $billboard = Billboard::query()->where('id',$id)->get()->toArray();
+        return $billboard;
+    }
+
+    public function getFaces($id){
+        return BillboardFace::query()->where('billboard_id', $id)->get()->toArray();
     }
 }

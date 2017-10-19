@@ -76,7 +76,7 @@
 
     export default {
         props: {
-            billboardId: {required: false},
+            billboardId: {required: true},
         },
 
         components: {},
@@ -88,21 +88,17 @@
         },
 
         mounted() {
-            this.reload();
-        },
-
-        mounted() {
-            this.reload();
+            this.load();
         },
 
         methods: {
-            reload() {
-                let self = this;
-                Slc.get(laroute.route('api.billboard-face.index', {bid: this.billboardId}))
-                    .then((response) => {
-                        console.log('Responde Faces',response);
-                        self.billboardFaces = response;
+            load() {
 
+                const self = this;
+                const uri = laroute.route('public.get.faces', {bid: this.billboardId});
+                Slc.get(uri).then((response) => {
+                    console.log('Load Faces - ',response);
+                        self.billboardFaces = response;
                     });
             },
 
@@ -126,9 +122,9 @@
             },
 
             format(hour){
-                if(hour){
-                    console.log('Format Hour - ',hour);
-                    const m = moment(hour,'HH:mm:ss');
+                if (hour) {
+                    console.log('Format Hour - ', hour);
+                    const m = moment(hour, 'HH:mm:ss');
                     return m.format('LT');
 
                 }
