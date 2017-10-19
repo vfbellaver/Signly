@@ -46,4 +46,8 @@ class BillboardForm extends BaseForm
     {
         return $this->request->get('user');
     }
+    public function team()
+    {
+        return $this->request->get('team');
+    }
 }

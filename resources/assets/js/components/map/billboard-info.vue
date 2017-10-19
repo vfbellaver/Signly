@@ -9,13 +9,21 @@
                     <div>{{billboard.address}}</div>
                     <h4>Location</h4>
                     <div>{{billboard.lat}}, {{billboard.lng}}</div>
-                    <div class="pull-right">
-                        <btn-submit
-                                @click.native="edit(billboard)"
-                        >
-                            EDIT
-                        </btn-submit>
-                    </div>
+                    <hr/>
+                        <div class="col-md-6">
+                            <btn-submit class="btn-info"
+                                    @click.native="showDetails(billboard)"
+                            >
+                                SHOW DETAILS
+                            </btn-submit>
+                        </div>
+                        <div class="col-md-6" v-if="this.user.email">
+                            <btn-submit
+                                    @click.native="edit(billboard)"
+                            >
+                                EDIT
+                            </btn-submit>
+                        </div>
                 </div>
             </tab>
             <tab :key="face.id" v-for="face in billboard.billboard_faces" :name="face.code">
@@ -67,18 +75,39 @@
 </style>
 
 <script>
+
     import * as Slc from "../../vue/http";
+
     export default {
+
         props: {
             billboard: {required: true},
+            user: {required: true}
         },
+
         created() {
             console.log("Billboard Info", this.billboard);
         },
+
         methods: {
+
             edit(billboard) {
                 window.location = laroute.route("billboards.edit", {billboard: billboard.id});
             },
+
+            showDetails(billboard){
+
+                console.log('equipe - ',billboard.team.id);
+                 Slc.get(laroute.route("billboard.team", {id: billboard.team.id}))
+                    .then((response) => {
+                       console.log('Team billboard',response);
+                    });
+
+                window.location = laroute.route('billboard.details',
+                        {teamName: team.name, billboardnaName: billboard.name, id:billboard.id});
+
+            }
         }
+
     }
 </script>

@@ -8,3 +8,4 @@ Route::post('billboard/csv-upload', 'Api\BillboardsController@csvUpload')
 
 Route::post('billboard/import-billboard', 'Api\BillboardsController@import')
     ->name('billboard.import');
+

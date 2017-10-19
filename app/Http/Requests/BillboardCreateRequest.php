@@ -15,6 +15,7 @@ class BillboardCreateRequest extends BaseRequest
     {
         $data = request()->all();
         $data['user'] = auth()->user();
+        $data['team_id'] =auth()->user()->team_id;
         $this->request->replace($data);
     }
 

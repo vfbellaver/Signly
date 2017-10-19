@@ -122,6 +122,19 @@
                 <div class="ibox-content">
                     <div class="col-lg-8 col-lg-offset-2">
                         <div class="form-group">
+                            <div class="form-group">
+                                <div class="col-lg-3">
+                                    <label class="control-label">CardHolder's Name</label>
+                                </div>
+                                <div class="col-lg-9">
+                                    <input type="text" class="form-control" name="owner" value="{{ old('owner') }}">
+                                    @if ($errors->has('owner'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('owner') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
                             <div class="form-row">
                                 <label for="card-element">
                                     Credit or debit card

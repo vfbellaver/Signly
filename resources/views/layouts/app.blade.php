@@ -33,6 +33,7 @@
                             @include('layouts._menu')
                         </ul>
                         <ul class="nav navbar-top-links navbar-right">
+                            @if(isset(auth()->user()->name))
                             <li>
                                 {{ auth()->user()->name }}
                             </li>
@@ -48,6 +49,13 @@
                                     {{ csrf_field() }}
                                 </form>
                             </li>
+                            @else
+                                <li>
+                                    <a href="{{ route('login') }}">
+                                        <i class="fa fa-sign-in"></i> Login
+                                    </a>
+                                </li>
+                            @endif
                         </ul>
                     </div>
                 </nav>

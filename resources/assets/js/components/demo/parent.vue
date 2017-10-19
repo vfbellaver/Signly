@@ -37,7 +37,7 @@
 
         methods: {
             onHello(p){
-                console.log('msg',p);
+                console.log('msg', p);
             }
         }
     }

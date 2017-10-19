@@ -8,6 +8,7 @@ use App\Models\User;
 use Artesaos\Defender\Facades\Defender;
 use Carbon\Carbon;
 use App\Http\Controllers\Controller;
+use Stripe\Card;
 use Stripe\Stripe;
 
 
@@ -56,10 +57,19 @@ class PaymentController extends Controller
         if ($user->save()) {
             $plan = $request->input('plan');
             $email = $request->input('email');
+            $owner = $request->input('owner');
 
-            $user->newSubscription('main', $plan)->create(request('stripeToken'), [
+            $user->newSubscription('main', $plan)
+                ->trialDays(14)
+                ->create(request('stripeToken'), [
                 'email' => $email,
             ]);
+
+            $customer = \Stripe\Customer::retrieve($user->stripe_id);
+            $card = $customer->sources->retrieve($customer->default_source);
+            $card->name = $owner;
+            $card->save();
+
         }
 
 

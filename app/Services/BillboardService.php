@@ -28,6 +28,7 @@ class BillboardService
 
             $billboard = new Billboard($data);
             $billboard->user()->associate($form->user());
+            $billboard->team()->associate($form->user()->team_id);
 
             $billboard->save();
 
@@ -104,6 +105,7 @@ class BillboardService
                     if (!isset($row["face{$i}_{$o}"]) || !$row["face{$i}_{$o}"]) {
                         continue;
                     }
+
                     if ($o === 'lights_on' || $o === 'lights_off') {
                         $time = $row["face{$i}_{$o}"];
                         $face[$o] = Carbon::createFromFormat('h:i A', $time)->format('H:i:s');
@@ -137,6 +139,7 @@ class BillboardService
                     'lat' => $blb['lat'],
                     'lng' => $blb['lng'],
                     'user_id' => $data['user_id'],
+                    'team_id' => $data['team_id'],
                 ]);
 
                 $events[] = new BillboardCreated($billboard);
@@ -146,6 +149,11 @@ class BillboardService
 
                 //create as faces relations
                 foreach ($faces as $face) {
+                    if(strtolower($face['is_illuminated']) == strtolower('No')){
+                        $face['is_illuminated'] = false;
+                    }else{
+                        $face['is_illuminated'] = true;
+                    }
                     $billboardFace = new BillboardFace($face);
                     $billboardFace->billboard()->associate($billboard);
                     $billboardFace->save();

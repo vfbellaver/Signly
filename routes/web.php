@@ -23,6 +23,16 @@ Route::get('roles', function () {
     dd($roles);
 });
 
+
+Route::get('/ ','Web\HomeController@index');
+Route::get('billboards/public','Api\PublicBillboardsController@index')
+    ->name('billboards.public');
+Route::get('team/billboard/{id}','Api\PublicBillboardsController@getTeam')
+    ->name('billboard.team');
+
+Route::get('{teamName}/{billboardName}', 'Api\PublicBillboardController@showDetails')
+    ->name('billboard.details');
+
 Route::get('slc.js', function () {
     $json = json_encode(array_merge(Slc::scriptVariables(), []));
     $js = <<<js
@@ -40,5 +50,6 @@ Route::group(['middleware' => ['auth']], function () {
         require $file;
     }
 });
+
 
 

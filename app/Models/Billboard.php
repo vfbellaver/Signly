@@ -15,6 +15,7 @@ class Billboard extends Model
         'pitch',
         'description',
         'user_id',
+        'team_id'
     ];
 
     protected $casts = [
@@ -37,6 +38,10 @@ class Billboard extends Model
     public function billboardFaces()
     {
         return $this->hasMany(BillboardFace::class);
+    }
+
+    public function team(){
+        return $this->belongsTo(Team::class);
     }
     #endregion
 
@@ -61,6 +66,7 @@ class Billboard extends Model
             'heading' => $this->heading,
             'pitch' => $this->pitch,
             'user' => $this->user->toArray(),
+            'team' =>$this->team->toArray(),
             'billboard_faces' => $this->billboardFaces->toArray(),
             'position' => [
                 'lat' => $this->lat,
