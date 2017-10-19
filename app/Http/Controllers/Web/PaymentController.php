@@ -6,9 +6,10 @@ use App\Http\Requests\UserRegistrationRequest;
 use App\Models\Team;
 use App\Models\User;
 use Artesaos\Defender\Facades\Defender;
-use Illuminate\Http\Request;
+use Carbon\Carbon;
 use App\Http\Controllers\Controller;
 use Stripe\Stripe;
+
 
 
 class PaymentController extends Controller
@@ -31,7 +32,8 @@ class PaymentController extends Controller
         return view('payment.register');
     }
 
-    public function store(UserRegistrationRequest $request) {
+    public function store(UserRegistrationRequest $request)
+    {
 
         Stripe::setApiKey($this->key);
 
@@ -40,24 +42,26 @@ class PaymentController extends Controller
         $team->save();
 
         $user = new  User();
+
+
         $user->name = $request->input('name');
-        $user->email = $request->input('stripeEmail');
-        $user->password = bcrypt($request->input('stripeEmail'));
+        $user->email = $request->input('email');
+        $user->password = bcrypt($request->input('password'));
         $user->remember_token = str_random(10);
         $user->team_id = $team->id;
+        $user->trial_ends_at = Carbon::now()->addDays(14);
 
         $user->save();
 
-        if($user->save()) {
+        if ($user->save()) {
             $plan = $request->input('plan');
-            $email = $request->input('stripeEmail');
+            $email = $request->input('email');
 
             $user->newSubscription('main', $plan)->create(request('stripeToken'), [
                 'email' => $email,
             ]);
         }
 
-        $user->attachRole($this->role);
 
         return redirect('/');
 

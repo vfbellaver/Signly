@@ -1,18 +1,8 @@
 @extends('layouts.login')
 
 @section('content')
-    @if (count($errors) > 0)
-        <div class="errors-container">
-            <ul>
-                @foreach($errors as $error)
-                <li> {{ $error }}</li>
-                 @endforeach
-            </ul>
-        </div>
-    @endif
     <div class="col-lg-8 col-lg-offset-2">
         <form class="form-horizontal" action="{{route('pay')}}" method="post" id="payment-form">
-
             {{csrf_field()}}
 
             <div class="ibox float-e-margins">
@@ -86,10 +76,10 @@
                             <label class="control-label">Email</label>
                         </div>
                         <div class="col-lg-10">
-                            <input type="email" class="form-control" name="stripeEmail" value="{{ old('stripeEmail') }}">
-                            @if ($errors->has('stripeEmail'))
+                            <input type="email" class="form-control" name="email" value="{{ old('email') }}">
+                            @if ($errors->has('email'))
                                 <span class="help-block">
-                                        <strong>{{ $errors->first('stripeEmail') }}</strong>
+                                        <strong>{{ $errors->first('email') }}</strong>
                                     </span>
                             @endif
                         </div>
@@ -111,10 +101,10 @@
                     </div>
 
                     <div class="form-group">
-                        <div class="col-lg-3">
+                        <div class="col-lg-2">
                             <label class="control-label" for="password-confirm">Confirm Password</label>
                         </div>
-                        <div class="col-lg-9">
+                        <div class="col-lg-10">
                             <input id="password-confirm" type="password" class="form-control"
                                    name="password_confirmation" required>
                         </div>
