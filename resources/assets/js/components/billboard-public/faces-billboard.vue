@@ -21,7 +21,9 @@
                                     Code - {{face.code}}
                                 </h2>
                             </row>
-                            <small>{{face.notes}}</small>
+                            <div class="notes">
+                                <small>{{face.notes}}</small>
+                            </div>
                             <hr>
                             <div>
                                 <div class="col-md-6">
@@ -68,7 +70,11 @@
 
     </div>
 </template>
-
+<style lang="scss" scoped="scoped">
+    .notes{
+        min-height: 70px;
+    }
+</style>
 <script>
 
     import _ from 'lodash';
