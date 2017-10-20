@@ -3,9 +3,10 @@
 use Faker\Generator as Faker;
 
 $factory->define(App\Models\Billboard::class, function (Faker $faker) {
-
+    $name = $faker->name;
     return [
-        'name' => $faker->name,
+        'name' => $name,
+        'slugname' => str_slug($name,'-'),
         'address' => $faker->address,
         'lat' => $faker->latitude,
         'lng' => $faker->longitude,
