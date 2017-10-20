@@ -4,9 +4,7 @@
             <div class="container-fluid">
                 <box>
                     <box-content>
-                        <h1 class=" text-center font-bold m-b-xs">
-                            Billboard Information
-                        </h1>
+
                         <hr/>
                         <row>
                             <column size="4">
@@ -22,7 +20,6 @@
                                 </div>
                                 <div class="col-sm-7">
                                     <h3><strong>{{this.teamOwner.name}}</strong></h3>
-
                                     <strong> <i class="fa fa-send"></i> Email:</strong><br>
                                     {{this.owner.email}}
                                     <br><br>
@@ -33,21 +30,21 @@
                                         <strong> <i class="fa fa-map-marker"></i> Address:</strong><br>
                                         {{this.owner.address}}
                                     </address>
-
                                 </div>
                                 <div class="clearfix"></div>
-
                             </column>
                             <column size="8">
-
-
                                 <h2 class="font-bold m-b-xs">
-                                    {{billboard.name}}
+                                    Billboard Information
                                 </h2>
                                 <hr>
 
+                                <h3>Billboard Name</h3>
+                                <div class="text-muted">
+                                    {{billboard.name}}
+                                </div>
+                                <br>
                                 <h3>Billboard description</h3>
-
                                 <div class="text-muted">
                                     {{billboard.description}}
                                 </div>
