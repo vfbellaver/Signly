@@ -14,49 +14,57 @@
                                     Team
                                 </h2>
                                 <hr>
-                                <div class="contact-box">
-                                        <div class="col-sm-6">
-                                            <div class="text-center">
-                                                <img alt="image" class="img-circle m-t-xs img-responsive" src="">
-                                                <div class="m-t-xs font-bold">Graphics designer</div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <h3><strong>John Smith</strong></h3>
-                                            <p><i class="fa fa-map-marker"></i> Riviera State 32/106</p>
-                                            <address>
-                                                <strong>Twitter, Inc.</strong><br>
-                                                795 Folsom Ave, Suite 600<br>
-                                                San Francisco, CA 94107<br>
-                                                <abbr title="Phone">P:</abbr> (123) 456-7890
-                                            </address>
-                                        </div>
-                                        <div class="clearfix"></div>
-                                    </a>
+                                <div class="col-sm-5">
+                                    <div class="text-center">
+                                        <img alt="image" class="img-responsive"
+                                             :src="this.owner.photo_url" width="100%" >
+                                    </div>
                                 </div>
+                                <div class="col-sm-7">
+                                    <h3><strong>{{this.teamOwner.name}}</strong></h3>
+
+                                    <strong> <i class="fa fa-send"></i> Email:</strong><br>
+                                    {{this.owner.email}}
+                                    <br><br>
+                                    <strong> <i class="fa fa-phone"></i> Phones:</strong><br>
+                                    (123) 456-7890
+                                    <br><br>
+                                    <address>
+                                        <strong> <i class="fa fa-map-marker"></i> Address:</strong><br>
+                                        {{this.owner.address}}
+                                    </address>
+
+                                </div>
+                                <div class="clearfix"></div>
+
                             </column>
                             <column size="8">
 
 
-                                    <h2 class="font-bold m-b-xs">
-                                        {{billboard.name}}
-                                    </h2>
-                                    <hr>
+                                <h2 class="font-bold m-b-xs">
+                                    {{billboard.name}}
+                                </h2>
+                                <hr>
 
-                                    <h3>Billboard description</h3>
+                                <h3>Billboard description</h3>
 
-                                    <div class="text-muted">
-                                        It is a long established fact that a reader will be distracted by the readable
-                                        content of a page when looking at its layout. The point of using Lorem Ipsum is
-                                        There are many variations of passages of Lorem Ipsum available, but the majority
-                                        have suffered alteration in some form, by injected humour, or randomised words
-                                        which don't look even slightly believable.
-                                    </div>
-                                    <dl class="m-t-md">
-                                        <dt>Description lists</dt>
-                                        <dd>A description list is perfect for defining terms.</dd>
-                                        <dt>Euismod</dt>
+                                <div class="text-muted">
+                                    {{billboard.description}}
+                                </div>
+                                <row>
+                                    <dl class="m-t-md col-sm-4">
+                                        <dt><i class="fa fa-map-marker"></i> Address</dt>
+                                        <dd>{{billboard.address}}</dd>
                                     </dl>
+                                    <dl class="m-t-md col-sm-2">
+                                        <dt><i class="fa fa-arrows-v"></i> Latitude</dt>
+                                        <dd>{{billboard.lat}}</dd>
+                                    </dl>
+                                    <dl class="m-t-md col-sm-2">
+                                        <dt><i class="fa fa-arrows-h"></i> Longitude</dt>
+                                        <dd>{{billboard.lng}}</dd>
+                                    </dl>
+                                </row>
 
                             </column>
                         </row>
@@ -141,7 +149,8 @@
 
         data() {
             return {
-
+                owner: {},
+                teamOwner:{},
                 loaded: false,
                 marker: null,
                 zoom: 12,
@@ -179,23 +188,18 @@
                 this.loaded = false;
                 const uri = laroute.route('public.get.billboard', {billboard: this.id});
                 Slc.get(uri).then((response) => {
-                    console.log("Billboard Public", response);
+                    console.log("Billboard Public", response[0]);
                     this.billboard = response[0];
                     this.center = response[0].position;
                     this.marker = response[0].position;
                     this.pov = response[0].pov;
+                    this.owner = response[0].user;
+                    this.teamOwner = response[0].team;
                     this.loaded = true;
                 });
             },
 
-            reloadForm() {
-                //this.form.he this.pov.heading;
-            },
-
-
             onMapClick(e) {
-
-                const self = this;
 
             },
 
