@@ -17,7 +17,7 @@
                                 <div class="col-sm-5">
                                     <div class="text-center">
                                         <img alt="image" class="img-responsive"
-                                             :src="this.owner.photo_url" width="100%" >
+                                             :src="this.owner.photo_url" width="100%">
                                     </div>
                                 </div>
                                 <div class="col-sm-7">
@@ -150,7 +150,7 @@
         data() {
             return {
                 owner: {},
-                teamOwner:{},
+                teamOwner: {},
                 loaded: false,
                 marker: null,
                 zoom: 12,
