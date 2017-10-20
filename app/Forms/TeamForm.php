@@ -8,4 +8,9 @@ class TeamForm extends BaseForm
     {
         return $this->request->get('name');
     }
+
+    public function slugname()
+    {
+        return $this->request->get('slugname');
+    }
 }

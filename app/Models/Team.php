@@ -8,6 +8,7 @@ class Team extends Model
 {
     protected $fillable = [
         'name',
+        'slugname'
     ];
 
     protected $casts = [
@@ -34,7 +35,8 @@ class Team extends Model
     {
         return [
             'id' => $this->id,
-            'name' => $this->name
+            'name' => $this->name,
+            'slugname' => $this->slugname,
         ];
     }
     #endregion
