@@ -30,7 +30,8 @@ class PaymentController extends Controller
 
     public function index()
     {
-        return view('payment.register');
+        //return view('payment.register');
+        return view('payment.index');
     }
 
     public function store(UserRegistrationRequest $request)

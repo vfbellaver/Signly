@@ -8,7 +8,8 @@ Vue.component('user-settings', require('./user/user-settings'));
 Vue.component('main-map', require('./map/main-map'));
 
 //Payment
-Vue.component('subscription', require('./payment/subscription'));
+Vue.component('plan', require('./payment/plan'));
+Vue.component('content-plan', require('./payment/content-plan'));
 Vue.component('profile', require('./payment/profile'));
 
 //TEAM

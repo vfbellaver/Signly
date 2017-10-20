@@ -18,6 +18,7 @@ class UserRegistrationRequest extends FormRequest
             'email' => 'required|email|unique:users,email',
             'team' => 'required|unique:teams,name',
             'plan' => 'required',
+            'owner' => 'required|min:10|max:50',
         ];
     }
 }
