@@ -8,9 +8,9 @@ use App\Models\User;
 use Artesaos\Defender\Facades\Defender;
 use Carbon\Carbon;
 use App\Http\Controllers\Controller;
+use Request;
 use Stripe\Card;
 use Stripe\Stripe;
-
 
 
 class PaymentController extends Controller
@@ -32,6 +32,17 @@ class PaymentController extends Controller
     {
         //return view('payment.register');
         return view('payment.index');
+    }
+
+    public function termsAccept()
+    {
+        $planId = bcrypt(request()->post('id'));
+        return $planId;
+    }
+
+    public function registerUser($plan)
+    {
+        return view('payment.user-form',compact('plan'));
     }
 
     public function store(UserRegistrationRequest $request)
@@ -63,8 +74,8 @@ class PaymentController extends Controller
             $user->newSubscription('main', $plan)
                 ->trialDays(14)
                 ->create(request('stripeToken'), [
-                'email' => $email,
-            ]);
+                    'email' => $email,
+                ]);
 
             $customer = \Stripe\Customer::retrieve($user->stripe_id);
             $card = $customer->sources->retrieve($customer->default_source);

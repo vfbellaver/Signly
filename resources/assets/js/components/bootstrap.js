@@ -10,6 +10,7 @@ Vue.component('main-map', require('./map/main-map'));
 //Payment
 Vue.component('plan', require('./payment/plan'));
 Vue.component('content-plan', require('./payment/content-plan'));
+Vue.component('plan-modal', require('./payment/plan-modal'));
 Vue.component('profile', require('./payment/profile'));
 
 //TEAM

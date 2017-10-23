@@ -15,7 +15,6 @@
 </div>
 <script src="{{ mix('js/app.js') }}"></script>
 <script>
-
     var stripe = Stripe('pk_test_o8pMqMjbYJLnpBp28U2ndxlJ');
     var elements = stripe.elements();
 

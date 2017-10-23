@@ -38,7 +38,8 @@ Route::get('public/get/{billboard}','Api\PublicBillboardsController@getBillboard
 Route::get('public/faces/{bid}','Api\PublicBillboardsController@getFaces')
     ->name('public.get.faces');
 
-
+Route::get('{teamName}/{billboardName}', 'Api\PublicBillboardController@showDetails')
+    ->name('billboard.details');
 
 Route::get('slc.js', function () {
     $json = json_encode(array_merge(Slc::scriptVariables(), []));
