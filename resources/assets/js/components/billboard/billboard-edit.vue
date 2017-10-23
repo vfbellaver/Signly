@@ -175,9 +175,7 @@
                     this.loaded = true;
                 });
             },
-            reloadForm() {
-                //this.form.he this.pov.heading;
-            },
+
             save() {
                 const uri = laroute.route('api.billboard.update', {billboard: this.form.id});
                 Slc.put(uri, this.form).then((response) => {
