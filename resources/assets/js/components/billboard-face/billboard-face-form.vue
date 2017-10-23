@@ -61,7 +61,7 @@
                     <column size="4">
                         <form-group :form="form" field="hard_cost">
                             <input-label for="hard_cost">Hard Cost: </input-label>
-                            <input-text v-model="form.hard_cost" id="hard_cost" name="hard_cost" v-float></input-text>
+                            <input-text v-model="form.hard_cost" id="hard_cost" name="hard_cost" v-money></input-text>
                         </form-group>
                     </column>
 
@@ -91,7 +91,7 @@
                     <column size="6">
                         <form-group :form="form" field="type">
                             <input-label for="type">Type: </input-label>
-                            <type-select v-model="form.type" id="type"></type-select>
+                            <type-select v-model="form.type" name="type" id="type"></type-select>
                         </form-group>
                     </column>
                     <column size="12">
@@ -143,8 +143,8 @@
     import * as Slc from "../../vue/http";
     import ModalForm from '../shared/Mixins/ModalForm';
     import VueTimepicker from "../../../../../node_modules/vue2-timepicker/src/vue-timepicker";
-    import TypeSelect from "./typeSelect";
-    import ReadSelect from "./readSelect.vue";
+    import TypeSelect from "./type-select";
+    import ReadSelect from "./read-select.vue";
 
     export default {
 
@@ -230,7 +230,7 @@
                     is_illuminated: billboard_face ? billboard_face.is_illuminated : false,
                     lights_on: billboard_face ? billboard_face.lights_on : null,
                     lights_off: billboard_face ? billboard_face.lights_off : null,
-                    type: billboard_face ? billboard_face.type : null,
+                    type: billboard_face ? billboard_face.type : 'Static',
                     billboard_face: billboard_face ? billboard_face.id : null,
                     billboard: this.billboardId,
                 };

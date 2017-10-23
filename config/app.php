@@ -174,6 +174,7 @@ return [
         Laravel\Tinker\TinkerServiceProvider::class,
         Lord\Laroute\LarouteServiceProvider::class,
         Artesaos\Defender\Providers\DefenderServiceProvider::class,
+        Laravel\Cashier\CashierServiceProvider::class,
 
         /*
          * Application Service Providers...

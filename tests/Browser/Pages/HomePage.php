@@ -28,14 +28,14 @@ class HomePage extends Page
     }
 
     /**
-     * Get the element shortcuts for the page.
+     * Get the elements shortcuts for the page.
      *
      * @return array
      */
     public function elements()
     {
         return [
-            '@element' => '#selector',
+            '@elements' => '#selector',
         ];
     }
 }

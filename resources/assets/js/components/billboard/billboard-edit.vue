@@ -170,6 +170,7 @@
                         heading: billboard.heading,
                         pitch: billboard.pitch
                     });
+                    console.log("Billboard center", this.center);
                     this.streetViewLoaded = true;
                     this.loaded = true;
                 });
@@ -177,14 +178,12 @@
             reloadForm() {
                 //this.form.he this.pov.heading;
             },
-
             save() {
                 const uri = laroute.route('api.billboard.update', {billboard: this.form.id});
                 Slc.put(uri, this.form).then((response) => {
                     console.log('Billboard Updated:', response);
                 });
             },
-
             buildForm(billboard) {
                 this.address = null;
                 this.zoomChanged = false;
@@ -198,7 +197,6 @@
                     lng: billboard.lng,
                 });
             },
-
             onMapClick(e) {
                 const self = this;
                 console.log(e);
@@ -225,18 +223,15 @@
                 });
                 this.marker = pos;
                 this.center = pos;
-
                 if (self.zoomChanged) {
                     return;
                 }
                 this.zoom = 15;
             },
-
             onZoomChanged(e) {
                 console.log("On Zoom Changed", e);
                 this.zoomChanged = true;
             },
-
             onAddressChange: _.debounce(function (e) {
                 console.log("OnAddressChange", e);
                 const self = this;
@@ -256,19 +251,16 @@
                     self.form.lng = pos.lng;
                     self.marker = pos;
                     self.center = pos;
-
                     self.streetViewLoaded = false;
                     self.$nextTick(()=>{
                         self.streetViewLoaded = true;
                     });
-
                     if (self.zoomChanged) {
                         return;
                     }
                     self.zoom = 15;
                 });
             }, 500),
-
             onMarkerMoved: _.debounce(function (e) {
                 console.log('On Marker Moved', e);
                 const pos = {
@@ -285,15 +277,12 @@
                     this.streetViewLoaded = true;
                 });
             }),
-
-
             updatePov(pov) {
                 console.log('Pov Changed: ', pov);
                 this.pov = pov;
                 this.form.heading = pov.heading;
                 this.form.pitch = pov.pitch;
             },
-
             updatePano(pano) {
                 this.pano = pano;
             }

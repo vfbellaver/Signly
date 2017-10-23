@@ -3,6 +3,13 @@ Route::get('demo', function () {
     return view('demo');
 });
 
+Route::get('stripe', function () {
+    return '';
+});
+
+Route::get('payment', 'Web\\PaymentController@index')->name('payment');
+Route::post('payment', 'Web\\PaymentController@store')->name('pay');
+
 Route::get('roles', function () {
     $roles = Defender::rolesList();
 

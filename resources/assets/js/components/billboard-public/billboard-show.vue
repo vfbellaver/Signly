@@ -196,6 +196,11 @@
                 });
             },
 
+            reloadForm() {
+                //this.form.he this.pov.heading;
+            },
+
+
             onMapClick(e) {
 
             },

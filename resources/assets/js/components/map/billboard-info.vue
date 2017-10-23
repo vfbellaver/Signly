@@ -19,7 +19,7 @@
                     </div>
                     <div class="col-md-6" v-if="this.user.email">
                         <btn-submit
-                                @click.native="edit(billboard)"
+                         @click.native="edit(billboard)"
                         >
                             EDIT
                         </btn-submit>

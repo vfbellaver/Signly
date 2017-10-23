@@ -105,6 +105,7 @@
                 Slc.get(uri).then((response) => {
                     console.log('Load Faces - ',response);
                         self.billboardFaces = response;
+
                     });
             },
 
@@ -112,8 +113,7 @@
 
                 let v = money;
                 v = v.toString().replace(/[^0-9]/g, "");
-                if (v === undefined || v === null || v.length === 0) {
-                    return "";
+                if (v === undefined || v === null || v.length === 0) {return "";
                 }
 
                 v = v.replace(/^0*/g, "");

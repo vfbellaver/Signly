@@ -86,8 +86,8 @@
         },
 
         methods: {
-            loadMarkers(uri) {
 
+            loadMarkers(uri) {
                 Slc.get(laroute.route(uri))
                     .then((response) => {
                         this.billboards = response;
