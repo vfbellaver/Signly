@@ -9,7 +9,7 @@ Route::get('stripe', function () {
 
 Route::get('payment', 'Web\PaymentController@index')->name('payment');
 Route::post('payment', 'Web\PaymentController@store')->name('pay');
-
+Route::get('payment/{plan}', 'Web\PaymentController@registerUser')->name('register.plan');
 Route::get('roles', function () {
     $roles = Defender::rolesList();
 
@@ -37,9 +37,6 @@ Route::get('public/get/{billboard}','Api\PublicBillboardsController@getBillboard
     ->name('public.get.billboard');
 Route::get('public/faces/{bid}','Api\PublicBillboardsController@getFaces')
     ->name('public.get.faces');
-
-Route::get('{teamName}/{billboardName}', 'Api\PublicBillboardController@showDetails')
-    ->name('billboard.details');
 
 Route::get('slc.js', function () {
     $json = json_encode(array_merge(Slc::scriptVariables(), []));
