@@ -20,7 +20,11 @@ class Team extends Model
     ];
 
     #region Relationships{relationships}
-    #region
+    public function clients(){
+        return $this->belongsToMany(Client::class);
+    }
+
+    #endregion
 
     #region Custom Attributes
 
