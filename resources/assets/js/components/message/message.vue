@@ -1,10 +1,13 @@
 <template>
     <li class="dropdown">
         <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
-            <i class="fa fa-envelope"></i> <span class="label label-danger">{{this.notifications.length}}</span>
+            <i class="fa fa-envelope"></i> <span class="label label-danger" v-if="this.notifications.length != 0">{{this.notifications.length}}</span>
         </a>
-
         <ul class="dropdown-menu dropdown-messages">
+            <li v-if="this.notifications.length == 0">
+                    <h3>You don't have notifications</h3>
+                <hr>
+            </li>
             <div style="overflow: auto; max-height: 400px">
                 <li v-for="msg in notifications">
                     <div class="ibox-content profile-content">
@@ -17,7 +20,7 @@
                                 <div class="col-md-12">
                                     <button type="button" class="btn btn-primary btn-sm pull-right" @click="readMsg(msg)">
                                         <i class="fa fa-edit"></i>
-                                        Mark a read
+                                        Mark as read
                                     </button>
                                 </div>
                             </div>
