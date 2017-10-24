@@ -34,4 +34,16 @@ class MessageService
             return $notification;
         });
     }
+
+    public function update(MessageForm $form, Message $message): Message
+    {
+        return \DB::transaction(function () use ($form,$message) {
+
+            $message->visualized = $form->visualized();
+
+            $message->save();
+
+            return $message;
+        });
+    }
 }

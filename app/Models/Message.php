@@ -9,15 +9,10 @@ class Message extends Model
     protected $fillable = [
         'subject',
         'message',
-        'vizualized',
+        'visualized',
         'user_id',
     ];
 
-    protected $casts = [
-    ];
-
-    protected $dates = [
-    ];
 
     #region Relationships
     public function user()
@@ -42,7 +37,7 @@ class Message extends Model
             'id' => $this->id,
             'subject' => $this->subject,
             'message' => $this->message,
-            'vizualized' => $this->vizualied,
+            'visualized' => $this->visualized,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at
         ];

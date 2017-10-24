@@ -35,7 +35,7 @@
                         <ul class="nav navbar-top-links navbar-right">
                             @if(isset(auth()->user()->name))
                                 <!-- COMPONENT MESSAGE NOTIFICATION -->
-                            <message-notification :messages="{{$messages}}"></message-notification>
+                            <message-notification :user="{{auth()->user()}}"></message-notification>
                             <li>
                                 {{ auth()->user()->name }}
                             </li>
