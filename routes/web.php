@@ -11,6 +11,7 @@ Route::get('payment', 'Web\\PaymentController@index')->name('payment');
 Route::post('payment', 'Web\\PaymentController@store')->name('pay');
 //Route::post('payment-plan', 'Web\\PaymentController@termsAccept')->name('register.plan');
 Route::get('payment/{plan}', 'Web\\PaymentController@registerUser')->name('register.plan');
+Route::get('update/card', 'Web\\PaymentController@getCard')->name('payment.card');
 
 Route::get('roles', function () {
     $roles = Defender::rolesList();

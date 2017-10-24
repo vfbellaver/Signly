@@ -40,6 +40,13 @@ class PaymentController extends Controller
         return $planId;
     }
 
+    public function getCard() {
+        Stripe::setApiKey($this->key);
+        $customer = \Stripe\Customer::retrieve(auth()->user()->stripe_id);
+        $card = $customer->sources->retrieve($customer->default_source);
+        return dd($card->jsonSerialize());
+    }
+
     public function registerUser($plan)
     {
         return view('payment.user-form',compact('plan'));
@@ -55,7 +62,6 @@ class PaymentController extends Controller
         $team->save();
 
         $user = new  User();
-
 
         $user->name = $request->input('name');
         $user->email = $request->input('email');
