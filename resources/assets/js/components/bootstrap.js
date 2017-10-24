@@ -3,6 +3,7 @@ require('./shared/_register');
 //USER
 Vue.component('user-list', require('./user/user-list.vue'));
 Vue.component('user-settings', require('./user/user-settings'));
+Vue.component('user-profile', require('./user/user-profile2.vue'));
 
 //MAP
 Vue.component('main-map', require('./map/main-map'));

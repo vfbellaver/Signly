@@ -85,7 +85,7 @@ class PaymentController extends Controller
         }
 
 
-        return redirect('/');
+        return view('user.index',compact('user'));
 
     }
 }

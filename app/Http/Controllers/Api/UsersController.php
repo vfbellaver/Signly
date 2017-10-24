@@ -43,6 +43,10 @@ class UsersController extends Controller
 
     public function update(UserUpdateRequest $request, User $user)
     {
+        if($request->input('password') == null){
+           $user->password = auth()->user()->getAuthPassword();
+        }
+
         $obj = $this->service->update($request->form(), $user);
 
         $response = [
