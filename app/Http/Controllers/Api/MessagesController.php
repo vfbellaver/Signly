@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Requests\MessageCreateRequest;
 use App\Http\Requests\MessageUpdateRequest;
 use App\Models\Message;
 use App\Http\Controllers\Controller;
@@ -25,6 +26,19 @@ class MessagesController extends Controller
             ->where('visualized','=',false)
             ->get()->toArray();
     }
+
+    public function store(MessageCreateRequest $request)
+    {
+        $data = $this->service->create($request->form());
+
+        $response = [
+            'message' => 'Billboard created.',
+            'data' => $data
+        ];
+
+        return $response;
+    }
+
 
     public function update(MessageUpdateRequest $request, Message $message)
     {
