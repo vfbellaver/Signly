@@ -26,5 +26,8 @@ Vue.component('billboard-list', require('./billboard/billboard-list'));
 Vue.component('billboard-edit', require('./billboard/billboard-edit'));
 Vue.component('billboard-show', require('./billboard-public/billboard-show'));
 
+//MESSAGE
+Vue.component('message-notification',require('./message/message'));
+
 //DEMO
 Vue.component('parent', require('./demo/parent'));

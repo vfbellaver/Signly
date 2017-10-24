@@ -24,7 +24,7 @@ Route::get('roles', function () {
 });
 
 
-Route::get('/ ','Web\HomeController@index');
+Route::get('/ ','Web\HomeController@index')->name('home');
 
 // Routes Public Page
 Route::get('billboards/public','Api\PublicBillboardsController@index')

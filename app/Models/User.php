@@ -52,6 +52,11 @@ class User extends Authenticatable
         return $this->belongsTo(Team::class);
     }
 
+    public function message()
+    {
+        return $this->belongsTo(Message::class);
+    }
+
     public function subscription()
     {
         return $this->hasOne(Subscription::class);

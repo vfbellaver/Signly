@@ -52,6 +52,7 @@ class PaymentController extends Controller
 
         $team = new  Team();
         $team->name = $request->input('team');
+        $team->slugname = str_slug($team->name,'-');
         $team->save();
 
         $user = new  User();
