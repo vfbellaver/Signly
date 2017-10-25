@@ -1,0 +1,182 @@
+<template>
+    <div>
+        <form-submit v-model="userForm" @submit="updateProfile">
+            <h2><i class="fa fa-credit-card-alt" aria-hidden="true"></i>
+                {{" Card ***********"+userForm.card_last_four+"    "}}<small><strong>Card Brand:</strong> {{" "+userForm.card_brand}}</small>
+            </h2>
+            <div class="divider"></div>
+            <column size="12">
+                <form-group :form="Card" field="name">
+                    <input-label for="name">Cardholder's Name: </input-label>
+                    <input-text v-model="Card.name" id="name"
+                                name="name"></input-text>
+                </form-group>
+            </column>
+            <column size="12">
+                <form-group :form="Card" field="number">
+                    <input-label for="number">Card Number: </input-label>
+                    <input-text v-card v-model="Card.number" id="number"
+                                name="number"></input-text>
+                </form-group>
+            </column>
+            <column size="6">
+                <form-group :form="Card" field="password">
+                    <input-label for="password">Password: </input-label>
+                    <input-password type="password" v-model="userForm.password" id="password"
+                                    name="password"></input-password>
+                </form-group>
+            </column>
+            <column size="6">
+                <form-group :form="userForm" field="password_confirm">
+                    <input-label for="password">Confirm Password: </input-label>
+                    <input-password type="password" v-model="userForm.password_confirm" id="password_confirm" name="password_confirm">
+                    </input-password>
+                            <span v-if="userForm.password_confirm != userForm.password" class="help-block">
+                                <strong>{{ 'please check password confirmation field' }}</strong>
+                            </span>
+                </form-group>
+            </column>
+
+            <div class="col-md-12">
+                <hr>
+                <btn-submit :disabled="userForm.busy">
+                    <spinner v-if="userForm.busy"></spinner>
+                </btn-submit>
+            </div>
+        </form-submit>
+    </div>
+</template>
+
+<style>
+    .divider {
+        height: 3px;
+        margin: 15px;
+        background-color: rgba(2, 118, 160, 0.74);
+        border-radius: 3px 3px 3px 3px;
+
+    }
+</style>
+
+<script>
+    import _ from 'lodash';
+    import * as Slc from "../../vue/http";
+
+    export default {
+        props: {
+            user: {required: true},
+        },
+        components: {},
+
+        data() {
+            return {
+                userForm: null,
+                Card: [],
+            }
+        },
+
+        created() {
+            this.userForm = new SlcForm({
+                stripe_id: this.user.stripe_id,
+                card_brand: this.user.card_brand,
+                trial_ends_at: this.user.trial_ends_at,
+                card_last_four: this.user.card_last_four,
+            });
+
+            this.center = {lat: this.userForm.lat, lng: this.userForm.lng};
+            this.marker = {lat: this.userForm.lat, lng: this.userForm.lng};
+        },
+
+        watch: {
+            'userForm.address': function (value, oldValue) {
+                if (!oldValue) {
+                    return;
+                }
+                this.onAddressChange();
+            },
+        },
+        methods: {
+            updateProfile() {
+                const uri = laroute.route('api.user.update', {user: this.user.id});
+                Slc.put(uri, this.userForm).then((response) => {
+                    console.log("User Update", response);
+                    EventBus.$emit('userUpdated');
+                })
+            },
+
+            onMapClick(e) {
+                const self = this;
+                console.log(e);
+                if (this.marker) {
+                    return;
+                }
+                const geocoder = new google.maps.Geocoder;
+                const pos = {
+                    lat: e.latLng.lat(),
+                    lng: e.latLng.lng(),
+                };
+                geocoder.geocode({'location': pos}, (results, status) => {
+                    console.log("Geocode", results, status);
+                    if (!results.length || status !== 'OK') {
+                        return;
+                    }
+                    if (self.userForm.address) {
+                        return;
+                    }
+                    const result = results[0];
+                    self.userForm.address = result.formatted_address;
+                    self.userForm.lat = pos.lat;
+                    self.userForm.lng = pos.lng;
+                });
+                this.marker = pos;
+                this.center = pos;
+                if (self.zoomChanged) {
+                    return;
+                }
+                this.zoom = 15;
+            },
+
+            onZoomChanged(e) {
+                console.log("On Zoom Changed", e);
+                this.zoomChanged = true;
+            },
+
+            onAddressChange: _.debounce(function (e) {
+                console.log("OnAddressChange", e);
+                const self = this;
+                const geocoder = new google.maps.Geocoder;
+                geocoder.geocode({address: self.userForm.address}, (results, status) => {
+                    console.log("Geocode From Address", results, status);
+                    if (!results.length || status !== 'OK') {
+                        return;
+                    }
+                    const result = results[0];
+                    const location = result.geometry.location;
+                    const pos = {
+                        lat: location.lat(),
+                        lng: location.lng(),
+                    };
+                    self.userForm.lat = pos.lat;
+                    self.userForm.lng = pos.lng;
+                    self.marker = pos;
+                    self.center = pos;
+                    if (self.zoomChanged) {
+                        return;
+                    }
+                    self.zoom = 7;
+                });
+            }, 500),
+
+            onMarkerMoved: _.debounce(function (e) {
+                console.log('On Marker Moved', e);
+                const pos = {
+                    lat: e.latLng.lat(),
+                    lng: e.latLng.lng(),
+                };
+                this.userForm.lat = pos.lat;
+                this.userForm.lng = pos.lng;
+                this.marker = pos;
+                this.center = pos;
+            }, 500),
+        }
+    }
+</script>

@@ -17,5 +17,7 @@ $factory->define(App\Models\User::class, function (Faker $faker) {
         'address' => $faker->address,
         'lat' => $faker->latitude,
         'lng' => $faker->longitude,
+        'card_exp_month' => $faker->numberBetween(1,12),
+        'card_exp_year' => $faker->numberBetween(2010,2020),
     ];
 });

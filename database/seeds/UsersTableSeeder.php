@@ -22,6 +22,8 @@ class UsersTableSeeder extends Seeder
         $user = factory(\App\Models\User::class)->create([
             'name' => 'Support SLC DevShop',
             'email' => 'support@slcdevshop.com',
+            'card_exp_month' => 11,
+            'card_exp_year' => 2017,
             'password' => bcrypt('slcdev##'),
             'team_id' => 1
         ]);

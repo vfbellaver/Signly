@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Console\Commands\CheckCardExperiation;
 use App\Console\Commands\ProjectSetup;
 use App\Console\Commands\Scaffolding;
 use App\Console\Commands\ScaffoldingRollback;
@@ -17,11 +18,12 @@ class Kernel extends ConsoleKernel
         Scaffolding::class,
         ScaffoldingRollback::class,
         TestCommand::class,
+        CheckCardExperiation::class,
     ];
 
     protected function schedule(Schedule $schedule)
     {
-
+        $schedule->command('check:card:expiration')->monthlyOn(1,'02:00');
     }
 
     protected function commands()

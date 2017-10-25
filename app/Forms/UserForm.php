@@ -21,6 +21,21 @@ class UserForm extends BaseForm
         return $this->request->get('email');
     }
 
+    public function address()
+    {
+        return $this->request->get('address');
+    }
+
+    public function lat()
+    {
+        return $this->request->get('lat');
+    }
+
+    public function lng()
+    {
+        return $this->request->get('lng');
+    }
+
     public function password()
     {
         return $this->request->get('password');

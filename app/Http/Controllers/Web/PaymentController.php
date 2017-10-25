@@ -40,6 +40,13 @@ class PaymentController extends Controller
         return $planId;
     }
 
+    public function getCard() {
+        Stripe::setApiKey($this->key);
+        $customer = \Stripe\Customer::retrieve(auth()->user()->stripe_id);
+        $card = $customer->sources->retrieve($customer->default_source);
+        return dd($card->jsonSerialize());
+    }
+
     public function registerUser($plan)
     {
         return view('payment.user-form',compact('plan'));
@@ -56,7 +63,6 @@ class PaymentController extends Controller
         $team->save();
 
         $user = new  User();
-
 
         $user->name = $request->input('name');
         $user->email = $request->input('email');
@@ -83,10 +89,22 @@ class PaymentController extends Controller
             $card->name = $owner;
             $card->save();
 
+            //save card expiration users table
+            $user->card_exp_month = $card->exp_month;
+            $user->card_exp_year = $card->exp_year;
+            $data = $user;
+            $user->save();
+
+
+
         }
 
 
-        return redirect('/');
+        return view('user.index',compact('user'));
 
+    }
+
+    public function cardExp(Request $request){
+        return $request::all();
     }
 }
