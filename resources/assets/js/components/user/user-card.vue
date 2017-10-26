@@ -1,39 +1,52 @@
 <template>
     <div>
-        <form-submit v-model="userForm" @submit="updateProfile">
+        <form-submit v-model="userForm" @submit="updateCard">
             <h2><i class="fa fa-credit-card-alt" aria-hidden="true"></i>
-                {{" Card ***********"+userForm.card_last_four+"    "}}<small><strong>Card Brand:</strong> {{" "+userForm.card_brand}}</small>
+                {{" Card ***********" + userForm.card_last_four + "    "}}
+                <small><strong>Card Brand:</strong> {{" " + userForm.brand}}</small>
             </h2>
             <div class="divider"></div>
             <column size="12">
-                <form-group :form="Card" field="name">
+                <form-group :form="userForm" field="name">
                     <input-label for="name">Cardholder's Name: </input-label>
-                    <input-text v-model="Card.name" id="name"
+                    <input-text v-model="userForm.name" id="name"
                                 name="name"></input-text>
                 </form-group>
             </column>
             <column size="12">
-                <form-group :form="Card" field="number">
-                    <input-label for="number">Card Number: </input-label>
-                    <input-text v-card v-model="Card.number" id="number"
-                                name="number"></input-text>
+                <form-group :form="userForm" field="number">
+                    <input-label for="card_number">Card Number: </input-label>
+                    <input-text v-model="userForm.number" id="number"
+                                placeholder="**** **** **** ****" name="number" v-card></input-text>
                 </form-group>
             </column>
-            <column size="6">
-                <form-group :form="Card" field="password">
-                    <input-label for="password">Password: </input-label>
-                    <input-password type="password" v-model="userForm.password" id="password"
-                                    name="password"></input-password>
+            <column size="4">
+                <form-group :form="userForm" field="cvc">
+                    <input-label for="cvc">Security Code : </input-label>
+                    <input-password text="number" max="3" v-model="userForm.cvc" id="cvc"
+                                    placeholder="***" name="cvc" v-cvc></input-password>
                 </form-group>
             </column>
-            <column size="6">
-                <form-group :form="userForm" field="password_confirm">
-                    <input-label for="password">Confirm Password: </input-label>
-                    <input-password type="password" v-model="userForm.password_confirm" id="password_confirm" name="password_confirm">
-                    </input-password>
-                            <span v-if="userForm.password_confirm != userForm.password" class="help-block">
-                                <strong>{{ 'please check password confirmation field' }}</strong>
-                            </span>
+            <column size="2">
+                <form-group :form="userForm" field="exp_month">
+                    <input-label for="exp_month">Month: </input-label>
+                    <input-password v-model="userForm.exp_month" id="exp_month"
+                                    placeholder="mm" name="exp_month" maxlength="2"></input-password>
+                </form-group>
+            </column>
+            <column size="2">
+                <form-group :form="userForm" field="exp_year">
+                    <input-label for="exp_year">Year: </input-label>
+                    <input-password v-model="userForm.exp_year" id="exp_year"
+                                    placeholder="AAAA" name="exp_year" maxlength="4"></input-password>
+                </form-group>
+            </column>
+
+            <column size="4">
+                <form-group :form="userForm" field="address_zip">
+                    <input-label for="exp_date">Zip Code: </input-label>
+                    <input-password v-model="userForm.address_zip" id="address_zip"
+                                    placeholder="*****" name="address_zip" v-zipcode></input-password>
                 </form-group>
             </column>
 
@@ -44,6 +57,8 @@
                 </btn-submit>
             </div>
         </form-submit>
+
+        <hr>
     </div>
 </template>
 
@@ -53,7 +68,6 @@
         margin: 15px;
         background-color: rgba(2, 118, 160, 0.74);
         border-radius: 3px 3px 3px 3px;
-
     }
 </style>
 
@@ -70,113 +84,73 @@
         data() {
             return {
                 userForm: null,
-                Card: [],
+                card: [],
+                token: ''
             }
         },
 
         created() {
-            this.userForm = new SlcForm({
-                stripe_id: this.user.stripe_id,
-                card_brand: this.user.card_brand,
-                trial_ends_at: this.user.trial_ends_at,
-                card_last_four: this.user.card_last_four,
-            });
-
-            this.center = {lat: this.userForm.lat, lng: this.userForm.lng};
-            this.marker = {lat: this.userForm.lat, lng: this.userForm.lng};
+            this.reload();
+            this.buildForm();
         },
 
         watch: {
-            'userForm.address': function (value, oldValue) {
-                if (!oldValue) {
-                    return;
+            'userForm.card_name': function () {
+                if (this.card.name != null) {
+                    this.userForm.card_name = this.card.name;
                 }
-                this.onAddressChange();
-            },
+            }
         },
+
         methods: {
-            updateProfile() {
-                const uri = laroute.route('api.user.update', {user: this.user.id});
-                Slc.put(uri, this.userForm).then((response) => {
-                    console.log("User Update", response);
-                    EventBus.$emit('userUpdated');
-                })
+
+            reload() {
+                let self = this;
+                Slc.get(laroute.route('api.payment.card'))
+
+                    .then((response) => {
+                        console.log('get Card ', response.data[0]);
+                        self.card = response.data[0];
+                        self.userForm.card_name = self.card.name;
+                    });
             },
 
-            onMapClick(e) {
-                const self = this;
-                console.log(e);
-                if (this.marker) {
-                    return;
-                }
-                const geocoder = new google.maps.Geocoder;
-                const pos = {
-                    lat: e.latLng.lat(),
-                    lng: e.latLng.lng(),
-                };
-                geocoder.geocode({'location': pos}, (results, status) => {
-                    console.log("Geocode", results, status);
-                    if (!results.length || status !== 'OK') {
-                        return;
-                    }
-                    if (self.userForm.address) {
-                        return;
-                    }
-                    const result = results[0];
-                    self.userForm.address = result.formatted_address;
-                    self.userForm.lat = pos.lat;
-                    self.userForm.lng = pos.lng;
+            updateCard(){
+
+                let number = this.userForm.number;
+                this.userForm.number = number.replace(/\s/g,"");
+
+                const uri = laroute.route('api.payment.token');
+                Slc.post(uri, this.userForm).then((response) => {
+                    this.userForm.source = response.id;
+                    this.updateCardWithToken(this.userForm);
                 });
-                this.marker = pos;
-                this.center = pos;
-                if (self.zoomChanged) {
-                    return;
-                }
-                this.zoom = 15;
+
             },
 
-            onZoomChanged(e) {
-                console.log("On Zoom Changed", e);
-                this.zoomChanged = true;
-            },
-
-            onAddressChange: _.debounce(function (e) {
-                console.log("OnAddressChange", e);
-                const self = this;
-                const geocoder = new google.maps.Geocoder;
-                geocoder.geocode({address: self.userForm.address}, (results, status) => {
-                    console.log("Geocode From Address", results, status);
-                    if (!results.length || status !== 'OK') {
-                        return;
-                    }
-                    const result = results[0];
-                    const location = result.geometry.location;
-                    const pos = {
-                        lat: location.lat(),
-                        lng: location.lng(),
-                    };
-                    self.userForm.lat = pos.lat;
-                    self.userForm.lng = pos.lng;
-                    self.marker = pos;
-                    self.center = pos;
-                    if (self.zoomChanged) {
-                        return;
-                    }
-                    self.zoom = 7;
+            updateCardWithToken(form){
+                const uri = laroute.route('api.payment.update.card');
+                Slc.post(uri, form).then((response) => {
+                    console.log('update card', response);
+                    this.buildForm();
                 });
-            }, 500),
+            },
 
-            onMarkerMoved: _.debounce(function (e) {
-                console.log('On Marker Moved', e);
-                const pos = {
-                    lat: e.latLng.lat(),
-                    lng: e.latLng.lng(),
-                };
-                this.userForm.lat = pos.lat;
-                this.userForm.lng = pos.lng;
-                this.marker = pos;
-                this.center = pos;
-            }, 500),
+            buildForm(){
+                this.userForm = new SlcForm({
+                    stripe_id: this.user.stripe_id,
+                    number: '',
+                    source: '',
+                    brand: this.user.card_brand,
+                    trial_ends_at: this.user.trial_ends_at,
+                    card_last_four: this.user.card_last_four,
+                    name: null,
+                    cvc: null,
+                    exp_month: null,
+                    exp_year: null,
+                    address_zip: null,
+                });
+            }
         }
     }
 </script>

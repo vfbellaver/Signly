@@ -23,8 +23,7 @@ class UserUpdateRequest extends BaseRequest
         return [
             'name' => 'required',
             'email' => "required|email|unique:users,id,{$id}",
-            'password' => 'min:6',
-            'password_confirm' => 'required',
+            'password' => 'nullable|min:6',
             'address' => 'required',
         ];
     }

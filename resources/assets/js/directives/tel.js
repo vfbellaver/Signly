@@ -6,7 +6,7 @@ Vue.directive('tel', {
 
         let mask = function () {
             let v = $(el).val();
-            v = v.toString().replace(/[^0-9]/g, "");
+            v = v.toString().replace(/^\D/g,"");
             if (v === undefined || v === null || v.length === 0) {
                 return "";
             }

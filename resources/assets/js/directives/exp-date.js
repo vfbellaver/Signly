@@ -1,4 +1,4 @@
-Vue.directive('zipcode', {
+Vue.directive('exp-date', {
 
     bind: function (el) {
 
@@ -6,12 +6,12 @@ Vue.directive('zipcode', {
 
         let mask = function () {
             let v = $(el).val();
-            v = v.toString().replace(/^\D/g,"");
+            v = v.toString().replace(/^\D/g, "");
             if (v === undefined || v === null || v.length === 0) {
-                return "";
+                return " ";
             }
 
-            v = v.replace(/^(\d{5})/g, "$1");
+            v = v.replace(/^(\d{2})(\d)/g,"$1/$2");
 
             $(el).val(v);
 
@@ -26,8 +26,6 @@ Vue.directive('zipcode', {
         $(el).keydown(() => {
             $(el).trigger('change');
         });
-
-        mask();
     },
 
 });

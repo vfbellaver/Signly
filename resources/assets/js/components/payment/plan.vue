@@ -76,7 +76,7 @@
                 </div>
             <div class="clear"></div>
         </div>
-        <plan-modal :id="id" :title="title" :term="term" ref="terms" @saved="agreeText"></plan-modal>
+        <plan-modal :stripe-id="stripeId" :id="id" :title="title" :term="term" ref="terms" @saved="agreeText"></plan-modal>
         <div class="clear"></div>
     </div>
 </template>
@@ -92,6 +92,10 @@
     import PlanModal from './plan-modal';
 
     export default {
+
+        props:{
+            stripeId: {required:false}
+        },
 
         component: {
             ModalForm,
