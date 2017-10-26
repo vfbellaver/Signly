@@ -4,34 +4,31 @@
             <i class="fa fa-envelope"></i> <span class="label label-danger" v-if="this.notifications.length != 0">{{this.notifications.length}}</span>
         </a>
         <ul class="dropdown-menu dropdown-messages">
-            <li v-if="this.notifications.length == 0">
-                    <h3>You don't have notifications</h3>
-                <hr>
-            </li>
-            <div style="overflow: auto; max-height: 400px">
-                <li v-for="msg in notifications">
-                    <div class="ibox-content profile-content">
-                        <h5><strong>Subject:</strong></h5>
-                        <p>{{msg.subject}}</p>
-
-                        <h5>Message:</h5>
+            <li v-for="msg in notifications">
+                <div class="dropdown-messages-box">
+                    <div class="media-body">
+                        <small class="pull-right">{{format(msg.created_at)}}</small>
+                        <strong>Subject:</strong> {{msg.subject}}. <br>
+                        <strong>Message:</strong><br>
                         <p class="text-justify">{{msg.message}}</p>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <button type="button" class="btn btn-primary btn-sm pull-right" @click="readMsg(msg)">
-                                        <i class="fa fa-edit"></i>
-                                        Mark as read
-                                    </button>
-                                </div>
-                            </div>
 
+
+                        <a class="btn btn-xs btn-primary pull-right" @click="readMsg(msg)">Read <i class="fa fa-check-square-o"></i></a>
                     </div>
-                    <hr>
-                </li>
-            </div>
+                    <div class="divider"></div>
+                </div>
+
+            </li>
+
         </ul>
     </li>
 </template>
+<style lang="scss" scoped="scoped">
+    .dropdown-messages{
+        min-width: 500px;
+    }
+
+</style>
 <script>
     export default {
         props: {
@@ -63,6 +60,11 @@
                     console.log("Message Read", response);
                     this.load();
                 })
+            },
+            format(d){
+                console.log('data - ',d.date);
+                const m = moment(d.date);
+                return m.format('LLL')
             }
         }
     }
