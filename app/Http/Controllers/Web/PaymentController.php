@@ -92,7 +92,7 @@ class PaymentController extends Controller
             //save card expiration users table
             $user->card_exp_month = $card->exp_month;
             $user->card_exp_year = $card->exp_year;
-            $data = $user;
+
             $user->save();
 
 
