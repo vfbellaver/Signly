@@ -17,24 +17,6 @@
                                 name="email"></input-text>
                 </form-group>
             </column>
-            <column size="6">
-                <form-group :form="userForm" field="password">
-                    <input-label for="password">Password: </input-label>
-                    <input-password type="password" v-model="userForm.password" id="password"
-                                    name="password"></input-password>
-                </form-group>
-            </column>
-            <column size="6">
-                <form-group :form="userForm" field="password_confirm">
-                    <input-label for="password">Confirm Password: </input-label>
-                    <input-password type="password" v-model="userForm.password_confirm" id="password_confirm" name="password_confirm">
-                    </input-password>
-                            <span v-if="userForm.password_confirm != userForm.password" class="help-block">
-                                <strong>{{ 'please check password confirmation field' }}</strong>
-                            </span>
-                </form-group>
-            </column>
-            <hr>
             <h2><i class="fa fa-map-marker" aria-hidden="true"></i> Address </h2>
             <div class="divider"></div>
             <column size="12">
@@ -60,7 +42,6 @@
                     ></gmap-marker>
                 </gmap-map>
             </column>
-
             <div class="col-md-12">
                 <hr>
                 <btn-submit :disabled="userForm.busy">
@@ -111,8 +92,6 @@
                 name: this.user.name,
                 email: this.user.email,
                 address: this.user.address,
-                password: null,
-                password_confirm: null,
                 lat: this.user.lat,
                 lng: this.user.lng,
             });

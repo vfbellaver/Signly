@@ -59,7 +59,7 @@ class User extends Authenticatable
         return $this->belongsTo(Message::class);
     }
 
-    public function subscription()
+    public function getSubscription()
     {
         return $this->hasOne(Subscription::class);
     }

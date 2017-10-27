@@ -37,7 +37,8 @@
             </div>
         </modal-body>
         <modal-footer>
-            <a @click="agree" class="btn btn-success">I Agree</a>
+            <a v-if="stripeId" @click="updateSubscription" class="btn btn-success">Update</a>
+            <a @click="agree" class="btn btn-success" v-else>I Agree</a>
         </modal-footer>
 
     </modal>
@@ -51,6 +52,7 @@
     export default {
         props: {
             title: {required: true},
+            stripeId: {required: true},
             term: {required: true},
             id: {required: true},
         },
@@ -79,7 +81,7 @@
         methods: {
             agree() {
                 this.form.id = this.id;
-               window.location = laroute.route("register.plan", {plan: this.form.id});
+                window.location = laroute.route("register.plan", {plan: this.form.id});
             },
 
             buildForm(plan) {
@@ -87,6 +89,14 @@
                     id: this.id,
                 });
             },
+
+            updateSubscription(){
+                this.form.id = this.id;
+                Slc.get(laroute.route("api.payment.update.subscription", {plan: this.form.id}))
+                    .then(response => {
+                        console.log(response);
+                    });
+            }
         }
     }
 </script>

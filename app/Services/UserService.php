@@ -37,7 +37,7 @@ class UserService
         return \DB::transaction(function () use ($form, $user) {
 
             if ($form->name()) $user->name = $form->name();
-            if ($form->password()) $user->password = $form->password();
+            if ($form->password()) $user->password = bcrypt($form->password());
             if ($form->address()) $user->address = $form->address();
             if ($form->lat()) $user->lat = $form->lat();
             if ($form->lng()) $user->lng = $form->lng();

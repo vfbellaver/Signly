@@ -8,20 +8,16 @@ import Laroute from './commons/laroute';
 import axios from 'axios';
 import Vue from 'vue';
 import Moment from 'moment';
-//import Stripe from 'stripe';
 
 window.moment = Moment;
 window.Utils = Utils();
 window.Layout = Layout();
 window.laroute = Laroute;
 window.Vue = Vue;
-//window.Stripe = Stripe;
-
 
 require('./directives/bootstrap');
 require('./components/bootstrap');
 require('./vue/bootstrap');
-//require('./stripe');
 
 window.Vue.use(VueTimePicker);
 window.Vue.use(VueGoogleMaps, {

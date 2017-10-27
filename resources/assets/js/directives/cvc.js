@@ -1,17 +1,14 @@
-Vue.directive('zipcode', {
+Vue.directive('cvc', {
 
     bind: function (el) {
 
-        $(el).attr('maxlength', 5);
-
+        $(el).attr('maxlength', 3);
         let mask = function () {
             let v = $(el).val();
-            v = v.toString().replace(/^\D/g,"");
+            v = v.toString().replace(/^\D/g, "");
             if (v === undefined || v === null || v.length === 0) {
-                return "";
+                return " ";
             }
-
-            v = v.replace(/^(\d{5})/g, "$1");
 
             $(el).val(v);
 
@@ -26,8 +23,6 @@ Vue.directive('zipcode', {
         $(el).keydown(() => {
             $(el).trigger('change');
         });
-
-        mask();
     },
 
 });
