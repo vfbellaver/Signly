@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Models\Message;
 use App\Models\User;
+use App\Notifications\CardExpirationSoon;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 
@@ -19,18 +20,11 @@ class CheckCardExperiation extends Command
     public function handle()
     {
         $users = User::all();
+        $msgs = [];
 
-        $yearnow = Carbon::now()->year;
-        $monthnow = Carbon::now()->month;
-        $daynow = Carbon::now()->day;
-        //create carbon object
-        $datenow = Carbon::create($yearnow, $monthnow, $daynow);
-
-        $msgs = [] ;
         foreach ($users as $user) {
-            $monthexp = $user->card_exp_month;
-            $yearexp = $user->card_exp_year;
-            $dateexp = Carbon::create($yearexp, $monthexp, 31);
+            $datenow = Carbon::now();
+            $dateexp = new Carbon($user->card_expiration);
 
             $diference = $datenow->diffInDaysFiltered(function (Carbon $date) {
                 return $date;
@@ -39,11 +33,17 @@ class CheckCardExperiation extends Command
             if ($diference < 45) {
                 $data = [
                     'subject' => 'Card Expiration',
-                    'message' => 'Hi Mr. ' . $user->name . '! Your credit card will expire in '.$diference.' days.',
+                    'message' => 'Your credit card will expire in ' . $diference . ' days.',
                     'user_id' => $user->id,
                 ];
-                $msgs [] = Message::create($data);
 
+                //create new msg and notification user;
+                $newmsg = Message::create($data);
+                $user->notify(new CardExpirationSoon($newmsg));
+
+                $msgs [] = $newmsg;
+
+                $this->info('User '.$user->name.' notified by email');
             }
 
         }
