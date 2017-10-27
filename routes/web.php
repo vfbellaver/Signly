@@ -1,4 +1,7 @@
 <?php
+use App\Models\Message;
+use App\Models\User;
+
 Route::get('demo', function () {
     return view('demo');
 });
@@ -23,6 +26,11 @@ Route::get('roles', function () {
     });
 
     dd($roles);
+});
+Route::get('/test/card/exp',function (){
+     $user = auth()->user();
+//    Mail::to('vfb@ex.com')->send(new \App\Mail\CardExpiration($user));
+    return view('mail.card-expiration',compact('user'));
 });
 
 Route::get('/ ','Web\HomeController@index')->name('home');

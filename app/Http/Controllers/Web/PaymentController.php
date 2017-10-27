@@ -73,6 +73,7 @@ class PaymentController extends Controller
 
         $user->save();
 
+
         if ($user->save()) {
             $plan = $request->input('plan');
             $email = $request->input('email');
@@ -94,8 +95,6 @@ class PaymentController extends Controller
             $user->card_exp_year = $card->exp_year;
 
             $user->save();
-
-
 
         }
 
