@@ -71,8 +71,8 @@ class UsersController extends Controller
 
     public function updatePassword(UserUpdatePasswordRequest $request, User $user)
     {
-        $data = $request->all();
 
+        $data = $request->all();
         $user->password = bcrypt($data['password']);
         $user->save();
 

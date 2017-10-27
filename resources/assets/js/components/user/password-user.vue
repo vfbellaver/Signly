@@ -1,48 +1,33 @@
 <template>
-    <div>
-        <form-submit v-model="userForm" @submit="updateProfile">
-            <h2><i class="fa fa-user"></i> User </h2>
-            <div class="divider"></div>
+    <div class="col-lg-8 col-lg-offset-2">
+        <h2><i class="fa fa-user"></i> Password </h2>
+        <div class="divider"></div>
+        <form-submit v-model="userForm" @submit="updatePassword">
             <column size="12">
-                <form-group :form="userForm" field="name">
-                    <input-label for="name">Name: </input-label>
-                    <input-text v-model="userForm.name" id="name"
-                                name="name"></input-text>
+                <form-group :form="userForm" field="current_password">
+                    <input-label for="current_password">Current Password: </input-label>
+                    <input-password type="password" v-model="userForm.current_password" id="current_password"
+                                    name="current_password"></input-password>
                 </form-group>
             </column>
             <column size="12">
-                <form-group :form="userForm" field="email">
-                    <input-label for="email">Email: </input-label>
-                    <input-text v-model="userForm.email" id="email"
-                                name="email"></input-text>
-                </form-group>
-            </column>
-            <h2><i class="fa fa-map-marker" aria-hidden="true"></i> Address </h2>
-            <div class="divider"></div>
-            <column size="12">
-                <form-group :form="userForm" field="address">
-                    <input-label for="address">Address: </input-label>
-                    <input-text v-model="userForm.address" id="address" name="address"></input-text>
+                <form-group :form="userForm" field="password">
+                    <input-label for="password">Password: </input-label>
+                    <input-password type="password" v-model="userForm.password" id="password"
+                                    name="password"></input-password>
                 </form-group>
             </column>
             <column size="12">
-                <gmap-map
-                        :center="center"
-                        :zoom="zoom"
-                        @click="onMapClick"
-                        @zoom_changed="onZoomChanged"
-                        :options="mapOptions"
-                        style="width: 100%; min-height: 220px">
-                    <gmap-marker
-                            :position="marker"
-                            :clickable="true"
-                            :draggable="true"
-                            @dragend="onMarkerMoved"
-                            @click="center=marker"
-                    ></gmap-marker>
-                </gmap-map>
+                <form-group :form="userForm" field="password_confirm">
+                    <input-label for="password">Confirm Password: </input-label>
+                    <input-password type="password" v-model="userForm.password_confirm" id="password_confirm"
+                                    name="password_confirm">
+                    </input-password>
+                    <span v-if="userForm.password_confirm != userForm.password" class="help-block">
+                                <strong>{{ 'please check password confirmation field' }}</strong>
+                            </span>
+                </form-group>
             </column>
-
             <div class="col-md-12">
                 <hr>
                 <btn-submit :disabled="userForm.busy">
@@ -76,122 +61,28 @@
         data() {
             return {
                 userForm: null,
-                marker: null,
-                center: null,
-                zoom: 7,
-                mapOptions: {
-                    mapTypeControl: false,
-                    scrollWell: true,
-                    gestureHandling: 'greedy'
-                },
-                zoomChanged: false,
             }
         },
 
         created() {
             this.userForm = new SlcForm({
-                name: this.user.name,
-                email: this.user.email,
-                address: this.user.address,
-                lat: this.user.lat,
-                lng: this.user.lng,
+                current_password: '',
+                password: '',
+                password_comfirm: '',
             });
 
-            this.center = {lat: this.userForm.lat, lng: this.userForm.lng};
-            this.marker = {lat: this.userForm.lat, lng: this.userForm.lng};
         },
 
         watch: {
-            'userForm.address': function (value, oldValue) {
-                if (!oldValue) {
-                    return;
-                }
-                this.onAddressChange();
-            },
+
         },
         methods: {
-            updateProfile() {
-                const uri = laroute.route('api.user.update', {user: this.user.id});
+            updatePassword() {
+                const uri = laroute.route('api.user.update.password', {user: this.user.id});
                 Slc.put(uri, this.userForm).then((response) => {
-                    console.log("User Update", response);
-                    EventBus.$emit('userUpdated');
+                    console.log("Password saved", response);
                 })
             },
-
-            onMapClick(e) {
-                const self = this;
-                console.log(e);
-                if (this.marker) {
-                    return;
-                }
-                const geocoder = new google.maps.Geocoder;
-                const pos = {
-                    lat: e.latLng.lat(),
-                    lng: e.latLng.lng(),
-                };
-                geocoder.geocode({'location': pos}, (results, status) => {
-                    console.log("Geocode", results, status);
-                    if (!results.length || status !== 'OK') {
-                        return;
-                    }
-                    if (self.userForm.address) {
-                        return;
-                    }
-                    const result = results[0];
-                    self.userForm.address = result.formatted_address;
-                    self.userForm.lat = pos.lat;
-                    self.userForm.lng = pos.lng;
-                });
-                this.marker = pos;
-                this.center = pos;
-                if (self.zoomChanged) {
-                    return;
-                }
-                this.zoom = 15;
-            },
-
-            onZoomChanged(e) {
-                console.log("On Zoom Changed", e);
-                this.zoomChanged = true;
-            },
-
-            onAddressChange: _.debounce(function (e) {
-                console.log("OnAddressChange", e);
-                const self = this;
-                const geocoder = new google.maps.Geocoder;
-                geocoder.geocode({address: self.userForm.address}, (results, status) => {
-                    console.log("Geocode From Address", results, status);
-                    if (!results.length || status !== 'OK') {
-                        return;
-                    }
-                    const result = results[0];
-                    const location = result.geometry.location;
-                    const pos = {
-                        lat: location.lat(),
-                        lng: location.lng(),
-                    };
-                    self.userForm.lat = pos.lat;
-                    self.userForm.lng = pos.lng;
-                    self.marker = pos;
-                    self.center = pos;
-                    if (self.zoomChanged) {
-                        return;
-                    }
-                    self.zoom = 7;
-                });
-            }, 500),
-
-            onMarkerMoved: _.debounce(function (e) {
-                console.log('On Marker Moved', e);
-                const pos = {
-                    lat: e.latLng.lat(),
-                    lng: e.latLng.lng(),
-                };
-                this.userForm.lat = pos.lat;
-                this.userForm.lng = pos.lng;
-                this.marker = pos;
-                this.center = pos;
-            }, 500),
         }
     }
 </script>

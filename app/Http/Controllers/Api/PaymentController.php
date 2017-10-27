@@ -19,6 +19,7 @@ class PaymentController extends Controller
 {
     private $key;
     private $service;
+    private $user;
 
     public function __construct(CardService $service)
     {
@@ -26,12 +27,12 @@ class PaymentController extends Controller
         $this->key = "sk_test_vKQEgHfPSO1a5eJl2W0ZqUzW";
         Stripe::setApiKey($this->key);
         $this->middleware('needsRole:admin');
+        $this->user = User::query()->find(auth()->id());
         $this->service = $service;
-
     }
 
     public function getCard() {
-        return \Stripe\Customer::retrieve(auth()->user()->stripe_id)->sources->all(array(
+        return Customer::retrieve(auth()->user()->stripe_id)->sources->all(array(
             'limit'=>1, 'object' => 'card'));
 
     }
@@ -44,20 +45,17 @@ class PaymentController extends Controller
 
     public function updateCard(CardsCreateRequest $request) {
 
-        $user = User::query()->find(1);
-
-        $user->updateCard($request->form()->source());
+        $this->user->updateCard($request->form()->source());
 
         return $response = [
-            'message' => "Plan updated with successful",
-            'data' => $user
+            'message' => "Card updated with successful",
+            'data' => $this->user
         ];
     }
 
     public function updateSubscription($plan)
     {
-        $user = User::Find(1);
-        $user->subscription('main')->cancel();
+        $this->user->subscription('main')->swap($plan);
         $response = [
             'message' => "Plan updated with successful",
             'data' => $plan
@@ -66,12 +64,11 @@ class PaymentController extends Controller
         return $response;
     }
 
-    public function createCard() {
-
-    }
-
     public function deleteCard(Card $card) {
-        $customer = Customer::retrieve(auth()->user()->stripe_id);
-        $customer->sources->retrieve("card_1BGtJiBxxlqj1r2NeKz0pxr5")->delete();
+        $this->user->subscription('main')->cancelNow();
+        $response = [
+            'message' => "Plan canceled with successful",
+            'data' => $this->user
+        ];
     }
 }

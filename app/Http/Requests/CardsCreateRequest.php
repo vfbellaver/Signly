@@ -29,6 +29,7 @@ class CardsCreateRequest extends FormRequest
             'exp_month' => 'required',
             'exp_year' => 'required',
             'number' => 'required',
+            'address_zip' => 'required',
         ];
     }
 }

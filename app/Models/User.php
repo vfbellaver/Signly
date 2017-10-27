@@ -53,7 +53,7 @@ class User extends Authenticatable
         return $this->belongsTo(Team::class);
     }
 
-    public function subscription()
+    public function getSubscription()
     {
         return $this->hasOne(Subscription::class);
     }

@@ -22,7 +22,6 @@ class PaymentController extends Controller
     private $service;
 
 
-
     public function __construct(CardService $service)
     {
         $this->middleware('needsRole:admin');
@@ -39,10 +38,11 @@ class PaymentController extends Controller
         return view('payment.index');
     }
 
-    public function getCard() {
+    public function getCard()
+    {
         Stripe::setApiKey($this->key);
         return \Stripe\Customer::retrieve(auth()->user()->stripe_id)->sources->all(array(
-            'limit'=>1, 'object' => 'card'));
+            'limit' => 1, 'object' => 'card'));
 
     }
 
@@ -54,7 +54,7 @@ class PaymentController extends Controller
 
     public function registerUser($plan)
     {
-        return view('payment.user-form',compact('plan'));
+        return view('payment.user-form', compact('plan'));
     }
 
     public function store(UserRegistrationRequest $request)
@@ -65,7 +65,6 @@ class PaymentController extends Controller
         $team->save();
 
         $user = new  User();
-
         $user->name = $request->input('name');
         $user->email = $request->input('email');
         $user->password = bcrypt($request->input('password'));
@@ -75,10 +74,27 @@ class PaymentController extends Controller
 
         $user->save();
 
-        $data = $this->service->store($this->key,$user,$request);
+        $plan = $request->input('plan');
+        $email = $request->input('email');
+        $owner = $request->input('owner');
+
+        Stripe::setApiKey($this->key);
 
 
-        return view('user.index',compact('user'));
+        $user->newSubscription('main', $plan)
+            ->trialDays(14)
+            ->create(request('stripeToken'), [
+                'email' => $email,
+            ]);
+
+        $data = $this->service->store($user, $owner);
+
+        $response = [
+            "message" => "Payment made successfully",
+            "data" => $data
+        ];
+
+        return view('user.index', compact('user', 'response'));
 
     }
 }

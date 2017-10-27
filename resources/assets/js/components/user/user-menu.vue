@@ -10,6 +10,9 @@
           <tab name="Update Subscription">
               <subscription-user :user="user"></subscription-user>
           </tab>
+          <tab name="Update Password">
+              <password-user :user="user"></password-user>
+          </tab>
       </tabs>
     </div>
 </template>
@@ -21,6 +24,7 @@
     import FormUser from './user-formR';
     import CardUser from './user-card';
     import SubscriptionUser from './subscription-user';
+    import PasswordUser from './password-user';
 
     export default {
 
@@ -36,7 +40,8 @@
             Tabs,
             FormUser,
             CardUser,
-            SubscriptionUser
+            SubscriptionUser,
+            PasswordUser
         },
 
         computed:{

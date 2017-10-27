@@ -1,6 +1,6 @@
 <template>
     <div>
-        <form-submit v-model="userForm" @submit="updateCard">
+        <form-submit v-model="userForm" @submit="getToken">
             <h2><i class="fa fa-credit-card-alt" aria-hidden="true"></i>
                 {{" Card ***********" + userForm.card_last_four + "    "}}
                 <small><strong>Card Brand:</strong> {{" " + userForm.brand}}</small>
@@ -115,7 +115,7 @@
                     });
             },
 
-            updateCard(){
+            getToken(){
 
                 let number = this.userForm.number;
                 this.userForm.number = number.replace(/\s/g,"");
@@ -123,16 +123,18 @@
                 const uri = laroute.route('api.payment.token');
                 Slc.post(uri, this.userForm).then((response) => {
                     this.userForm.source = response.id;
-                    this.updateCardWithToken(this.userForm);
+                    this.updateCard(this.userForm);
                 });
 
             },
 
-            updateCardWithToken(form){
+            updateCard(form){
                 const uri = laroute.route('api.payment.update.card');
                 Slc.post(uri, form).then((response) => {
                     console.log('update card', response);
                     this.buildForm();
+                    this.reload();
+                    self.userForm.card_name = self.card.name;
                 });
             },
 
