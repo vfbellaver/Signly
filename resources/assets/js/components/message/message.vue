@@ -5,6 +5,14 @@
             <span class="label label-danger" v-if="this.notifications.length != 0">{{this.notifications.length}}</span>
         </a>
         <ul class="dropdown-menu dropdown-messages">
+            <div v-if="this.notifications.length === 0">
+                <div class="dropdown-messages-box">
+                    <div class="text-center">
+                        <strong>You don't have notifications!</strong>
+                    </div>
+                    <div class="divider"></div>
+                </div>
+            </div>
             <div style="overflow: auto; max-height: 400px">
                 <li v-for="msg in notifications">
                     <div class="dropdown-messages-box">

@@ -94,7 +94,7 @@ class PaymentController extends Controller
 
             //save card expiration users table
             $user->card_expiration = Carbon::createFromFormat('m/Y', $cardexp)->endOfMonth();
-            $user->save();
+            $user->update();
 
         }
 
