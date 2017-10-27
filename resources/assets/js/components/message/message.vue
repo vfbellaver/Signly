@@ -1,10 +1,9 @@
 <template>
     <li class="dropdown">
         <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
-            <i class="fa fa-envelope"></i> <span class="label label-danger"
-                                                 v-if="this.notifications.length != 0">{{this.notifications.length}}</span>
+            <i class="fa fa-envelope"></i>
+            <span class="label label-danger" v-if="this.notifications.length != 0">{{this.notifications.length}}</span>
         </a>
-
         <ul class="dropdown-menu dropdown-messages">
             <div style="overflow: auto; max-height: 400px">
                 <li v-for="msg in notifications">
@@ -14,18 +13,15 @@
                             <strong>Subject:</strong> {{msg.subject}}. <br>
                             <strong>Message:</strong><br>
                             <p class="text-justify">{{msg.message}}</p>
-
-
-                            <a class="btn btn-xs btn-primary pull-right" @click="readMsg(msg)">Read <i
-                                    class="fa fa-check-square-o"></i></a>
+                            <a class="btn btn-xs btn-primary pull-right" @click="readMsg(msg)">
+                                Read <i class="fa fa-check-square-o"></i>
+                            </a>
                         </div>
                         <div class="divider"></div>
                     </div>
-
                 </li>
             </div>
         </ul>
-
     </li>
 </template>
 <style lang="scss" scoped="scoped">
@@ -33,8 +29,9 @@
         min-width: 500px;
 
     }
-    .dropdown-messages-box{
-       padding-right: 10px;
+
+    .dropdown-messages-box {
+        padding-right: 10px;
     }
 
 </style>

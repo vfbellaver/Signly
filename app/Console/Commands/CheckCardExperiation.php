@@ -43,7 +43,7 @@ class CheckCardExperiation extends Command
 
                 $msgs [] = $newmsg;
 
-                $this->info('User '.$user->name.' notified by email');
+                $this->info('User ' . $user->name . ' notified by email');
             }
 
         }

@@ -40,7 +40,8 @@ class PaymentController extends Controller
         return $planId;
     }
 
-    public function getCard() {
+    public function getCard()
+    {
         Stripe::setApiKey($this->key);
         $customer = \Stripe\Customer::retrieve(auth()->user()->stripe_id);
         $card = $customer->sources->retrieve($customer->default_source);
@@ -49,7 +50,7 @@ class PaymentController extends Controller
 
     public function registerUser($plan)
     {
-        return view('payment.user-form',compact('plan'));
+        return view('payment.user-form', compact('plan'));
     }
 
     public function store(UserRegistrationRequest $request)
@@ -59,7 +60,7 @@ class PaymentController extends Controller
 
         $team = new  Team();
         $team->name = $request->input('team');
-        $team->slugname = str_slug($team->name,'-');
+        $team->slugname = str_slug($team->name, '-');
         $team->save();
 
         $user = new  User();
@@ -72,7 +73,6 @@ class PaymentController extends Controller
         $user->trial_ends_at = Carbon::now()->addDays(14);
 
         $user->save();
-
 
         if ($user->save()) {
             $plan = $request->input('plan');
@@ -90,22 +90,21 @@ class PaymentController extends Controller
             $card->name = $owner;
             $card->save();
 
-            $cardexp = $card->exp_month.'/'.$card->exp_year;
+            $cardexp = $card->exp_month . '/' . $card->exp_year;
 
             //save card expiration users table
-            $user->card_expiration = Carbon::createFromFormat('m/Y',$cardexp)->endOfMonth();
-
-
+            $user->card_expiration = Carbon::createFromFormat('m/Y', $cardexp)->endOfMonth();
             $user->save();
 
         }
 
 
-        return view('user.index',compact('user'));
+        return view('user.index', compact('user'));
 
     }
 
-    public function cardExp(Request $request){
+    public function cardExp(Request $request)
+    {
         return $request::all();
     }
 }
