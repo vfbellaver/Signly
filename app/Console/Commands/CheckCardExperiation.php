@@ -23,31 +23,34 @@ class CheckCardExperiation extends Command
         $msgs = [];
 
         foreach ($users as $user) {
-            $datenow = Carbon::now();
-            $dateexp = new Carbon($user->card_expiration);
-
-            $diference = $datenow->diffInDaysFiltered(function (Carbon $date) {
-                return $date;
-            }, $dateexp);
-
-            if ($diference < 45) {
-                $data = [
-                    'subject' => 'Card Expiration',
-                    'message' => 'Your credit card will expire in ' . $diference . ' days.',
-                    'user_id' => $user->id,
-                ];
-
-                //create new msg and notification user;
-                $newmsg = Message::create($data);
-                $user->notify(new CardExpirationSoon($newmsg));
-
-                $msgs [] = $newmsg;
-
-                $this->info('User ' . $user->name . ' notified by email');
+            if (!$user->card_expiration) {
+                continue;
             }
+                $datenow = Carbon::now();
+                $dateexp = new Carbon($user->card_expiration);
 
+                $diference = $datenow->diffInDaysFiltered(function (Carbon $date) {
+                    return $date;
+                }, $dateexp);
+
+                if ($diference < 45) {
+                    $data = [
+                        'subject' => 'Card Expiration',
+                        'message' => 'Your credit card will expire in ' . $diference . ' days.',
+                        'user_id' => $user->id,
+                    ];
+
+                    //create new msg and notification user;
+                    $newmsg = Message::create($data);
+                    $user->notify(new CardExpirationSoon($newmsg));
+
+                    $msgs [] = $newmsg;
+
+                    $this->info('User ' . $user->name . ' notified by email');
+                }
+
+            }
+            return $msgs;
         }
-        return $msgs;
     }
-}
 
