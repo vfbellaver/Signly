@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\BillboardCreateRequest;
 use App\Models\Billboard;
 use App\Models\BillboardFace;
+use App\Models\Team;
 
 class BillboardsController extends Controller
 {
@@ -29,7 +30,7 @@ class BillboardsController extends Controller
 
     public function show($id)
     {
-        $faces = BillboardFace::query()->get()->where('billboard_id',$id);
+        $faces = BillboardFace::query()->get()->where('billboard_id', $id);
         $billboard = Billboard::query()->findOrFail($id);
         return view('billboard.show', [
             'billboard' => $billboard,
@@ -37,11 +38,16 @@ class BillboardsController extends Controller
         ]);
     }
 
-    public function publicPage (BillboardCreateRequest $billboard) {
-        return $billboard;
-    }
+    public function publicView($teamSlug, $billboardSlug)
+    {
+        $billboard = Billboard::query()
+            ->join('teams', 'teams.id', '=', 'billboards.team_id')
+            ->where('teams.slug', $teamSlug)
+            ->where('billboards.slug', $billboardSlug)
+            ->first();
 
-    public function makePublicPage (BillboardCreateRequest $request) {
-        str_slug();
+        return view('billboard.public', [
+            'billboard' => $billboard
+        ]);
     }
 }

@@ -24,16 +24,16 @@ Route::get('roles', function () {
     dd($roles);
 });
 
-Route::get('/ ','Web\HomeController@index')->name('home');
+Route::get('/ ', 'Web\HomeController@index')->name('home');
 
 // Routes Public Page
-Route::get('billboards/public','Api\PublicBillboardsController@index')
+Route::get('billboards/public', 'Api\PublicBillboardsController@index')
     ->name('public.billboard.page');
-Route::get('team/billboard/{id}','Api\PublicBillboardsController@makeUrl')
+Route::get('team/billboard/{id}', 'Api\PublicBillboardsController@makeUrl')
     ->name('make.url');
-Route::get('public/get/{billboard}','Api\PublicBillboardsController@getBillboard')
+Route::get('public/get/{billboard}', 'Api\PublicBillboardsController@getBillboard')
     ->name('public.get.billboard');
-Route::get('public/faces/{bid}','Api\PublicBillboardsController@getFaces')
+Route::get('public/faces/{bid}', 'Api\PublicBillboardsController@getFaces')
     ->name('public.get.faces');
 
 Route::get('slc.js', function () {
@@ -54,5 +54,5 @@ Route::group(['middleware' => ['auth']], function () {
     }
 });
 
-Route::get('{teamName}/{billboardName}', 'Api\PublicBillboardsController@showDetails')
-    ->name('public.billboard.details');
+Route::get('{teamSlug}/{billboardSlug}', 'Web\BillboardsController@publicView')
+    ->name('billboard.public-view');

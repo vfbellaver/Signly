@@ -20,7 +20,8 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-4" v-for="billboard in billboards">
-                        <billboard-card :billboard="billboard" @edit="edit" @destroy="destroy" @details="details"></billboard-card>
+                        <billboard-card :billboard="billboard" @edit="edit" @destroy="destroy"
+                                        :team="team"></billboard-card>
                     </div>
                 </div>
             </div>
@@ -43,6 +44,9 @@
     import BillboardImportForm from './billboard-import-form';
 
     export default {
+        props: {
+            team: {required: true},
+        },
         components: {
             BillboardCard,
             BillboardForm,
@@ -95,14 +99,6 @@
                     return _billboard.id === billboard.id;
                 });
             },
-            details(billboard){
-                Slc.get(laroute.route("make.url", {id: billboard.id}))
-                    .then((response) => {
-                        console.log('Team billboard', billboard);
-                        window.location = laroute.route('public.billboard.details',
-                            {teamName: response.data.slugTeam, billboardName: response.data.slugBillboard});
-                    });
-            }
         }
     }
 </script>

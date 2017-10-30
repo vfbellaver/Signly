@@ -1,17 +1,6 @@
-<!DOCTYPE html>
-<html lang="{{ app()->getLocale() }}">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ config('app.name', 'Laravel') }}</title>
-    <link rel="shortcut icon" href="{{asset('favicon.ico')}}">
-    <link href="{{ mix('css/app.css') }}" rel="stylesheet">
-    <script src="{{route('slc.js')}}" type="text/javascript"></script>
-</head>
-<body class="top-navigation">
-<div id="app">
+@extends('layouts.base', ['bodyClass' => 'top-navigation'])
+
+@section('base-content')
     <div id="wrapper">
         <div id="page-wrapper" class="gray-bg">
             <div class="row border-bottom white-bg">
@@ -89,18 +78,4 @@
             </div>
         </div>
     </div>
-</div>
-
-
-<!-- Scripts -->
-<script src="{{ mix('js/app.js') }}"></script>
-<script>
-    $(document).ready(function () {
-        $("button").click(function () {
-            $(".divproposal").toggle("slow");
-        });
-    });
-</script>
-
-</body>
-</html>
+@endsection

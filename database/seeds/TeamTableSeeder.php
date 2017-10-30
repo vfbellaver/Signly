@@ -15,6 +15,7 @@ class TeamTableSeeder extends Seeder
     {
         factory(Team::class)->create([
             'name' => 'Support SLC DevShop',
+            'slug' => str_slug('Support SLC DevShop')
         ]);
     }
 
