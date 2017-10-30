@@ -1,4 +1,4 @@
-<div class="wrapper wrapper-content">
+<div class="wrapper wrapper-content payment-body">
     <div class="container">
         <div class="row">
             <div class="col-md-12">

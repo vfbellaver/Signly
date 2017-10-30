@@ -79,9 +79,15 @@
         },
 
         methods: {
+            /*
             agree() {
                 this.form.id = this.id;
                 window.location = laroute.route("register.plan", {plan: this.form.id});
+            },
+            */
+            agree() {
+                this.$emit('Step2',{plan: this.id});
+                $(this.$el).modal('hide');
             },
 
             buildForm(plan) {
@@ -92,8 +98,11 @@
 
             updateSubscription(){
                 this.form.id = this.id;
+                debugger;
+                const uri = laroute.route("api.payment.update.subscription", {plan: this.form.id});
                 Slc.get(laroute.route("api.payment.update.subscription", {plan: this.form.id}))
                     .then(response => {
+                        $(this.$el).modal('hide');
                         console.log(response);
                     });
             }

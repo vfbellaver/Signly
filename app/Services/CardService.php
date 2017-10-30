@@ -41,7 +41,7 @@ class CardService
 
         try {
             $card->save();
-            return "Ok";
+            return "Payment made successfully";
         } catch (\Stripe\Error\Card $e) {
             $body = $e->getJsonBody();
             $err = $body['error'];
