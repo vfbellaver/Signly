@@ -1,0 +1,59 @@
+@import "_variables.scss";
+
+$green: #2ba81a;
+$dark-gray: #5E5E5E;
+
+.register-circle{
+  background: $green;
+  border-radius:100%;
+  width:100px;
+  height:100px;
+  color: white;
+  text-align: center;
+  font-size: 5em;
+  margin:auto;
+  margin-bottom: 20px;
+}
+
+.register-circle-disabled{
+  background-color:#5E5E5E;
+  border-radius:100%;
+  width:100px;
+  height:100px;
+  color: white;
+  text-align: center;
+  font-size: 5em;
+  margin:auto;
+  margin-bottom: 20px;
+}
+
+.register-box{
+  background-color:$gray;
+  height: 310px;
+  padding:5px;
+}
+.register-box > hr{
+  background-color: red;
+}
+
+.register-footer{
+  background-color:$green;
+  color: white;
+  font-weight: 800;
+  text-align: center;
+  padding:5px;
+  margin-bottom: 15px;
+}
+
+.register-footer-disabled{
+  background-color:$dark-gray;
+  color: white;
+  font-weight: 800;
+  text-align: center;
+  padding:5px;
+}
+
+.register-link > a:hover {
+  color: $dark-gray;
+}
+

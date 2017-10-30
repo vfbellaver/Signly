@@ -2,6 +2,7 @@
 
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Carbon;
 
 class UsersTableSeeder extends Seeder
 {
@@ -22,6 +23,7 @@ class UsersTableSeeder extends Seeder
         $user = factory(\App\Models\User::class)->create([
             'name' => 'Support SLC DevShop',
             'email' => 'support@slcdevshop.com',
+            'card_expiration' => Carbon::createFromFormat('m/Y','11/2017')->endOfMonth(),
             'password' => bcrypt('slcdev##'),
             'team_id' => 1
         ]);

@@ -103,7 +103,6 @@
                             {teamName: response.data.slugTeam, billboardName: response.data.slugBillboard});
                     });
             }
-            },
         }
     }
 </script>

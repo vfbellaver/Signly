@@ -3,9 +3,16 @@ require('./shared/_register');
 //USER
 Vue.component('user-list', require('./user/user-list.vue'));
 Vue.component('user-settings', require('./user/user-settings'));
+Vue.component('user-profile', require('./user/user-profile2.vue'));
 
 //MAP
-Vue.component('main-map', require('./map/main-map.vue'));
+Vue.component('main-map', require('./map/main-map'));
+
+//Payment
+Vue.component('plan', require('./payment/plan'));
+Vue.component('content-plan', require('./payment/content-plan'));
+Vue.component('plan-modal', require('./payment/plan-modal'));
+Vue.component('profile', require('./payment/profile'));
 
 //TEAM
 Vue.component('team-list', require('./team/team-list.vue'));
@@ -19,6 +26,9 @@ Vue.component('client-form',require('./client/client-form'));
 Vue.component('billboard-list', require('./billboard/billboard-list'));
 Vue.component('billboard-edit', require('./billboard/billboard-edit'));
 Vue.component('billboard-show', require('./billboard-public/billboard-show'));
+
+//MESSAGE
+Vue.component('message-notification',require('./message/message'));
 
 //DEMO
 Vue.component('parent', require('./demo/parent'));

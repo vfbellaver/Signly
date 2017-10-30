@@ -22,11 +22,13 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'address',
         'photo_url',
         'invitation_token',
         'status',
         'stripe_id',
         'card_brand',
+        'card_expiration',
         'card_last_four',
         'trial_ends_at',
         'address',
@@ -52,7 +54,12 @@ class User extends Authenticatable
         return $this->belongsTo(Team::class);
     }
 
-    public function subscription()
+    public function message()
+    {
+        return $this->belongsTo(Message::class);
+    }
+
+    public function getSubscription()
     {
         return $this->hasOne(Subscription::class);
     }
@@ -102,6 +109,7 @@ class User extends Authenticatable
             'pending' => $this->invitation_token != null,
             'stripe_id' => $this->stripe_id,
             'card_brand' => $this->card_brand,
+            'card_expiration' => $this->card_expiration,
             'card_last_four' => $this->card_last_four,
             'trial_ends_at' => $this->trial_ends_at,
             'address' => $this->address,

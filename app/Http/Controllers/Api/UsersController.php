@@ -43,6 +43,7 @@ class UsersController extends Controller
 
     public function update(UserUpdateRequest $request, User $user)
     {
+
         $obj = $this->service->update($request->form(), $user);
 
         $response = [
@@ -70,8 +71,8 @@ class UsersController extends Controller
 
     public function updatePassword(UserUpdatePasswordRequest $request, User $user)
     {
-        $data = $request->all();
 
+        $data = $request->all();
         $user->password = bcrypt($data['password']);
         $user->save();
 

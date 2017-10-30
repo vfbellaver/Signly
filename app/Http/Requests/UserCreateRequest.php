@@ -21,7 +21,8 @@ class UserCreateRequest extends BaseRequest
         return [
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
-            'role' => 'required'
+            'password' => 'min:6',
+            'address' => 'required',
         ];
     }
 

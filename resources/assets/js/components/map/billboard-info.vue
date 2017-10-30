@@ -19,7 +19,7 @@
                     </div>
                     <div class="col-md-6" v-if="this.user.email">
                         <btn-submit
-                                @click.native="edit(billboard)"
+                         @click.native="edit(billboard)"
                         >
                             EDIT
                         </btn-submit>
@@ -75,8 +75,11 @@
 </style>
 
 <script>
+
     import * as Slc from "../../vue/http";
+
     export default {
+
         props: {
             billboard: {required: true},
             user: {required: true}
@@ -87,10 +90,13 @@
                 nameteam: {}
             }
         },
+
         created() {
             console.log("Billboard Info", this.billboard);
         },
+
         methods: {
+
             edit(billboard) {
                 window.location = laroute.route("billboards.edit", {billboard: billboard.id});
             },
@@ -105,5 +111,6 @@
 
             }
         }
+
     }
 </script>
