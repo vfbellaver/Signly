@@ -12,11 +12,6 @@
 </head>
 <body class="top-navigation">
 <div id="app">
-    <notification
-            :type="'{{ session('notification') }}'"
-            :message="'{{ addslashes(session('message')) }}'"
-    ></notification>
-
     <div id="wrapper">
         <div id="page-wrapper" class="gray-bg">
             <div class="row border-bottom white-bg">
@@ -33,14 +28,24 @@
                             @include('layouts._menu')
                         </ul>
                         <ul class="nav navbar-top-links navbar-right">
-                        @if(isset(auth()->user()->name))
+                            @if(isset(auth()->user()->name))
                                 <li>
-                                    <button class="btn btn-sm btn-primary">Proposal Generator  <i class="fa fa-bars"></i></button>
+                                    <button class="btn btn-sm btn-primary">Proposal Generator <i class="fa fa-bars"></i>
+                                    </button>
                                 </li>
-                            <!-- COMPONENT MESSAGE NOTIFICATION -->
-                                <message-notification :user="{{auth()->user()}}"></message-notification>
                                 <li>
-                                    {{ auth()->user()->name }}
+                                    <a data-toggle="dropdown" class="dropdown-toggle" href="#" aria-expanded="true">
+                                        {{ auth()->user()->name }}
+                                        <b class="caret"></b>
+                                    </a>
+                                    <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                                        <li><a href="#">Your Settings</a></li>
+                                        @if(auth()->user()->is_team_owner)
+                                            <li><a href="#">Team Settings</a></li>
+                                        @endif
+                                        <li class="divider"></li>
+                                        <li><a href="#">Logout</a></li>
+                                    </ul>
                                 </li>
                                 <li>
                                     <a href="{{ route('logout') }}"
@@ -88,8 +93,8 @@
 <!-- Scripts -->
 <script src="{{ mix('js/app.js') }}"></script>
 <script>
-    $(document).ready(function(){
-        $("button").click(function(){
+    $(document).ready(function () {
+        $("button").click(function () {
             $(".divproposal").toggle("slow");
         });
     });

@@ -35,6 +35,12 @@ class UsersTableSeeder extends Seeder
         $role = Defender::findRole('admin');
 
         \App\Models\Team::all()->each(function (\App\Models\Team $team) use ($role) {
+            if ($team->id == 1) {
+                $team->owner_id = 1;
+                $team->save();
+                return;
+            }
+
             $owner = factory(\App\Models\User::class)
                 ->create([
                     'team_id' => $team->id
