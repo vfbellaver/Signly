@@ -37,21 +37,26 @@
                                 <!-- COMPONENT MESSAGE NOTIFICATION -->
                             <message-notification :user="{{auth()->user()}}"></message-notification>
                             <li>
-                                {{ auth()->user()->name }}
-                            </li>
-                            <li>
-                                <a href="{{ route('logout') }}"
-                                   onclick="event.preventDefault();
+                                    {{ auth()->user()->name }}
+                                </li>
+                                <li>
+                                    <a href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                    <i class="fa fa-sign-out"></i> Log out
-                                </a>
+                                        <i class="fa fa-sign-out"></i> Log out
+                                    </a>
 
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                      style="display: none;">
-                                    {{ csrf_field() }}
-                                </form>
-                            </li>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                          style="display: none;">
+                                        {{ csrf_field() }}
+                                    </form>
+                                </li>
                             @else
+                                <li>
+                                    <a href="{{route('payment')}}"><i class="fa fa-user-plus" aria-hidden="true"></i>
+                                        Register
+                                    </a>
+                                </li>
                                 <li>
                                     <a href="{{ route('login') }}">
                                         <i class="fa fa-sign-in"></i> Login

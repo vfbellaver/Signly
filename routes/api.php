@@ -9,3 +9,7 @@ Route::group(['as' => 'api.', 'middleware' => ['auth:api']], function () {
     }
 
 });
+
+Route::post('payment/user-verify', 'Api\PaymentController@verify')->name('api.payment.verify.user');
+Route::post('payment/user-pay', 'Api\PaymentController@store')->name('api.payment.user.pay');
+Route::post('payment/create-token', 'Api\PaymentController@createToken')->name('api.payment.token');

@@ -1,16 +1,16 @@
 <template>
     <div>
         <form-submit v-model="userForm" @submit="getToken">
-            <h2><i class="fa fa-credit-card-alt" aria-hidden="true"></i>
+            <h2 v-if="user"><i class="fa fa-credit-card-alt" aria-hidden="true"></i>
                 {{" Card ***********" + userForm.card_last_four + "    "}}
                 <small><strong>Card Brand:</strong> {{" " + userForm.brand}}</small>
             </h2>
-            <div class="divider"></div>
+            <div v-if="user" class="divider"></div>
             <column size="12">
-                <form-group :form="userForm" field="name">
-                    <input-label for="name">Cardholder's Name: </input-label>
-                    <input-text v-model="userForm.name" id="name"
-                                name="name"></input-text>
+                <form-group :form="userForm" field="owner">
+                    <input-label for="owner">Cardholder's Name: </input-label>
+                    <input-text v-model="userForm.owner" id="owner"
+                                name="owner"></input-text>
                 </form-group>
             </column>
             <column size="12">
@@ -52,12 +52,21 @@
 
             <div class="col-md-12">
                 <hr>
-                <btn-submit :disabled="userForm.busy">
-                    <spinner v-if="userForm.busy"></spinner>
-                </btn-submit>
+                <div v-if="this.user">
+                    <btn-submit :disabled="userForm.busy">
+                        <spinner v-if="userForm.busy"></spinner>
+                    </btn-submit>
+                </div>
+                <div v-else>
+                    <btn-submit
+                            class="pull-right"
+                            @click="getToken"
+                    >
+                        REGISTER
+                    </btn-submit>
+                </div>
             </div>
         </form-submit>
-
         <hr>
     </div>
 </template>
@@ -77,7 +86,8 @@
 
     export default {
         props: {
-            user: {required: true},
+            user: {required: false},
+            userVerify: {required: false},
         },
         components: {},
 
@@ -90,14 +100,16 @@
         },
 
         created() {
-            this.reload();
+            if (this.user) {
+                this.reload();
+            }
             this.buildForm();
         },
 
         watch: {
-            'userForm.card_name': function () {
+            'userForm.owner': function () {
                 if (this.card.name != null) {
-                    this.userForm.card_name = this.card.name;
+                    this.userForm.owner = this.card.name;
                 }
             }
         },
@@ -107,23 +119,29 @@
             reload() {
                 let self = this;
                 Slc.get(laroute.route('api.payment.card'))
-
                     .then((response) => {
                         console.log('get Card ', response.data[0]);
                         self.card = response.data[0];
-                        self.userForm.card_name = self.card.name;
+                        self.userForm.owner = self.card.name;
                     });
             },
 
             getToken(){
 
                 let number = this.userForm.number;
-                this.userForm.number = number.replace(/\s/g,"");
+                this.userForm.number = number.replace(/\s/g, "");
 
                 const uri = laroute.route('api.payment.token');
+                debugger;
                 Slc.post(uri, this.userForm).then((response) => {
+                    console.log('Get Token response', response.id);
                     this.userForm.source = response.id;
-                    this.updateCard(this.userForm);
+                    if (this.userForm.stripe_id != null) {
+                        this.updateCard(this.userForm);
+                    } else {
+                        console.log('Get Token', this.userForm.source);
+                        this.saveUser(this.userForm);
+                    }
                 });
 
             },
@@ -134,23 +152,38 @@
                     console.log('update card', response);
                     this.buildForm();
                     this.reload();
-                    self.userForm.card_name = self.card.name;
+                    self.userForm.owner = self.card.name;
                 });
+            },
+
+            saveUser(form){
+                const uri = laroute.route('api.payment.user.pay');
+                debugger;
+                Slc.post(uri, form).then((response) => {
+                    EventBus.$emit('Payment', response);
+                    window.location = laroute.route('login');
+                });
+
             },
 
             buildForm(){
                 this.userForm = new SlcForm({
-                    stripe_id: this.user.stripe_id,
+                    name: this.userVerify ? this.userVerify.user.name : '',
+                    email: this.userVerify ? this.userVerify.user.email : '',
+                    team: this.userVerify ? this.userVerify.user.team : '',
+                    plan: this.userVerify ? this.userVerify.user.plan : '',
+                    password: this.userVerify ? this.userVerify.user.password : '',
+                    stripe_id: this.user ? this.user.stripe_id : null,
                     number: '',
+                    owner: '',
                     source: '',
-                    brand: this.user.card_brand,
-                    trial_ends_at: this.user.trial_ends_at,
-                    card_last_four: this.user.card_last_four,
-                    name: null,
-                    cvc: null,
-                    exp_month: null,
-                    exp_year: null,
-                    address_zip: null,
+                    brand: this.user ? this.user.card_brand : null,
+                    trial_ends_at: this.user ? this.user.trial_ends_at : '',
+                    card_last_four: this.user ? this.user.card_last_four : '',
+                    cvc: '',
+                    exp_month: '',
+                    exp_year: '',
+                    address_zip: '',
                 });
             }
         }

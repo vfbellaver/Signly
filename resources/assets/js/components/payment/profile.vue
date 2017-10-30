@@ -26,7 +26,7 @@
 </template>
 
 <script>
-    import TeamSelect from '../team/team-select'
+    import TeamSelect from '../team/team-select';
     export default {
 
         components:{

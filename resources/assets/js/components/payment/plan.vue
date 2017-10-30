@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="ibox-content">
+        <div class="ibox-body">
             <a v-for="p in plans">
                 <content-plan
                         @click.native="selectedPlan(p)"
@@ -76,7 +76,7 @@
                 </div>
             <div class="clear"></div>
         </div>
-        <plan-modal :stripe-id="stripeId" :id="id" :title="title" :term="term" ref="terms" @saved="agreeText"></plan-modal>
+        <plan-modal @Step2="step2" :stripe-id="stripeId" :id="id" :title="title" :term="term" ref="terms"></plan-modal>
         <div class="clear"></div>
     </div>
 </template>
@@ -224,8 +224,8 @@
               this.$refs.terms.show();
             },
 
-            agreeText(){
-             console.log('Agree');
+            step2(plan){
+              this.$emit('pay',{plan:plan})
             },
             selectedPlan(plan){
                 plan.select = {
