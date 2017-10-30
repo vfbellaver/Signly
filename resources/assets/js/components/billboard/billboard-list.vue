@@ -102,7 +102,7 @@
                         window.location = laroute.route('public.billboard.details',
                             {teamName: response.data.slugTeam, billboardName: response.data.slugBillboard});
                     });
-            }
+                },
         }
     }
 </script>
