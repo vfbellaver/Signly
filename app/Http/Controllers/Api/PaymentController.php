@@ -67,7 +67,8 @@ class PaymentController extends Controller
     }
 
     public function deleteSubscription() {
-        $this->user->subscription('main')->cancelNow();
+        $user = User::query()->find(auth()->id());
+        $user->subscription('main')->cancelNow();
         return $response = [
             'message' => "Plan canceled with successful",
             'data' => $this->user

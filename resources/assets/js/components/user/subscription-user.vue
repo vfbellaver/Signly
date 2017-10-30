@@ -37,7 +37,6 @@
 
         methods: {
             deleteSubscription(){
-                let self = this;
                 Slc.get(laroute.route("api.payment.delete.card"))
                     .then(response => {
                         console.log('Subscription Deleted',response);
