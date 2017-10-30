@@ -17,5 +17,6 @@ $factory->define(App\Models\User::class, function (Faker $faker) {
         'address' => $faker->address,
         'lat' => $faker->latitude,
         'lng' => $faker->longitude,
+        'card_expiration' => $faker->dateTimeBetween('now','+5 years'),
     ];
 });

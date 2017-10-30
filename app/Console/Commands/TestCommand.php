@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Models\User;
+use App\Notifications\CardExpirationSoon;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 
@@ -19,8 +20,12 @@ class TestCommand extends Command
 
     public function handle()
     {
+        $data = Carbon::createFromFormat('m/Y','12/2018')->endOfMonth();
+
+        /** @var User $user */
         $user = factory(User::class)->make();
-        if (true) ;
+        $user->notify(new CardExpirationSoon());
+
 
     }
 }

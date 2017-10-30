@@ -34,7 +34,9 @@
                         </ul>
                         <ul class="nav navbar-top-links navbar-right">
                             @if(isset(auth()->user()->name))
-                                <li>
+                                <!-- COMPONENT MESSAGE NOTIFICATION -->
+                            <message-notification :user="{{auth()->user()}}"></message-notification>
+                            <li>
                                     {{ auth()->user()->name }}
                                 </li>
                                 <li>
@@ -80,5 +82,6 @@
 
 <!-- Scripts -->
 <script src="{{ mix('js/app.js') }}"></script>
+
 </body>
 </html>

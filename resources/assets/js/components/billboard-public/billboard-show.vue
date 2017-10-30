@@ -4,22 +4,69 @@
             <div class="container-fluid">
                 <box>
                     <box-content>
-                        <h2 align="center">Billboard Information</h2>
+
                         <hr/>
                         <row>
-                            <column size="6">
-                                <h4>Name</h4>
-                                <p class="name">{{billboard.name}}</p>
+                            <column size="4">
+                                <h2 class="font-bold m-b-xs">
+                                    Team
+                                </h2>
+                                <hr>
+                                <div class="col-sm-5">
+                                    <div class="text-center">
+                                        <img alt="image" class="img-responsive"
+                                             :src="this.owner.photo_url" width="100%">
+                                    </div>
+                                </div>
+                                <div class="col-sm-7">
+                                    <h3><strong>{{this.teamOwner.name}}</strong></h3>
+                                    <strong> <i class="fa fa-send"></i> Email:</strong><br>
+                                    {{this.owner.email}}
+                                    <br><br>
+                                    <strong> <i class="fa fa-phone"></i> Phones:</strong><br>
+                                    (123) 456-7890
+                                    <br><br>
+                                    <address>
+                                        <strong> <i class="fa fa-map-marker"></i> Address:</strong><br>
+                                        {{this.owner.address}}
+                                    </address>
+                                </div>
+                                <div class="clearfix"></div>
                             </column>
-                            <column size="6">
-                                <h4>Description</h4>
-                                <p class="description">{{billboard.description}}</p>
+                            <column size="8">
+                                <h2 class="font-bold m-b-xs">
+                                    Billboard Information
+                                </h2>
+                                <hr>
+
+                                <h3>Billboard Name</h3>
+                                <div class="text-muted">
+                                    {{billboard.name}}
+                                </div>
+                                <br>
+                                <h3>Billboard description</h3>
+                                <div class="text-muted">
+                                    {{billboard.description}}
+                                </div>
+                                <row>
+                                    <dl class="m-t-md col-sm-4">
+                                        <dt><i class="fa fa-map-marker"></i> Address</dt>
+                                        <dd>{{billboard.address}}</dd>
+                                    </dl>
+                                    <dl class="m-t-md col-sm-2">
+                                        <dt><i class="fa fa-arrows-v"></i> Latitude</dt>
+                                        <dd>{{billboard.lat}}</dd>
+                                    </dl>
+                                    <dl class="m-t-md col-sm-2">
+                                        <dt><i class="fa fa-arrows-h"></i> Longitude</dt>
+                                        <dd>{{billboard.lng}}</dd>
+                                    </dl>
+                                </row>
+
                             </column>
                         </row>
-                        <hr/>
                         <div class="row">
-                            <div class="col-md-6">
-                                <h4>Localization in Map</h4>
+                            <div class="col-md-12">
                                 <hr/>
                                 <gmap-map
                                         v-if="loaded"
@@ -27,7 +74,7 @@
                                         :zoom="zoom"
                                         @zoom_changed="onZoomChanged"
                                         :options="mapOptions"
-                                        style="width: 100%; min-height: 360px;">
+                                        style="width: 100%; min-height: 500px;">
                                     <gmap-marker
                                             v-if="marker"
                                             :position="marker"
@@ -35,8 +82,7 @@
                                     ></gmap-marker>
                                 </gmap-map>
                             </div>
-                            <div class="col-md-6">
-                                <h4>Street View</h4>
+                            <div class="col-md-12">
                                 <hr/>
                                 <gmap-street-view-panorama
                                         v-if="loaded"
@@ -70,7 +116,7 @@
     }
 
     .vue-street-view-pano-container {
-        min-height: 360px;
+        min-height: 500px;
     }
 
     .vue-map-container .map-vue {
@@ -100,7 +146,8 @@
 
         data() {
             return {
-
+                owner: {},
+                teamOwner: {},
                 loaded: false,
                 marker: null,
                 zoom: 12,
@@ -129,21 +176,22 @@
             }
         },
 
-        created() {
+        mounted() {
             this.load();
         },
 
         methods: {
             load() {
                 this.loaded = false;
-
-                const uri = laroute.route('api.billboard.show', {billboard: this.id});
-                Slc.find(uri).then((billboard) => {
-                    console.log("Billboard loaded", billboard);
-                    this.billboard = billboard;
-                    this.center = billboard.position;
-                    this.marker = billboard.position;
-                    this.pov = billboard.pov;
+                const uri = laroute.route('public.get.billboard', {billboard: this.id});
+                Slc.get(uri).then((response) => {
+                    console.log("Billboard Public", response[0]);
+                    this.billboard = response[0];
+                    this.center = response[0].position;
+                    this.marker = response[0].position;
+                    this.pov = response[0].pov;
+                    this.owner = response[0].user;
+                    this.teamOwner = response[0].team;
                     this.loaded = true;
                 });
             },
@@ -154,8 +202,6 @@
 
 
             onMapClick(e) {
-
-                const self = this;
 
             },
 

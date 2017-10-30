@@ -57,4 +57,8 @@ class UserForm extends BaseForm
         $team = (object)$this->request->get('team');
         return Team::query()->findOrFail($team->id);
     }
+
+    public function message(){
+        return $this->request->get('message');
+    }
 }

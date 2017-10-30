@@ -7,7 +7,7 @@
                     <column size="6">
                         <form-group :form="form" field="photo">
                             <input-label for="photo">Photo: </input-label>
-                            <image-upload :value="form.photo" id="photo" name="photo"></image-upload>
+                            <image-upload v-model="form.photo" id="photo" name="photo"></image-upload>
                         </form-group>
                     </column>
 

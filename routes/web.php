@@ -24,15 +24,19 @@ Route::get('roles', function () {
     dd($roles);
 });
 
+Route::get('/ ','Web\HomeController@index')->name('home');
 
-Route::get('/ ','Web\HomeController@index');
+// Routes Public Page
 Route::get('billboards/public','Api\PublicBillboardsController@index')
-    ->name('billboards.public');
-Route::get('team/billboard/{id}','Api\PublicBillboardsController@getTeam')
-    ->name('billboard.team');
-
+    ->name('public.billboard.page');
+Route::get('team/billboard/{id}','Api\PublicBillboardsController@makeUrl')
+    ->name('make.url');
 Route::get('{teamName}/{billboardName}', 'Api\PublicBillboardsController@showDetails')
-    ->name('billboard.details');
+    ->name('public.billboard.details');
+Route::get('public/get/{billboard}','Api\PublicBillboardsController@getBillboard')
+    ->name('public.get.billboard');
+Route::get('public/faces/{bid}','Api\PublicBillboardsController@getFaces')
+    ->name('public.get.faces');
 
 Route::get('slc.js', function () {
     $json = json_encode(array_merge(Slc::scriptVariables(), []));

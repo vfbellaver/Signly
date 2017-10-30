@@ -46,10 +46,15 @@ class TeamService
 
     public function delete(Team $team)
     {
-        return \DB::transaction(function() use ($team) {
-           $team->delete();
+        return \DB::transaction(function () use ($team) {
+            $team->delete();
 
-           event(new TeamDeleted($team));
+            event(new TeamDeleted($team));
         });
+    }
+
+    public function slugName(Team $team)
+    {
+        return str_slug($team->name, '-');
     }
 }
