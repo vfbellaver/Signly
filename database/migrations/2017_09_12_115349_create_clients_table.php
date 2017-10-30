@@ -32,10 +32,23 @@ class CreateClientsTable extends Migration
 
             $table->timestamps();
         });
+
+        Schema::create('client_team',function (Blueprint $table) {
+            $table->integer('team_id')->unsigned()->index();
+            $table->foreign('team_id')->references('id')
+                    ->on('teams')->onDelete('cascade');
+
+            $table->integer('client_id')->unsigned()->index();
+            $table->foreign('client_id')->references('id')
+                ->on('clients')->onDelete('cascade');
+
+            $table->timestamps();
+        });
     }
 
     public function down()
     {
+        Schema::dropIfExists('client_team');
         Schema::dropIfExists('clients');
     }
 }

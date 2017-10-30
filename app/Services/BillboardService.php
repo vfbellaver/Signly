@@ -18,6 +18,7 @@ class BillboardService
         return \DB::transaction(function () use ($form) {
             $data = [
                 'name' => $form->name(),
+                'slugname' => $form->slugname(),
                 'description' => $form->description(),
                 'address' => $form->address(),
                 'lat' => $form->lat(),
@@ -26,8 +27,12 @@ class BillboardService
                 'pitch' => $form->pitch(),
             ];
 
+
             $billboard = new Billboard($data);
+            $billboard->slugname = $this->nameExists($billboard);
+
             $billboard->user()->associate($form->user());
+            $billboard->team()->associate($form->user()->team_id);
 
             $billboard->save();
 
@@ -47,6 +52,7 @@ class BillboardService
             $billboard->lng = $form->lng();
             $billboard->heading = $form->heading();
             $billboard->pitch = $form->pitch();
+            $billboard->slugname = $this->nameExists($billboard);
 
             $billboard->save();
 
@@ -104,6 +110,7 @@ class BillboardService
                     if (!isset($row["face{$i}_{$o}"]) || !$row["face{$i}_{$o}"]) {
                         continue;
                     }
+
                     if ($o === 'lights_on' || $o === 'lights_off') {
                         $time = $row["face{$i}_{$o}"];
                         $face[$o] = Carbon::createFromFormat('h:i A', $time)->format('H:i:s');
@@ -137,6 +144,7 @@ class BillboardService
                     'lat' => $blb['lat'],
                     'lng' => $blb['lng'],
                     'user_id' => $data['user_id'],
+                    'team_id' => $data['team_id'],
                 ]);
 
                 $events[] = new BillboardCreated($billboard);
@@ -146,6 +154,11 @@ class BillboardService
 
                 //create as faces relations
                 foreach ($faces as $face) {
+                    if(strtolower($face['is_illuminated']) == strtolower('No')){
+                        $face['is_illuminated'] = false;
+                    }else{
+                        $face['is_illuminated'] = true;
+                    }
                     $billboardFace = new BillboardFace($face);
                     $billboardFace->billboard()->associate($billboard);
                     $billboardFace->save();
@@ -160,4 +173,20 @@ class BillboardService
             return $savedBillboards;
         });
     }
+
+    public function nameExists(Billboard $billboard)
+    {
+        $count = Billboard::query()
+            ->where('name',$billboard->name)
+            ->where('team_id',auth()->user()->team_id)
+            ->count();
+            if($count){
+                $slugname = str_slug($billboard->name,'-');
+                $slugname = $slugname.'-'.($count+1);
+                return $slugname;
+            }else{
+                return str_slug($billboard->name,'-');
+            }
+    }
+
 }

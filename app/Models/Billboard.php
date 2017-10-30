@@ -8,6 +8,7 @@ class Billboard extends Model
 {
     protected $fillable = [
         'name',
+        'slugname',
         'address',
         'lat',
         'lng',
@@ -15,6 +16,7 @@ class Billboard extends Model
         'pitch',
         'description',
         'user_id',
+        'team_id'
     ];
 
     protected $casts = [
@@ -38,6 +40,10 @@ class Billboard extends Model
     {
         return $this->hasMany(BillboardFace::class);
     }
+
+    public function team(){
+        return $this->belongsTo(Team::class);
+    }
     #endregion
 
     #region Custom Attributes
@@ -54,6 +60,7 @@ class Billboard extends Model
         return [
             'id' => $this->id,
             'name' => $this->name,
+            'slugname'=> $this->slugname,
             'description' => $this->description,
             'address' => $this->address,
             'lat' => $this->lat,
@@ -61,6 +68,7 @@ class Billboard extends Model
             'heading' => $this->heading,
             'pitch' => $this->pitch,
             'user' => $this->user->toArray(),
+            'team' =>$this->team->toArray(),
             'billboard_faces' => $this->billboardFaces->toArray(),
             'position' => [
                 'lat' => $this->lat,

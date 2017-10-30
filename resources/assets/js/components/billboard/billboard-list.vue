@@ -20,7 +20,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-4" v-for="billboard in billboards">
-                        <billboard-card :billboard="billboard" @edit="edit" @destroy="destroy"></billboard-card>
+                        <billboard-card :billboard="billboard" @edit="edit" @destroy="destroy" @details="details"></billboard-card>
                     </div>
                 </div>
             </div>
@@ -94,6 +94,15 @@
                 return this.billboards.findIndex((_billboard) => {
                     return _billboard.id === billboard.id;
                 });
+            },
+            details(billboard){
+                Slc.get(laroute.route("make.url", {id: billboard.id}))
+                    .then((response) => {
+                        console.log('Team billboard', billboard);
+                        window.location = laroute.route('public.billboard.details',
+                            {teamName: response.data.slugTeam, billboardName: response.data.slugBillboard});
+                    });
+            }
             },
         }
     }

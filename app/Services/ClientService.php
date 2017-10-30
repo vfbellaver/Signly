@@ -33,6 +33,7 @@ class ClientService
             $client = new Client($data);
             $client->user()->associate($form->user());
             $client->save();
+            $client->teams()->attach($form->user()->team_id);
 
             event(new ClientCreated($client));
 

@@ -17,7 +17,7 @@
                 :opened="(billboard !== null)"
                 :position="(billboard !== null) ? billboard.position : null"
                 @closeclick="billboard = null">
-            <billboard-info v-if="billboard" :billboard="billboard"></billboard-info>
+            <billboard-info v-if="billboard" :user="this.user" :billboard="billboard"></billboard-info>
         </gmap-info-window>
     </gmap-map>
 </template>
@@ -77,13 +77,18 @@
             };
             this.zoom = this.user.zoom;
             this.loaded = true;
-            this.loadMarkers();
+            if(this.user.email) {
+
+                this.loadMarkers('api.billboard.index');
+            }else{
+                this.loadMarkers('public.billboard.page');
+            }
         },
 
         methods: {
+            loadMarkers(uri) {
 
-            loadMarkers() {
-                Slc.get(laroute.route('api.billboard.index'))
+                Slc.get(laroute.route(uri))
                     .then((response) => {
                         this.billboards = response;
                         for (let i = 0; i < this.billboards.length; i++) {

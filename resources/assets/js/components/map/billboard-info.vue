@@ -9,7 +9,15 @@
                     <div>{{billboard.address}}</div>
                     <h4>Location</h4>
                     <div>{{billboard.lat}}, {{billboard.lng}}</div>
-                    <div class="pull-right">
+                    <hr/>
+                    <div class="col-md-6">
+                        <btn-submit class="btn-info"
+                                    @click.native="showDetails(billboard)"
+                        >
+                            SHOW DETAILS
+                        </btn-submit>
+                    </div>
+                    <div class="col-md-6" v-if="this.user.email">
                         <btn-submit
                                 @click.native="edit(billboard)"
                         >
@@ -71,6 +79,13 @@
     export default {
         props: {
             billboard: {required: true},
+            user: {required: true}
+        },
+
+        data(){
+            return {
+                nameteam: {}
+            }
         },
         created() {
             console.log("Billboard Info", this.billboard);
@@ -79,6 +94,16 @@
             edit(billboard) {
                 window.location = laroute.route("billboards.edit", {billboard: billboard.id});
             },
+            showDetails(billboard){
+                Slc.get(laroute.route("make.url", {id: billboard.id}))
+                    .then((response) => {
+                        console.log('Team billboard', billboard);
+                        window.location = laroute.route('public.billboard.details',
+                            {teamName: response.data.slugTeam, billboardName: response.data.slugBillboard});
+                    });
+
+
+            }
         }
     }
 </script>

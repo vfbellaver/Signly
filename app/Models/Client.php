@@ -34,7 +34,11 @@ class Client extends Model
     {
         return $this->belongsTo(User::class);
     }
-    #region
+
+    public function teams(){
+        return $this->belongsToMany(Team::class)->withTimestamps();
+    }
+    #endregion
 
     #region Custom Attributes
 
