@@ -63,7 +63,9 @@
         },
         mixins: [ModalForm],
         data() {
-            return {}
+            return {
+                userForm: null
+            }
         },
 
         methods: {
@@ -77,9 +79,9 @@
             },
 
             save() {
-                const uri = laroute.route('api.client.import');
-                Slc.post(uri, this.form).then((response) => {
-                    console.log('Post Clients:', response);
+                const uri = laroute.route('api.billboard.import');
+                Slc.post(uri, this.userForm).then((response) => {
+                    console.log('Post Billboards:', response);
                     this.saved(response.data, 'saved');
                 });
 
