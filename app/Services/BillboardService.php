@@ -18,7 +18,7 @@ class BillboardService
         return \DB::transaction(function () use ($form) {
             $data = [
                 'name' => $form->name(),
-                'slugname' => $form->slugname(),
+                'slug' => $form->slug(),
                 'description' => $form->description(),
                 'address' => $form->address(),
                 'lat' => $form->lat(),
@@ -29,7 +29,7 @@ class BillboardService
 
 
             $billboard = new Billboard($data);
-            $billboard->slugname = $this->nameExists($billboard);
+            $billboard->slug = $this->nameExists($billboard);
 
             $billboard->user()->associate($form->user());
             $billboard->team()->associate($form->user()->team_id);
@@ -52,7 +52,7 @@ class BillboardService
             $billboard->lng = $form->lng();
             $billboard->heading = $form->heading();
             $billboard->pitch = $form->pitch();
-            $billboard->slugname = $this->nameExists($billboard);
+            $billboard->slug = $this->nameExists($billboard);
 
             $billboard->save();
 
@@ -181,9 +181,9 @@ class BillboardService
             ->where('team_id',auth()->user()->team_id)
             ->count();
             if($count){
-                $slugname = str_slug($billboard->name,'-');
-                $slugname = $slugname.'-'.($count+1);
-                return $slugname;
+                $slug = str_slug($billboard->name,'-');
+                $slug = $slug.'-'.($count+1);
+                return $slug;
             }else{
                 return str_slug($billboard->name,'-');
             }

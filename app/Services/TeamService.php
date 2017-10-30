@@ -53,7 +53,7 @@ class TeamService
         });
     }
 
-    public function slugName(Team $team)
+    public function slug(Team $team)
     {
         return str_slug($team->name, '-');
     }

@@ -21,7 +21,8 @@ class Subscription extends Model
     ];
 
     protected $casts = [
-
+        'user_id' => 'int',
+        'quantity' => 'int',
     ];
 
     protected $dates = [

@@ -9,8 +9,8 @@ class CreateTeamsTable extends Migration
     {
         Schema::create('teams', function (BluePrint $table) {
             $table->increments('id');
-            $table->string('name',60)->unique();
-            $table->string('slugname',100);
+            $table->string('name', 60)->unique();
+            $table->string('slug', 100)->unique();
             $table->timestamps();
         });
     }
