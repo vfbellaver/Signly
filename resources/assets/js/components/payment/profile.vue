@@ -26,14 +26,11 @@
 </template>
 
 <script>
-    import TeamSelect from '../team/team-select';
     export default {
 
-        components:{
-           TeamSelect,
-        },
+        components: {},
 
-        data(){
+        data() {
 
             return {
                 key: window.Slc.StripeKey,
@@ -41,11 +38,9 @@
             }
         },
 
-       created(){
-            this.stripe = StripeElements.configure({
-
-            });
+        created() {
+            this.stripe = StripeElements.configure({});
             console.log(this.key);
-       }
+        }
     }
 </script>

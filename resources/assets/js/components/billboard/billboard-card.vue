@@ -15,7 +15,8 @@
             <div class="row  m-t-sm">
                 <div class="col-md-12">
                     <div class="btn-group pull-left">
-                        <button class="btn btn-white btn-sm" @click="details"><i class="fa fa-plus"></i> Details</button>
+                        <button class="btn btn-white btn-sm" @click="details"><i class="fa fa-plus"></i> Details
+                        </button>
                     </div>
                     <div class="btn-group pull-right">
                         <button class="btn btn-white btn-sm" @click="edit"><i class="fa fa-edit"></i> Edit</button>
@@ -38,6 +39,12 @@
         @include multi-line-text-ellipse(100%, 54px, 3);
     }
 
+    .team-members {
+        .img-circle {
+            margin-right: 4px;
+        }
+    }
+
 </style>
 
 <script>
@@ -53,7 +60,7 @@
             destroy() {
                 this.$emit('destroy', this.billboard);
             },
-            details(){
+            details() {
                 this.$emit('details', this.billboard);
             }
         }

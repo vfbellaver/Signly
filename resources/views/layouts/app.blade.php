@@ -40,9 +40,9 @@
                                         <b class="caret"></b>
                                     </a>
                                     <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                                        <li><a href="#">Your Settings</a></li>
+                                        <li><a href="{{route('user.settings')}}">Your Settings</a></li>
                                         @if(auth()->user()->is_team_owner)
-                                            <li><a href="#">Team Settings</a></li>
+                                            <li><a href="{{route('team.settings')}}">Team Settings</a></li>
                                         @endif
                                         <li class="divider"></li>
                                         <li><a href="javascript:;"

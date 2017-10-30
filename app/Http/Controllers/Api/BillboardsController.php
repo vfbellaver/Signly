@@ -22,7 +22,7 @@ class BillboardsController extends Controller
 
     public function index()
     {
-        return Billboard::all();
+        return Billboard::query()->where('team_id', auth()->user()->team_id)->get()->all();
     }
 
     public function show($id)
