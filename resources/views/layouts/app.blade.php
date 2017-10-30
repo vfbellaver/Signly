@@ -56,6 +56,11 @@
                                 </li>
                             @else
                                 <li>
+                                    <a href="{{route('payment')}}"><i class="fa fa-user-plus" aria-hidden="true"></i>
+                                        Register
+                                    </a>
+                                </li>
+                                <li>
                                     <a href="{{ route('login') }}">
                                         <i class="fa fa-sign-in"></i> Login
                                     </a>
@@ -66,9 +71,7 @@
                 </nav>
             </div>
 
-            <div class="divproposal">
-                <proposal></proposal>
-            </div>
+
             @yield('content')
             <div class="footer">
                 <div>

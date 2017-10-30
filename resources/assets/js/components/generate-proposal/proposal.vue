@@ -1,20 +1,21 @@
 <template>
     <div class="ibox-title">
         <div>
-            <h5>Select Client:</h5>
+            <div>
+                <h4>Select Client:</h4>
+                <client-select :option="clients"></client-select>
+            </div>
             <div class="ibox float-e-margins">
-                    <hr>
-                    <h5>Previous Proposals</h5>
-
-                <div class="ibox-content row" >
+                <h5>Previous Proposals</h5>
+                <div class="ibox-content row">
                     <table class="table table-striped">
                         <thead>
                         <tr>
                             <th>#</th>
                             <th>Name</th>
-                            <th>Date <i class="fa fa-calendar"></i></th>
-                            <th>Status <i class="fa fa-check-square-o"></i></th>
-                            <th>Action <i class="fa fa-briefcase"></i></th>
+                            <th><i class="fa fa-calendar"></i> Date Expiration</th>
+                            <th><i class="fa fa-check-square-o"></i> Status</th>
+                            <th><i class="fa fa-briefcase"></i> Action</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -30,7 +31,7 @@
                                         Edit
                                     </button>
                                     <button class="btn btn-white btn-sm">
-                                        <i  class="fa fa-trash"></i>
+                                        <i class="fa fa-trash"></i>
                                         Close
                                     </button>
                                 </div>
@@ -48,7 +49,7 @@
                                         Edit
                                     </button>
                                     <button class="btn btn-white btn-sm">
-                                        <i  class="fa fa-trash"></i>
+                                        <i class="fa fa-trash"></i>
                                         Close
                                     </button>
                                 </div>
@@ -66,7 +67,7 @@
                                         Edit
                                     </button>
                                     <button class="btn btn-white btn-sm">
-                                        <i  class="fa fa-trash"></i>
+                                        <i class="fa fa-trash"></i>
                                         Close
                                     </button>
                                 </div>
@@ -74,7 +75,9 @@
                         </tr>
                         </tbody>
                     </table>
-                    <hr>
+                    <div class="ibox-content row">
+
+                    </div>
                 </div>
             </div>
         </div>
@@ -82,11 +85,28 @@
 </template>
 <script>
     export default {
+        props: {
+            team_id: {required: true}
+        },
         data(){
             return {
-
+                clients: [],
             }
         },
 
+        mounted(){
+            this.load();
+        },
+
+        methods: {
+            load(){
+                let self = this;
+                Slc.get(laroute.route('api.client.index'))
+                    .then((response) => {
+                        debugger;
+                        self.clients = response;
+                    });
+            },
+        }
     }
 </script>

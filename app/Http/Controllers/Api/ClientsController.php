@@ -8,6 +8,7 @@ use App\Http\Requests\ClientImportRequest;
 use App\Http\Requests\ClientUpdateRequest;
 use App\Models\Client;
 use App\Services\ClientService;
+use function Deployer\get;
 
 class ClientsController extends Controller
 {
@@ -21,7 +22,8 @@ class ClientsController extends Controller
 
     public function index()
     {
-        return Client::all();
+       return Client::query()->where('team_id',auth()->user()->team_id)->get()->toArray();
+
     }
 
     public function show($id)

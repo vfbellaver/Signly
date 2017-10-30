@@ -1,6 +1,9 @@
 <template>
     <div>
         <plan :stripe-id="user.stripe_id"></plan>
+        <button class="btn btn-danger" @click="deleteSubscription">
+           DELETE
+        </button>
     </div>
 </template>
 
@@ -33,7 +36,12 @@
         },
 
         methods: {
-
+            deleteSubscription(){
+                Slc.get(laroute.route("api.payment.delete.card"))
+                    .then(response => {
+                        console.log('Subscription Deleted',response);
+                    });
+            }
         }
     }
 </script>
