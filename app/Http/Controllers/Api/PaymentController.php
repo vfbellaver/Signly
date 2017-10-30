@@ -8,12 +8,9 @@ use App\Http\Requests\PaymentRegistrationRequest;
 use App\Models\Team;
 use App\Models\User;
 use App\Services\CardService;
-use Artesaos\Defender\Facades\Defender;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
-use Stripe\Card;
+use Defender;
 use Stripe\Customer;
 use Stripe\Stripe;
 
@@ -32,19 +29,20 @@ class PaymentController extends Controller
         $this->role = Defender::findRole('user');
     }
 
-    public function getCard() {
+    public function getCard()
+    {
         return Customer::retrieve(auth()->user()->stripe_id)->sources->all(array(
-            'limit'=>1, 'object' => 'card'));
-
+            'limit' => 1, 'object' => 'card'));
     }
 
-    public function createToken (TokenCreateRequest $request)
+    public function createToken(TokenCreateRequest $request)
     {
         $data = $this->service->createToken($request->form());
         return $data;
     }
 
-    public function updateCard(CardsCreateRequest $request) {
+    public function updateCard(CardsCreateRequest $request)
+    {
         $user = User::query()->find(auth()->id());
         $user->updateCard($request->form()->source());
 
@@ -66,7 +64,8 @@ class PaymentController extends Controller
         return $response;
     }
 
-    public function deleteSubscription() {
+    public function deleteSubscription()
+    {
         $user = User::query()->find(auth()->id());
         $user->subscription('main')->cancelNow();
         return $response = [
@@ -75,20 +74,20 @@ class PaymentController extends Controller
         ];
     }
 
-    public function verify (PaymentRegistrationRequest $request)
+    public function verify(PaymentRegistrationRequest $request)
     {
         $data = $request->all();
-
         return $response = [
-          'message' => 'User saved with successful',
+            'message' => 'User saved with successful',
             'data' => $data
         ];
     }
 
     public function store(PaymentRegistrationRequest $request)
     {
-        $team = new  Team();
+        $team = new Team();
         $team->name = $request->input('team');
+        $team->slug = str_slug($team->name);
         $team->save();
 
         $user = new  User();
@@ -100,8 +99,8 @@ class PaymentController extends Controller
         $user->trial_ends_at = Carbon::now()->addDays(14);
 
         $user->save();
-        $user->attachRole($this->role);
 
+        $user->attachRole($this->role);
         $plan = $request->input('plan');
         $email = $request->input('email');
         $owner = $request->input('owner');
@@ -122,6 +121,5 @@ class PaymentController extends Controller
         ];
 
         return $response;
-
     }
 }
