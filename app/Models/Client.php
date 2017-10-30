@@ -3,9 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
 
 class Client extends Model
 {
+    use Notifiable;
+
     protected $fillable = [
         'company_name',
         'logo',
@@ -20,23 +23,20 @@ class Client extends Model
         'phone1',
         'phone2',
         'fax',
-        'user_id',
+        'team_id',
     ];
 
     protected $casts = [
+        'team_id' => 'int',
     ];
 
     protected $dates = [
     ];
 
     #region Relationships
-    public function user()
+    public function team()
     {
-        return $this->belongsTo(User::class);
-    }
-
-    public function teams(){
-        return $this->belongsToMany(Team::class)->withTimestamps();
+        return $this->belongsTo(Team::class);
     }
     #endregion
 
@@ -66,8 +66,6 @@ class Client extends Model
             'phone1' => $this->phone1,
             'phone2' => $this->phone2,
             'fax' => $this->fax,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at
         ];
     }
     #endregion

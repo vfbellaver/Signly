@@ -34,6 +34,7 @@ class User extends Authenticatable
         'address',
         'lat',
         'lng',
+        'team_id',
     ];
 
     protected $hidden = [
@@ -45,6 +46,7 @@ class User extends Authenticatable
         'status' => 'boolean',
         'lat' => 'float',
         'lng' => 'float',
+        'team_id' => 'int',
     ];
 
     #region Attributes

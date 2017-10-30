@@ -23,7 +23,6 @@ class CreateSubscriptionsTable extends Migration
                 ->on('users')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
-
         });
     }
 

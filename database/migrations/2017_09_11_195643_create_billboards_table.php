@@ -10,7 +10,7 @@ class CreateBillboardsTable extends Migration
         Schema::create('billboards', function (BluePrint $table) {
             $table->increments('id');
             $table->string('name', 128);
-            $table->string('slugname',128);
+            $table->string('slug', 192)->unique();
             $table->string('address', 256);
             $table->decimal('lat', 18, 15);
             $table->decimal('lng', 18, 15);
@@ -31,7 +31,7 @@ class CreateBillboardsTable extends Migration
                 ->on('teams')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
-            
+
             $table->timestamps();
         });
     }

@@ -1,0 +1,36 @@
+<?php
+
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+class CreateProposalsTable extends Migration
+{
+    public function up()
+    {
+        Schema::create('proposals', function (Blueprint $table) {
+            $table->increments('id');
+
+            $table->date('expires_on')->nullable();
+
+            $table->unsignedInteger('client_id');
+            $table->foreign('client_id')
+                ->references('id')
+                ->on('clients')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+
+            $table->unsignedInteger('team_id');
+            $table->foreign('team_id')
+                ->references('id')
+                ->on('teams')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+            $table->timestamps();
+        });
+    }
+
+    public function down()
+    {
+        Schema::dropIfExists('proposals');
+    }
+}

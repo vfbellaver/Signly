@@ -11,36 +11,37 @@ class CardExpirationSoon extends Notification
 {
     use Queueable;
 
-    public $notication;
+    public $notification;
 
     public function __construct($notification)
     {
-        $this->notication = $notification;
+        $this->notification = $notification;
     }
 
 
     public function via($notifiable)
     {
-        return ['mail'];
+        return ['mail', 'database'];
     }
 
 
     public function toMail($notifiable)
     {
-        $msg = $this->notication;
+        $msg = $this->notification;
         return (new MailMessage)
-                    ->greeting('Hello ' . $notifiable->name . '!')
-                    ->subject($msg->subject)
-                    ->line($msg->message)
-                    ->action('Update your card', route('login'))
-                    ->line('Thank you for using our application!');
+            ->greeting('Hello ' . $notifiable->name . '!')
+            ->subject($msg->subject)
+            ->line($msg->message)
+            ->action('Update your card', route('login'))
+            ->line('Thank you for using our application!');
     }
 
 
     public function toArray($notifiable)
     {
         return [
-            //
+            'subject' => $this->notification->subject,
+            'message' => $this->notification->message,
         ];
     }
 }
