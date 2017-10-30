@@ -30,7 +30,8 @@
                         <ul class="nav navbar-top-links navbar-right">
                             @if(isset(auth()->user()->name))
                                 <li>
-                                    <button class="btn btn-sm btn-primary">Proposal Generator <i class="fa fa-bars"></i>
+                                    <button class="btn btn-sm btn-primary">
+                                        Proposal Generator <i class="fa fa-bars"></i>
                                     </button>
                                 </li>
                                 <li>
@@ -44,13 +45,14 @@
                                             <li><a href="#">Team Settings</a></li>
                                         @endif
                                         <li class="divider"></li>
-                                        <li><a href="#">Logout</a></li>
+                                        <li><a href="javascript:;"
+                                               onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+                                            >Logout</a></li>
                                     </ul>
                                 </li>
                                 <li>
-                                    <a href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                                    <a href="javascript:;"
+                                       onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                         <i class="fa fa-sign-out"></i> Log out
                                     </a>
 
