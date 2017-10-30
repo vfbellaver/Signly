@@ -12,6 +12,7 @@ Vue.component('team-list', require('./team/team-list.vue'));
 
 //CLIENT
 Vue.component('client-list', require('./client/client-list'));
+Vue.component('client-list-two', require('./client/client-list-two'));
 Vue.component('client-form',require('./client/client-form'));
 
 // BILLBOARD

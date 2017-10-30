@@ -83,12 +83,4 @@ class BillboardsController extends Controller
             'message' => 'Billboard deleted.'
         ];
     }
-
-    public function publicPage () {
-        str_slug();
-    }
-
-    public function makePublicPage (BillboardCreateRequest $request) {
-        str_slug();
-    }
 }

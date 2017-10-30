@@ -13,7 +13,7 @@ class CreateBillboardFacesTable extends Migration
 
             $table->string('code', 6);
             $table->string('label', 50);
-            $table->float('hard_cost', 10, 0)->default(0);
+            $table->string('hard_cost')->default(0);
             $table->float('monthly_impressions', 10, 0)->default(0);
             $table->integer('duration');
             $table->boolean('is_illuminated')->default(false);
@@ -24,7 +24,7 @@ class CreateBillboardFacesTable extends Migration
             $table->text('notes')->nullable();
             $table->integer('max_ads')->nullable();
             $table->text('photo')->nullable();
-            $table->string('type',50)->nullable();
+            $table->string('type',50)->default('Static');
             $table->string('lights_on')->nullable();
             $table->string('lights_off')->nullable();
 
