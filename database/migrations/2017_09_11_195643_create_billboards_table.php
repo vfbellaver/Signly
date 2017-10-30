@@ -9,6 +9,8 @@ class CreateBillboardsTable extends Migration
     {
         Schema::create('billboards', function (BluePrint $table) {
             $table->increments('id');
+            $table->unsignedInteger('team_id');
+
             $table->string('name', 128);
             $table->string('slug', 192)->unique();
             $table->string('address', 256);
@@ -18,14 +20,6 @@ class CreateBillboardsTable extends Migration
             $table->decimal('pitch', 18, 14)->nullable();
             $table->text('description')->nullable();
 
-            $table->unsignedInteger('user_id');
-            $table->foreign('user_id')
-                ->references('id')
-                ->on('users')
-                ->onDelete('cascade')
-                ->onUpdate('cascade');
-
-            $table->unsignedInteger('team_id');
             $table->foreign('team_id')
                 ->references('id')
                 ->on('teams')

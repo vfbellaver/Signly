@@ -3,7 +3,7 @@
 use Faker\Generator as Faker;
 
 $factory->define(App\Models\Billboard::class, function (Faker $faker) {
-    $name = $faker->name;
+    $name = $faker->streetName;
     return [
         'name' => $name,
         'slug' => str_slug($name,'-'),
@@ -13,8 +13,8 @@ $factory->define(App\Models\Billboard::class, function (Faker $faker) {
         'heading' => 297.55399917596174,
         'pitch' => 14.632095135840359,
         'description' => $faker->text(200),
-        'user_id' => function () {
-            return factory(App\Models\User::class)->create()->id;
+        'team_id' => function () {
+            return factory(App\Models\Team::class)->create()->id;
         },
     ];
 });

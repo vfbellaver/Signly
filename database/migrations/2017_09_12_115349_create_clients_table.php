@@ -9,6 +9,8 @@ class CreateClientsTable extends Migration
     {
         Schema::create('clients', function (BluePrint $table) {
             $table->increments('id');
+            $table->unsignedInteger('team_id')->nullable();
+
             $table->string('company_name', 128);
             $table->string('logo', 256)->nullable();
             $table->string('first_name', 64)->nullable();
@@ -23,7 +25,6 @@ class CreateClientsTable extends Migration
             $table->string('phone2', 24)->nullable();
             $table->string('fax', 24)->nullable();
 
-            $table->unsignedInteger('team_id')->nullable();
             $table->foreign('team_id')
                 ->references('id')
                 ->on('teams')

@@ -8,7 +8,7 @@ class AddOwnerIdToTeamsTable extends Migration
     public function up()
     {
         Schema::table('teams', function (Blueprint $table) {
-            $table->unsignedInteger('owner_id')->nullable()->after('name');
+            $table->unsignedInteger('owner_id')->nullable()->after('id');
             $table->foreign('owner_id')
                 ->references('id')
                 ->on('users')

@@ -10,6 +10,8 @@ class CreateBillboardFacesTable extends Migration
     {
         Schema::create('billboard_faces', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('team_id');
+            $table->unsignedInteger('billboard_id');
 
             $table->string('code', 6);
             $table->string('label', 50);
@@ -28,14 +30,12 @@ class CreateBillboardFacesTable extends Migration
             $table->string('lights_on')->nullable();
             $table->string('lights_off')->nullable();
 
-            $table->unsignedInteger('billboard_id');
             $table->foreign('billboard_id')
                 ->references('id')
                 ->on('billboards')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
 
-            $table->unsignedInteger('team_id');
             $table->foreign('team_id')
                 ->references('id')
                 ->on('teams')
