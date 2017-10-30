@@ -33,24 +33,27 @@
                             @include('layouts._menu')
                         </ul>
                         <ul class="nav navbar-top-links navbar-right">
-                            @if(isset(auth()->user()->name))
-                                <!-- COMPONENT MESSAGE NOTIFICATION -->
-                            <message-notification :user="{{auth()->user()}}"></message-notification>
-                            <li>
-                                {{ auth()->user()->name }}
-                            </li>
-                            <li>
-                                <a href="{{ route('logout') }}"
-                                   onclick="event.preventDefault();
+                        @if(isset(auth()->user()->name))
+                                <li>
+                                    <button class="btn btn-sm btn-primary">Proposal Generator  <i class="fa fa-bars"></i></button>
+                                </li>
+                            <!-- COMPONENT MESSAGE NOTIFICATION -->
+                                <message-notification :user="{{auth()->user()}}"></message-notification>
+                                <li>
+                                    {{ auth()->user()->name }}
+                                </li>
+                                <li>
+                                    <a href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                    <i class="fa fa-sign-out"></i> Log out
-                                </a>
+                                        <i class="fa fa-sign-out"></i> Log out
+                                    </a>
 
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                      style="display: none;">
-                                    {{ csrf_field() }}
-                                </form>
-                            </li>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                          style="display: none;">
+                                        {{ csrf_field() }}
+                                    </form>
+                                </li>
                             @else
                                 <li>
                                     <a href="{{ route('login') }}">
@@ -63,8 +66,10 @@
                 </nav>
             </div>
 
+            <div class="divproposal">
+                <proposal></proposal>
+            </div>
             @yield('content')
-
             <div class="footer">
                 <div>
                     <strong>Copyright</strong> Slc DevShop &copy; 2014-2017
@@ -77,6 +82,13 @@
 
 <!-- Scripts -->
 <script src="{{ mix('js/app.js') }}"></script>
+<script>
+    $(document).ready(function(){
+        $("button").click(function(){
+            $(".divproposal").toggle("slow");
+        });
+    });
+</script>
 
 </body>
 </html>

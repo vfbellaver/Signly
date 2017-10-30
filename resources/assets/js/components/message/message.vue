@@ -35,6 +35,7 @@
 <style lang="scss" scoped="scoped">
     .dropdown-messages {
         min-width: 500px;
+        z-index: 2;
 
     }
 

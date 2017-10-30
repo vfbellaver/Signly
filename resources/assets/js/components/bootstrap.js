@@ -30,5 +30,8 @@ Vue.component('billboard-show', require('./billboard-public/billboard-show'));
 //MESSAGE
 Vue.component('message-notification',require('./message/message'));
 
+//GENERATE-PROPOSAL
+Vue.component('proposal',require('./generate-proposal/proposal'));
+
 //DEMO
 Vue.component('parent', require('./demo/parent'));
