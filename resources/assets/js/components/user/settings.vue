@@ -100,13 +100,9 @@
     </div>
 </template>
 <style lang="scss" scoped="scoped">
-    h3 {
-        margin-top: 0;
-    }
 
     hr {
-        border: solid 2px;
-        border-color: #43A3D0;
+        border-bottom: solid 4px #43A3D0;
     }
 </style>
 <script>
