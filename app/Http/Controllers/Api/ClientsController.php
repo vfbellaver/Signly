@@ -22,7 +22,7 @@ class ClientsController extends Controller
 
     public function index()
     {
-       return Client::query()->where('team_id',auth()->user()->team_id)->get()->toArray();
+        return Client::query()->where('team_id',auth()->user()->team_id)->get()->toArray();
 
     }
 

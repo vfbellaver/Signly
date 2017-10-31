@@ -1,5 +1,5 @@
 @extends('layouts.app')
 
 @section('content')
-    <billboard-list></billboard-list>
+    <billboard-list :team="user.team"></billboard-list>
 @endsection

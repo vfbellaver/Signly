@@ -3,7 +3,7 @@
         <div>
             <div>
                 <h4>Select Client:</h4>
-                <client-select :option="clients"></client-select>
+                <client-select v-model="clients" ></client-select>
             </div>
             <div class="ibox float-e-margins">
                 <h5>Previous Proposals</h5>
@@ -26,7 +26,7 @@
                             <td>Status</td>
                             <td>
                                 <div class="btn-group pull-right">
-                                    <button data-v-c3cccd28="" class="btn btn-white btn-sm">
+                                    <button class="btn btn-white btn-sm">
                                         <i class="fa fa-edit"></i>
                                         Edit
                                     </button>
@@ -44,7 +44,7 @@
                             <td>Otto</td>
                             <td>
                                 <div class="btn-group pull-right">
-                                    <button data-v-c3cccd28="" class="btn btn-white btn-sm">
+                                    <button class="btn btn-white btn-sm">
                                         <i class="fa fa-edit"></i>
                                         Edit
                                     </button>
@@ -84,7 +84,11 @@
     </div>
 </template>
 <script>
+    import ClientSelect from './../client/client-select';
     export default {
+        component: {
+          ClientSelect,
+        },
         props: {
             team_id: {required: true}
         },
@@ -103,7 +107,6 @@
                 let self = this;
                 Slc.get(laroute.route('api.client.index'))
                     .then((response) => {
-                        debugger;
                         self.clients = response;
                     });
             },

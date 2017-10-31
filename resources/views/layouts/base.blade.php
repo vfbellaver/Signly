@@ -9,13 +9,17 @@
     <link rel="shortcut icon" href="{{asset('favicon.ico')}}">
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
     <script src="{{route('slc.js')}}" type="text/javascript"></script>
-    <script src="https://js.stripe.com/v3/"></script>
+    @yield('head-scripts')
 </head>
-<body class="gray-bg">
+<body class="{{$bodyClass}}">
+
 <div id="app">
-    @yield('content')
+    @yield('base-content')
 </div>
+
 <script src="{{ mix('js/app.js') }}"></script>
+
+@yield('body-scripts')
 
 </body>
 </html>

@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use App\Forms\MessageForm;
 use Illuminate\Foundation\Http\FormRequest;
 
-class MessageUpdateRequest extends FormRequest
+class NotificationUpdateRequest extends FormRequest
 {
     public function form(): MessageForm
     {

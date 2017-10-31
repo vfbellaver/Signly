@@ -43,50 +43,40 @@ class UsersController extends Controller
 
     public function update(UserUpdateRequest $request, User $user)
     {
-
         $obj = $this->service->update($request->form(), $user);
-
         $response = [
             'message' => 'User updated.',
             'data' => $obj,
         ];
-
         return $response;
     }
 
     public function updatePhoto(UserUpdatePhotoRequest $request, User $user)
     {
         $data = $request->all();
-
         $user->photo_url = $data['photo_url'];
         $user->save();
-
         $response = [
             'message' => 'User photo updated.',
             'data' => $user->toArray(),
         ];
-
         return $response;
     }
 
     public function updatePassword(UserUpdatePasswordRequest $request, User $user)
     {
-
         $data = $request->all();
         $user->password = bcrypt($data['password']);
         $user->save();
-
         $response = [
             'message' => 'User password updated.',
             'data' => $user,
         ];
-
         return $response;
     }
 
     public function updateAddress(UserUpdateAddressRequest $request, User $user)
     {
-
         $data = $request->all();
         $user->address = $data['address'];
         $user->lat = $data['lat'];
@@ -97,7 +87,6 @@ class UsersController extends Controller
             'message' => 'User plan updated.',
             'data' => $user,
         ];
-
         return $response;
     }
 
@@ -107,7 +96,6 @@ class UsersController extends Controller
             'message' => 'User plan updated.',
             'data' => $user,
         ];
-
         return $response;
     }
 
@@ -117,26 +105,21 @@ class UsersController extends Controller
             'message' => 'User card updated.',
             'data' => $user,
         ];
-
         return $response;
     }
 
     public function cancelSubscription(User $user)
     {
-
-
         $response = [
             'message' => 'User subscription canceled.',
             'data' => $user,
         ];
-
         return $response;
     }
 
     public function destroy(User $user)
     {
         $this->service->delete($user);
-
         return [
             'message' => 'User deleted.'
         ];

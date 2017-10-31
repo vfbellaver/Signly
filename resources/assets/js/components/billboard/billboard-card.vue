@@ -15,7 +15,9 @@
             <div class="row  m-t-sm">
                 <div class="col-md-12">
                     <div class="btn-group pull-left">
-                        <button class="btn btn-white btn-sm" @click="details"><i class="fa fa-plus"></i> Details</button>
+                        <a class="btn btn-white btn-sm" :href="'/' + team.slug + '/' + billboard.slug">
+                            <i class="fa fa-plus"></i> Details
+                        </a>
                     </div>
                     <div class="btn-group pull-right">
                         <button class="btn btn-white btn-sm" @click="edit"><i class="fa fa-edit"></i> Edit</button>
@@ -38,13 +40,20 @@
         @include multi-line-text-ellipse(100%, 54px, 3);
     }
 
+    .team-members {
+        .img-circle {
+            margin-right: 4px;
+        }
+    }
+
 </style>
 
 <script>
 
     export default {
         props: {
-            billboard: {required: true}
+            team: {required: true},
+            billboard: {required: true},
         },
         methods: {
             edit() {
@@ -53,9 +62,6 @@
             destroy() {
                 this.$emit('destroy', this.billboard);
             },
-            details(){
-                this.$emit('details', this.billboard);
-            }
         }
     }
 

@@ -56,9 +56,11 @@ class User extends Authenticatable
         return $this->belongsTo(Team::class);
     }
 
-    public function message()
+    public function notifications()
     {
-        return $this->belongsTo(Message::class);
+        $relation = $this->hasMany(Notification::class, 'notifiable_id');
+        $relation->where('notifiable_type', 'users');
+        return $relation;
     }
 
     public function getSubscription()
@@ -69,6 +71,12 @@ class User extends Authenticatable
     public function getRoleAttribute()
     {
         return $this->roles()->first();
+    }
+
+    public function getIsTeamOwnerAttribute()
+    {
+        $isTeamOwner = $this->team->owner_id == $this->team_id;
+        return $isTeamOwner;
     }
     #endregion
 
