@@ -25,13 +25,13 @@
             </div>
         </div>
         <div class="col-md-12">
-            <hr/>
+            <hr style="border: 1px solid #00A5E3"/>
         </div>
         <div class="col-md-6">
             <gmap-map
                     :center="{{json_encode(['lat'=> $billboard->lat,'lng'=>$billboard->lng])}}"
                     :zoom="7"
-                    style="width: 95%; min-height: 250px">
+                    style="width: 95%; min-height: 200px">
                 <gmap-marker
                         :position="{{json_encode(['lat'=> $billboard->lat,'lng'=>$billboard->lng])}}"
                         :icon="{{
@@ -47,7 +47,7 @@
             </gmap-map>
         </div>
         <div class="col-md-6">
-            <h2 class="text-center"><strong>{{$billboard->name}}</strong></h2>
+            <h3 class="text-center"><strong>{{$billboard->name}}</strong></h3>
             <address>
                 <strong> <i class="fa fa-map-marker"></i> Address:</strong><br>
                 {{$billboard->address}}
@@ -57,18 +57,49 @@
         </div>
 
         <div class="col-md-12">
-            <hr/>
+            <hr style="border: 1px solid #00A5E3"/>
         </div>
-        <div class="col-md-12">
-            <div class="billboard-faces row">
-                <h3 class="text-center">Billboard Faces</h3>
-                @foreach($billboard->billboardFaces as $face)
-                    <div class="billboard-face col-md-6">
-                        {{$face->code}} - {{$face->label}}
+        <div class="col-md-12 text-center" >
+        <h3 style="margin-top: 0">Billboard Faces</h3>
+        </div>
+        @foreach($billboard->billboardFaces as $face)
+            <div class="billboard-face col-md-6">
+                <div>
+                    <div class="col-md-5">
+                        <div class="text-center">
+                            <img alt="Face" src="{{$face->photo}}" width="100%">
+                        </div>
                     </div>
-                @endforeach
+                    <div class="col-md-7">
+                        <h5><strong> {{$face->code}} - {{$face->label}}</strong></h5>
+                        <p><i class="fa fa-map-marker"></i> Riviera State 32/106</p>
+                    </div>
+                    <div class="col-md-12">
+                        <table class="table">
+                            <thead style="font-size: 10px">
+                            <tr>
+                                <th>Type</th>
+                                <th>Illuminated</th>
+                                <th>Lights on</th>
+                                <th>Lights off</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+
+                                <td>{{$face->type}}</td>
+                                <td>{{($face->is_illuminated ? 'Yes' : 'No')}}</td>
+                                <td>{{$face->lights_on}}</td>
+                                <td>{{$face->lights_off}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
             </div>
-        </div>
+        @endforeach
     </div>
+
 @endsection
 
