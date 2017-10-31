@@ -100,9 +100,6 @@
     </div>
 </template>
 <style lang="scss" scoped="scoped">
-    h3 {
-        margin-top: 0;
-    }
 
     hr {
         border: solid 2px;
