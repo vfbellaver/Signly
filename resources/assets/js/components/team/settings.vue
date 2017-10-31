@@ -62,9 +62,8 @@
                                 <div id="tab-membership" class="tab-pane">
                                     <div class="panel-body">
                                         <ul>
-                                            <li>Invite user to be part of the team</li>
-                                            <li>List users</li>
-                                            <li>Remove users</li>
+                                            <team-membership></team-membership>
+                                            <team-list></team-list>
                                         </ul>
                                     </div>
                                 </div>
@@ -110,7 +109,15 @@
 
 </style>
 <script>
+    import TeamMembership from './team-membership';
+    import TeamList from './team-list';
     export default {
+
+        components: {
+            TeamMembership,
+            TeamList,
+        },
+
         data() {
             return {
                 pageHeading: {

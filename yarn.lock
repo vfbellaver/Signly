@@ -1532,8 +1532,8 @@ create-hmac@^1.1.0, create-hmac@^1.1.2, create-hmac@^1.1.4:
     sha.js "^2.4.8"
 
 cross-env@^5.0.1:
-  version "5.1.0"
-  resolved "https://registry.yarnpkg.com/cross-env/-/cross-env-5.1.0.tgz#1f12d6b3777d5847dcf9cf39fbee3c6a76dd5058"
+  version "5.1.1"
+  resolved "https://registry.yarnpkg.com/cross-env/-/cross-env-5.1.1.tgz#b6d8ab97f304c0f71dae7277b75fe424c08dfa74"
   dependencies:
     cross-spawn "^5.1.0"
     is-windows "^1.0.0"
@@ -3789,8 +3789,8 @@ methods@~1.1.2:
   resolved "https://registry.yarnpkg.com/methods/-/methods-1.1.2.tgz#5529a4d67654134edcc5266656835b0f851afcee"
 
 metismenu@^2.7.0:
-  version "2.7.0"
-  resolved "https://registry.yarnpkg.com/metismenu/-/metismenu-2.7.0.tgz#bb4db5dac2b24ddbf7b6c023ecc5f5945c4560b1"
+  version "2.7.1"
+  resolved "https://registry.yarnpkg.com/metismenu/-/metismenu-2.7.1.tgz#af3cc1550a95836526bd837b887c53ff29cb8b5a"
 
 micromatch@^2.1.5, micromatch@^2.3.11, micromatch@^2.3.7:
   version "2.3.11"
@@ -6026,8 +6026,8 @@ vue-loader@^13.0.5:
     vue-template-es2015-compiler "^1.6.0"
 
 vue-multiselect@^2.0.0-beta.15:
-  version "2.0.3"
-  resolved "https://registry.yarnpkg.com/vue-multiselect/-/vue-multiselect-2.0.3.tgz#bec58f84586022f82c2a3169be1b869f6d9715fc"
+  version "2.0.6"
+  resolved "https://registry.yarnpkg.com/vue-multiselect/-/vue-multiselect-2.0.6.tgz#7ca80e6c53db41e414bf76a66b9377ddf4659ebd"
 
 vue-style-loader@^3.0.0:
   version "3.0.1"
@@ -6048,8 +6048,8 @@ vue-template-es2015-compiler@^1.6.0:
   resolved "https://registry.yarnpkg.com/vue-template-es2015-compiler/-/vue-template-es2015-compiler-1.6.0.tgz#dc42697133302ce3017524356a6c61b7b69b4a18"
 
 vue2-google-maps@^0.8.3:
-  version "0.8.3"
-  resolved "https://registry.yarnpkg.com/vue2-google-maps/-/vue2-google-maps-0.8.3.tgz#25886841d7668515f124fa3a24a57f9af85fefb5"
+  version "0.8.4"
+  resolved "https://registry.yarnpkg.com/vue2-google-maps/-/vue2-google-maps-0.8.4.tgz#4c5201f8f79a54a8e7c56841677fa3f3bb1600ca"
   dependencies:
     babel-plugin-lodash "^3.2.11"
     babel-plugin-transform-runtime "^6.15.0"

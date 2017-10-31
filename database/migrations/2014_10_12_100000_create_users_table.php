@@ -11,7 +11,7 @@ class CreateUsersTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('team_id')->nullable();
 
-            $table->string('name', 64);
+            $table->string('name', 64)->nullable();
             $table->string('photo_url', 128)->nullable();
             $table->string('email', 128)->unique();
             $table->string('password')->nullable();

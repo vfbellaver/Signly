@@ -28,7 +28,7 @@
                                 </p>
                                 <h1>
                                     <small> U$ :</small>
-                                    {{billboardFace.hard_cost}}
+                                    {{formatMoney(billboardFace.hard_cost)}}
                                 </h1>
                             </div>
                             <div class="clearfix"></div>
@@ -110,7 +110,9 @@
             }
         },
 
-        computed: {},
+        computed: {
+
+        },
 
         mounted() {
             this.reload();
@@ -153,7 +155,14 @@
             },
 
             formatMoney(money) {
+
                 money = money.toString();
+                let cents = money.slice((money.length -2),(money.length));
+
+                if(cents === '00') {
+                    money += cents;
+                }
+
                 var tmp = money.replace(".", "");
                 tmp = tmp.replace(/([0-9]{2})$/g, ",$1");
                 if (tmp.length > 6)
