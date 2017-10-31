@@ -61,7 +61,7 @@
                     <column size="4">
                         <form-group :form="form" field="hard_cost">
                             <input-label for="hard_cost">Hard Cost: </input-label>
-                            <input-text v-model="form.hard_cost" id="hard_cost" name="hard_cost" v-money></input-text>
+                            <input-text v-model="form.hard_cost" id="hard_cost" name="hard_cost" v-float></input-text>
                         </form-group>
                     </column>
 

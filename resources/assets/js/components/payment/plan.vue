@@ -1,22 +1,10 @@
 <template>
     <div>
         <div class="ibox-body">
-            <a v-for="p in plans">
-                <content-plan
-                        @click.native="selectedPlan(p)"
-                        :name="p.name"
-                        :icon="p.icon"
-                        :circle="p.select.circle"
-                        :footer="p.select.footer"
-                >
-                </content-plan>
-            </a>
-            <input class="margin" name="plan" :value="planSelected" type="hidden"/>
-            <div class="clear"></div>
-        </div>
-        <br>
-
-        <div class="ibox-content p-xl" v-for="p in plans" v-if="p.select.selected">
+            <ul v-for="p in plans">
+                <li><a @click="selectedPlan(p)">{{p.name}}</a></li>
+            </ul>
+            <div v-for="p in plans" v-if="p.select.selected">
                 <div class="col-sm-3">
                     <h2>{{p.name}}</h2>
                     <address>
@@ -46,7 +34,7 @@
                             <tr>
                                 <td>
                                     <small>
-                                        <strong>Total Billboards:</strong>   {{"   "+p.billboards}}
+                                        <strong>Total Billboards:</strong> {{"   " + p.billboards}}
                                     </small>
                                 </td>
                                 <td>{{p.users}}</td>
@@ -74,7 +62,8 @@
                         <a @click="showTerms(p)" class="btn btn-primary">Terms</a>
                     </div>
                 </div>
-            <div class="clear"></div>
+                <div class="clear"></div>
+            </div>
         </div>
         <plan-modal @Step2="step2" :stripe-id="stripeId" :id="id" :title="title" :term="term" ref="terms"></plan-modal>
         <div class="clear"></div>
@@ -87,18 +76,19 @@
 </style>
 <script>
 
-    //import ContentPlan from "./content-plan";
+    import ContentPlan from "./content-plan";
     import ModalForm from '../shared/Mixins/ModalForm';
     import PlanModal from './plan-modal';
 
     export default {
 
-        props:{
-            stripeId: {required:false}
+        props: {
+            stripeId: {required: false}
         },
 
-        component: {
+        components: {
             ModalForm,
+            ContentPlan,
             PlanModal
         },
 
@@ -109,7 +99,7 @@
             },
 
             dateDue(){
-                return moment().add(14,'days').calendar();
+                return moment().add(14, 'days').calendar();
             },
         },
 
@@ -218,14 +208,14 @@
 
         methods: {
             showTerms(plan){
-              this.term = plan.term,
-              this.title = plan.name,
-              this.id = plan.id,
-              this.$refs.terms.show();
+                this.term = plan.term,
+                    this.title = plan.name,
+                    this.id = plan.id,
+                    this.$refs.terms.show();
             },
 
             step2(plan){
-              this.$emit('pay',{plan:plan})
+                this.$emit('pay', {plan: plan})
             },
             selectedPlan(plan){
                 plan.select = {

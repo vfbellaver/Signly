@@ -13,7 +13,6 @@ Vue.component('main-map', require('./map/main-map'));
 Vue.component('register', require('./payment/register'));
 Vue.component('plan', require('./payment/plan'));
 Vue.component('user-card', require('./user/user-card'));
-Vue.component('content-plan', require('./payment/content-plan'));
 Vue.component('plan-modal', require('./payment/plan-modal'));
 Vue.component('profile', require('./payment/profile'));
 
