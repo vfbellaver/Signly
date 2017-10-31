@@ -9,6 +9,7 @@
     <link rel="shortcut icon" href="{{asset('favicon.ico')}}">
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
     <script src="{{route('slc.js')}}" type="text/javascript"></script>
+    @yield('head-scripts')
 </head>
 <body class="{{$bodyClass}}">
 
@@ -17,6 +18,8 @@
 </div>
 
 <script src="{{ mix('js/app.js') }}"></script>
+
+@yield('body-scripts')
 
 </body>
 </html>

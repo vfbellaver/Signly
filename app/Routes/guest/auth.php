@@ -10,4 +10,6 @@ Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm
 Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 
 Route::get('register', 'Auth\RegisterController@register')->name('register');
+Route::post('register', 'Auth\RegisterController@registerPost')->name('register-post');
 Route::get('register/invitation/{token}', 'Auth\RegisterController@invitation')->name('invitation');
+Route::get('terms-of-service', 'Auth\RegisterController@termsOfService')->name('terms-of-service');
