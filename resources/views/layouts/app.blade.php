@@ -67,9 +67,6 @@
                 </nav>
             </div>
 
-            <div class="divproposal">
-                <proposal></proposal>
-            </div>
             @yield('content')
             <div class="footer">
                 <div>

@@ -20,7 +20,7 @@ Vue.component('profile', require('./payment/profile'));
 Vue.component('client-list', require('./client/client-list'));
 Vue.component('client-list-two', require('./client/client-list-two'));
 Vue.component('client-form', require('./client/client-form'));
-
+Vue.component('client-select',require('./client/client-select'));
 // BILLBOARD
 Vue.component('billboard-list', require('./billboard/billboard-list'));
 Vue.component('billboard-edit', require('./billboard/billboard-edit'));
