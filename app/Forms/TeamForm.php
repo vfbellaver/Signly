@@ -13,4 +13,9 @@ class TeamForm extends BaseForm
     {
         return $this->request->get('slug');
     }
+
+    public function logo()
+    {
+        return $this->request->get('logo');
+    }
 }

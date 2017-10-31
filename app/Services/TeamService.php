@@ -33,6 +33,7 @@ class TeamService
 
             $data = [
                 'name' => $form->name(),
+                'logo' => $form->logo(),
             ];
 
             $team->save();

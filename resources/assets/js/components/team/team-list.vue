@@ -11,7 +11,7 @@
                 </thead>
                 <tbody>
                 <tr v-for="( user, index ) in users">
-                    <td v-if="boss.email === user.email">{{ user.email+" "}}<strong>You</strong></td>
+                    <td v-if="boss.email === user.email">{{ user.email+"  "}}<strong>(you)</strong></td>
                     <td v-else>{{ user.email }}</td>
                     <td>
                         <btn-danger

@@ -10,7 +10,7 @@
             <div class="container-fluid">
                 <div class="col-lg-12">
                     <div class="tabs-container">
-                        <h1>Team Settings</h1>
+                        <h1>Company Settings</h1>
                         <div class="tabs-left">
                             <ul class="nav nav-tabs">
                                 <li class="active">
@@ -54,8 +54,7 @@
                                 <div id="tab-team-profile" class="tab-pane active">
                                     <div class="panel-body">
                                         <ul>
-                                            <li>Change Team Logo (to show in proposal)</li>
-                                            <li>Change Team Name (will change the slug)</li>
+                                            <team-form></team-form>
                                         </ul>
                                     </div>
                                 </div>
@@ -111,17 +110,19 @@
 <script>
     import TeamMembership from './team-membership';
     import TeamList from './team-list';
+    import TeamForm from './team-form';
     export default {
 
         components: {
             TeamMembership,
             TeamList,
+            TeamForm,
         },
 
         data() {
             return {
                 pageHeading: {
-                    title: 'Team Settings',
+                    title: 'Company Settings',
                     breadcrumb: [
                         {title: 'Home', url: laroute.route('home')}
                     ]
