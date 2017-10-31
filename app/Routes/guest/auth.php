@@ -9,5 +9,5 @@ Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail'
 Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
 Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 
-Route::get('/invitation/{token}', 'Web\UserInvitationsController')->name('invitation');
-Route::post('/register', 'Web\UserRegistrationsController')->name('register');
+Route::get('register', 'Auth\RegisterController@register')->name('register');
+Route::get('register/invitation/{token}', 'Auth\RegisterController@invitation')->name('invitation');
