@@ -102,8 +102,7 @@
 <style lang="scss" scoped="scoped">
 
     hr {
-        border: solid 2px;
-        border-color: #43A3D0;
+        border-bottom: solid 3px #00A5E3;
     }
 </style>
 <script>
