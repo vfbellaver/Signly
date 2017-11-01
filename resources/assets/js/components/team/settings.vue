@@ -76,7 +76,8 @@
                                 <div id="tab-payment-method" class="tab-pane">
                                     <div class="panel-body">
                                         <ul>
-                                            <team-card></team-card>
+                                            <!--<team-card></team-card>-->
+                                            <team-card-stripe></team-card-stripe>
                                         </ul>
                                     </div>
                                 </div>
@@ -112,6 +113,7 @@
     import TeamForm from './team-form';
     import TeamCard from './team-card';
     import TeamSubscription from './team-subscription';
+    import TeamCardStripe from './team-card-stripe';
 
     export default {
 
@@ -121,6 +123,7 @@
             TeamForm,
             TeamCard,
             TeamSubscription,
+            TeamCardStripe,
         },
 
         data() {
