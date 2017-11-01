@@ -15,16 +15,24 @@
                 <td class="text-right" style="width: 134px;">
                     <button
                             class="select btn btn-primary btn-outline"
-                            :class="{'active': chosenPlan == plan.id}"
+                            :class="{'active': planForm.stripe_plan == plan.id}"
                             type="button" @click="choosePlan(plan)">
-                        <i v-if="chosenPlan == plan.id" class="fa fa-check"></i>
+                        <i v-if="planForm.stripe_plan == plan.id" class="fa fa-check"></i>
                         Select
                     </button>
                 </td>
             </tr>
             </tbody>
         </table>
-        <input ref="selectedPlan" type="hidden" name="plan"/>
+        <hr>
+        <btn-submit class="select btn btn-success btn-outline pull-right pull-right" @click.native="updateSubscription">
+            <spinner v-if="planForm.busy"></spinner>
+            <span>UPDATE</span>
+        </btn-submit>
+        <btn-danger style="margin-right: 10px" class="select btn btn-danger btn-outline pull-right" @click.native="deleteSubscription">
+            <spinner v-if="planForm.busy"></spinner>
+            <span>CANCEL SUBSCRIPTION</span>
+        </btn-danger>
     </div>
 </template>
 
@@ -44,18 +52,18 @@
 
         data() {
             return {
-                userForm: null,
-                chosenPlan: null,
-                card: [],
                 token: '',
-                plans: []
-
+                plans: [],
+                planForm: null,
             }
         },
 
         created() {
             this.reload();
             this.plans = Slc.plans;
+            this.planForm = new SlcForm({
+                stripe_plan: Slc.user.subscription[0].stripe_plan,
+            });
         },
 
         watch: {
@@ -87,13 +95,29 @@
             },
 
             showPlanFeatures(plan){
-                this.chosenPlan = plan.id;
+                this.planForm.stripe_plan = plan.id;
                 console.log('showPlanFeatures ', plan);
             },
 
             choosePlan(plan){
-                this.chosenPlan = plan.id;
+                this.planForm.stripe_plan = plan.id;
                 console.log('choosePlan ', plan.id);
+            },
+
+            deleteSubscription(){
+                SLC.get(laroute.route("api.payment.delete.card"))
+                    .then((response) => {
+                        console.log('Subscription Deleted',response);
+                    });
+            },
+
+            updateSubscription(){
+                this.planForm.busy = true;
+                SLC.get(laroute.route("api.payment.update.subscription",{plan: this.planForm.stripe_plan}))
+                    .then((response) => {
+                        console.log('Subscription Updated',response);
+                        this.planForm.busy = false;
+                    });
             },
         }
     }

@@ -69,8 +69,6 @@
                                 <div id="tab-subscription" class="tab-pane">
                                     <div class="panel-body">
                                         <ul>
-                                            <li>Update subscription (change plan)</li>
-                                            <li>Cancel subscription</li>
                                             <team-subscription></team-subscription>
                                         </ul>
                                     </div>

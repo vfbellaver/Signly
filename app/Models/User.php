@@ -101,6 +101,7 @@ class User extends Authenticatable
     public function toArray()
     {
         $role = [];
+
         if ($this->role) {
             $role = [
                 'id' => $this->role->id,
@@ -116,6 +117,7 @@ class User extends Authenticatable
             'role' => $role,
             'status' => $this->status,
             'team' => $this->team_id ? $this->team->toArray() : null,
+            'subscription' => $this->getSubscription()->get()->toArray(),
             'pending' => $this->invitation_token != null,
             'stripe_id' => $this->stripe_id,
             'card_brand' => $this->card_brand,
