@@ -7,6 +7,7 @@ use App\Http\Requests\BillboardCreateRequest;
 use App\Models\Billboard;
 use App\Models\BillboardFace;
 use App\Models\Team;
+use App\Models\User;
 
 class BillboardsController extends Controller
 {
@@ -42,12 +43,16 @@ class BillboardsController extends Controller
     {
         $billboard = Billboard::query()
             ->join('teams', 'teams.id', '=', 'billboards.team_id')
+
+            ->select('billboards.*','teams.id',
+                             'teams.name as teamname','teams.owner_id')
             ->where('teams.slug', $teamSlug)
             ->where('billboards.slug', $billboardSlug)
             ->first();
-
+        $owner = User::query()->where('id',$billboard->team->owner_id)->first();
         return view('billboard.public', [
-            'billboard' => $billboard
+            'billboard' => $billboard,
+            'owner' => $owner
         ]);
     }
 }
