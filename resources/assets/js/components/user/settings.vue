@@ -74,13 +74,16 @@
                                                 <h3>Update your Password</h3>
                                                 <hr>
                                                 <div class="form-group">
-                                                    <label for="password" class="col-md-4 control-label">Password</label>
-                                                    <input id="password" type="password" class="form-control" name="password" v-model="form.password">
+                                                    <label for="password"
+                                                           class="col-md-4 control-label">Password</label>
+                                                    <input id="password" type="password" class="form-control"
+                                                           name="password" v-model="form.password">
                                                 </div>
 
                                                 <div class="form-group">
                                                     <label for="password-confirm" class="col-md-4 control-label">Confirm Password</label>
-                                                    <input id="password-confirm" type="password" class="form-control" name="password_confirmation">
+                                                    <input id="password-confirm" type="password" class="form-control"
+                                                           name="password_confirmation">
                                                 </div>
                                                 <hr>
                                                 <div>
@@ -130,7 +133,7 @@
                 })
             },
             updatePw(){
-              console.log('Update pass!!');
+                console.log('Update pass!!');
             },
         }
     }

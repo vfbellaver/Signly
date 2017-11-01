@@ -3,7 +3,7 @@
 @section('base-content')
     <div id="public-billboard">
         <div class="col-md-2">
-            <img alt="Company" src="https://lorempixel.com/640/480/?88914" width="100%">
+            <img alt="Company" src="{{$billboard->team->logo}}" width="100%">
         </div>
         <div class="col-md-10">
             <div class="col-md-12">

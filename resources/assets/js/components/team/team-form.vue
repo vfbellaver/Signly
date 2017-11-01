@@ -20,6 +20,7 @@
                     <input-text v-model="team.name" id="name"
                                 name="name"></input-text>
                 </form-group>
+                <hr>
                 <div>
                     <btn-submit class="pull-right">
                         <spinner v-if="team.busy"></spinner>
@@ -32,8 +33,11 @@
         </form-submit>
     </div>
 </template>
-<style>
+<style lang="scss" scoped="scoped">
 
+    hr {
+        border-bottom: solid 4px #43A3D0;
+    }
 </style>
 <script>
 
