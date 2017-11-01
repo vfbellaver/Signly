@@ -91,9 +91,7 @@
         },
 
         created() {
-            if (this.user) {
-                this.reload();
-            }
+            this.reload();
             this.buildForm();
         },
 
@@ -126,19 +124,21 @@
                 SLC.post(uri, this.userForm).then((response) => {
                     console.log('Get Token response', response.id);
                     this.userForm.source = response.id;
-                    this.updateCard(this.userForm);
+                    this.updateCard();
 
                 });
 
             },
 
-            updateCard(form){
+            updateCard(){
+                const self = this;
                 const uri = laroute.route('api.payment.update.card');
-                SLC.post(uri, form).then((response) => {
+                SLC.post(uri, this.userForm).then((response) => {
                     console.log('update card', response);
                     this.buildForm();
                     this.reload();
                     self.userForm.owner = self.card.name;
+                    self.userForm.number = '';
                 });
             },
 

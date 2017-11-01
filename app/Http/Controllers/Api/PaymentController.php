@@ -45,10 +45,11 @@ class PaymentController extends Controller
     {
         $user = User::query()->find(auth()->id());
         $user->updateCard($request->form()->source());
+        $data = $this->service->store($user,$request->form()->owner());
 
         return $response = [
             'message' => "Card updated with successful",
-            'data' => $this->user
+            'data' => $data
         ];
     }
 
@@ -83,43 +84,4 @@ class PaymentController extends Controller
         ];
     }
 
-    public function store(PaymentRegistrationRequest $request)
-    {
-        $team = new Team();
-        $team->name = $request->input('team');
-        $team->slug = str_slug($team->name);
-        $team->save();
-
-        $user = new  User();
-        $user->name = $request->input('name');
-        $user->email = $request->input('email');
-        $user->password = bcrypt($request->input('password'));
-        $user->remember_token = str_random(10);
-        $user->team_id = $team->id;
-        $user->trial_ends_at = Carbon::now()->addDays(14);
-
-        $user->save();
-
-        $user->attachRole($this->role);
-        $plan = $request->input('plan');
-        $email = $request->input('email');
-        $owner = $request->input('owner');
-
-        Stripe::setApiKey($this->key);
-
-        $user->newSubscription('main', $plan)
-            ->trialDays(14)
-            ->create(request('source'), [
-                'email' => $email,
-            ]);
-
-        $data = $this->service->store($user, $owner);
-
-        $response = [
-            "message" => $data,
-            "data" => $data,
-        ];
-
-        return $response;
-    }
 }

@@ -130,6 +130,20 @@
                             Billing Information
                         </div>
                         <div class="panel-body">
+                            <div class="form-group{{ $errors->has('owner') ? ' has-error' : '' }}">
+                                <label for="owner" class="col-md-4 control-label">Cardholder's Name</label>
+
+                                <div class="col-md-8">
+                                    <input id="owner" type="text" class="form-control" name="owner"
+                                           value="{{ old('owner') }}" autofocus>
+
+                                    @if ($errors->has('name'))
+                                        <div class="help-block">
+                                            <strong>{{ $errors->first('name') }}</strong>
+                                        </div>
+                                    @endif
+                                </div>
+                            </div>
                             <div id="card-group" class="form-group{{ $errors->has('card') ? ' has-error' : '' }}">
                                 <label for="card-element" class="col-md-4 control-label">Credit or debit card</label>
                                 <div class="col-md-8">
