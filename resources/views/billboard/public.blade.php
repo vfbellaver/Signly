@@ -68,9 +68,9 @@
             <div class="billboard-face col-md-6">
                 <hr style="border-bottom: 2px solid #00A5E3; margin-top: 0"/>
                 <div class="col-md-5">
-                    <div class="text-center">
-                        <img alt="Face" src="{{$face->photo}}" width="100%">
-                    </div>
+
+                        <img alt="Face" class="img-responsive" src="{{$face->photo}}">
+
                 </div>
                 <div class="col-md-7">
                     <h5><strong> {{$face->code}} - {{$face->label}}</strong></h5>
@@ -101,6 +101,7 @@
 
             </div>
         @endforeach
+        <div style="clear: both"></div>
     </div>
 @endsection
 
