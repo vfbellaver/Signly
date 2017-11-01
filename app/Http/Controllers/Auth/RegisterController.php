@@ -10,7 +10,6 @@ use App\Models\User;
 use App\Services\CardService;
 use Artesaos\Defender\Facades\Defender;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
 use Stripe\Stripe;
 
 class RegisterController extends Controller
@@ -56,7 +55,7 @@ class RegisterController extends Controller
 
         $user->newSubscription('main', $plan)
             ->trialDays(14)
-            ->create(request('source'), [
+            ->create(request('card'), [
                 'email' => $email,
             ]);
 

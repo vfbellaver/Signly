@@ -16,24 +16,27 @@
         <h2>Mailed Invitations</h2>
         <hr>
         <div class="table-responsive">
-            <table class="table table-striped">
-                <thead>
-                <tr>
-                    <th>Email</th>
-                </tr>
-                </thead>
+            <table class="table table-striped table-hover">
                 <tbody>
                 <tr v-for="( user, index ) in users">
-                    <td>{{ user.email }}</td>
-                    <td>
-                        <btn-danger @click.native="destroy(user)"
-                                    :disabled="user.destroyForm.busy"
-                                    size="xs"
-                        >
+                    <td class="client-avatar"><img alt="image" src="/images/user.png"></td>
+                    <td><strong>Invited</strong></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="contact-type"><i class="fa fa-envelope"> </i></td>
+                    <td> {{user.email}}</td>
+                    <td class="client-status">
+                        <btn-danger
+                                @click.native="destroy(user)"
+                                :disabled="user.destroyForm.busy"
+                                size="xs">
                             <spinner v-if="user.destroyForm.busy"></spinner>
-                            <icon icon="trash" v-else/>
+                            <icon icon="trash" v-else></icon>
                         </btn-danger>
-
                     </td>
                 </tr>
                 </tbody>

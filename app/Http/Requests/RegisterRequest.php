@@ -16,6 +16,7 @@ class RegisterRequest extends FormRequest
     {
         return [
             'plan' => 'required',
+            'owner' => 'required',
             'company' => 'required',
             'name' => 'required',
             'email' => 'required|email',
@@ -30,6 +31,7 @@ class RegisterRequest extends FormRequest
     {
         return [
             'plan.required' => 'You must choose a plan',
+            'owner.required' => 'Please type the Cardholder name',
         ];
     }
 
