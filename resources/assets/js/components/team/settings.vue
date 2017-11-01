@@ -77,8 +77,7 @@
                                 <div id="tab-payment-method" class="tab-pane">
                                     <div class="panel-body">
                                         <ul>
-                                            <li>Show current card</li>
-                                            <li>Update Payment Method (credit card)</li>
+                                            <team-card></team-card>
                                         </ul>
                                     </div>
                                 </div>
@@ -108,15 +107,19 @@
 
 </style>
 <script>
+
     import TeamMembership from './team-membership';
     import TeamList from './team-list';
     import TeamForm from './team-form';
+    import TeamCard from './team-card';
+
     export default {
 
         components: {
             TeamMembership,
             TeamList,
             TeamForm,
+            TeamCard,
         },
 
         data() {

@@ -3,17 +3,15 @@
         <h2>team Members</h2>
         <hr>
         <div class="table-responsive">
-            <table class="table table-striped">
-                <thead>
-                <tr>
-                    <th>Email</th>
-                </tr>
-                </thead>
+            <table class="table table-striped table-hover">
                 <tbody>
                 <tr v-for="( user, index ) in users">
-                    <td v-if="boss.email === user.email">{{ user.email+"  "}}<strong>(you)</strong></td>
-                    <td v-else>{{ user.email }}</td>
-                    <td>
+                    <td class="client-avatar"><img alt="image" :src="user.photo_url"></td>
+                    <td v-if="boss.email === user.email">{{user.name+"  "}}<strong>you</strong></td>
+                    <td v-else>{{user.name}}</td>
+                    <td class="contact-type"><i class="fa fa-envelope"> </i></td>
+                    <td> {{user.email}}</td>
+                    <td class="client-status">
                         <btn-danger
                                 @click.native="destroy(user)"
                                 :disabled="user.destroyForm.busy"
