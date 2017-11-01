@@ -18,12 +18,13 @@ class Slc
         return [
             'user' => $user,
             'csrfToken' => csrf_token(),
+            //'stripeKey' => env('STRIPE_KEY'),
             'stripeKey' => env('STRIPE_KEY'),
             'pusher' => env('PUSHER_APP_KEY'),
             'plans' => [
                 [
-                    'id' => 'plan1',
-                    'name' => 'Plan 1',
+                    'id' => 'enterprise-team',
+                    'name' => 'ENTERPRISE TEAM',
                     'interval' => 'Monthly',
                     'trial_days' => 30,
                     'price' => 10,
@@ -34,8 +35,8 @@ class Slc
                     ]
                 ],
                 [
-                    'id' => 'plan2',
-                    'name' => 'Plan 2',
+                    'id' => 'company-team',
+                    'name' => 'COMPANY-TEAM',
                     'interval' => 'Monthly',
                     'trial_days' => 30,
                     'price' => 20,
@@ -46,8 +47,8 @@ class Slc
                     ]
                 ],
                 [
-                    'id' => 'plan3',
-                    'name' => 'Plan 3',
+                    'id' => 'growing-team',
+                    'name' => 'GROWING-TEAM',
                     'interval' => 'Monthly',
                     'trial_days' => 30,
                     'price' => 30,
@@ -56,7 +57,19 @@ class Slc
                         'Feature 2',
                         'Feature 3',
                     ]
+                ],
+                [
+                'id' => 'solo-team',
+                'name' => 'SOLO TEAM',
+                'interval' => 'Monthly',
+                'trial_days' => 30,
+                'price' => 30,
+                'features' => [
+                    'Feature 1',
+                    'Feature 2',
+                    'Feature 3',
                 ]
+            ]
             ]
         ];
     }
