@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Services\CardService;
 use Artesaos\Defender\Facades\Defender;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 use Stripe\Stripe;
 
 class RegisterController extends Controller
@@ -91,7 +92,7 @@ class RegisterController extends Controller
         $role = Defender::findRole('user');
         $user->attachRole($role);
 
-        return redirect()->route('login');
+        return redirect()->route('home');
     }
 
     public function termsOfService()
