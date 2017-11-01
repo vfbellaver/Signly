@@ -19,11 +19,21 @@
                 <div class="alert alert-success">
                     Thank you to accept our invitation. Enter your password to begin.
                 </div>
-                <form class="m-t" role="form" method="POST" action="{{ route('register') }}">
+                <form class="m-t" role="form" method="POST" action="{{ route('register-invitation') }}">
                     {{ csrf_field() }}
 
-                    <input type="hidden" name="invitation_token" value="{{ $token }}" />
+                    <input type="hidden" name="invitation_token" value="{{ $token }}"/>
 
+                    <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+                        <input id="name" type="name" class="form-control" name="name" required
+                               placeholder="Name">
+
+                        @if ($errors->has('name'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('name') }}</strong>
+                            </span>
+                        @endif
+                    </div>
                     <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                         <input id="password" type="password" class="form-control" name="password" required
                                placeholder="Password">

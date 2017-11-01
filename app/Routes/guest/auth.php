@@ -11,5 +11,6 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 
 Route::get('register', 'Auth\RegisterController@register')->name('register');
 Route::post('register', 'Auth\RegisterController@registerPost')->name('register-post');
+Route::post('register/invitation', 'Auth\RegisterController@registerInvitation')->name('register-invitation');
 Route::get('register/invitation/{token}', 'Auth\RegisterController@invitation')->name('invitation');
 Route::get('terms-of-service', 'Auth\RegisterController@termsOfService')->name('terms-of-service');

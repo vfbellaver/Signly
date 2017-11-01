@@ -72,7 +72,27 @@ class RegisterController extends Controller
 
     public function invitation($token)
     {
-        return view('auth.invitation');
+        $isValid = false;
+        $user = User::query()->where('invitation_token',$token)->first();
+        if($user){
+            $isValid = true;
+        }
+        return view('auth.invitation',compact('isValid','token'));
+    }
+
+    public function registerInvitation(Request $request)
+    {
+        $user = User::where('invitation_token',$request->input('invitation_token'))->first();
+
+        $user->name = $request->input('name');
+        $user->invitation_token = null;
+        $user->password = bcrypt($request->input('password'));
+        $user->remember_token = str_random(10);
+        $user->save();
+        $role = Defender::findRole('user');
+        $user->attachRole($role);
+
+        return redirect()->route('login');
     }
 
     public function termsOfService()

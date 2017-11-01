@@ -19,11 +19,6 @@
                         <ul class="nav navbar-top-links navbar-right">
                             @if(isset(auth()->user()->name))
                                 <li>
-                                    <button class="btn btn-sm btn-primary">
-                                        Proposal Generator <i class="fa fa-bars"></i>
-                                    </button>
-                                </li>
-                                <li>
                                     <a data-toggle="dropdown" class="dropdown-toggle" href="#" aria-expanded="true">
                                         {{ auth()->user()->name }}
                                         <b class="caret"></b>
