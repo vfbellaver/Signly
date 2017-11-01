@@ -71,6 +71,7 @@
                                         <ul>
                                             <li>Update subscription (change plan)</li>
                                             <li>Cancel subscription</li>
+                                            <team-subscription></team-subscription>
                                         </ul>
                                     </div>
                                 </div>
@@ -112,6 +113,7 @@
     import TeamList from './team-list';
     import TeamForm from './team-form';
     import TeamCard from './team-card';
+    import TeamSubscription from './team-subscription';
 
     export default {
 
@@ -120,6 +122,7 @@
             TeamList,
             TeamForm,
             TeamCard,
+            TeamSubscription,
         },
 
         data() {
