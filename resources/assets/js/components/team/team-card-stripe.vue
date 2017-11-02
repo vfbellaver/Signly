@@ -1,24 +1,43 @@
 <template>
     <div>
-        <form-submit v-model="userForm" @submit="createToken">
-            <column size="12">
-                <form-group :form="userForm" field="owner">
-                    <input-label for="owner">Cardholder's Name: </input-label>
-                    <input-text v-model="userForm.owner" id="owner"
-                                name="owner"></input-text>
-                </form-group>
-            </column>
-            <column size="12">
-                <div ref="card" class="form-control"></div>
-                <hr>
-                <button class="select btn btn-success btn-outline pull-right pull-right" @click="createToken">
-                    UPDATE CARD
-                </button>
-            </column>
-        </form-submit>
+        <div class="ibox">
+            <div class="ibox-title">
+                <h5>Update your Card</h5>
+            </div>
+            <div class="ibox-content">
+                <form-submit v-model="userForm" @submit="createToken">
+                    <column size="12">
+                        <form-group :form="userForm" field="owner">
+                            <input-label for="owner">Cardholder's Name: </input-label>
+                            <input-text v-model="userForm.owner" id="owner"
+                                        name="owner"></input-text>
+                        </form-group>
+                    </column>
+                    <column size="12">
+                        <div ref="card" class="form-control"></div>
+                        <hr>
+                        <button class="select btn btn-success btn-outline pull-right pull-right" @click="createToken">
+                            UPDATE CARD
+                        </button>
+                    </column>
+                </form-submit>
+                <div style="clear:both"></div>
+            </div>
+        </div>
     </div>
 </template>
+<style>
+    .ibox {
+        clear: none;
+        margin-bottom: 60px;
+        margin-top: 0px;
+        padding: 0;
+    }
 
+    .ibox-content {
+        clear: none;
+    }
+</style>
 <script>
 
     import * as SLC from '../../vue/http';

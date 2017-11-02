@@ -31,11 +31,8 @@ class TeamService
     {
         return \DB::transaction(function () use ($form, $team) {
 
-            $data = [
-                'name' => $form->name(),
-                'logo' => $form->logo(),
-            ];
-
+            $team->name = $form->name();
+            $team->logo = $form->logo();
             $team->save();
 
             event(new TeamUpdated($team));
