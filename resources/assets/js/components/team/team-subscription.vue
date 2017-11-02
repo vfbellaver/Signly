@@ -7,7 +7,7 @@
             <table class="table table-borderless m-b-none" v-cloak="true">
                 <tbody>
                 <tr v-for="(plan , index ) in plans">
-                    <td><h2><strong>{{plan.name}}</strong></h2></td>
+                    <td><h3><strong>{{plan.name}}</strong></h3></td>
                     <td>
                         <button class="btn btn-default" type="button" @click="showFeatures(plan)">
                             <i class="fa fa-btn fa-star-o"></i>

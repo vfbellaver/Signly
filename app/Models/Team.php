@@ -48,6 +48,7 @@ class Team extends Model
         return [
             'id' => $this->id,
             'name' => $this->name,
+            'logo' => $this->logo,
             'slug' => $this->slug,
         ];
     }

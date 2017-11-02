@@ -2,7 +2,7 @@
     <div>
         <div class="ibox">
             <div class="ibox-title">
-                <h5>Invite a new member to Team</h5>
+                <h5>Update your Card</h5>
             </div>
             <div class="ibox-content">
                 <form-submit v-model="userForm" @submit="createToken">
