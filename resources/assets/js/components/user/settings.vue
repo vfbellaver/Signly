@@ -67,11 +67,12 @@
                                         <div class="col-lg-12">
                                             <div class="ibox float-e-margins">
                                                 <div class="ibox-title">
-                                                    <h3>Update Password  <i class="fa fa-fw fa-btn fa-lock"></i></h3>
+                                                    <h3>Update Password</h3>
                                                 </div>
                                                 <div class="ibox-content">
-                                                    <form-submit v-model="formPw" @submit="updatePw">
-                                                        <div class="col-lg-8">
+                                                    <div class="col-lg-8">
+
+                                                        <form-submit v-model="formPw" @submit="updatePw">
                                                             <div class="form-group">
                                                                 <label>Current Password *</label>
                                                                 <input id="old_password" name="old_password"
@@ -103,18 +104,17 @@
                                                                     Update Password
                                                                 </button>
                                                             </div>
-                                                        </div>
-                                                        <div class="col-lg-4">
-                                                            <div class="text-center">
-                                                                <div style="margin-top: 20px">
-                                                                    <i class="fa fa-expeditedssl"
-                                                                       style="font-size: 180px;color: #f0f0f0 "></i>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </form-submit>
+                                                        </form-submit>
+                                                    </div>
                                                 </div>
-
+                                                <div class="col-lg-4">
+                                                    <div class="text-center">
+                                                        <div style="margin-top: 20px">
+                                                            <i class="fa fa-expeditedssl"
+                                                               style="font-size: 170px;color: #f0f0f0 "></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -128,16 +128,17 @@
     </div>
 </template>
 <style lang="scss" scoped="scoped">
-    label {
-        padding: 0;
-    }
+
     .ibox {
-        clear: none;
         margin-top: 0;
-    },
+    }
+
+    ,
     .ibox-content {
         padding-left: 0;
     }
+
+
 </style>
 <script>
     export default {
