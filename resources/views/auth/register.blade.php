@@ -231,8 +231,6 @@
 
             return {
                 init: function () {
-
-
                     card.mount('#card-element');
                     card.addEventListener('change', function (event) {
                         if (event.error) {

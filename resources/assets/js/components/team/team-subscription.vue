@@ -1,0 +1,124 @@
+<template>
+    <div>
+        <table class="table table-borderless m-b-none" v-cloak="true">
+            <tbody>
+            <tr v-for="(plan , index ) in plans">
+                <td><strong>{{plan.name}}</strong></td>
+                <td>
+                    <button class="btn btn-default" type="button" @click="showPlanFeatures(plan)">
+                        <i class="fa fa-btn fa-star-o"></i>
+                        Plan Features
+                    </button>
+                </td>
+                <td>{{plan.price}} / {{plan.interval}}</td>
+                <td>{{ plan.trial_days }} Day Trial</td>
+                <td class="text-right" style="width: 134px;">
+                    <button
+                            class="select btn btn-primary btn-outline"
+                            :class="{'active': planForm.stripe_plan == plan.id}"
+                            type="button" @click="choosePlan(plan)">
+                        <i v-if="planForm.stripe_plan == plan.id" class="fa fa-check"></i>
+                        Select
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <hr>
+        <btn-submit class="select btn btn-success btn-outline pull-right pull-right" @click.native="updateSubscription">
+            <spinner v-if="planForm.busy"></spinner>
+            <span>UPDATE</span>
+        </btn-submit>
+        <btn-danger style="margin-right: 10px" class="select btn btn-danger btn-outline pull-right" @click.native="deleteSubscription">
+            <spinner v-if="planForm.busy"></spinner>
+            <span>CANCEL SUBSCRIPTION</span>
+        </btn-danger>
+    </div>
+</template>
+
+<style>
+
+</style>
+
+<script>
+
+    import * as SLC from "../../vue/http";
+
+    export default {
+        props: {
+
+        },
+        components: {},
+
+        data() {
+            return {
+                token: '',
+                plans: [],
+                planForm: null,
+            }
+        },
+
+        created() {
+            this.reload();
+            this.plans = Slc.plans;
+            this.planForm = new SlcForm({
+                stripe_plan: Slc.user.subscription[0].stripe_plan,
+            });
+        },
+
+        watch: {
+
+        },
+
+        methods: {
+
+            reload() {
+                let self = this;
+                SLC.get(laroute.route('api.payment.card'))
+                    .then((response) => {
+                        console.log('get Card ', response.data[0]);
+                        self.card = response.data[0];
+                    });
+            },
+
+            getToken(){
+
+                let number = this.userForm.number;
+                this.userForm.number = number.replace(/\s/g, "");
+
+                const uri = laroute.route('api.payment.token');
+                SLC.post(uri, this.userForm).then((response) => {
+                    console.log('Get Token response', response.id);
+                    this.userForm.source = response.id;
+                });
+
+            },
+
+            showPlanFeatures(plan){
+                this.planForm.stripe_plan = plan.id;
+                console.log('showPlanFeatures ', plan);
+            },
+
+            choosePlan(plan){
+                this.planForm.stripe_plan = plan.id;
+                console.log('choosePlan ', plan.id);
+            },
+
+            deleteSubscription(){
+                SLC.get(laroute.route("api.payment.delete.card"))
+                    .then((response) => {
+                        console.log('Subscription Deleted',response);
+                    });
+            },
+
+            updateSubscription(){
+                this.planForm.busy = true;
+                SLC.get(laroute.route("api.payment.update.subscription",{plan: this.planForm.stripe_plan}))
+                    .then((response) => {
+                        console.log('Subscription Updated',response);
+                        this.planForm.busy = false;
+                    });
+            },
+        }
+    }
+</script>

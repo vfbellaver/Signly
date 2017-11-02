@@ -67,7 +67,7 @@ class RegisterController extends Controller
             "data" => $data,
         ];
 
-        return $response;
+        return view('login',compact('response'));
     }
 
     public function invitation($token)

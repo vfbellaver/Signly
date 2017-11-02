@@ -23,10 +23,6 @@ class CardsCreateRequest extends FormRequest
         return [
             'source' => 'required',
             'owner' => 'required',
-            'exp_month' => 'required',
-            'exp_year' => 'required',
-            'number' => 'required',
-            'address_zip' => 'required',
         ];
     }
 

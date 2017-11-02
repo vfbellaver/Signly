@@ -69,15 +69,15 @@
                                 <div id="tab-subscription" class="tab-pane">
                                     <div class="panel-body">
                                         <ul>
-                                            <li>Update subscription (change plan)</li>
-                                            <li>Cancel subscription</li>
+                                            <team-subscription></team-subscription>
                                         </ul>
                                     </div>
                                 </div>
                                 <div id="tab-payment-method" class="tab-pane">
                                     <div class="panel-body">
                                         <ul>
-                                            <team-card></team-card>
+                                            <!--<team-card></team-card>-->
+                                            <team-card-stripe></team-card-stripe>
                                         </ul>
                                     </div>
                                 </div>
@@ -112,6 +112,8 @@
     import TeamList from './team-list';
     import TeamForm from './team-form';
     import TeamCard from './team-card';
+    import TeamSubscription from './team-subscription';
+    import TeamCardStripe from './team-card-stripe';
 
     export default {
 
@@ -120,6 +122,8 @@
             TeamList,
             TeamForm,
             TeamCard,
+            TeamSubscription,
+            TeamCardStripe,
         },
 
         data() {

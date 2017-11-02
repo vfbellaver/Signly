@@ -57,12 +57,13 @@ class PaymentController extends Controller
     {
         $user = User::query()->find(auth()->id());
         $user->subscription('main')->swap($plan);
-        $response = [
+
+        return [
+
             'message' => "Plan updated with successful",
             'data' => $plan
         ];
 
-        return $response;
     }
 
     public function deleteSubscription()
