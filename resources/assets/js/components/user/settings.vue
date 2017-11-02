@@ -10,7 +10,7 @@
             <div class="container-fluid">
                 <div class="col-lg-12">
                     <div class="tabs-container">
-                        <h1>Team Settings</h1>
+                        <h1>Profile Settings  <i class=""></i></h1>
                         <div class="tabs-left">
                             <ul class="nav nav-tabs">
                                 <li class="active">
@@ -31,14 +31,12 @@
                                     <div class="panel-body">
                                         <div class="ibox">
                                             <div class="ibox-title">
-                                                <h5>Update Your Profile  <i class="fa fa-user"></i></h5>
+                                                <h5>Update Your Profile</h5>
                                             </div>
                                             <div class="ibox-content">
                                                 <form-submit v-model="form" @submit="save" class="wizard-big wizard clearfix">
                                                     <div class="content clearfix">
-                                                        <fieldset id="form-p-0" role="tabpanel"
-                                                                  aria-labelledby="form-h-0" class="body current"
-                                                                  aria-hidden="false">
+                                                        <fieldset>
                                                             <div class="row">
                                                                 <div class="col-lg-8">
                                                                     <form-group :form="form" field="name">
