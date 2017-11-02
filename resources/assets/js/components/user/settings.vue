@@ -34,7 +34,8 @@
                                                 <h5>Update Your Profile</h5>
                                             </div>
                                             <div class="ibox-content">
-                                                <form-submit v-model="form" @submit="save" class="wizard-big wizard clearfix">
+                                                <form-submit v-model="form" @submit="save"
+                                                             class="wizard-big wizard clearfix">
                                                     <div class="content clearfix">
                                                         <fieldset>
                                                             <div class="row">
@@ -46,17 +47,21 @@
                                                                     </form-group>
                                                                     <form-group :form="form" field="email">
                                                                         <input-label for="email">Email: </input-label>
-                                                                        <input-email v-model="form.email" id="email" name="email"/>
+                                                                        <input-email v-model="form.email" id="email"
+                                                                                     name="email"/>
                                                                     </form-group>
+                                                                    <hr>
                                                                     <div>
-                                                                        <button type="submit" class="btn btn-primary">Update Profile
+                                                                        <button type="submit" class="btn btn-primary">
+                                                                            Update Profile
                                                                         </button>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-lg-4">
                                                                     <div class="text-center">
                                                                         <form-group :form="form" field="photo">
-                                                                            <image-upload v-model="form.photo_url" id="photo"
+                                                                            <image-upload v-model="form.photo_url"
+                                                                                          id="photo"
                                                                                           name="photo"></image-upload>
                                                                         </form-group>
                                                                     </div>
@@ -67,6 +72,46 @@
                                                 </form-submit>
                                             </div>
                                         </div>
+                                        <div class="ibox" style="background-color: #00A5E3">
+                                            <div class="col-lg-4" style="padding-left: 0px">
+                                                <div class="ibox-title">
+                                                    <h5>Update Your Profile</h5>
+                                                </div>
+                                                <div class="ibox-content">
+                                                    <form-group :form="form" field="photo">
+                                                        <img-upload v-model="form.photo_url"
+                                                                      id="photo"
+                                                                      name="photo"></img-upload>
+                                                    </form-group>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-8" style="padding-right: 0px; margin-bottom: 0">
+                                                <div class="ibox-title">
+                                                    <h5>Update Your Profile</h5>
+                                                </div>
+                                                <div class="ibox-content" >
+                                                    <form-group :form="form" field="name">
+                                                        <input-label for="name">Name: </input-label>
+                                                        <input-text v-model="form.name" id="name"
+                                                                    name="name"></input-text>
+                                                    </form-group>
+                                                    <form-group :form="form" field="email">
+                                                        <input-label for="email">Email: </input-label>
+                                                        <input-email v-model="form.email" id="email"
+                                                                     name="email"/>
+                                                    </form-group>
+                                                    <hr>
+                                                    <div>
+                                                        <button type="submit" class="btn btn-primary">
+                                                            Update Profile
+                                                        </button>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            teste
+                                        </div>
+
                                     </div>
                                 </div>
                                 <div id="tab-security" class="tab-pane">
@@ -124,17 +169,28 @@
     .image-upload {
         border: none;
     }
+
     .ibox {
         clear: none;
         margin-top: 0;
     }
-    .ibox-content{
+
+    .ibox-content {
         clear: none;
     }
-    .panel-body{
-        padding:0 0 0 15px;
+
+    .panel-body {
+        padding: 0 0 0 20px;
         border: solid;
     }
+    .box-photo{
+        padding-left: 0;
+    }
+    .box-user-settings {
+       padding-right: 0;
+        min-height: 357px;
+    }
+
     .tabs-container .tabs-left >
     .nav-tabs .active > a, .tabs-container
     .tabs-left > .nav-tabs .active > a:hover,
@@ -155,7 +211,11 @@
     }
 </style>
 <script>
+    import ImgUpload from './../shared/Inputs/ImageUpload2'
     export default {
+        components :{
+          ImgUpload,
+        },
         data() {
             return {
                 form: null,

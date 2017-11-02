@@ -1,5 +1,5 @@
 <template>
-
+    <div class="tabs-container">
         <h1>Profile Settings</h1>
         <div class="tabs-left">
             <ul class="nav nav-tabs">
@@ -13,12 +13,6 @@
                     <a data-toggle="tab" href="#tab-security" aria-expanded="false">
                         <i class="fa fa-fw fa-btn fa-lock"></i>
                         Security
-                    </a>
-                </li>
-                <li>
-                    <a data-toggle="tab" href="#tab-user-profile-two" aria-expanded="true">
-                        <i class="fa fa-fw fa-btn fa-edit"></i>
-                        User profile 2
                     </a>
                 </li>
             </ul>
@@ -110,42 +104,8 @@
                 </div>
             </div>
         </div>
-
+    </div>
 </template>
-<style lang="scss" scoped="scoped">
-    .image-upload {
-        border: none;
-    }
-    .ibox {
-        clear: none;
-        margin-top: 0;
-    }
-    .ibox-content{
-        clear: none;
-    }
-    .panel-body{
-        padding:0 0 0 15px;
-        border: solid;
-    }
-    .tabs-container .tabs-left >
-    .nav-tabs .active > a, .tabs-container
-    .tabs-left > .nav-tabs .active > a:hover,
-    .tabs-container .tabs-left > .nav-tabs
-    .active > a:focus {
-        border-left: 4px solid #53abd3;
-        background-color: white;
-    }
-
-    .tabs-container .tabs-left
-    .tab-pane .panel-body,
-    .tabs-container .tabs-right
-    .tab-pane .panel-body {
-        border-top: 1px solid #f3f3f5;
-        border-color: #f3f3f5;
-        background-color: #f3f3f5;
-
-    }
-</style>
 <script>
     export default {
 
