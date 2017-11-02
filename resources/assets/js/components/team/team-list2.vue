@@ -24,20 +24,26 @@
                     <div class="tab-content">
                         <div id="tab-1" class="tab-pane active">
                             <div class="slimScrollDiv"
-                                 style="position: relative; overflow: hidden; width: auto; height: 100%;">
-                                <div class="full-height-scroll" style="overflow: hidden; width: auto; height: 100%;">
+                                 style="position: relative; overflow: hidden; width: auto; height: 200px;">
+                                <div class="full-height-scroll" style="overflow: hidden; width: auto; height: 200px;">
                                     <div class="table-responsive">
                                         <table class="table table-striped table-hover">
                                             <tbody>
-                                            <tr>
-                                                <td class="client-avatar"><img alt="image" src="img/a2.jpg"></td>
-                                                <td><a data-toggle="tab" href="#contact-1" class="client-link"
-                                                       aria-expanded="true">Anthony Jackson</a></td>
-                                                <td> Tellus Institute</td>
+                                            <tr v-for="( user, index ) in users">
+                                                <td class="client-avatar"><img alt="image" :src="user.photo_url"></td>
+                                                <td v-if="boss.email === user.email">{{user.name + "  "}}<strong>you</strong></td>
+                                                <td v-else>{{user.name}}</td>
                                                 <td class="contact-type"><i class="fa fa-envelope"> </i></td>
-                                                <td> gravida@rbisit.com</td>
-                                                <td class="client-status"><span
-                                                        class="label label-primary">Active</span></td>
+                                                <td> {{user.email}}</td>
+                                                <td class="client-status">
+                                                    <btn-danger
+                                                            @click.native="destroy(user)"
+                                                            :disabled="user.destroyForm.busy"
+                                                            size="xs">
+                                                        <spinner v-if="user.destroyForm.busy"></spinner>
+                                                        <icon icon="trash" v-else></icon>
+                                                    </btn-danger>
+                                                </td>
                                             </tr>
                                             </tbody>
                                         </table>

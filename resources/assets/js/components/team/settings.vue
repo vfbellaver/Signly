@@ -50,7 +50,7 @@
                                     </a>
                                 </li>
                             </ul>
-                            <div class="tab-content ">
+                            <div class="tab-content">
                                 <div id="tab-team-profile" class="tab-pane active">
                                     <div class="panel-body">
                                         <ul>
@@ -62,7 +62,7 @@
                                     <div class="panel-body">
                                         <ul>
                                             <team-membership></team-membership>
-                                            <team-list></team-list>
+                                            <team-list-2></team-list-2>
                                         </ul>
                                     </div>
                                 </div>
@@ -104,12 +104,29 @@
     </div>
 </template>
 <style>
+    .tabs-container .tabs-left >
+    .nav-tabs .active > a, .tabs-container
+    .tabs-left > .nav-tabs .active > a:hover,
+    .tabs-container .tabs-left > .nav-tabs
+    .active > a:focus {
+        border-left: 4px solid cornflowerblue;
+        background-color: white;
+    }
 
+    .tabs-container .tabs-left
+    .tab-pane .panel-body,
+    .tabs-container .tabs-right
+    .tab-pane .panel-body {
+        border-top: 1px solid #f3f3f5;
+        border-color: #f3f3f5;
+        background-color: #f3f3f5;
+
+    }
 </style>
 <script>
 
     import TeamMembership from './team-membership';
-    import TeamList from './team-list';
+    import TeamList2 from './team-list2';
     import TeamForm from './team-form';
     import TeamCard from './team-card';
     import TeamSubscription from './team-subscription';
@@ -119,7 +136,7 @@
 
         components: {
             TeamMembership,
-            TeamList,
+            TeamList2,
             TeamForm,
             TeamCard,
             TeamSubscription,
