@@ -34,82 +34,77 @@
                                                 <h5>Update Your Profile</h5>
                                             </div>
                                             <div class="ibox-content">
-                                                <form-submit v-model="form" @submit="save"
-                                                             class="wizard-big wizard clearfix">
-                                                    <div class="content clearfix">
-                                                        <fieldset>
-                                                            <div class="row">
-                                                                <div class="col-lg-8">
-                                                                    <form-group :form="form" field="name">
-                                                                        <input-label for="name">Name: </input-label>
-                                                                        <input-text v-model="form.name" id="name"
-                                                                                    name="name"></input-text>
-                                                                    </form-group>
-                                                                    <form-group :form="form" field="email">
-                                                                        <input-label for="email">Email: </input-label>
-                                                                        <input-email v-model="form.email" id="email"
-                                                                                     name="email"/>
-                                                                    </form-group>
-                                                                    <hr>
-                                                                    <div>
-                                                                        <button type="submit" class="btn btn-primary">
-                                                                            Update Profile
-                                                                        </button>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-lg-4">
-                                                                    <div class="text-center">
-                                                                        <form-group :form="form" field="photo">
-                                                                            <image-upload v-model="form.photo_url"
-                                                                                          id="photo"
-                                                                                          name="photo"></image-upload>
-                                                                        </form-group>
-                                                                    </div>
-                                                                </div>
+                                                <form-submit v-model="form" @submit="save">
+                                                    <div class="row">
+                                                        <div class="col-lg-8">
+                                                            <form-group :form="form" field="name">
+                                                                <input-label for="name">Name: </input-label>
+                                                                <input-text v-model="form.name" id="name"
+                                                                            name="name"></input-text>
+                                                            </form-group>
+                                                            <form-group :form="form" field="email">
+                                                                <input-label for="email">Email: </input-label>
+                                                                <input-email v-model="form.email" id="email"
+                                                                             name="email"/>
+                                                            </form-group>
+                                                            <hr>
+                                                            <div>
+                                                                <button type="submit" class="btn btn-primary">
+                                                                    Update Profile
+                                                                </button>
                                                             </div>
-                                                        </fieldset>
+                                                        </div>
+                                                        <div class="col-lg-4">
+                                                            <div class="text-center">
+                                                                <form-group :form="form" field="photo">
+                                                                    <image-upload v-model="form.photo_url"
+                                                                                  id="photo"
+                                                                                  name="photo"></image-upload>
+                                                                </form-group>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </form-submit>
                                             </div>
                                         </div>
-                                        <div class="ibox" style="background-color: #00A5E3">
-                                            <div class="col-lg-4" style="padding-left: 0px">
-                                                <div class="ibox-title">
-                                                    <h5>Update Your Profile</h5>
-                                                </div>
-                                                <div class="ibox-content">
-                                                    <form-group :form="form" field="photo">
-                                                        <img-upload v-model="form.photo_url"
-                                                                      id="photo"
-                                                                      name="photo"></img-upload>
-                                                    </form-group>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-8" style="padding-right: 0px; margin-bottom: 0">
-                                                <div class="ibox-title">
-                                                    <h5>Update Your Profile</h5>
-                                                </div>
-                                                <div class="ibox-content" >
-                                                    <form-group :form="form" field="name">
-                                                        <input-label for="name">Name: </input-label>
-                                                        <input-text v-model="form.name" id="name"
-                                                                    name="name"></input-text>
-                                                    </form-group>
-                                                    <form-group :form="form" field="email">
-                                                        <input-label for="email">Email: </input-label>
-                                                        <input-email v-model="form.email" id="email"
-                                                                     name="email"/>
-                                                    </form-group>
-                                                    <hr>
-                                                    <div>
-                                                        <button type="submit" class="btn btn-primary">
-                                                            Update Profile
-                                                        </button>
+                                        <div class="ibox">
+                                            <form-submit v-model="form" @submit="save">
+                                                <div class="col-lg-3" style="padding-left: 0px">
+                                                    <div class="ibox-title">
+                                                        <h5>Update Your Profile</h5>
+                                                    </div>
+                                                    <div class="ibox-content">
+
+                                                        <form-group :form="form" field="photo">
+                                                            <image-upload v-model="form.photo_url"
+                                                                          id="photo"
+                                                                          name="photo"></image-upload>
+                                                        </form-group>
                                                     </div>
                                                 </div>
-
-                                            </div>
-                                            teste
+                                                <div class="col-lg-9" style="padding-right: 0px;">
+                                                    <div class="ibox-title">
+                                                        <h5>Update Profile Photo</h5>
+                                                    </div>
+                                                    <div class="ibox-content" style="min-height: 262px">
+                                                        <form-group :form="form" field="name">
+                                                            <input-label for="name">Name: </input-label>
+                                                            <input-text v-model="form.name" id="name"
+                                                                        name="name"></input-text>
+                                                        </form-group>
+                                                        <form-group :form="form" field="email">
+                                                            <input-label for="email">Email: </input-label>
+                                                            <input-email v-model="form.email" id="email" name="email"/>
+                                                        </form-group>
+                                                        <hr>
+                                                        <div>
+                                                            <button type="submit" class="btn btn-primary">
+                                                                Update Profile
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form-submit>
                                         </div>
 
                                     </div>
@@ -121,38 +116,43 @@
                                                 <h5>Update Your Password <i class="fa fa-lock"></i></h5>
                                             </div>
                                             <div class="ibox-content">
-                                                <form id="form" action="#" class="wizard-big wizard clearfix"
-                                                      role="application" novalidate="novalidate">
+                                                <form-submit v-model="formPw" @submit="updatePw">
                                                     <div class="content clearfix">
-                                                        <fieldset id="form-p-0" role="tabpanel"
-                                                                  aria-labelledby="form-h-0" class="body current"
-                                                                  aria-hidden="false">
-                                                            <div class="row">
-                                                                <div class="col-lg-12">
-                                                                    <div class="form-group">
-                                                                        <label>Username *</label>
-                                                                        <input id="userName" name="userName" type="text"
-                                                                               class="form-control required"
-                                                                               aria-required="true">
-                                                                    </div>
-                                                                    <div class="form-group">
-                                                                        <label>Password *</label>
-                                                                        <input id="password" name="password" type="text"
-                                                                               class="form-control required"
-                                                                               aria-required="true">
-                                                                    </div>
-                                                                    <div class="form-group">
-                                                                        <label>Confirm Password *</label>
-                                                                        <input id="confirm" name="confirm" type="text"
-                                                                               class="form-control required"
-                                                                               aria-required="true">
-                                                                    </div>
-                                                                </div>
-
+                                                        <div class="col-lg-12">
+                                                            <form-group :form="formPw" field="password">
+                                                                <input-label for="password">Current password:
+                                                                </input-label>
+                                                                <input-text v-model="formPw.password"
+                                                                            id="password"
+                                                                            name="password"
+                                                                            type="password"></input-text>
+                                                            </form-group>
+                                                            <form-group :form="formPw" field="new_password">
+                                                                <input-label for="new_password">New password:
+                                                                </input-label>
+                                                                <input-text v-model="formPw.new_password"
+                                                                            id="new_password"
+                                                                            name="new_password"
+                                                                            type="password"></input-text>
+                                                            </form-group>
+                                                            <form-group :form="formPw" field="confirm_password">
+                                                                <input-label for="confirm_password">Confirm password:
+                                                                </input-label>
+                                                                <input-text v-model="formPw.confirm_password"
+                                                                            id="confirm_password"
+                                                                            name="confirm_password"
+                                                                            type="password"></input-text>
+                                                            </form-group>
+                                                            <hr>
+                                                            <div>
+                                                                <button type="submit" class="btn btn-primary">
+                                                                    Update Profile
+                                                                </button>
                                                             </div>
-                                                        </fieldset>
+                                                        </div>
                                                     </div>
-                                                </form>
+
+                                                </form-submit>
                                             </div>
                                         </div>
                                     </div>
@@ -166,9 +166,6 @@
     </div>
 </template>
 <style lang="scss" scoped="scoped">
-    .image-upload {
-        border: none;
-    }
 
     .ibox {
         clear: none;
@@ -183,11 +180,13 @@
         padding: 0 0 0 20px;
         border: solid;
     }
-    .box-photo{
+
+    .box-photo {
         padding-left: 0;
     }
+
     .box-user-settings {
-       padding-right: 0;
+        padding-right: 0;
         min-height: 357px;
     }
 
@@ -211,11 +210,8 @@
     }
 </style>
 <script>
-    import ImgUpload from './../shared/Inputs/ImageUpload2'
+
     export default {
-        components :{
-          ImgUpload,
-        },
         data() {
             return {
                 form: null,
@@ -241,10 +237,10 @@
             },
             updatePw(){
                 const uri = laroute.route('api.user.update.password', {user: Slc.user.id});
-
+                console.log('Update password',this.formPw);
                 Slc.put(uri, this.formPw).then((response) => {
                     console.log("Password Update", response);
-                })
+                });
             },
         }
     }
