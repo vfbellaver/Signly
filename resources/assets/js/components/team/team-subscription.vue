@@ -9,7 +9,7 @@
                 <tr v-for="(plan , index ) in plans">
                     <td><h2><strong>{{plan.name}}</strong></h2></td>
                     <td>
-                        <button class="btn btn-default" type="button" @click="showPlanFeatures(plan)">
+                        <button class="btn btn-default" type="button" @click="showFeatures(plan)">
                             <i class="fa fa-btn fa-star-o"></i>
                             Plan Features
                         </button>
@@ -41,6 +41,7 @@
             </btn-danger>
             <div style="clear:both"></div>
         </div>
+        <plan-modal :features="features" ref="terms"></plan-modal>
     </div>
 </template>
 
@@ -60,16 +61,20 @@
 <script>
 
     import * as SLC from "../../vue/http";
+    import PlanModal from './plan-modal'
 
     export default {
         props: {},
-        components: {},
+        components: {
+            PlanModal
+        },
 
         data() {
             return {
                 token: '',
                 plans: [],
                 planForm: null,
+                features: null,
             }
         },
 
@@ -107,9 +112,9 @@
 
             },
 
-            showPlanFeatures(plan){
-                this.planForm.stripe_plan = plan.id;
-                console.log('showPlanFeatures ', plan);
+            showFeatures(plan){
+                this.features = plan.features;
+                this.$refs.terms.show();
             },
 
             choosePlan(plan){

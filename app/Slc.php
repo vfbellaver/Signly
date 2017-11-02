@@ -29,9 +29,15 @@ class Slc
                     'trial_days' => 30,
                     'price' => 10,
                     'features' => [
-                        'Feature 1',
-                        'Feature 2',
-                        'Feature 3',
+                        'users' => 'Custom',
+                        'billboards' => 'Unlimited',
+                        'pdfs' => 'Custom',
+                        'proposals' => 'Custom',
+                        'contracts' => 'Custom',
+                        'scheduler' => 'Yes',
+                        'whiteLabel' => 'Yes',
+                        'valueMonthly' => 'Call For Quote',
+                        'valueAnnual' => 'Call For Quote',
                     ]
                 ],
                 [
@@ -41,9 +47,15 @@ class Slc
                     'trial_days' => 30,
                     'price' => 20,
                     'features' => [
-                        'Feature 1',
-                        'Feature 2',
-                        'Feature 3',
+                        'users' => '10',
+                        'billboards' => 'Unlimited',
+                        'pdfs' => '100',
+                        'proposals' => '100',
+                        'contracts' => '20',
+                        'scheduler' => 'Yes',
+                        'whiteLabel' => 'Yes',
+                        'valueMonthly' => '499',
+                        'valueAnnual' => '449',
                     ]
                 ],
                 [
@@ -53,9 +65,15 @@ class Slc
                     'trial_days' => 30,
                     'price' => 30,
                     'features' => [
-                        'Feature 1',
-                        'Feature 2',
-                        'Feature 3',
+                        'users' => '5',
+                        'billboards' => 'Unlimited',
+                        'pdfs' => '50',
+                        'proposals' => '50',
+                        'contracts' => '10',
+                        'scheduler' => '-',
+                        'whiteLabel' => '-',
+                        'valueMonthly' => '399',
+                        'valueAnnual' => '349',
                     ]
                 ],
                 [
@@ -65,9 +83,15 @@ class Slc
                 'trial_days' => 30,
                 'price' => 30,
                 'features' => [
-                    'Feature 1',
-                    'Feature 2',
-                    'Feature 3',
+                    'users' => '1',
+                    'billboards' => '25',
+                    'pdfs' => '20',
+                    'proposals' => '-',
+                    'contracts' => '-',
+                    'scheduler' => '-',
+                    'whiteLabel' => '-',
+                    'valueMonthly' => '299',
+                    'valueAnnual' => '449',
                 ]
             ]
             ]
@@ -80,3 +104,4 @@ class Slc
         return auth()->user()->toArray();
     }
 }
+

@@ -65,7 +65,7 @@
                 <div class="clear"></div>
             </div>
         </div>
-        <plan-modal @Step2="step2" :stripe-id="stripeId" :id="id" :title="title" :term="term" ref="terms"></plan-modal>
+        <plan-modal :features="features" ref="terms"></plan-modal>
         <div class="clear"></div>
     </div>
 </template>
@@ -78,7 +78,7 @@
 
     import ContentPlan from "./content-plan";
     import ModalForm from '../shared/Mixins/ModalForm';
-    import PlanModal from './plan-modal';
+    import PlanModal from '../team/plan-modal';
 
     export default {
 
