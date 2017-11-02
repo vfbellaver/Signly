@@ -29,92 +29,87 @@
                             <div class="tab-content ">
                                 <div id="tab-user-profile" class="tab-pane active">
                                     <div class="panel-body">
-                                        <ul>
-                                            <form-submit v-model="form" @submit="save">
-                                                <column size="4">
-                                                    <h3><strong>Profile Photo</strong></h3>
-                                                    <hr>
-                                                    <form-group :form="form" field="photo">
-                                                        <image-upload v-model="form.photo_url" id="photo"
-                                                                      name="photo"></image-upload>
-                                                    </form-group>
-                                                </column>
-
-                                                <column size="8">
-                                                    <h3><strong>Contact Information</strong></h3>
-                                                    <hr>
-
-                                                    <form-group :form="form" field="name">
-                                                        <input-label for="name">Name: </input-label>
-                                                        <input-text v-model="form.name" id="name"
-                                                                    name="name"></input-text>
-                                                    </form-group>
-                                                    <form-group :form="form" field="email">
-                                                        <input-label for="email">Email: </input-label>
-                                                        <input-email v-model="form.email" id="email" name="email"/>
-                                                    </form-group>
-                                                    <div>
-                                                        <button type="submit" class="btn btn-primary">Update Profile
-                                                        </button>
+                                        <div class="ibox">
+                                            <div class="ibox-title">
+                                                <h5>Update Your Profile  <i class="fa fa-user"></i></h5>
+                                            </div>
+                                            <div class="ibox-content">
+                                                <form-submit v-model="form" @submit="save" class="wizard-big wizard clearfix">
+                                                    <div class="content clearfix">
+                                                        <fieldset id="form-p-0" role="tabpanel"
+                                                                  aria-labelledby="form-h-0" class="body current"
+                                                                  aria-hidden="false">
+                                                            <div class="row">
+                                                                <div class="col-lg-8">
+                                                                    <form-group :form="form" field="name">
+                                                                        <input-label for="name">Name: </input-label>
+                                                                        <input-text v-model="form.name" id="name"
+                                                                                    name="name"></input-text>
+                                                                    </form-group>
+                                                                    <form-group :form="form" field="email">
+                                                                        <input-label for="email">Email: </input-label>
+                                                                        <input-email v-model="form.email" id="email" name="email"/>
+                                                                    </form-group>
+                                                                    <div>
+                                                                        <button type="submit" class="btn btn-primary">Update Profile
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-4">
+                                                                    <div class="text-center">
+                                                                        <form-group :form="form" field="photo">
+                                                                            <image-upload v-model="form.photo_url" id="photo"
+                                                                                          name="photo"></image-upload>
+                                                                        </form-group>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </fieldset>
                                                     </div>
-                                                </column>
-                                            </form-submit>
-                                        </ul>
+                                                </form-submit>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div id="tab-security" class="tab-pane">
                                     <div class="panel-body">
-                                        <div class="col-lg-12">
-                                            <div class="ibox float-e-margins">
-                                                <div class="ibox-title">
-                                                    <h3>Update Password</h3>
-                                                </div>
-                                                <div class="ibox-content">
-                                                    <div class="col-lg-8">
+                                        <div class="ibox">
+                                            <div class="ibox-title">
+                                                <h5>Update Your Password <i class="fa fa-lock"></i></h5>
+                                            </div>
+                                            <div class="ibox-content">
+                                                <form id="form" action="#" class="wizard-big wizard clearfix"
+                                                      role="application" novalidate="novalidate">
+                                                    <div class="content clearfix">
+                                                        <fieldset id="form-p-0" role="tabpanel"
+                                                                  aria-labelledby="form-h-0" class="body current"
+                                                                  aria-hidden="false">
+                                                            <div class="row">
+                                                                <div class="col-lg-12">
+                                                                    <div class="form-group">
+                                                                        <label>Username *</label>
+                                                                        <input id="userName" name="userName" type="text"
+                                                                               class="form-control required"
+                                                                               aria-required="true">
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label>Password *</label>
+                                                                        <input id="password" name="password" type="text"
+                                                                               class="form-control required"
+                                                                               aria-required="true">
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label>Confirm Password *</label>
+                                                                        <input id="confirm" name="confirm" type="text"
+                                                                               class="form-control required"
+                                                                               aria-required="true">
+                                                                    </div>
+                                                                </div>
 
-                                                        <form-submit v-model="formPw" @submit="updatePw">
-                                                            <div class="form-group">
-                                                                <label>Current Password *</label>
-                                                                <input id="old_password" name="old_password"
-                                                                       type="password"
-                                                                       class="form-control required"
-                                                                       aria-required="true"
-                                                                       placeholder="Current Password"
-                                                                       v-model="formPw.old_password">
                                                             </div>
-                                                            <div class="form-group">
-                                                                <label>New Password *</label>
-                                                                <input id="new_password" name="new_password"
-                                                                       type="password"
-                                                                       class="form-control required"
-                                                                       aria-required="true"
-                                                                       placeholder="New Password"
-                                                                       v-model="formPw.new_password">
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label>Confirm new Password *</label>
-                                                                <input id="confirm" name="confirm" type="password"
-                                                                       class="form-control required"
-                                                                       aria-required="true"
-                                                                       placeholder="Confirm Password"
-                                                                       v-model="formPw.confirm">
-                                                            </div>
-                                                            <div>
-                                                                <button type="submit" class="btn btn-primary">
-                                                                    Update Password
-                                                                </button>
-                                                            </div>
-                                                        </form-submit>
+                                                        </fieldset>
                                                     </div>
-                                                </div>
-                                                <div class="col-lg-4">
-                                                    <div class="text-center">
-                                                        <div style="margin-top: 20px">
-                                                            <i class="fa fa-expeditedssl"
-                                                               style="font-size: 170px;color: #f0f0f0 "></i>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                </form>
                                             </div>
                                         </div>
                                     </div>
@@ -128,17 +123,38 @@
     </div>
 </template>
 <style lang="scss" scoped="scoped">
-
+    .image-upload {
+        border: none;
+    }
     .ibox {
+        clear: none;
         margin-top: 0;
     }
-
-    ,
-    .ibox-content {
-        padding-left: 0;
+    .ibox-content{
+        clear: none;
+    }
+    .panel-body{
+        padding:0 0 0 15px;
+        border: solid;
+    }
+    .tabs-container .tabs-left >
+    .nav-tabs .active > a, .tabs-container
+    .tabs-left > .nav-tabs .active > a:hover,
+    .tabs-container .tabs-left > .nav-tabs
+    .active > a:focus {
+        border-left: 4px solid #53abd3;
+        background-color: white;
     }
 
+    .tabs-container .tabs-left
+    .tab-pane .panel-body,
+    .tabs-container .tabs-right
+    .tab-pane .panel-body {
+        border-top: 1px solid #f3f3f5;
+        border-color: #f3f3f5;
+        background-color: #f3f3f5;
 
+    }
 </style>
 <script>
     export default {
