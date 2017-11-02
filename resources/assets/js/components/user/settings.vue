@@ -32,17 +32,16 @@
                                         <ul>
                                             <form-submit v-model="form" @submit="save">
                                                 <column size="4">
-                                                    <h3>Profile photo:</h3>
+                                                    <h3><strong>Profile Photo</strong></h3>
                                                     <hr>
                                                     <form-group :form="form" field="photo">
                                                         <image-upload v-model="form.photo_url" id="photo"
                                                                       name="photo"></image-upload>
                                                     </form-group>
-                                                    <hr>
                                                 </column>
 
                                                 <column size="8">
-                                                    <h3>Contact Information</h3>
+                                                    <h3><strong>Contact Information</strong></h3>
                                                     <hr>
 
                                                     <form-group :form="form" field="name">
@@ -54,44 +53,70 @@
                                                         <input-label for="email">Email: </input-label>
                                                         <input-email v-model="form.email" id="email" name="email"/>
                                                     </form-group>
-                                                    <hr>
                                                     <div>
                                                         <button type="submit" class="btn btn-primary">Update Profile
                                                         </button>
                                                     </div>
-                                                    <div>
-                                                    </div>
                                                 </column>
                                             </form-submit>
-
                                         </ul>
                                     </div>
                                 </div>
                                 <div id="tab-security" class="tab-pane">
                                     <div class="panel-body">
-                                        <ul>
-                                            <form-submit v-model="form" @submit="updatePw">
-                                                <h3>Update your Password</h3>
-                                                <hr>
-                                                <div class="form-group">
-                                                    <label for="password"
-                                                           class="col-md-4 control-label">Password</label>
-                                                    <input id="password" type="password" class="form-control"
-                                                           name="password" v-model="form.password">
+                                        <div class="col-lg-12">
+                                            <div class="ibox float-e-margins">
+                                                <div class="ibox-title">
+                                                    <h3>Update Password  <i class="fa fa-fw fa-btn fa-lock"></i></h3>
+                                                </div>
+                                                <div class="ibox-content">
+                                                    <form-submit v-model="formPw" @submit="updatePw">
+                                                        <div class="col-lg-8">
+                                                            <div class="form-group">
+                                                                <label>Current Password *</label>
+                                                                <input id="old_password" name="old_password"
+                                                                       type="password"
+                                                                       class="form-control required"
+                                                                       aria-required="true"
+                                                                       placeholder="Current Password"
+                                                                       v-model="formPw.old_password">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>New Password *</label>
+                                                                <input id="new_password" name="new_password"
+                                                                       type="password"
+                                                                       class="form-control required"
+                                                                       aria-required="true"
+                                                                       placeholder="New Password"
+                                                                       v-model="formPw.new_password">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Confirm new Password *</label>
+                                                                <input id="confirm" name="confirm" type="password"
+                                                                       class="form-control required"
+                                                                       aria-required="true"
+                                                                       placeholder="Confirm Password"
+                                                                       v-model="formPw.confirm">
+                                                            </div>
+                                                            <div>
+                                                                <button type="submit" class="btn btn-primary">
+                                                                    Update Password
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-4">
+                                                            <div class="text-center">
+                                                                <div style="margin-top: 20px">
+                                                                    <i class="fa fa-expeditedssl"
+                                                                       style="font-size: 180px;color: #f0f0f0 "></i>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </form-submit>
                                                 </div>
 
-                                                <div class="form-group">
-                                                    <label for="password-confirm" class="col-md-4 control-label">Confirm Password</label>
-                                                    <input id="password-confirm" type="password" class="form-control"
-                                                           name="password_confirmation">
-                                                </div>
-                                                <hr>
-                                                <div>
-                                                    <button type="submit" class="btn btn-primary">Update Password
-                                                    </button>
-                                                </div>
-                                            </form-submit>
-                                        </ul>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -103,9 +128,15 @@
     </div>
 </template>
 <style lang="scss" scoped="scoped">
-
-    hr {
-        border-bottom: solid 4px #43A3D0;
+    label {
+        padding: 0;
+    }
+    .ibox {
+        clear: none;
+        margin-top: 0;
+    },
+    .ibox-content {
+        padding-left: 0;
     }
 </style>
 <script>
@@ -113,6 +144,7 @@
         data() {
             return {
                 form: null,
+                formPw: new SlcForm(),
                 pageHeading: {
                     title: 'User Settings',
                     breadcrumb: [
@@ -133,7 +165,11 @@
                 })
             },
             updatePw(){
-                console.log('Update pass!!');
+                const uri = laroute.route('api.user.update.password', {user: Slc.user.id});
+
+                Slc.put(uri, this.formPw).then((response) => {
+                    console.log("Password Update", response);
+                })
             },
         }
     }
