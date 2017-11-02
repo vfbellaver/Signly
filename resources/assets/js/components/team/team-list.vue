@@ -1,29 +1,23 @@
 <template>
     <div>
-        <h2>Team Members</h2>
-        <hr>
-        <div class="table-responsive">
-            <table class="table table-striped table-hover">
-                <tbody>
-                <tr v-for="( user, index ) in users">
-                    <td class="client-avatar"><img alt="image" :src="user.photo_url"></td>
-                    <td v-if="boss.email === user.email">{{user.name + "  "}}<strong>you</strong></td>
-                    <td v-else>{{user.name}}</td>
-                    <td class="contact-type"><i class="fa fa-envelope"> </i></td>
-                    <td> {{user.email}}</td>
-                    <td class="client-status">
-                        <btn-danger
-                                @click.native="destroy(user)"
-                                :disabled="user.destroyForm.busy"
-                                size="xs">
-                            <spinner v-if="user.destroyForm.busy"></spinner>
-                            <icon icon="trash" v-else></icon>
-                        </btn-danger>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
+
+        <tr v-for="( user, index ) in users">
+            <td class="client-avatar"><img alt="image" :src="user.photo_url"></td>
+            <td v-if="boss.email === user.email">{{user.name + "  "}}<strong>you</strong></td>
+            <td v-else>{{user.name}}</td>
+            <td class="contact-type"><i class="fa fa-envelope"> </i></td>
+            <td> {{user.email}}</td>
+            <td class="client-status">
+                <btn-danger
+                        @click.native="destroy(user)"
+                        :disabled="user.destroyForm.busy"
+                        size="xs">
+                    <spinner v-if="user.destroyForm.busy"></spinner>
+                    <icon icon="trash" v-else></icon>
+                </btn-danger>
+            </td>
+        </tr>
+
     </div>
 </template>
 <style>

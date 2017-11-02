@@ -1,43 +1,60 @@
 <template>
-    <div>
-        <table class="table table-borderless m-b-none" v-cloak="true">
-            <tbody>
-            <tr v-for="(plan , index ) in plans">
-                <td><strong>{{plan.name}}</strong></td>
-                <td>
-                    <button class="btn btn-default" type="button" @click="showPlanFeatures(plan)">
-                        <i class="fa fa-btn fa-star-o"></i>
-                        Plan Features
-                    </button>
-                </td>
-                <td>{{plan.price}} / {{plan.interval}}</td>
-                <td>{{ plan.trial_days }} Day Trial</td>
-                <td class="text-right" style="width: 134px;">
-                    <button
-                            class="select btn btn-primary btn-outline"
-                            :class="{'active': planForm.stripe_plan == plan.id}"
-                            type="button" @click="choosePlan(plan)">
-                        <i v-if="planForm.stripe_plan == plan.id" class="fa fa-check"></i>
-                        Select
-                    </button>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-        <hr>
-        <btn-submit class="select btn btn-success btn-outline pull-right pull-right" @click.native="updateSubscription">
-            <spinner v-if="planForm.busy"></spinner>
-            <span>UPDATE</span>
-        </btn-submit>
-        <btn-danger style="margin-right: 10px" class="select btn btn-danger btn-outline pull-right" @click.native="deleteSubscription">
-            <spinner v-if="planForm.busy"></spinner>
-            <span>CANCEL SUBSCRIPTION</span>
-        </btn-danger>
+    <div class="ibox">
+        <div class="ibox-title">
+            <h5>Subscriptions</h5>
+        </div>
+        <div class="ibox-content">
+            <table class="table table-borderless m-b-none" v-cloak="true">
+                <tbody>
+                <tr v-for="(plan , index ) in plans">
+                    <td><h2><strong>{{plan.name}}</strong></h2></td>
+                    <td>
+                        <button class="btn btn-default" type="button" @click="showPlanFeatures(plan)">
+                            <i class="fa fa-btn fa-star-o"></i>
+                            Plan Features
+                        </button>
+                    </td>
+                    <td>{{plan.price}} / {{plan.interval}}</td>
+                    <td>{{ plan.trial_days }} Day Trial</td>
+                    <td class="text-right" style="width: 134px;">
+                        <button
+                                class="select btn btn-primary btn-outline"
+                                :class="{'active': planForm.stripe_plan == plan.id}"
+                                type="button" @click="choosePlan(plan)">
+                            <i v-if="planForm.stripe_plan == plan.id" class="fa fa-check"></i>
+                            Select
+                        </button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <hr>
+            <btn-submit class="select btn btn-success btn-outline pull-right pull-right"
+                        @click.native="updateSubscription">
+                <spinner v-if="planForm.busy"></spinner>
+                <span>UPDATE</span>
+            </btn-submit>
+            <btn-danger style="margin-right: 10px" class="select btn btn-danger btn-outline pull-right"
+                        @click.native="deleteSubscription">
+                <spinner v-if="planForm.busy"></spinner>
+                <span>CANCEL SUBSCRIPTION</span>
+            </btn-danger>
+            <div style="clear:both"></div>
+        </div>
     </div>
 </template>
 
 <style>
+    .ibox {
+        clear: none;
+        margin-bottom: 60px;
+        margin-top: 0px;
+        padding: 0;
+    }
 
+    .ibox-content {
+        clear: none;
+    }
 </style>
 
 <script>
@@ -45,9 +62,7 @@
     import * as SLC from "../../vue/http";
 
     export default {
-        props: {
-
-        },
+        props: {},
         components: {},
 
         data() {
@@ -66,9 +81,7 @@
             });
         },
 
-        watch: {
-
-        },
+        watch: {},
 
         methods: {
 
@@ -107,15 +120,15 @@
             deleteSubscription(){
                 SLC.get(laroute.route("api.payment.delete.card"))
                     .then((response) => {
-                        console.log('Subscription Deleted',response);
+                        console.log('Subscription Deleted', response);
                     });
             },
 
             updateSubscription(){
                 this.planForm.busy = true;
-                SLC.get(laroute.route("api.payment.update.subscription",{plan: this.planForm.stripe_plan}))
+                SLC.get(laroute.route("api.payment.update.subscription", {plan: this.planForm.stripe_plan}))
                     .then((response) => {
-                        console.log('Subscription Updated',response);
+                        console.log('Subscription Updated', response);
                         this.planForm.busy = false;
                     });
             },

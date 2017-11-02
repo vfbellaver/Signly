@@ -61,7 +61,6 @@
                                 <div id="tab-membership" class="tab-pane">
                                     <div class="panel-body">
                                         <ul>
-                                            <team-membership></team-membership>
                                             <team-list-2></team-list-2>
                                         </ul>
                                     </div>
@@ -109,7 +108,7 @@
     .tabs-left > .nav-tabs .active > a:hover,
     .tabs-container .tabs-left > .nav-tabs
     .active > a:focus {
-        border-left: 4px solid cornflowerblue;
+        border-left: 4px solid #53abd3;
         background-color: white;
     }
 
@@ -120,12 +119,15 @@
         border-top: 1px solid #f3f3f5;
         border-color: #f3f3f5;
         background-color: #f3f3f5;
+    }
 
+    .tabs-container .tabs-left .tab-pane .panel-body,
+    .tabs-container .tabs-right .tab-pane .panel-body {
+        padding-top: 0px;
     }
 </style>
 <script>
 
-    import TeamMembership from './team-membership';
     import TeamList2 from './team-list2';
     import TeamForm from './team-form';
     import TeamCard from './team-card';
@@ -135,7 +137,6 @@
     export default {
 
         components: {
-            TeamMembership,
             TeamList2,
             TeamForm,
             TeamCard,
