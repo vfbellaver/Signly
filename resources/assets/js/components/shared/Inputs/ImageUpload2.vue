@@ -30,17 +30,11 @@
         width: 100%;
         overflow: hidden;
     }
-    .caption {
-        padding: 9px 5px;
-        background: #F7F7F7;
-    }
-    .caption p {
-        margin-bottom: 5px;
-    }
     .thumbnail {
-        height: 190px;
+        height: 250px;
         overflow: hidden;
         padding: 0;
+        border: none;
     }
     .view {
         overflow: hidden;
@@ -69,7 +63,7 @@
         font-size: 17px;
         padding: 3px;
         background: rgba(0, 0, 0, 0.35);
-        margin: 157px 0 0 0;
+        margin: 210px 0 0 0;
     }
     .mask.no-caption .tools {
         margin: 90px 0 0 0;
@@ -105,10 +99,12 @@
     }
     .view-first .mask {
 
-        background-color: rgba(0, 0, 0, 0.5);
         transition: all 0.4s ease-in-out;
     }
     .view-first .tools {
+        width: 225px;
+        margin-right: auto;
+        margin-left: auto;
         transform: translateY(-100px);
         opacity: 0;
         transition: all 0.4s ease-in-out;

@@ -176,29 +176,16 @@
                                     <div class="panel-body">
                                         <form-submit v-model="form" @submit="save">
                                             <div class="ibox">
-                                                <div class="contact-box center-version">
-                                                    <div class="img">
-                                                        <img-upload2 v-model="form.photo_url"
-                                                                      id="photo"
-                                                                      name="photo"></img-upload2>
-                                                    </div>
-                                                    <div class="contact-box-footer ">
-                                                        <form-group :form="form" field="name">
-                                                            <input-label for="name" style="float:left">Name: </input-label>
-                                                            <input-text v-model="form.name" id="name"
-                                                                        name="name"></input-text>
-                                                        </form-group>
-                                                        <form-group :form="form" field="email">
-                                                            <input-label for="email" style="float:left">Email: </input-label>
-                                                            <input-email v-model="form.email" id="email"
-                                                                         name="email"/>
-                                                        </form-group>
-                                                        <div>
-                                                            <button type="submit" class="btn btn-primary">
-                                                                Update Profile
-                                                            </button>
+                                                <div class="ibox-title">
+                                                    <h3>Account Settings</h3>
+                                                </div>
+                                                <div class="ibox-content">
+                                                    <div class="contact-box center-version">
+                                                        <div class="img">
+                                                            <img-upload2 v-model="form.photo_url"
+                                                                         id="photo"
+                                                                         name="photo"></img-upload2>
                                                         </div>
-                                                        <hr>
                                                     </div>
 
                                                 </div>
@@ -238,14 +225,19 @@
     </div>
 </template>
 <style lang="scss" scoped="scoped">
-    .img{
-        width: 20%;
+    .img {
+        max-width: 30%;
+        min-height: 100px;
         margin-top: 10px;
         margin-bottom: 10px;
         margin-left: auto;
         margin-right: auto;
     }
-    .ibox {
+    .contact-box.center-version {
+        border: none;
+    }
+
+        .ibox {
         clear: none;
         margin-top: 0;
     }
@@ -291,7 +283,7 @@
     import ImgUpload2 from './../shared/Inputs/ImageUpload2';
     export default {
         components: {
-          ImgUpload2,
+            ImgUpload2,
         },
         data() {
             return {
