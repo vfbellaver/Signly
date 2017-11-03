@@ -196,11 +196,17 @@
                     </div>
 
                     <div class="modal-body">
-                        <ul class="plan-feature-list p-b-none m-b-none">
-                            <li v-for="feature in selectedPlan.features">
-                                @{{ feature }}
-                            </li>
-                        </ul>
+                            <ul v-model="feature = selectedPlan.features">
+                                <li><strong>Users</strong>@{{" " + feature.users}}</li>
+                                <li><strong>Billboards</strong>@{{" " + feature.billboards}}</li>
+                                <li><strong>Pdf's</strong>@{{" " + feature.pdfs}}</li>
+                                <li><strong>Proposals</strong>@{{" " + feature.proposals}}</li>
+                                <li><strong>Contracts</strong>@{{" " + feature.contracts}}</li>
+                                <li><strong>Scheduler</strong>@{{" " + feature.scheduler}}</li>
+                                <li><strong>White Label</strong>@{{" " + feature.whiteLabel}}</li>
+                                <li><strong>Value Monthly</strong>@{{" " + feature.valueMonthly}}</li>
+                                <li><strong>Value Annual</strong>@{{" " + feature.valueAnnual}}</li>
+                            </ul>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

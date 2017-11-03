@@ -45,6 +45,7 @@
             sendEmail(){
                 const uri = laroute.route('api.team.invite.member');
                 Slc.post(uri, this.userEmail).then((response) => {
+                    this.userEmail = '';
                     this.$emit('newEmail');
                 });
             },

@@ -4,17 +4,17 @@
 
         <modal-body>
             <table class="table table-borderless m-b-none" v-cloak="true">
-                <tbody v-if="features != null">
-                    <tr><strong>Users</strong>{{" " + features.users}}</tr>
-                    <tr><strong>Billboards</strong>{{" " + features.billboards}}</tr>
-                    <tr><strong>Pdf's</strong>{{" " + features.pdfs}}</tr>
-                    <tr><strong>Proposals</strong>{{" " + features.proposals}}</tr>
-                    <tr><strong>Contracts</strong>{{" " + features.contracts}}</tr>
-                    <tr><strong>Scheduler</strong>{{" " + features.scheduler}}</tr>
-                    <tr><strong>White Label</strong>{{" " + features.whiteLabel}}</tr>
-                    <tr><strong>Value Monthly</strong>{{" " + features.valueMonthly}}</tr>
-                    <tr><strong>Value Annual</strong>{{" " + features.valueAnnual}}</tr>
-                </tbody>
+                <ul v-if="features != null">
+                    <li><strong>Users</strong>{{" " + features.users}}</li>
+                    <li><strong>Billboards</strong>{{" " + features.billboards}}</li>
+                    <li><strong>Pdf's</strong>{{" " + features.pdfs}}</li>
+                    <li><strong>Proposals</strong>{{" " + features.proposals}}</li>
+                    <li><strong>Contracts</strong>{{" " + features.contracts}}</li>
+                    <li><strong>Scheduler</strong>{{" " + features.scheduler}}</li>
+                    <li><strong>White Label</strong>{{" " + features.whiteLabel}}</li>
+                    <li><strong>Value Monthly</strong>{{" " + features.valueMonthly}}</li>
+                    <li><strong>Value Annual</strong>{{" " + features.valueAnnual}}</li>
+                </ul>
             </table>
         </modal-body>
         <modal-footer>

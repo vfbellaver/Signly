@@ -34,9 +34,9 @@
                             <div class="clearfix"></div>
                             <div class="contact-box-footer">
                                 <div class="m-t-xs btn-group pull-right">
-                                    <button @click="edit(billboardFace)" class="btn btn-xs btn-white"><i
+                                    <a @click="edit(billboardFace)" class="btn btn-xs btn-white"><i
                                             class="fa fa-edit"></i> EDIT
-                                    </button>
+                                    </a>
                                     <button @click="destroy(billboardFace)" class="btn btn-xs btn-white"><i
                                             class="fa fa-trash"></i> DELETE
                                     </button>
