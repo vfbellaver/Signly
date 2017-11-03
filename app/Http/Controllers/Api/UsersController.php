@@ -13,6 +13,7 @@ use App\Http\Requests\UserUpdateRequest;
 use App\Models\User;
 use App\Services\UserService;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UsersController extends Controller
 {
@@ -66,13 +67,18 @@ class UsersController extends Controller
     public function updatePassword(UserUpdatePasswordRequest $request, User $user)
     {
         $data = $request->all();
-        $user->password = bcrypt($data['password']);
-        $user->save();
-        $response = [
-            'message' => 'User password updated.',
-            'data' => $user,
-        ];
-        return $response;
+        if (Hash::check($request->input('current_password'), $user->password)) {
+            $user->password = bcrypt($data['password']);
+            $user->save();
+            $response = [
+                'message' => 'User password updated.',
+                'data' => $user,
+            ];
+            return $response;
+        } else {
+                return response()->setStatusCode(400);
+        }
+
     }
 
     public function updateAddress(UserUpdateAddressRequest $request, User $user)
