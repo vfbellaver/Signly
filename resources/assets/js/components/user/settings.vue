@@ -25,6 +25,18 @@
                                         Security
                                     </a>
                                 </li>
+                                <li>
+                                    <a data-toggle="tab" href="#tab-testea" aria-expanded="false">
+                                        <i class="fa fa-fw fa-btn fa-edit"></i>
+                                        Test Profile 1
+                                    </a>
+                                </li>
+                                <li>
+                                    <a data-toggle="tab" href="#tab-testeb" aria-expanded="false">
+                                        <i class="fa fa-fw fa-btn fa-edit"></i>
+                                        Test Profile 2
+                                    </a>
+                                </li>
                             </ul>
                             <div class="tab-content ">
                                 <div id="tab-user-profile" class="tab-pane active">
@@ -67,46 +79,6 @@
                                                 </form-submit>
                                             </div>
                                         </div>
-                                        <div class="ibox">
-                                            <form-submit v-model="form" @submit="save">
-                                                <div class="col-lg-3" style="padding-left: 0px">
-                                                    <div class="ibox-title">
-                                                        <h5>Update Your Profile</h5>
-                                                    </div>
-                                                    <div class="ibox-content">
-
-                                                        <form-group :form="form" field="photo">
-                                                            <image-upload v-model="form.photo_url"
-                                                                          id="photo"
-                                                                          name="photo"></image-upload>
-                                                        </form-group>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-9" style="padding-right: 0px;">
-                                                    <div class="ibox-title">
-                                                        <h5>Update Profile Photo</h5>
-                                                    </div>
-                                                    <div class="ibox-content" style="min-height: 262px">
-                                                        <form-group :form="form" field="name">
-                                                            <input-label for="name">Name: </input-label>
-                                                            <input-text v-model="form.name" id="name"
-                                                                        name="name"></input-text>
-                                                        </form-group>
-                                                        <form-group :form="form" field="email">
-                                                            <input-label for="email">Email: </input-label>
-                                                            <input-email v-model="form.email" id="email" name="email"/>
-                                                        </form-group>
-                                                        <hr>
-                                                        <div>
-                                                            <button type="submit" class="btn btn-primary">
-                                                                Update Profile
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </form-submit>
-                                        </div>
-
                                     </div>
                                 </div>
                                 <div id="tab-security" class="tab-pane">
@@ -146,7 +118,7 @@
                                                             <hr>
                                                             <div>
                                                                 <button type="submit" class="btn btn-primary">
-                                                                    Update Profile
+                                                                    Update Password
                                                                 </button>
                                                             </div>
                                                         </div>
@@ -155,6 +127,106 @@
                                                 </form-submit>
                                             </div>
                                         </div>
+                                    </div>
+                                </div>
+                                <div id="tab-testea" class="tab-pane">
+                                    <div class="panel-body">
+                                        <div class="ibox">
+                                            <form-submit v-model="form" @submit="save">
+                                                <div class="col-lg-3" style="padding-left: 0px">
+                                                    <div class="ibox-title">
+                                                        <h5>Update Your Photo</h5>
+                                                    </div>
+                                                    <div class="ibox-content">
+
+                                                        <form-group :form="form" field="photo">
+                                                            <image-upload v-model="form.photo_url"
+                                                                          id="photo"
+                                                                          name="photo"></image-upload>
+                                                        </form-group>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-9" style="padding-right: 0px;">
+                                                    <div class="ibox-title">
+                                                        <h5>Update Profile Photo</h5>
+                                                    </div>
+                                                    <div class="ibox-content" style="min-height: 262px">
+                                                        <form-group :form="form" field="name">
+                                                            <input-label for="name">Name: </input-label>
+                                                            <input-text v-model="form.name" id="name"
+                                                                        name="name"></input-text>
+                                                        </form-group>
+                                                        <form-group :form="form" field="email">
+                                                            <input-label for="email">Email: </input-label>
+                                                            <input-email v-model="form.email" id="email" name="email"/>
+                                                        </form-group>
+                                                        <hr>
+                                                        <div>
+                                                            <button type="submit" class="btn btn-primary">
+                                                                Update Profile
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form-submit>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="tab-testeb" class="tab-pane">
+                                    <div class="panel-body">
+                                        <form-submit v-model="form" @submit="save">
+                                            <div class="ibox">
+                                                <div class="contact-box center-version">
+                                                    <div class="img">
+                                                        <img-upload2 v-model="form.photo_url"
+                                                                      id="photo"
+                                                                      name="photo"></img-upload2>
+                                                    </div>
+                                                    <div class="contact-box-footer ">
+                                                        <form-group :form="form" field="name">
+                                                            <input-label for="name" style="float:left">Name: </input-label>
+                                                            <input-text v-model="form.name" id="name"
+                                                                        name="name"></input-text>
+                                                        </form-group>
+                                                        <form-group :form="form" field="email">
+                                                            <input-label for="email" style="float:left">Email: </input-label>
+                                                            <input-email v-model="form.email" id="email"
+                                                                         name="email"/>
+                                                        </form-group>
+                                                        <div>
+                                                            <button type="submit" class="btn btn-primary">
+                                                                Update Profile
+                                                            </button>
+                                                        </div>
+                                                        <hr>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <div class="ibox">
+                                                <div class="ibox-title">
+                                                    <h3>Account Settings</h3>
+                                                </div>
+                                                <div class="ibox-content">
+                                                    <form-group :form="form" field="name">
+                                                        <input-label for="name">Name: </input-label>
+                                                        <input-text v-model="form.name" id="name"
+                                                                    name="name"></input-text>
+                                                    </form-group>
+                                                    <form-group :form="form" field="email">
+                                                        <input-label for="email">Email: </input-label>
+                                                        <input-email v-model="form.email" id="email"
+                                                                     name="email"/>
+                                                    </form-group>
+                                                    <div>
+                                                        <button type="submit" class="btn btn-primary">
+                                                            Update Profile
+                                                        </button>
+                                                    </div>
+                                                    <hr>
+                                                </div>
+                                            </div>
+                                        </form-submit>
                                     </div>
                                 </div>
                             </div>
@@ -166,7 +238,13 @@
     </div>
 </template>
 <style lang="scss" scoped="scoped">
-
+    .img{
+        width: 20%;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        margin-left: auto;
+        margin-right: auto;
+    }
     .ibox {
         clear: none;
         margin-top: 0;
@@ -210,8 +288,11 @@
     }
 </style>
 <script>
-
+    import ImgUpload2 from './../shared/Inputs/ImageUpload2';
     export default {
+        components: {
+          ImgUpload2,
+        },
         data() {
             return {
                 form: null,
@@ -237,7 +318,7 @@
             },
             updatePw(){
                 const uri = laroute.route('api.user.update.password', {user: Slc.user.id});
-                console.log('Update password',this.formPw);
+                console.log('Update password', this.formPw);
                 Slc.put(uri, this.formPw).then((response) => {
                     console.log("Password Update", response);
                 });
