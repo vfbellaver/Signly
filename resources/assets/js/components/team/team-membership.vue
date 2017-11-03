@@ -20,7 +20,7 @@
                             <hr>
                             <btn-submit class="btn btn-primary">
                                 <spinner v-if="userEmail.busy"></spinner>
-                                <span><i class="fa fa-envelope"></i>  SEND</span>
+                                <span>Send</span>
                             </btn-submit>
                         </div>
                     </div>
@@ -53,6 +53,7 @@
     .ibox-body {
         background-color: white;
         height: 166px;
+        margin-top: 2px;
         padding: 10px 20px 20px 20px;
     }
 

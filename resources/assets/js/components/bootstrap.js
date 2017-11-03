@@ -11,6 +11,7 @@ Vue.component('main-map', require('./map/main-map'));
 
 // Slider
 Vue.component('slider', require('./slider/menu'));
+
 //Payment
 Vue.component('register', require('./payment/register'));
 Vue.component('plan', require('./payment/plan'));
