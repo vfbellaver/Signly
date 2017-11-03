@@ -1,44 +1,54 @@
 <template>
-    <div class="ibox">
-        <div class="ibox-title">
-            <h5>Subscriptions</h5>
+    <div>
+        <div class="ibox">
+            <div class="ibox-title">
+                <h5>Subscriptions</h5>
+            </div>
+            <div class="ibox-content">
+                <table class="table table-borderless m-b-none" v-cloak="true">
+                    <tbody>
+                    <tr v-for="(plan , index ) in plans">
+                        <td><h3><strong>{{plan.name}}</strong></h3></td>
+                        <td>
+                            <button class="btn btn-default" type="button" @click="showFeatures(plan)">
+                                <i class="fa fa-btn fa-star-o"></i>
+                                Plan Features
+                            </button>
+                        </td>
+                        <td>{{plan.price}} / {{plan.interval}}</td>
+                        <td>{{ plan.trial_days }} Day Trial</td>
+                        <td class="text-right" style="width: 134px;">
+                            <button
+                                    class="select btn btn-primary btn-outline"
+                                    :class="{'active': planForm.stripe_plan == plan.id}"
+                                    type="button" @click="choosePlan(plan)">
+                                <i v-if="planForm.stripe_plan == plan.id" class="fa fa-check"></i>
+                                Select
+                            </button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <hr>
+                <btn-submit class="btn btn-success"
+                            @click.native="updateSubscription">
+                    <spinner v-if="planForm.busy"></spinner>
+                    <span>UPDATE</span>
+                </btn-submit>
+                <div style="clear:both"></div>
+            </div>
         </div>
-        <div class="ibox-content">
-            <table class="table table-borderless m-b-none" v-cloak="true">
-                <tbody>
-                <tr v-for="(plan , index ) in plans">
-                    <td><h3><strong>{{plan.name}}</strong></h3></td>
-                    <td>
-                        <button class="btn btn-default" type="button" @click="showFeatures(plan)">
-                            <i class="fa fa-btn fa-star-o"></i>
-                            Plan Features
-                        </button>
-                    </td>
-                    <td>{{plan.price}} / {{plan.interval}}</td>
-                    <td>{{ plan.trial_days }} Day Trial</td>
-                    <td class="text-right" style="width: 134px;">
-                        <button
-                                class="select btn btn-primary btn-outline"
-                                :class="{'active': planForm.stripe_plan == plan.id}"
-                                type="button" @click="choosePlan(plan)">
-                            <i v-if="planForm.stripe_plan == plan.id" class="fa fa-check"></i>
-                            Select
-                        </button>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-            <hr>
-            <btn-submit class="select btn btn-success btn-outline pull-right pull-right"
-                        @click.native="updateSubscription">
-                <spinner v-if="planForm.busy"></spinner>
-                <span>UPDATE</span>
-            </btn-submit>
-            <btn-danger style="margin-right: 10px" class="select btn btn-danger btn-outline pull-right"
-                        @click.native="deleteSubscription">
-                <span>CANCEL SUBSCRIPTION</span>
-            </btn-danger>
-            <div style="clear:both"></div>
+        <div class="ibox">
+            <div class="ibox-title">
+                <h5>Delete Yuor Subscription</h5>
+            </div>
+            <div class="ibox-content">
+                <btn-danger style="margin-right: 10px" class="btn btn-danger"
+                            @click.native="deleteSubscription">
+                    <span>CANCEL SUBSCRIPTION</span>
+                </btn-danger>
+                <div style="clear: both"></div>
+            </div>
         </div>
         <plan-modal :features="features" ref="terms"></plan-modal>
     </div>

@@ -6,17 +6,22 @@
                     <h5>Your Logo</h5>
                 </div>
                 <div class="ibox-content">
-                    <div class="col-lg-4 col-lg-offset-4">
-                        <form-group :form="team" field="logo">
-                            <image-upload v-model="team.logo" id="logo"
-                                          name="logo"></image-upload>
-                        </form-group>
-                        <div>
-                            <button type="submit" class="form-control btn btn-primary">Update Profile
+                    <row>
+                        <div class="col-lg-4 col-sm-4 col-xs-12">
+                            <form-group :form="team" field="logo">
+                                <image-upload v-model="team.logo" id="logo"
+                                              name="logo"></image-upload>
+                            </form-group>
+                        </div>
+                    </row>
+                    <row>
+                        <div class="col-xs-12">
+                            <hr>
+                            <button type="submit" class="btn btn-primary">Update Your Logo
                             </button>
                         </div>
-                    </div>
-                    <div style="clear: both"></div>
+                        <div class="clear"></div>
+                    </row>
                 </div>
             </div>
             <div class="ibox">
@@ -24,19 +29,21 @@
                     <h5>Team Settings</h5>
                 </div>
                 <div class="ibox-content">
-                    <div class="col-lg-12">
-                        <form-group :form="team" field="name">
-                            <input-label for="name">Name: </input-label>
-                            <input-text v-model="team.name" id="name"
-                                        name="name"></input-text>
-                        </form-group>
-                        <hr>
-                        <div>
-                            <button type="submit" class="btn btn-primary">Update Profile
-                            </button>
+                    <row>
+                        <div class="col-lg-12">
+                            <form-group :form="team" field="name">
+                                <input-label for="name">Name: </input-label>
+                                <input-text v-model="team.name" id="name"
+                                            name="name"></input-text>
+                            </form-group>
+                            <hr>
+                            <div>
+                                <button type="submit" class="btn btn-primary">Update Your Name
+                                </button>
+                            </div>
                         </div>
-                    </div>
-                    <div style="clear: both"></div>
+                    </row>
+                    <div class="clear"></div>
                 </div>
             </div>
         </form-submit>
@@ -51,8 +58,24 @@
         padding: 0;
     }
 
+    hr {
+        margin-top: 1px;
+        margin-bottom: 20px;
+        border: 0;
+        border-top: 1px solid #eeeeee;
+    }
+
+    .row:before, .row:after {
+        content: " ";
+        display: none;
+    }
+
     .ibox-content {
         clear: none;
+    }
+
+    .clear {
+        clear: both;
     }
 </style>
 <script>
