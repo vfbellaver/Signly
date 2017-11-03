@@ -3,7 +3,7 @@
         <team-membership @newEmail="mailedInvitations"></team-membership>
         <div class="ibox">
             <div class="ibox-title">
-                <h5>Users List
+                <h5>Invited List
                     <small class="m-l-sm">
                         Here is your team and the invited members Listed
                     </small>
@@ -11,50 +11,6 @@
             </div>
             <div class="ibox-content">
                 <div class="clients-list">
-                    <ul class="nav nav-tabs">
-                        <span class="pull-right small text-muted">{{users.length + " Members"}}</span>
-                        <li :class="page1 ? 'active' : ''" @click="nextPage">
-                            <a data-toggle="tab" href="#tab-1" aria-expanded="true">
-                                <i class="fa fa-user"></i>{{boss.team.name}}
-                            </a>
-                        </li>
-                        <li :class="page2 ? 'active' : ''" @click="nextPage">
-                            <a data-toggle="tab" href="#tab-2" aria-expanded="false">
-                                <i class="fa fa-briefcase"></i>Invited Members
-                            </a>
-                        </li>
-                    </ul>
-                    <div class="tab-content">
-                        <div v-show="page1">
-                            <div style="overflow: auto; max-height: 280px">
-                                <div class="table-responsive">
-                                    <table class="table table-striped table-hover">
-                                        <tbody>
-                                        <tr v-for="( user, index ) in users">
-                                            <td class="client-avatar"><img alt="image" :src="user.photo_url"></td>
-                                            <td v-if="boss.email === user.email">
-                                                {{user.name + "  "}}<strong>you</strong></td>
-                                            <td v-else>{{user.name}}</td>
-                                            <td class="contact-type"><i class="fa fa-envelope"> </i></td>
-                                            <td> {{user.email}}</td>
-                                            <td class="client-status">
-                                                <btn-danger
-                                                        @click.native="destroy(user)"
-                                                        :disabled="user.destroyForm.busy"
-                                                        size="xs">
-                                                    <spinner v-if="user.destroyForm.busy"></spinner>
-                                                    <icon icon="trash" v-else></icon>
-                                                </btn-danger>
-                                            </td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div v-show="page2">
                     <div style="overflow: auto; max-height: 280px">
                         <div class="table-responsive">
                             <table class="table table-striped table-hover">
@@ -87,12 +43,54 @@
                 </div>
             </div>
         </div>
+
+        <div class="ibox">
+            <div class="ibox-title">
+                <h5>{{boss.team.name}}
+                    <small class="m-l-sm">
+                        Here is your team and the invited members Listed
+                    </small>
+                </h5>
+            </div>
+            <div class="ibox-content">
+                <div class="clients-list">
+                    <div class="tab-content">
+                        <div style="overflow: auto; max-height: 280px">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-hover">
+                                    <tbody>
+                                    <tr v-for="( user, index ) in users">
+                                        <td class="client-avatar"><img alt="image" :src="user.photo_url"></td>
+                                        <td v-if="boss.email === user.email">
+                                            {{user.name + "  "}}<strong>you</strong></td>
+                                        <td v-else>{{user.name}}</td>
+                                        <td class="contact-type"><i class="fa fa-envelope"> </i></td>
+                                        <td> {{user.email}}</td>
+                                        <td class="client-status">
+                                            <btn-danger
+                                                    @click.native="destroy(user)"
+                                                    :disabled="user.destroyForm.busy"
+                                                    size="xs">
+                                                <spinner v-if="user.destroyForm.busy"></spinner>
+                                                <icon icon="trash" v-else></icon>
+                                            </btn-danger>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 <style>
     .table {
         margin-top: 10px;
     }
+
     .ibox {
         clear: none;
         margin-bottom: 60px;
