@@ -1,46 +1,48 @@
 <template>
     <div>
-        <div class="ibox">
-            <div class="ibox-title">
-                <h5>Team Settings</h5>
-            </div>
-            <div class="ibox-content">
-                <form-submit v-model="team" @submit="saveTeam" class="wizard-big wizard clearfix">
-                    <div class="content clearfix">
-                        <fieldset>
-                            <div class="row">
-                                <div class="col-lg-8">
-                                    <form-group :form="team" field="name">
-                                        <input-label for="name">Name: </input-label>
-                                        <input-text v-model="team.name" id="name"
-                                                    name="name"></input-text>
-                                    </form-group>
-                                    <div>
-                                        <button type="submit" class="btn btn-primary">Update Profile
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="text-center">
-                                        <form-group :form="team" field="logo">
-                                            <image-upload v-model="team.logo" id="logo"
-                                                          name="logo"></image-upload>
-                                        </form-group>
-                                    </div>
-                                </div>
-                            </div>
-                        </fieldset>
+        <form-submit v-model="team" @submit="saveTeam" class="wizard-big wizard clearfix">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>Your Logo</h5>
+                </div>
+                <div class="ibox-content">
+                    <div class="col-lg-4 col-lg-offset-4">
+                        <form-group :form="team" field="logo">
+                            <image-upload v-model="team.logo" id="logo"
+                                          name="logo"></image-upload>
+                        </form-group>
+                        <div>
+                            <button type="submit" class="form-control btn btn-primary">Update Profile
+                            </button>
+                        </div>
                     </div>
-                </form-submit>
+                    <div style="clear: both"></div>
+                </div>
             </div>
-        </div>
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>Team Settings</h5>
+                </div>
+                <div class="ibox-content">
+                    <div class="col-lg-12">
+                        <form-group :form="team" field="name">
+                            <input-label for="name">Name: </input-label>
+                            <input-text v-model="team.name" id="name"
+                                        name="name"></input-text>
+                        </form-group>
+                        <hr>
+                        <div>
+                            <button type="submit" class="btn btn-primary">Update Profile
+                            </button>
+                        </div>
+                    </div>
+                    <div style="clear: both"></div>
+                </div>
+            </div>
+        </form-submit>
     </div>
 </template>
 <style lang="scss" scoped="scoped">
-
-    hr {
-        border-bottom: solid 4px #43A3D0;
-    }
 
     .ibox {
         clear: none;
