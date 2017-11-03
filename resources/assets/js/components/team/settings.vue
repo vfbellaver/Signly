@@ -61,7 +61,7 @@
                                 <div id="tab-membership" class="tab-pane">
                                     <div class="panel-body">
                                         <ul>
-                                            <team-list-2></team-list-2>
+                                            <team-list></team-list>
                                         </ul>
                                     </div>
                                 </div>
@@ -75,8 +75,7 @@
                                 <div id="tab-payment-method" class="tab-pane">
                                     <div class="panel-body">
                                         <ul>
-                                            <!--<team-card></team-card>-->
-                                            <team-card-stripe></team-card-stripe>
+                                            <team-card></team-card>
                                         </ul>
                                     </div>
                                 </div>
@@ -128,20 +127,18 @@
 </style>
 <script>
 
-    import TeamList2 from './team-list2';
+    import TeamList from './team-list';
     import TeamForm from './team-form';
-    import TeamCard from './team-card';
     import TeamSubscription from './team-subscription';
-    import TeamCardStripe from './team-card-stripe';
+    import TeamCard from './team-card';
 
     export default {
 
         components: {
-            TeamList2,
+            TeamList,
             TeamForm,
             TeamCard,
             TeamSubscription,
-            TeamCardStripe,
         },
 
         data() {
