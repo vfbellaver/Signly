@@ -179,15 +179,11 @@
                                                 <div class="ibox-title">
                                                     <h3>Account Settings</h3>
                                                 </div>
-                                                <div class="ibox-content">
-                                                    <div class="contact-box center-version">
-                                                        <div class="img">
+                                                <div class="ibox-content col-lg-12">
+
                                                             <img-upload2 v-model="form.photo_url"
                                                                          id="photo"
                                                                          name="photo"></img-upload2>
-                                                        </div>
-                                                    </div>
-
                                                 </div>
                                             </div>
                                             <div class="ibox">
@@ -226,18 +222,17 @@
 </template>
 <style lang="scss" scoped="scoped">
     .img {
-        max-width: 30%;
+        max-width: 40%;
         min-height: 100px;
-        margin-top: 10px;
-        margin-bottom: 10px;
         margin-left: auto;
         margin-right: auto;
     }
+
     .contact-box.center-version {
         border: none;
     }
 
-        .ibox {
+    .ibox {
         clear: none;
         margin-top: 0;
     }

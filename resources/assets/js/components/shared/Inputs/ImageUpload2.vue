@@ -1,5 +1,5 @@
 <template>
-    <div class="col-md-55">
+    <div class="col-md-3">
         <div class="thumbnail">
             <div class="image view view-first">
                 <input ref="file" type="file" @change="onFileChange" class="hidden"/>
@@ -13,11 +13,13 @@
                 <div v-else="internalValue" class="mask preview"
                      :style="{ 'background-image': 'url(/images/fileupload-bg.jpg)' }">
                     <div class="tools tools-bottom">
-                        <a @click="replaceImage"  title="Change Photo"><i class="fa fa-pencil"></i></a>
                         <a @click="remove" v-if="internalValue" title="Remove Image"><i class="fa fa-remove"></i></a>
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="text-center">
+            <a class="btn btn-primary btn-block">Update Photo</a>
         </div>
     </div>
 </template>
