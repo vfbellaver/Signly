@@ -31,7 +31,6 @@ class BillboardService
             $billboard = new Billboard($data);
             $billboard->slug = $this->nameExists($billboard);
 
-            $billboard->user()->associate($form->user());
             $billboard->team()->associate($form->user()->team_id);
 
             $billboard->save();

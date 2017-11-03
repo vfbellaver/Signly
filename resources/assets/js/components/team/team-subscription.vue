@@ -36,7 +36,6 @@
             </btn-submit>
             <btn-danger style="margin-right: 10px" class="select btn btn-danger btn-outline pull-right"
                         @click.native="deleteSubscription">
-                <spinner v-if="planForm.busy"></spinner>
                 <span>CANCEL SUBSCRIPTION</span>
             </btn-danger>
             <div style="clear:both"></div>

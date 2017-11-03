@@ -226,6 +226,8 @@
                     return;
                 }
                 this.zoom = 15;
+
+                console.log('On click Billboard', this.form);
             },
             onZoomChanged(e) {
                 console.log("On Zoom Changed", e);
@@ -258,6 +260,7 @@
                         return;
                     }
                     self.zoom = 15;
+                    console.log('On address Changed Billboard', this.form);
                 });
             }, 500),
             onMarkerMoved: _.debounce(function (e) {
@@ -275,15 +278,18 @@
                 this.$nextTick(() => {
                     this.streetViewLoaded = true;
                 });
+                console.log('On marker Moved Billboard', this.form);
             }),
             updatePov(pov) {
                 console.log('Pov Changed: ', pov);
                 this.pov = pov;
                 this.form.heading = pov.heading;
                 this.form.pitch = pov.pitch;
+                console.log('Update Pov Billboard', this.form);
             },
             updatePano(pano) {
                 this.pano = pano;
+                console.log('Update pano', this.form);
             }
         }
     }

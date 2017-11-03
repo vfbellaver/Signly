@@ -18,7 +18,6 @@ class Slc
         return [
             'user' => $user,
             'csrfToken' => csrf_token(),
-            //'stripeKey' => env('STRIPE_KEY'),
             'stripeKey' => env('STRIPE_KEY'),
             'pusher' => env('PUSHER_APP_KEY'),
             'plans' => [
