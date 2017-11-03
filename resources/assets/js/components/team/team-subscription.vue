@@ -81,6 +81,7 @@
         data() {
             return {
                 token: '',
+                userForm: null,
                 plans: [],
                 planForm: null,
                 features: null,
@@ -90,6 +91,9 @@
         created() {
             this.reload();
             this.plans = Slc.plans;
+            this.userForm = new SlcForm({
+                id: Slc.user.id,
+            });
             this.planForm = new SlcForm({
                 stripe_plan: Slc.user.subscription[0].stripe_plan,
             });
@@ -132,7 +136,8 @@
             },
 
             deleteSubscription(){
-                SLC.get(laroute.route("api.payment.delete.card"))
+                const uri = laroute.route("api.payment.delete.subscription",{user: this.userForm.id});
+                SLC.delete(uri,this.userForm)
                     .then((response) => {
                         console.log('Subscription Deleted', response);
                     });

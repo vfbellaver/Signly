@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Forms\UserForm;
 use App\Http\Requests\CardsCreateRequest;
 use App\Http\Requests\TokenCreateRequest;
 use App\Http\Requests\PaymentRegistrationRequest;
@@ -45,7 +46,7 @@ class PaymentController extends Controller
     {
         $user = User::query()->find(auth()->id());
         $user->updateCard($request->form()->source());
-        $data = $this->service->store($user,$request->form()->owner());
+        $data = $this->service->store($user, $request->form()->owner());
 
         return $response = [
             'message' => "Card updated with successful",
@@ -66,9 +67,8 @@ class PaymentController extends Controller
 
     }
 
-    public function deleteSubscription()
+    public function deleteSubscription(User $user)
     {
-        $user = User::query()->find(auth()->id());
         $user->subscription('main')->cancelNow();
         return $response = [
             'message' => "Plan canceled with successful",
