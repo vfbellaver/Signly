@@ -4,7 +4,7 @@
             <div class="ibox-title">
                 <h5>Update your Card</h5>
             </div>
-            <div class="ibox-content">
+            <div class="ibox-body-card">
                 <form-submit v-model="userForm" @submit="createToken">
                     <column size="12">
                         <form-group :form="userForm" field="owner">
@@ -35,8 +35,10 @@
         padding: 0;
     }
 
-    .ibox-content {
-        clear: none;
+    .ibox-body-card {
+        background-color: white;
+        height: 195px;
+        padding: 10px 20px 20px 20px;
     }
 </style>
 <script>
