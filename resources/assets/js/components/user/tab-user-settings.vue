@@ -101,7 +101,7 @@
             }
         },
         created(){
-            this.buildForm();
+            this.user = new SlcForm(Slc.user);
         },
 
         methods: {
@@ -109,14 +109,6 @@
                 const uri = laroute.route('api.user.update', {user: Slc.user.id});
                 Slc.put(uri, this.user).then((response) => {
                     console.log("User Update", response);
-                });
-            },
-            buildForm(){
-                this.user = new SlcForm({
-                    id: this.user.id,
-                    photo_url: this.user.photo_url ? this.user.photo_url : null,
-                    name: this.user.name,
-                    email: this.user.email,
                 });
             },
         }
