@@ -6,23 +6,37 @@
             </div>
             <div class="ibox-content">
                 <form-submit v-model="userEmail" @submit="sendEmail">
-                    <div class="input-group">
-                        <input-text class="form-control input-lg" v-model="userEmail.email" id="email"
-                                    name="email"></input-text>
-                        <div class="input-group-btn">
-                            <btn-submit class="btn btn-lg btn-primary">
-                                <spinner v-if="userEmail.busy"></spinner>
-                                <span><i class="fa fa-envelope"></i>  SEND</span>
-                            </btn-submit>
-                        </div>
+                    <div class="col-lg-12">
+                        <form-group :form="userEmail" field="email">
+                            <input-label for="email">Email: </input-label>
+                            <input-text v-model="userEmail.email" id="email"
+                                        name="email"></input-text>
+                        </form-group>
+                    </div>
+                    <hr>
+                    <div class="col-lg-12">
+                        <btn-submit class="btn btn-primary">
+                            <spinner v-if="userEmail.busy"></spinner>
+                            <span><i class="fa fa-envelope"></i>  SEND</span>
+                        </btn-submit>
                     </div>
                 </form-submit>
+                <div style="clear:both"></div>
             </div>
         </div>
     </div>
 </template>
 <style>
+    .ibox {
+        clear: none;
+        margin-bottom: 60px;
+        margin-top: 0px;
+        padding: 0;
+    }
 
+    .ibox-content {
+        clear: none;
+    }
 </style>
 <script>
 

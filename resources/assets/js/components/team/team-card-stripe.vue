@@ -13,10 +13,11 @@
                                         name="owner"></input-text>
                         </form-group>
                     </column>
+                    <hr>
                     <column size="12">
                         <div ref="card" class="form-control"></div>
                         <hr>
-                        <button class="select btn btn-success btn-outline pull-right pull-right" @click="createToken">
+                        <button class="btn btn-success" @click="createToken">
                             UPDATE CARD
                         </button>
                     </column>
