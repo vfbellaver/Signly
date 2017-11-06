@@ -44,11 +44,16 @@
     </div>
 </template>
 
-<style lang="scss" scoped="true">
+<style lang="scss">
     .info-window {
         min-width: 600px;
-        min-height: 256px;
+        min-height: 320px;
         padding: 25px;
+
+        .panel-body {
+            min-height: 270px;
+        }
+
         .description {
             text-align: justify;
         }
@@ -94,7 +99,7 @@
             },
 
             addFace(face) {
-                this.$emit('add-face', {face: face});
+                Bus.$emit('add-face', {face: face});
             }
         }
 

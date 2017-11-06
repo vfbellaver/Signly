@@ -6,11 +6,8 @@ class ClientsTableSeeder extends Seeder
 {
     public function run()
     {
-        $teamId = \App\Models\Team::query()->max('id');
-
-        if (!$teamId) {
-            return;
-        }
-        factory(\App\Models\Client::class, 25)->create(['team_id' => random_int(1, 6)]);
+        \App\Models\Team::all()->each(function ($team) {
+            factory(\App\Models\Client::class, 12)->create(['team_id' => $team->id]);
+        });
     }
 }

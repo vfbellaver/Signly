@@ -23,8 +23,10 @@
 
     </modal>
 </template>
-<style>
-
+<style lang="scss" scoped="scoped">
+    .width{
+        width: 50px;
+    }
 </style>
 <script>
 

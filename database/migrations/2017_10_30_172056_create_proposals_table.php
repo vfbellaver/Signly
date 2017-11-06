@@ -9,10 +9,9 @@ class CreateProposalsTable extends Migration
     {
         Schema::create('proposals', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('name', 64);
             $table->unsignedInteger('team_id');
             $table->unsignedInteger('client_id');
-
-            $table->date('expires_on')->nullable();
 
             $table->foreign('client_id')
                 ->references('id')

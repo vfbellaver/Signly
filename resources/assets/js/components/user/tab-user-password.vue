@@ -92,9 +92,10 @@
         methods: {
             updatePw(){
                 const uri = laroute.route('api.user.update.password', {user: Slc.user.id});
-                console.log('Update password', this.formPw);
+                console.log('FORM PW - ',this.formPw);
                 Slc.put(uri, this.formPw).then((response) => {
-                    console.log("Password Update", response);
+                    console.log('Password Updated',response);
+                    this.formPw = new SlcForm();
                 });
             },
         }

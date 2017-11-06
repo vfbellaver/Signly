@@ -20,14 +20,12 @@ Vue.component('profile', require('./payment/profile'));
 Vue.component('client-list', require('./client/client-list'));
 Vue.component('client-list-two', require('./client/client-list-two'));
 Vue.component('client-form', require('./client/client-form'));
-Vue.component('client-select',require('./client/client-select'));
+Vue.component('client-select', require('./client/client-select'));
 // BILLBOARD
 Vue.component('billboard-list', require('./billboard/billboard-list'));
 Vue.component('billboard-edit', require('./billboard/billboard-edit'));
 Vue.component('billboard-show', require('./billboard-public/billboard-show'));
-
-//PROPOSAL
-Vue.component('proposal-form', require('./proposal/proposal-form'));
-
 //TEAM
 Vue.component('team-settings', require('./team/settings'));
+//PROPOSAL
+Vue.component('proposal-list', require('./proposal/proposal-list.vue'));

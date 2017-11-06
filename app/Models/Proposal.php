@@ -7,37 +7,30 @@ use Illuminate\Database\Eloquent\Model;
 class Proposal extends Model
 {
     protected $fillable = [
-        'client_id',
+        'name',
         'team_id',
-        'expires_on'
+        'client_id',
     ];
 
     protected $casts = [
-        'client_id' => 'int',
         'team_id' => 'int',
+        'client_id' => 'int',
     ];
 
     protected $dates = [
-        'expires_on' => 'Y-m-d'
     ];
 
     #region Relationships
-
-    public function client()
-    {
-        return $this->belongsTo(Client::class);
-    }
-
     public function team()
     {
         return $this->belongsTo(Team::class);
     }
 
-    public function billboardFaces()
+    public function client()
     {
-        return $this->belongsToMany(BillboardFace::class, 'proposal_billboard_face');
+        return $this->belongsTo(Client::class);
     }
-    #endregion
+    #region
 
     #region Custom Attributes
 
@@ -52,6 +45,12 @@ class Proposal extends Model
     {
         return [
             'id' => $this->id,
+            'name' => $this->name,
+            'team_id' => $this->team_id,
+            'client_id' => $this->client_id,
+            'client' => $this->client->toArray(),
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at
         ];
     }
     #endregion
