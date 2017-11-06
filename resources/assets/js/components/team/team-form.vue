@@ -8,7 +8,7 @@
                 <div class="ibox-content">
                     <row>
                         <div class="col-lg-4 col-sm-4 col-xs-12">
-                            <form-group :form="team" field="logo">
+                            <form-group width="256px" :form="team" field="logo">
                                 <image-upload v-model="team.logo" id="logo"
                                               name="logo"></image-upload>
                             </form-group>

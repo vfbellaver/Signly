@@ -24,9 +24,7 @@
     </modal>
 </template>
 <style>
-    .width{
-        width: 50px;
-    }
+
 </style>
 <script>
 

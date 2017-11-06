@@ -3,7 +3,7 @@
         <multiselect
                 v-model="internalValue"
                 track-by="id"
-                label="name"
+                :label="labelValue"
                 :options="options"
                 :searchable="true"
                 :internal-search="true"
@@ -25,6 +25,7 @@
         props: {
             api: {required: false},
             url: {required: false},
+            label: {required: false},
             placeholder: {required: false}
         },
 
@@ -38,6 +39,14 @@
             route() {
                 if (this.url) return this.url;
                 else return laroute.route(`api.${this.api}.index`);
+            },
+
+            labelValue(){
+               if(this.label === null){
+                   return 'name';
+               } else {
+                   return this.label
+               }
             }
         },
 

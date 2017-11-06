@@ -80,7 +80,8 @@
         </div>
     </div>
 </template>
-<style>
+
+<style lang="scss" scoped="scoped">
     .table {
         margin-top: 10px;
     }
@@ -100,6 +101,7 @@
         clear: none;
     }
 </style>
+
 <script>
 
     import * as SLC from '../../vue/http';

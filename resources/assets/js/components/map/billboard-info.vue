@@ -10,13 +10,6 @@
                     <h4>Location</h4>
                     <div>{{billboard.lat}}, {{billboard.lng}}</div>
                     <hr/>
-                    <div class="col-md-6">
-                        <btn-submit class="btn-info"
-                                    @click.native="showDetails(billboard)"
-                        >
-                            SHOW DETAILS
-                        </btn-submit>
-                    </div>
                     <div class="col-md-6" v-if="this.user.email">
                         <btn-submit
                          @click.native="edit(billboard)"
@@ -45,6 +38,13 @@
                             <dt>Rate Card:</dt>
                             <dd>{{face.hard_cost}}</dd>
                         </dl>
+                    </div>
+                    <div>
+                        <btn-submit class="btn-info"
+                                    @click.native="addFace(face)"
+                        >
+                            <i class="fa fa-plus"></i> Add to Proposal
+                        </btn-submit>
                     </div>
                 </div>
             </tab>
@@ -100,15 +100,9 @@
             edit(billboard) {
                 window.location = laroute.route("billboards.edit", {billboard: billboard.id});
             },
-            showDetails(billboard){
-                Slc.get(laroute.route("make.url", {id: billboard.id}))
-                    .then((response) => {
-                        console.log('Team billboard', billboard);
-                        window.location = laroute.route('public.billboard.details',
-                            {teamName: response.data.slugTeam, billboardName: response.data.slugBillboard});
-                    });
 
-
+            addFace(face){
+                this.$emit('add-face',{face: face});
             }
         }
 
