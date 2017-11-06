@@ -80,7 +80,7 @@
         </div>
     </div>
 </template>
-<style>
+<style lang="scss" scoped="scoped">
     .table {
         margin-top: 10px;
     }

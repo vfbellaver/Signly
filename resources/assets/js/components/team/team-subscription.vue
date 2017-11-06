@@ -54,7 +54,7 @@
     </div>
 </template>
 
-<style>
+<style lang="scss" scoped="scoped">
     .ibox {
         clear: none;
         margin-bottom: 60px;

@@ -101,7 +101,7 @@
         </div>
     </div>
 </template>
-<style>
+<style lang="scss" scoped="scoped">
     .tabs-container .tabs-left >
     .nav-tabs .active > a, .tabs-container
     .tabs-left > .nav-tabs .active > a:hover,

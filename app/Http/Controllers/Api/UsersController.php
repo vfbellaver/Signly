@@ -14,6 +14,7 @@ use App\Models\User;
 use App\Services\UserService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\MessageBag;
 
 class UsersController extends Controller
 {
@@ -76,7 +77,10 @@ class UsersController extends Controller
             ];
             return $response;
         } else {
-                return response()->setStatusCode(400);
+            $error = [
+                'success' => false,
+                'current_password' => 'Current Password is Invalid.'
+            ];
         }
 
     }
