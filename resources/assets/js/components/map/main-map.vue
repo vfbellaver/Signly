@@ -25,7 +25,7 @@
 <style>
     .vue-map-container {
         width: 100%;
-        height: 90vmin;
+        height: 90vh;
     }
 </style>
 

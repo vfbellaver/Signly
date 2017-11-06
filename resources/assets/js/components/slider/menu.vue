@@ -1,39 +1,38 @@
 <template>
     <div class="zap-slideout"
          :class="{ isOpen: isOpen }">
-        <div class="zap-slideout-opener"
-             @click="toggle">{{openerText}}</div>
-        <ul class="zap-slideout-menu">
-            <li class="zap-slideout-menu-item">
-                <img class="zap-emoji" src="/images/pin.png" />
-            </li>
-            <li class="zap-slideout-menu-item"
-                v-for="item in menu">{{item}}</li>
-            <li class="zap-slideout-menu-item--small"
-                v-for="item in smallMenu">{{item}}</li>
-        </ul>
+        <div class="zap-slideout-opener" @click="toggle">
+            <button type="button" class="btn btn-primary btn-circle btn-lg">
+                <i :class="openerIcon" aria-hidden="true"></i>
+            </button>
+        </div>
+        <div class="zap-slideout-menu">
+          <slot></slot>
+        </div>
     </div>
 </template>
 <script>
+
     export default{
         data(){
             return {
-                openerText: 'Open',
+                openerIcon: 'fa fa-chevron-right',
                 isOpen: false,
-                menu: ['Home', 'Work', 'Contact'],
-                smallMenu: ['Tips', 'Resources', 'Shenanigans']
             }
+        },
+
+        components:{
         },
 
         methods: {
 
             open(){
-                this.openerText = 'Close';
+                this.openerIcon = 'fa fa-chevron-left';
                 this.isOpen = true;
             },
 
             close(){
-                this.openerText = 'Open';
+                this.openerIcon = 'fa fa-chevron-right';
                 this.isOpen = false;
             },
 

@@ -26,8 +26,8 @@ Vue.component('billboard-list', require('./billboard/billboard-list'));
 Vue.component('billboard-edit', require('./billboard/billboard-edit'));
 Vue.component('billboard-show', require('./billboard-public/billboard-show'));
 
-//GENERATE-PROPOSAL
-Vue.component('proposal', require('./generate-proposal/proposal'));
+//PROPOSAL
+Vue.component('proposal-form', require('./proposal/proposal-form'));
 
 //TEAM
 Vue.component('team-settings', require('./team/settings'));
