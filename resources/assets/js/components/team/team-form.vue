@@ -1,11 +1,11 @@
 <template>
     <div>
-        <form-submit v-model="team" @submit="saveTeam" class="wizard-big wizard clearfix">
-            <div class="ibox">
-                <div class="ibox-title">
-                    <h5>Your Logo</h5>
-                </div>
-                <div class="ibox-content">
+        <div class="ibox">
+            <div class="ibox-title">
+                <h5>Company Logo</h5>
+            </div>
+            <div class="ibox-content">
+                <form-submit v-model="team" @submit="saveTeamLogo" class="wizard-big wizard clearfix">
                     <row>
                         <div class="col-lg-4 col-sm-4 col-xs-12">
                             <form-group width="256px" :form="team" field="logo">
@@ -22,13 +22,15 @@
                         </div>
                         <div class="clear"></div>
                     </row>
-                </div>
+                </form-submit>
             </div>
-            <div class="ibox">
-                <div class="ibox-title">
-                    <h5>Team Settings</h5>
-                </div>
-                <div class="ibox-content">
+        </div>
+        <div class="ibox">
+            <div class="ibox-title">
+                <h5>Team Settings</h5>
+            </div>
+            <div class="ibox-content">
+                <form-submit v-model="team" @submit="saveTeamName" class="wizard-big wizard clearfix">
                     <row>
                         <div class="col-lg-12">
                             <form-group :form="team" field="name">
@@ -43,10 +45,10 @@
                             </div>
                         </div>
                     </row>
-                    <div class="clear"></div>
-                </div>
+                </form-submit>
+                <div class="clear"></div>
             </div>
-        </form-submit>
+        </div>
     </div>
 </template>
 <style lang="scss" scoped="scoped">
@@ -94,9 +96,18 @@
         },
 
         methods: {
-            saveTeam(){
+
+            saveTeamName(){
                 const self = this;
-                const uri = laroute.route('api.team.update', {team: this.team.id});
+                const uri = laroute.route('api.team.update.name', {team: this.team.id});
+                SLC.put(uri, self.team).then((response) => {
+                    console.log('Team updated ', response);
+                });
+            },
+
+            saveTeamLogo(){
+                const self = this;
+                const uri = laroute.route('api.team.update.logo', {team: this.team.id});
                 SLC.put(uri, self.team).then((response) => {
                     console.log('Team updated ', response);
                 });

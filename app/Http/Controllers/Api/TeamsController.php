@@ -43,10 +43,49 @@ class TeamsController extends Controller
     public function update(TeamUpdateRequest $request, Team $team)
     {
         $obj = $this->service->update($request->form(), $team);
-
         $response = [
             'message' => 'Team updated.',
             'data' => $obj,
+        ];
+        return $response;
+    }
+
+
+    public function updateLogo (Request $request)
+    {
+        $request->validate([
+            'logo' => 'required',
+        ]);
+
+        $user = auth()->user();
+
+        $team = Team::query()->find($user->team_id);
+        $team->logo = $request->input('logo');
+        $team->save();
+
+        $response = [
+            'message' => 'Company Logo updated.',
+            'data' => $team,
+        ];
+
+        return $response;
+    }
+
+    public function updateName (Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+        ]);
+
+        $user = auth()->user();
+
+        $team = Team::query()->find($user->team_id);
+        $team->name = $request->input('name');
+        $team->save();
+
+        $response = [
+            'message' => 'Company Name updated.',
+            'data' => $team,
         ];
 
         return $response;

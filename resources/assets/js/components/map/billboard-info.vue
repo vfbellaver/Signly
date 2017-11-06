@@ -102,7 +102,7 @@
             },
 
             addFace(face){
-                this.$emit('add-face',{face: face});
+                Bus.$emit('add-face',{face: face});
             }
         }
 
