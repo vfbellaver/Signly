@@ -8,11 +8,11 @@
                 <div class="ibox-content">
                     <row>
                         <div class="col-lg-12">
-                            <form-group :form="formPw" field="password">
-                                <input-label for="password">Current password:
+                            <form-group :form="formPw" field="current_password">
+                                <input-label for="current_password">Current password:
                                 </input-label>
-                                <input-text v-model="formPw.password"
-                                            id="password"
+                                <input-text v-model="formPw.current_password"
+                                            id="current_password"
                                             name="current_password"
                                             type="password"></input-text>
                             </form-group>

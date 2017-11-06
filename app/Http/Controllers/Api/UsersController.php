@@ -68,17 +68,13 @@ class UsersController extends Controller
     public function updatePassword(UserUpdatePasswordRequest $request, User $user)
     {
         $data = $request->all();
-        if (Hash::check($request->input('current_password'), $user->password)) {
-            $user->password = bcrypt($data['password']);
-            $user->save();
-            $response = [
-                'message' => 'User password updated.',
-                'data' => $user,
-            ];
-            return $response;
-        } else {
-        }
-
+        $user->password = bcrypt($data['new_password']);
+        $user->save();
+        $response = [
+            'message' => 'User password updated.',
+            'data' => $user,
+        ];
+        return $response;
     }
 
     public function updateAddress(UserUpdateAddressRequest $request, User $user)
