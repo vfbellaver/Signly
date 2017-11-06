@@ -11,11 +11,7 @@
                     <div>{{billboard.lat}}, {{billboard.lng}}</div>
                     <hr/>
                     <div class="col-md-6" v-if="this.user.email">
-                        <btn-submit
-                         @click.native="edit(billboard)"
-                        >
-                            EDIT
-                        </btn-submit>
+                        <btn-submit @click.native="edit(billboard)">Edit</btn-submit>
                     </div>
                 </div>
             </tab>
@@ -40,11 +36,7 @@
                         </dl>
                     </div>
                     <div>
-                        <btn-submit class="btn-info"
-                                    @click.native="addFace(face)"
-                        >
-                            <i class="fa fa-plus"></i> Add to Proposal
-                        </btn-submit>
+
                     </div>
                 </div>
             </tab>
@@ -85,7 +77,7 @@
             user: {required: true}
         },
 
-        data(){
+        data() {
             return {
                 nameteam: {}
             }
@@ -101,8 +93,8 @@
                 window.location = laroute.route("billboards.edit", {billboard: billboard.id});
             },
 
-            addFace(face){
-                this.$emit('add-face',{face: face});
+            addFace(face) {
+                this.$emit('add-face', {face: face});
             }
         }
 

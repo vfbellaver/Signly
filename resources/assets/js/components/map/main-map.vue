@@ -1,31 +1,60 @@
 <template>
-    <gmap-map
-            v-if="loaded"
-            :options="mapOptions"
-            :center="center"
-            :zoom="10">
-        <gmap-marker
-                :key="m.billboard.id"
-                v-for="m in markers"
-                :position="m.position"
-                :icon="markerIcon"
-                :clickable="true"
-                @click="openInfoWindow(m)">
-        </gmap-marker>
-
-        <gmap-info-window
-                :opened="(billboard !== null)"
-                :position="(billboard !== null) ? billboard.position : null"
-                @closeclick="billboard = null">
-            <billboard-info v-if="billboard" :user="this.user" :billboard="billboard"></billboard-info>
-        </gmap-info-window>
-    </gmap-map>
+    <div class="main-map">
+        <a class="btn-proposal"><i class="material-icons">local_atm</i></a>
+        <gmap-map
+                v-if="loaded"
+                :options="mapOptions"
+                :center="center"
+                :zoom="10">
+            <gmap-marker
+                    :key="m.billboard.id"
+                    v-for="m in markers"
+                    :position="m.position"
+                    :icon="markerIcon"
+                    :clickable="true"
+                    @click="openInfoWindow(m)">
+            </gmap-marker>
+            <gmap-info-window
+                    :opened="(billboard !== null)"
+                    :position="(billboard !== null) ? billboard.position : null"
+                    @closeclick="billboard = null">
+                <billboard-info v-if="billboard" :user="this.user" :billboard="billboard"></billboard-info>
+            </gmap-info-window>
+        </gmap-map>
+    </div>
 </template>
 
-<style>
-    .vue-map-container {
+<style lang="scss">
+    .main-map {
+        position: relative;
         width: 100%;
-        height: 90vh;
+        height: calc(100vh - 111px);
+
+        .btn-proposal {
+            background: white;
+            position: absolute;
+            right: 14px;
+            top: 60px;
+            z-index: 100;
+            width: 25px;
+            height: 25px;
+            border-radius: 4px;
+            box-shadow: 1px 1px 1px 1px rgba(222, 222, 222, 1);
+
+            i {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                color: #626262;
+                font-size: 24px;
+            }
+        }
+
+        .vue-map-container {
+            width: 100%;
+            height: calc(100vh - 90px);
+        }
     }
 </style>
 
@@ -77,10 +106,10 @@
             };
             this.zoom = this.user.zoom;
             this.loaded = true;
-            if(this.user.email) {
+            if (this.user.email) {
 
                 this.loadMarkers('api.billboard.index');
-            }else{
+            } else {
                 this.loadMarkers('public.billboard.page');
             }
         },
