@@ -44,7 +44,7 @@ class BillboardsController extends Controller
         $billboard = Billboard::query()
             ->join('teams', 'teams.id', '=', 'billboards.team_id')
 
-            ->select('billboards.*','teams.id',
+            ->select('billboards.*','teams.id as teamid',
                              'teams.name as teamname','teams.owner_id')
             ->where('teams.slug', $teamSlug)
             ->where('billboards.slug', $billboardSlug)
