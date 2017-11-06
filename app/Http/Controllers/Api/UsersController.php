@@ -71,7 +71,7 @@ class UsersController extends Controller
         $user->password = bcrypt($data['new_password']);
         $user->save();
         $response = [
-            'message' => 'User password updated.',
+            'message' => 'Password updated.',
             'data' => $user,
         ];
         return $response;

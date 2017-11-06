@@ -95,6 +95,7 @@
                 console.log('FORM PW - ',this.formPw);
                 Slc.put(uri, this.formPw).then((response) => {
                     console.log('Password Updated',response);
+                    this.formPw = new SlcForm();
                 });
             },
         }
