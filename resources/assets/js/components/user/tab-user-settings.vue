@@ -1,15 +1,15 @@
 <template>
     <div>
-        <form-submit v-model="user" @submit="saveUser" class="wizard-big wizard clearfix">
-            <div class="ibox">
+        <div class="ibox">
+            <form-submit v-model="formPhoto" @submit="updatePhoto" class="wizard-big wizard clearfix">
                 <div class="ibox-title">
                     <h5>Photo Porfile</h5>
                 </div>
                 <div class="ibox-content">
                     <row>
                         <div class="col-lg-4 col-sm-4 col-xs-12">
-                            <form-group :form="user" field="photo_url">
-                                <image-upload v-model="user.photo_url"
+                            <form-group :form="formPhoto" field="photo_url">
+                                <image-upload v-model="formPhoto.photo_url"
                                               id="photo_url"
                                               name="photo_url"></image-upload>
                             </form-group>
@@ -24,24 +24,26 @@
                         <div class="clear"></div>
                     </row>
                 </div>
+            </form-submit>
+        </div>
+        <div class="ibox">
+            <div class="ibox-title">
+                <h5>User Settings</h5>
             </div>
-            <div class="ibox">
-                <div class="ibox-title">
-                    <h5>User Settings</h5>
-                </div>
-                <div class="ibox-content">
+            <div class="ibox-content">
+                <form-submit v-model="formUser" @submit="saveUser" class="wizard-big wizard clearfix">
                     <row>
                         <div class="col-lg-12">
 
-                            <form-group :form="user" field="name">
+                            <form-group :form="formUser" field="name">
                                 <input-label for="name">Name: </input-label>
-                                <input-text v-model="user.name" id="name"
+                                <input-text v-model="formUser.name" id="name"
                                             name="name"></input-text>
                             </form-group>
 
-                            <form-group :form="user" field="email">
+                            <form-group :form="formUser" field="email">
                                 <input-label for="email">Email: </input-label>
-                                <input-text v-model="user.email" id="email"
+                                <input-text v-model="formUser.email" id="email"
                                             name="email"></input-text>
                             </form-group>
                             <hr>
@@ -51,10 +53,11 @@
                             </div>
                         </div>
                     </row>
-                    <div class="clear"></div>
-                </div>
+                </form-submit>
+                <div class="clear"></div>
             </div>
-        </form-submit>
+        </div>
+
     </div>
 </template>
 <style lang="scss" scoped="scoped">
@@ -91,7 +94,8 @@
     export default {
         data() {
             return {
-                user: Slc.user,
+                formUser: null,
+                formPhoto: null,
                 pageHeading: {
                     title: 'User Settings',
                     breadcrumb: [
@@ -101,14 +105,21 @@
             }
         },
         created(){
-            this.user = new SlcForm(Slc.user);
+            this.formUser = new SlcForm(Slc.user);
+            this.formPhoto = new SlcForm(Slc.user);
         },
 
         methods: {
             saveUser(){
                 const uri = laroute.route('api.user.update', {user: Slc.user.id});
-                Slc.put(uri, this.user).then((response) => {
+                Slc.put(uri, this.formUser).then((response) => {
                     console.log("User Update", response);
+                });
+            },
+            updatePhoto(){
+                const uri = laroute.route('api.user.update.photo', {user: Slc.user.id});
+                Slc.put(uri, this.formPhoto).then((response) => {
+                    console.log("Profile Photo Update", response);
                 });
             },
         }

@@ -25,26 +25,15 @@
             </div>
         </div>
         <div class="col-md-12">
-            <hr style="border-bottom: 2px solid #00A5E3"/>
+            <hr/>
         </div>
         <div class="col-md-6">
-            <gmap-map
-                    :center="{{json_encode(['lat'=> $billboard->lat,'lng'=>$billboard->lng])}}"
-                    :zoom="7"
-                    style="width: 95%; min-height: 185px">
-                <gmap-marker
-                        :position="{{json_encode(['lat'=> $billboard->lat,'lng'=>$billboard->lng])}}"
-                        :icon="{{
-                        json_encode([
-                                    'url'=> '/images/pin.png',
-                                    'size'=> ['width'=> 48, 'height'=> 48, 'f'=>'px', 'b'=> 'px'],
-                                    'scaledSize'=> ['width'=> 48, 'height'=> 48, 'f'=>'px', 'b'=> 'px'],
-                                    ])
-                                }}"
-                        :clickable="false"
-                        :draggable="false"
-                ></gmap-marker>
-            </gmap-map>
+            <gmap-street-view-panorama
+                    class="pano"
+                    :position="{{json_encode(['lat'=> $billboard->lat,'lng'=>$billboard->lng])}}"
+                    :pov="{{json_encode(array('heading'=>$billboard->heading,'pitch'=>$billboard->pitch))}}"
+                    :zoom="1">
+            </gmap-street-view-panorama>
         </div>
         <div class="col-md-6">
             <h3 class="text-center"><strong>{{$billboard->name}}</strong></h3>
@@ -57,19 +46,17 @@
         </div>
 
         <div class="col-md-12">
-            <hr style="border-bottom: 2px solid #00A5E3"/>
+            <hr/>
         </div>
 
         <!-- BILLBOARD FACES -->
-        <div class="col-md-12 text-center">
-            <h4 style="margin-top: 0">Billboard Faces</h4>
-        </div>
         @foreach($billboard->billboardFaces as $face)
             <div class="billboard-face col-md-6">
-                <hr style="border-bottom: 2px solid #00A5E3; margin-top: 0"/>
+            <div class="row">
+                <hr/>
                 <div class="col-md-5">
 
-                        <img alt="Face" class="img-responsive" src="{{$face->photo}}">
+                        <img alt="Face" class="img-responsive" src="{{$face->photo}}" width="100%">
 
                 </div>
                 <div class="col-md-7">
@@ -99,6 +86,7 @@
                     </table>
                 </div>
 
+            </div>
             </div>
         @endforeach
         <div style="clear: both"></div>

@@ -14,6 +14,7 @@ use App\Models\User;
 use App\Services\UserService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\MessageBag;
 
 class UsersController extends Controller
 {
@@ -70,7 +71,7 @@ class UsersController extends Controller
         $user->password = bcrypt($data['new_password']);
         $user->save();
         $response = [
-            'message' => 'User password updated.',
+            'message' => 'Password updated.',
             'data' => $user,
         ];
         return $response;
