@@ -44,7 +44,7 @@
         },
 
         mounted(){
-            this.$on('add-face', (face) => console.log('Face', face));
+            Bus.$on('add-face', (face) => console.log('Face', face));
         },
 
         methods:{
