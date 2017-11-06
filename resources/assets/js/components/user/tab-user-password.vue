@@ -8,11 +8,11 @@
                 <div class="ibox-content">
                     <row>
                         <div class="col-lg-12">
-                            <form-group :form="formPw" field="current_password">
-                                <input-label for="current_password">Current password:
+                            <form-group :form="formPw" field="password">
+                                <input-label for="password">Current password:
                                 </input-label>
-                                <input-text v-model="formPw.current_password"
-                                            id="current_password"
+                                <input-text v-model="formPw.password"
+                                            id="password"
                                             name="current_password"
                                             type="password"></input-text>
                             </form-group>
@@ -92,6 +92,7 @@
         methods: {
             updatePw(){
                 const uri = laroute.route('api.user.update.password', {user: Slc.user.id});
+                console.log('FORM PW - ',this.formPw);
                 Slc.put(uri, this.formPw).then((response) => {
                     console.log('Password Updated',response);
                 });

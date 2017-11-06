@@ -77,10 +77,6 @@ class UsersController extends Controller
             ];
             return $response;
         } else {
-            $error = [
-                'success' => false,
-                'current_password' => 'Current Password is Invalid.'
-            ];
         }
 
     }
