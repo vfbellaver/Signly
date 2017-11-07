@@ -24,7 +24,7 @@ class PaymentController extends Controller
 
     public function __construct(CardService $service)
     {
-        $this->key = "sk_test_vKQEgHfPSO1a5eJl2W0ZqUzW";
+        $this->key = config('services.stripe.secret');
         Stripe::setApiKey($this->key);
         $this->service = $service;
         $this->role = Defender::findRole('user');

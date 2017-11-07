@@ -7,8 +7,13 @@
   box-sizing: border-box;
   min-height: calc(100vh - 60px);
   box-shadow: 2px 2px 2px #d7d7d7;
-  border: solid 1px #00A5E3;
 }
+#public-billboard .ibox-content {
+  padding-left: 0;
+  padding-right: 0;
+  padding-top: 10px;
+}
+
 h3 {
   margin-top: 0px;
 }

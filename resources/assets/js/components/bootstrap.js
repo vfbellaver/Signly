@@ -28,5 +28,5 @@ Vue.component('billboard-show', require('./billboard-public/billboard-show'));
 //TEAM
 Vue.component('team-settings', require('./team/settings'));
 //PROPOSAL
-Vue.component('proposal-list', require('./proposal/proposal-list.vue'));
-Vue.component('proposal-show', require('./proposal/proposal-show.vue'));
+Vue.component('proposal-list', require('./proposal/proposal-list'));
+Vue.component('proposal-show', require('./proposal/proposal-show'));
