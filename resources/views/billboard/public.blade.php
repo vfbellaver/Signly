@@ -27,9 +27,9 @@
         <div class="col-md-12">
             <hr/>
         </div>
-        <div class="row">
+
             <div class="col-md-6">
-                <img width="100%" class="text-center" src="/images/pov_img.png">
+                <img width="96%" class="text-center" src="/images/pov_img.png">
             </div>
             <div class="col-md-6">
                 <h3 class="text-center"><strong>{{$billboard->name}}</strong></h3>
@@ -40,7 +40,7 @@
                 <strong> <i class="fa fa-edit"></i> Description:</strong><br>
                 <p class="text-justify">{{$billboard->description}}</p>
             </div>
-        </div>
+
 
         <div class="col-md-12">
             <hr/>
