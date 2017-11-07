@@ -69,20 +69,24 @@
                                 <h2 class="font-bold">$ {{$face->hard_cost}}</h2>
                             </div>
                         </div>
-                        <hr style="margin-top: 5px; margin-bottom: 5px">
+                        <hr style="margin-top: 5px; margin-bottom: 15px">
                         <table class="table">
                             <thead>
                             <tr>
-                                <th>Illuminated</th>
-                                <th>Lights on</th>
-                                <th>Lights off</th>
+                                <th>Width</th>
+                                <th>Height</th>
+                                <th>Type</th>
+                                <th>Duration</th>
+                                <th>Reads</th>
                             </tr>
                             </thead>
                             <tbody>
                             <tr>
-                                <td>{{($face->is_illuminated ? 'Yes' : 'No')}}</td>
-                                <td>{{$face->lights_on}}</td>
-                                <td>{{$face->lights_off}}</td>
+                                <td>{{($face->width ? 'Yes' : 'No')}}</td>
+                                <td>{{$face->height}}</td>
+                                <td>{{$face->type}}</td>
+                                <td>{{$face->duration}}</td>
+                                <td>{{$face->reads}}</td>
                             </tr>
                             </tbody>
                         </table>

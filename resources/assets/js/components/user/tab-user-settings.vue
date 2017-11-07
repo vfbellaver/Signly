@@ -34,7 +34,6 @@
                 <form-submit v-model="formUser" @submit="saveUser" class="wizard-big wizard clearfix">
                     <row>
                         <div class="col-lg-12">
-
                             <form-group :form="formUser" field="name">
                                 <input-label for="name">Name: </input-label>
                                 <input-text v-model="formUser.name" id="name"
@@ -119,6 +118,7 @@
             updatePhoto(){
                 const uri = laroute.route('api.user.update.photo', {user: Slc.user.id});
                 Slc.put(uri, this.formPhoto).then((response) => {
+                    this.formUser = new SlcForm(response.data);
                     console.log("Profile Photo Update", response);
                 });
             },
