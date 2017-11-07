@@ -1,3 +1,3 @@
 <?php
 
-Route::resource('proposal', 'Api\ProposalsController', ['except' => ['show', 'create', 'edit']]);
+Route::resource('proposal', 'Api\ProposalsController', ['except' => ['create', 'edit']]);

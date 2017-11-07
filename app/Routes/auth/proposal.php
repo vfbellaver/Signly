@@ -1,3 +1,3 @@
 <?php
 
-Route::resource('proposals', 'Web\ProposalsController', ['only' => ['index']]);
+Route::resource('proposals', 'Web\ProposalsController', ['only' => ['index', 'show']]);

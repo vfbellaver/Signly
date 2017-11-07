@@ -202,7 +202,7 @@ video {
 
 /// here was padding 0 15px
 #page-wrapper {
-  padding: 0 0 60px 0;
+  padding: 0 0 40px 0;
   min-height: 568px;
   position: relative !important;
 }
@@ -238,7 +238,6 @@ ul.unstyled, ol.unstyled {
 /* FOOTER */
 
 .footer {
-
   background: none repeat scroll 0 0 white;
   border-top: 1px solid $border-color;
   bottom: 0;
@@ -246,6 +245,7 @@ ul.unstyled, ol.unstyled {
   padding: 10px 20px;
   position: absolute;
   right: 0;
+  height: 40px;
 }
 
 .footer.fixed_full {

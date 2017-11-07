@@ -31,8 +31,10 @@
                                     <td>{{ proposal.name }}</td>
                                     <td>{{ proposal.client.company_name }}</td>
                                     <td>
-                                        <btn-success size="xs" @click.native="edit(proposal)">
-                                            <icon icon="edit"></icon>
+                                        <btn-success size="xs" @click.native="edit(proposal)"
+                                                     :disabled="proposal.editForm.busy">
+                                            <spinner v-if="proposal.editForm.busy"></spinner>
+                                            <icon v-else icon="edit"></icon>
                                         </btn-success>
 
                                         <btn-danger @click.native="destroy(proposal)"
@@ -87,7 +89,8 @@
             },
 
             edit(proposal) {
-                this.$refs.form.show(proposal);
+                proposal.editForm.busy = true;
+                window.location = laroute.route('proposals.show', {proposal: proposal.id});
             },
 
             reload() {

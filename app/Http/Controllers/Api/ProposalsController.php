@@ -23,6 +23,15 @@ class ProposalsController extends Controller
         return Proposal::all();
     }
 
+    public function show($id)
+    {
+        $user = auth()->user();
+        return Proposal::query()
+            ->where('id', $id)
+            ->where('team_id', $user->team_id)
+            ->firstOrFail();
+    }
+
     public function store(ProposalCreateRequest $request)
     {
         $data = $this->service->create($request->form());
