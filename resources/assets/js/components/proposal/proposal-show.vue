@@ -14,7 +14,7 @@
         </nav>
 
         <div class="wrapper wrapper-content">
-            <map-controls :proposal="proposal"></map-controls>
+            <map-controls></map-controls>
 
             <gmap-map
                     v-if="loaded"
@@ -22,8 +22,8 @@
                     :center="center"
                     :zoom="10">
                 <gmap-marker
-                        :key="m.billboard.id"
                         v-for="m in markers"
+                        :key="m.billboard.id"
                         :position="m.position"
                         :icon="markerIcon"
                         :clickable="true"
@@ -32,8 +32,8 @@
                 <gmap-info-window
                         :opened="(billboard !== null)"
                         :position="(billboard !== null) ? billboard.position : null"
-                        @closeclick="billboard = null">
-                    <billboard-show v-if="billboard" :user="this.user" :billboard="billboard"></billboard-show>
+                        @closeclick="closeInfoWindow">
+                    <billboard-show v-if="billboard"></billboard-show>
                 </gmap-info-window>
             </gmap-map>
         </div>
@@ -59,18 +59,19 @@
     import * as Slc from "../../vue/http";
     import BillboardShow from './show/billboard-show';
     import MapControls from './show/map-controls';
+    import store from './show/store';
 
     export default {
         props: {
             id: {required: true},
         },
+        store,
         components: {
             BillboardShow,
             MapControls,
         },
         data() {
             return {
-                proposal: null,
                 pageHeading: {
                     title: 'Loading...',
                     breadcrumb: [
@@ -78,10 +79,8 @@
                         {title: 'Proposal List', url: laroute.route('proposals.index')}
                     ]
                 },
-                loaded: false,
-                billboards: [],
-                billboard: null,
 
+                loaded: false,
                 center: null,
                 zoom: null,
                 mapOptions: {
@@ -95,55 +94,61 @@
                     size: {width: 48, height: 48, f: 'px', b: 'px'},
                     scaledSize: {width: 48, height: 48, f: 'px', b: 'px'}
                 },
-                markers: [],
-
                 infoWindowPos: null,
             }
         },
 
+        computed: {
+            user() {
+                return this.$store.state.user;
+            },
+            billboard() {
+                return this.$store.state.billboard;
+            },
+            billboards() {
+                return this.$store.state.billboards;
+            },
+            markers() {
+                return this.$store.state.markers;
+            }
+        },
+
         created() {
-            const user = window.Slc.user;
-            this.center = {
-                lat: parseFloat(user.lat),
-                lng: parseFloat(user.lng),
-            };
-            this.zoom = user.zoom;
-            this.loaded = true;
+            this.$store.dispatch('getUser');
+            this.$store.dispatch('getProposal', this.id);
+            this.$store.dispatch('getBillboards');
         },
 
         mounted() {
-            this.load();
-            this.loadMarkers();
+            const self = this;
+            this.center = {
+                lat: parseFloat(this.user.lat),
+                lng: parseFloat(this.user.lng),
+            };
+            this.zoom = this.user.zoom;
+            this.loaded = true;
+            this.$store.watch(state => {
+                    return state.proposal;
+                },
+                () => {
+                    if (!self.$store.state.proposal) {
+                        return;
+                    }
+                    this.pageHeading.title = self.$store.state.proposal.name;
+                },
+                {
+                    deep: true
+                })
         },
 
         methods: {
-            load() {
-                Slc.find(laroute.route('api.proposal.show', {proposal: this.id}))
-                    .then((response) => {
-                        console.log("Load proposal ", response);
-                        this.proposal = response;
-                        this.pageHeading.title = response.name;
-                    });
-            },
-            loadMarkers() {
-                const uri = laroute.route('api.billboard.index');
-                Slc.get(uri)
-                    .then((response) => {
-                        this.billboards = response;
-                        for (let i = 0; i < this.billboards.length; i++) {
-                            this.markers.push({
-                                position: {
-                                    lat: parseFloat(this.billboards[i].lat),
-                                    lng: parseFloat(this.billboards[i].lng)
-                                },
-                                billboard: this.billboards[i],
-                            });
-                        }
-                    });
-            },
-            openInfoWindow: function (marker) {
+            openInfoWindow(marker) {
                 console.log("Open Info Window", marker.billboard);
-                this.billboard = marker.billboard;
+                this.$store.dispatch('setBillboard', marker.billboard);
+            },
+            closeInfoWindow() {
+                console.log("Close Info Window");
+                this.$store.dispatch('setBillboard', null);
             },
         }
     }

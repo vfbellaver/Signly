@@ -44,15 +44,28 @@
 <script>
 
     import * as Slc from "../../../vue/http";
+    import store from './store';
 
     export default {
-
-        props: {
-            proposal: {required: true}
-        },
-
+        props: {},
+        store,
         data() {
             return {}
+        },
+
+        computed: {
+            user() {
+                return this.$store.state.user;
+            },
+            billboard() {
+                return this.$store.state.billboard;
+            },
+            billboards() {
+                return this.$store.state.billboards;
+            },
+            markers() {
+                return this.$store.state.markers;
+            }
         },
 
         created() {
