@@ -32,7 +32,7 @@
                         </dl>
                     </div>
                     <div>
-
+                        <button class="btn btn-primary" @click="addToProposal(face)">Add</button>
                     </div>
                 </div>
             </tab>
@@ -70,29 +70,40 @@
 <script>
 
     import * as Slc from "../../../vue/http";
+    import store from './store';
 
     export default {
+        props: {},
 
-        props: {
-            billboard: {required: true},
-            user: {required: true}
-        },
+        store,
 
         data() {
-            return {
-                nameteam: {}
+            return {}
+        },
+
+        computed: {
+            user() {
+                return this.$store.state.user;
+            },
+            billboard() {
+                return this.$store.state.billboard;
+            },
+            billboards() {
+                return this.$store.state.billboards;
+            },
+            markers() {
+                return this.$store.state.markers;
             }
         },
 
         created() {
-            console.log("Billboard Info", this.billboard);
+
         },
 
         methods: {
-            addFace(face) {
-                Bus.$emit('add-face', {face: face});
-            }
+            addToProposal(billboardFace) {
+                this.$store.dispatch('addBillboardFace', billboardFace);
+            },
         }
-
     }
 </script>

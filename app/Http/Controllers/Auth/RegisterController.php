@@ -22,7 +22,7 @@ class RegisterController extends Controller
 
     public function __construct(CardService $service)
     {
-        $this->key = "sk_test_vKQEgHfPSO1a5eJl2W0ZqUzW";
+        $this->key = config('services.stripe.secret');
         Stripe::setApiKey($this->key);
         $this->service = $service;
         $this->role = Defender::findRole('user');
@@ -37,7 +37,7 @@ class RegisterController extends Controller
     {
         $team = new  Team();
         $team->name = $request->input('company');
-        $team->slug = str_slug($request->input('company'),'-');
+        $team->slug = str_slug($request->input('company'), '-');
         $team->save();
         $user = new  User();
         $user->name = $request->input('name');
@@ -67,22 +67,22 @@ class RegisterController extends Controller
             "data" => $data,
         ];
 
-        return view('auth.login',compact('response'));
+        return view('auth.login', compact('response'));
     }
 
     public function invitation($token)
     {
         $isValid = false;
-        $user = User::query()->where('invitation_token',$token)->first();
-        if($user){
+        $user = User::query()->where('invitation_token', $token)->first();
+        if ($user) {
             $isValid = true;
         }
-        return view('auth.invitation',compact('isValid','token'));
+        return view('auth.invitation', compact('isValid', 'token'));
     }
 
     public function registerInvitation(Request $request)
     {
-        $user = User::where('invitation_token',$request->input('invitation_token'))->first();
+        $user = User::where('invitation_token', $request->input('invitation_token'))->first();
 
         $user->name = $request->input('name');
         $user->invitation_token = null;
