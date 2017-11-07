@@ -35,6 +35,7 @@
         components: {
             ClientSelect,
         },
+
         data() {
             return {
                 api: 'proposal'

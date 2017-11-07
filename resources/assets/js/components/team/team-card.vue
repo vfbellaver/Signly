@@ -1,7 +1,7 @@
 <template>
     <div>
         <row>
-            <div class="col-lg-4">
+            <div class="col-xs-6 col-sm-6">
                 <div class="payment-card">
                     <i :class="brand"></i>
                     <h2>
@@ -23,7 +23,7 @@
             </div>
         </row>
         <row>
-            <div class="col-lg-12">
+            <div class="col-xs-12">
                 <div class="ibox">
                     <div class="ibox-title">
                         <h5>Update your Card</h5>
@@ -99,6 +99,7 @@
                     {name: 'Diners Club', class: 'fa fa-cc-diners-club payment-icon-big text-success'},
                     {name: 'American Express', class: 'fa fa-cc-visa payment-icon-big text-success'},
                     {name: 'Discovery', class: 'fa fa-cc-discover payment-icon-big text-success'},
+                    {name: 'JCB', class: 'fa fa-cc-jcb payment-icon-big text-success'},
                 ],
                 brand: null,
                 stripe: null,
