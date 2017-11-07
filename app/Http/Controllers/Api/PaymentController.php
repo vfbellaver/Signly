@@ -32,8 +32,9 @@ class PaymentController extends Controller
 
     public function getCard()
     {
-        return Customer::retrieve(auth()->user()->stripe_id)->sources->all(array(
+        $card = Customer::retrieve(auth()->user()->stripe_id)->sources->all(array(
             'limit' => 1, 'object' => 'card'));
+        return $card;
     }
 
     public function createToken(TokenCreateRequest $request)
