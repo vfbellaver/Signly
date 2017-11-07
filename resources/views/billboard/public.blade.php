@@ -61,16 +61,14 @@
                     <div class="ibox-content">
                         <div class="row  m-t-sm">
                             <div class="col-sm-6">
-                                <p>Hard Cost</p>
-                                <h2 class="font-bold">$ {{$face->hard_cost}}</h2>
-                            </div>
-                            <div class="col-sm-6">
                                 <p>Montlhy Impressions</p>
                                 <h2 class="font-bold">{{$face->monthly_impressions}}</h2>
                             </div>
+                            <div class="col-sm-6">
+                                <p>Hard Cost</p>
+                                <h2 class="font-bold">$ {{$face->hard_cost}}</h2>
+                            </div>
                         </div>
-
-
                         <hr style="margin-top: 5px; margin-bottom: 5px">
                         <table class="table">
                             <thead>
@@ -88,6 +86,23 @@
                             </tr>
                             </tbody>
                         </table>
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>Illuminated</th>
+                                <th>Lights on</th>
+                                <th>Lights off</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>{{($face->is_illuminated ? 'Yes' : 'No')}}</td>
+                                <td>{{$face->lights_on}}</td>
+                                <td>{{$face->lights_off}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+
 
                     </div>
                 </div>
