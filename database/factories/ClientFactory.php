@@ -18,8 +18,8 @@ $factory->define(App\Models\Client::class, function (Faker $faker) {
         'phone1' => $faker->phoneNumber,
         'phone2' => $faker->phoneNumber,
         'fax' => $faker->phoneNumber,
-        'user_id' => function () {
-            return factory(App\Models\User::class)->create()->id;
+        'team_id' => function () {
+            return factory(App\Models\Team::class)->create()->id;
         },
     ];
 });

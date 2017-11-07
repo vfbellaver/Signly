@@ -42,7 +42,7 @@
                                                 @click="center=marker"
                                         ></gmap-marker>
                                     </gmap-map>
-                                    <hr />
+                                    <hr/>
                                     <gmap-street-view-panorama
                                             v-if="streetViewLoaded"
                                             class="pano"
@@ -52,7 +52,7 @@
                                             @pano_changed="updatePano"
                                             @pov_changed="updatePov">
                                     </gmap-street-view-panorama>
-
+                                    <hr/>
                                     <form-group :form="form" field="lat">
                                         <input-label for="lat">Latitude: </input-label>
                                         <input-text v-model="form.lat" id="lat" name="lat"></input-text>
@@ -64,9 +64,7 @@
                                     </form-group>
                                 </div>
                                 <div class="col-md-6" v-if="form.id">
-                                    <form-group :form="form" field="billboardFaces">
-                                        <billboard-face-list :billboardId="form.id"></billboard-face-list>
-                                    </form-group>
+                                    <billboard-face-list :billboardId="form.id"></billboard-face-list>
                                 </div>
                             </div>
                             <div class="row">
@@ -90,9 +88,11 @@
     .top-navigation .wrapper.wrapper-content {
         padding-top: 0;
     }
+
     .margin-billboard-edit {
         margin-right: 5px;
     }
+
     .vue-street-view-pano-container {
         min-height: 360px;
     }
@@ -102,6 +102,7 @@
     import _ from 'lodash';
     import * as Slc from "../../vue/http";
     import BillboardFaceList from '../billboard-face/billboard-face-list';
+
     export default {
         props: {
             id: {required: true},
@@ -225,6 +226,8 @@
                     return;
                 }
                 this.zoom = 15;
+
+                console.log('On click Billboard', this.form);
             },
             onZoomChanged(e) {
                 console.log("On Zoom Changed", e);
@@ -250,13 +253,14 @@
                     self.marker = pos;
                     self.center = pos;
                     self.streetViewLoaded = false;
-                    self.$nextTick(()=>{
+                    self.$nextTick(() => {
                         self.streetViewLoaded = true;
                     });
                     if (self.zoomChanged) {
                         return;
                     }
                     self.zoom = 15;
+                    console.log('On address Changed Billboard', this.form);
                 });
             }, 500),
             onMarkerMoved: _.debounce(function (e) {
@@ -269,20 +273,23 @@
                 this.form.lng = pos.lng;
                 this.marker = pos;
                 this.center = pos;
-                console.log('Is center chaged', this.center );
+                console.log('Is center chaged', this.center);
                 this.streetViewLoaded = false;
-                this.$nextTick(()=>{
+                this.$nextTick(() => {
                     this.streetViewLoaded = true;
                 });
+                console.log('On marker Moved Billboard', this.form);
             }),
             updatePov(pov) {
                 console.log('Pov Changed: ', pov);
                 this.pov = pov;
                 this.form.heading = pov.heading;
                 this.form.pitch = pov.pitch;
+                console.log('Update Pov Billboard', this.form);
             },
             updatePano(pano) {
                 this.pano = pano;
+                console.log('Update pano', this.form);
             }
         }
     }

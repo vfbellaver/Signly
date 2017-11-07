@@ -1,6 +1,6 @@
-@extends('layouts.login')
+@extends('layouts.base', ['bodyClass' => 'gray-bg'])
 
-@section('content')
+@section('base-content')
     <div class="passwordBox animated fadeInDown">
         <div class="row">
             <div class="col-md-12">

@@ -8,14 +8,13 @@ class Billboard extends Model
 {
     protected $fillable = [
         'name',
-        'slugname',
+        'slug',
         'address',
         'lat',
         'lng',
         'heading',
         'pitch',
         'description',
-        'user_id',
         'team_id'
     ];
 
@@ -24,6 +23,7 @@ class Billboard extends Model
         'lng' => 'float',
         'heading' => 'float',
         'pitch' => 'float',
+        'team_id' => 'integer'
     ];
 
     protected $dates = [
@@ -31,18 +31,14 @@ class Billboard extends Model
 
     #region Relationships
 
-    public function user()
+    public function team()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Team::class);
     }
 
     public function billboardFaces()
     {
         return $this->hasMany(BillboardFace::class);
-    }
-
-    public function team(){
-        return $this->belongsTo(Team::class);
     }
     #endregion
 
@@ -60,15 +56,14 @@ class Billboard extends Model
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'slugname'=> $this->slugname,
+            'slug' => $this->slug,
             'description' => $this->description,
             'address' => $this->address,
             'lat' => $this->lat,
             'lng' => $this->lng,
             'heading' => $this->heading,
             'pitch' => $this->pitch,
-            'user' => $this->user->toArray(),
-            'team' =>$this->team->toArray(),
+            'team' => $this->team->toArray(),
             'billboard_faces' => $this->billboardFaces->toArray(),
             'position' => [
                 'lat' => $this->lat,
@@ -78,6 +73,15 @@ class Billboard extends Model
                 'heading' => $this->heading ? $this->heading : 0,
                 'pitch' => $this->pitch ? $this->pitch : 0,
             ]
+        ];
+    }
+
+    public function toLightArray()
+    {
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+            'slug' => $this->slug,
         ];
     }
     #endregion

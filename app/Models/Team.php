@@ -8,11 +8,13 @@ class Team extends Model
 {
     protected $fillable = [
         'name',
-        'slugname'
+        'slug',
+        'logo',
+        'owner_id'
     ];
 
     protected $casts = [
-
+        'owner_id' => 'int',
     ];
 
     protected $dates = [
@@ -20,8 +22,14 @@ class Team extends Model
     ];
 
     #region Relationships{relationships}
-    public function clients(){
-        return $this->belongsToMany(Client::class);
+    public function clients()
+    {
+        return $this->hasMany(Client::class);
+    }
+
+    public function owner()
+    {
+        return $this->belongsTo(User::class, 'owner_id');
     }
 
     #endregion
@@ -40,7 +48,8 @@ class Team extends Model
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'slugname' => $this->slugname,
+            'logo' => $this->logo,
+            'slug' => $this->slug,
         ];
     }
     #endregion

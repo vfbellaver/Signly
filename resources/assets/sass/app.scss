@@ -4,6 +4,8 @@
 @import "theme/google_maps";
 // Register
 @import "theme/register";
+// Slider
+@import "theme/slider";
 // Payment
 @import "theme/payment";
 // Variables
@@ -35,6 +37,13 @@
 // Media query style
 @import "theme/media";
 @import "common";
+@import "components/public-billboard";
+@import "components/stripe-form";
+@import "components/register-form";
+
+[v-cloak] {
+  display: none;
+}
 
 // Clear layout on print mode
 @media print {

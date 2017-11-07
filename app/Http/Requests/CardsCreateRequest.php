@@ -17,19 +17,19 @@ class CardsCreateRequest extends FormRequest
         return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array
-     */
+
     public function rules()
     {
         return [
             'source' => 'required',
-            'exp_month' => 'required',
-            'exp_year' => 'required',
-            'number' => 'required',
-            'address_zip' => 'required',
+            'owner' => 'required',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'owner.required' => 'Please type the Cardholder name',
         ];
     }
 }

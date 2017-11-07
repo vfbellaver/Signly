@@ -34,6 +34,7 @@ class User extends Authenticatable
         'address',
         'lat',
         'lng',
+        'team_id',
     ];
 
     protected $hidden = [
@@ -45,6 +46,7 @@ class User extends Authenticatable
         'status' => 'boolean',
         'lat' => 'float',
         'lng' => 'float',
+        'team_id' => 'int',
     ];
 
     #region Attributes
@@ -54,9 +56,11 @@ class User extends Authenticatable
         return $this->belongsTo(Team::class);
     }
 
-    public function message()
+    public function notifications()
     {
-        return $this->belongsTo(Message::class);
+        $relation = $this->hasMany(Notification::class, 'notifiable_id');
+        $relation->where('notifiable_type', 'users');
+        return $relation;
     }
 
     public function getSubscription()
@@ -67,6 +71,12 @@ class User extends Authenticatable
     public function getRoleAttribute()
     {
         return $this->roles()->first();
+    }
+
+    public function getIsTeamOwnerAttribute()
+    {
+        $isTeamOwner = $this->team->owner_id == $this->team_id;
+        return $isTeamOwner;
     }
     #endregion
 
@@ -91,6 +101,7 @@ class User extends Authenticatable
     public function toArray()
     {
         $role = [];
+
         if ($this->role) {
             $role = [
                 'id' => $this->role->id,
@@ -106,6 +117,7 @@ class User extends Authenticatable
             'role' => $role,
             'status' => $this->status,
             'team' => $this->team_id ? $this->team->toArray() : null,
+            'subscription' => $this->getSubscription()->get()->toArray(),
             'pending' => $this->invitation_token != null,
             'stripe_id' => $this->stripe_id,
             'card_brand' => $this->card_brand,

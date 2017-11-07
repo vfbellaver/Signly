@@ -8,6 +8,6 @@ $factory->define(App\Models\Team::class, function (Faker $faker) {
     $name = $faker->company;
     return [
         'name' => $name,
-        'slugname' => str_slug($name,'-'),
+        'slug' => str_slug($name,'-'),
     ];
 });

@@ -3,6 +3,7 @@
         <single-select
                 v-model="internalValue"
                 :value="value"
+                label="company_name"
                 api="client"
                 placeholder="Select a Client">
         </single-select>

@@ -9,7 +9,9 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name', 64);
+            $table->unsignedInteger('team_id')->nullable();
+
+            $table->string('name', 64)->nullable();
             $table->string('photo_url', 128)->nullable();
             $table->string('email', 128)->unique();
             $table->string('password')->nullable();
@@ -26,7 +28,6 @@ class CreateUsersTable extends Migration
             $table->decimal('lat', 18, 15)->nullable();
             $table->decimal('lng', 18, 15)->nullable();
 
-            $table->unsignedInteger('team_id')->nullable();
             $table->foreign('team_id')
                 ->references('id')
                 ->on('teams')

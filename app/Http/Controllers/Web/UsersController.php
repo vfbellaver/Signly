@@ -15,4 +15,9 @@ class UsersController extends Controller
     {
         return view('user.index');
     }
+
+    public function settings()
+    {
+        return view('user.settings');
+    }
 }

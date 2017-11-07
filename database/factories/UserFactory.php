@@ -13,7 +13,7 @@ $factory->define(App\Models\User::class, function (Faker $faker) {
         'email' => $faker->unique()->safeEmail,
         'password' => $password ?: $password = bcrypt('secret'),
         'remember_token' => str_random(10),
-        'team_id' => $faker->numberBetween(2, 6),
+        'team_id' => null,
         'address' => $faker->address,
         'lat' => $faker->latitude,
         'lng' => $faker->longitude,

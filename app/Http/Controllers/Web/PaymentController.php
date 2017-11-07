@@ -24,15 +24,13 @@ class PaymentController extends Controller
 
     public function __construct(CardService $service)
     {
-        $this->key = "sk_test_vKQEgHfPSO1a5eJl2W0ZqUzW";
+        $this->key = config('services.stripe.secret');
         $this->role = Defender::findRole('user');
         $this->service = $service;
     }
 
     public function index()
     {
-        //return view('payment.register');
-        //return view('payment.index');
         return view('payment.pay');
     }
 

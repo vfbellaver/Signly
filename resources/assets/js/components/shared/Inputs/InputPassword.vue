@@ -1,8 +1,6 @@
 
-
-
 <template>
-    <input class="form-control" v-model="internalValue" v-bind:value="value" :name="name"/>
+    <input type="password" class="form-control" v-model="internalValue" v-bind:value="value" :name="name"/>
 </template>
 
 <script>

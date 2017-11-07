@@ -89,8 +89,8 @@ class CardForm extends BaseForm
         return $this->request->get('last4');
     }
 
-    public function name()
+    public function owner()
     {
-        return $this->request->get('name');
+        return $this->request->get('owner');
     }
 }

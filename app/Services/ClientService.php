@@ -28,12 +28,11 @@ class ClientService
                 'phone1' => $form->phone1(),
                 'phone2' => $form->phone2(),
                 'fax' => $form->fax(),
+                'team_id' => auth()->user()->team_id,
             ];
 
             $client = new Client($data);
-            $client->user()->associate($form->user());
             $client->save();
-            $client->teams()->attach($form->user()->team_id);
 
             event(new ClientCreated($client));
 
@@ -100,7 +99,7 @@ class ClientService
             $client = array_intersect_key($row, $client);
 
 
-            if(!isset($row["company_name"]) || !$row["company_name"]){
+            if (!isset($row["company_name"]) || !$row["company_name"]) {
                 continue;
             }
 

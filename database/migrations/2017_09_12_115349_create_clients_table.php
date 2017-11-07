@@ -9,6 +9,8 @@ class CreateClientsTable extends Migration
     {
         Schema::create('clients', function (BluePrint $table) {
             $table->increments('id');
+            $table->unsignedInteger('team_id')->nullable();
+
             $table->string('company_name', 128);
             $table->string('logo', 256)->nullable();
             $table->string('first_name', 64)->nullable();
@@ -23,24 +25,11 @@ class CreateClientsTable extends Migration
             $table->string('phone2', 24)->nullable();
             $table->string('fax', 24)->nullable();
 
-            $table->unsignedInteger('user_id');
-            $table->foreign('user_id')
+            $table->foreign('team_id')
                 ->references('id')
-                ->on('users')
+                ->on('teams')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
-
-            $table->timestamps();
-        });
-
-        Schema::create('client_team',function (Blueprint $table) {
-            $table->integer('team_id')->unsigned()->index();
-            $table->foreign('team_id')->references('id')
-                    ->on('teams')->onDelete('cascade');
-
-            $table->integer('client_id')->unsigned()->index();
-            $table->foreign('client_id')->references('id')
-                ->on('clients')->onDelete('cascade');
 
             $table->timestamps();
         });
@@ -48,7 +37,6 @@ class CreateClientsTable extends Migration
 
     public function down()
     {
-        Schema::dropIfExists('client_team');
         Schema::dropIfExists('clients');
     }
 }

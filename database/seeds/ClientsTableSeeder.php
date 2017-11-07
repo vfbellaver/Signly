@@ -6,11 +6,8 @@ class ClientsTableSeeder extends Seeder
 {
     public function run()
     {
-        $user = \App\Models\User::query()->find(1);
-
-        if (!$user) {
-            return;
-        }
-        factory(\App\Models\Client::class, 25)->create(['user_id' => $user->id]);
+        \App\Models\Team::all()->each(function ($team) {
+            factory(\App\Models\Client::class, 12)->create(['team_id' => $team->id]);
+        });
     }
 }

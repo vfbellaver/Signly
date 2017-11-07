@@ -8,47 +8,40 @@
                 </box-tools>
             </box-title>
             <box-content>
-                <div style="overflow: auto; max-height: 1030px">
-                    <div v-for="billboardFace in billboardFaces">
+                <div class="row">
+                    <div class="col-md-6" v-for="billboardFace in billboardFaces">
                         <div class="contact-box">
-                            <div class="col-sm-4">
+                            <div class="col-sm-6">
                                 <div class="text-center">
-                                    <img alt="image" class="img-circle m-t-xs img-responsive" :src="billboardFace.photo">
+                                    <img alt="image" class="m-t-xs img-responsive"
+                                         :src="billboardFace.photo">
+                                    <div class="m-t-xs font-bold">{{billboardFace.code}}</div>
                                 </div>
                             </div>
-                            <div class="col-sm-8">
-                                <h4>
-                                    <small>code: &nbsp</small>
-                                    <strong>{{billboardFace.code}}</strong>
-                                </h4>
+                            <div class="col-sm-6">
                                 <h4>
                                     <small>Type: &nbsp</small>
                                     <strong>{{billboardFace.type}}</strong>
                                 </h4>
                                 <p>
-                                    <i class="fa fa-arrows-v"></i>
-                                    <small>Heigth:</small>
-                                    {{billboardFace.height}} &nbsp
-                                    <i class="fa fa-arrows-h"></i>
-                                    <small>Width:</small>
-                                    {{billboardFace.width}}
+                                    {{billboardFace.width}} W x {{billboardFace.height}} H
                                 </p>
                                 <h1>
                                     <small> U$ :</small>
-                                    {{billboardFace.hard_cost}}
+                                    {{formatMoney(billboardFace.hard_cost)}}
                                 </h1>
                             </div>
                             <div class="clearfix"></div>
-                                <div class="contact-box-footer">
-                                    <div class="m-t-xs btn-group pull-right">
-                                        <button @click="edit(billboardFace)" class="btn btn-xs btn-white"><i
-                                                class="fa fa-edit"></i> EDIT
-                                        </button>
-                                        <button @click="destroy(billboardFace)" class="btn btn-xs btn-white"><i
-                                                class="fa fa-trash"></i> DELETE
-                                        </button>
-                                    </div>
+                            <div class="contact-box-footer">
+                                <div class="m-t-xs btn-group pull-right">
+                                    <a @click="edit(billboardFace)" class="btn btn-xs btn-white"><i
+                                            class="fa fa-edit"></i> EDIT
+                                    </a>
+                                    <button @click="destroy(billboardFace)" class="btn btn-xs btn-white"><i
+                                            class="fa fa-trash"></i> DELETE
+                                    </button>
                                 </div>
+                            </div>
 
                         </div>
                     </div>
@@ -74,9 +67,12 @@
         }
         .ibox-content {
             border: 0;
+            img {
+                margin: auto;
+            }
         }
 
-        .contact-box-footer{
+        .contact-box-footer {
             margin-top: 10px;
         }
 
@@ -114,7 +110,9 @@
             }
         },
 
-        computed: {},
+        computed: {
+
+        },
 
         mounted() {
             this.reload();
@@ -157,7 +155,14 @@
             },
 
             formatMoney(money) {
+
                 money = money.toString();
+                let cents = money.slice((money.length -2),(money.length));
+
+                if(cents === '00') {
+                    money += cents;
+                }
+
                 var tmp = money.replace(".", "");
                 tmp = tmp.replace(/([0-9]{2})$/g, ",$1");
                 if (tmp.length > 6)
