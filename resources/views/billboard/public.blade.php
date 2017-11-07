@@ -28,12 +28,7 @@
             <hr/>
         </div>
         <div class="col-md-6">
-            <gmap-street-view-panorama
-                    class="pano"
-                    :position="{{json_encode(['lat'=> $billboard->lat,'lng'=>$billboard->lng])}}"
-                    :pov="{{json_encode(array('heading'=>$billboard->heading,'pitch'=>$billboard->pitch))}}"
-                    :zoom="1">
-            </gmap-street-view-panorama>
+            <img width="85%" src="/images/pov_img.png">
         </div>
         <div class="col-md-6">
             <h3 class="text-center"><strong>{{$billboard->name}}</strong></h3>
@@ -50,25 +45,28 @@
         </div>
 
         <!-- BILLBOARD FACES -->
+        <h3 class="text-center">Billboard Faces</h3>
         @foreach($billboard->billboardFaces as $face)
-            <div class="billboard-face col-md-6">
-            <div class="row">
+
+            <div class="row col-md-12">
                 <hr/>
-                <div class="col-md-5">
-
+                <div class="col-md-6">
                         <img alt="Face" class="img-responsive" src="{{$face->photo}}" width="100%">
-
                 </div>
-                <div class="col-md-7">
-                    <h5><strong> {{$face->code}} - {{$face->label}}</strong></h5>
-                    <small><strong>Hard Cost:</strong></small>
-                    <p><i class="fa fa-dollar"></i> {{$face->hard_cost}}</p>
-                </div>
-                <div class="col-md-12">
+                <div class="col-md-6">
+                    <p> {{$face->code}}</p>
+                    <p> {{$face->label}}</p>
+                    <p> {{$face->hard_cost}}</p>
+                    <p> {{$face->duration}}</p>
+                    <p> {{$face->height}}</p>
+                    <p> {{$face->width}}</p>
+                    <p> {{$face->reads}}</p>
+                    <p> {{$face->notes}}</p>
+                    <p> {{$face->monthly_impressions}}</p>
+                    <p> {{$face->max_ads}}</p>
                     <table class="table">
                         <thead style="font-size: 10px">
                         <tr>
-                            <th>Type</th>
                             <th>Illuminated</th>
                             <th>Lights on</th>
                             <th>Lights off</th>
@@ -76,8 +74,6 @@
                         </thead>
                         <tbody>
                         <tr>
-
-                            <td>{{$face->type}}</td>
                             <td>{{($face->is_illuminated ? 'Yes' : 'No')}}</td>
                             <td>{{$face->lights_on}}</td>
                             <td>{{$face->lights_off}}</td>
@@ -87,7 +83,7 @@
                 </div>
 
             </div>
-            </div>
+
         @endforeach
         <div style="clear: both"></div>
     </div>
