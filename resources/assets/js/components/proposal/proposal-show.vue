@@ -116,7 +116,6 @@
         created() {
             this.$store.dispatch('getUser');
             this.$store.dispatch('getProposal', this.id);
-            this.$store.dispatch('getBillboards');
         },
 
         mounted() {

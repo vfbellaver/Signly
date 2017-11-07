@@ -42,17 +42,16 @@ export default new Vuex.Store({
     actions: {
         getProposal({commit}, proposalId) {
             const url = laroute.route('api.proposal.show', {proposal: proposalId});
-            Slc.find(url).then((response) => {
-                console.log('Load proposal: ', url, response);
-                commit('setProposal', response);
+            Slc.find(url).then((proposal) => {
+                console.log('Load proposal: ', url, proposal);
+                commit('setProposal', proposal);
+
+                const uri = laroute.route('api.billboard.index', {proposalId: proposalId});
+                Slc.get(uri)
+                    .then((billboards) => {
+                        commit('setBillboards', billboards);
+                    });
             });
-        },
-        getBillboards({commit}, proposalId) {
-            const uri = laroute.route('api.billboard.index', {proposalId: proposalId});
-            Slc.get(uri)
-                .then((response) => {
-                    commit('setBillboards', response);
-                });
         },
         getUser({commit}) {
             commit('setUser', window.Slc.user);

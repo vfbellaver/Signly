@@ -9,6 +9,8 @@ use App\Http\Requests\BillboardUpdateRequest;
 use App\Models\Billboard;
 use App\Services\BillboardService;
 use Carbon\Carbon;
+use DB;
+use Illuminate\Database\Query\Builder;
 
 class BillboardsController extends Controller
 {
@@ -22,7 +24,8 @@ class BillboardsController extends Controller
 
     public function index()
     {
-        return Billboard::query()->where('team_id', auth()->user()->team_id)->get()->all();
+        $query = Billboard::query()->where('team_id', auth()->user()->team_id);
+        return $query->get()->all();
     }
 
     public function show($id)

@@ -32,7 +32,7 @@
                         </dl>
                     </div>
                     <div>
-
+                        <button class="btn btn-primary" @click="addToProposal(face)">Add</button>
                     </div>
                 </div>
             </tab>
@@ -100,6 +100,10 @@
 
         },
 
-        methods: {}
+        methods: {
+            addToProposal(billboardFace) {
+                this.$store.dispatch('addBillboardFace', billboardFace);
+            },
+        }
     }
 </script>
