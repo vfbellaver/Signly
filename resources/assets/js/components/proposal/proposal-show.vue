@@ -137,7 +137,7 @@
                 },
                 {
                     deep: true
-                })
+                });
         },
 
         methods: {

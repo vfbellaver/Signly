@@ -26,10 +26,12 @@ class ProposalsController extends Controller
     public function show($id)
     {
         $user = auth()->user();
-        return Proposal::query()
+        $proposal = Proposal::query()
             ->where('id', $id)
             ->where('team_id', $user->team_id)
             ->firstOrFail();
+
+        return $proposal;
     }
 
     public function store(ProposalCreateRequest $request)
