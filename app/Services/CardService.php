@@ -27,13 +27,13 @@ class CardService
     private $key;
 
     public function __construct(){
-        $this->key = "sk_test_vKQEgHfPSO1a5eJl2W0ZqUzW";
+        $this->key = config('services.stripe.secret');
     }
 
     public function store(User $user,$owner)
     {
 
-        Stripe::setApiKey("sk_test_vKQEgHfPSO1a5eJl2W0ZqUzW");
+        Stripe::setApiKey($this->key);
 
         $customer = Customer::retrieve($user->stripe_id);
         $card = $customer->sources->retrieve($customer->default_source);
