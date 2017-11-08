@@ -37,6 +37,16 @@ export default new Vuex.Store({
         setBillboard(state, billboard) {
             state.billboard = billboard;
         },
+        addBillboardFace(state, billboardFace) {
+            state.proposal.billboard_faces.push(billboardFace);
+        },
+        removeBillboardFace(state, billboardFace) {
+            const faces = state.proposal.billboard_faces;
+            faces.splice(faces.indexOf(billboardFace), 1);
+        },
+        save(state) {
+
+        }
     },
 
     actions: {
@@ -59,5 +69,14 @@ export default new Vuex.Store({
         setBillboard({commit}, billboard) {
             commit('setBillboard', billboard);
         },
+        addBillboardFace({commit}, billboardFace) {
+            commit('addBillboardFace', billboardFace);
+        },
+        removeBillboardFace({commit}, billboardFace) {
+            commit('removeBillboardFace', billboardFace);
+        },
+        save({commit}) {
+            commit('save');
+        }
     }
 });

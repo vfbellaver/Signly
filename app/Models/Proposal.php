@@ -30,6 +30,11 @@ class Proposal extends Model
     {
         return $this->belongsTo(Client::class);
     }
+
+    public function billboardFaces()
+    {
+        return $this->belongsToMany(BillboardFace::class, 'proposal_billboard_face');
+    }
     #region
 
     #region Custom Attributes
@@ -43,15 +48,17 @@ class Proposal extends Model
     #region Conversions
     public function toArray()
     {
-        return [
+        $data = [
             'id' => $this->id,
             'name' => $this->name,
             'team_id' => $this->team_id,
             'client_id' => $this->client_id,
             'client' => $this->client->toArray(),
+            'billboard_faces' => $this->billboardFaces->toArray(),
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at
         ];
+        return $data;
     }
     #endregion
 

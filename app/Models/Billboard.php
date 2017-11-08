@@ -75,6 +75,15 @@ class Billboard extends Model
             ]
         ];
     }
+
+    public function toLightArray()
+    {
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+            'slug' => $this->slug,
+        ];
+    }
     #endregion
 
 }
