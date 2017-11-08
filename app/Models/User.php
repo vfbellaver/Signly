@@ -75,7 +75,7 @@ class User extends Authenticatable
 
     public function getIsTeamOwnerAttribute()
     {
-        $isTeamOwner = $this->team->owner_id == $this->team_id;
+        $isTeamOwner = $this->team->owner_id == $this->id;
         return $isTeamOwner;
     }
     #endregion
