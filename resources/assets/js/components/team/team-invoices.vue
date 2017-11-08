@@ -19,7 +19,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr class="footable-even" v-for="invoice in invoices">
+                    <tr class="footable-even" v-for="(invoice , index) in invoices">
                         <td class="footable-visible footable-first-column"><span class="footable-toggle"></span>
                             {{user.team.name}}
                         </td>
@@ -87,8 +87,8 @@
 
             getInvoices(){
                 SLC.get(laroute.route('api.payment.invoices')).then((response) => {
-                    this.invoices = response;
-                    console.log('Invoices ', response);
+                    this.invoices = response[0];
+                    console.log('Invoices ', response[0]);
                 });
             },
 

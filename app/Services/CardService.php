@@ -86,14 +86,17 @@ class CardService
         $invoices = $user->InvoicesIncludingPending();
 
         $arrayInvoices = [];
+        $i = 0;
 
         foreach ($invoices as $invoice) {
-            $arrayInvoices =  array([
+            $arrayInvoices[$i]  =  array([
                 'date' => $invoice->date()->toFormattedDateString(),
                 'total' => $invoice->total(),
                 'id' => $invoice->id,
             ]);
+            $i++;
         };
+
 
         return $arrayInvoices;
     }
