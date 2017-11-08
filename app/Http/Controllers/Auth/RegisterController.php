@@ -46,6 +46,9 @@ class RegisterController extends Controller
         $user->remember_token = str_random(10);
         $user->team_id = $team->id;
         $user->trial_ends_at = Carbon::now()->addDays(14);
+        //TODO[daniel]: remove this part
+        $user->lat = '40.7767168';
+        $user->lng = '-111.9905246';
         $user->save();
         $user->attachRole($this->role);
         $plan = $request->input('plan');
@@ -60,14 +63,10 @@ class RegisterController extends Controller
                 'email' => $email,
             ]);
 
-        $data = $this->service->store($user, $owner);
+        $this->service->store($user, $owner);
 
-        $response = [
-            "message" => $data,
-            "data" => $data,
-        ];
-
-        return view('auth.login', compact('response'));
+        auth()->login($user);
+        return route('home');
     }
 
     public function invitation($token)
