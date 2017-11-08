@@ -66,7 +66,7 @@ class RegisterController extends Controller
         $this->service->store($user, $owner);
 
         auth()->login($user);
-        return route('home');
+        return redirect(route('home'));
     }
 
     public function invitation($token)
