@@ -34,5 +34,22 @@ class PaymentController extends Controller
         return view('payment.pay');
     }
 
+    public function invoices()
+    {
+        $user = User::query()->find(auth()->id());
+        $invoices = $user->InvoicesIncludingPending();
+        return view('payment.index',compact('invoices'));
+    }
 
+    public function invoicePDF($invoiceId)
+    {
+        $user = User::query()->find(auth()->id());
+        $subscription = $user->getSubscription()->get()->toArray();
+        $team = Team::query()->find(auth()->user()->team_id);
+
+        return $user->downloadInvoice($invoiceId, [
+            'vendor'  => $team->name,
+            'product' => $subscription[0]["stripe_plan"],
+        ]);
+    }
 }

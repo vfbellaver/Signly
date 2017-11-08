@@ -82,7 +82,7 @@
                                 <div id="tab-invoices" class="tab-pane">
                                     <div class="panel-body">
                                         <ul>
-                                            <li>Show invoices</li>
+                                            <team-invoices></team-invoices>
                                         </ul>
                                     </div>
                                 </div>
@@ -128,6 +128,7 @@
 <script>
 
     import TeamList from './team-list';
+    import TeamInvoices from './team-invoices';
     import TeamForm from './team-form';
     import TeamSubscription from './team-subscription';
     import TeamCard from './team-card';
@@ -138,6 +139,7 @@
             TeamList,
             TeamForm,
             TeamCard,
+            TeamInvoices,
             TeamSubscription,
         },
 
