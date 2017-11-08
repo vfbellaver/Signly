@@ -89,8 +89,7 @@ class PaymentController extends Controller
     public function invoices()
     {
         $user = User::query()->find(auth()->id());
-        $invoices = $user->InvoicesIncludingPending();
-        return $invoices;
+        return $this->service->invoices($user);
     }
 
 }

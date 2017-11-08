@@ -29,11 +29,6 @@ Route::group(['middleware' => ['auth']], function () {
     }
 });
 
-Route::get('invoices','Web\PaymentController@invoices');
-
-Route::get('user/invoice/{invoice}','Web\PaymentController@invoicePDF');
-
-
 foreach (File::files(app()->path() . '/Routes/guest') as $file) {
     require $file;
 }

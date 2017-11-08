@@ -79,4 +79,22 @@ class CardService
         ));
 
     }
+
+    public function invoices($user)
+    {
+        $user = User::query()->find(auth()->id());
+        $invoices = $user->InvoicesIncludingPending();
+
+        $arrayInvoices = [];
+
+        foreach ($invoices as $invoice) {
+            $arrayInvoices =  array([
+                'date' => $invoice->date()->toFormattedDateString(),
+                'total' => $invoice->total(),
+                'id' => $invoice->id,
+            ]);
+        };
+
+        return $arrayInvoices;
+    }
 }
