@@ -25,7 +25,7 @@ class RegisterController extends Controller
         $this->key = config('services.stripe.secret');
         Stripe::setApiKey($this->key);
         $this->service = $service;
-        $this->role = Defender::findRole('user');
+        $this->role = Defender::findRole('admin');
     }
 
     public function register()
