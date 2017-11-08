@@ -50,6 +50,10 @@ class RegisterController extends Controller
         $user->lat = '40.7767168';
         $user->lng = '-111.9905246';
         $user->save();
+
+        $team->owner_id = $user->id;
+        $team->save();
+
         $user->attachRole($this->role);
         $plan = $request->input('plan');
         $email = $request->input('email');
