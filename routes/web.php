@@ -13,6 +13,8 @@ Route::get('roles', function () {
     dd($roles);
 });
 
+Route::get('pdf','Web\PDFController@index');
+
 Route::get('slc.js', function () {
     $json = json_encode(array_merge(Slc::scriptVariables(), []));
     $js = <<<js

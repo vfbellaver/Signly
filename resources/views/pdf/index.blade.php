@@ -1,7 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: cursino
- * Date: 09/11/17
- * Time: 13:35
- */
+$html = '<bookmark content="Start of the Document" /><div>Section 1 text</div>';
+
+$mpdf->WriteHTML($html);
+$mpdf->Output();
