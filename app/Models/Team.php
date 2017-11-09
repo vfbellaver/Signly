@@ -9,6 +9,10 @@ class Team extends Model
     protected $fillable = [
         'name',
         'slug',
+        'email',
+        'phone',
+        'fax',
+        'address',
         'logo',
         'owner_id'
     ];
@@ -48,6 +52,10 @@ class Team extends Model
         return [
             'id' => $this->id,
             'name' => $this->name,
+            'email' => $this->email,
+            'phone' => $this->phone,
+            'fax' => $this->fax,
+            'address' => $this->address,
             'logo' => $this->logo,
             'slug' => $this->slug,
         ];

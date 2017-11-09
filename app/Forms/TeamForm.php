@@ -9,6 +9,26 @@ class TeamForm extends BaseForm
         return $this->request->get('name');
     }
 
+    public function email()
+    {
+        return $this->request->get('email');
+    }
+
+    public function phone()
+    {
+        return $this->request->get('phone');
+    }
+
+    public function fax()
+    {
+        return $this->request->get('fax');
+    }
+
+    public function address()
+    {
+        return $this->request->get('address');
+    }
+
     public function slug()
     {
         return $this->request->get('slug');

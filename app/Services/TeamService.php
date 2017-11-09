@@ -32,6 +32,10 @@ class TeamService
         return \DB::transaction(function () use ($form, $team) {
 
             $team->name = $form->name();
+            $team->email = $form->email();
+            $team->phone = $form->phone();
+            $team->fax = $form->fax();
+            $team->address = $form->address();
             $team->logo = $form->logo();
             $team->save();
 
