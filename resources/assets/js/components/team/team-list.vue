@@ -1,110 +1,187 @@
 <template>
     <div>
-        <box>
-            <box-title>
-                Teams
-                <box-tools slot="tools">
-                    <box-tool icon="plus" @click.native="add">New</box-tool>
-                </box-tools>
-            </box-title>
-            <box-content>
-                <div class="table-responsive">
-                    <table class="table table-striped">
-                        <thead>
-                        <tr>
-                            <th>Name</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr v-for="( team, index ) in teams">
-                            <td>{{ index + 1 }}</td>
-                            <td>{{team.name}}</td>
-                            <td>
-                                <btn-success
-                                        size="xs"
-                                        @click.native="edit(team)"
-                                >
-                                    <icon icon="edit"/>
-                                </btn-success>
-
-                                <btn-danger @click.native="destroy(team)"
-                                            :disabled="team.destroyForm.busy"
-                                            size="xs"
-                                >
-                                    <spinner v-if="team.destroyForm.busy"></spinner>
-                                    <icon icon="trash" v-else/>
-                                </btn-danger>
-
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
+        <team-membership @newEmail="mailedInvitations"></team-membership>
+        <div class="ibox">
+            <div class="ibox-title">
+                <h5>Invited List
+                    <small class="m-l-sm">
+                        Here is your team and the invited members Listed
+                    </small>
+                </h5>
+            </div>
+            <div class="ibox-content">
+                <div class="clients-list">
+                    <div style="overflow: auto; max-height: 280px">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-hover">
+                                <tbody>
+                                <tr v-for="( user, index ) in mailed">
+                                    <td class="client-avatar"><img alt="image" src="/images/user.png"></td>
+                                    <td style="width: 400px"><strong>Waiting Confirmation...</strong></td>
+                                    <td class="contact-type"><i class="fa fa-envelope"> </i></td>
+                                    <td> {{user.email}}</td>
+                                    <td class="client-status">
+                                        <btn-danger class="pull-rigth"
+                                                @click.native="destroyMailed(user)"
+                                                :disabled="user.destroyForm.busy"
+                                                size="xs">
+                                            <spinner v-if="user.destroyForm.busy"></spinner>
+                                            <icon icon="trash" v-else></icon>
+                                        </btn-danger>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
-            </box-content>
-        </box>
-        <team-form ref="form" @saved="formSaved"></team-form>
+            </div>
+        </div>
+
+        <div class="ibox">
+            <div class="ibox-title">
+                <h5>{{boss.team.name}}
+                    <small class="m-l-sm">
+                        Here is your team and the invited members Listed
+                    </small>
+                </h5>
+            </div>
+            <div class="ibox-content">
+                <div class="clients-list">
+                    <div class="tab-content">
+                        <div style="overflow: auto; max-height: 280px">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-hover">
+                                    <tbody>
+                                    <tr v-for="( user, index ) in users">
+                                        <td class="client-avatar"><img alt="image" :src="user.photo_url"></td>
+                                        <td v-if="boss.email === user.email">
+                                            {{user.name + "  "}}<strong>you</strong></td>
+                                        <td v-else>{{user.name}}</td>
+                                        <td class="contact-type"><i class="fa fa-envelope"> </i></td>
+                                        <td> {{user.email}}</td>
+                                        <td class="client-status">
+                                            <btn-danger class="pull-rigth"
+                                                    @click.native="destroy(user)"
+                                                    :disabled="user.destroyForm.busy"
+                                                    size="xs">
+                                                <spinner v-if="user.destroyForm.busy"></spinner>
+                                                <icon icon="trash" v-else></icon>
+                                            </btn-danger>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
+<style lang="scss" scoped="scoped">
+    .table {
+        margin-top: 10px;
+    }
+
+    .invited_tr tr {
+        width: 30%;
+    }
+
+    .ibox {
+        clear: none;
+        margin-bottom: 60px;
+        margin-top: 0px;
+        padding: 0;
+    }
+
+    .ibox-content {
+        clear: none;
+    }
+</style>
 
 <script>
-    import TeamForm from './team-form';
+
+    import * as SLC from '../../vue/http';
+    import TeamMembership from './team-membership';
 
     export default {
+
         components: {
-            TeamForm
+            TeamMembership
         },
+
         data() {
             return {
-                teams: []
+                users: [],
+                mailed: [],
+                page1: true,
+                page2: false,
+                boss: Slc.user
             }
         },
 
-        mounted() {
-            this.reload();
+        created(){
+            this.invitations();
+            this.mailedInvitations();
         },
 
         methods: {
-
-            add() {
-                this.$refs.form.show();
-            },
-
-            edit(team) {
-                this.$refs.form.show(team);
-            },
-
-            reload() {
-                Slc.get(laroute.route('api.team.index'))
-                    .then((response) => {
-                        this.teams = response;
-                    });
-            },
-
-            formSaved(team) {
-                let index = this.findIndex(team);
-                index > -1 ? this.teams[index] = team : this.teams.push(team);
-                this.$forceUpdate();
-            },
-
-            destroy(team) {
-                let self = this;
-                Slc.delete(laroute.route('api.team.destroy', {team: team.id}), team.destroyForm)
-                    .then(() => {
-                        self.removeTeam(team);
-                    });
-            },
-
-            removeTeam(team) {
-                this.teams.splice(this.findIndex(team), 1);
-            },
-
-            findIndex(team) {
-                return this.teams.findIndex((_team) => {
-                    return _team.id === team.id;
+            invitations(){
+                SLC.get(laroute.route('api.team.list.invited.members')).then((response) => {
+                    this.users = response;
                 });
-            }
+            },
+
+            destroy(user) {
+                let self = this;
+                SLC.delete(laroute.route('api.user.destroy', {user: user.id}), user.destroyForm)
+                    .then(() => {
+                        self.removeUser(user);
+                    });
+            },
+
+            removeUser(user) {
+                this.users.splice(this.findIndex(user), 1);
+            },
+
+            findIndex(user) {
+                return this.users.findIndex((_user) => {
+                    return _user.id === user.id;
+                });
+            },
+
+            mailedInvitations(){
+                Slc.get(laroute.route('api.team.list.mailed.invitations')).then((response) => {
+                    this.mailed = response;
+                    console.log('mailed');
+                });
+            },
+
+            destroyMailed(user) {
+                let self = this;
+                Slc.delete(laroute.route('api.user.destroy', {user: user.id}), user.destroyForm)
+                    .then(() => {
+                        self.removeMailed(user);
+                    });
+            },
+
+            removeMailed(user) {
+                this.mailed.splice(this.findMailed(user), 1);
+            },
+
+            findMailed(user) {
+                return this.mailed.findIndex((_user) => {
+                    return _user.id === user.id;
+                });
+
+            },
+
+            nextPage(){
+                this.page1 = !this.page1;
+                this.page2 = !this.page2;
+            },
         }
-
     }
-
 </script>

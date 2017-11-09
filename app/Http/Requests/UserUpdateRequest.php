@@ -21,8 +21,9 @@ class UserUpdateRequest extends BaseRequest
         $id = request('id');
 
         return [
-			'name' => 'required|min:3',
-			'email' => "required|email|unique:users,id,{$id}"
+            'name' => 'required',
+            'email' => "required|email|unique:users,id,{$id}",
+            'address' => 'required',
         ];
     }
 

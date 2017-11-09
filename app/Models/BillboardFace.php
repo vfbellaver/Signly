@@ -7,27 +7,35 @@ use Illuminate\Validation\Rules\Unique;
 
 class BillboardFace extends Model
 {
+
+    const READS = ['Left' => 'Left', 'Right' => 'Right', 'Across' => 'Across'];
+    const TYPE = ['Static' => 'Static', 'Digital' => 'Digital'];
+
     protected $fillable = [
         'code',
-        'height',
-        'width',
-        'reads',
         'label',
         'hard_cost',
         'monthly_impressions',
+        'duration',
+        'is_illuminated',
+        'height',
+        'width',
+        'reads',
         'notes',
         'max_ads',
-        'duration',
         'photo',
-        'is_illuminated',
         'lights_on',
         'lights_off',
+        'type',
         'billboard_id',
+        'team_id',
     ];
 
     protected $casts = [
+        'hard_cost' => 'float',
         'max_ads' => 'int',
         'duration' => 'int',
+        'team_id' => 'int',
         'is_illuminated' => 'boolean',
     ];
 
@@ -39,6 +47,7 @@ class BillboardFace extends Model
     {
         return $this->belongsTo(Billboard::class);
     }
+
     #region
 
     #region Custom Attributes
@@ -68,8 +77,9 @@ class BillboardFace extends Model
             'is_illuminated' => $this->is_illuminated,
             'lights_on' => $this->lights_on,
             'lights_off' => $this->lights_off,
+            'type' => $this->type,
             'billboard_id' => $this->billboard_id,
-            'billboard' => $this->billboard->toArray(),
+            'billboard_name' => $this->billboard->name,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at
         ];

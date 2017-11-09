@@ -11,6 +11,14 @@ class BillboardCreateRequest extends BaseRequest
         return new BillboardForm($this);
     }
 
+    protected function prepareForValidation()
+    {
+        $data = request()->all();
+        $data['user'] = auth()->user();
+        $data['team_id'] =auth()->user()->team_id;
+        $this->request->replace($data);
+    }
+
     public function authorize()
     {
         return true;
@@ -20,11 +28,9 @@ class BillboardCreateRequest extends BaseRequest
     {
         return [
             'name' => 'required',
-            'description' => 'nullable',
             'address' => 'required',
             'lat' => 'required',
             'lng' => 'required',
-            'digital_driveby' => 'nullable|url',
         ];
     }
 }

@@ -10,4 +10,9 @@ class TeamsController extends Controller
     {
         return view('team.index');
     }
+
+    public function settings()
+    {
+        return view('team.settings');
+    }
 }

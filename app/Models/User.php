@@ -14,7 +14,7 @@ class User extends Authenticatable
 {
     use Notifiable, HasApiTokens, HasDefender, Billable;
 
-    const SUPERADMIN = 'slc';
+    const SUPER_ADMIN = 'slc';
     const ADMIN = 'admin';
     const USER = 'user';
 
@@ -22,9 +22,19 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'address',
         'photo_url',
         'invitation_token',
-        'status'
+        'status',
+        'stripe_id',
+        'card_brand',
+        'card_expiration',
+        'card_last_four',
+        'trial_ends_at',
+        'address',
+        'lat',
+        'lng',
+        'team_id',
     ];
 
     protected $hidden = [
@@ -33,7 +43,10 @@ class User extends Authenticatable
     ];
 
     protected $casts = [
-        'status' => 'boolean'
+        'status' => 'boolean',
+        'lat' => 'float',
+        'lng' => 'float',
+        'team_id' => 'int',
     ];
 
     #region Attributes
@@ -43,9 +56,27 @@ class User extends Authenticatable
         return $this->belongsTo(Team::class);
     }
 
+    public function notifications()
+    {
+        $relation = $this->hasMany(Notification::class, 'notifiable_id');
+        $relation->where('notifiable_type', 'users');
+        return $relation;
+    }
+
+    public function getSubscription()
+    {
+        return $this->hasOne(Subscription::class);
+    }
+
     public function getRoleAttribute()
     {
         return $this->roles()->first();
+    }
+
+    public function getIsTeamOwnerAttribute()
+    {
+        $isTeamOwner = $this->team->owner_id == $this->team_id;
+        return $isTeamOwner;
     }
     #endregion
 
@@ -62,7 +93,7 @@ class User extends Authenticatable
 
     private static function whereToken($token)
     {
-        return static::where('invitation_token', '=', $token);
+        return static::query()->where('invitation_token', '=', $token);
     }
     #endregion
 
@@ -70,14 +101,13 @@ class User extends Authenticatable
     public function toArray()
     {
         $role = [];
+
         if ($this->role) {
             $role = [
                 'id' => $this->role->id,
                 'name' => $this->role->name
             ];
         };
-
-
 
         return [
             'id' => (int)$this->id,
@@ -86,8 +116,17 @@ class User extends Authenticatable
             'email' => $this->email,
             'role' => $role,
             'status' => $this->status,
-            'team' => $this->team->toArray(),
-            'pending' => $this->invitation_token != null
+            'team' => $this->team_id ? $this->team->toArray() : null,
+            'subscription' => $this->getSubscription()->get()->toArray(),
+            'pending' => $this->invitation_token != null,
+            'stripe_id' => $this->stripe_id,
+            'card_brand' => $this->card_brand,
+            'card_expiration' => $this->card_expiration,
+            'card_last_four' => $this->card_last_four,
+            'trial_ends_at' => $this->trial_ends_at,
+            'address' => $this->address,
+            'lat' => $this->lat,
+            'lng' => $this->lng,
         ];
     }
 

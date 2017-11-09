@@ -46,8 +46,7 @@
                     <column size="4">
                         <form-group :form="form" field="reads">
                             <input-label for="reads">Reads: </input-label>
-                            <input-text v-model="form.reads" id="reads" name="reads"
-                                        placeholder="Optional"></input-text>
+                            <read-select v-model="form.reads" id="reads" name="reads"></read-select>
                         </form-group>
                     </column>
 
@@ -82,11 +81,17 @@
                     </column>
 
 
-                    <column size="12">
+                    <column size="6">
                         <form-group :form="form" field="max_ads">
                             <input-label for="max_ads">Max Ads: </input-label>
                             <input-text v-model="form.max_ads" id="max_ads" name="max_ads"
                                         placeholder="Optional"></input-text>
+                        </form-group>
+                    </column>
+                    <column size="6">
+                        <form-group :form="form" field="type">
+                            <input-label for="type">Type: </input-label>
+                            <type-select v-model="form.type" name="type" id="type"></type-select>
                         </form-group>
                     </column>
                     <column size="12">
@@ -138,10 +143,16 @@
     import * as Slc from "../../vue/http";
     import ModalForm from '../shared/Mixins/ModalForm';
     import VueTimepicker from "../../../../../node_modules/vue2-timepicker/src/vue-timepicker";
+    import TypeSelect from "./type-select";
+    import ReadSelect from "./read-select.vue";
 
     export default {
 
-        components: {VueTimepicker},
+        components: {
+            VueTimepicker,
+            TypeSelect,
+            ReadSelect,
+        },
         props: {
             billboardId: {required: true},
         },
@@ -177,7 +188,7 @@
         },
 
         mounted() {
-            this.form.is_iluminated = false;
+            this.form.is_illuminated = false;
         },
 
         watch: {
@@ -194,7 +205,7 @@
                 handler(value) {
                     if (value.hh && value.mm && value.A) {
                         const m = moment(`${value.hh}:${value.mm}:${value.A}`, "hh:mm A");
-                        this.form.lights_on = m.format('HH:mm:ss');
+                        this.form.lights_off = m.format('HH:mm:ss');
                     }
                 },
                 deep: true,
@@ -219,6 +230,7 @@
                     is_illuminated: billboard_face ? billboard_face.is_illuminated : false,
                     lights_on: billboard_face ? billboard_face.lights_on : null,
                     lights_off: billboard_face ? billboard_face.lights_off : null,
+                    type: billboard_face ? billboard_face.type : 'Static',
                     billboard_face: billboard_face ? billboard_face.id : null,
                     billboard: this.billboardId,
                 };
@@ -244,7 +256,7 @@
                 return new SlcForm(data);
             },
             setStatus(value, item) {
-                item.is_iluminated = value;
+                item.is_illuminated = value;
                 if (!value) {
                     this.form.lights_on = null;
                     this.form.lights_off = null;

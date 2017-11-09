@@ -14,24 +14,26 @@ class BillboardFaceService
     {
         return \DB::transaction(function () use ($form) {
             $data = [
-				'code' => $form->code(),
-				'height' => $form->height(),
-				'width' => $form->width(),
-				'reads' => $form->reads(),
-				'label' => $form->label(),
-				'hard_cost' => $form->hardCost(),
-				'monthly_impressions' => $form->monthlyImpressions(),
-				'notes' => $form->notes(),
-				'max_ads' => $form->maxAds(),
-				'duration' => $form->duration(),
-				'photo' => $form->photo(),
-				'is_illuminated' => $form->isIlluminated(),
+                'code' => $form->code(),
+                'height' => $form->height(),
+                'width' => $form->width(),
+                'label' => $form->label(),
+                'hard_cost' => $form->hardCost(),
+                'monthly_impressions' => $form->monthlyImpressions(),
+                'notes' => $form->notes(),
+                'max_ads' => $form->maxAds(),
+                'duration' => $form->duration(),
+                'photo' => $form->photo(),
+                'is_illuminated' => $form->isIlluminated(),
                 'lights_on' => $form->lightsOn(),
                 'lights_off' => $form->lightsOff(),
+                'team_id' => auth()->user()->team_id,
             ];
 
             $billboardFace = new BillboardFace($data);
-			$billboardFace->billboard()->associate($form->billboard());
+            $billboardFace->type = BillboardFace::TYPE[$form->type()];
+            $billboardFace->reads = BillboardFace::READS[$form->reads()];
+            $billboardFace->billboard()->associate($form->billboard());
 
             $billboardFace->save();
 
@@ -46,20 +48,21 @@ class BillboardFaceService
         return \DB::transaction(function () use ($form, $billboardFace) {
 
             $billboardFace->code = $form->code();
-			$billboardFace->height = $form->height();
-			$billboardFace->width = $form->width();
-			$billboardFace->reads = $form->reads();
-			$billboardFace->label = $form->label();
-			$billboardFace->hard_cost = $form->hardCost();
-			$billboardFace->monthly_impressions = $form->monthlyImpressions();
-			$billboardFace->notes = $form->notes();
-			$billboardFace->max_ads = $form->maxAds();
-			$billboardFace->duration = $form->duration();
-			$billboardFace->photo = $form->photo();
-			$billboardFace->is_illuminated = $form->isIlluminated();
-			$billboardFace->lights_on = $form->lightsOn();
-			$billboardFace->lights_off = $form->lightsOff();
-			$billboardFace->billboard()->associate($form->billboard());
+            $billboardFace->height = $form->height();
+            $billboardFace->width = $form->width();
+            $billboardFace->reads = $form->reads();
+            $billboardFace->label = $form->label();
+            $billboardFace->hard_cost = $form->hardCost();
+            $billboardFace->monthly_impressions = $form->monthlyImpressions();
+            $billboardFace->notes = $form->notes();
+            $billboardFace->max_ads = $form->maxAds();
+            $billboardFace->duration = $form->duration();
+            $billboardFace->photo = $form->photo();
+            $billboardFace->is_illuminated = $form->isIlluminated();
+            $billboardFace->lights_on = $form->lightsOn();
+            $billboardFace->lights_off = $form->lightsOff();
+            $billboardFace->type = $form->type();
+            $billboardFace->billboard()->associate($form->billboard());
 
             $billboardFace->save();
 
@@ -71,10 +74,10 @@ class BillboardFaceService
 
     public function delete(BillboardFace $billboardFace)
     {
-        return \DB::transaction(function() use ($billboardFace) {
-           $billboardFace->delete();
+        return \DB::transaction(function () use ($billboardFace) {
+            $billboardFace->delete();
 
-           event(new BillboardFaceDeleted($billboardFace));
+            event(new BillboardFaceDeleted($billboardFace));
         });
     }
 }

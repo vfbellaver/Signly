@@ -2,6 +2,7 @@
 
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Carbon;
 
 class UsersTableSeeder extends Seeder
 {
@@ -22,6 +23,7 @@ class UsersTableSeeder extends Seeder
         $user = factory(\App\Models\User::class)->create([
             'name' => 'Support SLC DevShop',
             'email' => 'support@slcdevshop.com',
+            'card_expiration' => Carbon::createFromFormat('m/Y', '11/2017')->endOfMonth(),
             'password' => bcrypt('slcdev##'),
             'team_id' => 1
         ]);
@@ -31,21 +33,31 @@ class UsersTableSeeder extends Seeder
     private function createAdminUsers()
     {
         $role = Defender::findRole('admin');
-        factory(\App\Models\User::class, 5)
-            ->create()
-            ->each(function (User $user) use ($role) {
-                $user->attachRole($role);
-            });
+
+        \App\Models\Team::all()->each(function (\App\Models\Team $team) use ($role) {
+            if ($team->id == 1) {
+                $team->owner_id = 1;
+                $team->save();
+                return;
+            }
+
+            $owner = factory(\App\Models\User::class)
+                ->create([
+                    'team_id' => $team->id
+                ]);
+            $team->owner_id = $owner->id;
+            $team->save();
+        });
     }
 
     private function createUserUsers()
     {
         $role = Defender::findRole('user');
-
-        factory(\App\Models\User::class, 5)
-            ->create()
-            ->each(function (User $user) use ($role) {
-                $user->attachRole($role);
-            });
+        \App\Models\Team::all()->each(function (\App\Models\Team $team) use ($role) {
+            factory(\App\Models\User::class, 3)
+                ->create([
+                    'team_id' => $team->id
+                ]);
+        });
     }
 }

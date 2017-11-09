@@ -1,7 +1,4 @@
 <?php
-Route::get('demo', function () {
-    return view('demo');
-});
 
 Route::get('roles', function () {
     $roles = Defender::rolesList();
@@ -16,6 +13,8 @@ Route::get('roles', function () {
     dd($roles);
 });
 
+Route::get('pdf','Web\PDFController@index');
+
 Route::get('slc.js', function () {
     $json = json_encode(array_merge(Slc::scriptVariables(), []));
     $js = <<<js
@@ -24,13 +23,14 @@ js;
     return response($js)->header('Content-Type', 'text/javascript');
 })->name('slc.js');
 
-foreach (File::files(app()->path() . '/Routes/guest') as $file) {
-    require $file;
-}
-
 Route::group(['middleware' => ['auth']], function () {
+    Route::get('/ ', 'Web\HomeController@index')->name('home');
+
     foreach (File::files(app()->path() . '/Routes/auth') as $file) {
         require $file;
     }
 });
 
+foreach (File::files(app()->path() . '/Routes/guest') as $file) {
+    require $file;
+}

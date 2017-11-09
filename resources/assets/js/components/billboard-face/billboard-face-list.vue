@@ -8,38 +8,42 @@
                 </box-tools>
             </box-title>
             <box-content>
-                {{billboardFaces}}
-                <div class="cards-line-separator" v-for="billboardFace in billboardFaces">
-                    <div class="card-container">
-                        <column size="4">
-                            <img width="100%" :src="billboardFace.photo">
-                        </column>
-                        <column size="8">
-                            <div class="card-body">
-                                <h3>Code: {{billboardFace.code}} &nbsp Label: {{billboardFace.label}} </h3>
-                                <column size="12">
-                                    <column size="4">
-                                        <h5>U$ :</h5>
-                                    </column>
-                                    <column size="8">
-                                        <h2 class="money">{{format(billboardFace.hard_cost)}}</h2>
-                                    </column>
-                                </column>
-                                <column size="12">
-                                    <btn-success size="xs" @click.native="edit(billboardFace)">
-                                        EDIT &nbsp
-                                        <icon icon="edit"></icon>
-                                    </btn-success>
-                                    <btn-danger @click.native="destroy(billboardFace)"
-                                                :disabled="billboardFace.destroyForm.busy"
-                                                size="xs">
-                                        <spinner v-if="billboardFace.destroyForm.busy"></spinner>
-                                        <icon icon="trash" v-else></icon>
-                                    </btn-danger>
-                                </column>
+                <div class="row">
+                    <div class="col-md-6" v-for="billboardFace in billboardFaces">
+                        <div class="contact-box">
+                            <div class="col-sm-6">
+                                <div class="text-center">
+                                    <img alt="image" class="m-t-xs img-responsive"
+                                         :src="billboardFace.photo">
+                                    <div class="m-t-xs font-bold">{{billboardFace.code}}</div>
+                                </div>
                             </div>
-                        </column>
-                        <div style="clear: both"></div>
+                            <div class="col-sm-6">
+                                <h4>
+                                    <small>Type: &nbsp</small>
+                                    <strong>{{billboardFace.type}}</strong>
+                                </h4>
+                                <p>
+                                    {{billboardFace.width}} W x {{billboardFace.height}} H
+                                </p>
+                                <h1>
+                                    <small> U$ :</small>
+                                    {{formatMoney(billboardFace.hard_cost)}}
+                                </h1>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="contact-box-footer">
+                                <div class="m-t-xs btn-group pull-right">
+                                    <a @click="edit(billboardFace)" class="btn btn-xs btn-white"><i
+                                            class="fa fa-edit"></i> EDIT
+                                    </a>
+                                    <button @click="destroy(billboardFace)" class="btn btn-xs btn-white"><i
+                                            class="fa fa-trash"></i> DELETE
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
                 </div>
             </box-content>
@@ -63,16 +67,25 @@
         }
         .ibox-content {
             border: 0;
+            img {
+                margin: auto;
+            }
         }
 
-        .card-container {
-            padding: 15px;
+        .contact-box-footer {
+            margin-top: 10px;
         }
 
-        .money {
-            font-family: sans-serif;
-            font-weight: 500;
+        > hr {
+            margin: 5px;
         }
+
+        h3 {
+            small {
+                padding-left: 12px;
+            }
+        }
+
     }
 </style>
 
@@ -80,36 +93,33 @@
 
     import _ from 'lodash';
     import * as Slc from "../../vue/http";
-    import BillboardFaceForm from './billboard-face-form.vue';
+    import BillboardFaceForm from './billboard-face-form';
 
     export default {
         props: {
             billboardId: {required: false},
         },
+
         components: {
             BillboardFaceForm
         },
+
         data() {
             return {
-                billboardFaces: []
+                billboardFaces: [],
             }
         },
-        created() {
-         this.reload();
-        },
-        mounted(){
-          this.showMeFace();
-        },
+
         computed: {
-            format: function (money) {
-                var tmp = money + '';
-                tmp = tmp.replace(/([0-9]{2})$/g, ",$1");
-                if (tmp.length > 6)
-                    tmp = tmp.replace(/([0-9]{3}),([0-9]{2}$)/g, ".$1,$2");
-                return money;
-            }
+
         },
+
+        mounted() {
+            this.reload();
+        },
+
         methods: {
+
             add() {
                 this.$refs.form.show();
             },
@@ -120,7 +130,7 @@
                 let self = this;
                 Slc.get(laroute.route('api.billboard-face.index', {bid: this.billboardId}))
                     .then((response) => {
-                       self.billboardFaces =  response;
+                        self.billboardFaces = response;
                     });
             },
             formSaved(billboardFace) {
@@ -143,10 +153,22 @@
                     return _billboardFace.id === billboardFace.id;
                 });
             },
-            showMeFace() {
-                console.log('Show ',BillboardFaces.length);
-            }
 
+            formatMoney(money) {
+
+                money = money.toString();
+                let cents = money.slice((money.length -2),(money.length));
+
+                if(cents === '00') {
+                    money += cents;
+                }
+
+                var tmp = money.replace(".", "");
+                tmp = tmp.replace(/([0-9]{2})$/g, ",$1");
+                if (tmp.length > 6)
+                    tmp = tmp.replace(/([0-9]{3}),([0-9]{2}$)/g, ".$1,$2");
+                return tmp;
+            }
         }
     }
 </script>

@@ -1,17 +1,17 @@
 Vue.directive('zipcode', {
 
-    bind: function (el, binding) {
+    bind: function (el) {
 
-        $(el).attr('maxlength', 10);
+        $(el).attr('maxlength', 5);
 
         let mask = function () {
             let v = $(el).val();
-            v = v.toString().replace(/[^0-9]/g, "");
+            v = v.toString().replace(/^\D/g,"");
             if (v === undefined || v === null || v.length === 0) {
                 return "";
             }
 
-            v = v.replace(/^(\d{5})(\d)/g, "$1-$2");
+            v = v.replace(/^(\d{5})/g, "$1");
 
             $(el).val(v);
 

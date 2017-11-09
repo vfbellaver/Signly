@@ -1,117 +1,119 @@
 <template>
-    <gmap-map
-            :center="center"
-            :zoom="10"
-            style="width: 100%; height: 90vmin;"
-
-    >
+    <div class="main-map">
+        <gmap-map
+                v-if="loaded"
+                :options="mapOptions"
+                :center="center"
+                :zoom="10">
+            <gmap-marker
+                    :key="m.billboard.id"
+                    v-for="m in markers"
+                    :position="m.position"
+                    :icon="markerIcon"
+                    :clickable="true"
+                    @click="openInfoWindow(m)">
+            </gmap-marker>
             <gmap-info-window
-                    :options="infoOptions"
-                    :position="infoWindowPos"
-                    :opened="infoWinOpen"
-                    @closeclick="infoWinOpen=false">
-                <info-content
-
-                        :billboard="billboard"
-                >
-                </info-content>
+                    :opened="(billboard !== null)"
+                    :position="(billboard !== null) ? billboard.position : null"
+                    @closeclick="billboard = null">
+                <billboard-info v-if="billboard" :user="this.user" :billboard="billboard"></billboard-info>
             </gmap-info-window>
-        <gmap-marker
-                :key="i"
-                v-for="(m,i) in markers"
-                :position="m.position"
-                :clickable="true"
-                @click="toggleInfoWindow(m,i)">
-        </gmap-marker>
-    </gmap-map>
+        </gmap-map>
+    </div>
 </template>
 
+<style lang="scss">
+    .main-map {
+        position: relative;
+        width: 100%;
+        height: calc(100vh - 111px);
+
+        .vue-map-container {
+            width: 100%;
+            height: calc(100vh - 90px);
+        }
+    }
+</style>
+
 <script>
+
+    import _ from 'lodash';
+    import * as Slc from "../../vue/http";
+    import BillboardInfo from './billboard-info';
+
     export default {
 
-        data () {
+        props: {
+            user: {required: true}
+        },
+
+        components: {
+            BillboardInfo
+        },
+
+        data() {
             return {
-
+                loaded: false,
                 billboards: [],
+                billboard: null,
 
-                infoShow: false,
+                center: null,
+                zoom: null,
+                mapOptions: {
+                    scrollWell: true,
+                    mapTypeControl: false,
+                    gestureHandling: 'greedy',
+                },
 
-                center: {lat: 40.757994, lng: -111.970834},
-
+                markerIcon: {
+                    url: '/images/pin.png',
+                    size: {width: 48, height: 48, f: 'px', b: 'px'},
+                    scaledSize: {width: 48, height: 48, f: 'px', b: 'px'}
+                },
                 markers: [],
 
-                infoOptions: {
-                    pixelOffset: {
-                        width: 0,
-                        height: -35,
-                        maxWidth: 200
-                    }
-                },
-
-
-                infoWinOpen: false,
-
-                infoWindowPos: {
-                    lat: 0,
-                    lng: 0
-                },
-
-                billboard:'',
-
+                infoWindowPos: null,
             }
         },
 
-        mounted () {
-            this.reload();
+        created() {
+            this.center = {
+                lat: parseFloat(this.user.lat),
+                lng: parseFloat(this.user.lng),
+            };
+            this.zoom = this.user.zoom;
+            this.loaded = true;
+            if (this.user.email) {
+
+                this.loadMarkers('api.billboard.index');
+            } else {
+                this.loadMarkers('public.billboard.page');
+            }
         },
 
         methods: {
 
-            reload() {
-                Slc.get(laroute.route('api.billboard.index'))
+            loadMarkers(uri) {
+                Slc.get(laroute.route(uri))
                     .then((response) => {
                         this.billboards = response;
-                        this.reloadMarkers();
+                        for (let i = 0; i < this.billboards.length; i++) {
+                            this.markers.push({
+                                position: {
+                                    lat: parseFloat(this.billboards[i].lat),
+                                    lng: parseFloat(this.billboards[i].lng)
+                                },
+                                billboard: this.billboards[i],
+                            });
+                        }
                     });
-
             },
 
-            reloadMarkers () {
-
-                for(let i = 0; i < this.billboards.length; i++) {
-                  this.markers.push({
-                        position: {
-                            lat: parseFloat(this.billboards[i].lat),
-                            lng: parseFloat(this.billboards[i].lng)
-                        },
-
-                        infoText: this.billboards[i],
-                   });
-                }
-
+            openInfoWindow: function (marker) {
+                console.log("Open Info Window", marker.billboard);
+                this.billboard = marker.billboard;
             },
-
-            popovers(){
-
-            },
-
-            toggleInfoWindow: function(marker, idx) {
-
-                this.infoWindowPos = marker.position;
-                this.billboard = marker.infoText;
-
-
-                //check if its the same marker that was selected if yes toggle
-                if (this.currentMidx == idx) {
-                    this.infoWinOpen = !this.infoWinOpen;
-                }
-                //if different marker set infowindow to open and reset current marker index
-                else {
-                    this.infoWinOpen = true;
-                    this.currentMidx = idx;
-                }
-            }
-
         }
     }
 </script>

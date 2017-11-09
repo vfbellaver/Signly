@@ -1,72 +1,66 @@
 <template>
-    <div>
-        <box>
-            <box-title>
-                Billboards
-                <box-tools slot="tools">
-                    <box-tool icon="plus" @click.native="create">New</box-tool>
-                    <box-tool icon="upload" @click.native="importBillboards">Import Billboards</box-tool>
-                    <box-tool class="green" icon="map-marker" @click.native="goToHome">Map View</box-tool>
-                </box-tools>
-            </box-title>
-            <box-content>
-                <div>
-                    <div class="table-responsive">
-                        <!--table-->
-                        <table class="table table-striped">
-                            <thead>
-                            <tr>
-                                <th style="width: 50px"></th>
-                                <th style="width: 300px">Name</th>
-                                <th style="width: 600px" class="hidden-sm">Address</th>
-                                <th style="width:  100px"></th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr v-for="( billboard, index ) in billboards">
-                                <td>{{ index + 1 }}</td>
-                                <td>{{ billboard.name }}</td>
-                                <td class="hidden-sm">{{ billboard.address }}</td>
-                                <td>
-                                    <btn-success size="xs" @click.native="edit(billboard)">
-                                        <icon icon="edit"></icon>
-                                    </btn-success>
-                                    <btn-danger @click.native="destroy(billboard)"
-                                                :disabled="billboard.destroyForm.busy"
-                                                size="xs">
-                                        <spinner v-if="billboard.destroyForm.busy"></spinner>
-                                        <icon icon="trash" v-else></icon>
-                                    </btn-danger>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
+    <div class="card-list">
+        <inspinia-page-heading v-if="pageHeading" :data="pageHeading"></inspinia-page-heading>
+
+        <nav class="navbar navbar-in-content navbar-default" data-spy="affix" data-offset-top="147">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a @click="create">
+                    <icon icon="plus"></icon>
+                    Add</a></li>
+                <li><a @click="importBillboards">
+                    <icon icon="upload"></icon>
+                    Import</a></li>
+                <li><a @click="goToHome">
+                    <icon icon="map-marker"></icon>
+                    Map</a></li>
+            </ul>
+        </nav>
+
+        <div class="wrapper wrapper-content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-4" v-for="billboard in billboards">
+                        <billboard-card :billboard="billboard" @edit="edit" @destroy="destroy"
+                                        :team="team"></billboard-card>
                     </div>
                 </div>
-            </box-content>
-        </box>
-        <billboard-form-csv @saved="reload" ref="formCsv"></billboard-form-csv>
+            </div>
+        </div>
+        <billboard-form ref="form" @saved="edit"></billboard-form>
+        <billboard-import-form ref="importForm" @saved="reload"></billboard-import-form>
     </div>
 </template>
 
 <style lang="scss" scoped="scoped">
-    .green:hover {
-        color: #7aa32b;
-    }
+
 </style>
 
 <script>
     import _ from 'lodash';
     import * as Slc from "../../vue/http";
-    import BillboardFormCsv from './billboard-form-csv.vue'
+
+    import BillboardCard from './billboard-card';
+    import BillboardForm from './billboard-form';
+    import BillboardImportForm from './billboard-import-form';
 
     export default {
+        props: {
+            team: {required: true},
+        },
         components: {
-            BillboardFormCsv
+            BillboardCard,
+            BillboardForm,
+            BillboardImportForm,
         },
         data() {
             return {
                 billboards: [],
+                pageHeading: {
+                    title: 'Billboard List',
+                    breadcrumb: [
+                        {title: 'Home', url: laroute.route('home')}
+                    ]
+                },
             }
         },
         mounted() {
@@ -74,13 +68,13 @@
         },
         methods: {
             create() {
-                window.location = laroute.route('billboards.create');
+                this.$refs.form.show();
             },
             edit(billboard) {
                 window.location = laroute.route("billboards.edit", {billboard: billboard.id});
             },
             importBillboards() {
-                this.$refs.formCsv.show();
+                this.$refs.importForm.show();
             },
             goToHome() {
                 window.location = "/";
@@ -104,7 +98,7 @@
                 return this.billboards.findIndex((_billboard) => {
                     return _billboard.id === billboard.id;
                 });
-            }
+            },
         }
     }
 </script>

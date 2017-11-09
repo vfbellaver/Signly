@@ -8,10 +8,13 @@ class Team extends Model
 {
     protected $fillable = [
         'name',
+        'slug',
+        'logo',
+        'owner_id'
     ];
 
     protected $casts = [
-
+        'owner_id' => 'int',
     ];
 
     protected $dates = [
@@ -19,7 +22,17 @@ class Team extends Model
     ];
 
     #region Relationships{relationships}
-    #region
+    public function clients()
+    {
+        return $this->hasMany(Client::class);
+    }
+
+    public function owner()
+    {
+        return $this->belongsTo(User::class, 'owner_id');
+    }
+
+    #endregion
 
     #region Custom Attributes
 
@@ -34,7 +47,9 @@ class Team extends Model
     {
         return [
             'id' => $this->id,
-            'name' => $this->name
+            'name' => $this->name,
+            'logo' => $this->logo,
+            'slug' => $this->slug,
         ];
     }
     #endregion

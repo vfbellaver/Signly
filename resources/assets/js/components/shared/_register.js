@@ -1,3 +1,5 @@
+require('./Inspinia/_register');
+
 // ------------------------------------------------------------------------
 // Others
 Vue.component('icon', require('./Icon'));
@@ -33,7 +35,6 @@ Vue.component('input-password', require('./Inputs/InputPassword'));
 Vue.component('input-url', require('./Inputs/InputUrl'));
 Vue.component('input-email', require('./Inputs/InputEmail'));
 Vue.component('text-area', require('./Inputs/TextArea'));
-Vue.component('input-csv', require('./Inputs/CsvUpload.vue'));
 Vue.component('image-upload', require('./Inputs/ImageUpload'));
 Vue.component('input-time', require('./Inputs/InputTime.vue'));
 
@@ -47,3 +48,6 @@ Vue.component('box-content', require('./Boxes/BoxContent'));
 Vue.component('box-body', require('./Boxes/BoxBody'));
 
 // ------------------------------------------------------------------------
+//TABS
+Vue.component('Tabs', require('./Tabs/Tabs'));
+Vue.component('Tab', require('./Tabs/Tab'));

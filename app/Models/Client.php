@@ -3,33 +3,42 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
 
 class Client extends Model
 {
+    use Notifiable;
+
     protected $fillable = [
-		'company_name',
-		'logo',
-		'first_name',
-		'last_name',
-		'email',
-		'address_line1',
-		'address_line2',
-		'city',
-		'zipcode',
-		'state',
-		'phone1',
-		'phone2',
-		'fax',
+        'company_name',
+        'logo',
+        'first_name',
+        'last_name',
+        'email',
+        'address_line1',
+        'address_line2',
+        'city',
+        'zipcode',
+        'state',
+        'phone1',
+        'phone2',
+        'fax',
+        'team_id',
     ];
 
     protected $casts = [
+        'team_id' => 'int',
     ];
 
     protected $dates = [
     ];
 
     #region Relationships
-    #region
+    public function team()
+    {
+        return $this->belongsTo(Team::class);
+    }
+    #endregion
 
     #region Custom Attributes
 
@@ -44,21 +53,19 @@ class Client extends Model
     {
         return [
             'id' => $this->id,
-			'company_name' => $this->company_name,
-			'logo' => $this->logo,
-			'first_name' => $this->first_name,
-			'last_name' => $this->last_name,
-			'email' => $this->email,
-			'address_line1' => $this->address_line1,
-			'address_line2' => $this->address_line2,
-			'city' => $this->city,
-			'zipcode' => $this->zipcode,
-			'state' => $this->state,
-			'phone1' => $this->phone1,
-			'phone2' => $this->phone2,
-			'fax' => $this->fax,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at
+            'company_name' => $this->company_name,
+            'logo' => $this->logo,
+            'first_name' => $this->first_name,
+            'last_name' => $this->last_name,
+            'email' => $this->email,
+            'address_line1' => $this->address_line1,
+            'address_line2' => $this->address_line2,
+            'city' => $this->city,
+            'zipcode' => $this->zipcode,
+            'state' => $this->state,
+            'phone1' => $this->phone1,
+            'phone2' => $this->phone2,
+            'fax' => $this->fax,
         ];
     }
     #endregion

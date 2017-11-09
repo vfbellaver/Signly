@@ -1,6 +1,6 @@
-@extends('layouts.login')
+@extends('layouts.base', ['bodyClass' => 'gray-bg'])
 
-@section('content')
+@section('base-content')
     <div class="middle-box text-center loginscreen">
         <div>
             <h3>Welcome to</h3>
@@ -45,6 +45,10 @@
                 <a href="{{ route('password.request') }}" id="forgot_password">
                     <small>Forgot Your Password?</small>
                 </a>
+                <p class="text-muted text-center">
+                    <small>Do not have an account?</small>
+                </p>
+                <a class="btn btn-sm btn-white btn-block" href="{{route('register')}}">Create an account</a>
             </form>
         </div>
     </div>

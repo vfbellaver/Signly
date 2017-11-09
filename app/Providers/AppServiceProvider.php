@@ -5,6 +5,7 @@ namespace App\Providers;
 use Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Dusk\DuskServiceProvider;
+use Laravel\Passport\Passport;
 use Schema;
 
 class AppServiceProvider extends ServiceProvider
@@ -16,6 +17,7 @@ class AppServiceProvider extends ServiceProvider
 
     public function register()
     {
+        Passport::ignoreMigrations();
         if (!class_exists('Slc')) {
             class_alias('App\Slc', 'Slc');
         }

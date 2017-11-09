@@ -25,12 +25,6 @@
                             <input-label for="role">Role: </input-label>
                             <roles-select v-model="form.role" id="role" name="role"/>
                         </form-group>
-
-                        <form-group :form="form" field="team">
-                            <input-label for="team">Team: </input-label>
-                            <teams-select v-model="form.team" id="team" name="team"/>
-                        </form-group>
-
                     </column>
                 </row>
             </modal-body>
@@ -49,14 +43,12 @@
 <script>
 
     import RolesSelect from '../role/role-select';
-    import TeamsSelect from '../team/team-select';
     import ModalForm from '../shared/Mixins/ModalForm';
 
     export default {
         mixins: [ModalForm],
         components: {
             RolesSelect,
-            TeamsSelect
         },
         data() {
             return {

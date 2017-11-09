@@ -1,14 +1,12 @@
 <template>
     <div class="image-upload">
-        <div>
-            <div>
-                <div>
-                    <input ref="file" type="file" @change="onFileChange" class="hidden" :multiple="multiple"/>
-                    <div v-if="internalValue" class="preview" :style="{ 'background-image': 'url(' + internalValue + ')' }"
-                         @click="replaceImage">
-                    </div>
-                    <div v-else class="dropzone" @click="replaceImage"></div>
-                </div>
+        <input ref="file" type="file" @change="onFileChange" class="hidden"/>
+        <div class="preview" :style="style"></div>
+        <div class="overlay">
+            <div class="btn-group">
+                <a class="btn btn-default" @click="replaceImage" title="Replace Image">
+                    <i class="fa fa-camera" aria-hidden="true"></i>
+                </a>
             </div>
         </div>
     </div>
@@ -19,46 +17,49 @@
     @import "../../../../sass/variables";
 
     .image-upload {
-        overflow: hidden;
-        padding-bottom: 75%;
         position: relative;
         background: $white;
         border-radius: 4px;
         border: 1px solid #E3E3E3;
+        width: 256px;
+        height: 256px;
 
-        > div {
-            height: 100%;
+        a {
             position: absolute;
+            cursor: pointer;
+            top: 4px;
+            right: 8px;
+            color: black;
+            text-decoration: none;
+            z-index: 3;
+        }
+
+        .preview {
+            cursor: pointer;
+            background: no-repeat center center;
+            background-size: contain;
             width: 100%;
+            height: 100%;
+        }
+        .overlay {
+            display: none;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.3);
+            .btn-group {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+        }
 
-            > div {
-                display: table;
-                height: 100%;
-                width: 100%;
-
-                > div {
-                    padding: 12px;
-                    display: table-cell;
-                    text-align: center;
-                    vertical-align: middle;
-
-                    .preview {
-                        cursor: pointer;
-                        background: no-repeat center center;
-                        background-size: contain;
-                        width: 100%;
-                        height: 100%;
-                    }
-
-                    .dropzone {
-                        cursor: pointer;
-                        background: url('/images/fileupload-bg.jpg') no-repeat center center;
-                        background-size: contain;
-                        width: 100%;
-                        height: 100%;
-                        border: none;
-                    }
-                }
+        &:hover {
+            .overlay {
+                display: block;
             }
         }
     }
@@ -69,11 +70,18 @@
 
     export default {
         props: {
-            multiple: {required: false, 'default': false},
             maxSize: {required: false},
             allowedTypes: {required: false}
         },
         mixins: [require('../Mixins/Model')],
+
+        computed: {
+            style() {
+                const image = this.internalValue ? this.internalValue : '/images/fileupload-bg.jpg';
+                return {'background-image': `url(${image})`};
+            }
+        },
+
         data() {
             return {
                 internalAllowedTypes: []
@@ -98,6 +106,7 @@
                     return;
                 }
 
+                let hasInvalid = false;
                 const allowedFiles = [];
                 for (let i = 0; i < files.length; i++) {
                     let f = files.item(i);
@@ -112,7 +121,19 @@
                     }
                     if (valid) {
                         allowedFiles.push(f);
+                    } else {
+                        hasInvalid = true;
                     }
+                }
+
+                this.$refs.file.value = null;
+
+                if (hasInvalid) {
+                    EventBus.$emit(
+                        'notify',
+                        'error',
+                        'Invalid file type. Choose a valid image file (png, jpg or gif) and try again.'
+                    );
                 }
 
                 if (!allowedFiles.length) {
@@ -129,7 +150,7 @@
             },
             replaceImage() {
                 $(this.$refs.file).trigger('click');
-            }
+            },
         }
     }
 </script>

@@ -19,7 +19,8 @@ class TeamUpdateRequest extends BaseRequest
     public function rules()
     {
         return [
-            'name' => 'required'
+            'name' => 'required',
+            'logo' => 'required'
         ];
     }
 }

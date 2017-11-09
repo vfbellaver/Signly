@@ -31,10 +31,8 @@ class TeamService
     {
         return \DB::transaction(function () use ($form, $team) {
 
-            $data = [
-                'name' => $form->name(),
-            ];
-
+            $team->name = $form->name();
+            $team->logo = $form->logo();
             $team->save();
 
             event(new TeamUpdated($team));
@@ -46,10 +44,15 @@ class TeamService
 
     public function delete(Team $team)
     {
-        return \DB::transaction(function() use ($team) {
-           $team->delete();
+        return \DB::transaction(function () use ($team) {
+            $team->delete();
 
-           event(new TeamDeleted($team));
+            event(new TeamDeleted($team));
         });
+    }
+
+    public function slug(Team $team)
+    {
+        return str_slug($team->name, '-');
     }
 }

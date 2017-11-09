@@ -1,3 +1,3 @@
 <?php
 
-Route::resource('teams', 'Web\TeamsController', ['only' => ['index']]);
+Route::get('team/settings', "Web\TeamsController@settings")->name('team.settings');

@@ -3,13 +3,19 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UserUpdateAddressRequest;
+use App\Http\Requests\UserUpdateCardRequest;
+use App\Http\Requests\UserUpdateLocationRequest;
 use App\Http\Requests\UserUpdatePasswordRequest;
 use App\Http\Requests\UserUpdatePhotoRequest;
 use App\Http\Requests\UserCreateRequest;
+use App\Http\Requests\UserUpdatePlanRequest;
 use App\Http\Requests\UserUpdateRequest;
 use App\Models\User;
 use App\Services\UserService;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\MessageBag;
 
 class UsersController extends Controller
 {
@@ -41,64 +47,96 @@ class UsersController extends Controller
     public function update(UserUpdateRequest $request, User $user)
     {
         $obj = $this->service->update($request->form(), $user);
-
         $response = [
             'message' => 'User updated.',
             'data' => $obj,
         ];
-
         return $response;
     }
 
     public function updatePhoto(UserUpdatePhotoRequest $request, User $user)
     {
         $data = $request->all();
-
         $user->photo_url = $data['photo_url'];
         $user->save();
-
         $response = [
             'message' => 'User photo updated.',
             'data' => $user->toArray(),
         ];
-
         return $response;
     }
 
     public function updatePassword(UserUpdatePasswordRequest $request, User $user)
     {
         $data = $request->all();
-
-        $user->password = bcrypt($data['password']);
+        $user->password = bcrypt($data['new_password']);
         $user->save();
-
         $response = [
-            'message' => 'User password updated.',
+            'message' => 'Password updated.',
             'data' => $user,
         ];
-
         return $response;
     }
 
-    public function updateBilling(UserUpdatePhotoRequest $request, User $user)
+    public function updateAddress(UserUpdateAddressRequest $request, User $user)
     {
         $data = $request->all();
-
-        $user->photo_url = $data['photo_url'];
+        $user->address = $data['address'];
+        $user->lat = $data['lat'];
+        $user->lng = $data['lng'];
         $user->save();
 
         $response = [
-            'message' => 'User billing updated.',
+            'message' => 'User plan updated.',
             'data' => $user,
         ];
+        return $response;
+    }
 
+    public function updateLocation (UserUpdateLocationRequest $request, User $user)
+    {
+        $data = $request->all();
+        $user->lat = $data['lat'];
+        $user->lng = $data['lng'];
+        $user->save();
+
+        $response = [
+            'message' => 'Your Location updated.',
+            'data' => $user,
+        ];
+        return $response;
+    }
+
+    public function updatePlan(UserUpdatePlanRequest $request, User $user)
+    {
+        $response = [
+            'message' => 'User plan updated.',
+            'data' => $user,
+        ];
+        return $response;
+    }
+
+    public function updateCard(UserUpdateCardRequest $request, User $user)
+    {
+        $response = [
+            'message' => 'User card updated.',
+            'data' => $user,
+        ];
+        return $response;
+    }
+
+    public function cancelSubscription(User $user)
+    {
+        $response = [
+            'message' => 'User subscription canceled.',
+            'data' => $user,
+        ];
         return $response;
     }
 
     public function destroy(User $user)
     {
         $this->service->delete($user);
-
         return [
             'message' => 'User deleted.'
         ];

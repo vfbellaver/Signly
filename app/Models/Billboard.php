@@ -7,22 +7,40 @@ use Illuminate\Database\Eloquent\Model;
 class Billboard extends Model
 {
     protected $fillable = [
-		'name',
-		'description',
-		'digital_driveby',
-		'address',
-		'lat',
-		'lng',
+        'name',
+        'slug',
+        'address',
+        'lat',
+        'lng',
+        'heading',
+        'pitch',
+        'description',
+        'team_id'
     ];
 
     protected $casts = [
+        'lat' => 'float',
+        'lng' => 'float',
+        'heading' => 'float',
+        'pitch' => 'float',
+        'team_id' => 'integer'
     ];
 
     protected $dates = [
     ];
 
     #region Relationships
-    #region
+
+    public function team()
+    {
+        return $this->belongsTo(Team::class);
+    }
+
+    public function billboardFaces()
+    {
+        return $this->hasMany(BillboardFace::class);
+    }
+    #endregion
 
     #region Custom Attributes
 
@@ -37,14 +55,33 @@ class Billboard extends Model
     {
         return [
             'id' => $this->id,
-			'name' => $this->name,
-			'description' => $this->description,
-			'digital_driveby' => $this->digital_driveby,
-			'address' => $this->address,
-			'lat' => $this->lat,
-			'lng' => $this->lng,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at
+            'name' => $this->name,
+            'slug' => $this->slug,
+            'description' => $this->description,
+            'address' => $this->address,
+            'lat' => $this->lat,
+            'lng' => $this->lng,
+            'heading' => $this->heading,
+            'pitch' => $this->pitch,
+            'team' => $this->team->toArray(),
+            'billboard_faces' => $this->billboardFaces->toArray(),
+            'position' => [
+                'lat' => $this->lat,
+                'lng' => $this->lng,
+            ],
+            'pov' => [
+                'heading' => $this->heading ? $this->heading : 0,
+                'pitch' => $this->pitch ? $this->pitch : 0,
+            ]
+        ];
+    }
+
+    public function toLightArray()
+    {
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+            'slug' => $this->slug,
         ];
     }
     #endregion

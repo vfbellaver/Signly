@@ -5,7 +5,9 @@ use Faker\Generator as Faker;
 $factory->define(App\Models\Team::class, function (Faker $faker) {
     static $password;
 
+    $name = $faker->company;
     return [
-        'name' => $faker->company,
+        'name' => $name,
+        'slug' => str_slug($name,'-'),
     ];
 });
