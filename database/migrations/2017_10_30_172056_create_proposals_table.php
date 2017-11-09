@@ -9,9 +9,18 @@ class CreateProposalsTable extends Migration
     {
         Schema::create('proposals', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name', 64);
             $table->unsignedInteger('team_id');
             $table->unsignedInteger('client_id');
+            $table->unsignedInteger('user_id')->nullable();
+
+            $table->string('name', 64);
+            $table->decimal('budget', 10, 2);
+            $table->date('from_date');
+            $table->date('to_date');
+            $table->decimal('revenue', 10, 2);
+            $table->decimal('confidence', 5, 2);
+
+            $table->enum('status', ['Active', 'Won', 'Lost'])->default('Active');
 
             $table->foreign('client_id')
                 ->references('id')
@@ -22,6 +31,11 @@ class CreateProposalsTable extends Migration
                 ->references('id')
                 ->on('teams')
                 ->onDelete('cascade')
+                ->onUpdate('cascade');
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('set null')
                 ->onUpdate('cascade');
             $table->timestamps();
         });
