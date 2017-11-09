@@ -1,6 +1,6 @@
 <template>
     <div>
-        <multiselect
+        <multi-select
                 v-model="internalValue"
                 track-by="id"
                 :label="labelValue"
@@ -9,17 +9,17 @@
                 :internal-search="true"
                 :placeholder="placeholder"
                 :value="value"
-        ></multiselect>
+        ></multi-select>
     </div>
 </template>
 
 <script>
-    import Multiselect from 'vue-multiselect';
+    import MultiSelect from 'vue-multiselect/src/Multiselect';
 
     export default {
         mixins: [require('../Mixins/Model')],
         components: {
-            Multiselect
+            MultiSelect
         },
 
         props: {
@@ -41,12 +41,12 @@
                 else return laroute.route(`api.${this.api}.index`);
             },
 
-            labelValue(){
-               if(this.label === null){
-                   return 'name';
-               } else {
-                   return this.label
-               }
+            labelValue() {
+                if (this.label === null) {
+                    return 'name';
+                } else {
+                    return this.label
+                }
             }
         },
 

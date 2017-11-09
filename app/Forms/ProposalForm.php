@@ -3,6 +3,7 @@
 namespace App\Forms;
 
 use App\Models\Client;
+use Carbon\Carbon;
 
 class ProposalForm extends BaseForm
 {
@@ -11,14 +12,36 @@ class ProposalForm extends BaseForm
         return $this->request->get('name');
     }
 
-    public function client()
+    public function clientId()
     {
         $client = (object)$this->request->get('client');
-        return Client::query()->findOrFail($client->id);
+        return $client->id;
     }
 
-    public function expiresOn()
+    public function userId()
     {
-        return $this->transformDate($this->request->get('expires_on'));
+        return (int)$this->request->get('user_id');
+    }
+
+    public function fromDate()
+    {
+        $date = $this->request->get('from_date');
+        return Carbon::createFromFormat('d/m/Y', $date);
+    }
+
+    public function toDate()
+    {
+        $date = $this->request->get('to_date');
+        return Carbon::createFromFormat('d/m/Y', $date);
+    }
+
+    public function budget()
+    {
+        return (float)$this->request->get('budget');
+    }
+
+    public function confidence()
+    {
+        return (int)$this->request->get('confidence');
     }
 }

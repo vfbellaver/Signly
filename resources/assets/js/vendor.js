@@ -1,17 +1,20 @@
 import _ from 'lodash';
-window._ = _;
+import DateRangePicker from 'bootstrap-daterangepicker';
+import Sparkline from 'jquery-sparkline';
+import jQuery from 'jquery';
+import ionRangeSlider from 'ion-rangeslider';
 
-import jQUery from 'jquery';
-window.$ = window.jQuery = jQUery;
+window._ = _;
+window.$ = window.jQuery = jQuery;
+window.$.sparkline = Sparkline;
+window.$.daterangepicker = DateRangePicker;
+window.$.ionRangeSlider = ionRangeSlider;
 
 window.axios = require('axios');
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 let token = document.head.querySelector('meta[name="csrf-token"]');
 window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
-
-import Sparkline from 'jquery-sparkline';
-window.$.sparkline = Sparkline;
 
 require('sweetalert');
 require('metismenu');
