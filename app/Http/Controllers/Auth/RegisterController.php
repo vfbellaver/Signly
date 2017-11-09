@@ -37,6 +37,7 @@ class RegisterController extends Controller
     {
         $team = new  Team();
         $team->name = $request->input('company');
+        $team->email = $request->input('email');
         $team->slug = str_slug($request->input('company'), '-');
         $team->save();
         $user = new  User();
@@ -47,6 +48,11 @@ class RegisterController extends Controller
         $user->team_id = $team->id;
         $user->trial_ends_at = Carbon::now()->addDays(14);
         $user->save();
+
+        $team->owner_id = $user->id;
+        $team->save();
+
+
         $user->attachRole($this->role);
         $plan = $request->input('plan');
         $email = $request->input('email');

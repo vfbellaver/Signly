@@ -16,7 +16,7 @@
                                 <li class="active">
                                     <a data-toggle="tab" href="#tab-team-profile" aria-expanded="true">
                                         <i class="fa fa-fw fa-btn fa-edit"></i>
-                                        Team profile
+                                        Company profile
                                     </a>
                                 </li>
                                 <li>

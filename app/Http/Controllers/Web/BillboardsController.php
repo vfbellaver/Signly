@@ -58,7 +58,6 @@ class BillboardsController extends Controller
             ->where('teams.slug', $teamSlug)
             ->where('billboards.slug', $billboardSlug)
             ->first();
-        $owner = User::query()->where('id', $billboard->team->owner_id)->first();
 
         $url = $this->service->createPOVUrl($billboard);
 
@@ -69,7 +68,6 @@ class BillboardsController extends Controller
 
         return view('billboard.public', [
             'billboard' => $billboard,
-            'owner' => $owner
         ]);
     }
 }
