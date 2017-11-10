@@ -6,7 +6,10 @@ Vue.directive('money', {
             let v = $(el).val();
             v = v.toString().replace(/[^0-9]/g, "");
             if (v === undefined || v === null || v.length === 0) {
-                return "";
+                $(el).val('');
+                let event = new Event('input', {bubbles: true});
+                el.dispatchEvent(event);
+                return;
             }
 
             v = v.replace(/^0*/g, "");
@@ -20,7 +23,6 @@ Vue.directive('money', {
 
             $(el).val(v);
             let event = new Event('input', {bubbles: true});
-            el.value = v;
             el.dispatchEvent(event);
         };
 

@@ -105,6 +105,7 @@
                 let index = this.findIndex(proposal);
                 index > -1 ? this.proposals[index] = proposal : this.proposals.push(proposal);
                 this.$forceUpdate();
+                window.location = laroute.route('proposals.show', {proposal: proposal.id});
             },
 
             destroy(proposal) {
