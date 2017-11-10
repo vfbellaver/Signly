@@ -16,7 +16,7 @@ class Proposal extends Model
         'client_id',
         'user_id',
         'budget',
-        'revenue',
+        'total_price',
         'confidence',
         'from_date',
         'to_date',
@@ -28,7 +28,7 @@ class Proposal extends Model
         'client_id' => 'int',
         'user_id' => 'int',
         'budget' => 'float',
-        'revenue' => 'float',
+        'total_price' => 'float',
         'confidence' => 'float',
     ];
 
@@ -50,7 +50,8 @@ class Proposal extends Model
 
     public function billboardFaces()
     {
-        return $this->belongsToMany(BillboardFace::class, 'proposal_billboard_face');
+        return $this->belongsToMany(BillboardFace::class, 'proposal_billboard_face')
+            ->withPivot('order', 'price');
     }
     #region
 
@@ -73,7 +74,7 @@ class Proposal extends Model
             'client' => $this->client->toArray(),
             'billboard_faces' => $this->billboardFaces->toArray(),
             'budget' => $this->budget,
-            'revenue' => $this->revenue,
+            'total_price' => $this->total_price,
             'from_date' => $this->from_date,
             'to_date' => $this->to_date,
 

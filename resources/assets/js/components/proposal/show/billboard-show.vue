@@ -78,7 +78,9 @@
         store,
 
         data() {
-            return {}
+            return {
+                form: new SlcForm({}),
+            }
         },
 
         computed: {
@@ -102,6 +104,11 @@
 
         methods: {
             addToProposal(billboardFace) {
+                this.form = new SlcForm({
+                    billboard: this.billboard,
+                    billboardFace,
+                });
+
                 this.$store.dispatch('addBillboardFace', billboardFace);
             },
         }

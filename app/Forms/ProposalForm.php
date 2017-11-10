@@ -2,7 +2,6 @@
 
 namespace App\Forms;
 
-use App\Models\Client;
 use Carbon\Carbon;
 
 class ProposalForm extends BaseForm

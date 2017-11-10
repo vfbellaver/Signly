@@ -19,7 +19,7 @@ class CreateProposalsTable extends Migration
             $table->date('to_date');
             $table->decimal('confidence', 5, 2);
 
-            $table->decimal('revenue', 10, 2)->default(0);
+            $table->decimal('total_price', 10, 2)->default(0);
             $table->enum('status', ['Active', 'Won', 'Lost'])->default('Active');
 
             $table->foreign('client_id')
