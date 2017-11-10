@@ -8,8 +8,11 @@ import Laroute from './commons/laroute';
 import axios from 'axios';
 import Vue from 'vue';
 import Moment from 'moment';
+import MomentTZ from 'moment-timezone';
 
 window.moment = Moment;
+window.momentTZ = MomentTZ;
+
 window.Utils = Utils();
 window.Layout = Layout();
 window.laroute = Laroute;

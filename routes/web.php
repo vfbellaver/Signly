@@ -15,6 +15,8 @@ Route::get('roles', function () {
 
 Route::get('pdf','Web\PDFController@index');
 
+Route::get('utc','Web\PaymentController@getTimeZone');
+
 Route::get('slc.js', function () {
     $json = json_encode(array_merge(Slc::scriptVariables(), []));
     $js = <<<js

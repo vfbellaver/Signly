@@ -37,7 +37,7 @@
                 </row>
             </div>
         </div>
-
+<!--
         <div class="ibox">
             <div class="ibox-title">
                 <h5>Invoice List
@@ -59,6 +59,7 @@
                 </row>
             </div>
         </div>
+-->
     </div>
 </template>
 <style lang="scss" scoped="scoped">
@@ -77,6 +78,7 @@
         clear: none;
     }
 </style>
+
 <script>
 
     import * as SLC from '../../vue/http';
@@ -114,6 +116,7 @@
                 id: Slc.user.id,
                 lat: Slc.user.lat,
                 lng: Slc.user.lng,
+                timezone: Slc.user.timezone,
             });
         },
 
@@ -121,7 +124,6 @@
 
             save() {
                 const uri = laroute.route('api.user.update.location', {user: this.user.id});
-                debugger;
                 SLC.put(uri, this.user).then((response) => {
                     console.log('Updated Location ', response);
                 });
@@ -129,7 +131,6 @@
 
             saveUtc() {
                 const uri = laroute.route('api.user.update.location', {user: this.user.id});
-                debugger;
                 SLC.put(uri, this.user).then((response) => {
                     console.log('Updated Location ', response);
                 });
@@ -154,6 +155,7 @@
                     const result = results[0];
                     self.user.lat = pos.lat;
                     self.user.lng = pos.lng;
+                    self.getTimeZone(pos);
                 });
                 this.marker = pos;
                 this.center = pos;
@@ -202,9 +204,19 @@
                 };
                 this.user.lat = pos.lat;
                 this.user.lng = pos.lng;
+                this.getTimeZone(pos);
                 this.marker = pos;
                 this.center = pos;
             }),
+
+            getTimeZone(pos){
+                const uri = laroute.route('api.user.get.timezone',{lat:pos.lat,lng:pos.lng,time: moment.utc().seconds()});
+                SLC.get(uri).then((response) => {
+                   this.user.timezone = response.data.timeZoneId;
+                    console.log(momentTZ.tz(this.user.timezone).format("YYYY-MM-DD HH:mm Z"));
+                    this.user.timezone = momentTZ.tz(this.user.timezone).format("YYYY-MM-DD HH:mm");
+                });
+            }
         }
     }
 </script>

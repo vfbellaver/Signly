@@ -13,6 +13,8 @@ use App\Http\Requests\UserUpdatePlanRequest;
 use App\Http\Requests\UserUpdateRequest;
 use App\Models\User;
 use App\Services\UserService;
+use Carbon\Carbon;
+use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\MessageBag;
@@ -93,11 +95,14 @@ class UsersController extends Controller
         return $response;
     }
 
-    public function updateLocation (UserUpdateLocationRequest $request, User $user)
+    public function updateLocation(UserUpdateLocationRequest $request, User $user)
     {
         $data = $request->all();
         $user->lat = $data['lat'];
         $user->lng = $data['lng'];
+        //$date = Carbon::now($data['timezone'])->toDateTimeString();
+        //$user->timezone = $date;
+        $user->timezone = $data['timezone'];
         $user->save();
 
         $response = [
@@ -134,11 +139,36 @@ class UsersController extends Controller
         return $response;
     }
 
+    public function getTimeZone($lat, $lng, $time)
+    {
+
+        $json = $this->urlFormat($lat, $lng, $time);
+
+        return [
+          'data' =>  $json,
+        ];
+
+    }
+
     public function destroy(User $user)
     {
         $this->service->delete($user);
         return [
             'message' => 'User deleted.'
         ];
+    }
+
+    private function urlFormat ($lat, $lng, $time) {
+
+        $lat = number_format($lat,7);
+        $lng = number_format($lng,7);
+
+        $location = 'location=' . $lat . ',' . $lng;
+        $timestamp = '&timestamp=' . $time;
+        $googleUrl = 'https://maps.googleapis.com/maps/api/timezone/json?';
+        $uri = $googleUrl.$location.$timestamp.'&key='.env('TIMEZONE');
+        $client = new Client();
+        $res = $client->request('GET', $uri);
+        return \GuzzleHttp\json_decode($res->getBody(),true);
     }
 }

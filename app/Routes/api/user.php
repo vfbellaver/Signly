@@ -2,7 +2,7 @@
 
 Route::resource('user', 'Api\UsersController', ['except' => ['show', 'create', 'edit']]);
 Route::get('current-user', 'Api\CurrentUserController')->name('current.user');
-
+Route::get('user/get-timezone/{lat}/{lng}/{time}', 'Api\UsersController@getTimeZone')->name('user.get.timezone');
 Route::put('user/{user}/photo', 'Api\UsersController@updatePhoto')->name('user.update.photo');
 Route::put('user/{user}/password', 'Api\UsersController@updatePassword')->name('user.update.password');
 Route::put('user/{user}/address', 'Api\UsersController@updateAddress')->name('user.update.address');

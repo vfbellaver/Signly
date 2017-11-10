@@ -27,6 +27,7 @@ class CreateUsersTable extends Migration
             $table->string('address', 256)->nullable();
             $table->decimal('lat', 18, 15)->nullable();
             $table->decimal('lng', 18, 15)->nullable();
+            $table->dateTime('timezone')->nullable();
 
             $table->foreign('team_id')
                 ->references('id')
