@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Models\User;
 use App\Notifications\CardExpirationSoon;
+use Timezone;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 
@@ -20,12 +21,9 @@ class TestCommand extends Command
 
     public function handle()
     {
-        $data = Carbon::createFromFormat('m/Y','12/2018')->endOfMonth();
-
-        /** @var User $user */
-        $user = factory(User::class)->make();
-        $user->notify(new CardExpirationSoon());
-
-
+        $date = Carbon::now();
+        $converted = Timezone::convertFromUTC($date->getTimestamp(), 'US/Mountain');
+        $this->info($converted);
+        $listOfTimeZones = Timezone::getTimezones();
     }
 }
