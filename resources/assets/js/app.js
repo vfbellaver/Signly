@@ -25,7 +25,7 @@ require('./vue/bootstrap');
 window.Vue.use(VueTimePicker);
 window.Vue.use(VueGoogleMaps, {
     load: {
-        key: 'AIzaSyC2z5mUPBMQj4xb6VNzX32Iv-5xFzcpxu4',
+        key: Slc.googleApiKey,
         libraries: 'places',
     },
     installComponents: true,

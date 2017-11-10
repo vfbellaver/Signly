@@ -166,7 +166,7 @@ class UsersController extends Controller
         $location = 'location=' . $lat . ',' . $lng;
         $timestamp = '&timestamp=' . $time;
         $googleUrl = 'https://maps.googleapis.com/maps/api/timezone/json?';
-        $uri = $googleUrl.$location.$timestamp.'&key='.env('TIMEZONE');
+        $uri = $googleUrl.$location.$timestamp.'&key='.env('GOOGLE_API_KEY');
         $client = new Client();
         $res = $client->request('GET', $uri);
         return \GuzzleHttp\json_decode($res->getBody(),true);

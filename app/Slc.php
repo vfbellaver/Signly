@@ -19,6 +19,7 @@ class Slc
             'user' => $user,
             'csrfToken' => csrf_token(),
             'stripeKey' => env('STRIPE_KEY'),
+            'googleApiKey' => env('GOOGLE_API_KEY'),
             'pusher' => env('PUSHER_APP_KEY'),
             'plans' => [
                 [

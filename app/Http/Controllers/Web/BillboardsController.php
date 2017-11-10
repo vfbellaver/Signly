@@ -64,7 +64,7 @@ class BillboardsController extends Controller
         $client = new Client();
 
         $path = fopen(storage_path().'/app/public/images/pov_img.png','w') or die('Something went wrong');
-        $request = $client->request('GET',$url,['timeout' => 10.29,'save_to' => $path]);
+        $client->request('GET',$url,['timeout' => 10.29,'save_to' => $path]);
 
         return view('billboard.public', [
             'billboard' => $billboard,
