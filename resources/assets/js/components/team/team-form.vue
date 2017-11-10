@@ -44,9 +44,15 @@
                                             name="email"></input-text>
                             </form-group>
                             <form-group :form="team" field="address">
-                                <input-label for="address">Address: </input-label>
+                                <input-label for="address">Address: </input-label><br>
                                 <input-text v-model="team.address" id="address"
                                             name="address"></input-text>
+                                <!--<br>-->
+                                <!--<gmap-autocomplete-->
+                                        <!--class="form-control"-->
+                                        <!--placeholder="Enter a location"-->
+                                        <!--:selectFirstOnEnter=true>-->
+                                <!--</gmap-autocomplete>-->
                             </form-group>
                             <row>
                                 <column size="6">
@@ -122,10 +128,17 @@
             this.buildForm();
         },
 
-        methods: {
+        watch: {
+            'team.address': function (val) {
+                this.searchAddress(val);
+            }
+        },
 
+
+        methods: {
             saveTeamName(){
                 const self = this;
+                console.log('endereco - ',self.team.address);
                 const uri = laroute.route('api.team.update.name', {team: this.team.id});
                 SLC.put(uri, self.team).then((response) => {
                     console.log('Team updated ', response);
@@ -150,7 +163,23 @@
                     fax: this.team.fax,
                     logo: this.team.logo ? this.team.logo : null,
                 });
+
             },
+
+            searchAddress(val) {
+                let defaultBounds = new google.maps.LatLngBounds(
+                    new google.maps.LatLng(-90,-180),
+                    new google.maps.LatLng(90,180));
+
+                let options = {
+                    bounds:defaultBounds,
+                    strictBounds: false,
+                    types: ['geocode']
+                };
+                let autocomplete = new google.maps.places.Autocomplete(document.getElementById('address'));
+                let place = autocomplete.getPlace();
+                console.log('Places!',place);
+            }
         }
     }
 </script>
