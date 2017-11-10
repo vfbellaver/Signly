@@ -2,25 +2,27 @@
 
 @section('base-content')
     <div id="public-billboard">
-        <div class="col-md-2">
+        <div class="col-md-2" style="padding-right: 0">
             <img alt="Company" src="{{$billboard->team->logo}}" width="100%">
         </div>
         <div class="col-md-10">
             <div class="col-md-12">
                 <h3><strong>Company {{$billboard->team->name}}</strong></h3>
+            <hr>
             </div>
             <div class="col-md-4">
                 <strong> <i class="fa fa-send"></i> Email:</strong><br>
-                {{$owner->email}}
+                {{$billboard->team->email}}
             </div>
             <div class="col-md-3">
                 <strong> <i class="fa fa-phone"></i> Phones:</strong><br>
-                (xxx) xxx-xxxx
+               {{$billboard->team->phone}}<br>
+               {{$billboard->team->fax}}
             </div>
             <div class="col-md-5">
                 <address>
                     <strong> <i class="fa fa-map-marker"></i> Address:</strong><br>
-                    {{$owner->address}}
+                    {{$billboard->team->address}}
                 </address>
             </div>
         </div>

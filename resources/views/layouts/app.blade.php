@@ -20,13 +20,13 @@
                             @if(isset(auth()->user()->name))
                                 <li>
                                     <a data-toggle="dropdown" class="dropdown-toggle" href="#" aria-expanded="true">
-                                        {{ auth()->user()->name }}
+                                        @{{user.name}}
                                         <b class="caret"></b>
                                     </a>
                                     <ul class="dropdown-menu animated fadeInRight m-t-xs">
                                         <li><a href="{{route('user.settings')}}">Your Settings</a></li>
                                         @if(auth()->user()->is_team_owner)
-                                            <li><a href="{{route('team.settings')}}">Team Settings</a></li>
+                                            <li><a href="{{route('team.settings')}}">Company Settings</a></li>
                                         @endif
                                         <li class="divider"></li>
                                         <li><a href="javascript:;"

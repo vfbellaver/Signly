@@ -16,7 +16,7 @@
                                 <li class="active">
                                     <a data-toggle="tab" href="#tab-team-profile" aria-expanded="true">
                                         <i class="fa fa-fw fa-btn fa-edit"></i>
-                                        Team profile
+                                        Company profile
                                     </a>
                                 </li>
                                 <li>
@@ -41,12 +41,6 @@
                                     <a data-toggle="tab" href="#tab-invoices" aria-expanded="false">
                                         <i class="fa fa-fw fa-btn fa-history"></i>
                                         Invoices
-                                    </a>
-                                </li>
-                                <li>
-                                    <a data-toggle="tab" href="#tab-configuration" aria-expanded="true">
-                                        <i class="fa fa-fw fa-btn fa-gears"></i>
-                                        Configuration
                                     </a>
                                 </li>
                             </ul>
@@ -82,14 +76,7 @@
                                 <div id="tab-invoices" class="tab-pane">
                                     <div class="panel-body">
                                         <ul>
-                                            <li>Show invoices</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div id="tab-configuration" class="tab-pane">
-                                    <div class="panel-body">
-                                        <ul>
-                                            <li>Default Map Center</li>
+                                            <team-invoices></team-invoices>
                                         </ul>
                                     </div>
                                 </div>
@@ -128,7 +115,9 @@
 <script>
 
     import TeamList from './team-list';
+    import TeamInvoices from './team-invoices';
     import TeamForm from './team-form';
+    import TeamConfiguration from '../user/tab-user-configuration';
     import TeamSubscription from './team-subscription';
     import TeamCard from './team-card';
 
@@ -138,6 +127,7 @@
             TeamList,
             TeamForm,
             TeamCard,
+            TeamInvoices,
             TeamSubscription,
         },
 

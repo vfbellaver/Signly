@@ -81,10 +81,14 @@ class TeamsController extends Controller
 
         $team = Team::query()->find($user->team_id);
         $team->name = $request->input('name');
+        $team->email = $request->input('email');
+        $team->phone = $request->input('phone');
+        $team->fax = $request->input('fax');
+        $team->address = $request->input('address');
         $team->save();
 
         $response = [
-            'message' => 'Company Name updated.',
+            'message' => 'Company Settings updated.',
             'data' => $team,
         ];
 
@@ -96,7 +100,7 @@ class TeamsController extends Controller
         $this->service->delete($team);
 
         return [
-            'message' => 'Team deleted.'
+            'message' => 'Company deleted.'
         ];
     }
 

@@ -106,7 +106,7 @@
 </template>
 <style lang="scss" scoped="scoped">
     .image-upload {
-        max-height: 50px;
+        max-height: 200px;
     }
 </style>
 <script>

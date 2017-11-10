@@ -58,18 +58,16 @@ class BillboardsController extends Controller
             ->where('teams.slug', $teamSlug)
             ->where('billboards.slug', $billboardSlug)
             ->first();
-        $owner = User::query()->where('id', $billboard->team->owner_id)->first();
 
         $url = $this->service->createPOVUrl($billboard);
 
         $client = new Client();
 
         $path = fopen(storage_path().'/app/public/images/pov_img.png','w') or die('Something went wrong');
-        $request = $client->request('GET',$url,['timeout' => 10.29,'save_to' => $path]);
+        $client->request('GET',$url,['timeout' => 10.29,'save_to' => $path]);
 
         return view('billboard.public', [
             'billboard' => $billboard,
-            'owner' => $owner
         ]);
     }
 }
