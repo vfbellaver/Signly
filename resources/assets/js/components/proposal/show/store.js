@@ -44,9 +44,6 @@ export default new Vuex.Store({
             const faces = state.proposal.billboard_faces;
             faces.splice(faces.indexOf(billboardFace), 1);
         },
-        save(state) {
-
-        }
     },
 
     actions: {
@@ -69,14 +66,14 @@ export default new Vuex.Store({
         setBillboard({commit}, billboard) {
             commit('setBillboard', billboard);
         },
-        addBillboardFace({commit}, billboardFace) {
-            commit('addBillboardFace', billboardFace);
+        addBillboardFace({commit}, proposal, form) {
+            const uri = laroute.route('api.proposal.add-billboard-face', {proposal: proposal.id});
+            Slc.post(uri, form).then(response => {
+                commit('addBillboardFace', response);
+            });
         },
         removeBillboardFace({commit}, billboardFace) {
             commit('removeBillboardFace', billboardFace);
-        },
-        save({commit}) {
-            commit('save');
         }
     }
 });

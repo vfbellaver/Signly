@@ -37,6 +37,7 @@ class RegisterController extends Controller
     {
         $team = new  Team();
         $team->name = $request->input('company');
+        $team->email = $request->input('email');
         $team->slug = str_slug($request->input('company'), '-');
         $team->save();
         $user = new  User();

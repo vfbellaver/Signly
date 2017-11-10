@@ -113,6 +113,7 @@
                 const uri = laroute.route('api.user.update', {user: Slc.user.id});
                 Slc.put(uri, this.formUser).then((response) => {
                     console.log("User Update", response);
+                    EventBus.$emit('userUpdated');
                 });
             },
             updatePhoto(){

@@ -15,7 +15,6 @@
 
         <div class="wrapper wrapper-content">
             <map-controls></map-controls>
-
             <gmap-map
                     v-if="loaded"
                     :options="mapOptions"
@@ -37,6 +36,8 @@
                 </gmap-info-window>
             </gmap-map>
         </div>
+
+        <billboard-face-form @saved=""></billboard-face-form>
     </div>
 </template>
 <style lang="scss">
@@ -59,6 +60,7 @@
     import * as Slc from "../../vue/http";
     import BillboardShow from './show/billboard-show';
     import MapControls from './show/map-controls';
+    import BillboardFaceForm from './show/billboard-face-form';
     import store from './show/store';
 
     export default {
@@ -69,6 +71,7 @@
         components: {
             BillboardShow,
             MapControls,
+            BillboardFaceForm,
         },
         data() {
             return {

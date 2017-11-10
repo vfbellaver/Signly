@@ -9,6 +9,7 @@ use App\Services\CardService;
 use Artesaos\Defender\Facades\Defender;
 use Carbon\Carbon;
 use App\Http\Controllers\Controller;
+use GuzzleHttp\Client;
 use function GuzzleHttp\Psr7\str;
 use Request;
 use Stripe\Card;
@@ -34,5 +35,15 @@ class PaymentController extends Controller
         return view('payment.pay');
     }
 
+    public function invoicePDF($invoiceId)
+    {
+        $user = User::query()->find(auth()->id());
+        $subscription = $user->getSubscription()->get()->toArray();
+        $team = Team::query()->find(auth()->user()->team_id);
 
+        return $user->downloadInvoice($invoiceId, [
+            'vendor' => $team->name,
+            'product' => $subscription[0]["stripe_plan"],
+        ]);
+    }
 }

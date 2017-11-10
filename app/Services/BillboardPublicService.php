@@ -16,7 +16,7 @@ class BillboardPublicService
 
     function __construct()
     {
-        $this->key = 'AIzaSyA7mOjLcyaXJLF20Y0u0o8tmc40FLKCzQw';
+        $this->key = env('GOOGLE_API_KEY');
         $this->size = '500x300';
     }
 

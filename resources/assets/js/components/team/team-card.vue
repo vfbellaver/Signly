@@ -128,11 +128,8 @@
         },
 
         watch: {
-            'userForm.owner': function () {
-                if (this.currentCard.name != null) {
-                    this.userForm.owner = this.currentCard.name;
-                    this.getBrandCard(this.currentCard.brand);
-                }
+            'currentCard.brand': function () {
+                this.getBrandCard(this.currentCard.brand);
             },
         },
 
@@ -144,12 +141,11 @@
                     .then((response) => {
                         console.log('get Card ', response.data[0]);
                         self.currentCard = response.data[0];
-                        self.userForm.owner = self.currentCard.name;
                     });
             },
 
             getBrandCard(flag){
-                for(let i = 0; i < this.cardBrand.length; i++){
+                for (let i = 0; i < this.cardBrand.length; i++) {
                     if (this.cardBrand[i].name === flag) {
                         this.brand = this.cardBrand[i].class;
                     }
@@ -184,7 +180,7 @@
             {
                 this.userForm = new SlcForm({
                     source: this.token,
-                    owner: this.currentCard.name,
+                    owner: '',
                 });
             },
 
