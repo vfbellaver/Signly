@@ -41,11 +41,14 @@
 
         <div class="wrapper wrapper-content card-list">
             <div class="container-fluid">
-                <div class="row">
+                <div class="row" v-if="type === VIEW_CARD">
                     <div class="col-md-4" v-for="billboard in billboards">
                         <billboard-card :billboard="billboard" @edit="edit" @destroy="destroy"
                                         :team="team"></billboard-card>
                     </div>
+                </div>
+                <div class="row" v-else>
+                    <billboard-list-view :list="billboards"></billboard-list-view>
                 </div>
             </div>
         </div>
@@ -61,6 +64,7 @@
     import BillboardCard from './billboard-card';
     import BillboardForm from './billboard-form';
     import BillboardImportForm from './billboard-import-form';
+    import BillboardListView from './billboard-list-view';
 
     const VIEW_CARD = 'card';
     const VIEW_LIST = 'list';
@@ -73,6 +77,7 @@
             BillboardCard,
             BillboardForm,
             BillboardImportForm,
+            BillboardListView
         },
         data() {
             return {
