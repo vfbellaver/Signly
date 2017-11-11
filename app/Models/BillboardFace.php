@@ -2,12 +2,14 @@
 
 namespace App\Models;
 
+use App\Helper\DataViewer;
 use App\Scopes\TeamScope;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 class BillboardFace extends Model
 {
+    use DataViewer;
+
     const READS = ['Left' => 'Left', 'Right' => 'Right', 'Across' => 'Across'];
     const TYPE = ['Static' => 'Static', 'Digital' => 'Digital'];
 
@@ -51,27 +53,6 @@ class BillboardFace extends Model
     public function billboard()
     {
         return $this->belongsTo(Billboard::class);
-    }
-
-    public function scopeDatatable(Builder $query, $data)
-    {
-        $limit = $data['limit'];
-        $offset = $data['offset'];
-        $sort = $data['sort'];
-        $order = $data['order'];
-
-        $total = $query->count();
-
-        $query = $query->limit($limit)->offset($offset);
-
-        if ($sort) {
-            $query = $query->orderBy($sort, $order);
-        }
-
-        return [
-            'rows' => $query->get(),
-            'total' => $total
-        ];
     }
 
     public function toArray()

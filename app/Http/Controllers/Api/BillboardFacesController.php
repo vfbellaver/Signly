@@ -26,8 +26,27 @@ class BillboardFacesController extends Controller
 
     public function search()
     {
-        $data = request()->all();
-        return BillboardFace::datatable($data);
+        // TODO: add type and formating to columns
+        // TODO: figure it out how to format each column
+        $columns = [
+            'code',
+            'photo',
+            'label',
+            'hard_cost',
+            'monthly_impressions',
+            'duration',
+            'height',
+            'width',
+            'reads',
+            'type',
+        ];
+
+        $model = BillboardFace::searchPaginateAndOrder($columns);
+
+        return [
+            'model' => $model,
+            'columns' => $columns
+        ];
     }
 
     public function store(BillboardFaceCreateRequest $request)
