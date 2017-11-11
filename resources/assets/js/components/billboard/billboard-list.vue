@@ -5,13 +5,13 @@
         <nav class="navbar navbar-in-content navbar-default" data-spy="affix" data-offset-top="147">
             <ul class="nav navbar-nav">
                 <li>
-                    <a @click="view(VIEW_LIST)" v-tippy title="List Face View">
+                    <a @click="view = 'list'" v-tippy title="List Face View">
                         <icon icon="list"></icon>
                         List View
                     </a>
                 </li>
                 <li>
-                    <a @click="view(VIEW_CARD)" v-tippy title="Card View Grouped by Address">
+                    <a @click="view = 'card'" v-tippy title="Card View Grouped by Address">
                         <icon icon="address-card"></icon>
                         Card View
                     </a>
@@ -41,7 +41,7 @@
 
         <div class="wrapper wrapper-content card-list">
             <div class="container-fluid">
-                <div class="row" v-if="type === VIEW_CARD">
+                <div class="row" v-if="view === 'card'">
                     <div class="col-md-4" v-for="billboard in billboards">
                         <billboard-card :billboard="billboard" @edit="edit" @destroy="destroy"
                                         :team="team"></billboard-card>
@@ -66,9 +66,6 @@
     import BillboardImportForm from './billboard-import-form';
     import BillboardListView from './billboard-list-view';
 
-    const VIEW_CARD = 'card';
-    const VIEW_LIST = 'list';
-
     export default {
         props: {
             team: {required: true},
@@ -79,32 +76,21 @@
             BillboardImportForm,
             BillboardListView
         },
-        data() {
-            return {
-                billboards: [],
-                view: VIEW_LIST,
-                pageHeading:
-                    {
-                        title: 'Billboard List',
-                        breadcrumb:
-                            [
-                                {title: 'Home', url: laroute.route('home')}
-                            ]
-                    }
-                ,
-            }
-        },
+        data: () => ({
+            billboards: [],
+            view: 'list',
+            pageHeading: {
+                title: 'Billboard List',
+                breadcrumb:
+                    [
+                        {title: 'Home', url: laroute.route('home')}
+                    ]
+            },
+        }),
         mounted() {
             this.reload();
         },
         methods: {
-            view(type) {
-                if (type === VIEW_CARD) {
-                }
-
-                if (type === VIEW_LIST) {
-                }
-            },
             create() {
                 this.$refs.form.show();
             },

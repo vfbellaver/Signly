@@ -24,6 +24,12 @@ class BillboardFacesController extends Controller
         return BillboardFace::query()->where('billboard_id', $billboardId)->get()->toArray();
     }
 
+    public function search()
+    {
+        $data = request()->all();
+        return BillboardFace::datatable($data);
+    }
+
     public function store(BillboardFaceCreateRequest $request)
     {
         $data = $this->service->create($request->form());

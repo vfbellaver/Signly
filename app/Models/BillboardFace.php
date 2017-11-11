@@ -2,12 +2,12 @@
 
 namespace App\Models;
 
+use App\Scopes\TeamScope;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Validation\Rules\Unique;
 
 class BillboardFace extends Model
 {
-
     const READS = ['Left' => 'Left', 'Right' => 'Right', 'Across' => 'Across'];
     const TYPE = ['Static' => 'Static', 'Digital' => 'Digital'];
 
@@ -39,53 +39,46 @@ class BillboardFace extends Model
         'is_illuminated' => 'boolean',
     ];
 
-    protected $dates = [
+    protected static function boot()
+    {
+        parent::boot();
 
-    ];
+        if (auth()->check()) {
+            static::addGlobalScope(new TeamScope(auth()->user()->team));
+        }
+    }
 
     public function billboard()
     {
         return $this->belongsTo(Billboard::class);
     }
 
-    #region
+    public function scopeDatatable(Builder $query, $data)
+    {
+        $limit = $data['limit'];
+        $offset = $data['offset'];
+        $sort = $data['sort'];
+        $order = $data['order'];
 
-    #region Custom Attributes
+        $total = $query->count();
 
-    #endregion
+        $query = $query->limit($limit)->offset($offset);
 
-    #region Queries
+        if ($sort) {
+            $query = $query->orderBy($sort, $order);
+        }
 
-    #endregion
+        return [
+            'rows' => $query->get(),
+            'total' => $total
+        ];
+    }
 
-    #region Conversions
     public function toArray()
     {
-        $data = [
-            'id' => $this->id,
-            'code' => $this->code,
-            'height' => $this->height,
-            'width' => $this->width,
-            'reads' => $this->reads,
-            'label' => $this->label,
-            'hard_cost' => $this->hard_cost,
-            'monthly_impressions' => $this->monthly_impressions,
-            'notes' => $this->notes,
-            'max_ads' => $this->max_ads,
-            'duration' => $this->duration,
-            'photo' => $this->photo,
-            'is_illuminated' => $this->is_illuminated,
-            'lights_on' => $this->lights_on,
-            'lights_off' => $this->lights_off,
-            'type' => $this->type,
-            'billboard_id' => $this->billboard_id,
-            'billboard_name' => $this->billboard->name,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at
-        ];
-
-        return $data;
+        return array_merge(parent::toArray(), [
+            'billboard_name' => $this->billboard->name
+        ]);
     }
-    #endregion
 
 }
