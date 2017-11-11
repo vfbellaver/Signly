@@ -8,8 +8,12 @@ use Illuminate\Validation\Rules\Unique;
 class BillboardFace extends Model
 {
 
-    const READS = ['Left' => 'Left', 'Right' => 'Right', 'Across' => 'Across'];
-    const TYPE = ['Static' => 'Static', 'Digital' => 'Digital'];
+    const TYPE_STATIC = 'Static';
+    const TYPE_DIGITAL = 'Digital';
+
+    const READS_LEFT = 'Left';
+    const READS_RIGHT = 'Right';
+    const READS_ACROSS = 'Across';
 
     protected $fillable = [
         'code',
@@ -64,22 +68,22 @@ class BillboardFace extends Model
         $data = [
             'id' => $this->id,
             'code' => $this->code,
+            'slug' => $this->slug,
+            'label' => $this->label,
             'height' => $this->height,
             'width' => $this->width,
             'reads' => $this->reads,
-            'label' => $this->label,
-            'hard_cost' => $this->hard_cost,
+            'rate_card' => $this->rate_card,
             'monthly_impressions' => $this->monthly_impressions,
             'notes' => $this->notes,
             'max_ads' => $this->max_ads,
             'duration' => $this->duration,
-            'photo' => $this->photo,
+            'photo_url' => $this->photo_url,
             'is_illuminated' => $this->is_illuminated,
             'lights_on' => $this->lights_on,
             'lights_off' => $this->lights_off,
             'type' => $this->type,
             'billboard_id' => $this->billboard_id,
-            'billboard_name' => $this->billboard->name,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at
         ];

@@ -34,6 +34,7 @@ class User extends Authenticatable
         'address',
         'lat',
         'lng',
+        'timezone',
         'team_id',
     ];
 
@@ -119,14 +120,18 @@ class User extends Authenticatable
             'team' => $this->team_id ? $this->team->toArray() : null,
             'subscription' => $this->getSubscription()->get()->toArray(),
             'pending' => $this->invitation_token != null,
+
             'stripe_id' => $this->stripe_id,
             'card_brand' => $this->card_brand,
             'card_expiration' => $this->card_expiration,
             'card_last_four' => $this->card_last_four,
             'trial_ends_at' => $this->trial_ends_at,
+
             'address' => $this->address,
             'lat' => $this->lat,
             'lng' => $this->lng,
+
+            'timezone' => $this->timezone,
         ];
     }
 

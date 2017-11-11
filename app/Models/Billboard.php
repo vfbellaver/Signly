@@ -8,13 +8,11 @@ class Billboard extends Model
 {
     protected $fillable = [
         'name',
-        'slug',
         'address',
         'lat',
         'lng',
         'heading',
         'pitch',
-        'description',
         'team_id'
     ];
 
@@ -56,8 +54,6 @@ class Billboard extends Model
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'slug' => $this->slug,
-            'description' => $this->description,
             'address' => $this->address,
             'lat' => $this->lat,
             'lng' => $this->lng,
@@ -81,7 +77,6 @@ class Billboard extends Model
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'slug' => $this->slug,
         ];
     }
     #endregion

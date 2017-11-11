@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
@@ -15,20 +14,29 @@ class CreateBillboardFacesTable extends Migration
 
             $table->string('code', 6);
             $table->string('label', 50);
-            $table->decimal('hard_cost', 10, 2)->default(0);
-            $table->float('monthly_impressions', 10, 0)->default(0);
-            $table->integer('duration');
+            $table->string('slug', 190);
+
+            $table->decimal('rate_card', 10, 2)->default(0)->comment('the suggest price for this face');
+            $table->decimal('monthly_impressions', 10, 2)->default(0);
+
+            $table->enum('type', ['Static', 'Digital'])->default('Static');
+
+            $table->float('width', 10)->nullable()->comment('Face width in ft');
+            $table->float('height', 10)->nullable()->comment('Face height in ft');
+
+            $table->text('notes')->nullable();
+            $table->text('photo_url')->nullable();
+
+            //if digital
+            $table->integer('duration')->nullable()->comment('the amount of time in seconds an add turn will have');
+            $table->integer('max_ads')->nullable()->comment('max number of ads this digital billboard can have');
+
+            //if static
             $table->boolean('is_illuminated')->default(false);
 
-            $table->float('height', 10)->nullable();
-            $table->float('width', 10)->nullable();
-            $table->string('reads', 50)->nullable();
-            $table->text('notes')->nullable();
-            $table->integer('max_ads')->nullable();
-            $table->text('photo')->nullable();
-            $table->string('type', 50)->default('Static');
-            $table->string('lights_on')->nullable();
-            $table->string('lights_off')->nullable();
+            //if illuminated
+            $table->string('lights_on', 32)->nullable();
+            $table->string('lights_off', 32)->nullable();
 
             $table->foreign('billboard_id')
                 ->references('id')
