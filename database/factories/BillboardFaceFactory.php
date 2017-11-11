@@ -33,9 +33,5 @@ $factory->define(App\Models\BillboardFace::class, function (Faker $faker) {
         'is_illuminated' => $type == BillboardFace::TYPE_STATIC ? $isIlluminated : null,
         'lights_on' => $isIlluminated ? $faker->time() : null,
         'lights_off' => $isIlluminated ? $faker->time() : null,
-
-        'billboard_id' => function () {
-            return factory(App\Models\Billboard::class)->create()->id;
-        },
     ];
 });

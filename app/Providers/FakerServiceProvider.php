@@ -2,12 +2,18 @@
 
 namespace App\Providers;
 
+use Carbon\Carbon;
 use Exception;
 use Faker\Factory;
 use Faker\Provider\Base;
 use GuzzleHttp\Client;
 use Illuminate\Support\ServiceProvider;
 use Storage;
+use Stripe\Customer;
+use Stripe\Plan;
+use Stripe\Stripe;
+use Stripe\Subscription;
+use Stripe\Token;
 
 class FakerServiceProvider extends ServiceProvider
 {

@@ -21,6 +21,6 @@ class TeamTableSeeder extends Seeder
 
     private function createTeams()
     {
-        factory(Team::class, 5)->create();
+        factory(Team::class, 1)->create();
     }
 }

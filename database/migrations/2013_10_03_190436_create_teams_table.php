@@ -13,8 +13,6 @@ class CreateTeamsTable extends Migration
             $table->string('name', 64);
 
             $table->string('email', 128)->unique();
-            $table->string('phone', 24)->nullable();
-            $table->string('fax', 24)->nullable();
 
             $table->string('logo', 128)->nullable();
             $table->string('slug', 100)->unique();

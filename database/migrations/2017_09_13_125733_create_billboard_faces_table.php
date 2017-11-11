@@ -16,6 +16,7 @@ class CreateBillboardFacesTable extends Migration
             $table->string('slug', 48);
             $table->string('label', 32);
             $table->enum('facing', ['North', 'South', 'East', 'West', 'Other'])->nullable();
+            $table->enum('reads', ['Left', 'Right', 'Across'])->nullable();
 
             $table->decimal('rate_card', 10, 2)->default(0)->comment('the suggest price for this face');
             $table->decimal('monthly_impressions', 10, 2)->default(0);
@@ -39,7 +40,7 @@ class CreateBillboardFacesTable extends Migration
             $table->string('lights_on', 32)->nullable();
             $table->string('lights_off', 32)->nullable();
 
-            $table->unique('team_id', 'code');
+            $table->unique(['team_id', 'code']);
 
             $table->foreign('billboard_id')
                 ->references('id')

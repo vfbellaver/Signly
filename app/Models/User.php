@@ -38,6 +38,11 @@ class User extends Authenticatable
         'team_id',
     ];
 
+    protected $dates = [
+        'card_expiration',
+        'trial_ends_at',
+    ];
+
     protected $hidden = [
         'password',
         'remember_token',
