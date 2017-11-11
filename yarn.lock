@@ -6491,7 +6491,7 @@ vue2-timepicker@^0.1.4:
   dependencies:
     vue "^2.0.1"
 
-vue@^2.0.1, vue@^2.1.10:
+vue@^2.0.1, vue@^2.5.3:
   version "2.5.3"
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.5.3.tgz#e1a3b1f49b6e93e574ce040b95cbc873912fecc1"
 
