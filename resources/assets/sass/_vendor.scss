@@ -6,3 +6,6 @@
 @import "~bootstrap-daterangepicker/daterangepicker";
 @import "~material-design-icons-font/iconfont/material-icons";
 @import "vendor/ionRangeSlider";
+//noinspection CssUnknownTarget
+@import 'node_modules/v-tippy/dist/tippy';
+@import 'vendor/tippy';

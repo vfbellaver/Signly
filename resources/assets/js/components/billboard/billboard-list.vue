@@ -1,22 +1,45 @@
 <template>
-    <div class="card-list">
+    <div>
         <inspinia-page-heading v-if="pageHeading" :data="pageHeading"></inspinia-page-heading>
 
         <nav class="navbar navbar-in-content navbar-default" data-spy="affix" data-offset-top="147">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a @click="view(VIEW_LIST)" v-tippy title="List Face View">
+                        <icon icon="list"></icon>
+                        List View
+                    </a>
+                </li>
+                <li>
+                    <a @click="view(VIEW_CARD)" v-tippy title="Card View Grouped by Address">
+                        <icon icon="address-card"></icon>
+                        Card View
+                    </a>
+                </li>
+            </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a @click="create">
-                    <icon icon="plus"></icon>
-                    Add</a></li>
-                <li><a @click="importBillboards">
-                    <icon icon="upload"></icon>
-                    Import</a></li>
-                <li><a @click="goToHome">
-                    <icon icon="map-marker"></icon>
-                    Map</a></li>
+                <li>
+                    <a @click="create">
+                        <icon icon="plus"></icon>
+                        Add
+                    </a>
+                </li>
+                <li>
+                    <a @click="importBillboards">
+                        <icon icon="upload"></icon>
+                        Import
+                    </a>
+                </li>
+                <li>
+                    <a @click="goToHome">
+                        <icon icon="map-marker"></icon>
+                        Map
+                    </a>
+                </li>
             </ul>
         </nav>
 
-        <div class="wrapper wrapper-content">
+        <div class="wrapper wrapper-content card-list">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-4" v-for="billboard in billboards">
@@ -31,10 +54,6 @@
     </div>
 </template>
 
-<style lang="scss" scoped="scoped">
-
-</style>
-
 <script>
     import _ from 'lodash';
     import * as Slc from "../../vue/http";
@@ -42,6 +61,9 @@
     import BillboardCard from './billboard-card';
     import BillboardForm from './billboard-form';
     import BillboardImportForm from './billboard-import-form';
+
+    const VIEW_CARD = 'card';
+    const VIEW_LIST = 'list';
 
     export default {
         props: {
@@ -55,18 +77,29 @@
         data() {
             return {
                 billboards: [],
-                pageHeading: {
-                    title: 'Billboard List',
-                    breadcrumb: [
-                        {title: 'Home', url: laroute.route('home')}
-                    ]
-                },
+                view: VIEW_LIST,
+                pageHeading:
+                    {
+                        title: 'Billboard List',
+                        breadcrumb:
+                            [
+                                {title: 'Home', url: laroute.route('home')}
+                            ]
+                    }
+                ,
             }
         },
         mounted() {
             this.reload();
         },
         methods: {
+            view(type) {
+                if (type === VIEW_CARD) {
+                }
+
+                if (type === VIEW_LIST) {
+                }
+            },
             create() {
                 this.$refs.form.show();
             },

@@ -56,7 +56,8 @@
 .top-navigation .navbar-brand {
   background: $navy;
   color: #fff;
-  padding: 15px 25px;
+  padding: 15px 20px 15px 30px;
+  min-height: 52px;
 }
 
 .top-navigation .navbar-top-links li:last-child {
