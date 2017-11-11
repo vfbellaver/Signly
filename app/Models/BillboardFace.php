@@ -15,9 +15,15 @@ class BillboardFace extends Model
     const READS_RIGHT = 'Right';
     const READS_ACROSS = 'Across';
 
+    const FACING_NORTH = 'North';
+    const FACING_SOUTH = 'South';
+    const FACING_EAST = 'East';
+    const FACING_WEST = 'West';
+
     protected $fillable = [
         'code',
         'label',
+        'facing',
         'hard_cost',
         'monthly_impressions',
         'duration',
@@ -70,6 +76,7 @@ class BillboardFace extends Model
             'code' => $this->code,
             'slug' => $this->slug,
             'label' => $this->label,
+            'facing' => $this->facing,
             'height' => $this->height,
             'width' => $this->width,
             'reads' => $this->reads,

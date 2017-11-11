@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Models\User;
 use App\Notifications\CardExpirationSoon;
+use Faker\Generator;
 use Timezone;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
@@ -19,11 +20,8 @@ class TestCommand extends Command
         parent::__construct();
     }
 
-    public function handle()
+    public function handle(Generator $faker)
     {
-        $date = Carbon::now();
-        $converted = Timezone::convertFromUTC($date->getTimestamp(), 'US/Mountain');
-        $this->info($converted);
-        $listOfTimeZones = Timezone::getTimezones();
+
     }
 }

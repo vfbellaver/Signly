@@ -6,7 +6,6 @@ $factory->define(App\Models\Billboard::class, function (Faker $faker) {
     $name = $faker->streetName;
     return [
         'name' => $name,
-        'slug' => str_slug($name,'-'),
         'address' => $faker->address,
         'lat' => $faker->latitude,
         'lng' => $faker->longitude,

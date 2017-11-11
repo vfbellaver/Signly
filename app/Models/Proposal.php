@@ -15,21 +15,20 @@ class Proposal extends Model
         'team_id',
         'client_id',
         'user_id',
-        'budget',
         'total_price',
         'confidence',
         'from_date',
         'to_date',
-        'status'
+        'status',
+        'notes',
     ];
 
     protected $casts = [
         'team_id' => 'int',
         'client_id' => 'int',
         'user_id' => 'int',
-        'budget' => 'float',
         'total_price' => 'float',
-        'confidence' => 'float',
+        'confidence' => 'int',
     ];
 
     protected $dates = [
@@ -73,10 +72,10 @@ class Proposal extends Model
             'client_id' => $this->client_id,
             'client' => $this->client->toArray(),
             'billboard_faces' => $this->billboardFaces->toArray(),
-            'budget' => $this->budget,
             'total_price' => $this->total_price,
             'from_date' => $this->from_date,
             'to_date' => $this->to_date,
+            'notes' => $this->notes,
 
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at

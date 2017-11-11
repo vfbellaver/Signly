@@ -18,7 +18,8 @@ class CreateProposalsTable extends Migration
 
             $table->date('from_date');
             $table->date('to_date');
-            $table->decimal('confidence', 5, 2);
+
+            $table->integer('confidence')->nullable();
 
             $table->decimal('total_price', 10, 2)->default(0);
             $table->enum('status', ['Active', 'Won', 'Lost'])->default('Active');

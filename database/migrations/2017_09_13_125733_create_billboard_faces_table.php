@@ -12,9 +12,10 @@ class CreateBillboardFacesTable extends Migration
             $table->unsignedInteger('team_id');
             $table->unsignedInteger('billboard_id');
 
-            $table->string('code', 6);
-            $table->string('label', 50);
-            $table->string('slug', 190);
+            $table->string('code', 32);
+            $table->string('slug', 48);
+            $table->string('label', 32);
+            $table->enum('facing', ['North', 'South', 'East', 'West', 'Other'])->nullable();
 
             $table->decimal('rate_card', 10, 2)->default(0)->comment('the suggest price for this face');
             $table->decimal('monthly_impressions', 10, 2)->default(0);
@@ -32,11 +33,13 @@ class CreateBillboardFacesTable extends Migration
             $table->integer('max_ads')->nullable()->comment('max number of ads this digital billboard can have');
 
             //if static
-            $table->boolean('is_illuminated')->default(false);
+            $table->boolean('is_illuminated')->nullable();
 
             //if illuminated
             $table->string('lights_on', 32)->nullable();
             $table->string('lights_off', 32)->nullable();
+
+            $table->unique('team_id', 'code');
 
             $table->foreign('billboard_id')
                 ->references('id')
