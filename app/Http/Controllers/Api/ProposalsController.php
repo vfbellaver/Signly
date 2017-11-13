@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ProposalBillboardFaceCreateRequest;
 use App\Http\Requests\ProposalCreateRequest;
 use App\Http\Requests\ProposalUpdateRequest;
 use App\Models\Proposal;
@@ -41,6 +42,18 @@ class ProposalsController extends Controller
         $response = [
             'message' => 'Proposal created.',
             'data' => $data
+        ];
+
+        return $response;
+    }
+
+    public function addBillboardFace(ProposalBillboardFaceCreateRequest $request, Proposal $proposal)
+    {
+        $obj = $this->service->update($request->form(), $proposal);
+
+        $response = [
+            'message' => 'Proposal updated.',
+            'data' => $obj,
         ];
 
         return $response;
