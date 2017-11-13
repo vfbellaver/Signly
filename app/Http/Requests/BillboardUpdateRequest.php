@@ -20,7 +20,6 @@ class BillboardUpdateRequest extends BaseRequest
     {
         return [
             'name' => 'required',
-            'description' => 'nullable',
             'address' => 'required',
             'lat' => 'required',
             'lng' => 'required',

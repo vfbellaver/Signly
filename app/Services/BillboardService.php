@@ -18,8 +18,6 @@ class BillboardService
         return \DB::transaction(function () use ($form) {
             $data = [
                 'name' => $form->name(),
-                'slug' => $form->slug(),
-                'description' => $form->description(),
                 'address' => $form->address(),
                 'lat' => $form->lat(),
                 'lng' => $form->lng(),
@@ -29,8 +27,6 @@ class BillboardService
 
 
             $billboard = new Billboard($data);
-            $billboard->slug = $this->nameExists($billboard);
-
             $billboard->team()->associate($form->user()->team_id);
 
             $billboard->save();
@@ -45,7 +41,6 @@ class BillboardService
         return \DB::transaction(function () use ($form, $billboard) {
 
             $billboard->name = $form->name();
-            $billboard->description = $form->description();
             $billboard->address = $form->address();
             $billboard->lat = $form->lat();
             $billboard->lng = $form->lng();
@@ -77,7 +72,6 @@ class BillboardService
         foreach ($data as $row) {
             $billboard = [
                 'name' => null,
-                'description' => null,
                 'address' => null,
                 'lat' => null,
                 'lng' => null,
@@ -89,8 +83,8 @@ class BillboardService
             $billboard['faces'] = [];
 
             $i = 1;
-            $required = ['code', 'label', 'hard_cost', 'monthly_impressions', 'duration'];
-            $optional = ['height', 'width', 'reads', 'notes', 'max_ads', 'lights_on', 'lights_off', 'billboard_id', 'photo', 'is_illuminated'];
+            $required = ['code', 'label', 'rate_card', 'monthly_impressions', 'duration'];
+            $optional = ['height', 'width', 'reads', 'notes', 'max_ads', 'lights_on', 'lights_off', 'billboard_id', 'photo_url', 'is_illuminated'];
             while (isset($row["face{$i}_code"])) {
                 $face = [];
                 $valid = true;
@@ -136,6 +130,7 @@ class BillboardService
 
             foreach ($billboards as $blb) {
                 //create o billboard
+                /** @var Billboard $billboard */
                 $billboard = Billboard::query()->create([
                     'name' => $blb['name'],
                     'description' => $blb['description'],
@@ -153,9 +148,9 @@ class BillboardService
 
                 //create as faces relations
                 foreach ($faces as $face) {
-                    if(strtolower($face['is_illuminated']) == strtolower('No')){
+                    if (strtolower($face['is_illuminated']) == strtolower('No')) {
                         $face['is_illuminated'] = false;
-                    }else{
+                    } else {
                         $face['is_illuminated'] = true;
                     }
                     $billboardFace = new BillboardFace($face);
@@ -172,20 +167,4 @@ class BillboardService
             return $savedBillboards;
         });
     }
-
-    public function nameExists(Billboard $billboard)
-    {
-        $count = Billboard::query()
-            ->where('name',$billboard->name)
-            ->where('team_id',auth()->user()->team_id)
-            ->count();
-            if($count){
-                $slug = str_slug($billboard->name,'-');
-                $slug = $slug.'-'.($count+1);
-                return $slug;
-            }else{
-                return str_slug($billboard->name,'-');
-            }
-    }
-
 }

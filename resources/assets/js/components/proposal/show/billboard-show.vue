@@ -15,7 +15,7 @@
                 <h3>{{face.label}}</h3>
                 <div class="row">
                     <div class="col-xs-4 no-padding">
-                        <img class="img-responsive" :src="face.photo" alt="label"/>
+                        <img class="img-responsive" :src="face.photo_url" alt="label"/>
                     </div>
                     <div class="col-xs-7">
                         <dl class="dl-horizontal">
@@ -28,7 +28,7 @@
                             <dt>DEC:</dt>
                             <dd>{{face.reads}}</dd>
                             <dt>Rate Card:</dt>
-                            <dd>{{face.hard_cost}}</dd>
+                            <dd>{{face.rate_card}}</dd>
                         </dl>
                     </div>
                     <div>

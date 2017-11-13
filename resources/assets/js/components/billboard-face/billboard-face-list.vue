@@ -14,13 +14,13 @@
                             <div class="col-sm-6">
                                 <div class="text-center">
                                     <img alt="image" class="m-t-xs img-responsive"
-                                         :src="billboardFace.photo">
+                                         :src="billboardFace.photo_url">
                                     <div class="m-t-xs font-bold">{{billboardFace.code}}</div>
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <h4>
-                                    <small>Type: &nbsp</small>
+                                    <small>Type: </small>
                                     <strong>{{billboardFace.type}}</strong>
                                 </h4>
                                 <p>
@@ -28,7 +28,7 @@
                                 </p>
                                 <h1>
                                     <small> U$ :</small>
-                                    {{formatMoney(billboardFace.hard_cost)}}
+                                    {{formatMoney(billboardFace.rate_card)}}
                                 </h1>
                             </div>
                             <div class="clearfix"></div>

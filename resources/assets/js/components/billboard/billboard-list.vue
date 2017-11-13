@@ -39,9 +39,9 @@
     import _ from 'lodash';
     import * as Slc from "../../vue/http";
 
-    import BillboardCard from './billboard-card';
-    import BillboardForm from './billboard-form';
-    import BillboardImportForm from './billboard-import-form';
+    import BillboardCard from './list/billboard-card';
+    import BillboardForm from './list/billboard-form';
+    import BillboardImportForm from './list/billboard-import-form';
 
     export default {
         props: {

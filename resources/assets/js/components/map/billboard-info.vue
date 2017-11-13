@@ -32,7 +32,7 @@
                             <dt>DEC:</dt>
                             <dd>{{face.reads}}</dd>
                             <dt>Rate Card:</dt>
-                            <dd>{{face.hard_cost}}</dd>
+                            <dd>{{face.rate_card}}</dd>
                         </dl>
                     </div>
                     <div>

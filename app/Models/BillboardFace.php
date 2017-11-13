@@ -24,7 +24,7 @@ class BillboardFace extends Model
         'code',
         'label',
         'facing',
-        'hard_cost',
+        'rate_card',
         'monthly_impressions',
         'duration',
         'is_illuminated',
@@ -33,7 +33,7 @@ class BillboardFace extends Model
         'reads',
         'notes',
         'max_ads',
-        'photo',
+        'photo_url',
         'lights_on',
         'lights_off',
         'type',
@@ -42,7 +42,7 @@ class BillboardFace extends Model
     ];
 
     protected $casts = [
-        'hard_cost' => 'float',
+        'rate_card' => 'float',
         'max_ads' => 'int',
         'duration' => 'int',
         'team_id' => 'int',

@@ -12,16 +12,6 @@ class BillboardForm extends BaseForm
         return $this->request->get('name');
     }
 
-    public function slug()
-    {
-        return $this->request->get('slug');
-    }
-
-    public function description()
-    {
-        return $this->request->get('description');
-    }
-
     public function address()
     {
         return $this->request->get('address');
