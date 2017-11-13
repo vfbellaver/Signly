@@ -16,7 +16,7 @@ class UserUpdateLocationRequest extends FormRequest
         return [
             'lat' => 'required',
             'lng' => 'required',
-            'timezone' => 'required',
+            'address' => 'required',
         ];
     }
 
@@ -25,7 +25,7 @@ class UserUpdateLocationRequest extends FormRequest
         return [
             'lat' => 'Latitude',
             'lng' => 'Longitude',
-            'timezone' => 'Your time zone is not set.'
+            'address' => 'Address'
         ];
     }
 }
