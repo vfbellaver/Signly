@@ -1,16 +1,28 @@
 <template>
     <div class="ibox">
         <div class="ibox-title">
-            <h5>{{billboard.name}}</h5>
+            <h5><i class="fa fa-map-marker"></i> {{billboard.address}}</h5>
         </div>
         <div class="ibox-content">
-            <div class="team-members">
+            <div class="faces-container">
+                <div class="feed-activity-list">
+                    <div class="feed-element" v-for="face in billboard.billboard_faces">
+                        <a class="pull-left">
+                            <img alt="Billboard Face" class="img-circle" :src="face.photo_url">
+                        </a>
+                        <div class="media-body ">
+                            <small class="pull-right">{{face.type}}</small>
+                            <strong>{{face.code}}</strong> - Facing {{face.label}}<br>
+                            <small class="text-muted">Rate Card {{face.rate_card | money('$')}}</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div v-if="false" class="team-members">
                 <span v-for="face in billboard.billboard_faces">
                     <img alt="Billboard Face" class="img-circle" :src="face.photo_url">
                 </span>
             </div>
-            <h4>Description</h4>
-            <p class="description">{{billboard.description}}</p>
             <hr/>
             <div class="row  m-t-sm">
                 <div class="col-md-12">
@@ -31,13 +43,27 @@
     @import "../../../../sass/placeholders";
     @import "../../../../sass/breakpoints";
 
-    p.description {
-        @include multi-line-text-ellipse(100%, 54px, 3);
+    .ibox-title {
+        h5 {
+            @include text-ellipse(98%);
+        }
     }
 
     .team-members {
         .img-circle {
             margin-right: 4px;
+        }
+    }
+
+    .faces-container {
+        height: 261px;
+    }
+
+    .feed-activity-list {
+        .feed-element {
+            &:last-of-type {
+                border-bottom: none;
+            }
         }
     }
 

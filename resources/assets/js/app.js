@@ -18,6 +18,7 @@ window.Layout = Layout();
 window.laroute = Laroute;
 window.Vue = Vue;
 
+require('./filters/bootstrap');
 require('./directives/bootstrap');
 require('./components/bootstrap');
 require('./vue/bootstrap');

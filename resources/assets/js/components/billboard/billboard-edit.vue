@@ -5,75 +5,79 @@
 
         <div class="wrapper wrapper-content">
             <div class="container-fluid">
-                <box>
-                    <box-content>
-                        <form-submit v-model="form" @submit="save">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <form-group :form="form" field="name">
-                                        <input-label for="name">Name: </input-label>
-                                        <input-text v-model="form.name" id="name" name="name"></input-text>
-                                    </form-group>
-                                    <form-group :form="form" field="address">
-                                        <input-label for="address">Address: </input-label>
-                                        <input-text v-model="form.address" id="address" name="address"></input-text>
-                                    </form-group>
-                                    <div class="map-container">
-                                        <gmap-map
-                                                v-if="loaded"
-                                                :center="center"
-                                                :zoom="zoom"
-                                                @click="onMapClick"
-                                                @zoom_changed="onZoomChanged"
-                                                :options="mapOptions">
-                                            <gmap-marker
-                                                    v-if="marker"
-                                                    :position="marker"
-                                                    :icon="markerIcon"
-                                                    :clickable="true"
-                                                    :draggable="true"
-                                                    @dragend="onMarkerMoved"
-                                                    @click="center=marker"
-                                            ></gmap-marker>
-                                        </gmap-map>
+                <div class="col-md-6">
+                    <div class="ibox">
+                        <div class="ibox-title">
+                            <h5>Location</h5>
+                        </div>
+                        <div class="ibox-content">
+                            <form-submit v-model="form" @submit="save">
+                                <form-group :form="form" field="name">
+                                    <input-label for="name">Name: </input-label>
+                                    <input-text v-model="form.name" id="name" name="name"></input-text>
+                                </form-group>
+                                <form-group :form="form" field="address">
+                                    <input-label for="address">Address: </input-label>
+                                    <input-text v-model="form.address" id="address" name="address"></input-text>
+                                </form-group>
+                                <div class="map-container">
+                                    <gmap-map
+                                            v-if="loaded"
+                                            :center="center"
+                                            :zoom="zoom"
+                                            @click="onMapClick"
+                                            @zoom_changed="onZoomChanged"
+                                            :options="mapOptions">
+                                        <gmap-marker
+                                                v-if="marker"
+                                                :position="marker"
+                                                :icon="markerIcon"
+                                                :clickable="true"
+                                                :draggable="true"
+                                                @dragend="onMarkerMoved"
+                                                @click="center=marker"
+                                        ></gmap-marker>
+                                    </gmap-map>
 
-                                        <gmap-street-view-panorama
-                                                v-if="streetViewLoaded"
-                                                class="pano"
-                                                :position="center"
-                                                :pov="pov"
-                                                :zoom="1"
-                                                @pano_changed="updatePano"
-                                                @pov_changed="updatePov">
-                                        </gmap-street-view-panorama>
-                                    </div>
-                                    <hr/>
-                                    <form-group :form="form" field="lat">
-                                        <input-label for="lat">Latitude: </input-label>
-                                        <input-text v-model="form.lat" id="lat" name="lat"></input-text>
-                                    </form-group>
+                                    <gmap-street-view-panorama
+                                            v-if="streetViewLoaded"
+                                            class="pano"
+                                            :position="center"
+                                            :pov="pov"
+                                            :zoom="1"
+                                            @pano_changed="updatePano"
+                                            @pov_changed="updatePov">
+                                    </gmap-street-view-panorama>
+                                </div>
+                                <hr/>
+                                <form-group :form="form" field="lat">
+                                    <input-label for="lat">Latitude: </input-label>
+                                    <input-text v-model="form.lat" id="lat" name="lat"></input-text>
+                                </form-group>
 
-                                    <form-group :form="form" field="lng">
-                                        <input-label for="lng">Longitude: </input-label>
-                                        <input-text v-model="form.lng" id="lng" name="lng"></input-text>
-                                    </form-group>
-                                </div>
-                                <div class="col-md-6" v-if="form.id">
-                                    <billboard-face-list :billboardId="form.id"></billboard-face-list>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <hr>
-                                    <btn-submit :disabled="form.busy">
-                                        <spinner v-if="form.busy"></spinner>
-                                    </btn-submit>
-                                    <a class="btn btn-default" :href="billboardListRoute">Cancel</a>
-                                </div>
-                            </div>
-                        </form-submit>
-                    </box-content>
-                </box>
+                                <form-group :form="form" field="lng">
+                                    <input-label for="lng">Longitude: </input-label>
+                                    <input-text v-model="form.lng" id="lng" name="lng"></input-text>
+                                </form-group>
+                            </form-submit>
+                            <hr>
+                            <btn-submit :disabled="form.busy">
+                                <spinner v-if="form.busy"></spinner>
+                            </btn-submit>
+                            <a class="btn btn-default" :href="billboardListRoute">Cancel</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="ibox">
+                        <div class="ibox-title">
+                            <h5>Faces</h5>
+                        </div>
+                        <div class="ibox-content">
+
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
