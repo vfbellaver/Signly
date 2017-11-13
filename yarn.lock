@@ -4163,9 +4163,13 @@ moment-timezone@^0.5.14:
   dependencies:
     moment ">= 2.9.0"
 
-"moment@>= 2.9.0", moment@^2.19.0, moment@^2.9.0:
+"moment@>= 2.9.0", moment@^2.9.0:
   version "2.19.1"
   resolved "https://registry.yarnpkg.com/moment/-/moment-2.19.1.tgz#56da1a2d1cbf01d38b7e1afc31c10bcfa1929167"
+
+moment@^2.19.0:
+  version "2.19.2"
+  resolved "https://registry.yarnpkg.com/moment/-/moment-2.19.2.tgz#8a7f774c95a64550b4c7ebd496683908f9419dbe"
 
 move-concurrently@^1.0.1:
   version "1.0.1"
@@ -6486,14 +6490,7 @@ vue-style-loader@^3.0.0:
     hash-sum "^1.0.2"
     loader-utils "^1.0.2"
 
-vue-template-compiler@^2.0.0:
-  version "2.5.3"
-  resolved "https://registry.yarnpkg.com/vue-template-compiler/-/vue-template-compiler-2.5.3.tgz#ab631b0694e211a6aaf0d800102b37836aae36a4"
-  dependencies:
-    de-indent "^1.0.2"
-    he "^1.1.0"
-
-vue-template-compiler@^2.5.3:
+vue-template-compiler@^2.0.0, vue-template-compiler@^2.5.3:
   version "2.5.3"
   resolved "https://registry.yarnpkg.com/vue-template-compiler/-/vue-template-compiler-2.5.3.tgz#ab631b0694e211a6aaf0d800102b37836aae36a4"
   dependencies:
