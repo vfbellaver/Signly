@@ -55,8 +55,8 @@
     </modal>
 </template>
 <script>
-    import * as Slc from "../../vue/http";
-    import ModalForm from '../shared/Mixins/ModalForm';
+    import * as Slc from "../../../vue/http";
+    import ModalForm from '../../shared/Mixins/ModalForm';
     import BillboardCsvUpload from './billboard-csv-upload';
 
     export default {

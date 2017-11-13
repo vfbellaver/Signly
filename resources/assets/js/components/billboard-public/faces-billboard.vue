@@ -32,7 +32,7 @@
                                 </div>
                                 <div>
                                     <p>Hard Cost</p>
-                                    <h1 class="product-main-price">$ {{formatMoney(face.hard_cost)}}</h1>
+                                    <h1 class="product-main-price">$ {{formatMoney(face.rate_card)}}</h1>
                                 </div>
                             </div>
                             <hr>

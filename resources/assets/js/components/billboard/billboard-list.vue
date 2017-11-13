@@ -5,13 +5,13 @@
         <nav class="navbar navbar-in-content navbar-default" data-spy="affix" data-offset-top="147">
             <ul class="nav navbar-nav">
                 <li>
-                    <a @click="view = 'list'" v-tippy title="List Face View">
+                    <a @click="view = 'list'"  title="List Face View">
                         <icon icon="list"></icon>
                         List View
                     </a>
                 </li>
                 <li>
-                    <a @click="view = 'card'" v-tippy title="Card View Grouped by Address">
+                    <a @click="view = 'card'"  title="Card View Grouped by Address">
                         <icon icon="address-card"></icon>
                         Card View
                     </a>
@@ -61,9 +61,9 @@
     import _ from 'lodash';
     import * as Slc from "../../vue/http";
 
-    import BillboardCard from './billboard-card';
-    import BillboardForm from './billboard-form';
-    import BillboardImportForm from './billboard-import-form';
+    import BillboardCard from './list/billboard-card';
+    import BillboardForm from './list/billboard-form';
+    import BillboardImportForm from './list/billboard-import-form';
     import BillboardListView from './billboard-list-view';
 
     export default {

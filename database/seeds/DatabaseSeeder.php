@@ -7,12 +7,13 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         if (app()->environment('production')) {
-            exit('I just stopped you getting fired. Love Jeremias! S2');
+            exit("I've just stopped you from getting fired. With love, Jeremias! S2");
         }
         $this->call(TeamTableSeeder::class);
         $this->call(RolesTableSeeder::class);
         $this->call(UsersTableSeeder::class);
         $this->call(ClientsTableSeeder::class);
         $this->call(BillboardsTableSeeder::class);
+        $this->call(ProposalTableSeeder::class);
     }
 }

@@ -22,10 +22,10 @@ class BillboardFaceCreateRequest extends BaseRequest
         return [
             'code' => 'required|unique:billboard_faces,code',
             'label' => 'required',
-            'hard_cost' => 'required',
+            'rate_card' => 'required',
             'monthly_impressions' => 'required',
             'duration' => 'required|numeric',
-            'photo' => 'required',
+            'photo_url' => 'required',
             'billboard' => 'required|numeric',
         ];
     }

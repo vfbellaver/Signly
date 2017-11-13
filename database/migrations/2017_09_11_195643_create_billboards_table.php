@@ -12,15 +12,12 @@ class CreateBillboardsTable extends Migration
             $table->unsignedInteger('team_id');
 
             $table->string('name', 128);
-            $table->string('slug', 190);
+
             $table->string('address', 256);
             $table->decimal('lat', 18, 15);
             $table->decimal('lng', 18, 15);
             $table->decimal('heading', 18, 14)->nullable();
             $table->decimal('pitch', 18, 14)->nullable();
-            $table->text('description')->nullable();
-
-            $table->unique(['team_id', 'slug']);
 
             $table->foreign('team_id')
                 ->references('id')

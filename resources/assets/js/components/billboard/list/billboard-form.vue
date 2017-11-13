@@ -57,8 +57,8 @@
 </template>
 
 <script>
-    import * as Slc from "../../vue/http";
-    import ModalForm from '../shared/Mixins/ModalForm';
+    import * as Slc from "../../../vue/http";
+    import ModalForm from '../../shared/Mixins/ModalForm';
     export default {
         mixins: [ModalForm],
         data() {

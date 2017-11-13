@@ -5,33 +5,29 @@
 
         <div class="wrapper wrapper-content">
             <div class="container-fluid">
-                <box>
-                    <box-content>
-                        <form-submit v-model="form" @submit="save">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <form-group :form="form" field="name">
-                                        <input-label for="name">Name: </input-label>
-                                        <input-text v-model="form.name" id="name" name="name"></input-text>
-                                    </form-group>
-                                    <form-group :form="form" field="description">
-                                        <input-label for="description">Description: </input-label>
-                                        <text-area v-model="form.description" id="description"
-                                                   name="description"></text-area>
-                                    </form-group>
-                                    <form-group :form="form" field="address">
-                                        <input-label for="address">Address: </input-label>
-                                        <input-text v-model="form.address" id="address" name="address"></input-text>
-                                    </form-group>
-
+                <div class="col-md-6">
+                    <div class="ibox">
+                        <div class="ibox-title">
+                            <h5>Location</h5>
+                        </div>
+                        <div class="ibox-content">
+                            <form-submit v-model="form" @submit="save">
+                                <form-group :form="form" field="name">
+                                    <input-label for="name">Name: </input-label>
+                                    <input-text v-model="form.name" id="name" name="name"></input-text>
+                                </form-group>
+                                <form-group :form="form" field="address">
+                                    <input-label for="address">Address: </input-label>
+                                    <input-text v-model="form.address" id="address" name="address"></input-text>
+                                </form-group>
+                                <div class="map-container">
                                     <gmap-map
                                             v-if="loaded"
                                             :center="center"
                                             :zoom="zoom"
                                             @click="onMapClick"
                                             @zoom_changed="onZoomChanged"
-                                            :options="mapOptions"
-                                            style="width: 100%; min-height: 320px">
+                                            :options="mapOptions">
                                         <gmap-marker
                                                 v-if="marker"
                                                 :position="marker"
@@ -42,7 +38,7 @@
                                                 @click="center=marker"
                                         ></gmap-marker>
                                     </gmap-map>
-                                    <hr/>
+
                                     <gmap-street-view-panorama
                                             v-if="streetViewLoaded"
                                             class="pano"
@@ -52,33 +48,36 @@
                                             @pano_changed="updatePano"
                                             @pov_changed="updatePov">
                                     </gmap-street-view-panorama>
-                                    <hr/>
-                                    <form-group :form="form" field="lat">
-                                        <input-label for="lat">Latitude: </input-label>
-                                        <input-text v-model="form.lat" id="lat" name="lat"></input-text>
-                                    </form-group>
+                                </div>
+                                <hr/>
+                                <form-group :form="form" field="lat">
+                                    <input-label for="lat">Latitude: </input-label>
+                                    <input-text v-model="form.lat" id="lat" name="lat"></input-text>
+                                </form-group>
 
-                                    <form-group :form="form" field="lng">
-                                        <input-label for="lng">Longitude: </input-label>
-                                        <input-text v-model="form.lng" id="lng" name="lng"></input-text>
-                                    </form-group>
-                                </div>
-                                <div class="col-md-6" v-if="form.id">
-                                    <billboard-face-list :billboardId="form.id"></billboard-face-list>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <hr>
-                                    <btn-submit :disabled="form.busy">
-                                        <spinner v-if="form.busy"></spinner>
-                                    </btn-submit>
-                                    <a class="btn btn-default" :href="billboardListRoute">Cancel</a>
-                                </div>
-                            </div>
-                        </form-submit>
-                    </box-content>
-                </box>
+                                <form-group :form="form" field="lng">
+                                    <input-label for="lng">Longitude: </input-label>
+                                    <input-text v-model="form.lng" id="lng" name="lng"></input-text>
+                                </form-group>
+                            </form-submit>
+                            <hr>
+                            <btn-submit :disabled="form.busy">
+                                <spinner v-if="form.busy"></spinner>
+                            </btn-submit>
+                            <a class="btn btn-default" :href="billboardListRoute">Cancel</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="ibox">
+                        <div class="ibox-title">
+                            <h5>Faces</h5>
+                        </div>
+                        <div class="ibox-content">
+
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -93,9 +92,23 @@
         margin-right: 5px;
     }
 
-    .vue-street-view-pano-container {
-        min-height: 360px;
+    .map-container {
+        position: relative;
+
+        .vue-map-container {
+            width: 100%;
+            min-height: 600px
+        }
+
+        .vue-street-view-pano-container {
+            position: absolute;
+            width: 320px;
+            height: 260px;
+            bottom: 0;
+            left: 0;
+        }
     }
+
 </style>
 
 <script>
@@ -288,8 +301,18 @@
                 console.log('Update Pov Billboard', this.form);
             },
             updatePano(pano) {
+                const self = this;
                 this.pano = pano;
                 console.log('Update pano', this.form);
+                const sv = new google.maps.StreetViewService();
+                sv.getPanoramaById(pano, data => {
+                    const lat = data.location.latLng.lat();
+                    const lng = data.location.latLng.lng();
+                    self.form.lat = lat;
+                    self.form.lng = lng;
+                    self.marker.lat = lat;
+                    self.marker.lng = lng;
+                });
             }
         }
     }

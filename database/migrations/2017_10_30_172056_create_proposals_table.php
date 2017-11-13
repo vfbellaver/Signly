@@ -14,10 +14,12 @@ class CreateProposalsTable extends Migration
             $table->unsignedInteger('user_id')->nullable();
 
             $table->string('name', 64);
-            $table->decimal('budget', 10, 2);
+            $table->text('notes')->nullable();
+
             $table->date('from_date');
             $table->date('to_date');
-            $table->decimal('confidence', 5, 2);
+
+            $table->integer('confidence')->nullable();
 
             $table->decimal('total_price', 10, 2)->default(0);
             $table->enum('status', ['Active', 'Won', 'Lost'])->default('Active');

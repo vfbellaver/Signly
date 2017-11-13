@@ -10,13 +10,23 @@ class BillboardFace extends Model
 {
     use DataViewer;
 
-    const READS = ['Left' => 'Left', 'Right' => 'Right', 'Across' => 'Across'];
-    const TYPE = ['Static' => 'Static', 'Digital' => 'Digital'];
+    const TYPE_STATIC = 'Static';
+    const TYPE_DIGITAL = 'Digital';
+
+    const READS_LEFT = 'Left';
+    const READS_RIGHT = 'Right';
+    const READS_ACROSS = 'Across';
+
+    const FACING_NORTH = 'North';
+    const FACING_SOUTH = 'South';
+    const FACING_EAST = 'East';
+    const FACING_WEST = 'West';
 
     protected $fillable = [
         'code',
         'label',
-        'hard_cost',
+        'facing',
+        'rate_card',
         'monthly_impressions',
         'duration',
         'is_illuminated',
@@ -25,7 +35,7 @@ class BillboardFace extends Model
         'reads',
         'notes',
         'max_ads',
-        'photo',
+        'photo_url',
         'lights_on',
         'lights_off',
         'type',
@@ -34,7 +44,7 @@ class BillboardFace extends Model
     ];
 
     protected $casts = [
-        'hard_cost' => 'float',
+        'rate_card' => 'float',
         'max_ads' => 'int',
         'duration' => 'int',
         'team_id' => 'int',

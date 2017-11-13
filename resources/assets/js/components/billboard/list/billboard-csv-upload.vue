@@ -4,7 +4,7 @@
 
 <script>
     import _ from 'lodash';
-    import * as Slc from "../../vue/http";
+    import * as Slc from "../../../vue/http";
 
     export default {
         props: {

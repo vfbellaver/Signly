@@ -32,9 +32,9 @@ class BillboardFaceForm extends BaseForm
         return $this->request->get('label');
     }
 
-    public function hardCost()
+    public function rateCard()
     {
-        return $this->request->get('hard_cost');
+        return $this->request->get('rate_card');
     }
 
     public function monthlyImpressions()
@@ -57,9 +57,9 @@ class BillboardFaceForm extends BaseForm
         return $this->request->get('duration');
     }
 
-    public function photo()
+    public function photoUrl()
     {
-        return $this->request->get('photo');
+        return $this->request->get('photo_url');
     }
 
     public function isIlluminated()

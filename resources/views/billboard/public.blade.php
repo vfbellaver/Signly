@@ -67,8 +67,8 @@
                                 <h2 class="font-bold">{{$face->monthly_impressions}}</h2>
                             </div>
                             <div class="col-sm-6">
-                                <p>Hard Cost</p>
-                                <h2 class="font-bold">$ {{$face->hard_cost}}</h2>
+                                <p>Rate Card</p>
+                                <h2 class="font-bold">$ {{$face->rate_card}}</h2>
                             </div>
                         </div>
                         <hr style="margin-top: 5px; margin-bottom: 15px">
