@@ -184,6 +184,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         \App\Providers\FakerServiceProvider::class,
+        App\Providers\TimezoneServiceProvider::class,
     ],
 
     /*
@@ -234,6 +235,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Bugsnag' => Bugsnag\BugsnagLaravel\Facades\Bugsnag::class,
         'Defender' => Artesaos\Defender\Facades\Defender::class,
+        'Timezone' => App\Services\Facades\Timezone::class,
     ],
 
 ];

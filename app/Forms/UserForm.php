@@ -41,6 +41,11 @@ class UserForm extends BaseForm
         return $this->request->get('password');
     }
 
+    public function timezone()
+    {
+        return $this->request->get('timezone');
+    }
+
     public function role()
     {
         if (!$this->request->has('role')) return null;

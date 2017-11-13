@@ -36,7 +36,7 @@
                             <button class="btn btn-primary btn-xs"
                             @click="generatePDF(invoice.id)"
                             >
-                                Generate PDF
+                                <i class="fa fa-file-pdf-o"></i>
                             </button>
                         </td>
                     </tr>
@@ -49,10 +49,6 @@
 <style lang="scss" scoped="scoped">
     .table {
         margin-top: 10px;
-    }
-
-    .invited_tr tr {
-        width: 30%;
     }
 
     .ibox {

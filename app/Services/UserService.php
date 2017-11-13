@@ -42,6 +42,7 @@ class UserService
             if ($form->photo_url()) $user->photo_url = $form->photo_url();
             if ($form->lat()) $user->lat = $form->lat();
             if ($form->lng()) $user->lng = $form->lng();
+            if ($form->timezone()) $user->timezone = $form->timezone();
 
             if ($form->email()) $user->email = $form->email();
             $emailWasChanged = $user->isDirty('email');

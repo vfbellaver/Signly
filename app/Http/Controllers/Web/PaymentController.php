@@ -9,6 +9,7 @@ use App\Services\CardService;
 use Artesaos\Defender\Facades\Defender;
 use Carbon\Carbon;
 use App\Http\Controllers\Controller;
+use GuzzleHttp\Client;
 use function GuzzleHttp\Psr7\str;
 use Request;
 use Stripe\Card;
@@ -33,7 +34,6 @@ class PaymentController extends Controller
     {
         return view('payment.pay');
     }
-
 
     public function invoicePDF($invoiceId)
     {

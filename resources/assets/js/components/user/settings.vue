@@ -24,6 +24,12 @@
                                         <i class="fa fa-fw fa-btn fa-lock"></i>
                                         Security
                                     </a>
+
+                                <li>
+                                    <a data-toggle="tab" href="#tab-configuration" aria-expanded="false">
+                                        <i class="fa fa-fw fa-btn fa-map-marker"></i>
+                                        Location
+                                    </a>
                                 </li>
                             </ul>
                             <div class="tab-content">
@@ -38,6 +44,13 @@
                                     <div class="panel-body">
                                         <ul>
                                             <tab-update-password></tab-update-password>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div id="tab-configuration" class="tab-pane">
+                                    <div class="panel-body">
+                                        <ul>
+                                            <tab-user-configuration></tab-user-configuration>
                                         </ul>
                                     </div>
                                 </div>
@@ -71,12 +84,16 @@
     }
 </style>
 <script>
+
     import TabUserSettings from './tab-user-settings';
     import TabUpdatePassword from './tab-user-password';
+    import TabUserConfiguration from './tab-user-configuration';
+
     export default {
         components: {
             TabUserSettings,
             TabUpdatePassword,
+            TabUserConfiguration,
         },
         data() {
             return {

@@ -43,12 +43,6 @@
                                         Invoices
                                     </a>
                                 </li>
-                                <li>
-                                    <a data-toggle="tab" href="#tab-configuration" aria-expanded="true">
-                                        <i class="fa fa-fw fa-btn fa-gears"></i>
-                                        Configuration
-                                    </a>
-                                </li>
                             </ul>
                             <div class="tab-content">
                                 <div id="tab-team-profile" class="tab-pane active">
@@ -83,13 +77,6 @@
                                     <div class="panel-body">
                                         <ul>
                                             <team-invoices></team-invoices>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div id="tab-configuration" class="tab-pane">
-                                    <div class="panel-body">
-                                        <ul>
-                                            <li>Default Map Center</li>
                                         </ul>
                                     </div>
                                 </div>
@@ -130,6 +117,7 @@
     import TeamList from './team-list';
     import TeamInvoices from './team-invoices';
     import TeamForm from './team-form';
+    import TeamConfiguration from '../user/tab-user-configuration';
     import TeamSubscription from './team-subscription';
     import TeamCard from './team-card';
 
