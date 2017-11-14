@@ -9,8 +9,10 @@ use App\Models\BillboardFace;
 use App\Models\Team;
 use App\Models\User;
 use App\Services\BillboardPublicService;
+use bar\foo\baz\Object;
 use GuzzleHttp\Client;
 use GuzzleHttp\Stream\Stream;
+use PhpParser\Node\Expr\Cast\Object_;
 
 class BillboardsController extends Controller
 {
@@ -51,10 +53,10 @@ class BillboardsController extends Controller
 
     public function publicView($teamSlug, $faceCode)
     {
-        $team = Team::query()->select('teams.slug','LIKE',$teamSlug)->get()->toArray();
-        $faces = BillboardFace::query()->select('code','LIKE',$faceCode)->get()->toArray();
+        $team = Team::query()->where('teams.slug','LIKE','%'.$teamSlug.'%')->get()->first();
+        $faces = BillboardFace::query()->where('billboard_faces.slug','LIKE','%'.$faceCode.'%')->get()->first();
 
-        dd($faces);
+        /*
 
         $url = $this->service->createPOVUrl($faces);
 
@@ -63,8 +65,8 @@ class BillboardsController extends Controller
         $path = fopen(storage_path().'/app/public/images/pov_img.png','w') or die('Something went wrong');
         $client->request('GET',$url,['timeout' => 10.29,'save_to' => $path]);
 
-        return view('billboard.public', [
-            'billboard' => $faces,
-        ]);
+        */
+
+         return view('billboard.public',compact('team','faces'));
     }
 }
