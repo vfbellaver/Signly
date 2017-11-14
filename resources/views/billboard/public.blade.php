@@ -76,37 +76,41 @@
                             </tr>
                             </tbody>
                         </table>
-                        <table class="table">
-                            <thead>
-                            <tr>
-                                <th>Illuminated</th>
-                                <th>Lights on</th>
-                                <th>Lights off</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td>{{($faces->is_illuminated ? 'Yes' : 'No')}}</td>
-                                <td>{{$faces->lights_on}}</td>
-                                <td>{{$faces->lights_off}}</td>
-                            </tr>
-                            </tbody>
-                        </table>
 
+                        @if($faces->type == 'Static')
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th>Illuminated</th>
+                                    <th>Lights on</th>
+                                    <th>Lights off</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>{{($faces->is_illuminated ? 'Yes' : 'No')}}</td>
+                                    <td>{{$faces->lights_on}}</td>
+                                    <td>{{$faces->lights_off}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        @endif
 
                     </div>
                 </div>
             </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <hr/>
+                </div>
+            </div>
+
             <div class="row">
                 <div class="col-md-12">
                     <div class="well m-t"><strong>Note:</strong>
                         {{$faces->notes}}
                     </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <hr/>
                 </div>
             </div>
 
