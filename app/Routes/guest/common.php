@@ -1,4 +1,4 @@
 <?php
 
-Route::get('{teamSlug}/{billboardSlug}', 'Web\BillboardsController@publicView')
+Route::get('{teamSlug}/{faceCode}', 'Web\BillboardsController@publicView')
     ->name('billboard.public-view');

@@ -26,9 +26,9 @@
                                     </a>
 
                                 <li>
-                                    <a data-toggle="tab" href="#tab-configuration" aria-expanded="false">
+                                    <a data-toggle="tab" href="#tab-location" aria-expanded="false">
                                         <i class="fa fa-fw fa-btn fa-map-marker"></i>
-                                        Location
+                                        Default Location
                                     </a>
                                 </li>
                             </ul>
@@ -47,10 +47,10 @@
                                         </ul>
                                     </div>
                                 </div>
-                                <div id="tab-configuration" class="tab-pane">
+                                <div id="tab-location" class="tab-pane">
                                     <div class="panel-body">
                                         <ul>
-                                            <tab-user-configuration></tab-user-configuration>
+                                            <tab-user-location></tab-user-location>
                                         </ul>
                                     </div>
                                 </div>
@@ -87,13 +87,13 @@
 
     import TabUserSettings from './tab-user-settings';
     import TabUpdatePassword from './tab-user-password';
-    import TabUserConfiguration from './tab-user-configuration';
+    import TabUserLocation from './tab-user-location';
 
     export default {
         components: {
             TabUserSettings,
             TabUpdatePassword,
-            TabUserConfiguration,
+            TabUserLocation,
         },
         data() {
             return {

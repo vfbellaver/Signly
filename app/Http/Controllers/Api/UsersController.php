@@ -100,9 +100,7 @@ class UsersController extends Controller
         $data = $request->all();
         $user->lat = $data['lat'];
         $user->lng = $data['lng'];
-        //$date = Carbon::now($data['timezone'])->toDateTimeString();
-        //$user->timezone = $date;
-        $user->timezone = $data['timezone'];
+        $user->address = $data['address'];
         $user->save();
 
         $response = [

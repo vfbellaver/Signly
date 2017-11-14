@@ -49,17 +49,14 @@ class BillboardsController extends Controller
         ]);
     }
 
-    public function publicView($teamSlug, $billboardSlug)
+    public function publicView($teamSlug, $faceCode)
     {
-        $billboard = Billboard::query()
-            ->join('teams', 'teams.id', '=', 'billboards.team_id')
-            ->select('billboards.*', 'teams.id as teamid',
-                'teams.name as teamname', 'teams.owner_id')
-            ->where('teams.slug', $teamSlug)
-            ->where('billboards.slug', $billboardSlug)
-            ->first();
+        $team = Team::query()->select('teams.slug','LIKE',$teamSlug)->get()->toArray();
+        $faces = BillboardFace::query()->select('code','LIKE',$faceCode)->get()->toArray();
 
-        $url = $this->service->createPOVUrl($billboard);
+        dd($faces);
+
+        $url = $this->service->createPOVUrl($faces);
 
         $client = new Client();
 
@@ -67,7 +64,7 @@ class BillboardsController extends Controller
         $client->request('GET',$url,['timeout' => 10.29,'save_to' => $path]);
 
         return view('billboard.public', [
-            'billboard' => $billboard,
+            'billboard' => $faces,
         ]);
     }
 }
