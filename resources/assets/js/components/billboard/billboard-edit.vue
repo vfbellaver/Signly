@@ -59,12 +59,13 @@
                                     <input-label for="lng">Longitude: </input-label>
                                     <input-text v-model="form.lng" id="lng" name="lng"></input-text>
                                 </form-group>
+
+                                <btn-submit :disabled="form.busy">
+                                    <spinner v-if="form.busy"></spinner>
+                                </btn-submit>
+                                <a class="btn btn-default" :href="billboardListRoute">Cancel</a>
                             </form-submit>
                             <hr>
-                            <btn-submit :disabled="form.busy">
-                                <spinner v-if="form.busy"></spinner>
-                            </btn-submit>
-                            <a class="btn btn-default" :href="billboardListRoute">Cancel</a>
                         </div>
                     </div>
                 </div>
@@ -87,19 +88,15 @@
     .top-navigation .wrapper.wrapper-content {
         padding-top: 0;
     }
-
     .margin-billboard-edit {
         margin-right: 5px;
     }
-
     .map-container {
         position: relative;
-
         .vue-map-container {
             width: 100%;
             min-height: 600px
         }
-
         .vue-street-view-pano-container {
             position: absolute;
             width: 320px;
@@ -108,14 +105,12 @@
             left: 0;
         }
     }
-
 </style>
 
 <script>
     import _ from 'lodash';
     import * as Slc from "../../vue/http";
     import BillboardFaceList from '../billboard-face/billboard-face-list';
-
     export default {
         props: {
             id: {required: true},
@@ -189,7 +184,6 @@
                     this.loaded = true;
                 });
             },
-
             save() {
                 const uri = laroute.route('api.billboard.update', {billboard: this.form.id});
                 Slc.put(uri, this.form).then((response) => {
@@ -239,7 +233,6 @@
                     return;
                 }
                 this.zoom = 15;
-
                 console.log('On click Billboard', this.form);
             },
             onZoomChanged(e) {
