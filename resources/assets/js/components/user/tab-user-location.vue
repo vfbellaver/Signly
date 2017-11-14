@@ -16,6 +16,7 @@
                             </form-group>
 
                             <gmap-map
+                                v-if="loaded"
                                 :center="center"
                                 :zoom="zoom"
                                 @click="onMapClick"
@@ -103,15 +104,22 @@
                 zoomChanged: false,
                 gestureHandling: 'greedy',
                 user: null,
+                loaded: null,
+                position: null,
             }
         },
         created(){
+
             this.user = new SlcForm({
                 id: Slc.user.id,
                 lat: Slc.user.lat,
                 lng: Slc.user.lng,
                 address: Slc.user.address,
             });
+
+            this.position = {lat: Slc.user.lat,lng:Slc.user.lng};
+
+            this.load();
         },
         methods: {
             save() {
@@ -119,6 +127,15 @@
                 SLC.put(uri, this.user).then((response) => {
                     console.log('Updated Location ', response);
                 });
+            },
+
+            load() {
+                    this.loaded = false;
+                    console.log("User loaded", this.position);
+                    this.center = this.position;
+                    this.marker = this.position;
+                    console.log("User center", this.center);
+                    this.loaded = true;
             },
 
             onMapClick(e) {
