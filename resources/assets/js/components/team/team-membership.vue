@@ -5,7 +5,7 @@
                 <h5>Invite a new member to Team</h5>
             </div>
             <div class="ibox-body">
-                <form-submit v-model="userEmail" @submit="sendEmail" class="wizard-big wizard clearfix">
+                <form-submit v-model="userEmail" @submit="sendEmail">
                     <div class="row">
                         <div class="col-xs-12">
                             <form-group :form="userEmail" field="email">
@@ -82,8 +82,14 @@
             sendEmail(){
                 const uri = laroute.route('api.team.invite.member');
                 Slc.post(uri, this.userEmail).then((response) => {
-                    this.userEmail = '';
+                    this.loadUser();
                     this.$emit('newEmail');
+                });
+            },
+
+            loadUser(){
+                this.userEmail = new SlcForm({
+                    email: '',
                 });
             },
 

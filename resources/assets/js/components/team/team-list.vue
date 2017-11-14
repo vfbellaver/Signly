@@ -19,7 +19,7 @@
                                     <td class="client-avatar"><img alt="image" src="/images/user.png"></td>
                                     <td style="width: 400px"><strong>Waiting Confirmation...</strong></td>
                                     <td class="contact-type"><i class="fa fa-envelope"> </i></td>
-                                    <td> {{user.email}}</td>
+                                    <td style="width:56%"> {{user.email}}</td>
                                     <td class="client-status">
                                         <btn-danger class="pull-rigth"
                                                 @click.native="destroyMailed(user)"
@@ -59,7 +59,7 @@
                                             {{user.name + "  "}}<strong>you</strong></td>
                                         <td v-else>{{user.name}}</td>
                                         <td class="contact-type"><i class="fa fa-envelope"> </i></td>
-                                        <td> {{user.email}}</td>
+                                        <td style="width:60%"> {{user.email}}</td>
                                         <td class="client-status">
                                             <btn-danger class="pull-rigth"
                                                     @click.native="destroy(user)"
@@ -176,11 +176,6 @@
                     return _user.id === user.id;
                 });
 
-            },
-
-            nextPage(){
-                this.page1 = !this.page1;
-                this.page2 = !this.page2;
             },
         }
     }
