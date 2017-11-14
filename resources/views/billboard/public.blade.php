@@ -18,17 +18,16 @@
                         <strong> <i class="fa fa-send"></i> Email:</strong><br>
                         {{$team->email}}
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <strong> <i class="fa fa-phone"></i> Phones:</strong><br>
                        {{$team->phone1}}<br>
                        {{$team->phone2}}<br>
-                       {{$team->fax}}
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-5">
                         <address>
                             <strong> <i class="fa fa-map-marker"></i> Address:</strong><br>
                             {{$team->address_line1}} <br>
-                            {{$team->address_line2}} <br>
+                            {{$team->city}} , {{$team->state}}
                         </address>
                     </div>
                 </div>
