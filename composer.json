@@ -37,6 +37,7 @@
     "lord/laroute": "dev-master",
     "mpdf/mpdf": "^7.0",
     "predis/predis": "^1.1",
+    "spatie/laravel-fractal": "^5.2",
     "stripe/stripe-php": "^5.3"
   },
   "require-dev": {

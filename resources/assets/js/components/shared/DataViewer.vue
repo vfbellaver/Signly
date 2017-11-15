@@ -52,7 +52,7 @@
                         <form class="form-inline " @submit.prevent="fetchIndexData">
                             <label for="per_page">Rows per page</label>
                             <select v-model="query.per_page" id="per_page" class="form-control input-sm"
-                                    @change="fetchIndexData">
+                                    @change="rowsPerPageChanged">
                                 <option value="5">5</option>
                                 <option value="10">10</option>
                                 <option value="15">15</option>
@@ -62,15 +62,15 @@
                             </select>
                             <div class="input-group">
                                 <div class="input-group-btn">
-                                    <button class="btn btn-primary btn-sm" @click="prev()">
+                                    <button class="btn btn-default btn-sm" @click="prev()" :disabled="! model.prev_page_url">
                                         <icon icon="arrow-left"></icon>
                                     </button>
                                 </div>
                                 <select v-model="query.page" class="form-control input-sm square" @change="fetchIndexData">
-                                    <option v-for="i in model.total" :key="i" :value="i">{{ i }}</option>
+                                    <option v-for="i in model.last_page" :key="i" :value="i">{{ i }}</option>
                                 </select>
                                 <div class="input-group-btn">
-                                    <button class="btn btn-default btn-sm" @click="next()">
+                                    <button class="btn btn-default btn-sm" @click="next()" :disabled="! model.next_page_url">
                                         <icon icon="arrow-right"></icon>
                                     </button>
                                 </div>
@@ -154,6 +154,10 @@
                     .catch(function (response) {
                         console.log(response)
                     })
+            },
+            rowsPerPageChanged() {
+                this.query.page = 1;
+                this.fetchIndexData();
             }
         }
     }
