@@ -248,13 +248,19 @@
             },
 
             billboardFaceCreated(face) {
+                console.log("Face Created", face);
                 this.faces.push(face);
             },
 
             billboardFaceUpdated(face) {
-                const i = this.faces.indexOf(face);
-                const f = this.faces[i];
-                Object.assign(f, face);
+                console.log("Face Updated", face);
+                for (let i = 0; i < this.faces.length; i++) {
+                    const f = this.faces[i];
+                    if (f.id === face.id) {
+                        Object.assign(f, face);
+                        break;
+                    }
+                }
             },
 
             billboardDestroy(face) {

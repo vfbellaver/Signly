@@ -14,7 +14,7 @@
                         <column size="6">
                             <form-group :form="form" field="code">
                                 <input-label for="code">ID: </input-label>
-                                <input-text :disabled="unique" v-model="form.code" id="code" name="code"></input-text>
+                                <input-text v-model="form.code" id="code" name="code"></input-text>
                             </form-group>
                             <form-group :form="form" field="label">
                                 <input-label for="label">Label: </input-label>
@@ -169,17 +169,6 @@
             return {
                 api: 'billboard-face',
                 loaded: false,
-                lights_on: {
-                    hh: null,
-                    mm: null,
-                    A: null
-                },
-
-                lights_off: {
-                    hh: null,
-                    mm: null,
-                    A: null
-                },
             }
         },
 
@@ -187,35 +176,10 @@
             title() {
                 return `${(this.form.id ? 'Edit' : 'Add')} Billboard Face`;
             },
-
-            unique() {
-                return !!this.form.id;
-            },
         },
 
         mounted() {
             this.form.is_illuminated = false;
-        },
-
-        watch: {
-            lights_on: {
-                handler(value) {
-                    if (value.hh && value.mm && value.A) {
-                        const m = moment(`${value.hh}:${value.mm}:${value.A}`, "hh:mm A");
-                        this.form.lights_on = m.format('HH:mm:ss');
-                    }
-                },
-                deep: true,
-            },
-            lights_off: {
-                handler(value) {
-                    if (value.hh && value.mm && value.A) {
-                        const m = moment(`${value.hh}:${value.mm}:${value.A}`, "hh:mm A");
-                        this.form.lights_off = m.format('HH:mm:ss');
-                    }
-                },
-                deep: true,
-            },
         },
 
         methods: {
@@ -241,23 +205,6 @@
                     billboard: this.billboardId,
                 };
 
-                if (data.lights_on) {
-                    const m = moment(data.lights_on, "HH:mm:ss");
-                    this.lights_on = {
-                        hh: m.format('hh'),
-                        mm: m.format('mm'),
-                        A: m.format('A'),
-                    };
-                }
-
-                if (data.lights_off) {
-                    const m = moment(data.lights_off, "HH:mm:ss");
-                    this.lights_off = {
-                        hh: m.format('hh'),
-                        mm: m.format('mm'),
-                        A: m.format('A'),
-                    };
-                }
                 this.loaded = true;
                 return new SlcForm(data);
             },
@@ -266,16 +213,6 @@
                 if (!value) {
                     this.form.lights_on = null;
                     this.form.lights_off = null;
-                    this.lights_on = {
-                        HH: null,
-                        mm: null,
-                        ss: null,
-                    };
-                    this.lights_off = {
-                        HH: null,
-                        mm: null,
-                        ss: null,
-                    };
                 }
             }
         },

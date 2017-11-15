@@ -18,8 +18,10 @@ class BillboardFaceUpdateRequest extends BaseRequest
 
     public function rules()
     {
+        $id = $this->request->get('id');
+
         return [
-            'code' => 'required',
+            'code' => 'required|unique:billboard_faces,code,' . $id,
             'label' => 'required',
             'rate_card' => 'required',
             'monthly_impressions' => 'required',
