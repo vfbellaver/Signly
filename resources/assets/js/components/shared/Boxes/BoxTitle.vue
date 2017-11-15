@@ -1,6 +1,6 @@
 <template>
     <div class="ibox-title">
-        <h5><slot></slot></h5>
+        <slot></slot>
         <slot name="tools"></slot>
     </div>
 </template>

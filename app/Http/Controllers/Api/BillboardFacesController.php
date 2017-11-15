@@ -24,6 +24,35 @@ class BillboardFacesController extends Controller
         return BillboardFace::query()->where('billboard_id', $billboardId)->get()->toArray();
     }
 
+    public function search()
+    {
+        $columns = [
+            'code',
+            'photo',
+            'label',
+            'monthly_impressions',
+            'duration',
+            'height',
+            'width',
+            'reads',
+            'type',
+        ];
+
+        $model = BillboardFace::searchPaginateAndOrder($columns);
+        $model
+            ->getCollection()
+            ->transform(function (BillboardFace $item) {
+                return array_merge($item->toArray(), [
+                    'photo' => "<img src='{$item->photo}' width='50' />"
+                ]);
+            });
+
+        return [
+            'model' => $model,
+            'columns' => $columns
+        ];
+    }
+
     public function store(BillboardFaceCreateRequest $request)
     {
         $data = $this->service->create($request->form());
