@@ -32,17 +32,14 @@
 </template>
 
 <style lang="scss" scoped="scoped">
-
 </style>
 
 <script>
     import _ from 'lodash';
     import * as Slc from "../../vue/http";
-
     import BillboardCard from './list/billboard-card';
     import BillboardForm from './list/billboard-form';
     import BillboardImportForm from './list/billboard-import-form';
-
     export default {
         props: {
             team: {required: true},
