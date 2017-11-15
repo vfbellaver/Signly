@@ -19,7 +19,7 @@
                 <h3>{{face.label}}</h3>
                 <div class="row">
                     <div class="col-xs-4 no-padding">
-                        <img class="img-responsive" :src="face.photo_url" alt="label" @click="showImage"/>
+                        <img class="img-responsive" :src="face.photo_url" alt="label" @click="showImage(face.photo_url)"/>
                     </div>
                     <div class="col-xs-7">
                         <dl class="dl-horizontal">
@@ -38,7 +38,8 @@
                 </div>
             </tab>
         </tabs>
-        <face-details ref="faceDetails"></face-details>
+
+        <photo-face :src="photo_url" ref="photoFace"></photo-face>
     </div>
 </template>
 
@@ -77,11 +78,11 @@
 <script>
 
     import * as Slc from "../../vue/http";
-    import FaceDetails from './details-face';
+    import PhotoFace from './photo-face';
 
     export default {
         components: {
-          FaceDetails,
+          PhotoFace,
         },
 
         props: {
@@ -91,7 +92,8 @@
 
         data() {
             return {
-                nameteam: {}
+                nameteam: {},
+                photo_url:'',
             }
         },
 
@@ -105,9 +107,10 @@
                 window.location = laroute.route("billboards.edit", {billboard: billboard.id});
             },
 
-            showImage(){
-               this.$refs.faceDetails.show();
-            }
+            showImage(photo){
+                this.photo_url = photo;
+                this.$refs.photoFace.show();
+            },
         }
 
     }
