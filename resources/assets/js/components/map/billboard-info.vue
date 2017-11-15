@@ -38,6 +38,7 @@
                 </div>
             </tab>
         </tabs>
+        <face-details ref="faceDetails"></face-details>
     </div>
 </template>
 
@@ -57,6 +58,10 @@
         .img-responsive {
             max-width: 100%;
             cursor: pointer;
+            transition: 0.3s;
+        }
+        .img-responsive:hover{
+            opacity: 0.7;
         }
         .dl-horizontal {
             dt {
@@ -72,8 +77,12 @@
 <script>
 
     import * as Slc from "../../vue/http";
+    import FaceDetails from './details-face';
 
     export default {
+        components: {
+          FaceDetails,
+        },
 
         props: {
             billboard: {required: true},
@@ -97,7 +106,7 @@
             },
 
             showImage(){
-                console.log('teste');
+               this.$refs.faceDetails.show();
             }
         }
 
