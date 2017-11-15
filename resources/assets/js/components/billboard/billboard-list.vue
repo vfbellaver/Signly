@@ -1,28 +1,54 @@
 <template>
-    <div class="card-list">
+    <div>
         <inspinia-page-heading v-if="pageHeading" :data="pageHeading"></inspinia-page-heading>
 
         <nav class="navbar navbar-in-content navbar-default" data-spy="affix" data-offset-top="147">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a @click="view = 'list'" v-tippy title="List Face View">
+                        <icon icon="list"></icon>
+                        List View
+                    </a>
+                </li>
+                <li>
+                    <a @click="view = 'card'" v-tippy title="Card View Grouped by Address">
+                        <icon icon="address-card"></icon>
+                        Card View
+                    </a>
+                </li>
+            </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a @click="create">
-                    <icon icon="plus"></icon>
-                    Add</a></li>
-                <li><a @click="importBillboards">
-                    <icon icon="upload"></icon>
-                    Import</a></li>
-                <li><a @click="goToHome">
-                    <icon icon="map-marker"></icon>
-                    Map</a></li>
+                <li>
+                    <a @click="create">
+                        <icon icon="plus"></icon>
+                        Add
+                    </a>
+                </li>
+                <li>
+                    <a @click="importBillboards">
+                        <icon icon="upload"></icon>
+                        Import
+                    </a>
+                </li>
+                <li>
+                    <a @click="goToHome">
+                        <icon icon="map-marker"></icon>
+                        Map
+                    </a>
+                </li>
             </ul>
         </nav>
 
-        <div class="wrapper wrapper-content">
+        <div class="wrapper wrapper-content card-list">
             <div class="container-fluid">
-                <div class="row">
+                <div class="row" v-if="view === 'card'">
                     <div class="col-md-4" v-for="billboard in billboards">
                         <billboard-card :billboard="billboard" @edit="edit" @destroy="destroy"
                                         :team="team"></billboard-card>
                     </div>
+                </div>
+                <div class="row" v-else>
+                    <billboard-list-view :list="billboards"></billboard-list-view>
                 </div>
             </div>
         </div>
@@ -31,10 +57,6 @@
     </div>
 </template>
 
-<style lang="scss" scoped="scoped">
-
-</style>
-
 <script>
     import _ from 'lodash';
     import * as Slc from "../../vue/http";
@@ -42,6 +64,7 @@
     import BillboardCard from './list/billboard-card';
     import BillboardForm from './list/billboard-form';
     import BillboardImportForm from './list/billboard-import-form';
+    import BillboardListView from './billboard-list-view';
 
     export default {
         props: {
@@ -51,18 +74,19 @@
             BillboardCard,
             BillboardForm,
             BillboardImportForm,
+            BillboardListView
         },
-        data() {
-            return {
-                billboards: [],
-                pageHeading: {
-                    title: 'Billboard List',
-                    breadcrumb: [
+        data: () => ({
+            billboards: [],
+            view: 'list',
+            pageHeading: {
+                title: 'Billboard List',
+                breadcrumb:
+                    [
                         {title: 'Home', url: laroute.route('home')}
                     ]
-                },
-            }
-        },
+            },
+        }),
         mounted() {
             this.reload();
         },

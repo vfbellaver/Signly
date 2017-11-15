@@ -2,11 +2,13 @@
 
 namespace App\Models;
 
+use App\Helper\DataViewer;
+use App\Scopes\TeamScope;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Validation\Rules\Unique;
 
 class BillboardFace extends Model
 {
+    use DataViewer;
 
     const TYPE_STATIC = 'Static';
     const TYPE_DIGITAL = 'Digital';
@@ -51,54 +53,25 @@ class BillboardFace extends Model
         'is_illuminated' => 'boolean',
     ];
 
-    protected $dates = [
+    protected static function boot()
+    {
+        parent::boot();
 
-    ];
+        if (auth()->check()) {
+            static::addGlobalScope(new TeamScope(auth()->user()->team));
+        }
+    }
 
     public function billboard()
     {
         return $this->belongsTo(Billboard::class);
     }
 
-    #region
-
-    #region Custom Attributes
-
-    #endregion
-
-    #region Queries
-
-    #endregion
-
-    #region Conversions
     public function toArray()
     {
-        $data = [
-            'id' => $this->id,
-            'code' => $this->code,
-            'slug' => $this->slug,
-            'label' => $this->label,
-            'facing' => $this->facing,
-            'height' => $this->height,
-            'width' => $this->width,
-            'reads' => $this->reads,
-            'rate_card' => $this->rate_card,
-            'monthly_impressions' => $this->monthly_impressions,
-            'notes' => $this->notes,
-            'max_ads' => $this->max_ads,
-            'duration' => $this->duration,
-            'photo_url' => $this->photo_url,
-            'is_illuminated' => $this->is_illuminated,
-            'lights_on' => $this->lights_on,
-            'lights_off' => $this->lights_off,
-            'type' => $this->type,
-            'billboard_id' => $this->billboard_id,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at
-        ];
-
-        return $data;
+        return array_merge(parent::toArray(), [
+            'billboard_name' => $this->billboard->name
+        ]);
     }
-    #endregion
 
 }
