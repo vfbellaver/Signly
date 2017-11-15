@@ -36,7 +36,7 @@ Vue.component('input-url', require('./Inputs/InputUrl'));
 Vue.component('input-email', require('./Inputs/InputEmail'));
 Vue.component('text-area', require('./Inputs/TextArea'));
 Vue.component('image-upload', require('./Inputs/ImageUpload'));
-Vue.component('input-time', require('./Inputs/InputTime.vue'));
+Vue.component('input-time', require('./Inputs/InputTime'));
 
 // ------------------------------------------------------------------------
 // Boxes
@@ -46,6 +46,7 @@ Vue.component('box-tools', require('./Boxes/BoxTools'));
 Vue.component('box-tool', require('./Boxes/BoxTool'));
 Vue.component('box-content', require('./Boxes/BoxContent'));
 Vue.component('box-body', require('./Boxes/BoxBody'));
+Vue.component('box-footer', require('./Boxes/BoxFooter'));
 
 // ------------------------------------------------------------------------
 //TABS

@@ -4163,9 +4163,13 @@ moment-timezone@^0.5.14:
   dependencies:
     moment ">= 2.9.0"
 
-"moment@>= 2.9.0", moment@^2.19.0, moment@^2.9.0:
+"moment@>= 2.9.0", moment@^2.9.0:
   version "2.19.1"
   resolved "https://registry.yarnpkg.com/moment/-/moment-2.19.1.tgz#56da1a2d1cbf01d38b7e1afc31c10bcfa1929167"
+
+moment@^2.19.0:
+  version "2.19.2"
+  resolved "https://registry.yarnpkg.com/moment/-/moment-2.19.2.tgz#8a7f774c95a64550b4c7ebd496683908f9419dbe"
 
 move-concurrently@^1.0.1:
   version "1.0.1"
@@ -4210,6 +4214,10 @@ multipipe@^0.1.2:
 nan@^2.3.0, nan@^2.3.2:
   version "2.7.0"
   resolved "https://registry.yarnpkg.com/nan/-/nan-2.7.0.tgz#d95bf721ec877e08db276ed3fc6eb78f9083ad46"
+
+nano-assign@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/nano-assign/-/nano-assign-1.0.0.tgz#499f4f8a1ae801f2405863e6946ca8568d666e4e"
 
 ncname@1.0.x:
   version "1.0.0"
@@ -4705,6 +4713,10 @@ pngquant-bin@^3.0.0:
     bin-build "^2.0.0"
     bin-wrapper "^3.0.0"
     logalot "^2.0.0"
+
+popper.js@^1.12.4:
+  version "1.12.7"
+  resolved "https://registry.yarnpkg.com/popper.js/-/popper.js-1.12.7.tgz#b8d225618e5d95e27ac2b591debf581857a9c16d"
 
 portfinder@^1.0.9:
   version "1.0.13"
@@ -6117,6 +6129,12 @@ timers-browserify@^2.0.2:
   dependencies:
     setimmediate "^1.0.4"
 
+tippy.js@^1.1.3:
+  version "1.4.1"
+  resolved "https://registry.yarnpkg.com/tippy.js/-/tippy.js-1.4.1.tgz#a20831a53e40566825c0b3c6ad72afc30e97c6f5"
+  dependencies:
+    popper.js "^1.12.4"
+
 to-absolute-glob@^0.1.1:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/to-absolute-glob/-/to-absolute-glob-0.1.1.tgz#1cdfa472a9ef50c239ee66999b662ca0eb39937f"
@@ -6343,6 +6361,13 @@ uuid@^3.0.0, uuid@^3.0.1, uuid@^3.1.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.1.0.tgz#3dd3d3e790abc24d7b0d3a034ffababe28ebbc04"
 
+v-tippy@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/v-tippy/-/v-tippy-1.0.2.tgz#0cf925dc717621ef975465c55906fe75a87a3baf"
+  dependencies:
+    nano-assign "^1.0.0"
+    tippy.js "^1.1.3"
+
 vali-date@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/vali-date/-/vali-date-1.0.0.tgz#1b904a59609fb328ef078138420934f6b86709a6"
@@ -6465,7 +6490,7 @@ vue-style-loader@^3.0.0:
     hash-sum "^1.0.2"
     loader-utils "^1.0.2"
 
-vue-template-compiler@^2.0.0:
+vue-template-compiler@^2.0.0, vue-template-compiler@^2.5.3:
   version "2.5.3"
   resolved "https://registry.yarnpkg.com/vue-template-compiler/-/vue-template-compiler-2.5.3.tgz#ab631b0694e211a6aaf0d800102b37836aae36a4"
   dependencies:

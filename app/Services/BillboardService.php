@@ -10,6 +10,7 @@ use App\Forms\BillboardForm;
 use App\Models\Billboard;
 use App\Models\BillboardFace;
 use Carbon\Carbon;
+use function GuzzleHttp\Psr7\str;
 
 class BillboardService
 {
@@ -46,6 +47,7 @@ class BillboardService
             $billboard->lng = $form->lng();
             $billboard->heading = $form->heading();
             $billboard->pitch = $form->pitch();
+            $billboard->slug = $this->nameExists($billboard);
 
             $billboard->save();
 

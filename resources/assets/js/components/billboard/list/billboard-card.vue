@@ -13,7 +13,7 @@
                         <div class="media-body ">
                             <small class="pull-right">{{face.type}}</small>
                             <strong>{{face.code}}</strong> - Facing {{face.label}}<br>
-                            <small class="text-muted">Rate Card {{face.rate_card | money('$')}}</small>
+                            <!--<small class="text-muted">Rate Card {{face.rate_card | money('$')}}</small>-->
                         </div>
                     </div>
                 </div>

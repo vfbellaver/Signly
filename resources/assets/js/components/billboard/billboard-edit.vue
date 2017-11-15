@@ -222,6 +222,7 @@
                 });
             },
             save() {
+                console.log('Save!!!');
                 const uri = laroute.route('api.billboard.update', {billboard: this.form.id});
                 Slc.put(uri, this.form).then((response) => {
                     console.log('Billboard Updated:', response);
