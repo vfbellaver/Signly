@@ -17,6 +17,7 @@ window.Vue = Vue;
 
 require('./directives/bootstrap');
 require('./components/bootstrap');
+require('./filters/bootstrap');
 require('./vue/bootstrap');
 
 window.EventBus = window.Bus = new Vue();

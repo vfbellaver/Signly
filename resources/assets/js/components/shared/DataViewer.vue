@@ -4,7 +4,7 @@
             <form class="form-inline pull-right" @submit.prevent="fetchIndexData">
                 <label for="search_column">Search:</label>
                 <select class="form-control input-sm" v-model="query.search_column" id="search_column">
-                    <option v-for="column in columns" :value="column">{{column}}</option>
+                    <option v-for="column in columns" :value="column">{{column | snakeToTitle}}</option>
                 </select>
                 <select class="form-control input-sm" v-model="query.search_operator">
                     <option v-for="(value, key) in operators" :value="key">{{value}}</option>
@@ -25,11 +25,14 @@
                     <tr>
                         <th class="index">#</th>
                         <th v-for="column in columns" @click="toggleOrder(column)">
-                            <span>{{column}}</span>
+                            <span>{{column | snakeToTitle}}</span>
                             <span class="dv-table-column" v-if="column === query.column">
                             <span v-if="query.direction === 'desc'">&darr;</span>
                             <span v-else>&uarr;</span>
                         </span>
+                        </th>
+                        <th v-if="btnShare || btnEdit || btnDestroy">
+                            Actions
                         </th>
                     </tr>
                     </thead>
@@ -37,7 +40,12 @@
                     <tr v-for="row, index in model.data">
                         <td>{{ index + 1 }}</td>
                         <td v-for="column in columns">
-                            {{row[column]}}
+                            <span v-html="row[column]"></span>
+                        </td>
+                        <td>
+                            <button class="btn btn-sm btn-default" @click="$emit('share', row)" v-if="btnShare">Share</button>
+                            <button class="btn btn-sm btn-primary" @click="$emit('edit', row)" v-if="btnEdit">Edit</button>
+                            <button class="btn btn-sm btn-danger" @click="$emit('destroy', row)" v-if="btnDestroy">Delete</button>
                         </td>
                     </tr>
                     </tbody>
@@ -91,7 +99,10 @@
         props: {
             source: {required: true},
             title: {required: true},
-            defaultColumn: {required: false}
+            defaultColumn: {required: false},
+            btnEdit: {require: false, default: false},
+            btnDestroy: {require: false, default: false},
+            btnShare: {require: false, default: false},
         },
         data() {
             return {
@@ -113,8 +124,8 @@
                     greater_than: '>',
                     less_than_or_equal_to: '<=',
                     greater_than_or_equal_to: '>=',
-                    in: 'IN',
-                    like: 'LIKE'
+                    in: 'in',
+                    like: 'contains'
                 }
             }
         },
