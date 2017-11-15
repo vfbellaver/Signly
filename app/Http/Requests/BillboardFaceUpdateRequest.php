@@ -19,13 +19,12 @@ class BillboardFaceUpdateRequest extends BaseRequest
     public function rules()
     {
         return [
-			'code' => 'required',
-			'label' => 'required',
-			'rate_card' => 'required',
-			'monthly_impressions' => 'required',
-			'duration' => 'required|numeric',
-			'photo_url' => 'required',
-			'billboard' => 'required|numeric',
+            'code' => 'required',
+            'label' => 'required',
+            'rate_card' => 'required',
+            'monthly_impressions' => 'required',
+            'photo_url' => 'required',
+            'billboard' => 'required|numeric',
         ];
     }
 }

@@ -28,11 +28,12 @@ class BillboardFaceService
                 'lights_on' => $form->lightsOn(),
                 'lights_off' => $form->lightsOff(),
                 'team_id' => auth()->user()->team_id,
+                'slug' => str_slug($form->code()),
+                'type' => $form->type(),
+                'reads' => $form->reads(),
             ];
 
             $billboardFace = new BillboardFace($data);
-            $billboardFace->type = BillboardFace::TYPE[$form->type()];
-            $billboardFace->reads = BillboardFace::READS[$form->reads()];
             $billboardFace->billboard()->associate($form->billboard());
 
             $billboardFace->save();
@@ -52,12 +53,12 @@ class BillboardFaceService
             $billboardFace->width = $form->width();
             $billboardFace->reads = $form->reads();
             $billboardFace->label = $form->label();
-            $billboardFace->rate_card = $form->hardCost();
+            $billboardFace->rate_card = $form->rateCard();
             $billboardFace->monthly_impressions = $form->monthlyImpressions();
             $billboardFace->notes = $form->notes();
             $billboardFace->max_ads = $form->maxAds();
             $billboardFace->duration = $form->duration();
-            $billboardFace->photo = $form->photoUrl();
+            $billboardFace->photo_url = $form->photoUrl();
             $billboardFace->is_illuminated = $form->isIlluminated();
             $billboardFace->lights_on = $form->lightsOn();
             $billboardFace->lights_off = $form->lightsOff();

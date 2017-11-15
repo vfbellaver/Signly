@@ -39,6 +39,7 @@ class BillboardFace extends Model
         'type',
         'billboard_id',
         'team_id',
+        'slug',
     ];
 
     protected $casts = [

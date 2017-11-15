@@ -1,7 +1,14 @@
 <template>
     <div>
-
         <inspinia-page-heading v-if="pageHeading" :data="pageHeading"></inspinia-page-heading>
+
+        <nav class="navbar navbar-in-content navbar-default" data-spy="affix" data-offset-top="147">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a @click="addBillboardFace">
+                    <icon icon="plus"></icon>
+                    Add Face</a></li>
+            </ul>
+        </nav>
 
         <div class="wrapper wrapper-content">
             <div class="container-fluid">
@@ -60,27 +67,64 @@
                                     <input-text v-model="form.lng" id="lng" name="lng"></input-text>
                                 </form-group>
 
+<<<<<<< HEAD
+=======
+                                <hr>
+>>>>>>> 632270bbef4f2a140b36fab8fd2b42826caedbc3
                                 <btn-submit :disabled="form.busy">
                                     <spinner v-if="form.busy"></spinner>
                                 </btn-submit>
                                 <a class="btn btn-default" :href="billboardListRoute">Cancel</a>
                             </form-submit>
+<<<<<<< HEAD
                             <hr>
+=======
+>>>>>>> 632270bbef4f2a140b36fab8fd2b42826caedbc3
                         </div>
                     </div>
                 </div>
+
                 <div class="col-md-6">
                     <div class="ibox">
                         <div class="ibox-title">
                             <h5>Faces</h5>
                         </div>
                         <div class="ibox-content">
-
+                            <div class="table-responsive">
+                                <table class="table table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th style="width: 64px">ID</th>
+                                        <th>Facing</th>
+                                        <th style="width: 120px">Type</th>
+                                        <th style="width: 92px"></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr v-for="face in faces">
+                                        <td>{{face.code}}</td>
+                                        <td>{{face.label}}</td>
+                                        <td>{{face.type}}</td>
+                                        <td>
+                                            <button type="button" class="btn btn-success btn-xs"><i
+                                                    class="fa fa-edit" @click="openBillboardFace(face)"></i></button>
+                                            <button type="button" class="btn btn-danger btn-xs"
+                                                    @click="billboardDestroy(face)"><i
+                                                    class="fa fa-trash"></i></button>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
+        <billboard-face-form ref="billboardFaceForm" :billboardId="id"
+                             @created="billboardFaceCreated"
+                             @updated="billboardFaceUpdated"></billboard-face-form>
     </div>
 </template>
 
@@ -110,17 +154,24 @@
 <script>
     import _ from 'lodash';
     import * as Slc from "../../vue/http";
+<<<<<<< HEAD
     import BillboardFaceList from '../billboard-face/billboard-face-list';
+=======
+    import BillboardFaceForm from './edit/billboard-face-form';
+
+>>>>>>> 632270bbef4f2a140b36fab8fd2b42826caedbc3
     export default {
         props: {
             id: {required: true},
         },
         components: {
-            BillboardFaceList
+            BillboardFaceForm
         },
+
         data() {
             return {
                 form: new SlcForm({}),
+                faces: [],
                 loaded: false,
                 marker: null,
                 markerIcon: {
@@ -141,7 +192,6 @@
                 streetViewLoaded: false,
                 pano: null,
                 zoomChanged: false,
-                billboardFaces: [],
                 billboardListRoute: laroute.route('billboards.index'),
                 pageHeading: {
                     title: 'Billboard Edit',
@@ -152,14 +202,17 @@
                 },
             }
         },
+
         watch: {
             'form.address': function () {
                 this.onAddressChange();
             }
         },
+
         created() {
             this.load();
         },
+
         methods: {
             load() {
                 this.loaded = false;
@@ -177,11 +230,11 @@
                         lat: billboard.lat,
                         lng: billboard.lng,
                         heading: billboard.heading,
-                        pitch: billboard.pitch
+                        pitch: billboard.pitch,
                     });
-                    console.log("Billboard center", this.center);
                     this.streetViewLoaded = true;
                     this.loaded = true;
+                    this.faces = billboard.billboard_faces;
                 });
             },
             save() {
@@ -190,19 +243,34 @@
                     console.log('Billboard Updated:', response);
                 });
             },
-            buildForm(billboard) {
-                this.address = null;
-                this.zoomChanged = false;
-                return new SlcForm({
-                    id: billboard.id,
-                    name: billboard.name,
-                    description: billboard.description,
-                    digital_driveby: billboard.digital_driveby,
-                    address: billboard.address,
-                    lat: billboard.lat,
-                    lng: billboard.lng,
-                });
+
+            addBillboardFace() {
+                this.$refs.billboardFaceForm.show();
             },
+
+            openBillboardFace(face) {
+                this.$refs.billboardFaceForm.show(face);
+            },
+
+            billboardFaceCreated(face) {
+                this.faces.push(face);
+            },
+
+            billboardFaceUpdated(face) {
+                const i = this.faces.indexOf(face);
+                const f = this.faces[i];
+                Object.assign(f, face);
+            },
+
+            billboardDestroy(face) {
+                face.destroyForm = new SlcForm({});
+                Slc.delete(laroute.route('api.billboard-face.destroy', {billboard_face: face.id}), face.destroyForm)
+                    .then(() => {
+                        const i = this.faces.indexOf(face);
+                        this.faces.splice(i, 1);
+                    });
+            },
+
             onMapClick(e) {
                 const self = this;
                 console.log(e);
@@ -235,10 +303,12 @@
                 this.zoom = 15;
                 console.log('On click Billboard', this.form);
             },
+
             onZoomChanged(e) {
                 console.log("On Zoom Changed", e);
                 this.zoomChanged = true;
             },
+
             onAddressChange: _.debounce(function (e) {
                 console.log("OnAddressChange", e);
                 const self = this;
@@ -269,6 +339,7 @@
                     console.log('On address Changed Billboard', this.form);
                 });
             }, 500),
+
             onMarkerMoved: _.debounce(function (e) {
                 console.log('On Marker Moved', e);
                 const pos = {
@@ -286,6 +357,7 @@
                 });
                 console.log('On marker Moved Billboard', this.form);
             }),
+
             updatePov(pov) {
                 console.log('Pov Changed: ', pov);
                 this.pov = pov;
@@ -293,6 +365,7 @@
                 this.form.pitch = pov.pitch;
                 console.log('Update Pov Billboard', this.form);
             },
+
             updatePano(pano) {
                 const self = this;
                 this.pano = pano;
