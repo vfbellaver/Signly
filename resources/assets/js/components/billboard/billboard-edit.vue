@@ -59,12 +59,13 @@
                                     <input-label for="lng">Longitude: </input-label>
                                     <input-text v-model="form.lng" id="lng" name="lng"></input-text>
                                 </form-group>
-                            </form-submit>
+
                             <hr>
                             <btn-submit :disabled="form.busy">
                                 <spinner v-if="form.busy"></spinner>
                             </btn-submit>
                             <a class="btn btn-default" :href="billboardListRoute">Cancel</a>
+                            </form-submit>
                         </div>
                     </div>
                 </div>
@@ -191,6 +192,7 @@
             },
 
             save() {
+                console.log('Save!!!');
                 const uri = laroute.route('api.billboard.update', {billboard: this.form.id});
                 Slc.put(uri, this.form).then((response) => {
                     console.log('Billboard Updated:', response);

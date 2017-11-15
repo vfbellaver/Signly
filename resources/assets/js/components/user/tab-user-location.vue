@@ -16,23 +16,23 @@
                             </form-group>
 
                             <gmap-map
-                                v-if="loaded"
-                                :center="center"
-                                :zoom="zoom"
-                                @click="onMapClick"
-                                @zoom_changed="onZoomChanged"
-                                :options="mapOptions"
-                                style="width: 100%; min-height: 400px">
-                            <gmap-marker
-                                    v-if="marker"
-                                    :position="marker"
-                                    :icon="markerIcon"
-                                    :clickable="true"
-                                    :draggable="true"
-                                    @dragend="onMarkerMoved"
-                                    @click="center=marker"
-                            ></gmap-marker>
-                        </gmap-map>
+                                    v-if="loaded"
+                                    :center="center"
+                                    :zoom="zoom"
+                                    @click="onMapClick"
+                                    @zoom_changed="onZoomChanged"
+                                    :options="mapOptions"
+                                    style="width: 100%; min-height: 400px">
+                                <gmap-marker
+                                        v-if="marker"
+                                        :position="marker"
+                                        :icon="markerIcon"
+                                        :clickable="true"
+                                        :draggable="true"
+                                        @dragend="onMarkerMoved"
+                                        @click="center=marker"
+                                ></gmap-marker>
+                            </gmap-map>
 
                             <hr/>
                             <row>
@@ -68,12 +68,14 @@
     .table {
         margin-top: 10px;
     }
+
     .ibox {
         clear: none;
         margin-bottom: 60px;
         margin-top: 0px;
         padding: 0;
     }
+
     .ibox-content {
         clear: none;
     }
@@ -82,6 +84,8 @@
 <script>
     import * as SLC from '../../vue/http';
     import SelectUtc from './partials/select-utc';
+    import * as _ from "lodash";
+
     export default {
         components: {
             SelectUtc,
@@ -108,8 +112,7 @@
                 position: null,
             }
         },
-        created(){
-
+        created() {
             this.user = new SlcForm({
                 id: Slc.user.id,
                 lat: Slc.user.lat,
@@ -117,9 +120,15 @@
                 address: Slc.user.address,
             });
 
-            this.position = {lat: Slc.user.lat,lng:Slc.user.lng};
-
+            this.position = {lat: Slc.user.lat, lng: Slc.user.lng};
+        },
+        mounted() {
             this.load();
+        },
+        watch: {
+            'user.address': function () {
+                this.onAddressChange();
+            }
         },
         methods: {
             save() {
@@ -130,12 +139,12 @@
             },
 
             load() {
-                    this.loaded = false;
-                    console.log("User loaded", this.position);
-                    this.center = this.position;
-                    this.marker = this.position;
-                    console.log("User center", this.center);
-                    this.loaded = true;
+                this.loaded = false;
+                console.log("User loaded", this.position);
+                this.center = this.position;
+                this.marker = this.position;
+                console.log("User center", this.center);
+                this.loaded = true;
             },
 
             onMapClick(e) {
@@ -204,6 +213,7 @@
                     console.log('On address Changed Billboard', this.user);
                 });
             }, 500),
+
             onMarkerMoved: _.debounce(function (e) {
                 console.log('On Marker Moved', e);
                 const pos = {
@@ -221,8 +231,13 @@
                 });
                 console.log('On marker Moved Billboard', this.user);
             }),
-            getTimeZone(pos){
-                const uri = laroute.route('api.user.get.timezone',{lat:pos.lat,lng:pos.lng,time: moment.utc().seconds()});
+
+            getTimeZone(pos) {
+                const uri = laroute.route('api.user.get.timezone', {
+                    lat: pos.lat,
+                    lng: pos.lng,
+                    time: moment.utc().seconds()
+                });
                 SLC.get(uri).then((response) => {
                     this.user.timezone = response.data.timeZoneId;
                     console.log(momentTZ.tz(this.user.timezone).format("YYYY-MM-DD HH:mm Z"));

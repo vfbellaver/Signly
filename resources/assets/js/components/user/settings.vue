@@ -25,8 +25,9 @@
                                         Security
                                     </a>
 
-                                <li>
-                                    <a data-toggle="tab" href="#tab-location" aria-expanded="false">
+                                <li @click="showLocation">
+                                    <a data-toggle="tab" href="#tab-location"
+                                       aria-expanded="false">
                                         <i class="fa fa-fw fa-btn fa-map-marker"></i>
                                         Default Location
                                     </a>
@@ -50,7 +51,7 @@
                                 <div id="tab-location" class="tab-pane">
                                     <div class="panel-body">
                                         <ul>
-                                            <tab-user-location></tab-user-location>
+                                            <tab-user-location v-if="showLocationTab"></tab-user-location>
                                         </ul>
                                     </div>
                                 </div>
@@ -101,9 +102,15 @@
                     title: 'User Settings',
                     breadcrumb: [
                         {title: 'Home', url: laroute.route('home')}
-                    ]
+                    ],
                 },
+                showLocationTab: false,
             }
         },
+        methods: {
+            showLocation() {
+                this.showLocationTab = true;
+            }
+        }
     }
 </script>
