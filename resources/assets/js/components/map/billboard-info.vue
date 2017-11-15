@@ -19,7 +19,7 @@
                 <h3>{{face.label}}</h3>
                 <div class="row">
                     <div class="col-xs-4 no-padding">
-                        <img class="img-responsive" :src="face.photo" alt="label"/>
+                        <img class="img-responsive" :src="face.photo_url" alt="label" @click="showImage"/>
                     </div>
                     <div class="col-xs-7">
                         <dl class="dl-horizontal">
@@ -34,9 +34,6 @@
                             <dt>Rate Card:</dt>
                             <dd>{{face.rate_card}}</dd>
                         </dl>
-                    </div>
-                    <div>
-
                     </div>
                 </div>
             </tab>
@@ -59,6 +56,7 @@
         }
         .img-responsive {
             max-width: 100%;
+            cursor: pointer;
         }
         .dl-horizontal {
             dt {
@@ -98,8 +96,8 @@
                 window.location = laroute.route("billboards.edit", {billboard: billboard.id});
             },
 
-            addFace(face) {
-                Bus.$emit('add-face', {face: face});
+            showImage(){
+                console.log('teste');
             }
         }
 
