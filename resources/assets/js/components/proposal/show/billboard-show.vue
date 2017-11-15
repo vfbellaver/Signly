@@ -109,7 +109,7 @@
                     billboardFace,
                 });
 
-                this.$store.dispatch('addBillboardFace', billboardFace);
+                this.$store.dispatch('addBillboardFace',billboardFace);
             },
         }
     }
