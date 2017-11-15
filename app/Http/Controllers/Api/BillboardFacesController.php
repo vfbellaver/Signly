@@ -53,7 +53,7 @@ class BillboardFacesController extends Controller
         $this->service->delete($billboardFace);
 
         return [
-            'message' => 'BillboardFace deleted.'
+            'message' => 'Billboard face deleted.'
         ];
     }
 }

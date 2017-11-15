@@ -24,7 +24,6 @@ class BillboardFaceCreateRequest extends BaseRequest
             'label' => 'required',
             'rate_card' => 'required',
             'monthly_impressions' => 'required',
-            'duration' => 'required|numeric',
             'photo_url' => 'required',
             'billboard' => 'required|numeric',
         ];
