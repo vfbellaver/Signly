@@ -67,19 +67,12 @@
                                     <input-text v-model="form.lng" id="lng" name="lng"></input-text>
                                 </form-group>
 
-<<<<<<< HEAD
-=======
                                 <hr>
->>>>>>> 632270bbef4f2a140b36fab8fd2b42826caedbc3
                                 <btn-submit :disabled="form.busy">
                                     <spinner v-if="form.busy"></spinner>
                                 </btn-submit>
                                 <a class="btn btn-default" :href="billboardListRoute">Cancel</a>
                             </form-submit>
-<<<<<<< HEAD
-                            <hr>
-=======
->>>>>>> 632270bbef4f2a140b36fab8fd2b42826caedbc3
                         </div>
                     </div>
                 </div>
@@ -154,12 +147,7 @@
 <script>
     import _ from 'lodash';
     import * as Slc from "../../vue/http";
-<<<<<<< HEAD
-    import BillboardFaceList from '../billboard-face/billboard-face-list';
-=======
     import BillboardFaceForm from './edit/billboard-face-form';
-
->>>>>>> 632270bbef4f2a140b36fab8fd2b42826caedbc3
     export default {
         props: {
             id: {required: true},
@@ -167,7 +155,6 @@
         components: {
             BillboardFaceForm
         },
-
         data() {
             return {
                 form: new SlcForm({}),
@@ -202,17 +189,14 @@
                 },
             }
         },
-
         watch: {
             'form.address': function () {
                 this.onAddressChange();
             }
         },
-
         created() {
             this.load();
         },
-
         methods: {
             load() {
                 this.loaded = false;
@@ -243,25 +227,20 @@
                     console.log('Billboard Updated:', response);
                 });
             },
-
             addBillboardFace() {
                 this.$refs.billboardFaceForm.show();
             },
-
             openBillboardFace(face) {
                 this.$refs.billboardFaceForm.show(face);
             },
-
             billboardFaceCreated(face) {
                 this.faces.push(face);
             },
-
             billboardFaceUpdated(face) {
                 const i = this.faces.indexOf(face);
                 const f = this.faces[i];
                 Object.assign(f, face);
             },
-
             billboardDestroy(face) {
                 face.destroyForm = new SlcForm({});
                 Slc.delete(laroute.route('api.billboard-face.destroy', {billboard_face: face.id}), face.destroyForm)
@@ -270,7 +249,6 @@
                         this.faces.splice(i, 1);
                     });
             },
-
             onMapClick(e) {
                 const self = this;
                 console.log(e);
@@ -303,12 +281,10 @@
                 this.zoom = 15;
                 console.log('On click Billboard', this.form);
             },
-
             onZoomChanged(e) {
                 console.log("On Zoom Changed", e);
                 this.zoomChanged = true;
             },
-
             onAddressChange: _.debounce(function (e) {
                 console.log("OnAddressChange", e);
                 const self = this;
@@ -339,7 +315,6 @@
                     console.log('On address Changed Billboard', this.form);
                 });
             }, 500),
-
             onMarkerMoved: _.debounce(function (e) {
                 console.log('On Marker Moved', e);
                 const pos = {
@@ -357,7 +332,6 @@
                 });
                 console.log('On marker Moved Billboard', this.form);
             }),
-
             updatePov(pov) {
                 console.log('Pov Changed: ', pov);
                 this.pov = pov;
@@ -365,7 +339,6 @@
                 this.form.pitch = pov.pitch;
                 console.log('Update Pov Billboard', this.form);
             },
-
             updatePano(pano) {
                 const self = this;
                 this.pano = pano;
