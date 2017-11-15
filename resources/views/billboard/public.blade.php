@@ -10,26 +10,27 @@
                 <div class="row">
                     <div class="col-md-12">
                         <h3><strong>Company {{$team->name}}</strong></h3>
-                        <hr>
+
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-4">
-                        <strong> <i class="fa fa-send"></i> Email:</strong><br>
-                        {{$team->email}}
-                    </div>
-                    <div class="col-md-3">
-                        <strong> <i class="fa fa-phone"></i> Phones:</strong><br>
-                       {{$team->phone1}}<br>
-                       {{$team->phone2}}<br>
-
-                    </div>
-                    <div class="col-md-5">
+                    <div class="col-md-7">
+                        <strong> <i class="fa fa-send"></i> Email:</strong> &nbsp;
+                        {{$team->email}}<br>
                         <address>
                             <strong> <i class="fa fa-map-marker"></i> Address:</strong><br>
-                            {{$team->address_line1}} <br>
+                            {{$team->address_line1}}
                             {{$team->city}} , {{$team->state}}
                         </address>
+                    </div>
+                    <div class="col-md-5">
+                        <strong> <i class="fa fa-phone"></i> Phone (1): &nbsp;</strong>
+                       {{$team->phone1}}<br>
+                        <strong> <i class="fa fa-phone"></i> Phone (2): &nbsp;</strong>
+                        {{$team->phone1}}<br>
+                        <strong> <i class="fa fa-phone"></i> Fax:&nbsp; </strong>
+                        {{$team->fax}}
+
                     </div>
                 </div>
             </div>

@@ -47,7 +47,7 @@ class BillboardService
             $billboard->lng = $form->lng();
             $billboard->heading = $form->heading();
             $billboard->pitch = $form->pitch();
-
+            $billboard->slug = $this->nameExists($billboard);
 
             $billboard->save();
 
