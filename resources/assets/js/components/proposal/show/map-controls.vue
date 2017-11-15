@@ -7,15 +7,17 @@
                     <a href="#" class="file-control active">Company</a>
                     <a href="#" class="file-control">Proposal</a>
                     <div class="hr-line-dashed"></div>
-                    <button class="btn btn-primary btn-block">Save</button>
+                    <button class="btn btn-primary btn-block" @click="save(proposal)">Save</button>
                     <div class="hr-line-dashed"></div>
                     <h5>Billboard Faces</h5>
 
                     <div class="dd-list">
+
                         <draggable v-model="billboardFaces"
                                    :options="{group:'faces', draggable:'.dd-item', handle: '.dd-handle'}"
                                    :move="move"
-                                   @end="end">
+                                   @end="end"
+                        >
                             <div class="dd-item"
                                  v-for="face in billboardFaces"
                                  :key="face.id">
@@ -32,7 +34,9 @@
                                     </button>
                                 </div>
                             </div>
+
                         </draggable>
+
                     </div>
                     <div class="clearfix"></div>
                 </div>
@@ -160,9 +164,15 @@
             removeBillboardFace(billboardFace) {
                 this.$store.dispatch('removeBillboardFace', billboardFace);
             },
+
+            save() {
+                this.$store.commit('save');
+            },
+
             move() {
 
             },
+
             end() {
 
             }

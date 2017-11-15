@@ -45,11 +45,9 @@
         min-width: 600px;
         min-height: 320px;
         padding: 25px;
-
         .panel-body {
             min-height: 270px;
         }
-
         .description {
             text-align: justify;
         }
@@ -68,18 +66,15 @@
 </style>
 
 <script>
-
     import * as Slc from "../../../vue/http";
     import store from './store';
-
     export default {
         props: {},
-
         store,
-
         data() {
             return {
-                form: new SlcForm({}),
+
+                face: null,
             }
         },
 
@@ -99,18 +94,39 @@
         },
 
         created() {
+            console.log('Billboard-show',);
 
         },
 
         methods: {
-            addToProposal(billboardFace) {
-                this.form = new SlcForm({
-                    billboard: this.billboard,
-                    billboardFace,
-                });
 
-                this.$store.dispatch('addBillboardFace',billboardFace);
+            addToProposal(billboardFace) {
+                this.buildForm(billboardFace);
+                this.$store.commit('addBillboardFace',this.face);
             },
+
+
+            buildForm(billboardFace) {
+
+                const self = this;
+
+                const data = {
+
+                    billboard_id: billboardFace.billboard_id,
+                    code: billboardFace.code,
+                    id: billboardFace.id,
+                    pivot: {
+                        billboard_face_id: billboardFace.id,
+                        order: (self.$store.state.proposal.billboard_faces.length + 1),
+                        price: "2.00",
+                        proposal_id:this.$store.state.proposal.id,
+                    },
+
+                };
+
+                self.face = new SlcForm (data);
+
+            }
         }
     }
 </script>

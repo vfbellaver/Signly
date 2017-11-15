@@ -66,6 +66,7 @@
     import BillboardCard from './list/billboard-card';
     import BillboardForm from './list/billboard-form';
     import BillboardImportForm from './list/billboard-import-form';
+    import BillboardListView from './billboard-list-view';
     export default {
         props: {
             team: {required: true},

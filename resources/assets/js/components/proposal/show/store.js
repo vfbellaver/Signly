@@ -11,7 +11,11 @@ export default new Vuex.Store({
         markers: [],
     },
 
-    getters: {},
+    getters: {
+
+
+
+    },
 
     mutations: {
         setUser(state, user) {
@@ -44,6 +48,26 @@ export default new Vuex.Store({
             const faces = state.proposal.billboard_faces;
             faces.splice(faces.indexOf(billboardFace), 1);
         },
+
+        save(state) {
+
+            let form;
+            const faces = state.proposal.billboard_faces;
+
+            faces.forEach(face => {
+
+                form = new SlcForm({
+
+                    billboard_face: face.id,
+                    price: 999.99,
+                    order: face.pivot.order
+                });
+
+                console.log('Faces each name',face.code, 'order',face.pivot.order);
+
+            });
+        },
+
     },
 
     actions: {
@@ -66,14 +90,8 @@ export default new Vuex.Store({
         setBillboard({commit}, billboard) {
             commit('setBillboard', billboard);
         },
-        addBillboardFace({commit}, proposal, form) {
-            const uri = laroute.route('api.proposal.add-billboard-face', {proposal: proposal.id});
-            Slc.post(uri, form).then(response => {
-                commit('addBillboardFace', response);
-            });
-        },
         removeBillboardFace({commit}, billboardFace) {
             commit('removeBillboardFace', billboardFace);
-        }
+        },
     }
 });
