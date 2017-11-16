@@ -35,8 +35,8 @@ class ProposalCreateRequest extends BaseRequest
             'user_id' => 'required',
             'budget' => 'required|regex:/^\d*(\.\d{1,2})?$/',
             'confidence' => 'required',
-            'from_date' => 'required|date_format:d/m/Y',
-            'to_date' => 'required|date_format:d/m/Y|after:from_date',
+            'from_date' => 'required|date_format:m/d/Y',
+            'to_date' => 'required|date_format:m/d/Y|after:from_date',
         ];
     }
 
