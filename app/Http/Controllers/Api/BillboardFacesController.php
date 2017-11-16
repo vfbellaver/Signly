@@ -26,13 +26,10 @@ class BillboardFacesController extends Controller
 
     public function search()
     {
-        // TODO: add type and formating to columns
-        // TODO: figure it out how to format each column
         $columns = [
             'code',
             'photo',
             'label',
-            'hard_cost',
             'monthly_impressions',
             'duration',
             'height',
@@ -42,6 +39,13 @@ class BillboardFacesController extends Controller
         ];
 
         $model = BillboardFace::searchPaginateAndOrder($columns);
+        $model
+            ->getCollection()
+            ->transform(function (BillboardFace $item) {
+                return array_merge($item->toArray(), [
+                    'photo' => "<img src='{$item->photo}' width='50' />"
+                ]);
+            });
 
         return [
             'model' => $model,

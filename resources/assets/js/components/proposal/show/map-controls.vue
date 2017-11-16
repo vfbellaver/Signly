@@ -7,17 +7,15 @@
                     <a href="#" class="file-control active">Company</a>
                     <a href="#" class="file-control">Proposal</a>
                     <div class="hr-line-dashed"></div>
-                    <button class="btn btn-primary btn-block" @click="save(proposal)">Save</button>
+                    <button class="btn btn-primary btn-block">Save</button>
                     <div class="hr-line-dashed"></div>
                     <h5>Billboard Faces</h5>
 
                     <div class="dd-list">
-
                         <draggable v-model="billboardFaces"
                                    :options="{group:'faces', draggable:'.dd-item', handle: '.dd-handle'}"
                                    :move="move"
-                                   @end="end"
-                        >
+                                   @end="end">
                             <div class="dd-item"
                                  v-for="face in billboardFaces"
                                  :key="face.id">
@@ -34,9 +32,7 @@
                                     </button>
                                 </div>
                             </div>
-
                         </draggable>
-
                     </div>
                     <div class="clearfix"></div>
                 </div>
@@ -54,24 +50,20 @@
         bottom: 0;
         margin-top: 30px;
         z-index: 1;
-
         .dd-list {
             .dd-item {
                 background: #f5f5f5;
                 border: 1px solid #e7eaec;
                 margin: 4px 0;
                 padding: 5px 10px;
-
                 .dd-handle, .dd-content, .dd-action {
                     display: table-cell;
                 }
-
                 .dd-handle {
                     width: 34px;
                     background: inherit;
                     border: none;
                 }
-
                 .dd-content {
                     width: 220px;
                     overflow: hidden;
@@ -79,11 +71,9 @@
                     white-space: nowrap;
                     margin: 0 8px;
                 }
-
                 .dd-action {
                     width: 34px;
                 }
-
                 &.sortable-ghost {
                     margin: 5px 0;
                     padding: 0;
@@ -97,7 +87,6 @@
                     }
                 }
                 &.sortable-chosen {
-
                 }
             }
         }
@@ -105,7 +94,6 @@
 </style>
 
 <script>
-
     import * as Slc from "../../../vue/http";
     import store from './store';
     import Draggable from 'vuedraggable'
@@ -121,7 +109,6 @@
                 billboardFaces: []
             }
         },
-
         computed: {
             user() {
                 return this.$store.state.user;
@@ -139,7 +126,6 @@
                 return this.$store.state.proposal;
             },
         },
-
         created() {
             const self = this;
             this.$store.watch(state => {
@@ -155,28 +141,18 @@
                     deep: true
                 })
         },
-
         mounted() {
-
         },
-
         methods: {
             removeBillboardFace(billboardFace) {
                 this.$store.dispatch('removeBillboardFace', billboardFace);
             },
-
-            save() {
-                this.$store.commit('save');
-            },
-
             move() {
-
+                const self = this;
+                self.$store.commit('moveToList', this.$store.state.proposal, this.billboardFaces);
             },
-
             end() {
-
             }
         }
-
     }
 </script>
