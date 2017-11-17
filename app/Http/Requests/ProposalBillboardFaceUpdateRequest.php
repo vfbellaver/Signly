@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use App\Forms\ProposalBillboardFaceForm;
 use App\Models\Proposal;
 
-class ProposalBillboardFaceCreateRequest extends BaseRequest
+class ProposalBillboardFaceUpdateRequest extends BaseRequest
 {
     public function form(): ProposalBillboardFaceForm
     {

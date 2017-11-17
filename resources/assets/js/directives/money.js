@@ -27,7 +27,6 @@ Vue.directive('money', {
         };
 
         $(el).change(() => {
-            console.log('Change money');
             setTimeout(mask, 1);
         });
         $(el).keydown(() => {

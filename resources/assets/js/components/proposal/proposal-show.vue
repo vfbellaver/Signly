@@ -14,7 +14,7 @@
         </nav>
 
         <div class="wrapper wrapper-content">
-            <map-controls></map-controls>
+            <map-controls @edit="openBillboardFaceForm" @remove="removeBillboardFace"></map-controls>
             <gmap-map
                     v-if="loaded"
                     :options="mapOptions"
@@ -32,12 +32,12 @@
                         :opened="(billboard !== null)"
                         :position="(billboard !== null) ? billboard.position : null"
                         @closeclick="closeInfoWindow">
-                    <billboard-show v-if="billboard"></billboard-show>
+                    <billboard-show v-if="billboard" @add="openBillboardFaceForm"></billboard-show>
                 </gmap-info-window>
             </gmap-map>
         </div>
 
-        <billboard-face-form @saved=""></billboard-face-form>
+        <billboard-face-form ref="billboardFaceForm"></billboard-face-form>
     </div>
 </template>
 <style lang="scss">
@@ -152,6 +152,13 @@
                 console.log("Close Info Window");
                 this.$store.dispatch('setBillboard', null);
             },
+            openBillboardFaceForm(face) {
+                console.log("Open Billboard Face Form");
+                this.$refs.billboardFaceForm.show(face);
+            },
+            removeBillboardFace(face) {
+                console.log("Remove face", face);
+            }
         }
     }
 </script>
