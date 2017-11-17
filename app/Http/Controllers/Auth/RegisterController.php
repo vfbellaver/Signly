@@ -21,9 +21,8 @@ class RegisterController extends Controller
 
     public function __construct(CardService $service)
     {
-        $this->key = config('services.stripe.secret');
-        Stripe::setApiKey($this->key);
         $this->service = $service;
+        $this->key = config('services.stripe.secret');
         $this->role = Defender::findRole('admin');
     }
 
@@ -35,6 +34,8 @@ class RegisterController extends Controller
     public function registerPost(RegisterRequest $request)
     {
         return DB::transaction(function () use ($request) {
+            $trialDays = 30;
+
             $team = new  Team();
             $team->name = $request->input('company');
             $team->email = $request->input('email');
@@ -47,7 +48,7 @@ class RegisterController extends Controller
             $user->password = bcrypt($request->input('password'));
             $user->remember_token = str_random(10);
             $user->team_id = $team->id;
-            $user->trial_ends_at = Carbon::now()->addDays(14);
+            $user->trial_ends_at = Carbon::now()->addDays($trialDays);
 
             //TODO[daniel]: remove this part
             $user->lat = '40.7767168';
@@ -58,21 +59,22 @@ class RegisterController extends Controller
             $team->save();
 
             $user->attachRole($this->role);
-            $plan = $request->input('plan');
+            $plan = $request->input('plan')['id'];
             $email = $request->input('email');
             $owner = $request->input('owner');
+            $cardToken = request('card');
 
             Stripe::setApiKey($this->key);
 
             $user->newSubscription('main', $plan)
-                ->trialDays(14)
-                ->create(request('card'), [
+                ->trialDays($trialDays)
+                ->create($cardToken, [
                     'email' => $email,
                 ]);
 
             $this->service->store($user, $owner);
             auth()->login($user);
-            return redirect(route('home'));
+            return ['message' => 'Register Complete!'];
         });
     }
 
