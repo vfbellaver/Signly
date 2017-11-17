@@ -44,6 +44,21 @@ export default new Vuex.Store({
             const faces = state.proposal.billboard_faces;
             faces.splice(faces.indexOf(billboardFace), 1);
         },
+        faceCreated(state, face) {
+            console.log('Face Created', face);
+            const faces = state.proposal.billboard_faces;
+            faces.push(face);
+        },
+        faceUpdated(state, face) {
+            console.log('Face Updated', face);
+            const faces = state.proposal.billboard_faces;
+            for (let i = 0; i < faces.length; i++) {
+                const f = faces[i];
+                if (f.id === face.id) {
+                    Object.assign(f, face);
+                }
+            }
+        },
     },
 
     actions: {
@@ -72,8 +87,21 @@ export default new Vuex.Store({
                 commit('addBillboardFace', response);
             });
         },
-        removeBillboardFace({commit}, billboardFace) {
-            commit('removeBillboardFace', billboardFace);
-        }
+        removeBillboardFace({commit}, face) {
+            const form = new SlcForm({});
+            const pivot = face.pivot;
+            const uri = laroute.route('api.proposal.destroy-billboard-face',
+                {proposal: pivot.proposal_id, face: face.id})
+
+            Slc.delete(uri, form).then(response => {
+                commit('removeBillboardFace', face);
+            });
+        },
+        faceCreated({commit}, face) {
+            commit('faceCreated', face);
+        },
+        faceUpdated({commit}, face) {
+            commit('faceUpdated', face);
+        },
     }
 });

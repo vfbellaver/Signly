@@ -24,7 +24,7 @@
                         v-for="m in markers"
                         :key="m.billboard.id"
                         :position="m.position"
-                        :icon="markerIcon"
+                        :icon="markerIcon(m)"
                         :clickable="true"
                         @click="openInfoWindow(m)">
                 </gmap-marker>
@@ -37,7 +37,8 @@
             </gmap-map>
         </div>
 
-        <billboard-face-form ref="billboardFaceForm"></billboard-face-form>
+        <billboard-face-form ref="billboardFaceForm" @created="faceCreated"
+                             @updated="faceUpdated"></billboard-face-form>
     </div>
 </template>
 <style lang="scss">
@@ -91,12 +92,6 @@
                     mapTypeControl: false,
                     gestureHandling: 'greedy',
                 },
-
-                markerIcon: {
-                    url: '/images/pin.png',
-                    size: {width: 48, height: 48, f: 'px', b: 'px'},
-                    scaledSize: {width: 48, height: 48, f: 'px', b: 'px'}
-                },
                 infoWindowPos: null,
             }
         },
@@ -113,6 +108,9 @@
             },
             markers() {
                 return this.$store.state.markers;
+            },
+            proposal() {
+                return this.$store.state.proposal;
             }
         },
 
@@ -144,6 +142,43 @@
         },
 
         methods: {
+            markerIcon(marker) {
+
+                let fillColor = '#42c0fb';
+                const markerFaces = marker.billboard.billboard_faces;
+                const proposalFaces = this.proposal.billboard_faces;
+                for (let i = 0; i < proposalFaces.length; i++) {
+                    const pf = proposalFaces[i];
+                    for (let j = 0; j < markerFaces.length; j++) {
+                        const mf = markerFaces[j];
+                        if (pf.id === mf.id) {
+                            fillColor = '#999';
+                            break;
+                        }
+                    }
+                }
+
+                return {
+                    path: "M 13.24,29.00\n" +
+                    "           C 11.29,25.16 9.45,22.37 8.81,18.00\n" +
+                    "             5.47,-4.64 38.39,-6.24 39.40,14.00\n" +
+                    "             39.62,18.39 38.18,22.10 36.36,26.00\n" +
+                    "             34.57,29.84 33.75,31.84 30.00,34.00\n" +
+                    "             28.98,30.76 27.51,27.46 27.82,24.00\n" +
+                    "             28.16,20.13 31.19,15.99 28.97,12.15\n" +
+                    "             26.13,7.21 17.79,8.78 18.27,16.00\n" +
+                    "             18.63,21.51 27.25,33.47 28.12,38.00\n" +
+                    "             28.80,41.52 26.51,44.93 25.00,48.00\n" +
+                    "             25.00,48.00 23.00,48.00 23.00,48.00\n" +
+                    "             23.00,48.00 13.24,29.00 13.24,29.00 Z",
+                    fillColor: fillColor,
+                    fillOpacity: 1,
+                    strokeWeight: 0,
+                    scale: 1,
+                    origin: new google.maps.Point(4, 0),
+                    anchor: new google.maps.Point(24, 48),
+                };
+            },
             openInfoWindow(marker) {
                 console.log("Open Info Window", marker.billboard);
                 this.$store.dispatch('setBillboard', marker.billboard);
@@ -158,6 +193,13 @@
             },
             removeBillboardFace(face) {
                 console.log("Remove face", face);
+                this.$store.dispatch('removeBillboardFace', face);
+            },
+            faceCreated(face) {
+                this.$store.dispatch('faceCreated', face);
+            },
+            faceUpdated(face) {
+                this.$store.dispatch('faceUpdated', face);
             }
         }
     }
