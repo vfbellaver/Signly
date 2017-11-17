@@ -40,7 +40,10 @@
                     <tr v-for="row, index in model.data">
                         <td>{{ index + 1 }}</td>
                         <td v-for="column in columns">
-                            <span v-html="row[column]"></span>
+                            <span v-if="typeof(row[column]) === 'object' && row[column] !== null">
+                                <img v-image-preview  class="hand" :src="row[column]['data']" :width="row[column]['width']" v-if="row[column]['type'] === 'image'" />
+                            </span>
+                            <span v-else v-html="row[column]"></span>
                         </td>
                         <td>
                             <button class="btn btn-sm btn-default" @click="$emit('share', row)" v-if="btnShare">Share</button>
