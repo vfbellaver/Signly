@@ -64,7 +64,7 @@
         mixins: [ModalForm],
         data() {
             return {
-                userForm: null
+
             }
         },
 
@@ -74,13 +74,9 @@
                     clients: []
                 });
             },
-            reload() {
-                window.location = laroute.route("client.index");
-            },
-
             save() {
-                const uri = laroute.route('api.billboard.import');
-                Slc.post(uri, this.userForm).then((response) => {
+                const uri = laroute.route('api.client.import');
+                Slc.post(uri, this.form).then((response) => {
                     console.log('Post Billboards:', response);
                     this.saved(response.data, 'saved');
                 });

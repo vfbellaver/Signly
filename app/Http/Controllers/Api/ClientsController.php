@@ -48,7 +48,7 @@ class ClientsController extends Controller
     public function import(ClientImportRequest $request)
     {
         $data = $request->all();
-        $data['user_id'] = auth()->user()->id;
+        $data['team_id'] = auth()->user()->team_id;
         $this->service->import($data);
     }
 
