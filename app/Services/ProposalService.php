@@ -52,6 +52,34 @@ class ProposalService
         });
     }
 
+    public function updateBillboardFace(ProposalBillboardFaceForm $form, Proposal $proposal)
+    {
+        return DB::transaction(function () use ($form, $proposal) {
+
+            DB::table('proposal_billboard_face')
+                ->where([
+                    'billboard_face_id' => $form->billboardFaceId(),
+                    'proposal_id' => $proposal->id,
+                ])
+                ->update([
+                    'price' => $form->price(),
+                ]);
+
+            event(new ProposalUpdated($proposal));
+            return $proposal;
+        });
+    }
+
+    public function updateBillboardFaceOrder(ProposalBillboardFaceForm $form, Proposal $proposal)
+    {
+        return DB::transaction(function () use ($form, $proposal) {
+
+
+            event(new ProposalUpdated($proposal));
+            return $proposal;
+        });
+    }
+
     public function update(ProposalForm $form, Proposal $proposal): Proposal
     {
         return DB::transaction(function () use ($form, $proposal) {
