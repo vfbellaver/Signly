@@ -22,8 +22,7 @@ class UserUpdateRequest extends BaseRequest
 
         return [
             'name' => 'required',
-            'email' => "required|email|unique:users,id,{$id}",
-            'address' => 'required',
+            'email' => "required|email|unique:users,id,{$id}"
         ];
     }
 
