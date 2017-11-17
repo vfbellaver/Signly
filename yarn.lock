@@ -6449,6 +6449,12 @@ vm-browserify@0.0.4:
   dependencies:
     indexof "0.0.1"
 
+vue-directive-image-previewer@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/vue-directive-image-previewer/-/vue-directive-image-previewer-1.1.2.tgz#f46c2e4d84c5fdedf7211041cbb8b5d01200a049"
+  dependencies:
+    vue "^2.4.2"
+
 vue-hot-reload-api@^2.2.0:
   version "2.2.3"
   resolved "https://registry.yarnpkg.com/vue-hot-reload-api/-/vue-hot-reload-api-2.2.3.tgz#43c8e5506d65a271d2571936d77253019fd3eb17"
@@ -6515,6 +6521,10 @@ vue2-timepicker@^0.1.4:
 vue@^2.0.1, vue@^2.5.3:
   version "2.5.3"
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.5.3.tgz#e1a3b1f49b6e93e574ce040b95cbc873912fecc1"
+
+vue@^2.4.2:
+  version "2.5.5"
+  resolved "https://registry.yarnpkg.com/vue/-/vue-2.5.5.tgz#cc3cd9b2a4f1d7356861ae0f71da0e6beb091910"
 
 vuedraggable@^2.15.0:
   version "2.15.0"

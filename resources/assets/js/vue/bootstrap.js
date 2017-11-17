@@ -3,6 +3,7 @@ import Tippy from 'v-tippy';
 import ToggleButton from 'vue-js-toggle-button';
 import * as VueGoogleMaps from 'vue2-google-maps';
 import * as VueTimePicker from 'vue2-timepicker';
+import VueDirectiveImagePreviewer from 'vue-directive-image-previewer';
 
 Vue.directive('sortable', {
     inserted: function (el, binding) {
@@ -14,6 +15,7 @@ Vue.use(ToggleButton);
 Vue.use(Tippy, {
     arrow: true
 });
+Vue.use(VueDirectiveImagePreviewer);
 Vue.component('multiselect', require('vue-multiselect'));
 Vue.use(VueTimePicker);
 Vue.use(VueGoogleMaps, {
