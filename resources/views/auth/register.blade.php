@@ -196,7 +196,7 @@
                     </div>
 
                     <div class="modal-body">
-                            <ul v-model="feature = selectedPlan.features">
+                            <ul>
                                 <li><strong>Users</strong>@{{" " + feature.users}}</li>
                                 <li><strong>Billboards</strong>@{{" " + feature.billboards}}</li>
                                 <li><strong>Pdf's</strong>@{{" " + feature.pdfs}}</li>

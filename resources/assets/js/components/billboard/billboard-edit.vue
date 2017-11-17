@@ -253,9 +253,7 @@
             },
 
             billboardFaceUpdated(face) {
-                const i = this.faces.indexOf(face);
-                const f = this.faces[i];
-                Object.assign(f, face);
+                this.faces = face.billboard.billboard_faces;
             },
 
             billboardDestroy(face) {
