@@ -49,15 +49,15 @@
                                     </form-group>
                                 </div>
                             </row>
+                            <row>
+                                <div class="col-xs-12">
+                                    <hr class="hr">
+                                    <btn-submit :disabled="user.busy">
+                                        <spinner v-if="user.busy"></spinner>
+                                    </btn-submit>
+                                </div>
+                            </row>
                         </form-submit>
-                    </div>
-                </row>
-                <row>
-                    <div class="col-xs-12">
-                        <hr class="hr">
-                        <button class="btn btn-success" @click="save">
-                            Define
-                        </button>
                     </div>
                 </row>
             </div>

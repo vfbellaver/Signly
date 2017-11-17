@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Services\CardService;
 use Artesaos\Defender\Facades\Defender;
 use Carbon\Carbon;
+use DB;
 use Illuminate\Http\Request;
 use Stripe\Stripe;
 
@@ -35,52 +36,51 @@ class RegisterController extends Controller
 
     public function registerPost(RegisterRequest $request)
     {
-        $team = new  Team();
-        $team->name = $request->input('company');
-        $team->email = $request->input('email');
-        $team->slug = str_slug($request->input('company'), '-');
-        $team->save();
-        $user = new  User();
-        $user->name = $request->input('name');
-        $user->email = $request->input('email');
-        $user->password = bcrypt($request->input('password'));
-        $user->remember_token = str_random(10);
-        $user->team_id = $team->id;
-        $user->trial_ends_at = Carbon::now()->addDays(14);
-        //TODO[daniel]: remove this part
-        $user->lat = '40.7767168';
-        $user->lng = '-111.9905246';
-        $user->save();
+        return DB::transaction(function () use ($request) {
+            $team = new  Team();
+            $team->name = $request->input('company');
+            $team->email = $request->input('email');
+            $team->slug = str_slug($request->input('company'), '-');
+            $team->save();
 
-        $team->owner_id = $user->id;
-        $team->save();
+            $user = new  User();
+            $user->name = $request->input('name');
+            $user->email = $request->input('email');
+            $user->password = bcrypt($request->input('password'));
+            $user->remember_token = str_random(10);
+            $user->team_id = $team->id;
+            $user->trial_ends_at = Carbon::now()->addDays(14);
 
-        $user->attachRole($this->role);
-        $plan = $request->input('plan');
-        $email = $request->input('email');
-        $owner = $request->input('owner');
+            //TODO[daniel]: remove this part
+            $user->lat = '40.7767168';
+            $user->lng = '-111.9905246';
+            $user->save();
 
-        Stripe::setApiKey($this->key);
+            $team->owner_id = $user->id;
+            $team->save();
 
-        try {
+            $user->attachRole($this->role);
+            $plan = $request->input('plan');
+            $email = $request->input('email');
+            $owner = $request->input('owner');
 
-            $user->newSubscription('main', $plan)
-                ->trialDays(14)
-                ->create(request('card'), [
-                    'email' => $email,
-                ]);
+            Stripe::setApiKey($this->key);
+
+        try {$user->newSubscription('main', $plan)
+            ->trialDays(14)
+            ->create(request('card'), [
+                'email' => $email,
+            ]);
 
         } catch (\Exception $e) {
 
             $user->delete();
             $team->delete();
 
-        }
-
-        $this->service->store($user, $owner);
+        }$this->service->store($user, $owner);
 
         auth()->login($user);
-        return redirect(route('home'));
+        return redirect(route('home'));});
     }
 
     public function invitation($token)

@@ -89,6 +89,7 @@
             },
 
             generatePDF(id){
+                debugger;
                window.location = laroute.route('payment.invoice.pdf',{invoice:id});
             },
 
