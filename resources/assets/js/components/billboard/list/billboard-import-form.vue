@@ -20,6 +20,7 @@
                         </form-group>
                     </column>
                 </row>
+
                 <form-group :form="form" field="tablebillboards">
                     <div style="overflow: auto; max-height: 400px">
                         <table v-if="form.billboards" class="table table-responsive table-striped">
