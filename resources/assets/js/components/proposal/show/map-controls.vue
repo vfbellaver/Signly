@@ -14,7 +14,6 @@
                     <div class="dd-list">
                         <draggable v-model="billboardFaces"
                                    :options="{group:'faces', draggable:'.dd-item', handle: '.dd-handle'}"
-                                   :move="move"
                                    @end="end">
                             <div class="dd-item"
                                  v-for="face in billboardFaces"
@@ -22,9 +21,7 @@
                                 <div class="dd-handle">
                                     <i class="fa fa-arrows"></i>
                                 </div>
-                                <div class="dd-content">
-                                    {{face.code}}
-                                </div>
+                                <div class="dd-content">{{face.code}}</div>
                                 <div class="dd-action">
                                     <button type="button" class="btn btn-xs btn-primary"
                                             @click="editBillboardFace(face)">
@@ -167,11 +164,13 @@
             editBillboardFace(face) {
                 this.$emit('edit', face)
             },
-            move() {
-
-            },
             end() {
-
+                const orderList = [];
+                for (let i = 0; i < this.billboardFaces.length; i++) {
+                    const face = this.billboardFaces[i];
+                    orderList.push(face.id);
+                }
+                this.$emit('reordered', orderList);
             }
         }
 

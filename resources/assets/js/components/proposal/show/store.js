@@ -103,5 +103,10 @@ export default new Vuex.Store({
         faceUpdated({commit}, face) {
             commit('faceUpdated', face);
         },
+        reorderBillboardFaces({commit}, form) {
+            const uri = laroute.route('api.proposal.reorder-billboard-faces', {proposal: form.proposal_id});
+            Slc.put(uri, form).then(response => {
+            });
+        }
     }
 });

@@ -50,7 +50,8 @@ class Proposal extends Model
     public function billboardFaces()
     {
         return $this->belongsToMany(BillboardFace::class, 'proposal_billboard_face')
-            ->withPivot('order', 'price');
+            ->withPivot('order', 'price')
+            ->orderBy('order');
     }
     #region
 

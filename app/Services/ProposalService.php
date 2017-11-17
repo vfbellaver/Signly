@@ -125,9 +125,21 @@ class ProposalService
 
     public function updateBillboardFaceOrder(ProposalBillboardFaceForm $form, Proposal $proposal)
     {
-        return DB::transaction(function () use ($form, $proposal) {
+        DB::transaction(function () use ($form, $proposal) {
+
+            $orderList = $form->orderList();
+            foreach ($orderList as $index => $billboardFaceId) {
+                DB::table('proposal_billboard_face')
+                    ->where([
+                        'billboard_face_id' => $billboardFaceId,
+                        'proposal_id' => $proposal->id,
+                    ])
+                    ->update([
+                        'order' => ($index + 1),
+                    ]);
+            }
+
             event(new ProposalUpdated($proposal));
-            return $proposal;
         });
     }
 

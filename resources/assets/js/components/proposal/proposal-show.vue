@@ -14,7 +14,9 @@
         </nav>
 
         <div class="wrapper wrapper-content">
-            <map-controls @edit="openBillboardFaceForm" @remove="removeBillboardFace"></map-controls>
+            <map-controls @edit="openBillboardFaceForm"
+                          @remove="removeBillboardFace"
+                          @reordered="reorderBillboardFaces"></map-controls>
             <gmap-map
                     v-if="loaded"
                     :options="mapOptions"
@@ -200,7 +202,16 @@
             },
             faceUpdated(face) {
                 this.$store.dispatch('faceUpdated', face);
-            }
+            },
+            reorderBillboardFaces(orderList) {
+                console.log("Order changed", orderList);
+                const form = new SlcForm({
+                    proposal_id: this.proposal.id,
+                    orderList: orderList,
+                });
+
+                this.$store.dispatch('reorderBillboardFaces', form);
+            },
         }
     }
 </script>
