@@ -3,8 +3,21 @@
         <div class="ibox float-e-margins">
             <div class="ibox-content">
                 <div class="file-manager">
-                    <h5>Billboard Faces</h5>
+                    <div class="form-group">
+                        <label for="shareLink">Share Link</label>
+                        <div class="input-group mb-2 mb-sm-0">
+                            <div class="input-group-addon">
+                                <i class="fa fa-clone" aria-hidden="true"></i>
+                            </div>
+                            <input id="shareLink" type="text" v-if="proposal" class="form-control"
+                                   v-model="proposal.share_link"/>
+                        </div>
+                    </div>
 
+                    <button class="btn btn-primary btn-block m-t-sm">Generate Proposal</button>
+
+                    <div class="hr-line-dashed"></div>
+                    <h5>Billboard Faces</h5>
                     <div class="dd-list">
                         <draggable v-model="billboardFaces"
                                    :options="{group:'faces', draggable:'.dd-item', handle: '.dd-handle'}"
@@ -112,7 +125,7 @@
         },
         data() {
             return {
-                billboardFaces: []
+                billboardFaces: [],
             }
         },
 

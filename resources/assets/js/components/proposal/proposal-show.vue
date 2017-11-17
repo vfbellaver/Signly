@@ -7,8 +7,8 @@
             <ul class="nav navbar-nav navbar-right">
                 <li>
                     <a>
-                        <i class="fa fa-share"></i>
-                        Share</a>
+                        <i class="fa fa-comments"></i>
+                        Comments</a>
                 </li>
             </ul>
         </nav>

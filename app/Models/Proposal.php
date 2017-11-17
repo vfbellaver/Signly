@@ -79,7 +79,8 @@ class Proposal extends Model
             'notes' => $this->notes,
 
             'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at
+            'updated_at' => $this->updated_at,
+            'share_link' => url(route('proposal.public-view', ['proposal' => encrypt($this->id)])),
         ];
         return $data;
     }
