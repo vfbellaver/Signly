@@ -34,6 +34,7 @@ window.App = new Vue({
             isMenuVisible: true,
             plans: 'Slc' in window ? Slc.plans : [],
             selectedPlan: null,
+            features: null,
             chosenPlan: null,
         }
     },
@@ -60,6 +61,8 @@ window.App = new Vue({
     methods: {
         showPlanFeatures(plan) {
             this.selectedPlan = plan;
+            this.features = this.selectedPlan.features;
+            console.log('Features', this.selectedPlan);
             $(this.$refs.featuresModal).modal('show');
         },
         choosePlan(plan) {

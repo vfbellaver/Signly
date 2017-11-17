@@ -62,11 +62,20 @@ class RegisterController extends Controller
 
         Stripe::setApiKey($this->key);
 
-        $user->newSubscription('main', $plan)
-            ->trialDays(14)
-            ->create(request('card'), [
-                'email' => $email,
-            ]);
+        try {
+
+            $user->newSubscription('main', $plan)
+                ->trialDays(14)
+                ->create(request('card'), [
+                    'email' => $email,
+                ]);
+
+        } catch (\Exception $e) {
+
+            $user->delete();
+            $team->delete();
+
+        }
 
         $this->service->store($user, $owner);
 

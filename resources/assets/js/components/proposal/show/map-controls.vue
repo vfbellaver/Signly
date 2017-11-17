@@ -97,7 +97,6 @@
     import * as Slc from "../../../vue/http";
     import store from './store';
     import Draggable from 'vuedraggable'
-
     export default {
         props: {},
         store,
@@ -148,8 +147,6 @@
                 this.$store.dispatch('removeBillboardFace', billboardFace);
             },
             move() {
-                const self = this;
-                self.$store.commit('moveToList', this.$store.state.proposal, this.billboardFaces);
             },
             end() {
             }

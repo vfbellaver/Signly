@@ -196,16 +196,16 @@
                     </div>
 
                     <div class="modal-body">
-                            <ul v-model="feature = selectedPlan.features">
-                                <li><strong>Users</strong>@{{" " + feature.users}}</li>
-                                <li><strong>Billboards</strong>@{{" " + feature.billboards}}</li>
-                                <li><strong>Pdf's</strong>@{{" " + feature.pdfs}}</li>
-                                <li><strong>Proposals</strong>@{{" " + feature.proposals}}</li>
-                                <li><strong>Contracts</strong>@{{" " + feature.contracts}}</li>
-                                <li><strong>Scheduler</strong>@{{" " + feature.scheduler}}</li>
-                                <li><strong>White Label</strong>@{{" " + feature.whiteLabel}}</li>
-                                <li><strong>Value Monthly</strong>@{{" " + feature.valueMonthly}}</li>
-                                <li><strong>Value Annual</strong>@{{" " + feature.valueAnnual}}</li>
+                            <ul>
+                                <li><strong>Users</strong>@{{" " + features.users}}</li>
+                                <li><strong>Billboards</strong>@{{" " + features.billboards}}</li>
+                                <li><strong>Pdf's</strong>@{{" " + features.pdfs}}</li>
+                                <li><strong>Proposals</strong>@{{" " + features.proposals}}</li>
+                                <li><strong>Contracts</strong>@{{" " + features.contracts}}</li>
+                                <li><strong>Scheduler</strong>@{{" " + features.scheduler}}</li>
+                                <li><strong>White Label</strong>@{{" " + features.whiteLabel}}</li>
+                                <li><strong>Value Monthly</strong>@{{" " + features.valueMonthly}}</li>
+                                <li><strong>Value Annual</strong>@{{" " + features.valueAnnual}}</li>
                             </ul>
                     </div>
                     <div class="modal-footer">
@@ -219,6 +219,7 @@
 
 @section('body-scripts')
     <script>
+
         var registerFormHandler = function () {
             var $form = $('#register-form');
             var $plan = $("#plan");

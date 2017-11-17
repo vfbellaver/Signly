@@ -25,11 +25,9 @@
 <script>
     import ModalForm from '../../shared/Mixins/ModalForm';
     import * as _ from "lodash";
-
     export default {
         mixins: [ModalForm],
         components: {},
-
         data() {
             return {
                 api: 'billboardFace',
@@ -40,7 +38,6 @@
             }
         },
         mounted() {
-
         },
         computed: {
             title() {
@@ -50,7 +47,6 @@
         methods: {
             buildForm() {
                 const form = new SlcForm({});
-
                 return form;
             }
         }
