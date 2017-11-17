@@ -3,12 +3,6 @@
         <div class="ibox float-e-margins">
             <div class="ibox-content">
                 <div class="file-manager">
-                    <h5>Show Billboards From:</h5>
-                    <a href="#" class="file-control active">Company</a>
-                    <a href="#" class="file-control">Proposal</a>
-                    <div class="hr-line-dashed"></div>
-                    <button class="btn btn-primary btn-block">Save</button>
-                    <div class="hr-line-dashed"></div>
                     <h5>Billboard Faces</h5>
 
                     <div class="dd-list">
@@ -21,7 +15,7 @@
                                 <div class="dd-handle">
                                     <i class="fa fa-arrows"></i>
                                 </div>
-                                <div class="dd-content">{{face.code}}</div>
+                                <div class="dd-content">{{face.code}} - {{face.pivot.price | money('$')}}</div>
                                 <div class="dd-action">
                                     <button type="button" class="btn btn-xs btn-primary"
                                             @click="editBillboardFace(face)">
@@ -36,6 +30,9 @@
                         </draggable>
                     </div>
                     <div class="clearfix"></div>
+
+                    <div class="hr-line-dashed"></div>
+                    <h4 class="text-right p-xs">Total: {{total | money('$')}}</h4>
                 </div>
             </div>
         </div>
@@ -45,7 +42,7 @@
 <style lang="scss" scoped="true">
     .map-controls {
         background: white;
-        width: 320px;
+        width: 400px;
         position: absolute;
         top: 0;
         bottom: 0;
@@ -70,7 +67,7 @@
                 }
 
                 .dd-content {
-                    width: 220px;
+                    width: 240px;
                     overflow: hidden;
                     text-overflow: ellipsis;
                     white-space: nowrap;
@@ -135,6 +132,19 @@
             proposal() {
                 return this.$store.state.proposal;
             },
+            total() {
+                if (!this.$store.state.proposal) {
+                    return 0;
+                }
+                const faces = this.$store.state.proposal.billboard_faces;
+                let total = 0;
+                for (let i = 0; i < faces.length; i++) {
+                    const f = faces[i];
+                    total += Number.parseFloat(f.pivot.price);
+                }
+                console.log("Total", total);
+                return total.toFixed(2);
+            }
         },
 
         created() {
