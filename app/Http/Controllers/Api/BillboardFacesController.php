@@ -43,7 +43,11 @@ class BillboardFacesController extends Controller
             ->getCollection()
             ->transform(function (BillboardFace $item) {
                 return array_merge($item->toArray(), [
-                    'photo' => "<img v-image-preview src='{$item->photo_url}' width='50' />"
+                    'photo' => [
+                        'data' => $item->photo_url,
+                        'type' => 'image',
+                        'width' => 50
+                    ]
                 ]);
             });
 
