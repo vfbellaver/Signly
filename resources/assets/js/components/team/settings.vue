@@ -117,7 +117,6 @@
     import TeamList from './team-list';
     import TeamInvoices from './team-invoices';
     import TeamForm from './team-form';
-    import TeamConfiguration from '../user/tab-user-location';
     import TeamSubscription from './team-subscription';
     import TeamCard from './team-card';
 

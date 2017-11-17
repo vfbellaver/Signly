@@ -249,6 +249,7 @@
             },
 
             billboardFaceCreated(face) {
+                console.log("Face Created", face);
                 this.faces.push(face);
             },
 

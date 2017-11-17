@@ -1,3 +1,3 @@
-require('./SnakeToTitle');
 require('./money');
 require('./date');
+require('./SnakeToTitle');
