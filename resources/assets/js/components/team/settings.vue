@@ -2,7 +2,7 @@
     <div>
         <inspinia-page-heading v-if="pageHeading" :data="pageHeading"></inspinia-page-heading>
 
-        <nav class="navbar navbar-in-content navbar-default" data-spy="affix" data-offset-top="147">
+        <nav class="navbar navbar-in-content navbar-default">
             <ul class="nav navbar-nav navbar-right"></ul>
         </nav>
 

@@ -18,7 +18,7 @@
                     <div class="row">
                         <div class="col-xs-12">
                             <hr>
-                            <btn-submit class="btn btn-primary">
+                            <btn-submit class="btn btn-primary" :disabled="userEmail.busy">
                                 <spinner v-if="userEmail.busy"></spinner>
                                 <span>Send</span>
                             </btn-submit>
