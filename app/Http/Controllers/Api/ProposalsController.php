@@ -48,6 +48,27 @@ class ProposalsController extends Controller
         return $response;
     }
 
+    public function update(ProposalUpdateRequest $request, Proposal $proposal)
+    {
+        $obj = $this->service->update($request->form(), $proposal);
+
+        $response = [
+            'message' => 'Proposal updated.',
+            'data' => $obj,
+        ];
+
+        return $response;
+    }
+
+    public function destroy(Proposal $proposal)
+    {
+        $this->service->delete($proposal);
+
+        return [
+            'message' => 'Proposal deleted.'
+        ];
+    }
+
     public function createProposalBillboardFace(ProposalBillboardFaceCreateRequest $request)
     {
         $form = $request->form();
@@ -80,24 +101,21 @@ class ProposalsController extends Controller
         return $response;
     }
 
-    public function update(ProposalUpdateRequest $request, Proposal $proposal)
+    public function destroyProposalBillboardFace($proposalId, $billboardFaceId)
     {
-        $obj = $this->service->update($request->form(), $proposal);
+        /** @var Proposal $proposal */
+        $proposal = Proposal::query()
+            ->where('id', $proposalId)
+            ->where('team_id', auth()->user()->team_id)
+            ->firstOrFail();
+
+        $this->service->destroyBillboardFace($billboardFaceId, $proposal);
 
         $response = [
-            'message' => 'Proposal updated.',
-            'data' => $obj,
+            'message' => 'Billboard Face deleted.'
         ];
 
         return $response;
     }
 
-    public function destroy(Proposal $proposal)
-    {
-        $this->service->delete($proposal);
-
-        return [
-            'message' => 'Proposal deleted.'
-        ];
-    }
 }

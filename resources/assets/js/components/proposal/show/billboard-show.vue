@@ -11,7 +11,7 @@
 
                     </div>
                     <div>
-                        <button class="btn btn-primary" @click="add(face)">Add</button>
+                        <button class="btn btn-primary" @click="add(face)" :disabled="disabled(face)">Add</button>
                     </div>
                 </div>
             </tab>
@@ -69,12 +69,15 @@
             billboard() {
                 return this.$store.state.billboard;
             },
+            proposal() {
+                return this.$store.state.proposal;
+            },
             billboards() {
                 return this.$store.state.billboards;
             },
             markers() {
                 return this.$store.state.markers;
-            }
+            },
         },
 
         created() {
@@ -82,9 +85,19 @@
         },
 
         methods: {
-            add(billboardFace) {
-               this.$emit('add', billboardFace);
+            add(face) {
+                this.$emit('add', face);
             },
+            disabled(face) {
+                const faces = this.proposal.billboard_faces;
+                for (let i = 0; i < faces.length; i++) {
+                    const f = faces[i];
+                    if (f.id === face.id) {
+                        return true;
+                    }
+                }
+                return false;
+            }
         }
     }
 </script>
