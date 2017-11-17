@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Forms\CardForm;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RegisterRequest;
 use App\Models\Team;
 use App\Models\User;
 use App\Services\CardService;
-use Artesaos\Defender\Facades\Defender;
+use Defender;
 use Carbon\Carbon;
 use DB;
 use Illuminate\Http\Request;
@@ -18,7 +17,6 @@ class RegisterController extends Controller
 {
     private $key;
     private $service;
-    private $user;
     private $role;
 
     public function __construct(CardService $service)
@@ -90,17 +88,19 @@ class RegisterController extends Controller
 
     public function registerInvitation(Request $request)
     {
-        $user = User::where('invitation_token', $request->input('invitation_token'))->first();
+        return DB::transaction(function () use ($request) {
+            $user = User::where('invitation_token', $request->input('invitation_token'))->first();
 
-        $user->name = $request->input('name');
-        $user->invitation_token = null;
-        $user->password = bcrypt($request->input('password'));
-        $user->remember_token = str_random(10);
-        $user->save();
-        $role = Defender::findRole('user');
-        $user->attachRole($role);
+            $user->name = $request->input('name');
+            $user->invitation_token = null;
+            $user->password = bcrypt($request->input('password'));
+            $user->remember_token = str_random(10);
+            $user->save();
+            $role = Defender::findRole('user');
+            $user->attachRole($role);
 
-        return redirect()->route('home');
+            return redirect()->route('home');
+        });
     }
 
     public function termsOfService()

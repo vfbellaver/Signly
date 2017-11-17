@@ -2,7 +2,7 @@
     <div class="info-window">
         <tabs>
             <tab :key="face.id" v-for="(face, i) in billboard.billboard_faces" :name="face.label" :selected="i == 0">
-                <h3>{{face.label}}</h3>
+                <h3>{{face.code}}</h3>
                 <div class="row">
                     <div class="col-xs-4 no-padding">
                         <img class="img-responsive" :src="face.photo_url" alt="label"/>
@@ -11,7 +11,7 @@
 
                     </div>
                     <div>
-                        <button class="btn btn-primary" @click="addToProposal(face)">Add</button>
+                        <button class="btn btn-primary" @click="add(face)">Add</button>
                     </div>
                 </div>
             </tab>
@@ -82,13 +82,8 @@
         },
 
         methods: {
-            addToProposal(billboardFace) {
-                this.form = new SlcForm({
-                    billboard: this.billboard,
-                    billboardFace,
-                });
-
-                this.$store.dispatch('addBillboardFace', billboardFace);
+            add(billboardFace) {
+               this.$emit('add', billboardFace);
             },
         }
     }

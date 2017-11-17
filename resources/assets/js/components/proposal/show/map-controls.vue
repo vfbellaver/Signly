@@ -26,6 +26,10 @@
                                     {{face.code}}
                                 </div>
                                 <div class="dd-action">
+                                    <button type="button" class="btn btn-xs btn-primary"
+                                            @click="editBillboardFace(face)">
+                                        <i class="fa fa-edit"></i>
+                                    </button>
                                     <button type="button" class="btn btn-xs btn-danger"
                                             @click="removeBillboardFace(face)">
                                         <i class="fa fa-trash"></i>
@@ -77,7 +81,7 @@
                 }
 
                 .dd-action {
-                    width: 34px;
+                    width: 64px;
                 }
 
                 &.sortable-ghost {
@@ -157,8 +161,11 @@
         },
 
         methods: {
-            removeBillboardFace(billboardFace) {
-                this.$store.dispatch('removeBillboardFace', billboardFace);
+            removeBillboardFace(face) {
+                this.$emit('remove', face)
+            },
+            editBillboardFace(face) {
+                this.$emit('edit', face)
             },
             move() {
 
