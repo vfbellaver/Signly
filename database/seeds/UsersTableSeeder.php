@@ -15,7 +15,7 @@ class UsersTableSeeder extends Seeder
         Stripe::setApiKey(config('services.stripe.secret'));
 
         $this->createSupportUser();
-        if (app()->environment('local')) {
+        if (app()->environment('production')) {
             $this->setTeamOwners();
             $this->createUserUsers();
             $this->subscribeTeamOwners();
