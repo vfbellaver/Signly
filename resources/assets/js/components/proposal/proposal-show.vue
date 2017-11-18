@@ -31,6 +31,7 @@
                         @click="openInfoWindow(m)">
                 </gmap-marker>
                 <gmap-info-window
+                        ref="gmapInfoWindow"
                         :opened="(billboard !== null)"
                         :position="(billboard !== null) ? billboard.position : null"
                         @closeclick="closeInfoWindow">
@@ -191,6 +192,7 @@
             },
             openBillboardFaceForm(face) {
                 console.log("Open Billboard Face Form");
+                this.$refs.gmapInfoWindow.$infoWindow.close();
                 this.$refs.billboardFaceForm.show(face);
             },
             removeBillboardFace(face) {
