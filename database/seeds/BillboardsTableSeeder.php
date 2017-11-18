@@ -7,7 +7,7 @@ class BillboardsTableSeeder extends Seeder
     public function run()
     {
         \App\Models\Team::all()->each(function (\App\Models\Team $team) {
-            factory(\App\Models\Billboard::class, 25)
+            factory(\App\Models\Billboard::class, 12)
                 ->create([
                     'team_id' => $team->id
                 ])
