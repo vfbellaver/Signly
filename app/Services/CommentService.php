@@ -19,7 +19,7 @@ class CommentService
             ];
 
             $comment = new Comment($data);
-            $comment->billboardFace()->associate($form->billboard_face());
+            $comment->proposal()->associate($form->proposal());
             $comment->team()->associate($form->team());
             if ($form->user()) {
                 $comment->user()->associate($form->user());
@@ -39,7 +39,7 @@ class CommentService
             $comment->from_name = $form->fromName();
             $comment->comment = $form->comment();
             $comment->team()->associate($form->team());
-            $comment->billboardFace()->associate($form->billboard_face());
+            $comment->proposal()->associate($form->proposal());
             if ($form->user()) {
                 $comment->user()->associate($form->user());
             }

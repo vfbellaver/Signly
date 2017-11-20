@@ -15,10 +15,10 @@ class CreateCommentsTable extends Migration
                 ->on('teams')
                 ->onDelete('cascade');
 
-            $table->unsignedInteger('billboard_face_id');
-            $table->foreign('billboard_face_id')
+            $table->unsignedInteger('proposal_id');
+            $table->foreign('proposal_id')
                 ->references('id')
-                ->on('billboard_faces')
+                ->on('proposals')
                 ->onDelete('cascade');
 
             $table->unsignedInteger('user_id')->nullable();

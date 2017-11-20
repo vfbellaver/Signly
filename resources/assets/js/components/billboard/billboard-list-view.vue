@@ -9,38 +9,29 @@
                 @edit="edit"
                 :btn-destroy="true"
                 @destroy="destroy"
-                :btn-optional="btnComments"
-                @optional="openComments"
         >
         </data-viewer>
 
         <billboard-face-form v-if="billboardId" ref="billboardFaceForm" :billboardId="billboardId"
                              @updated="billboardFaceUpdated"
         ></billboard-face-form>
-        <comments ref="commentsModal" @saved="commentSaved"></comments>
     </div>
 </template>
 <script>
     import DataViewer from '../shared/DataViewer';
     import BillboardFaceForm from './edit/billboard-face-form';
     import * as Slc from "../../vue/http";
-    import Comments from '../comment/comment-form';
 
     export default {
         components: {
             DataViewer,
-            BillboardFaceForm,
-            Comments
+            BillboardFaceForm
         },
         data: () => ({
             title: 'Billboard List View',
             source: laroute.route('api.billboard-face.search'),
             defaultColumn: 'code',
-            billboardId: null,
-            btnComments: {
-                enabled: true,
-                icon: 'comments'
-            }
+            billboardId: null
         }),
         methods: {
             share(billboard) {
@@ -65,13 +56,6 @@
             },
             billboardFaceUpdated(face) {
                 console.log("billboardFaceUpdated", face);
-                this.$refs.dataViewer.fetchIndexData();
-            },
-            openComments(row) {
-                console.log(row);
-                this.$refs.commentsModal.show(row);
-            },
-            commentSaved() {
                 this.$refs.dataViewer.fetchIndexData();
             }
         }

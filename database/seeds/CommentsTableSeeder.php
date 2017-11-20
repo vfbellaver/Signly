@@ -4,22 +4,22 @@ use Illuminate\Database\Seeder;
 use App\Models\Team;
 use App\Models\User;
 use App\Models\Comment;
-use App\Models\BillboardFace;
+use App\Models\Proposal;
 
 class CommentsTableSeeder extends Seeder
 {
     public function run()
     {
-        BillboardFace::all()->each(function ($billboardFace) {
-            $user = User::whereHas('team', function ($query) use ($billboardFace) {
-                $query->where('id', $billboardFace->team->id);
+        Proposal::all()->each(function ($proposal) {
+            $user = User::whereHas('team', function ($query) use ($proposal) {
+                $query->where('id', $proposal->team->id);
             })->inRandomOrder()->get()->first();
 
             for ($i = 0; $i <= rand(1, 10) ; $i++) {
                 factory(Comment::class, rand(1, 10))->create([
                     'user_id' => rand(0, 1) ? $user->id : null,
-                    'billboard_face_id' => $billboardFace->id,
-                    'team_id' => $billboardFace->team->id
+                    'proposal_id' => $proposal->id,
+                    'team_id' => $proposal->team->id
                 ]);
             }
         });

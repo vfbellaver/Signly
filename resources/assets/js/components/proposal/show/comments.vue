@@ -5,9 +5,10 @@
             <modal-body>
                 <row>
                     <column size="12">
-                        <span v-if="! form.billboard_face">Empty</span>
+                        <span v-if="! form.proposal || form.proposal.comments.length === 0">Empty</span>
                         <div v-else class="comments" ref="comments">
-                            <div class="social-comment" v-for="(comment, index) in form.billboard_face.comments" :key="comment.id">
+                            <div class="social-comment" v-for="(comment, index) in form.proposal.comments"
+                                 :key="comment.id">
                                 <div class="media-body">
                                     <a href="#">{{ comment.name }}</a>
                                     {{ comment.comment }}
@@ -16,7 +17,7 @@
                                 </div>
                             </div>
                         </div>
-                   </column>
+                    </column>
                 </row>
             </modal-body>
 
@@ -24,14 +25,16 @@
                 <row v-if="! $root.user.id">
                     <column size="12">
                         <form-group :form="form" field="from_name">
-                            <input-text v-model="form.from_name" id="from_name" name="from_name" placeholder="Your name:"></input-text>
+                            <input-text v-model="form.from_name" id="from_name" name="from_name"
+                                        placeholder="Your name:"></input-text>
                         </form-group>
                     </column>
                 </row>
                 <row>
                     <column size="12">
                         <form-group :form="form" field="comment">
-                            <text-area v-model="form.comment" id="comment" name="comment" placeholder="Add a comment"></text-area>
+                            <text-area v-model="form.comment" id="comment" name="comment"
+                                       placeholder="Add a comment"></text-area>
                         </form-group>
                     </column>
                 </row>
@@ -49,45 +52,48 @@
 </template>
 
 <script>
-    import ModalForm from '../shared/Mixins/ModalForm';
+    import store from './store';
 
     export default {
-        mixins: [ModalForm],            
-        data() {
-            return {
-                api: 'comment'
+        store,
+        data: () => ({
+            form: new SlcForm({})
+        }),
+        computed: {
+            proposal() {
+                return this.$store.state.proposal;
             }
         },
-        created() {
-            this.$on('saved', (obj) => {
-                console.info('saved', obj);
-            });
-        },
         methods: {
-            buildForm(billboardFace) {
-                return new SlcForm({
-					billboard_face: billboardFace,
-					from_name: null,
-					comment: null
+            show() {
+                $(this.$el).modal('show');
+                this.buildForm();
+                this.moveDown();
+            },
+            save() {
+                this.$store.dispatch('saveComment', this.form)
+                    .then(() => {
+                        this.$forceUpdate();
+                        this.moveDown();
+                        this.buildForm();
+                    });
+            },
+            buildForm() {
+                this.form = new SlcForm({
+                    proposal: this.proposal,
+                    from_name: null,
+                    comment: null
                 });
             },
             moveDown() {
                 let self = this;
                 this.$nextTick(() => {
-                    if( self.$refs.comments ) {
+                    if (self.$refs.comments) {
                         setTimeout(() => {
                             self.$refs.comments.scrollTop = self.$refs.comments.scrollHeight;
                         }, 500);
                     }
                 });
-            }
-        },
-        watch: {
-            form: {
-                 handler: function(newValue) {
-                    this.moveDown();
-                },
-                deep: true
             }
         }
     }
@@ -99,6 +105,7 @@
         padding: 10px 20px;
         border: 1px solid #e5e5e5;
     }
+
     .comments {
         overflow-y: auto;
         height: 250px;

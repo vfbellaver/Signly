@@ -11,9 +11,10 @@
                         Edit</a>
                 </li>
                 <li>
-                    <a>
-                        <i class="fa fa-comments"></i>
-                        Comments</a>
+                    <a @click="openComments">
+                        <icon icon="comments"></icon>
+                        Comments
+                    </a>
                 </li>
             </ul>
         </nav>
@@ -47,6 +48,7 @@
         <proposal-form ref="form" @saved="formSaved"></proposal-form>
         <billboard-face-form ref="billboardFaceForm" @created="faceCreated"
                              @updated="faceUpdated"></billboard-face-form>
+        <comments ref="comments"></comments>
     </div>
 </template>
 <style lang="scss">
@@ -72,6 +74,7 @@
     import BillboardFaceForm from './show/billboard-face-form';
     import ProposalForm from './proposal-form';
     import store from './show/store';
+    import Comments from './show/comments';
 
     export default {
         props: {
@@ -83,6 +86,7 @@
             MapControls,
             BillboardFaceForm,
             ProposalForm,
+            Comments
         },
         data() {
             return {
@@ -152,6 +156,9 @@
         },
 
         methods: {
+            openComments() {
+                this.$refs.comments.show();
+            },
             markerIcon(marker) {
 
                 let fillColor = '#42c0fb';

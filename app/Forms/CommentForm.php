@@ -2,36 +2,37 @@
 
 namespace App\Forms;
 
+use App\Models\Proposal;
+
 class CommentForm extends BaseForm
 {
-	public function team()
-	{
-		return $this->billboard_face()->team->id;
-	}
+    public function team()
+    {
+        return $this->proposal()->team;
+    }
 
-	public function billboard_face()
-	{
-		$billboard_face = $this->request->get('billboard_face');
-		return \App\Models\BillboardFace::findOrFail($billboard_face['id']);
-	}
+    public function proposal()
+    {
+        $proposal = $this->request->get('proposal');
+        return Proposal::findOrFail($proposal['id']);
+    }
 
-	public function user()
-	{
-		if( auth()->check() ) {
-			return auth()->user();
-		}
+    public function user()
+    {
+        if (auth()->check()) {
+            return auth()->user();
+        }
 
-		return null;
-	}
+        return null;
+    }
 
-	public function fromName()
-	{
-		return $this->request->get('from_name');
-	}
+    public function fromName()
+    {
+        return $this->request->get('from_name');
+    }
 
-	public function comment()
-	{
-		return $this->request->get('comment');
-	}
-
+    public function comment()
+    {
+        return $this->request->get('comment');
+    }
 }

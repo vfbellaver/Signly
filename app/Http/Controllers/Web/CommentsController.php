@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CommentCreateRequest;
@@ -14,13 +14,7 @@ class CommentsController extends Controller
 
     public function __construct(CommentService $service)
     {
-        $this->middleware('needsRole:admin');
         $this->service = $service;
-    }
-
-    public function index()
-    {
-        return Comment::all();
     }
 
     public function store(CommentCreateRequest $request)
@@ -33,26 +27,5 @@ class CommentsController extends Controller
         ];
 
         return $response;
-    }
-
-    public function update(CommentUpdateRequest $request, Comment $comment)
-    {
-        $obj = $this->service->update($request->form(), $comment);
-
-        $response = [
-            'message' => 'Comment updated.',
-            'data' => $obj,
-        ];
-
-        return $response;
-    }
-
-    public function destroy(Comment $comment)
-    {
-        $this->service->delete($comment);
-
-        return [
-            'message' => 'Comment deleted.'
-        ];
     }
 }

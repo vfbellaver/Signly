@@ -8,7 +8,7 @@ class Comment extends Model
 {
     protected $fillable = [
         'team_id',
-        'billboard_face_id',
+        'proposal_id',
 		'user_id',
 		'from_name',
 		'comment',
@@ -24,9 +24,9 @@ class Comment extends Model
 		return $this->belongsTo(User::class);
 	}
 
-    public function billboardFace()
+    public function proposal()
     {
-        return $this->belongsTo(BillboardFace::class);
+        return $this->belongsTo(proposal::class);
     }
 
     public function toArray() 
