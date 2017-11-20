@@ -28,7 +28,7 @@ class Comment extends Model
 
     public function proposal()
     {
-        return $this->belongsTo(proposal::class);
+        return $this->belongsTo(Proposal::class);
     }
 
     public function toArray()
