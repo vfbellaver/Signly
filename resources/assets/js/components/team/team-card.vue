@@ -46,7 +46,7 @@
                                     </div>
                                 </div>
                                 <hr class="hr">
-                                <button class="btn btn-success" @click="createToken" :disabled="userForm.busy">
+                                <button class="btn btn-primary" @click="createToken" :disabled="userForm.busy">
                                     <spinner v-if="userForm.busy"></spinner>
                                     Update Card
                                 </button>
