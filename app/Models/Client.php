@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Scopes\TeamScope;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 
@@ -32,6 +33,15 @@ class Client extends Model
 
     protected $dates = [
     ];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        if (auth()->check()) {
+            static::addGlobalScope(new TeamScope(auth()->user()->team));
+        }
+    }
 
     #region Relationships
     public function team()
@@ -66,6 +76,7 @@ class Client extends Model
             'phone1' => $this->phone1,
             'phone2' => $this->phone2,
             'fax' => $this->fax,
+            'team_id' => $this->team_id,
         ];
     }
     #endregion

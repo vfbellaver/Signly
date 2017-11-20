@@ -14,7 +14,6 @@ class ProposalCreateRequest extends BaseRequest
     protected function prepareForValidation()
     {
         $data = $this->all();
-        $data['budget'] = str_replace(',', '', $data['budget']);
         $data['user_id'] = auth()->id();
         $this->replace($data);
 
@@ -33,8 +32,6 @@ class ProposalCreateRequest extends BaseRequest
             'name' => 'required',
             'client' => 'required',
             'user_id' => 'required',
-            'budget' => 'required|regex:/^\d*(\.\d{1,2})?$/',
-            'confidence' => 'required',
             'from_date' => 'required|date_format:m/d/Y',
             'to_date' => 'required|date_format:m/d/Y|after:from_date',
         ];
@@ -51,7 +48,7 @@ class ProposalCreateRequest extends BaseRequest
     public function messages()
     {
         return [
-            'budget.regex' => 'The :attribute must be a number'
+
         ];
     }
 }

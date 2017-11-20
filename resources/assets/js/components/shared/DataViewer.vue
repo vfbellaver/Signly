@@ -4,7 +4,9 @@
             <form class="form-inline pull-right" @submit.prevent="fetchIndexData">
                 <label for="search_column">Search:</label>
                 <select class="form-control input-sm" v-model="query.search_column" id="search_column">
-                    <option v-for="column in columns" :value="column">{{column | snakeToTitle}}</option>
+                    <option v-for="column in columns" :value="column.name"
+                            v-if="column.searchable !== undefined ? column.searchable : true">{{column.label}}
+                    </option>
                 </select>
                 <select class="form-control input-sm" v-model="query.search_operator">
                     <option v-for="(value, key) in operators" :value="key">{{value}}</option>
@@ -20,32 +22,50 @@
         </box-title>
         <box-content>
             <div class="table-responsive">
-                <table class="table table-striped table-hover">
+                <div v-if="loading">Loading...</div>
+                <table class="table table-striped table-hover" v-else>
                     <thead>
                     <tr>
                         <th class="index">#</th>
-                        <th v-for="column in columns" @click="toggleOrder(column)">
-                            <span>{{column | snakeToTitle}}</span>
-                            <span class="dv-table-column" v-if="column === query.column">
+                        <th v-for="column in columns" @click="toggleOrder(column)"
+                            :style="{width: column.width !== undefined ? column.width + 'px' : 'auto'}">
+                            <span>{{column.label}}</span>
+                            <span class="dv-table-column" v-if="column.name === query.column">
                             <span v-if="query.direction === 'desc'">&darr;</span>
                             <span v-else>&uarr;</span>
                         </span>
                         </th>
-                        <th v-if="btnShare || btnEdit || btnDestroy">
-                            Actions
-                        </th>
+                        <th class="action" :style="{width: action_width + 'px'}"
+                            v-if="btnShare || btnEdit || btnDestroy"></th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr v-for="row, index in model.data">
-                        <td>{{ index + 1 }}</td>
+                        <td>{{ (index + 1) + ((query.page - 1) * query.per_page)}}</td>
                         <td v-for="column in columns">
-                            <span v-html="row[column]"></span>
+                            <span v-if="typeof(row[column.name]) === 'object' && row[column.name] !== null">
+                                <img v-image-preview class="hand" :src="row[column.name]['data']"
+                                     :width="row[column.name]['width']"
+                                     :height="row[column.name]['height']"
+                                     v-if="row[column.name]['type'] === 'image'"/>
+                                <span v-if="row[column.name]['type'] === 'boolean'">
+                                    {{(row[column.name]['data'] === null) ? '-' : (row[column.name]['data'] ? 'Yes' : 'No')}}
+                                </span>
+                            </span>
+                            <span v-else v-html="row[column.name]"></span>
                         </td>
                         <td>
-                            <button class="btn btn-sm btn-default" @click="$emit('share', row)" v-if="btnShare">Share</button>
-                            <button class="btn btn-sm btn-primary" @click="$emit('edit', row)" v-if="btnEdit">Edit</button>
-                            <button class="btn btn-sm btn-danger" @click="$emit('destroy', row)" v-if="btnDestroy">Delete</button>
+                            <button class="btn btn-xs btn-default" @click="$emit('share', row)"
+                                    v-if="btnShare">
+                                <icon icon="share"></icon>
+                            </button>
+                            <button class="btn btn-xs btn-primary" @click="$emit('edit', row)" v-if="btnEdit">
+                                <icon icon="edit"></icon>
+                            </button>
+                            <button class="btn btn-xs btn-danger" @click="$emit('destroy', row)"
+                                    v-if="btnDestroy">
+                                <icon icon="trash"></icon>
+                            </button>
                         </td>
                     </tr>
                     </tbody>
@@ -70,15 +90,18 @@
                             </select>
                             <div class="input-group">
                                 <div class="input-group-btn">
-                                    <button class="btn btn-default btn-sm" @click="prev()" :disabled="! model.prev_page_url">
+                                    <button class="btn btn-default btn-sm" @click="prev()"
+                                            :disabled="! model.prev_page_url">
                                         <icon icon="arrow-left"></icon>
                                     </button>
                                 </div>
-                                <select v-model="query.page" class="form-control input-sm square" @change="fetchIndexData">
+                                <select v-model="query.page" class="form-control input-sm square"
+                                        @change="fetchIndexData">
                                     <option v-for="i in model.last_page" :key="i" :value="i">{{ i }}</option>
                                 </select>
                                 <div class="input-group-btn">
-                                    <button class="btn btn-default btn-sm" @click="next()" :disabled="! model.next_page_url">
+                                    <button class="btn btn-default btn-sm" @click="next()"
+                                            :disabled="! model.next_page_url">
                                         <icon icon="arrow-right"></icon>
                                     </button>
                                 </div>
@@ -126,7 +149,9 @@
                     greater_than_or_equal_to: '>=',
                     in: 'in',
                     like: 'contains'
-                }
+                },
+                action_width: 72,
+                loading: false,
             }
         },
         created() {
@@ -146,7 +171,7 @@
                 }
             },
             toggleOrder(column) {
-                if (column === this.query.column) {
+                if (column.name === this.query.column) {
                     this.query.direction = this.query.direction === 'desc' ? 'asc' : 'desc';
                 } else {
                     this.query.column = column;
@@ -157,13 +182,18 @@
             },
             fetchIndexData() {
                 let vm = this;
+                vm.loading = true;
                 axios.get(`${this.source}?column=${this.query.column}&direction=${this.query.direction}&page=${this.query.page}&per_page=${this.query.per_page}&search_column=${this.query.search_column}&search_operator=${this.query.search_operator}&search_input=${this.query.search_input}`)
                     .then(function (response) {
+                        console.log('DataViewer', response);
                         Vue.set(vm.$data, 'model', response.data.model);
                         Vue.set(vm.$data, 'columns', response.data.columns);
+                        vm.action_width = response.data.action_width ? response.data.action_width : 72;
+                        vm.loading = false;
                     })
                     .catch(function (response) {
                         console.log(response)
+                        vm.loading = false;
                     })
             },
             rowsPerPageChanged() {
@@ -194,8 +224,7 @@
     }
 
     .ibox-content {
-        padding-left: 0;
-        padding-right: 0;
+
     }
 
     .ibox-footer {
@@ -208,13 +237,15 @@
     .square {
         -webkit-appearance: none;
         -webkit-border-radius: 0;
-        text-align-last: center; text-align: center;
+        text-align-last: center;
+        text-align: center;
         -ms-text-align-last: center;
         -moz-text-align-last: center;
         font-size: 13px;
         padding: 0;
         width: 50px !important;
     }
+
     .displaying {
         font-weight: bold;
         float: left;

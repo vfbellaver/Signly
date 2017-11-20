@@ -31,10 +31,12 @@
                     </a>
                 </li>
                 <li>
+
                     <a @click="goToHome">
                         <icon icon="map-marker"></icon>
                         Map
                     </a>
+
                 </li>
             </ul>
         </nav>
@@ -80,8 +82,11 @@
             BillboardListView
         },
         data: () => ({
+
             billboards: [],
+
             view: 'list',
+
             pageHeading: {
                 title: 'Billboard List',
                 breadcrumb:
@@ -89,38 +94,49 @@
                         {title: 'Home', url: laroute.route('home')}
                     ]
             },
+
         }),
+
         mounted() {
             this.reload();
         },
+
         methods: {
+
             create() {
                 this.$refs.form.show();
             },
+
             edit(billboard) {
                 window.location = laroute.route("billboards.edit", {billboard: billboard.id});
             },
+
             importBillboards() {
                 this.$refs.importForm.show();
             },
+
             goToHome() {
                 window.location = "/";
             },
+
             reload() {
                 Slc.get(laroute.route('api.billboard.index'))
                     .then((response) => {
                         this.billboards = response;
                     });
             },
+
             destroy(billboard) {
                 Slc.delete(laroute.route('api.billboard.destroy', {billboard: billboard.id}), billboard.destroyForm)
                     .then(() => {
                         this.removeBillboard(billboard);
                     });
             },
+
             removeBillboard(billboard) {
                 this.billboards.splice(this.findIndex(billboard), 1);
             },
+
             findIndex(billboard) {
                 return this.billboards.findIndex((_billboard) => {
                     return _billboard.id === billboard.id;

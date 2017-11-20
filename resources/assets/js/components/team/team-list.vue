@@ -3,11 +3,7 @@
         <team-membership @newEmail="mailedInvitations"></team-membership>
         <div class="ibox">
             <div class="ibox-title">
-                <h5>Invited List
-                    <small class="m-l-sm">
-                        Here is your team and the invited members Listed
-                    </small>
-                </h5>
+                <h5>Invitations Sent</h5>
             </div>
             <div class="ibox-content">
                 <div class="clients-list">
@@ -20,11 +16,11 @@
                                     <td style="width: 400px"><strong>Waiting Confirmation...</strong></td>
                                     <td class="contact-type"><i class="fa fa-envelope"> </i></td>
                                     <td style="width:56%"> {{user.email}}</td>
-                                    <td class="client-status">
+                                    <td style="width: 36px;" class="client-status">
                                         <btn-danger class="pull-rigth"
-                                                @click.native="destroyMailed(user)"
-                                                :disabled="user.destroyForm.busy"
-                                                size="xs">
+                                                    @click.native="destroyMailed(user)"
+                                                    :disabled="user.destroyForm.busy"
+                                                    size="xs">
                                             <spinner v-if="user.destroyForm.busy"></spinner>
                                             <icon icon="trash" v-else></icon>
                                         </btn-danger>
@@ -40,11 +36,7 @@
 
         <div class="ibox">
             <div class="ibox-title">
-                <h5>{{boss.team.name}}
-                    <small class="m-l-sm">
-                        Here is your team and the invited members Listed
-                    </small>
-                </h5>
+                <h5>{{boss.team.name}}</h5>
             </div>
             <div class="ibox-content">
                 <div class="clients-list">
@@ -60,11 +52,11 @@
                                         <td v-else>{{user.name}}</td>
                                         <td class="contact-type"><i class="fa fa-envelope"> </i></td>
                                         <td style="width:60%"> {{user.email}}</td>
-                                        <td class="client-status">
+                                        <td style="width: 36px;" class="client-status">
                                             <btn-danger class="pull-rigth"
-                                                    @click.native="destroy(user)"
-                                                    :disabled="user.destroyForm.busy"
-                                                    size="xs">
+                                                        @click.native="destroy(user)"
+                                                        :disabled="user.destroyForm.busy"
+                                                        size="xs">
                                                 <spinner v-if="user.destroyForm.busy"></spinner>
                                                 <icon icon="trash" v-else></icon>
                                             </btn-danger>
@@ -103,8 +95,8 @@
 
 <script>
 
-    import * as SLC from '../../vue/http';
     import TeamMembership from './team-membership';
+    import * as Slc from "../../vue/http";
 
     export default {
 
@@ -118,25 +110,25 @@
                 mailed: [],
                 page1: true,
                 page2: false,
-                boss: Slc.user
+                boss: window.Slc.user,
             }
         },
 
-        created(){
+        created() {
             this.invitations();
             this.mailedInvitations();
         },
 
         methods: {
-            invitations(){
-                SLC.get(laroute.route('api.team.list.invited.members')).then((response) => {
+            invitations() {
+                Slc.get(laroute.route('api.team.list.invited.members')).then((response) => {
                     this.users = response;
                 });
             },
 
             destroy(user) {
                 let self = this;
-                SLC.delete(laroute.route('api.user.destroy', {user: user.id}), user.destroyForm)
+                Slc.delete(laroute.route('api.user.destroy', {user: user.id}), user.destroyForm)
                     .then(() => {
                         self.removeUser(user);
                     });
@@ -152,10 +144,10 @@
                 });
             },
 
-            mailedInvitations(){
+            mailedInvitations() {
                 Slc.get(laroute.route('api.team.list.mailed.invitations')).then((response) => {
-                    this.mailed = response;
                     console.log('mailed');
+                    this.mailed = response;
                 });
             },
 

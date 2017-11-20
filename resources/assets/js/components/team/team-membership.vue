@@ -2,7 +2,7 @@
     <div>
         <div class="ibox">
             <div class="ibox-title">
-                <h5>Invite a new member to Team</h5>
+                <h5>Invite a New User</h5>
             </div>
             <div class="ibox-body">
                 <form-submit v-model="userEmail" @submit="sendEmail">
@@ -18,7 +18,7 @@
                     <div class="row">
                         <div class="col-xs-12">
                             <hr>
-                            <btn-submit class="btn btn-primary">
+                            <btn-submit class="btn btn-primary" :disabled="userEmail.busy">
                                 <spinner v-if="userEmail.busy"></spinner>
                                 <span>Send</span>
                             </btn-submit>

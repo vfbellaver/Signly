@@ -39,12 +39,14 @@
                             </column>
                             <hr>
                             <column size="12">
-                                <div ref="card" class="form-control"></div>
+                                <div class="form-group" :class="{'has-error': cardError}">
+                                    <div ref="card" class="form-control"></div>
+                                    <div v-if="cardError" class="help-block">
+                                        <strong>{{ cardError }}</strong>
+                                    </div>
+                                </div>
                                 <hr class="hr">
-                                <button class="btn btn-primary"
-                                        @click="createToken"
-                                        :disabled="userForm.busy"
-                                >
+                                <button class="btn btn-success" @click="createToken" :disabled="userForm.busy">
                                     <spinner v-if="userForm.busy"></spinner>
                                     Update Card
                                 </button>
@@ -67,7 +69,7 @@
 
     .ibox-body-card {
         background-color: white;
-        height: 238px;
+        height: 227px;
         margin-top: 2px;
         padding: 10px 20px 20px 20px;
     }
@@ -104,10 +106,14 @@
                     {name: 'American Express', class: 'fa fa-cc-amex payment-icon-big text-success'},
                     {name: 'Discover', class: 'fa fa-cc-discover payment-icon-big text-success'},
                     {name: 'JCB', class: 'fa fa-cc-jcb payment-icon-big text-success'},
+                    {name: 'Stripe', class: 'fa fa-cc-stripe payment-icon-big text-success'},
+                    {name: 'Unknown', class: 'fa fa-cc payment-icon-big text-success'},
                 ],
                 brand: null,
                 stripe: null,
+                token: null,
                 card: null,
+                cardError: null,
                 currentCard: []
             }
         },
@@ -118,26 +124,25 @@
         },
 
         mounted() {
-            this.createCardInput();
+            this.stripe = Stripe(window.Slc.stripeKey);
+            const elements = this.stripe.elements();
+            this.card = elements.create('card', {style: {base: {lineHeight: '1.429'}}});
+            this.card.mount(this.$refs.card);
+
+            this.card.addEventListener('change', function (event) {
+                if (event.error) {
+                    console.log('Error', event);
+                }
+            });
         },
 
+        watch: {
+            'currentCard.brand': function () {
+                this.getBrandCard(this.currentCard.brand);
+            },
+        },
 
         methods: {
-
-            createCardInput() {
-
-                this.stripe = Stripe(window.Slc.stripeKey);
-                const elements = this.stripe.elements();
-                this.card = elements.create('card', {style: {base: {lineHeight: '1.429'}}});
-                this.card.mount(this.$refs.card);
-
-                this.card.addEventListener('change', function (event) {
-                    if (event.error) {
-                        console.log('Error', event);
-                    }
-                });
-
-            },
 
             getCard() {
                 let self = this;
@@ -145,7 +150,6 @@
                     .then((response) => {
                         console.log('get Card ', response.data[0]);
                         self.currentCard = response.data[0];
-                        this.getBrandCard(this.currentCard.brand);
                     });
             },
 
@@ -154,17 +158,21 @@
                     if (this.cardBrand[i].name === flag) {
                         this.brand = this.cardBrand[i].class;
                     }
-                };
+                }
             },
 
             createToken() {
                 const self = this;
+                this.userForm.startProcessing();
                 this.stripe.createToken(this.card).then(function (result) {
                     if (result.error) {
                         console.log('Error Token', result);
+                        self.cardError = result.error.message;
+                        self.userForm.finishProcessing();
                         return;
                     }
-                    self.userForm.source = result.token.id;
+                    self.token = result.token.id;
+                    self.buildForm();
                     self.updateCard();
                 });
             },
@@ -172,21 +180,21 @@
             updateCard() {
                 const self = this;
                 const uri = laroute.route('api.payment.update.card');
-                SLC.put(uri, this.userForm).then((response) => {
+                SLC.post(uri, this.userForm).then((response) => {
+                    console.log('update card', response);
                     self.buildForm();
                 });
-                self.createCardInput();
-                self.getCard();
             },
 
             buildForm() {
                 this.userForm = new SlcForm({
-                    source: '',
+                    source: this.token,
                     owner: '',
                 });
             },
 
         }
+
 
     }
 </script>

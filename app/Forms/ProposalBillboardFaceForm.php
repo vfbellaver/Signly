@@ -10,8 +10,7 @@ class ProposalBillboardFaceForm extends BaseForm
 
     public function billboardFaceId()
     {
-        $client = (object)$this->request->get('billboard_face');
-        return $client->id;
+        return $this->request->get('id');
     }
 
     public function price()
@@ -19,8 +18,13 @@ class ProposalBillboardFaceForm extends BaseForm
         return (float)$this->request->get('price');
     }
 
-    public function order()
+    public function proposalId()
     {
-        return (int)$this->request->get('order');
+        return (int)$this->request->get('proposal_id');
+    }
+
+    public function orderList()
+    {
+        return $this->request->get('orderList');
     }
 }

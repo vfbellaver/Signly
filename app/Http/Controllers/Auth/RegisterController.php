@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Forms\CardForm;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RegisterRequest;
 use App\Models\Team;
 use App\Models\User;
 use App\Services\CardService;
-use Artesaos\Defender\Facades\Defender;
+use Defender;
 use Carbon\Carbon;
 use DB;
 use Illuminate\Http\Request;
@@ -18,14 +17,12 @@ class RegisterController extends Controller
 {
     private $key;
     private $service;
-    private $user;
     private $role;
 
     public function __construct(CardService $service)
     {
-        $this->key = config('services.stripe.secret');
-        Stripe::setApiKey($this->key);
         $this->service = $service;
+        $this->key = config('services.stripe.secret');
         $this->role = Defender::findRole('admin');
     }
 
@@ -37,6 +34,8 @@ class RegisterController extends Controller
     public function registerPost(RegisterRequest $request)
     {
         return DB::transaction(function () use ($request) {
+            $trialDays = 30;
+
             $team = new  Team();
             $team->name = $request->input('company');
             $team->email = $request->input('email');
@@ -49,7 +48,7 @@ class RegisterController extends Controller
             $user->password = bcrypt($request->input('password'));
             $user->remember_token = str_random(10);
             $user->team_id = $team->id;
-            $user->trial_ends_at = Carbon::now()->addDays(14);
+            $user->trial_ends_at = Carbon::now()->addDays($trialDays);
 
             //TODO[daniel]: remove this part
             $user->lat = '40.7767168';
@@ -60,27 +59,23 @@ class RegisterController extends Controller
             $team->save();
 
             $user->attachRole($this->role);
-            $plan = $request->input('plan');
+            $plan = $request->input('plan')['id'];
             $email = $request->input('email');
             $owner = $request->input('owner');
+            $cardToken = request('card');
 
             Stripe::setApiKey($this->key);
 
-        try {$user->newSubscription('main', $plan)
-            ->trialDays(14)
-            ->create(request('card'), [
-                'email' => $email,
-            ]);
+            $user->newSubscription('main', $plan)
+                ->trialDays($trialDays)
+                ->create($cardToken, [
+                    'email' => $email,
+                ]);
 
-        } catch (\Exception $e) {
-
-            $user->delete();
-            $team->delete();
-
-        }$this->service->store($user, $owner);
-
-        auth()->login($user);
-        return redirect(route('home'));});
+            $this->service->store($user, $owner);
+            auth()->login($user);
+            return ['message' => 'Register Complete!'];
+        });
     }
 
     public function invitation($token)
@@ -95,17 +90,19 @@ class RegisterController extends Controller
 
     public function registerInvitation(Request $request)
     {
-        $user = User::where('invitation_token', $request->input('invitation_token'))->first();
+        return DB::transaction(function () use ($request) {
+            $user = User::where('invitation_token', $request->input('invitation_token'))->first();
 
-        $user->name = $request->input('name');
-        $user->invitation_token = null;
-        $user->password = bcrypt($request->input('password'));
-        $user->remember_token = str_random(10);
-        $user->save();
-        $role = Defender::findRole('user');
-        $user->attachRole($role);
+            $user->name = $request->input('name');
+            $user->invitation_token = null;
+            $user->password = bcrypt($request->input('password'));
+            $user->remember_token = str_random(10);
+            $user->save();
+            $role = Defender::findRole('user');
+            $user->attachRole($role);
 
-        return redirect()->route('home');
+            return redirect()->route('home');
+        });
     }
 
     public function termsOfService()

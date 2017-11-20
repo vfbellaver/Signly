@@ -17,13 +17,9 @@
                             <input-label for="client">Client: </input-label>
                             <client-select v-model="form.client" id="client" name="client"></client-select>
                         </form-group>
-                        <form-group :form="form" field="budget">
-                            <input-label for="budget">Budget: </input-label>
-                            <input-text v-model="form.budget" id="budget" name="budget" v-money></input-text>
-                        </form-group>
-                        <form-group :form="form" field="confidence">
-                            <input-label for="confidence">Confidence: {{form.confidence}}% </input-label>
-                            <input id="confidence" v-model="form.confidence" type="range" min="0" max="100" step="1"/>
+                        <form-group :form="form" field="notes">
+                            <input-label for="notes">Notes: </input-label>
+                            <text-area v-model="form.notes" id="notes" name="notes"></text-area>
                         </form-group>
                     </column>
                 </row>
@@ -64,25 +60,35 @@
             },
         },
         methods: {
+            save() {
+                this.form.id ? this.update() : this.add();
+            },
+
             buildForm(proposal) {
                 const self = this;
+                console.log("build form proposal", proposal);
+                const fromDate = proposal ? moment(proposal.from_date, 'YYYY-MM-DD') : moment();
+                const toDate = proposal ? moment(proposal.to_date, 'YYYY-MM-DD') : moment().add('months', 3);
+
+                window.fromDate = fromDate;
+
                 const form = new SlcForm({
                     id: proposal ? proposal.id : null,
                     name: proposal ? proposal.name : null,
                     client: proposal ? proposal.client : null,
-                    from_date: proposal ? proposal.from_date : moment().format('MM/DD/YYYY'),
-                    to_date: proposal ? proposal.to_date : moment().add('months', 3).format('MM/DD/YYYY'),
-                    confidence: proposal ? proposal.confidence : 50,
+                    from_date: fromDate.format('MM/DD/YYYY'),
+                    to_date: toDate.format('MM/DD/YYYY'),
+                    notes: proposal ? proposal.notes : null,
                     user_id: proposal ? proposal.user_id : null,
                     budget: proposal ? proposal.budget : null,
                 });
 
                 $(this.$refs.timeFrame).daterangepicker({
                     "alwaysShowCalendars": true,
-                    "startDate": form.from_date,
-                    "endDate": form.to_date,
+                    "startDate": fromDate,
+                    "endDate": toDate,
                 }, function (start, end) {
-                    console.log('Time frame changed', start, end);
+                    console.log('Time frame changed', start.format('MM/DD/YYYY'), end.format('MM/DD/YYYY'));
                     self.form.from_date = start.format('MM/DD/YYYY');
                     self.form.to_date = end.format('MM/DD/YYYY');
                 });

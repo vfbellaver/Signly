@@ -20,7 +20,7 @@
                             @if(isset(auth()->user()->name))
                                 <li>
                                     <a data-toggle="dropdown" class="dropdown-toggle" href="#" aria-expanded="true">
-                                        @{{user.name}}
+                                        <span v-cloak>@{{user.name}}</span>
                                         <b class="caret"></b>
                                     </a>
                                     <ul class="dropdown-menu animated fadeInRight m-t-xs">

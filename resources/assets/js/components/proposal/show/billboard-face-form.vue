@@ -1,5 +1,5 @@
 <template>
-    <modal size="lg">
+    <modal size="md">
         <modal-header>{{ title }}</modal-header>
         <form-submit v-model="form" @submit="save">
             <modal-body>
@@ -8,6 +8,8 @@
                         <form-group :form="form" field="price">
                             <input-label for="price">Price: </input-label>
                             <input-text v-model="form.price" id="price" name="price" v-money></input-text>
+                            <small v-if="face" class="pull-right p-xs">Rate Card: {{face.rate_card | money('$')}}
+                            </small>
                         </form-group>
                     </column>
                 </row>
@@ -22,17 +24,25 @@
     </modal>
 </template>
 
+<style lang="scss" scoped="true">
+
+</style>
+
 <script>
     import ModalForm from '../../shared/Mixins/ModalForm';
     import * as _ from "lodash";
+    import store from './store';
+
     export default {
         mixins: [ModalForm],
         components: {},
+        store,
         data() {
             return {
-                api: 'billboardFace',
+                face: null,
                 route: {
-                    store: 'api.proposal.add-billboard-face',
+                    model: 'face',
+                    store: 'api.proposal.create-billboard-face',
                     update: 'api.proposal.update-billboard-face',
                 }
             }
@@ -41,13 +51,24 @@
         },
         computed: {
             title() {
-                return `${(this.form.id ? 'Edit' : 'Add')} Billboard Face`;
+                if (this.face && this.face.pivot) {
+                    return 'Edit Billboard Face';
+                }
+                return `Add Billboard Face`;
             },
         },
         methods: {
-            buildForm() {
-                const form = new SlcForm({});
-                return form;
+            save() {
+                this.face.pivot ? this.update() : this.add();
+            },
+            buildForm(face) {
+                console.log("Build billboard face form", face);
+                this.face = face;
+                return new SlcForm({
+                    id: face ? face.id : null,
+                    proposal_id: this.$store.state.proposal ? this.$store.state.proposal.id : null,
+                    price: (face && face.pivot) ? face.pivot.price : null,
+                });
             }
         }
     }

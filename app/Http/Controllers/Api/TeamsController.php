@@ -51,7 +51,7 @@ class TeamsController extends Controller
     }
 
 
-    public function updateLogo (Request $request)
+    public function updateLogo(Request $request)
     {
         $request->validate([
             'logo' => 'required',
@@ -71,7 +71,7 @@ class TeamsController extends Controller
         return $response;
     }
 
-    public function updateName (Request $request)
+    public function updateName(Request $request)
     {
         $request->validate([
             'name' => 'required',
@@ -82,9 +82,15 @@ class TeamsController extends Controller
         $team = Team::query()->find($user->team_id);
         $team->name = $request->input('name');
         $team->email = $request->input('email');
-        $team->phone = $request->input('phone');
+        $team->phone1 = $request->input('phone1');
+        $team->phone2 = $request->input('phone2');
         $team->fax = $request->input('fax');
-        $team->address = $request->input('address');
+
+        $team->address_line1 = $request->input('address_line1');
+        $team->address_line2 = $request->input('address_line2');
+        $team->city = $request->input('city');
+        $team->state = $request->input('state');
+
         $team->save();
 
         $response = [
@@ -104,13 +110,13 @@ class TeamsController extends Controller
         ];
     }
 
-    public function inviteMember (TeamMemberInvitationRequest $request)
+    public function inviteMember(TeamMemberInvitationRequest $request)
     {
 
         $user = new User();
         $user->email = $request->form()->email();
         $user->team_id = auth()->user()->team_id;
-        $user->invitation_token =  str_random(128);
+        $user->invitation_token = str_random(128);
         $user->save();
 
         $user->notify(new UserInvited($user));
@@ -123,12 +129,12 @@ class TeamsController extends Controller
     public function listMailedInvitationsMembers()
     {
         return User::query()->whereNull('name')
-            ->where('team_id','=',auth()->user()->team_id)->get()->toArray();
+            ->where('team_id', '=', auth()->user()->team_id)->get()->toArray();
     }
 
     public function listInvitedMembers()
     {
         return User::query()->whereNotNull('name')
-            ->where('team_id','=',auth()->user()->team_id)->get()->toArray();
+            ->where('team_id', '=', auth()->user()->team_id)->get()->toArray();
     }
 }

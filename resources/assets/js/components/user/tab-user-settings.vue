@@ -18,9 +18,10 @@
                     <row>
                         <div class="col-xs-12">
                             <hr>
-                            <btn-submit :disabled="formPhoto.busy">
+                            <button type="submit" class="btn btn-primary" :disabled="formPhoto.busy">
                                 <spinner v-if="formPhoto.busy"></spinner>
-                            </btn-submit>
+                                Update Photo
+                            </button>
                         </div>
                         <div class="clear"></div>
                     </row>
@@ -48,9 +49,10 @@
                             </form-group>
                             <hr>
                             <div>
-                                <btn-submit :disabled="formUser.busy">
+                                <button type="submit" class="btn btn-primary" :disabled="formUser.busy">
                                     <spinner v-if="formUser.busy"></spinner>
-                                </btn-submit>
+                                    Update Profile
+                                </button>
                             </div>
                         </div>
                     </row>

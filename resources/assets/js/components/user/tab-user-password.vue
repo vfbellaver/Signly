@@ -34,9 +34,10 @@
                             </form-group>
                             <hr>
                             <div>
-                                <btn-submit :disabled="formPw.busy">
+                                <button type="submit" class="btn btn-primary" :disabled="formPw.busy">
                                     <spinner v-if="formPw.busy"></spinner>
-                                </btn-submit>
+                                    Update Password
+                                </button>
                             </div>
                         </div>
                     </row>

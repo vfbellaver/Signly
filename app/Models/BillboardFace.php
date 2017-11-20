@@ -67,11 +67,57 @@ class BillboardFace extends Model
         return $this->belongsTo(Billboard::class);
     }
 
+
+    public function team()
+    {
+        return $this->belongsTo(Team::class);
+    }
+
     public function toArray()
     {
-        return array_merge(parent::toArray(), [
-            'billboard_name' => $this->billboard->name
-        ]);
+        $billboard = $this->billboard;
+
+        $lat = $billboard->lat;
+        $lng = $billboard->lng;
+
+        $base = "https://maps.googleapis.com/maps/api/staticmap";
+        $center = "?center={$lat},{$lng}";
+        $marker = "&markers=icon:http://signly.clevermage.com/images/pin.png|{$lat},{$lng}";
+        $zoom = "&zoom=14";
+        $size = "&size=600x400";
+
+        $staticMap = "{$base}{$center}{$marker}{$zoom}{$size}";
+
+        return [
+            'id' => $this->id,
+            'code' => $this->code,
+            'label' => $this->label,
+            'facing' => $this->facing,
+            'rate_card' => $this->rate_card,
+            'monthly_impressions' => $this->monthly_impressions,
+            'duration' => $this->duration,
+            'is_illuminated' => $this->is_illuminated,
+            'height' => $this->height,
+            'width' => $this->width,
+            'reads' => $this->reads,
+            'notes' => $this->notes,
+            'max_ads' => $this->max_ads,
+            'photo_url' => $this->photo_url,
+            'lights_on' => $this->lights_on,
+            'lights_off' => $this->lights_off,
+            'type' => $this->type,
+            'billboard_id' => $this->billboard_id,
+            'team_id' => $this->team_id,
+            'slug' => $this->slug,
+            'billboard_name' => $billboard->name,
+            'location' => $billboard->address,
+            'static_map' => $staticMap,
+            'pivot' => $this->pivot,
+            'public_url' => route('billboard.public-view', [
+                'teamSlug' => $this->team->slug,
+                'faceCode' => $this->slug,
+            ])
+        ];
     }
 
 }
