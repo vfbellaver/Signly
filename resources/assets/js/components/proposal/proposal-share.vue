@@ -1,17 +1,5 @@
 <template>
-
-    <div class="proposal-list">
-        <nav class="navbar navbar-in-content navbar-default" data-spy="affix" data-offset-top="147">
-            <ul class="nav navbar-nav navbar-right">
-                <li>
-                    <a @click="openComments">
-                        <icon icon="comments"></icon>
-                        Comments
-                    </a>
-                </li>
-            </ul>
-        </nav>
-
+    <div class="proposal-share">
         <div class="wrapper wrapper-content">
             <map-controls @centerFace="centerFace"></map-controls>
             <gmap-map
@@ -36,16 +24,15 @@
                 </gmap-info-window>
             </gmap-map>
         </div>
-        <comments ref="comments"></comments>
     </div>
 </template>
 <style lang="scss">
-    .proposal-list {
+    .proposal-share {
         position: relative;
 
         .wrapper.wrapper-content {
             position: relative;
-            padding: 30px 0 0 0;
+            padding: 0;
         }
 
         .vue-map-container {
@@ -60,7 +47,6 @@
     import BillboardShow from './share/billboard-show';
     import MapControls from './share/map-controls';
     import store from './share/store';
-    import Comments from './share/comments';
 
     export default {
         props: {
@@ -70,7 +56,6 @@
         components: {
             BillboardShow,
             MapControls,
-            Comments
         },
         data() {
             return {
@@ -109,6 +94,7 @@
                     return state.proposal;
                 },
                 () => {
+                    console.log('Proposal changed');
                     if (!self.proposal) {
                         return;
                     }
@@ -129,9 +115,6 @@
         },
 
         methods: {
-            openComments() {
-                this.$refs.comments.show();
-            },
             markerIcon(marker) {
                 let fillColor = '#42c0fb';
                 return {
@@ -165,7 +148,7 @@
             },
             centerFace(face) {
                 this.center = face.position;
-                this.$store.dispatch('setFace', face);
+                //this.$store.dispatch('setFace', face);
             }
         }
     }
