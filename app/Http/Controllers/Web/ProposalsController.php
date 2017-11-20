@@ -79,4 +79,20 @@ class ProposalsController extends Controller
             ->header('Content-Length', strlen($pdf))
             ->header('Content-Disposition', "attachment; filename=\"proposal.pdf\"");
     }
+
+    public function share($proposalEncryptedId)
+    {
+        $id = (int)decrypt($proposalEncryptedId);
+        $proposal = Proposal::query()->findOrFail($id);
+
+        return view('proposal.share', ['proposal' => $proposal, 'id' => $proposalEncryptedId]);
+    }
+
+    public function publicPdf($proposalEncryptedId)
+    {
+        $id = (int)decrypt($proposalEncryptedId);
+        /** @var Proposal $proposal */
+        $proposal = Proposal::query()->findOrFail($id);
+        return $this->pdf($proposal);
+    }
 }

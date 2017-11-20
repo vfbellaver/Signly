@@ -26,3 +26,4 @@ Vue.component('team-settings', require('./team/settings'));
 //PROPOSAL
 Vue.component('proposal-list', require('./proposal/proposal-list'));
 Vue.component('proposal-show', require('./proposal/proposal-show'));
+Vue.component('proposal-share', require('./proposal/proposal-share'));
