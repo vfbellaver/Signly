@@ -3,11 +3,7 @@
         <team-membership @newEmail="mailedInvitations"></team-membership>
         <div class="ibox">
             <div class="ibox-title">
-                <h5>Invited List
-                    <small class="m-l-sm">
-                        Here is your team and the invited members Listed
-                    </small>
-                </h5>
+                <h5>Invitations Sent</h5>
             </div>
             <div class="ibox-content">
                 <div class="clients-list">
@@ -22,9 +18,9 @@
                                     <td style="width:56%"> {{user.email}}</td>
                                     <td class="client-status">
                                         <btn-danger class="pull-rigth"
-                                                @click.native="destroyMailed(user)"
-                                                :disabled="user.destroyForm.busy"
-                                                size="xs">
+                                                    @click.native="destroyMailed(user)"
+                                                    :disabled="user.destroyForm.busy"
+                                                    size="xs">
                                             <spinner v-if="user.destroyForm.busy"></spinner>
                                             <icon icon="trash" v-else></icon>
                                         </btn-danger>
@@ -40,11 +36,7 @@
 
         <div class="ibox">
             <div class="ibox-title">
-                <h5>{{boss.team.name}}
-                    <small class="m-l-sm">
-                        Here is your team and the invited members Listed
-                    </small>
-                </h5>
+                <h5>{{boss.team.name}}</h5>
             </div>
             <div class="ibox-content">
                 <div class="clients-list">
@@ -62,9 +54,9 @@
                                         <td style="width:60%"> {{user.email}}</td>
                                         <td class="client-status">
                                             <btn-danger class="pull-rigth"
-                                                    @click.native="destroy(user)"
-                                                    :disabled="user.destroyForm.busy"
-                                                    size="xs">
+                                                        @click.native="destroy(user)"
+                                                        :disabled="user.destroyForm.busy"
+                                                        size="xs">
                                                 <spinner v-if="user.destroyForm.busy"></spinner>
                                                 <icon icon="trash" v-else></icon>
                                             </btn-danger>
@@ -122,13 +114,13 @@
             }
         },
 
-        created(){
+        created() {
             this.invitations();
             this.mailedInvitations();
         },
 
         methods: {
-            invitations(){
+            invitations() {
                 SLC.get(laroute.route('api.team.list.invited.members')).then((response) => {
                     this.users = response;
                 });
@@ -152,7 +144,7 @@
                 });
             },
 
-            mailedInvitations(){
+            mailedInvitations() {
                 Slc.get(laroute.route('api.team.list.mailed.invitations')).then((response) => {
                     this.mailed = response;
                     console.log('mailed');

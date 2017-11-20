@@ -2,7 +2,7 @@
     <div>
         <div class="ibox">
             <div class="ibox-title">
-                <h5>Invite a new member to Team</h5>
+                <h5>Invite a New User</h5>
             </div>
             <div class="ibox-body">
                 <form-submit v-model="userEmail" @submit="sendEmail">
