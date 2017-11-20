@@ -46,7 +46,7 @@ class UsersTableSeeder extends Seeder
         return $plan;
     }
 
-    private function stripeToken($card = null)
+    private function stripeToken(User $user, $card = null)
     {
         $cards = [
             '4242424242424242',
@@ -65,6 +65,7 @@ class UsersTableSeeder extends Seeder
 
         $token = Token::create(array(
             "card" => array(
+                "name" => $user->name,
                 "number" => $card,
                 "exp_month" => rand(1, 12),
                 "exp_year" => Carbon::now()->addYears(rand(1, 5))->format('Y'),
@@ -127,7 +128,7 @@ class UsersTableSeeder extends Seeder
         User::all()->each(function (User $user) {
             if (!$user->is_team_owner) return;
             $plan = $this->resolvePlan();
-            $token = $this->stripeToken();
+            $token = $this->stripeToken($user);
             $user->newSubscription('main', $plan->id)
                 ->trialDays(30)
                 ->create($token->id, ['email' => $user->email]);

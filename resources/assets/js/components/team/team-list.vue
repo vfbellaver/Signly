@@ -16,7 +16,7 @@
                                     <td style="width: 400px"><strong>Waiting Confirmation...</strong></td>
                                     <td class="contact-type"><i class="fa fa-envelope"> </i></td>
                                     <td style="width:56%"> {{user.email}}</td>
-                                    <td class="client-status">
+                                    <td style="width: 36px;" class="client-status">
                                         <btn-danger class="pull-rigth"
                                                     @click.native="destroyMailed(user)"
                                                     :disabled="user.destroyForm.busy"
@@ -52,7 +52,7 @@
                                         <td v-else>{{user.name}}</td>
                                         <td class="contact-type"><i class="fa fa-envelope"> </i></td>
                                         <td style="width:60%"> {{user.email}}</td>
-                                        <td class="client-status">
+                                        <td style="width: 36px;" class="client-status">
                                             <btn-danger class="pull-rigth"
                                                         @click.native="destroy(user)"
                                                         :disabled="user.destroyForm.busy"
@@ -95,8 +95,8 @@
 
 <script>
 
-    import * as SLC from '../../vue/http';
     import TeamMembership from './team-membership';
+    import * as Slc from "../../vue/http";
 
     export default {
 
@@ -110,7 +110,7 @@
                 mailed: [],
                 page1: true,
                 page2: false,
-                boss: Slc.user
+                boss: window.Slc.user,
             }
         },
 
@@ -121,14 +121,14 @@
 
         methods: {
             invitations() {
-                SLC.get(laroute.route('api.team.list.invited.members')).then((response) => {
+                Slc.get(laroute.route('api.team.list.invited.members')).then((response) => {
                     this.users = response;
                 });
             },
 
             destroy(user) {
                 let self = this;
-                SLC.delete(laroute.route('api.user.destroy', {user: user.id}), user.destroyForm)
+                Slc.delete(laroute.route('api.user.destroy', {user: user.id}), user.destroyForm)
                     .then(() => {
                         self.removeUser(user);
                     });
@@ -146,8 +146,8 @@
 
             mailedInvitations() {
                 Slc.get(laroute.route('api.team.list.mailed.invitations')).then((response) => {
-                    this.mailed = response;
                     console.log('mailed');
+                    this.mailed = response;
                 });
             },
 

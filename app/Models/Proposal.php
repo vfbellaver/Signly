@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Scopes\TeamScope;
 use Illuminate\Database\Eloquent\Model;
 
 class Proposal extends Model
@@ -36,6 +37,15 @@ class Proposal extends Model
         'to_date',
         'created_at',
     ];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        if (auth()->check()) {
+            static::addGlobalScope(new TeamScope(auth()->user()->team));
+        }
+    }
 
     #region Relationships
     public function team()
