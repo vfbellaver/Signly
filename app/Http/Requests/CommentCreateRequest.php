@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Forms\CommentForm;
+use Exception;
 
 class CommentCreateRequest extends BaseRequest
 {
@@ -16,23 +17,40 @@ class CommentCreateRequest extends BaseRequest
         return true;
     }
 
+    protected function prepareForValidation()
+    {
+        $data = $this->all();
+        if (!auth()->check()) {
+            try {
+                $data['proposal']['id'] = decrypt($data['proposal_id']);
+            } catch (Exception $e) {
+                $data['proposal'] = null;
+            }
+        }
+
+        $this->replace($data);
+        $this->request->replace($data);
+        return $this->all();
+    }
+
     public function rules()
     {
         $data = [
-            'comment' => 'required'
+            'comment' => 'required',
+            'proposal' => 'required',
         ];
 
-        if( ! auth()->check() ) {
+        if (!auth()->check()) {
             $data['from_name'] = 'required';
         }
 
         return $data;
     }
 
-    public function messages() 
+    public function messages()
     {
         return [
-            'from_name.required' => 'The name is required.'
+            'from_name.required' => 'The name field is required.'
         ];
     }
 }

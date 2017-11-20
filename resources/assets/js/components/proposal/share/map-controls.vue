@@ -269,6 +269,7 @@
                 console.log('Comment');
 
                 this.form.proposal = this.proposal;
+                this.form.proposal_id = this.$store.state.id;
                 this.$store.dispatch('saveComment', this.form)
                     .then(() => {
                         this.$forceUpdate();
@@ -289,6 +290,7 @@
             buildForm() {
                 return new SlcForm({
                     proposal: null,
+                    proposal_id: null,
                     from_name: null,
                     comment: null
                 });

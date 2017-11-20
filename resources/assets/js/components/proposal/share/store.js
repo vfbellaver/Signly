@@ -34,10 +34,7 @@ export default new Vuex.Store({
             state.id = id;
         },
         commentSaved(state, comment) {
-            if (!state.proposal.comments) {
-                state.proposal.comments = [];
-            }
-            state.proposal.comments.push(comment);
+            state.comments.push(comment);
         },
         setComments(state, comments) {
             state.comments.splice(0, state.comments.length);
