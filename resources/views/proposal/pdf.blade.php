@@ -149,7 +149,7 @@
             <tr>
                 <td></td>
                 <td style="text-align: right;">
-                    <small>{{$proposal['created_at']->format('d/m/Y')}}</small>
+                    <small>{{$proposalObj->created_at->format('d/m/Y')}}</small>
                 </td>
             </tr>
         </table>
@@ -170,7 +170,7 @@
                         <br/>
                         {{$team['city']}}, {{$team['state']}} - {{$team['zipcode']}}
                         <br/>
-                        {{$team['phone1']}}
+                        {{$team['phone1']}}, {{$team['email']}}
                         <br/>
                     </div>
                 </td>
@@ -186,7 +186,7 @@
             <tr>
                 <td>{{$user ? $user['email'] : $team['email']}}</td>
                 <td style="text-align: right;">
-                    <small>{{$proposal['created_at']->format('d/m/Y')}}</small>
+                    <small>{{$proposalObj->created_at->format('d/m/Y')}}</small>
                 </td>
             </tr>
         </table>
@@ -231,9 +231,9 @@
     <br/>
     <table style="width:100%; margin-top: 250pt">
         <tr>
-            <td align="center" class="uppercase" style="font-size: 18pt; color: #888888">
+            <td align="center" class="uppercase" style="font-size: 22pt; color: #888888">
                 Proposal Presented to: <br/>
-                <strong style="font-size: 22pt">{{$client['company_name']}}</strong>
+                <strong style="font-size: ">{{$client['company_name']}}</strong>
             </td>
         </tr>
     </table>
@@ -242,7 +242,7 @@
 <tocpagebreak links="on"
               toc-odd-header-name='tocHeader'
               toc-odd-header-value="on"
-              toc-margin-top="92"
+              toc-margin-top="72"
               toc-odd-margin-left="72"
               toc-odd-footer-name="tocFooter"
               toc-odd-footer-value="on"
@@ -262,7 +262,7 @@
     <table width="100%">
         <tr>
             <td>
-                {{$proposal['from_date']->format('m/d/Y')}} - {{$proposal['to_date']->format('m/d/Y')}}
+                {{$proposalObj->from_date->format('m/d/Y')}} - {{$proposalObj->to_date->format('m/d/Y')}}
             </td>
         </tr>
     </table>

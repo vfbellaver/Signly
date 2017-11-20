@@ -3,8 +3,13 @@
         <div class="ibox float-e-margins">
             <div class="ibox-content">
                 <div class="file-manager">
+                    <h5>Time Range</h5>
+                    <div v-if="proposal">
+                        {{proposal.from_date | date('MM/DD/YYYY')}} - {{proposal.to_date | date('MM/DD/YYYY')}}
+                    </div>
+                    <div class="hr-line-dashed"></div>
+                    <h5>Share Link</h5>
                     <div class="form-group">
-                        <label for="shareLink">Share Link</label>
                         <div class="input-group mb-2 mb-sm-0">
                             <div class="input-group-addon">
                                 <i class="fa fa-clone" aria-hidden="true"></i>

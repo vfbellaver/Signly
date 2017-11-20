@@ -64,6 +64,7 @@ class ProposalsController extends Controller
         $team = $proposal->team->toArray();
 
         $content = view('proposal.pdf', [
+            'proposalObj' => $proposal,
             'proposal' => $proposal->toArray(),
             'client' => $client,
             'team' => $team,

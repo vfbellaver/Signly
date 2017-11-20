@@ -8,16 +8,13 @@
                 <h1 class="logo-name">{{env('APP_NAME')}}</h1>
             </div>
             <br/>
-            <p>
-                Perfectly designed and precisely prepared to manage your project.
-            </p>
             @if(!$isValid)
                 <div class="alert alert-danger">
-                    <strong>Sorry!</strong> This invite isn't valid anymore.
+                    <strong>Sorry!</strong> This invitation is no longer valid.
                 </div>
             @else
                 <div class="alert alert-success">
-                    Thank you to accept our invitation. Enter your password to begin.
+                    Thank you for accepting our invitation.
                 </div>
                 <form class="m-t" role="form" method="POST" action="{{ route('register-invitation') }}">
                     {{ csrf_field() }}
