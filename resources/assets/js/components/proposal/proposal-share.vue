@@ -13,7 +13,7 @@
         </nav>
 
         <div class="wrapper wrapper-content">
-            <map-controls></map-controls>
+            <map-controls @centerFace="centerFace"></map-controls>
             <gmap-map
                     v-if="loaded"
                     :options="mapOptions"
@@ -163,6 +163,10 @@
                 console.log("Close Info Window");
                 this.$store.dispatch('setFace', null);
             },
+            centerFace(face) {
+                this.center = face.position;
+                this.$store.dispatch('setFace', face);
+            }
         }
     }
 </script>

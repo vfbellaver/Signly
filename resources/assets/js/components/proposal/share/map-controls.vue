@@ -15,6 +15,12 @@
                              v-for="face in $store.state.proposal.billboard_faces"
                              :key="face.id">
                             <div class="dd-content">{{face.code}} - {{face.pivot.price | money('$')}}</div>
+                            <div class="dd-action">
+                                <button type="button" class="btn btn-xs btn-default"
+                                        @click="centerFace(face)">
+                                    <i class="fa fa-dot-circle-o"></i>
+                                </button>
+                            </div>
                         </div>
                     </div>
                     <div class="clearfix"></div>
@@ -48,14 +54,8 @@
                     display: table-cell;
                 }
 
-                .dd-handle {
-                    width: 34px;
-                    background: inherit;
-                    border: none;
-                }
-
                 .dd-content {
-                    width: 240px;
+                    width: 324px;
                     overflow: hidden;
                     text-overflow: ellipsis;
                     white-space: nowrap;
@@ -63,7 +63,8 @@
                 }
 
                 .dd-action {
-                    width: 64px;
+                    width: 36px;
+                    text-align: right;
                 }
 
                 &.sortable-ghost {
@@ -143,6 +144,10 @@
 
         },
 
-        methods: {}
+        methods: {
+            centerFace(face) {
+                this.$emit('centerFace', face);
+            }
+        }
     }
 </script>
