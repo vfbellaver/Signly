@@ -14,7 +14,7 @@
                         </div>
                     </div>
 
-                    <button class="btn btn-primary btn-block m-t-sm">Generate Proposal</button>
+                    <a class="btn btn-primary btn-block m-t-sm" :href="pdfLink">Generate Proposal</a>
 
                     <div class="hr-line-dashed"></div>
                     <h5>Billboard Faces</h5>
@@ -157,7 +157,13 @@
                 }
                 console.log("Total", total);
                 return total.toFixed(2);
-            }
+            },
+            pdfLink() {
+                if (!this.$store.state.proposal) {
+                    return '';
+                }
+                return laroute.route('proposal.pdf', {proposal: this.$store.state.proposal.id});
+            },
         },
 
         created() {

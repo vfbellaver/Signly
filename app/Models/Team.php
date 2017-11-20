@@ -49,16 +49,9 @@ class Team extends Model
     #region Conversions
     public function toArray()
     {
-        return [
-            'id' => $this->id,
-            'name' => $this->name,
-            'email' => $this->email,
-            'phone' => $this->phone,
-            'fax' => $this->fax,
-            'address' => $this->address,
-            'logo' => $this->logo,
-            'slug' => $this->slug,
-        ];
+        return array_merge(parent::toArray(), [
+
+        ]);
     }
     #endregion
 

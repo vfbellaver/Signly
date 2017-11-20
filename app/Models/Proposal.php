@@ -34,6 +34,7 @@ class Proposal extends Model
     protected $dates = [
         'from_date',
         'to_date',
+        'created_at',
     ];
 
     #region Relationships
@@ -45,6 +46,11 @@ class Proposal extends Model
     public function client()
     {
         return $this->belongsTo(Client::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 
     public function billboardFaces()

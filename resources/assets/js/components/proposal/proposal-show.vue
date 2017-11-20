@@ -184,6 +184,7 @@
             },
             openInfoWindow(marker) {
                 console.log("Open Info Window", marker.billboard);
+                this.$refs.gmapInfoWindow.createInfoWindow();
                 this.$store.dispatch('setBillboard', marker.billboard);
             },
             closeInfoWindow() {
