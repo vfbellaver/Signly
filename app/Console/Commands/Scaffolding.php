@@ -25,7 +25,7 @@ class Scaffolding extends Command
     protected $camelCasePluralName;
     protected $columnsInformation;
     protected $snakeName;
-    protected $signature = 'scaffolding {name} {--object=all}';
+    protected $signature = 'make:crud {name} {--object=all}';
     protected $description = 'Scaffolding everything related to the model';
     protected $unnecessaryColumns = ['id', 'created_at', 'updated_at', 'deleted_at', 'created_by_id', 'updated_by_id'];
 
@@ -69,28 +69,27 @@ class Scaffolding extends Command
 
             default:
                 $this->model();
-                $this->service();
-                $this->eventCreate();
-                $this->eventUpdate();
-                $this->eventDelete();
-                $this->apiController();
-                $this->controller();
-                $this->apiRoute();
-                $this->route();
-                $this->form();
-                $this->createRequest();
-                $this->updateRequest();
-                $this->makeVueDirectory();
-                $this->vueForm();
-                $this->vueList();
-                $this->vueSelect();
-                $this->updateBootstrapJs();
-                $this->makeViewDirectory();
-                $this->view();
+               $this->service();
+               $this->eventCreate();
+               $this->eventUpdate();
+               $this->eventDelete();
+               $this->apiController();
+            //    $this->controller();
+               $this->apiRoute();
+            //    $this->route();
+               $this->form();
+               $this->createRequest();
+               $this->updateRequest();
+               $this->makeVueDirectory();
+               $this->vueForm();
+            //    $this->vueList();
+            //    $this->vueSelect();
+            //    $this->updateBootstrapJs();
+            //    $this->makeViewDirectory();
+            //    $this->view();
                 $this->info(PHP_EOL . 'BE HAPPY');
                 break;
         }
-
     }
 
     private function model()
@@ -224,11 +223,7 @@ class Scaffolding extends Command
 
     private function generateFile($templateToUse, $whereToSave, $howToSave, $sufix = '', $extension = 'php', $prefix = '')
     {
-        $projectFile = base_path() . "/templates/$templateToUse.txt";
-        $defaultFile = __DIR__ . "/../../templates/$templateToUse.txt";
-        $file = (file_exists($projectFile)) ? $projectFile : $defaultFile;
-
-        $template = File::get($file);
+        $template = File::get(base_path() . "/templates/$templateToUse.txt");
         $compiledModel = str_replace('{name}', $this->lowerName, $template);
         $compiledModel = str_replace('{snakeName}', $this->snakeName, $compiledModel);
         $compiledModel = str_replace('{kebabName}', $this->kebabName, $compiledModel);
@@ -310,7 +305,17 @@ class Scaffolding extends Command
     {
         $rules = [];
 
-        if ($column->Null == 'NO') {
+        $null = null;
+
+        if( property_exists($column, 'null') ) {
+            $null = $column->null;
+        }
+
+        if( property_exists($column, 'Null') ) {
+            $null = $column->Null;
+        }
+
+        if ($null == 'NO') {
             array_push($rules, 'required');
         } else {
             array_push($rules, 'nullable');
@@ -406,7 +411,6 @@ class Scaffolding extends Command
 \t\tcomponents: {{$components}
 \t\t},
 EOF;
-
         }
 
         return $results;
@@ -421,7 +425,7 @@ EOF;
             }
             $columnField = $column->Field;
             if (ends_with($column->Field, '_id')) {
-                $columnField = camel_case(substr($column->Field, 0, -3)) . ".name";
+                $columnField = camel_case(substr($column->Field, 0, -3)) . '.name';
             }
 
             $results .= PHP_EOL . "\t\t\t\t\t\t\t<td>{{ {$this->lowerName}.{$columnField} }}</td>";
@@ -448,20 +452,18 @@ EOF;
                 $field = <<<EOF
                         <form-group :form="form" field="{$camelCase}">
                             <input-label for="{$camelCase}">{$pascalCase}: </input-label>
-                            <{$kebabCase}-select v-model="form.{$camelCase}" id="{$camelCase}" name="{$camelCase}"/>
+                            <{$kebabCase}-select v-model="form.{$camelCase}" id="{$camelCase}" name="{$camelCase}"></{$kebabCase}-select>
                         </form-group>         
 EOF;
             } else {
-
                 $formType = $this->getFormInputType($column);
 
                 $field = <<<EOF
                         <form-group :form="form" field="{$column->Field}">
                             <input-label for="{$column->Field}">{$titledField}: </input-label>
-                            <input-{$formType} v-model="form.{$column->Field}" id="{$column->Field}" name="{$column->Field}"/>
+                            <input-{$formType} v-model="form.{$column->Field}" id="{$column->Field}" name="{$column->Field}"></input-{$formType}>
                         </form-group>     
 EOF;
-
             }
 
             $fields .= $field . PHP_EOL;
@@ -576,7 +578,6 @@ EOF;
 
 EOF;
             } else {
-
                 $return = "return \$this->request->get('{$snakeCase}');";
 
                 if (strpos($column->Type, 'date') !== false) {
@@ -658,7 +659,6 @@ EOF;
                 $results .= PHP_EOL . "\t\t\t'{$column->Field}' => \$this->{$column->Field},";
             }
 
-
             if (ends_with($column->Field, '_id')) {
                 $fieldName = camel_case(substr($column->Field, 0, -3));
                 $results .= PHP_EOL . "\t\t\t'{$fieldName}' => \$this->{$fieldName}->toArray(),";
@@ -698,7 +698,6 @@ EOF;
             $newFile .= $line;
         }
 
-
         File::put($repositoryServiceProvider, $newFile);
         $this->info('Services Service Provider Updated!');
     }
@@ -717,6 +716,4 @@ EOF;
         shell_exec('npm run dev');
         $this->info('Js Compiled');
     }
-
-
 }

@@ -13,7 +13,7 @@ Route::get('roles', function () {
     dd($roles);
 });
 
-Route::get('pdf','Web\PDFController@index');
+// Route::get('pdf','Web\PDFController@index');
 
 Route::get('utc','Web\PaymentController@getTimeZone');
 

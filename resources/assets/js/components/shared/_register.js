@@ -21,6 +21,8 @@ Vue.component('btn-submit', require('./Buttons/Submit'));
 Vue.component('btn-danger', require('./Buttons/Danger'));
 Vue.component('btn-success', require('./Buttons/Success'));
 Vue.component('btn-default', require('./Buttons/Default'));
+Vue.component('btn-cancel', require('./Buttons/Cancel'));
+
 
 // ------------------------------------------------------------------------
 // Forms
