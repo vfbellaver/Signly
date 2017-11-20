@@ -30,18 +30,6 @@ class CommentsController extends Controller
         return $response;
     }
 
-    public function storePublic(CommentCreateRequest $request)
-    {
-        $data = $this->service->create($request->form());
-
-        $response = [
-            'message' => 'Comment created.',
-            'data' => $data
-        ];
-
-        return $response;
-    }
-
     public function index()
     {
         $proposalEncryptedId = request()->get('proposal');
