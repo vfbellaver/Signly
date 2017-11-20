@@ -9,7 +9,7 @@
             </box-title>
             <box-content>
                 <div class="row">
-                    <div class="col-md-6" v-for="billboardFace in billboardFaces">
+                    <div class="col-md-6" v-for="billboardFace in billboardFaces" :key="billboardFace.id">
                         <div class="contact-box">
                             <div class="col-sm-6">
                                 <div class="text-center">

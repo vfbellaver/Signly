@@ -60,6 +60,12 @@ export default new Vuex.Store({
                 }
             }
         },
+        commentSaved(state, comment) {
+            if (!state.proposal.comments) {
+                state.proposal.comments = [];
+            }
+            state.proposal.comments.push(comment);
+        }
     },
 
     actions: {
@@ -108,6 +114,14 @@ export default new Vuex.Store({
             const uri = laroute.route('api.proposal.reorder-billboard-faces', {proposal: form.proposal_id});
             Slc.put(uri, form).then(response => {
             });
+        },
+
+        saveComment({commit}, form) {
+            const uri = laroute.route('comment.store');
+            return Slc.post(uri, form).then(response => {
+                commit('commentSaved', response.data);
+            });
         }
+
     }
 });

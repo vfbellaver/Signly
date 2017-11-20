@@ -4,12 +4,12 @@
             <form class="form-inline pull-right" @submit.prevent="fetchIndexData">
                 <label for="search_column">Search:</label>
                 <select class="form-control input-sm" v-model="query.search_column" id="search_column">
-                    <option v-for="column in columns" :value="column.name"
+                    <option v-for="(column, index) in columns" :value="column.name" :key="index"
                             v-if="column.searchable !== undefined ? column.searchable : true">{{column.label}}
                     </option>
                 </select>
                 <select class="form-control input-sm" v-model="query.search_operator">
-                    <option v-for="(value, key) in operators" :value="key">{{value}}</option>
+                    <option v-for="(value, key) in operators" :key="key" :value="key">{{value}}</option>
                 </select>
                 <input type="text" class="form-control input-sm"
                        placeholder="Search"
@@ -27,8 +27,10 @@
                     <thead>
                     <tr>
                         <th class="index">#</th>
-                        <th v-for="column in columns" @click="toggleOrder(column)"
-                            :style="{width: column.width !== undefined ? column.width + 'px' : 'auto'}">
+                        <th v-for="(column, index) in columns" @click="toggleOrder(column)"
+                            :style="{width: column.width !== undefined ? column.width + 'px' : 'auto'}" 
+                            :key="index"
+                        >
                             <span>{{column.label}}</span>
                             <span class="dv-table-column" v-if="column.name === query.column">
                             <span v-if="query.direction === 'desc'">&darr;</span>
@@ -40,9 +42,9 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr v-for="row, index in model.data">
+                    <tr v-for="(row, index) in model.data" :key="'row_' + index">
                         <td>{{ (index + 1) + ((query.page - 1) * query.per_page)}}</td>
-                        <td v-for="column in columns">
+                        <td v-for="(column, index) in columns" :key="index">
                             <span v-if="typeof(row[column.name]) === 'object' && row[column.name] !== null">
                                 <img v-image-preview class="hand" :src="row[column.name]['data']"
                                      :width="row[column.name]['width']"
@@ -54,7 +56,11 @@
                             </span>
                             <span v-else v-html="row[column.name]"></span>
                         </td>
-                        <td>
+                        <td style="white-space:nowrap;">
+                            <button class="btn btn-xs btn-default" @click="$emit('optional', row)"
+                                    v-if="btnOptional.enabled">
+                                <icon :icon="btnOptional.icon"></icon>
+                            </button>
                             <button class="btn btn-xs btn-default" @click="$emit('share', row)"
                                     v-if="btnShare">
                                 <icon icon="share"></icon>
@@ -126,6 +132,7 @@
             btnEdit: {require: false, default: false},
             btnDestroy: {require: false, default: false},
             btnShare: {require: false, default: false},
+            btnOptional: {require: false, default: { enabled: false }}
         },
         data() {
             return {
@@ -223,10 +230,6 @@
         }
     }
 
-    .ibox-content {
-
-    }
-
     .ibox-footer {
         .input-group {
             margin-bottom: -6px;
@@ -236,7 +239,7 @@
 
     .square {
         -webkit-appearance: none;
-        -webkit-border-radius: 0;
+        border-radius: 0;
         text-align-last: center;
         text-align: center;
         -ms-text-align-last: center;
