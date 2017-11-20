@@ -34,7 +34,7 @@
 
                             <div class="social-comment">
                                 <div class="media-body">
-                                    <form-group :form="form" field="from_name">
+                                    <form-group :form="form" field="from_name" v-if="!user.id">
                                         <input-text v-model="form.from_name" id="from_name" name="from_name"
                                                     class="input-sm"
                                                     placeholder="Your name:"></input-text>
@@ -175,6 +175,7 @@
             return {
                 sendDown: true,
                 form: this.buildForm(),
+                user: window.Slc.user,
             }
         },
 
@@ -212,7 +213,6 @@
         mounted() {
             const self = this;
             const pullComments = function () {
-                console.log('Pull comments');
                 if (self.form.comment) {
                     setTimeout(() => {
                         pullComments();
@@ -245,7 +245,6 @@
                     return state.comments;
                 },
                 () => {
-                    console.log('Comments changed');
                     if (self.comments.length && self.sendDown) {
                         self.sendDown = false;
                         self.moveDown();
@@ -292,7 +291,8 @@
                     proposal: null,
                     proposal_id: null,
                     from_name: null,
-                    comment: null
+                    comment: null,
+                    timezone: moment.tz.guess(),
                 });
             },
         }

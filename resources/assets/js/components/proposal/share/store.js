@@ -67,7 +67,7 @@ export default new Vuex.Store({
             });
         },
         fetchComments({commit}, proposal) {
-            const uri = laroute.route('comment.index', {proposal: proposal});
+            const uri = laroute.route('comment.index', {proposal: proposal, timezone: moment.tz.guess()});
             return Slc.get(uri).then(response => {
                 commit('setComments', response);
             });

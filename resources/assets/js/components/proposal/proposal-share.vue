@@ -148,7 +148,7 @@
             },
             centerFace(face) {
                 this.center = face.position;
-                //this.$store.dispatch('setFace', face);
+                this.$store.dispatch('setFace', face);
             }
         }
     }
