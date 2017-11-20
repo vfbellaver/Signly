@@ -79,7 +79,7 @@
                             <input-text v-model="form.state" id="state" name="state"></input-text>
                         </form-group>
 
-                        <form-group :form="form" field="zipcode">
+                        <form-group>
                             <input-label for="zipcode">Zipcode: </input-label>
                             <input-text v-model="form.zipcode" id="zipcode" name="zipcode"
                                         v-zipcode></input-text>
