@@ -27,15 +27,14 @@ class BillboardFacesController extends Controller
     public function search()
     {
         $columns = [
-            'code',
-            'photo',
-            'label',
-            'monthly_impressions',
-            'duration',
-            'height',
-            'width',
-            'reads',
-            'type',
+            'code' => ['name' => 'code', 'label' => 'ID', 'width' => 64],
+            'photo' => ['name' => 'photo', 'label' => 'Photo', 'searchable' => false, 'width' => 64],
+            'location' => ['name' => 'location', 'label' => 'Location', 'searchable' => false],
+            'monthly_impressions' => ['name' => 'monthly_impressions', 'label' => 'Mo. Impressions', 'width' => 128],
+            'height' => ['name' => 'height', 'label' => 'Height', 'width' => 64],
+            'width' => ['name' => 'width', 'label' => 'Width', 'width' => 64],
+            'reads' => ['name' => 'reads', 'label' => 'Direction Read', 'width' => 120],
+            'type' => ['name' => 'type', 'label' => 'Type', 'width' => 64],
         ];
 
         $model = BillboardFace::searchPaginateAndOrder($columns);
@@ -46,14 +45,16 @@ class BillboardFacesController extends Controller
                     'photo' => [
                         'data' => $item->photo_url,
                         'type' => 'image',
-                        'width' => 50
-                    ]
+                        'width' => 50,
+                        'height' => 33,
+                    ],
                 ]);
             });
 
         return [
             'model' => $model,
-            'columns' => $columns
+            'columns' => $columns,
+            'action_width' => 108
         ];
     }
 

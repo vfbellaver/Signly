@@ -67,6 +67,12 @@ class BillboardFace extends Model
         return $this->belongsTo(Billboard::class);
     }
 
+
+    public function team()
+    {
+        return $this->belongsTo(Team::class);
+    }
+
     public function toArray()
     {
         $billboard = $this->billboard;
@@ -107,6 +113,10 @@ class BillboardFace extends Model
             'location' => $billboard->address,
             'static_map' => $staticMap,
             'pivot' => $this->pivot,
+            'public_url' => route('billboard.public-view', [
+                'teamSlug' => $this->team->slug,
+                'faceCode' => $this->slug,
+            ])
         ];
     }
 

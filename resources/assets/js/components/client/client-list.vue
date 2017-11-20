@@ -21,26 +21,25 @@
                             <table class="table table-striped">
                                 <thead>
                                 <tr>
-                                    <th></th>
-                                    <th>Company Name</th>
-                                    <th>First Name</th>
-                                    <th>Last Name</th>
-                                    <th>Email</th>
+                                    <th style="width: 64px"></th>
+                                    <th>Name</th>
+                                    <th>Contact</th>
+                                    <th style="width: 320px">Email</th>
+                                    <th style="width: 72px"></th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <tr v-for="( client, index ) in clients">
                                     <td>{{ index + 1 }}</td>
                                     <td>{{ client.company_name }}</td>
-                                    <td>{{ client.first_name }}</td>
-                                    <td>{{ client.last_name }}</td>
+                                    <td>{{ client.first_name }} {{ client.last_name }}</td>
                                     <td>{{ client.email }}</td>
                                     <td>
                                         <btn-success
                                                 size="xs"
                                                 @click.native="edit(client)"
                                         >
-                                            <icon icon="edit"/>
+                                            <icon icon="edit"></icon>
                                         </btn-success>
 
                                         <btn-danger @click.native="destroy(client)"
@@ -48,7 +47,7 @@
                                                     size="xs"
                                         >
                                             <spinner v-if="client.destroyForm.busy"></spinner>
-                                            <icon icon="trash" v-else/>
+                                            <icon icon="trash" v-else></icon>
                                         </btn-danger>
 
                                     </td>
@@ -96,7 +95,7 @@
                 this.$refs.form.show();
             },
 
-            importClient(){
+            importClient() {
                 this.$refs.importForm.show();
             },
 
