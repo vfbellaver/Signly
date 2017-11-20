@@ -20,15 +20,13 @@
                     </div>
                     <div class="col-md-4">
                         <strong> <i class="fa fa-phone"></i> Phones:</strong><br>
-                        {{$team->phone1}}<br>
-                        {{$team->phone2}}<br>
+                        {{$team->phone}}<br>
                         {{$team->fax}}
                     </div>
                     <div class="col-md-4">
                         <address>
                             <strong> <i class="fa fa-map-marker"></i> Address:</strong><br>
-                            {{$team->address_line1}} <br>
-                            {{$team->address_line2}} <br>
+                            {{$team->address}} <br>
                         </address>
                     </div>
                 </div>
