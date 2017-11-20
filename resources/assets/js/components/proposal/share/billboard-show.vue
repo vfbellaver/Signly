@@ -30,8 +30,8 @@
                             <strong>Dimension</strong>
                         </li>
                         <li class="list-group-item">
-                            <span class="pull-right">{{face.rate_card | money('$')}}</span>
-                            <strong>Rate Card</strong>
+                            <span class="pull-right">{{face.pivot.price | money('$')}}</span>
+                            <strong>Price</strong>
                         </li>
                     </ul>
                 </div>
