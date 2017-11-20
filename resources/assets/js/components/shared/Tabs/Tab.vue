@@ -9,6 +9,7 @@
 <script>
     export default {
         props: {
+            tabId: {required: true},
             name: {required: true},
             selected: {'default': false}
         },
@@ -21,7 +22,7 @@
 
         computed: {
             href() {
-                return '#' + this.name.toLowerCase().replace(/ /g, '-');
+                return '#' + this.tabId.toLowerCase().replace(/ /g, '-');
             }
         },
 

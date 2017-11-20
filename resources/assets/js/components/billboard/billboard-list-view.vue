@@ -25,13 +25,13 @@
     export default {
         components: {
             DataViewer,
-            BillboardFaceForm,
+            BillboardFaceForm
         },
         data: () => ({
             title: 'Billboard List View',
             source: laroute.route('api.billboard-face.search'),
             defaultColumn: 'code',
-            billboardId: null,
+            billboardId: null
         }),
         methods: {
             share(billboard) {

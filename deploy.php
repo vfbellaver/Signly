@@ -68,6 +68,11 @@ task('php-fpm:restart', function () {
     run('sudo service php7.1-fpm restart');
 });
 
+desc('Execute artisan config:clear');
+task('artisan:config:clear', function () {
+    run('{{bin/php}} {{release_path}}/artisan config:clear');
+});
+
 task('deploy', [
     'deploy:prepare',
     'deploy:lock',
@@ -81,6 +86,7 @@ task('deploy', [
     'artisan:view:clear',
     'artisan:cache:clear',
     'artisan:config:cache',
+    'artisan:config:clear',
     'artisan:optimize',
     'artisan:laroute',
 
@@ -90,6 +96,7 @@ task('deploy', [
     'artisan:migrate',
     'deploy:symlink',
     'php-fpm:restart',
+    'artisan:queue:restart',
     'deploy:unlock',
     'cleanup',
 ]);

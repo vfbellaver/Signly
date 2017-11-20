@@ -166,11 +166,11 @@
                 <td class="footer-content">
                     <div>
                         <strong class="uppercase">{{$team['name']}}</strong><br/>
-                        {{$team['address_line1']}}{{$team['address_line2'] ? '<br/>' . $team['address_line2']: ''}},
+                        {{$team['address']}},
                         <br/>
                         {{$team['city']}}, {{$team['state']}} - {{$team['zipcode']}}
                         <br/>
-                        {{$team['phone1']}}, {{$team['email']}}
+                        {{$team['phone']}}, {{$team['email']}}
                         <br/>
                     </div>
                 </td>
@@ -203,11 +203,11 @@
                 <td class="footer-content">
                     <div>
                         <strong class="uppercase">{{$team['name']}}</strong><br/>
-                        {{$team['address_line1']}}{{$team['address_line2'] ? '<br/>' . $team['address_line2']: ''}},
+                        {{$team['address']}},
                         <br/>
                         {{$team['city']}}, {{$team['state']}} - {{$team['zipcode']}}
                         <br/>
-                        {{$team['phone1']}}
+                        {{$team['phone']}}
                         <br/>
                     </div>
                 </td>

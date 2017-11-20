@@ -1,13 +1,11 @@
 <template>
     <div class="modal-footer">
-        <cancel-btn></cancel-btn>
+        <btn-cancel v-if="cancelButton"></btn-cancel>
         <slot></slot>
     </div>
 </template>
 
 <script>
-    import CancelBtn from '../Buttons/Cancel';
-
     export default {
         props: {
             cancelButton: {
@@ -15,9 +13,6 @@
                 required: false,
                 default: true
             }
-        },
-        components: {
-            CancelBtn
         }
     }
 </script>

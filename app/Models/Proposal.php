@@ -69,6 +69,11 @@ class Proposal extends Model
             ->withPivot('order', 'price')
             ->orderBy('order');
     }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
     #region
 
     #region Custom Attributes
@@ -93,7 +98,7 @@ class Proposal extends Model
             'from_date' => $this->from_date->format('Y-m-d'),
             'to_date' => $this->to_date->format('Y-m-d'),
             'notes' => $this->notes,
-
+            'comments' => $this->comments,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
             'share_link' => url(route('proposal.public-view', ['proposal' => encrypt($this->id)])),

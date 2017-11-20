@@ -1,7 +1,8 @@
 <template>
     <div class="info-window">
         <tabs>
-            <tab :key="face.id" v-for="(face, i) in billboard.billboard_faces" :name="face.label" :selected="i == 0">
+            <tab :key="face.id" v-for="(face, i) in billboard.billboard_faces" :tab-id="face.code" :name="face.label"
+                 :selected="i == 0">
                 <div style="padding: 0 15px;">
                     <div class="row" style="height: 82px;">
                         <div class="col-xs-12">
@@ -15,8 +16,9 @@
                         <div class="col-xs-12">
                             <ul class="list-group clear-list">
                                 <li class="list-group-item fist-item">
-                                    <span class="pull-right">{{billboard.address}}</span>
                                     <strong>Address</strong>
+                                    <br/><br/>
+                                    <span class="p-h-xs">{{billboard.address}}</span>
                                 </li>
                                 <li class="list-group-item">
                                     <span class="pull-right">{{face.type}}</span>
@@ -35,7 +37,6 @@
                                     <strong>Rate Card</strong>
                                 </li>
                             </ul>
-
                             <button class="btn btn-primary btn-sm" @click="add(face)" :disabled="disabled(face)">
                                 Add to Proposal
                             </button>
