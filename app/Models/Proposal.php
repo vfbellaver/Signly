@@ -90,8 +90,8 @@ class Proposal extends Model
             'client' => $this->client->toArray(),
             'billboard_faces' => $this->billboardFaces->toArray(),
             'total_price' => $this->total_price,
-            'from_date' => $this->from_date,
-            'to_date' => $this->to_date,
+            'from_date' => $this->from_date->format('Y-m-d'),
+            'to_date' => $this->to_date->format('Y-m-d'),
             'notes' => $this->notes,
 
             'created_at' => $this->created_at,

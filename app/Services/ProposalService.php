@@ -23,8 +23,7 @@ class ProposalService
                 'user_id' => $form->userId(),
                 'from_date' => $form->fromDate(),
                 'to_date' => $form->toDate(),
-                'budget' => $form->budget(),
-                'confidence' => $form->confidence(),
+                'notes' => $form->notes(),
             ];
 
             $proposal = new Proposal($data);
@@ -38,8 +37,12 @@ class ProposalService
     {
         return DB::transaction(function () use ($form, $proposal) {
             $proposal->name = $form->name();
-            $proposal->client()->associate($form->client());
+            $proposal->client_id = $form->clientId();
+            $proposal->from_date = $form->fromDate();
+            $proposal->to_date = $form->toDate();
+            $proposal->notes = $form->notes();
             $proposal->save();
+
             event(new ProposalUpdated($proposal));
             return $proposal;
         });

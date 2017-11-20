@@ -6,6 +6,11 @@
         <nav class="navbar navbar-in-content navbar-default" data-spy="affix" data-offset-top="147">
             <ul class="nav navbar-nav navbar-right">
                 <li>
+                    <a @click="openEditForm">
+                        <i class="fa fa-edit"></i>
+                        Edit</a>
+                </li>
+                <li>
                     <a>
                         <i class="fa fa-comments"></i>
                         Comments</a>
@@ -39,7 +44,7 @@
                 </gmap-info-window>
             </gmap-map>
         </div>
-
+        <proposal-form ref="form" @saved="formSaved"></proposal-form>
         <billboard-face-form ref="billboardFaceForm" @created="faceCreated"
                              @updated="faceUpdated"></billboard-face-form>
     </div>
@@ -65,6 +70,7 @@
     import BillboardShow from './show/billboard-show';
     import MapControls from './show/map-controls';
     import BillboardFaceForm from './show/billboard-face-form';
+    import ProposalForm from './proposal-form';
     import store from './show/store';
 
     export default {
@@ -76,6 +82,7 @@
             BillboardShow,
             MapControls,
             BillboardFaceForm,
+            ProposalForm,
         },
         data() {
             return {
@@ -181,6 +188,14 @@
                     origin: new google.maps.Point(4, 0),
                     anchor: new google.maps.Point(24, 48),
                 };
+            },
+            openEditForm() {
+                this.$refs.form.show(this.proposal);
+            },
+            formSaved(proposal) {
+                console.log("formSaved", proposal);
+                this.pageHeading.title = proposal.name;
+                this.$store.dispatch('getProposal', this.id);
             },
             openInfoWindow(marker) {
                 console.log("Open Info Window", marker.billboard);

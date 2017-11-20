@@ -46,6 +46,7 @@ export default new Vuex.Store({
         },
         faceCreated(state, face) {
             console.log('Face Created', face);
+            face.pivot.price = face.pivot.price.replace(',', '');
             const faces = state.proposal.billboard_faces;
             faces.push(face);
         },

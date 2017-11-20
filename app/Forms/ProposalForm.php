@@ -25,18 +25,18 @@ class ProposalForm extends BaseForm
     public function fromDate()
     {
         $date = $this->request->get('from_date');
-        return Carbon::createFromFormat('d/m/Y', $date);
+        return Carbon::createFromFormat('m/d/Y', $date);
     }
 
     public function toDate()
     {
         $date = $this->request->get('to_date');
-        return Carbon::createFromFormat('d/m/Y', $date);
+        return Carbon::createFromFormat('m/d/Y', $date);
     }
 
-    public function budget()
+    public function notes()
     {
-        return (float)$this->request->get('budget');
+        return $this->request->get('notes');
     }
 
     public function confidence()
