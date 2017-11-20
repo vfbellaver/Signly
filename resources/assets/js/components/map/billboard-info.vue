@@ -1,42 +1,43 @@
 <template>
     <div class="info-window">
         <tabs>
-            <tab name="Billboard" :selected="true">
-                <div>
-                    <h3>{{billboard.name}}</h3>
-                    <p class="description">{{billboard.description}}</p>
-                    <h4>Address</h4>
-                    <div>{{billboard.address}}</div>
-                    <h4>Location</h4>
-                    <div>{{billboard.lat}}, {{billboard.lng}}</div>
-                    <hr/>
-                    <div class="col-md-6" v-if="this.user.email">
-                        <btn-submit @click.native="edit(billboard)">Edit</btn-submit>
+            <tab :key="face.id" v-for="(face, i) in billboard.billboard_faces" :tab-id="face.code" :name="face.label"
+                 :selected="i == 0">
+                <div style="padding: 0 15px;">
+                    <div class="row" style="height: 82px;">
+                        <div class="col-xs-12">
+                            <strong style="position: relative; top: 4px;">{{face.code}}</strong>
+                            <img alt="image" class="pull-right hand" style="max-width: 128px" :src="face.photo_url"
+                                 v-image-preview>
+                        </div>
                     </div>
-                </div>
-            </tab>
-            <tab :key="face.id" v-for="face in billboard.billboard_faces" :name="face.code">
-                <h3>{{face.label}}</h3>
-                <div class="row">
-                    <div class="col-xs-4 no-padding">
-                        <img class="img-responsive" :src="face.photo" alt="label"/>
-                    </div>
-                    <div class="col-xs-7">
-                        <dl class="dl-horizontal">
-                            <dt>Type:</dt>
-                            <dd>Static</dd>
-                            <dt>Reads:</dt>
-                            <dd>{{face.reads}}</dd>
-                            <dt>Dimensions:</dt>
-                            <dd>{{face.width}} x {{face.height}}</dd>
-                            <dt>DEC:</dt>
-                            <dd>{{face.reads}}</dd>
-                            <dt>Rate Card:</dt>
-                            <dd>{{face.rate_card}}</dd>
-                        </dl>
-                    </div>
-                    <div>
-
+                    <div class="hr-line-dashed"></div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <ul class="list-group clear-list">
+                                <li class="list-group-item fist-item">
+                                    <strong>Address</strong>
+                                    <br/><br/>
+                                    <span class="p-h-xs">{{billboard.address}}</span>
+                                </li>
+                                <li class="list-group-item">
+                                    <span class="pull-right">{{face.type}}</span>
+                                    <strong>Type</strong>
+                                </li>
+                                <li class="list-group-item">
+                                    <span class="pull-right">{{face.reads}}</span>
+                                    <strong>Reads</strong>
+                                </li>
+                                <li v-if="face.width && face.height" class="list-group-item">
+                                    <span class="pull-right">{{face.width}} x {{face.height}}</span>
+                                    <strong>Dimension</strong>
+                                </li>
+                                <li class="list-group-item">
+                                    <span class="pull-right">{{face.rate_card | money('$')}}</span>
+                                    <strong>Rate Card</strong>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </tab>
@@ -93,14 +94,9 @@
         },
 
         methods: {
-
             edit(billboard) {
                 window.location = laroute.route("billboards.edit", {billboard: billboard.id});
             },
-
-            addFace(face) {
-                Bus.$emit('add-face', {face: face});
-            }
         }
 
     }
