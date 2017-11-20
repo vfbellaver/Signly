@@ -1610,7 +1610,7 @@ create-hmac@^1.1.0, create-hmac@^1.1.2, create-hmac@^1.1.4:
     safe-buffer "^5.0.1"
     sha.js "^2.4.8"
 
-cross-env@^5.1.1:
+cross-env@^5.0.1:
   version "5.1.1"
   resolved "https://registry.yarnpkg.com/cross-env/-/cross-env-5.1.1.tgz#b6d8ab97f304c0f71dae7277b75fe424c08dfa74"
   dependencies:
@@ -3610,7 +3610,7 @@ kind-of@^4.0.0:
   dependencies:
     is-buffer "^1.1.5"
 
-laravel-mix@^1.6.1:
+laravel-mix@^1.0:
   version "1.6.1"
   resolved "https://registry.yarnpkg.com/laravel-mix/-/laravel-mix-1.6.1.tgz#3c5eaec1bd815f512d12f3d0fd9b4f14579ee923"
   dependencies:
@@ -4056,7 +4056,7 @@ methods@~1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/methods/-/methods-1.1.2.tgz#5529a4d67654134edcc5266656835b0f851afcee"
 
-metismenu@^2.7.1:
+metismenu@^2.7.0:
   version "2.7.1"
   resolved "https://registry.yarnpkg.com/metismenu/-/metismenu-2.7.1.tgz#af3cc1550a95836526bd837b887c53ff29cb8b5a"
 
@@ -5472,7 +5472,7 @@ right-align@^0.1.1:
   dependencies:
     align-text "^0.1.1"
 
-rimraf@2, rimraf@^2.2.6, rimraf@^2.2.8, rimraf@^2.5.1, rimraf@^2.5.4, rimraf@^2.6.1, rimraf@^2.6.2:
+rimraf@2, rimraf@^2.2.6, rimraf@^2.2.8, rimraf@^2.5.1, rimraf@^2.5.4, rimraf@^2.6.1:
   version "2.6.2"
   resolved "https://registry.yarnpkg.com/rimraf/-/rimraf-2.6.2.tgz#2ed8150d24a16ea8651e6d6ef0f47c4158ce7a36"
   dependencies:
@@ -5702,7 +5702,7 @@ sort-keys@^1.0.0:
   dependencies:
     is-plain-obj "^1.0.0"
 
-sortablejs@^1.7.0:
+sortablejs@^1.5.1, sortablejs@^1.7.0:
   version "1.7.0"
   resolved "https://registry.yarnpkg.com/sortablejs/-/sortablejs-1.7.0.tgz#80a2b2370abd568e1cec8c271131ef30a904fa28"
 
@@ -6453,11 +6453,17 @@ vm-browserify@0.0.4:
   dependencies:
     indexof "0.0.1"
 
+vue-directive-image-previewer@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/vue-directive-image-previewer/-/vue-directive-image-previewer-1.1.2.tgz#f46c2e4d84c5fdedf7211041cbb8b5d01200a049"
+  dependencies:
+    vue "^2.4.2"
+
 vue-hot-reload-api@^2.2.0:
   version "2.2.3"
   resolved "https://registry.yarnpkg.com/vue-hot-reload-api/-/vue-hot-reload-api-2.2.3.tgz#43c8e5506d65a271d2571936d77253019fd3eb17"
 
-vue-js-toggle-button@^1.2.0:
+vue-js-toggle-button@^1.1.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/vue-js-toggle-button/-/vue-js-toggle-button-1.2.0.tgz#d7ae11b9ec0ab57346faf89a34dec36b00b73eb5"
 
@@ -6479,7 +6485,7 @@ vue-loader@^13.0.5:
     vue-style-loader "^3.0.0"
     vue-template-es2015-compiler "^1.6.0"
 
-vue-multiselect@^2.0.6:
+vue-multiselect@^2.0.0-beta.15:
   version "2.0.6"
   resolved "https://registry.yarnpkg.com/vue-multiselect/-/vue-multiselect-2.0.6.tgz#7ca80e6c53db41e414bf76a66b9377ddf4659ebd"
 
@@ -6490,7 +6496,7 @@ vue-style-loader@^3.0.0:
     hash-sum "^1.0.2"
     loader-utils "^1.0.2"
 
-vue-template-compiler@^2.0.0, vue-template-compiler@^2.5.3:
+vue-template-compiler@^2.0.0:
   version "2.5.3"
   resolved "https://registry.yarnpkg.com/vue-template-compiler/-/vue-template-compiler-2.5.3.tgz#ab631b0694e211a6aaf0d800102b37836aae36a4"
   dependencies:
@@ -6519,6 +6525,10 @@ vue2-timepicker@^0.1.4:
 vue@^2.0.1, vue@^2.5.3:
   version "2.5.3"
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.5.3.tgz#e1a3b1f49b6e93e574ce040b95cbc873912fecc1"
+
+vue@^2.4.2:
+  version "2.5.5"
+  resolved "https://registry.yarnpkg.com/vue/-/vue-2.5.5.tgz#cc3cd9b2a4f1d7356861ae0f71da0e6beb091910"
 
 vuedraggable@^2.15.0:
   version "2.15.0"

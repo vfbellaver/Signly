@@ -3,18 +3,29 @@
         <div class="ibox float-e-margins">
             <div class="ibox-content">
                 <div class="file-manager">
-                    <h5>Show Billboards From:</h5>
-                    <a href="#" class="file-control active">Company</a>
-                    <a href="#" class="file-control">Proposal</a>
+                    <h5>Time Range</h5>
+                    <div v-if="proposal">
+                        {{proposal.from_date | date('MM/DD/YYYY')}} - {{proposal.to_date | date('MM/DD/YYYY')}}
+                    </div>
                     <div class="hr-line-dashed"></div>
-                    <button class="btn btn-primary btn-block">Save</button>
+                    <h5>Share Link</h5>
+                    <div class="form-group">
+                        <div class="input-group mb-2 mb-sm-0">
+                            <div class="input-group-addon">
+                                <i class="fa fa-clone" aria-hidden="true"></i>
+                            </div>
+                            <input id="shareLink" type="text" v-if="proposal" class="form-control"
+                                   v-model="proposal.share_link"/>
+                        </div>
+                    </div>
+
+                    <a class="btn btn-primary btn-block m-t-sm" :href="pdfLink">Generate Proposal</a>
+
                     <div class="hr-line-dashed"></div>
                     <h5>Billboard Faces</h5>
-
                     <div class="dd-list">
                         <draggable v-model="billboardFaces"
                                    :options="{group:'faces', draggable:'.dd-item', handle: '.dd-handle'}"
-                                   :move="move"
                                    @end="end">
                             <div class="dd-item"
                                  v-for="face in billboardFaces"
@@ -22,9 +33,7 @@
                                 <div class="dd-handle">
                                     <i class="fa fa-arrows"></i>
                                 </div>
-                                <div class="dd-content">
-                                    {{face.code}}
-                                </div>
+                                <div class="dd-content">{{face.code}} - {{face.pivot.price | money('$')}}</div>
                                 <div class="dd-action">
                                     <button type="button" class="btn btn-xs btn-primary"
                                             @click="editBillboardFace(face)">
@@ -39,6 +48,9 @@
                         </draggable>
                     </div>
                     <div class="clearfix"></div>
+
+                    <div class="hr-line-dashed"></div>
+                    <h4 class="text-right p-xs">Total: {{total | money('$')}}</h4>
                 </div>
             </div>
         </div>
@@ -48,11 +60,11 @@
 <style lang="scss" scoped="true">
     .map-controls {
         background: white;
-        width: 320px;
+        width: 400px;
         position: absolute;
         top: 0;
         bottom: 0;
-        margin-top: 30px;
+        margin-top: 32px;
         z-index: 1;
 
         .dd-list {
@@ -73,7 +85,7 @@
                 }
 
                 .dd-content {
-                    width: 220px;
+                    width: 240px;
                     overflow: hidden;
                     text-overflow: ellipsis;
                     white-space: nowrap;
@@ -118,7 +130,7 @@
         },
         data() {
             return {
-                billboardFaces: []
+                billboardFaces: [],
             }
         },
 
@@ -137,6 +149,25 @@
             },
             proposal() {
                 return this.$store.state.proposal;
+            },
+            total() {
+                if (!this.$store.state.proposal) {
+                    return 0;
+                }
+                const faces = this.$store.state.proposal.billboard_faces;
+                let total = 0;
+                for (let i = 0; i < faces.length; i++) {
+                    const f = faces[i];
+                    total += Number.parseFloat(f.pivot.price);
+                }
+                console.log("Total", total);
+                return total.toFixed(2);
+            },
+            pdfLink() {
+                if (!this.$store.state.proposal) {
+                    return '';
+                }
+                return laroute.route('proposal.pdf', {proposal: this.$store.state.proposal.id});
             },
         },
 
@@ -167,11 +198,13 @@
             editBillboardFace(face) {
                 this.$emit('edit', face)
             },
-            move() {
-
-            },
             end() {
-
+                const orderList = [];
+                for (let i = 0; i < this.billboardFaces.length; i++) {
+                    const face = this.billboardFaces[i];
+                    orderList.push(face.id);
+                }
+                this.$emit('reordered', orderList);
             }
         }
 

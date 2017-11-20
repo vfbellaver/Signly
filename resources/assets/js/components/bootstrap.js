@@ -10,15 +10,11 @@ Vue.component('main-map', require('./map/main-map'));
 // Slider
 Vue.component('slider', require('./slider/menu'));
 
-//Payment
-Vue.component('register', require('./payment/register'));
-Vue.component('plan', require('./payment/plan'));
-Vue.component('user-card', require('./user/user-card'));
-Vue.component('profile', require('./payment/profile'));
+// REGISTRATION
+Vue.component('register', require('./register/register'));
 
 //CLIENT
 Vue.component('client-list', require('./client/client-list'));
-Vue.component('client-list-two', require('./client/client-list-two'));
 Vue.component('client-form', require('./client/client-form'));
 Vue.component('client-select', require('./client/client-select'));
 // BILLBOARD

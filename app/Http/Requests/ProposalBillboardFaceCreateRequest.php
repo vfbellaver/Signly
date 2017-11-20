@@ -19,6 +19,16 @@ class ProposalBillboardFaceCreateRequest extends BaseRequest
             ->where('team_id', auth()->user()->team_id)->exists();
     }
 
+    protected function prepareForValidation()
+    {
+        $data = $this->all();
+        $data['price'] = str_replace(',', '', $data['price']);
+
+        $this->replace($data);
+        $this->request->replace($data);
+        return $this->all();
+    }
+
     public function rules()
     {
         return [

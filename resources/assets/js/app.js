@@ -31,11 +31,7 @@ window.App = new Vue({
             user: 'Slc' in window ? Slc.user : null,
             settings: 'Slc' in window ? Slc.settings : null,
             pageHeading: null,
-            isMenuVisible: true,
-            plans: 'Slc' in window ? Slc.plans : [],
-            selectedPlan: null,
-            feature: null,
-            chosenPlan: null,
+            isMenuVisible: true
         }
     },
 
@@ -57,16 +53,4 @@ window.App = new Vue({
                 });
         });
     },
-
-    methods: {
-        showPlanFeatures(plan) {
-            this.selectedPlan = plan;
-            this.feature = this.selectedPlan.features;
-            $(this.$refs.featuresModal).modal('show');
-        },
-        choosePlan(plan) {
-            this.chosenPlan = plan;
-            $(this.$refs.selectedPlan).val(plan.id);
-        }
-    }
 });

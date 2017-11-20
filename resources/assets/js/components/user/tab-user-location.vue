@@ -55,7 +55,8 @@
                 <row>
                     <div class="col-xs-12">
                         <hr class="hr">
-                        <button class="btn btn-success" @click="save">
+                        <button class="btn btn-success" @click="save" :disabled="user.busy">
+                            <spinner v-if="user.busy"></spinner>
                             Define
                         </button>
                     </div>

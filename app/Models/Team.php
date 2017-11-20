@@ -10,14 +10,9 @@ class Team extends Model
         'name',
         'slug',
         'email',
-        'phone1',
-        'phone2',
+        'phone',
         'fax',
-        'address_line1',
-        'address_line2',
-        'city',
-        'state',
-        'zipcode',
+        'address',
         'logo',
         'owner_id'
     ];
@@ -54,21 +49,9 @@ class Team extends Model
     #region Conversions
     public function toArray()
     {
-        return [
-            'id' => $this->id,
-            'name' => $this->name,
-            'email' => $this->email,
-            'phone1' => $this->phone1,
-            'phone2' => $this->phone2,
-            'fax' => $this->fax,
-            'address_line1' => $this->address_line1,
-            'address_line2' => $this->address_line2,
-            'city' => $this->city,
-            'state' => $this->state,
-            'zipcode' => $this->zipcode,
-            'logo' => $this->logo,
-            'slug' => $this->slug,
-        ];
+        return array_merge(parent::toArray(), [
+
+        ]);
     }
     #endregion
 

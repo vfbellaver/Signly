@@ -31,7 +31,7 @@
                 </table>
                 <hr>
                 <btn-submit class="btn btn-success"
-                            @click.native="updateSubscription">
+                            @click.native="updateSubscription" :disabled="planForm.busy">
                     <spinner v-if="planForm.busy"></spinner>
                     <span>Update</span>
                 </btn-submit>
@@ -39,12 +39,10 @@
             </div>
         </div>
         <div class="ibox">
-            <div class="ibox-title">
-                <h5>Delete Yuor Subscription</h5>
-            </div>
             <div class="ibox-content">
                 <btn-danger style="margin-right: 10px" class="btn btn-danger"
-                            @click.native="deleteSubscription">
+                            @click.native="deleteSubscription" :disabled="userForm.busy">
+                    <spinner v-if="userForm.busy"></spinner>
                     <span>Cancel Subscription</span>
                 </btn-danger>
                 <div style="clear: both"></div>

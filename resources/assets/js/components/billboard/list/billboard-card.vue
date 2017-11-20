@@ -8,7 +8,7 @@
                 <div class="feed-activity-list">
                     <div class="feed-element" v-for="face in billboard.billboard_faces">
                         <a class="pull-left">
-                            <img alt="Billboard Face" class="img-circle" :src="face.photo_url">
+                            <img v-image-preview alt="Billboard Face" class="img-circle" :src="face.photo_url">
                         </a>
                         <div class="media-body ">
                             <small class="pull-right">{{face.type}}</small>

@@ -139,34 +139,34 @@ class UsersController extends Controller
 
     public function getTimeZone($lat, $lng, $time)
     {
-
         $json = $this->urlFormat($lat, $lng, $time);
 
         return [
-          'data' =>  $json,
+            'data' => $json,
         ];
-
     }
 
     public function destroy(User $user)
     {
         $this->service->delete($user);
+        $message = ($user->password) ? 'User deleted' : 'Invitation deleted';
         return [
-            'message' => 'User deleted.'
+            'message' => $message,
         ];
     }
 
-    private function urlFormat ($lat, $lng, $time) {
+    private function urlFormat($lat, $lng, $time)
+    {
 
-        $lat = number_format($lat,7);
-        $lng = number_format($lng,7);
+        $lat = number_format($lat, 7);
+        $lng = number_format($lng, 7);
 
         $location = 'location=' . $lat . ',' . $lng;
         $timestamp = '&timestamp=' . $time;
         $googleUrl = 'https://maps.googleapis.com/maps/api/timezone/json?';
-        $uri = $googleUrl.$location.$timestamp.'&key='.env('GOOGLE_API_KEY');
+        $uri = $googleUrl . $location . $timestamp . '&key=' . env('GOOGLE_API_KEY');
         $client = new Client();
         $res = $client->request('GET', $uri);
-        return \GuzzleHttp\json_decode($res->getBody(),true);
+        return \GuzzleHttp\json_decode($res->getBody(), true);
     }
 }

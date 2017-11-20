@@ -22,4 +22,9 @@ class ProposalBillboardFaceForm extends BaseForm
     {
         return (int)$this->request->get('proposal_id');
     }
+
+    public function orderList()
+    {
+        return $this->request->get('orderList');
+    }
 }
