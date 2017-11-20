@@ -101,7 +101,7 @@ class Proposal extends Model
             'comments' => $this->comments,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
-            'share_link' => url(route('proposal.public-view', ['proposal' => encrypt($this->id)])),
+            'share_link' => url(route('proposal.share', ['proposal' => encrypt($this->id)])),
         ];
         return $data;
     }

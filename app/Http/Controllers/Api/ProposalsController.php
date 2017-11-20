@@ -8,6 +8,7 @@ use App\Http\Requests\ProposalBillboardFaceReorderRequest;
 use App\Http\Requests\ProposalBillboardFaceUpdateRequest;
 use App\Http\Requests\ProposalCreateRequest;
 use App\Http\Requests\ProposalUpdateRequest;
+use App\Models\BillboardFace;
 use App\Models\Proposal;
 use App\Services\ProposalService;
 
@@ -17,7 +18,6 @@ class ProposalsController extends Controller
 
     public function __construct(ProposalService $service)
     {
-        $this->middleware('needsRole:admin');
         $this->service = $service;
     }
 
@@ -35,6 +35,31 @@ class ProposalsController extends Controller
             ->firstOrFail();
 
         return $proposal;
+    }
+
+    public function publicShow($proposalEncryptedId)
+    {
+        $id = (int)decrypt($proposalEncryptedId);
+        $proposal = Proposal::query()
+            ->where('id', $id)
+            ->firstOrFail();
+
+        return $proposal;
+    }
+
+    public function publicProposalBillboards($proposalEncryptedId)
+    {
+        $id = (int)decrypt($proposalEncryptedId);
+        /** @var Proposal $proposal */
+        $proposal = Proposal::query()
+            ->where('id', $id)
+            ->firstOrFail();
+        $billboards = [];
+        /** @var BillboardFace $face */
+        foreach ($proposal->billboardFaces as $face) {
+            $billboards[] = $face->billboard->toArray();
+        }
+        return $billboards;
     }
 
     public function store(ProposalCreateRequest $request)
