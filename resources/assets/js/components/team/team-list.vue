@@ -55,7 +55,7 @@
                                         <td style="width: 36px;" class="client-status">
                                             <btn-danger class="pull-rigth"
                                                         @click.native="destroy(user)"
-                                                        :disabled="user.destroyForm.busy"
+                                                        :disabled="boss.email === user.email ? true : user.destroyForm.busy"
                                                         size="xs">
                                                 <spinner v-if="user.destroyForm.busy"></spinner>
                                                 <icon icon="trash" v-else></icon>
