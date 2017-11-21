@@ -132,7 +132,7 @@
             btnEdit: {require: false, default: false},
             btnDestroy: {require: false, default: false},
             btnShare: {require: false, default: false},
-            btnOptional: {require: false, default: () => { enabled: false }}
+            btnOptional: {require: false, default: function () { return {enabled: false} }}
         },
         data() {
             return {
