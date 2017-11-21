@@ -124,46 +124,54 @@
         },
 
         mounted() {
-            this.stripe = Stripe(window.Slc.stripeKey);
-            const elements = this.stripe.elements();
-            this.card = elements.create('card', {style: {base: {lineHeight: '1.429'}}});
-            this.card.mount(this.$refs.card);
 
-            this.card.addEventListener('change', function (event) {
+            this.buildFormStripe();
 
-                if (event.error) {
-                    console.log('Error', event);
-                }
-
-            });
         },
 
-        watch: {
-            'currentCard.brand': function () {
-                this.getBrandCard(this.currentCard.brand);
-            },
-        },
 
         methods: {
 
+            buildFormStripe(){
+
+                this.stripe = Stripe(window.Slc.stripeKey);
+                const elements = this.stripe.elements();
+                this.card = elements.create('card', {style: {base: {lineHeight: '1.429'}}});
+                this.card.mount(this.$refs.card);
+
+                this.card.addEventListener('change', function (event) {
+
+                    if (event.error) {
+                        console.log('Error', event);
+                    }
+
+                });
+            },
+
             getCard() {
+
                 let self = this;
                 SLC.get(laroute.route('api.payment.card'))
                     .then((response) => {
                         console.log('get Card ', response.data[0]);
                         self.currentCard = response.data[0];
+                        this.getBrandCard(this.currentCard.brand);
                     });
+
             },
 
             getBrandCard(flag) {
+
                 for (let i = 0; i < this.cardBrand.length; i++) {
                     if (this.cardBrand[i].name === flag) {
                         this.brand = this.cardBrand[i].class;
                     }
                 }
+
             },
 
             createToken() {
+
                 const self = this;
                 this.userForm.startProcessing();
                 this.stripe.createToken(this.card).then(function (result) {
@@ -173,7 +181,7 @@
                         self.userForm.finishProcessing();
                         return;
                     }
-                    self.token = result.token.id;
+                    self.userForm.source = result.token.id;
                     self.updateCard();
                 });
             },
@@ -184,7 +192,10 @@
                 SLC.put(uri, this.userForm).then((response) => {
                     console.log('update card', response);
                     self.buildForm();
+                    self.getCard();
+                    self.buildFormStripe();
                 });
+
             },
 
             buildForm() {
