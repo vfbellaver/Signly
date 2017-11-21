@@ -111,6 +111,10 @@ class BillboardFace extends Model
             'slug' => $this->slug,
             'billboard_name' => $billboard->name,
             'location' => $billboard->address,
+            'position' => [
+                'lat' => $billboard->lat,
+                'lng' => $billboard->lng,
+            ],
             'static_map' => $staticMap,
             'pivot' => $this->pivot,
             'public_url' => route('billboard.public-view', [
