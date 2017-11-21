@@ -145,12 +145,11 @@
 
                     if (event.error) {
 
-                        self.cardError = event.error.message;
+                        this.cardError = event.error.message;
 
                     } else {
 
-                        self.cardError = '';
-
+                        console.log('Error 2', self.card);
                     }
 
                 });
