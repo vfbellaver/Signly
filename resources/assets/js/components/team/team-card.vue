@@ -141,8 +141,16 @@
 
                 this.card.addEventListener('change', function (event) {
 
+                    const self = this;
+
                     if (event.error) {
-                        console.log('Error', event);
+
+                        self.cardError = event.error.message;
+
+                    } else {
+
+                        self.cardError = '';
+
                     }
 
                 });
@@ -193,7 +201,6 @@
                     console.log('update card', response);
                     self.buildForm();
                     self.getCard();
-                    self.buildFormStripe();
                 });
 
             },
@@ -203,6 +210,8 @@
                     source: this.token,
                     owner: '',
                 });
+
+                this.buildFormStripe();
             },
 
         }
