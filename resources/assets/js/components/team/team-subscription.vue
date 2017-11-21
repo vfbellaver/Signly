@@ -30,7 +30,7 @@
                     </tbody>
                 </table>
                 <hr>
-                <btn-submit class="btn btn-success"
+                <btn-submit class="btn btn-primary"
                             @click.native="updateSubscription" :disabled="planForm.busy">
                     <spinner v-if="planForm.busy"></spinner>
                     <span>Update</span>

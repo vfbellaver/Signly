@@ -30,22 +30,26 @@ class CardService
         $this->key = config('services.stripe.secret');
     }
 
-    public function store(User $user,$owner)
+    public function store(User $user,$request)
     {
+        try {
 
         Stripe::setApiKey($this->key);
 
+        $user->updateCard($request->form()->source());
+
         $customer = Customer::retrieve($user->stripe_id);
         $card = $customer->sources->retrieve($customer->default_source);
-        $card->name = $owner;
+        $card->name = $request->form()->owner();
 
-        try {
             $card->save();
+
             return $card;
+
         } catch (\Stripe\Error\Card $e) {
             $body = $e->getJsonBody();
             $err = $body['error'];
-            return $e->getHttpStatus();
+            return $err->getHttpStatus();
         } catch (\Stripe\Error\RateLimit $e) {
             return $e;
         } catch (\Stripe\Error\InvalidRequest $e) {
@@ -96,7 +100,6 @@ class CardService
             ]);
             $i++;
         };
-
 
         return $arrayInvoices;
     }

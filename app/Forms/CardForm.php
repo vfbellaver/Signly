@@ -19,6 +19,11 @@ class CardForm extends BaseForm
         return $this->request->get('stripe_id');
     }
 
+    public function stripe_plan()
+    {
+        return $this->request->get('stripe_plan');
+    }
+
     public function number()
     {
         return $this->request->get('number');

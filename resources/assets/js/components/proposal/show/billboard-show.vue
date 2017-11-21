@@ -53,7 +53,6 @@
         min-width: 600px;
         min-height: 320px;
         padding: 25px;
-
         .panel-body {
             min-height: 270px;
         }
@@ -61,18 +60,14 @@
 </style>
 
 <script>
-
     import * as Slc from "../../../vue/http";
     import store from './store';
-
     export default {
         props: {},
-
         store,
-
         data() {
             return {
-                form: new SlcForm({}),
+                face: null,
             }
         },
 

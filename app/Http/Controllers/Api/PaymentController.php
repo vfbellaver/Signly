@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Forms\UserForm;
 use App\Http\Requests\CardsCreateRequest;
+use App\Http\Requests\PlanUpdateRequest;
 use App\Http\Requests\TokenCreateRequest;
 use App\Http\Requests\PaymentRegistrationRequest;
 use App\Models\Team;
@@ -46,24 +47,20 @@ class PaymentController extends Controller
     public function updateCard(CardsCreateRequest $request)
     {
         $user = User::query()->find(auth()->id());
-        $user->updateCard($request->form()->source());
-        $data = $this->service->store($user, $request->form()->owner());
+        $data = $this->service->store($user, $request);
 
-        return $response = [
-            'message' => "Card updated with successful",
-            'data' => $data
+        return [
+            'message' => 'Billboards Uploaded',
         ];
     }
 
-    public function updateSubscription($plan)
+    public function updateSubscription(PlanUpdateRequest $request)
     {
         $user = User::query()->find(auth()->id());
-        $user->subscription('main')->swap($plan);
+        $user->subscription('main')->swap($request->form()->stripe_plan());
 
-        return [
-
+        return $response = [
             'message' => "Plan updated with successful",
-            'data' => $plan
         ];
 
     }
