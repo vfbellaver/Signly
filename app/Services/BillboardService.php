@@ -47,7 +47,6 @@ class BillboardService
             $billboard->lng = $form->lng();
             $billboard->heading = $form->heading();
             $billboard->pitch = $form->pitch();
-            $billboard->slug = $this->nameExists($billboard);
 
             $billboard->save();
 
@@ -117,6 +116,7 @@ class BillboardService
             }
             $billboards[] = $billboard;
         }
+
         unset($billboard, $data, $face, $filename, $i, $o, $optional, $r, $required, $row, $time, $valid);
 
         return $billboards;
@@ -134,7 +134,6 @@ class BillboardService
                 /** @var Billboard $billboard */
                 $billboard = Billboard::query()->create([
                     'name' => $blb['name'],
-                    'description' => $blb['description'],
                     'address' => $blb['address'],
                     'lat' => $blb['lat'],
                     'lng' => $blb['lng'],
@@ -149,6 +148,10 @@ class BillboardService
 
                 //create as faces relations
                 foreach ($faces as $face) {
+
+                    $face['team_id'] = auth()->user()->team_id;
+                    $face['slug'] = str_slug($face['code'],'-');
+
                     if (strtolower($face['is_illuminated']) == strtolower('No')) {
                         $face['is_illuminated'] = false;
                     } else {

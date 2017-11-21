@@ -130,9 +130,11 @@
             this.card.mount(this.$refs.card);
 
             this.card.addEventListener('change', function (event) {
+
                 if (event.error) {
                     console.log('Error', event);
                 }
+
             });
         },
 
@@ -172,7 +174,6 @@
                         return;
                     }
                     self.token = result.token.id;
-                    self.buildForm();
                     self.updateCard();
                 });
             },
@@ -180,7 +181,7 @@
             updateCard() {
                 const self = this;
                 const uri = laroute.route('api.payment.update.card');
-                SLC.post(uri, this.userForm).then((response) => {
+                SLC.put(uri, this.userForm).then((response) => {
                     console.log('update card', response);
                     self.buildForm();
                 });

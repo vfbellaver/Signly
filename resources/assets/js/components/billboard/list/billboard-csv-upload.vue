@@ -92,6 +92,7 @@
                     console.log('Uploaded Csv:', response);
                     this.internalValue = response.data;
                     this.$emit('uploaded');
+                    this.$emit('uploadedAndSaved');
                 });
             },
         }

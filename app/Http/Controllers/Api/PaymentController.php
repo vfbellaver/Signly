@@ -49,11 +49,9 @@ class PaymentController extends Controller
         $user = User::query()->find(auth()->id());
         $data = $this->service->store($user, $request);
 
-        return $response = [
-            'message' => "Card updated with successful",
-            'data' => $data
+        return [
+            'message' => 'Billboards Uploaded',
         ];
-
     }
 
     public function updateSubscription(PlanUpdateRequest $request)

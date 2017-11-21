@@ -199,7 +199,7 @@
                         vm.loading = false;
                     })
                     .catch(function (response) {
-                        console.log(response)
+                        console.log(response);
                         vm.loading = false;
                     })
             },
