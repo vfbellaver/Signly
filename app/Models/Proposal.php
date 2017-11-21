@@ -100,7 +100,9 @@ class Proposal extends Model
             'notes' => $this->notes,
             'comments' => $this->comments,
             'created_at' => $this->created_at,
+            'created_at_str' => $this->created_at->format('Y-m-d'),
             'updated_at' => $this->updated_at,
+            'team' => $this->team->toArray(),
             'share_link' => url(route('proposal.share', ['proposal' => encrypt($this->id)])),
         ];
         return $data;

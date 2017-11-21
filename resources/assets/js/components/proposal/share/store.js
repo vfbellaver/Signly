@@ -8,6 +8,7 @@ export default new Vuex.Store({
         proposal: null,
         face: null,
         markers: [],
+        comments: [],
     },
 
     getters: {},
@@ -33,10 +34,14 @@ export default new Vuex.Store({
             state.id = id;
         },
         commentSaved(state, comment) {
-            if (!state.proposal.comments) {
-                state.proposal.comments = [];
+            state.comments.push(comment);
+        },
+        setComments(state, comments) {
+            state.comments.splice(0, state.comments.length);
+            for (let i = 0; i < comments.length; i++) {
+                const comment = comments[i];
+                state.comments.push(comment);
             }
-            state.proposal.comments.push(comment);
         }
     },
 
@@ -46,6 +51,7 @@ export default new Vuex.Store({
             Slc.find(url).then((proposal) => {
                 console.log('Load proposal: ', url, proposal);
                 commit('setProposal', proposal);
+                commit('setComments', proposal.comments);
             });
         },
         setFace({commit}, face) {
@@ -58,6 +64,12 @@ export default new Vuex.Store({
             const uri = laroute.route('comment.store');
             return Slc.post(uri, form).then(response => {
                 commit('commentSaved', response.data);
+            });
+        },
+        fetchComments({commit}, proposal) {
+            const uri = laroute.route('comment.index', {proposal: proposal, timezone: moment.tz.guess()});
+            return Slc.get(uri).then(response => {
+                commit('setComments', response);
             });
         }
     }

@@ -13,9 +13,7 @@ Route::get('roles', function () {
     dd($roles);
 });
 
-// Route::get('pdf','Web\PDFController@index');
-
-Route::get('utc','Web\PaymentController@getTimeZone');
+Route::get('utc', 'Web\PaymentController@getTimeZone');
 
 Route::get('slc.js', function () {
     $json = json_encode(array_merge(Slc::scriptVariables(), []));
@@ -25,7 +23,7 @@ js;
     return response($js)->header('Content-Type', 'text/javascript');
 })->name('slc.js');
 
-Route::group(['middleware' => ['auth']], function () {
+Route::group(['middleware' => ['auth', 'timezone']], function () {
     Route::get('/ ', 'Web\HomeController@index')->name('home');
 
     foreach (File::files(app()->path() . '/Routes/auth') as $file) {
@@ -33,6 +31,8 @@ Route::group(['middleware' => ['auth']], function () {
     }
 });
 
-foreach (File::files(app()->path() . '/Routes/guest') as $file) {
-    require $file;
-}
+Route::group(['middleware' => ['timezone']], function () {
+    foreach (File::files(app()->path() . '/Routes/guest') as $file) {
+        require $file;
+    }
+});

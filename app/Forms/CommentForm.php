@@ -14,7 +14,7 @@ class CommentForm extends BaseForm
     public function proposal()
     {
         $proposal = $this->request->get('proposal');
-        return Proposal::findOrFail($proposal['id']);
+        return Proposal::query()->findOrFail($proposal['id']);
     }
 
     public function user()
