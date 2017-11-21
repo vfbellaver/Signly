@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
 use App\Models\Proposal;
+use Exception;
 use Mpdf\Config\ConfigVariables;
 use Mpdf\Config\FontVariables;
 use Mpdf\Mpdf;
@@ -82,17 +83,25 @@ class ProposalsController extends Controller
 
     public function share($proposalEncryptedId)
     {
-        $id = (int)decrypt($proposalEncryptedId);
-        $proposal = Proposal::query()->findOrFail($id);
+        try {
+            $id = (int)decrypt($proposalEncryptedId);
+            $proposal = Proposal::query()->findOrFail($id);
 
-        return view('proposal.share', ['proposal' => $proposal, 'id' => $proposalEncryptedId]);
+            return view('proposal.share', ['proposal' => $proposal, 'id' => $proposalEncryptedId]);
+        } catch (Exception $e) {
+            return abort(404);
+        }
     }
 
     public function publicPdf($proposalEncryptedId)
     {
-        $id = (int)decrypt($proposalEncryptedId);
-        /** @var Proposal $proposal */
-        $proposal = Proposal::query()->findOrFail($id);
-        return $this->pdf($proposal);
+        try {
+            $id = (int)decrypt($proposalEncryptedId);
+            /** @var Proposal $proposal */
+            $proposal = Proposal::query()->findOrFail($id);
+            return $this->pdf($proposal);
+        } catch (Exception $e) {
+            return abort(404);
+        }
     }
 }

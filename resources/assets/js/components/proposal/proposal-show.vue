@@ -22,6 +22,7 @@
         <div class="wrapper wrapper-content">
             <map-controls @edit="openBillboardFaceForm"
                           @remove="removeBillboardFace"
+                          @centerFace="centerFace"
                           @reordered="reorderBillboardFaces"></map-controls>
             <gmap-map
                     v-if="loaded"
@@ -107,6 +108,7 @@
                     gestureHandling: 'greedy',
                 },
                 infoWindowPos: null,
+                gmapInfoWindowClosed: false,
             }
         },
 
@@ -206,7 +208,10 @@
             },
             openInfoWindow(marker) {
                 console.log("Open Info Window", marker.billboard);
-                this.$refs.gmapInfoWindow.createInfoWindow();
+                if (this.gmapInfoWindowClosed) {
+                    this.gmapInfoWindowClosed = false;
+                    this.$refs.gmapInfoWindow.createInfoWindow();
+                }
                 this.$store.dispatch('setBillboard', marker.billboard);
             },
             closeInfoWindow() {
@@ -216,6 +221,7 @@
             openBillboardFaceForm(face) {
                 console.log("Open Billboard Face Form");
                 this.$refs.gmapInfoWindow.$infoWindow.close();
+                this.gmapInfoWindowClosed = true;
                 this.$refs.billboardFaceForm.show(face);
             },
             removeBillboardFace(face) {
@@ -236,6 +242,20 @@
                 });
 
                 this.$store.dispatch('reorderBillboardFaces', form);
+            },
+            centerFace(face) {
+                console.log('Center face', face);
+                for (let i = 0; i < this.markers.length; i++) {
+                    const billboard = this.markers[i].billboard;
+                    if (billboard.id === face.billboard_id) {
+                        if (this.gmapInfoWindowClosed) {
+                            this.gmapInfoWindowClosed = false;
+                            this.$refs.gmapInfoWindow.createInfoWindow();
+                        }
+                        this.$store.dispatch('setBillboard', billboard);
+                        break;
+                    }
+                }
             },
         }
     }

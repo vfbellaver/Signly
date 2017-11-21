@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\CommentCreateRequest;
 use App\Http\Requests\CommentUpdateRequest;
 use App\Models\Comment;
+use App\Models\Proposal;
 use App\Services\CommentService;
 
 class CommentsController extends Controller
@@ -27,5 +28,15 @@ class CommentsController extends Controller
         ];
 
         return $response;
+    }
+
+    public function index()
+    {
+        $proposalEncryptedId = request()->get('proposal');
+        $id = (int)decrypt($proposalEncryptedId);
+        /** @var Proposal $proposal */
+        $proposal = Proposal::query()->findOrFail($id);
+
+        return $proposal->comments;
     }
 }

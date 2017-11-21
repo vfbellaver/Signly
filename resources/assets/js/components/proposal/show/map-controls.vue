@@ -43,6 +43,10 @@
                                             @click="removeBillboardFace(face)">
                                         <i class="fa fa-trash"></i>
                                     </button>
+                                    <button type="button" class="btn btn-xs btn-default"
+                                            @click="centerFace(face)">
+                                        <i class="fa fa-dot-circle-o"></i>
+                                    </button>
                                 </div>
                             </div>
                         </draggable>
@@ -79,13 +83,13 @@
                 }
 
                 .dd-handle {
-                    width: 34px;
+                    width: 36px;
                     background: inherit;
                     border: none;
                 }
 
                 .dd-content {
-                    width: 240px;
+                    width: 216px;
                     overflow: hidden;
                     text-overflow: ellipsis;
                     white-space: nowrap;
@@ -93,7 +97,8 @@
                 }
 
                 .dd-action {
-                    width: 64px;
+                    width: 108px;
+                    text-align: right;
                 }
 
                 &.sortable-ghost {
@@ -205,6 +210,9 @@
                     orderList.push(face.id);
                 }
                 this.$emit('reordered', orderList);
+            },
+            centerFace(face) {
+                this.$emit('centerFace', face);
             }
         }
 

@@ -70,7 +70,7 @@ export default new Vuex.Store({
 
     actions: {
         getProposal({commit}, proposalId) {
-            const url = laroute.route('api.proposal.show', {proposal: proposalId});
+            const url = laroute.route('api.proposal.show', {proposal: proposalId, timezone: moment.tz.guess()});
             Slc.find(url).then((proposal) => {
                 console.log('Load proposal: ', url, proposal);
                 commit('setProposal', proposal);
@@ -89,6 +89,7 @@ export default new Vuex.Store({
             commit('setBillboard', billboard);
         },
         addBillboardFace({commit}, proposal, form) {
+            form.timezone = moment.tz.guess();
             const uri = laroute.route('api.proposal.add-billboard-face', {proposal: proposal.id});
             Slc.post(uri, form).then(response => {
                 commit('addBillboardFace', response);
@@ -96,6 +97,7 @@ export default new Vuex.Store({
         },
         removeBillboardFace({commit}, face) {
             const form = new SlcForm({});
+            form.timezone = moment.tz.guess();
             const pivot = face.pivot;
             const uri = laroute.route('api.proposal.destroy-billboard-face',
                 {proposal: pivot.proposal_id, face: face.id})
@@ -117,6 +119,7 @@ export default new Vuex.Store({
         },
 
         saveComment({commit}, form) {
+            form.timezone = moment.tz.guess();
             const uri = laroute.route('comment.store');
             return Slc.post(uri, form).then(response => {
                 commit('commentSaved', response.data);
