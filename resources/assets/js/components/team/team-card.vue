@@ -153,7 +153,7 @@
                 let self = this;
                 SLC.get(laroute.route('api.payment.card'))
                     .then((response) => {
-                        console.log('get Card ', response.data[0]);
+                        console.log('get Card');
                         self.currentCard = response.data[0];
                         this.getBrandCard(this.currentCard.brand);
                     });
