@@ -46,7 +46,7 @@
                         <td>{{ (index + 1) + ((query.page - 1) * query.per_page)}}</td>
                         <td v-for="(column, index) in columns" :key="index">
                             <span v-if="typeof(row[column.name]) === 'object' && row[column.name] !== null">
-                                <img v-image-preview class="hand" :src="row[column.name]['data']"
+                                <img v-image-preview class="hand" :src="row[column.name]['data'] ? row[column.name]['data'] : imagedefault"
                                      :width="row[column.name]['width']"
                                      :height="row[column.name]['height']"
                                      v-if="row[column.name]['type'] === 'image'"/>
@@ -138,6 +138,7 @@
             return {
                 model: {},
                 columns: {},
+                imagedefault: '/images/no_image_available.jpeg',
                 query: {
                     page: 1,
                     column: this.defaultColumn || 'id',

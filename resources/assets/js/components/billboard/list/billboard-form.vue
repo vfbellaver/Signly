@@ -1,5 +1,5 @@
 <template>
-    <modal>
+    <modal size="lg">
         <modal-header>{{ title }}</modal-header>
         <form-submit v-model="form" @submit="save">
             <modal-body>
