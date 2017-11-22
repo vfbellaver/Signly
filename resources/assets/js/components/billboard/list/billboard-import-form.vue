@@ -7,7 +7,7 @@
                     <column size="6">
                         <form-group :form="form" field="filecsv">
                             <input-label for="filecsv">Select File: </input-label>
-                            <billboard-csv-upload v-model="form.billboards" id="billboards"></billboard-csv-upload>
+                            <billboard-csv-upload v-model="form.billboards" id="billboards" @uploading="updateUploaded"></billboard-csv-upload>
                         </form-group>
                     </column>
                     <column size="6">
@@ -48,7 +48,7 @@
             </modal-body>
 
             <modal-footer>
-                <btn-submit :disabled="form.busy">
+                <btn-submit :disabled="!uploaded">
                     <spinner v-if="form.busy"></spinner>
                 </btn-submit>
             </modal-footer>
@@ -67,7 +67,9 @@
         },
         mixins: [ModalForm],
         data() {
-            return {}
+            return {
+                uploaded: false,
+            }
         },
 
         methods: {
@@ -79,6 +81,11 @@
             reload() {
                 window.location = laroute.route("billboards.index");
             },
+            updateUploaded(){
+                this.uploaded = true;
+            },
+
+
 
             save() {
                 const uri = laroute.route('api.billboard.import');
