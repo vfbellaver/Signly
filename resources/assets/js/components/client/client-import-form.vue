@@ -7,7 +7,7 @@
                     <column size="6">
                         <form-group :form="form" field="filecsv">
                             <input-label for="filecsv">Select File: </input-label>
-                            <client-csv-upload v-model="form.clients" id="clients"></client-csv-upload>
+                            <client-csv-upload v-model="form.clients" id="clients" @uploaded="updateUploaded"></client-csv-upload>
                         </form-group>
                     </column>
                     <column size="6">
@@ -41,7 +41,7 @@
             </modal-body>
 
             <modal-footer>
-                <btn-submit :disabled="form.busy">
+                <btn-submit :disabled="!uploaded">
                     <spinner v-if="form.busy"></spinner>
                 </btn-submit>
             </modal-footer>
@@ -64,7 +64,7 @@
         mixins: [ModalForm],
         data() {
             return {
-
+                uploaded: false,
             }
         },
 
@@ -81,7 +81,10 @@
                     this.saved(response.data, 'saved');
                 });
 
-            }
+            },
+            updateUploaded(){
+                this.uploaded = true;
+            },
 
         }
     }
