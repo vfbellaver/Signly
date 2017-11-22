@@ -23,6 +23,63 @@ class Slc
             'pusher' => env('PUSHER_APP_KEY'),
             'plans' => [
                 [
+                    'id' => 'master',
+                    'name' => 'MASTER',
+                    'interval' => 'Monthly',
+                    'trial_days' => 30,
+                    'price' => 10,
+                    'features' => [
+                        'users' => 'Custom',
+                        'billboards' => 'Unlimited',
+                        'pdfs' => 'Custom',
+                        'proposals' => 'Custom',
+                        'contracts' => 'Custom',
+                        'scheduler' => 'Yes',
+                        'whiteLabel' => 'Yes',
+                        'valueMonthly' => 'Call For Quote',
+                        'valueAnnual' => 'Call For Quote',
+                    ]
+                ],
+
+                [
+                    'id' => 'standard',
+                    'name' => 'STANDARD',
+                    'interval' => 'Monthly',
+                    'trial_days' => 30,
+                    'price' => 10,
+                    'features' => [
+                        'users' => 'Custom',
+                        'billboards' => 'Unlimited',
+                        'pdfs' => 'Custom',
+                        'proposals' => 'Custom',
+                        'contracts' => 'Custom',
+                        'scheduler' => 'Yes',
+                        'whiteLabel' => 'Yes',
+                        'valueMonthly' => 'Call For Quote',
+                        'valueAnnual' => 'Call For Quote',
+                    ]
+                ],
+
+                [
+                    'id' => 'basic',
+                    'name' => 'BASIC',
+                    'interval' => 'Monthly',
+                    'trial_days' => 30,
+                    'price' => 10,
+                    'features' => [
+                        'users' => 'Custom',
+                        'billboards' => 'Unlimited',
+                        'pdfs' => 'Custom',
+                        'proposals' => 'Custom',
+                        'contracts' => 'Custom',
+                        'scheduler' => 'Yes',
+                        'whiteLabel' => 'Yes',
+                        'valueMonthly' => 'Call For Quote',
+                        'valueAnnual' => 'Call For Quote',
+                    ]
+                ],
+
+                [
                     'id' => 'enterprise-team',
                     'name' => 'ENTERPRISE TEAM',
                     'interval' => 'Monthly',
@@ -40,6 +97,7 @@ class Slc
                         'valueAnnual' => 'Call For Quote',
                     ]
                 ],
+
                 [
                     'id' => 'company-team',
                     'name' => 'COMPANY-TEAM',
@@ -58,6 +116,7 @@ class Slc
                         'valueAnnual' => '449',
                     ]
                 ],
+
                 [
                     'id' => 'growing-team',
                     'name' => 'GROWING-TEAM',
@@ -76,24 +135,26 @@ class Slc
                         'valueAnnual' => '349',
                     ]
                 ],
+
                 [
-                'id' => 'solo-team',
-                'name' => 'SOLO TEAM',
-                'interval' => 'Monthly',
-                'trial_days' => 30,
-                'price' => 30,
-                'features' => [
-                    'users' => '1',
-                    'billboards' => '25',
-                    'pdfs' => '20',
-                    'proposals' => '-',
-                    'contracts' => '-',
-                    'scheduler' => '-',
-                    'whiteLabel' => '-',
-                    'valueMonthly' => '299',
-                    'valueAnnual' => '449',
+                    'id' => 'solo-team',
+                    'name' => 'SOLO TEAM',
+                    'interval' => 'Monthly',
+                    'trial_days' => 30,
+                    'price' => 30,
+                    'features' => [
+                        'users' => '1',
+                        'billboards' => '25',
+                        'pdfs' => '20',
+                        'proposals' => '-',
+                        'contracts' => '-',
+                        'scheduler' => '-',
+                        'whiteLabel' => '-',
+                        'valueMonthly' => '299',
+                        'valueAnnual' => '449',
+                    ]
                 ]
-            ]
+
             ]
         ];
     }

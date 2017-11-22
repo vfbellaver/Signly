@@ -131,7 +131,8 @@
 
             updateSubscription(){
                 this.planForm.busy = true;
-                SLC.get(laroute.route("api.payment.update.subscription", {plan: this.planForm.stripe_plan}))
+                const uri = laroute.route("api.payment.update.subscription");
+                SLC.put(uri,this.planForm)
                     .then((response) => {
                         console.log('Subscription Updated', response);
                         this.planForm.busy = false;
