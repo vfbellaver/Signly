@@ -66,36 +66,29 @@
         margin-top: 0px;
         padding: 0;
     }
-
     .ibox-body-card {
         background-color: white;
         height: 227px;
         margin-top: 2px;
         padding: 10px 20px 20px 20px;
     }
-
     .row:before, .row:after {
         content: " ";
         display: none;
     }
-
     .hr {
         margin-top: 16px;
         margin-bottom: 20px;
         border: 0;
         border-top: 1px solid #eeeeee;
     }
-
     .payment-card {
         height: 177px
     }
 </style>
 <script>
-
     import * as SLC from '../../vue/http';
-
     export default {
-
         data() {
             return {
                 userForm: null,
@@ -119,44 +112,35 @@
         },
 
         created() {
+
             this.getCard();
+
             this.buildForm();
         },
 
         mounted() {
 
-            this.buildFormStripe();
+            this.stripe = Stripe(window.Slc.stripeKey);
+
+            const elements = this.stripe.elements();
+
+            this.card = elements.create('card', {style: {base: {lineHeight: '1.429'}}});
+
+            this.card.mount(this.$refs.card);
+
+            const self = this;
+
+            this.card.addEventListener('change', function (event) {
+                console.log('ref ', self.$refs.card);
+                self.cardError = event.error ? event.error.message : null;
+
+            });
 
         },
 
-
         methods: {
 
-            buildFormStripe(){
-
-                this.stripe = Stripe(window.Slc.stripeKey);
-                const elements = this.stripe.elements();
-                this.card = elements.create('card', {style: {base: {lineHeight: '1.429'}}});
-                this.card.mount(this.$refs.card);
-
-                this.card.addEventListener('change', function (event) {
-
-                    const self = this;
-
-                    if (event.error) {
-
-                        this.cardError = event.error.message;
-
-                    } else {
-
-                        console.log('Error 2', self.card);
-                    }
-
-                });
-            },
-
             getCard() {
-
                 let self = this;
                 SLC.get(laroute.route('api.payment.card'))
                     .then((response) => {
@@ -164,21 +148,15 @@
                         self.currentCard = response.data[0];
                         this.getBrandCard(this.currentCard.brand);
                     });
-
             },
-
             getBrandCard(flag) {
-
                 for (let i = 0; i < this.cardBrand.length; i++) {
                     if (this.cardBrand[i].name === flag) {
                         this.brand = this.cardBrand[i].class;
                     }
                 }
-
             },
-
             createToken() {
-
                 const self = this;
                 this.userForm.startProcessing();
                 this.stripe.createToken(this.card).then(function (result) {
@@ -192,7 +170,6 @@
                     self.updateCard();
                 });
             },
-
             updateCard() {
                 const self = this;
                 const uri = laroute.route('api.payment.update.card');
@@ -200,21 +177,18 @@
                     console.log('update card', response);
                     self.buildForm();
                     self.getCard();
+                    this.card.unmount(this.$refs.card);
+                    this.card.mount(this.$refs.card);
                 });
-
             },
-
             buildForm() {
+
                 this.userForm = new SlcForm({
-                    source: this.token,
+                    source: null,
                     owner: '',
                 });
 
-                this.buildFormStripe();
             },
-
         }
-
-
     }
 </script>
