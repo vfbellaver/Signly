@@ -46,7 +46,7 @@ class CardService
             $card->save();
 
             return [
-                'message' => 'Billboards Uploaded',
+                'message' => 'Card Updated',
             ];
 
         } catch (\Stripe\Error\Card $e) {

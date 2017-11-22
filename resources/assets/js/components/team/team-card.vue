@@ -46,7 +46,7 @@
                                     </div>
                                 </div>
                                 <hr class="hr">
-                                <button class="btn btn-primary" @click="createToken" :disabled="userForm.busy">
+                                <button class="btn btn-primary" :disabled="userForm.busy">
                                     <spinner v-if="userForm.busy"></spinner>
                                     Update Card
                                 </button>
@@ -166,6 +166,7 @@
                         self.userForm.finishProcessing();
                         return;
                     }
+
                     self.userForm.source = result.token.id;
                     self.updateCard();
                 });
