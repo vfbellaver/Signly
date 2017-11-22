@@ -28,7 +28,7 @@
                     <div class="ibox-title">
                         <h5>Update your Card</h5>
                     </div>
-                    <div class="ibox-body-card">
+                    <div :class="classError">
                         <form-submit v-model="userForm" @submit="createToken">
                             <column size="12">
                                 <form-group :form="userForm" field="owner">
@@ -69,7 +69,14 @@
 
     .ibox-body-card {
         background-color: white;
-        height: 227px;
+        height: 239px;
+        margin-top: 2px;
+        padding: 10px 20px 20px 20px;
+    }
+
+    .ibox-body-card-msg {
+        background-color: white;
+        height: 262px;
         margin-top: 2px;
         padding: 10px 20px 20px 20px;
     }
@@ -92,6 +99,7 @@
 </style>
 <script>
     import * as SLC from '../../vue/http';
+
     export default {
         data() {
             return {
@@ -115,6 +123,18 @@
             }
         },
 
+        computed: {
+
+            classError(){
+                if(this.cardError) {
+                    return 'ibox-body-card-msg';
+                } else {
+                    return 'ibox-body-card';
+                }
+            }
+
+        },
+
         created() {
             this.getCard();
             this.buildForm();
@@ -129,7 +149,7 @@
 
         methods: {
 
-            buildFormStripe(){
+            buildFormStripe() {
                 this.stripe = Stripe(window.Slc.stripeKey);
                 const elements = this.stripe.elements();
                 this.card = elements.create('card', {style: {base: {lineHeight: '1.429'}}});
@@ -138,8 +158,9 @@
                 this.card.addEventListener('change', function (event) {
                     if (event.error) {
                         self.cardError = event.error ? event.error.message : null
+                    } else {
+                        self.cardError = null;
                     }
-
                 });
             },
 
