@@ -138,10 +138,10 @@
                 const elements = this.stripe.elements();
                 this.card = elements.create('card', {style: {base: {lineHeight: '1.429'}}});
                 this.card.mount(this.$refs.card);
-
+                const self = this;
                 this.card.addEventListener('change', function (event) {
                     if (event.error) {
-                        console.log('Error', event);
+                       self.cardError = event.error ? event.error.message : null
                     }
 
                 });
