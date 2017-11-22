@@ -46,7 +46,7 @@
                                     </div>
                                 </div>
                                 <hr class="hr">
-                                <button class="btn btn-primary" @click="createToken" :disabled="userForm.busy">
+                                <button class="btn btn-primary" :disabled="userForm.busy">
                                     <spinner v-if="userForm.busy"></spinner>
                                     Update Card
                                 </button>
@@ -183,9 +183,10 @@
                     console.log('update card', response);
                     self.buildForm();
                     self.getCard();
+                    this.card.unmount(this.$refs.card);
+                    this.card.mount(this.$refs.card);
                 });
-                this.card.unmount(this.$refs.card);
-                this.card.mount(this.$refs.card);
+
             },
 
             buildForm() {
