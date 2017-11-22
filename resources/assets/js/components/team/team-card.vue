@@ -66,22 +66,26 @@
         margin-top: 0px;
         padding: 0;
     }
+
     .ibox-body-card {
         background-color: white;
         height: 227px;
         margin-top: 2px;
         padding: 10px 20px 20px 20px;
     }
+
     .row:before, .row:after {
         content: " ";
         display: none;
     }
+
     .hr {
         margin-top: 16px;
         margin-bottom: 20px;
         border: 0;
         border-top: 1px solid #eeeeee;
     }
+
     .payment-card {
         height: 177px
     }
@@ -133,7 +137,7 @@
                 const self = this;
                 this.card.addEventListener('change', function (event) {
                     if (event.error) {
-                       self.cardError = event.error ? event.error.message : null
+                        self.cardError = event.error ? event.error.message : null
                     }
 
                 });
@@ -148,6 +152,7 @@
                         this.getBrandCard(this.currentCard.brand);
                     });
             },
+
             getBrandCard(flag) {
                 for (let i = 0; i < this.cardBrand.length; i++) {
                     if (this.cardBrand[i].name === flag) {
@@ -155,6 +160,7 @@
                     }
                 }
             },
+
             createToken() {
                 const self = this;
                 this.userForm.startProcessing();
@@ -169,6 +175,7 @@
                     self.updateCard();
                 });
             },
+
             updateCard() {
                 const self = this;
                 const uri = laroute.route('api.payment.update.card');
@@ -180,8 +187,8 @@
                 this.card.unmount(this.$refs.card);
                 this.card.mount(this.$refs.card);
             },
-            buildForm() {
 
+            buildForm() {
                 this.userForm = new SlcForm({
                     source: null,
                     owner: '',
