@@ -72,7 +72,7 @@ class RegisterController extends Controller
                     'email' => $email,
                 ]);
 
-            $this->service->store($user, $owner);
+            $this->service->store($user, $request);
             auth()->login($user);
             return ['message' => 'Register Complete!'];
         });
