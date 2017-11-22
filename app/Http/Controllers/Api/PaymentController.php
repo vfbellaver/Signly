@@ -49,9 +49,7 @@ class PaymentController extends Controller
         $user = User::query()->find(auth()->id());
         $data = $this->service->store($user, $request);
 
-        return [
-            'message' => 'Billboards Uploaded',
-        ];
+        return $data;
     }
 
     public function updateSubscription(PlanUpdateRequest $request)
