@@ -140,7 +140,6 @@
                 this.card.mount(this.$refs.card);
 
                 this.card.addEventListener('change', function (event) {
-
                     if (event.error) {
                         console.log('Error', event);
                     }
@@ -193,9 +192,9 @@
                     console.log('update card', response);
                     self.buildForm();
                     self.getCard();
-                    self.buildFormStripe();
                 });
-
+                this.card.unmount(this.$refs.card);
+                this.card.mount(this.$refs.card);
             },
 
             buildForm() {
