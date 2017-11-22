@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="col-lg-8 col-lg-offset-2">
-        <form class="form-horizontal" action="{{route('pay')}}" method="post" id="payment-form">
+        <form class="form-horizontal" action="{{route('register')}}" method="post" id="payment-form">
             {{csrf_field()}}
 
             <div class="ibox float-e-margins">

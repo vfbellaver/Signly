@@ -110,11 +110,12 @@
     }
 </style>
 <script>
+    import * as Slc from "../../vue/http";
     import ModalForm from '../shared/Mixins/ModalForm';
 
     export default {
         mixins: [ModalForm],
-        props: {},
+
         data() {
             return {
                 api: 'client'
@@ -125,6 +126,7 @@
                 return `${(this.form.id ? 'Edit' : 'Add')} Client`;
             }
         },
+
         methods: {
             buildForm(client) {
                 return new SlcForm({

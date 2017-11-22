@@ -1,5 +1,5 @@
 <template>
-    <modal>
+    <modal size="lg">
         <modal-header>{{ title }}</modal-header>
         <form-submit v-model="form" @submit="save">
             <modal-body>
@@ -21,7 +21,7 @@
                                   @click="onMapClick"
                                   @zoom_changed="onZoomChanged"
                                   :options="mapOptions"
-                                  style="width: 95%; min-height: 320px">
+                                  style="width: 100%; min-height: 320px">
                             <gmap-marker
                                     v-if="marker"
                                     :position="marker"

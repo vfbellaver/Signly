@@ -17,14 +17,12 @@ class CreateTeamsTable extends Migration
             $table->string('logo', 128)->nullable();
             $table->string('slug', 100)->unique();
 
-            $table->string('address_line1', 64)->nullable();
-            $table->string('address_line2', 64)->nullable();
+            $table->string('address', 64)->nullable();
             $table->string('city', 64)->nullable();
             $table->string('zipcode', 13)->nullable();
             $table->string('state', 64)->nullable();
 
-            $table->string('phone1', 24)->nullable();
-            $table->string('phone2', 24)->nullable();
+            $table->string('phone', 24)->nullable();
             $table->string('fax', 24)->nullable();
 
             $table->timestamps();

@@ -83,8 +83,8 @@ class BillboardService
             $billboard['faces'] = [];
 
             $i = 1;
-            $required = ['code', 'label', 'rate_card', 'monthly_impressions', 'duration'];
-            $optional = ['height', 'width', 'reads', 'notes', 'max_ads', 'lights_on', 'lights_off', 'billboard_id', 'photo_url', 'is_illuminated'];
+            $required = ['code', 'label', 'rate_card', 'monthly_impressions'];
+            $optional = ['type','duration','height', 'width', 'reads', 'notes', 'max_ads', 'lights_on', 'lights_off', 'billboard_id','team_id','photo_url', 'is_illuminated'];
             while (isset($row["face{$i}_code"])) {
                 $face = [];
                 $valid = true;
@@ -110,6 +110,8 @@ class BillboardService
                         continue;
                     }
                     $face[$o] = $row["face{$i}_{$o}"];
+                    $face['team_id'] = auth()->user()->team_id;
+                    $face['slug'] = str_slug($face['code'],'-');
                 }
                 $billboard['faces'][] = $face;
                 $i++;

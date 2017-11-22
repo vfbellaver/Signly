@@ -87,7 +87,6 @@
         },
 
         created() {
-            this.reload();
             this.plans = Slc.plans;
             this.userForm = new SlcForm({
                 id: Slc.user.id,
@@ -100,18 +99,7 @@
         watch: {},
 
         methods: {
-
-            reload() {
-                let self = this;
-                SLC.get(laroute.route('api.payment.card'))
-                    .then((response) => {
-                        console.log('get Card ', response.data[0]);
-                        self.card = response.data[0];
-                    });
-            },
-
             getToken(){
-
                 let number = this.userForm.number;
                 this.userForm.number = number.replace(/\s/g, "");
 

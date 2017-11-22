@@ -8,14 +8,11 @@ $factory->define(App\Models\Team::class, function (Faker $faker) {
         'name' => $name,
         'email' => $faker->companyEmail,
         'slug' => str_slug($name),
-
-        'address_line1' => $faker->streetAddress,
-        'address_line2' => null,
+        'address' => $faker->streetAddress,
         'city' => $faker->city,
         'zipcode' => $faker->postcode,
         'state' => 'UT',
-        'phone1' => $faker->phoneNumber,
-        'phone2' => $faker->phoneNumber,
+        'phone' => $faker->phoneNumber,
         'fax' => $faker->phoneNumber,
     ];
 });

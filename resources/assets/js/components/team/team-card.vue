@@ -66,22 +66,26 @@
         margin-top: 0px;
         padding: 0;
     }
+
     .ibox-body-card {
         background-color: white;
         height: 227px;
         margin-top: 2px;
         padding: 10px 20px 20px 20px;
     }
+
     .row:before, .row:after {
         content: " ";
         display: none;
     }
+
     .hr {
         margin-top: 16px;
         margin-bottom: 20px;
         border: 0;
         border-top: 1px solid #eeeeee;
     }
+
     .payment-card {
         height: 177px
     }
@@ -112,43 +116,43 @@
         },
 
         created() {
-
             this.getCard();
-
             this.buildForm();
         },
 
         mounted() {
 
-            this.stripe = Stripe(window.Slc.stripeKey);
-
-            const elements = this.stripe.elements();
-
-            this.card = elements.create('card', {style: {base: {lineHeight: '1.429'}}});
-
-            this.card.mount(this.$refs.card);
-
-            const self = this;
-
-            this.card.addEventListener('change', function (event) {
-                console.log('ref ', self.$refs.card);
-                self.cardError = event.error ? event.error.message : null;
-
-            });
+            this.buildFormStripe();
 
         },
 
+
         methods: {
+
+            buildFormStripe(){
+                this.stripe = Stripe(window.Slc.stripeKey);
+                const elements = this.stripe.elements();
+                this.card = elements.create('card', {style: {base: {lineHeight: '1.429'}}});
+                this.card.mount(this.$refs.card);
+                const self = this;
+                this.card.addEventListener('change', function (event) {
+                    if (event.error) {
+                        self.cardError = event.error ? event.error.message : null
+                    }
+
+                });
+            },
 
             getCard() {
                 let self = this;
                 SLC.get(laroute.route('api.payment.card'))
                     .then((response) => {
-                        console.log('get Card ', response.data[0]);
+                        console.log('get Card');
                         self.currentCard = response.data[0];
                         this.getBrandCard(this.currentCard.brand);
                     });
             },
+
             getBrandCard(flag) {
                 for (let i = 0; i < this.cardBrand.length; i++) {
                     if (this.cardBrand[i].name === flag) {
@@ -156,6 +160,7 @@
                     }
                 }
             },
+
             createToken() {
                 const self = this;
                 this.userForm.startProcessing();
@@ -171,6 +176,7 @@
                     self.updateCard();
                 });
             },
+
             updateCard() {
                 const self = this;
                 const uri = laroute.route('api.payment.update.card');
@@ -181,9 +187,10 @@
                     this.card.unmount(this.$refs.card);
                     this.card.mount(this.$refs.card);
                 });
-            },
-            buildForm() {
 
+            },
+
+            buildForm() {
                 this.userForm = new SlcForm({
                     source: null,
                     owner: '',

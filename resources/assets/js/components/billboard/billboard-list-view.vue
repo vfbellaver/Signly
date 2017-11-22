@@ -65,7 +65,7 @@
             billboardFaceUpdated(face) {
                 console.log("billboardFaceUpdated", face);
                 this.$refs.dataViewer.fetchIndexData();
-            }
+            },
         }
     }
 </script>

@@ -14,28 +14,20 @@ class TeamForm extends BaseForm
         return $this->request->get('email');
     }
 
-    public function phone1()
+    public function phone()
     {
-        return $this->request->get('phone1');
+        return $this->request->get('phone');
     }
 
-    public function phone2()
-    {
-        return $this->request->get('phone2');
-    }
 
     public function fax()
     {
         return $this->request->get('fax');
     }
 
-    public function address_line1()
+    public function address()
     {
-        return $this->request->get('address_line1');
-    }
-    public function address_line2()
-    {
-        return $this->request->get('address_line2');
+        return $this->request->get('address');
     }
 
     public function city()
