@@ -1,7 +1,7 @@
-Vue.directive('float', {
+Vue.directive('integer', {
 
     bind: function (el, binding) {
-
+        $(el).attr('maxlength', 11);
         let mask = function () {
             let v = $(el).val();
             v = v.toString().replace(/[^0-9]/g, "");

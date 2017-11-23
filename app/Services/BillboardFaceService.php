@@ -19,7 +19,7 @@ class BillboardFaceService
                 'width' => $form->width(),
                 'label' => $form->label(),
                 'rate_card' => $form->rateCard(),
-                'monthly_impressions' => $form->monthlyImpressions(),
+                'monthly_impressions' => str_replace($form->monthlyImpressions(),'.',''),
                 'notes' => $form->notes(),
                 'max_ads' => $form->maxAds(),
                 'duration' => $form->duration(),
