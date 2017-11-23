@@ -18,7 +18,7 @@ class UserUpdatePasswordRequest extends FormRequest
         return [
             'current_password' => ['required', new CurrentPassword],
             'new_password' => ['required', new PasswordFormat],
-            'confirm_password' => 'required|same:new_password'
+            'password_confirmation' => 'required|same:new_password'
         ];
     }
 }
