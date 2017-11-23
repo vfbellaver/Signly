@@ -54,6 +54,7 @@
                                     {{(row[column.name]['data'] === null) ? '-' : (row[column.name]['data'] ? 'Yes' : 'No')}}
                                 </span>
                             </span>
+                            <span v-else-if="column.name == 'monthly_impressions'" v-html="format(row[column.name])"></span>
                             <span v-else v-html="row[column.name]"></span>
                         </td>
                         <td style="white-space:nowrap;">
@@ -165,6 +166,7 @@
         created() {
             this.fetchIndexData();
         },
+
         methods: {
             next() {
                 if (this.model.next_page_url) {
@@ -207,7 +209,13 @@
             rowsPerPageChanged() {
                 this.query.page = 1;
                 this.fetchIndexData();
-            }
+            },
+            format(el){
+                console.log('valor - ',el);
+                return String(el)
+                    .split('').reverse().join('').split(/(\d{3})/).filter(Boolean)
+                    .join('.').split('').reverse().join('');
+            },
         }
     }
 </script>
