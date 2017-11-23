@@ -1,7 +1,7 @@
 Vue.directive('integer', {
 
     bind: function (el, binding) {
-
+        $(el).attr('maxlength', 11);
         let mask = function () {
             let v = $(el).val();
             v = v.toString().replace(/[^0-9]/g, "");
@@ -9,13 +9,13 @@ Vue.directive('integer', {
                 return "";
             }
 
-            v = v.replace(/^(\d{3})\.*$/, "$1");
-            v = v.replace(/^(\d)(\d{3})*$/, "$1.$2");
-            for (let i = 0; i < 10; i++) {
-                v = v.replace(/(\d)(\d{3}[..])/, "$1.$2");
-            }
-
-
+            v = v.replace(/^0*/g, "");
+            v = v.replace(/^(\d{1})(\d{3})$/, "$1.$2");
+            v = v.replace(/^(\d{2})(\d{3})$/, "$1.$2");
+            v = v.replace(/^(\d{3})(\d{3})$/, "$1.$2");
+            v = v.replace(/^(\d{1})(\d{3})(\d{3})$/, "$1.$2.$3");
+            v = v.replace(/^(\d{2})(\d{3})(\d{3})$/, "$1.$2.$3");
+            v = v.replace(/^(\d{3})(\d{3})(\d{3})$/, "$1.$2.$3");
 
             $(el).val(v);
             let event = new Event('input', {bubbles: true});
