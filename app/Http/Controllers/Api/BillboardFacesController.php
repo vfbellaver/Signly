@@ -14,7 +14,6 @@ class BillboardFacesController extends Controller
 
     public function __construct(BillboardFaceService $service)
     {
-        $this->middleware('needsRole:admin');
         $this->service = $service;
     }
 

@@ -15,7 +15,6 @@ class NotificationsController extends Controller
 
     public function __construct(MessageService $service)
     {
-        $this->middleware('needsRole:admin');
         $this->service = $service;
     }
 

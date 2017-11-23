@@ -18,7 +18,6 @@ class BillboardsController extends Controller
 
     public function __construct(BillboardService $service)
     {
-        $this->middleware('needsRole:admin');
         $this->service = $service;
     }
 

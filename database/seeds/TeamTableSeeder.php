@@ -7,15 +7,24 @@ class TeamTableSeeder extends Seeder
 {
     public function run()
     {
-        $this->createMainTeam();
+        $this->createSuperAdminTeam();
+        $this->createAdminTeam();
         $this->createTeams();
     }
 
-    private function createMainTeam()
+    private function createSuperAdminTeam()
     {
         factory(Team::class)->create([
-            'name' => 'Support SLC DevShop',
-            'slug' => str_slug('Support SLC DevShop')
+            'name' => 'DevSquad',
+            'slug' => str_slug('DevSquad')
+        ]);
+    }
+
+    private function createAdminTeam()
+    {
+        factory(Team::class)->create([
+            'name' => 'Signly',
+            'slug' => str_slug('Signly')
         ]);
     }
 

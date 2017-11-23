@@ -25,13 +25,13 @@ class UsersController extends Controller
 
     public function __construct(UserService $service)
     {
-        $this->middleware('needsRole:admin');
+        //$this->middleware("needsRole:" . User::ADMIN);
         $this->service = $service;
     }
 
     public function index()
     {
-        return User::query()->where('id', Auth::id())->get()->toArray();
+        return User::all();
     }
 
     public function store(UserCreateRequest $request)
