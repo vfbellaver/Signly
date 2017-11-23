@@ -2,31 +2,19 @@
 
 namespace App\Http\Controllers\Web;
 
-use App\Http\Requests\UserRegistrationRequest;
-use App\Models\Team;
 use App\Models\User;
 use App\Services\CardService;
-use Artesaos\Defender\Facades\Defender;
-use Carbon\Carbon;
 use App\Http\Controllers\Controller;
-use GuzzleHttp\Client;
-use function GuzzleHttp\Psr7\str;
-use Request;
-use Stripe\Card;
-use Stripe\Stripe;
 
 
 class PaymentController extends Controller
 {
     private $key;
-    private $role;
     private $service;
-
 
     public function __construct(CardService $service)
     {
         $this->key = config('services.stripe.secret');
-        $this->role = Defender::findRole('user');
         $this->service = $service;
     }
 
@@ -37,9 +25,10 @@ class PaymentController extends Controller
 
     public function invoicePDF($invoiceId)
     {
-        $user = User::query()->find(auth()->id());
-        $subscription = $user->getSubscription()->get()->toArray();
-        $team = Team::query()->find(auth()->user()->team_id);
+        /** @var User $user */
+        $user = auth()->user();
+        $subscription = $user->getSubscription->toArray();
+        $team = $user->team;
 
         return $user->downloadInvoice($invoiceId, [
             'vendor' => $team->name,

@@ -1,3 +1,9 @@
+@canImpersonate
+<li class="{{route_contains('user', 'IN') ? 'active' : ''}}">
+    <a class="nav-link" href="{{ route('users.index') }}">Users</a>
+</li>
+@endCanImpersonate
+
 <li class="{{route_contains('billboard', 'IN') ? 'active' : ''}}">
     <a class="nav-link" href="{{ route('billboards.index') }}">Billboards</a>
 </li>

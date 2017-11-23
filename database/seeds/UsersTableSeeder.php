@@ -15,10 +15,10 @@ class UsersTableSeeder extends Seeder
         Stripe::setApiKey(config('services.stripe.secret'));
 
         $this->createSupportUser();
+        $this->createAdminUser();
+
         if (!app()->environment('production')) {
-            $this->setTeamOwners();
-            $this->createUserUsers();
-            $this->subscribeTeamOwners();
+            $this->createTeams();
         }
     }
 
@@ -78,28 +78,49 @@ class UsersTableSeeder extends Seeder
 
     private function createSupportUser()
     {
-        $role = Defender::findRole('slc');
+        $team = \App\Models\Team::query()->where('slug', 'devsquad')->first();
+        /** @var User $user */
+        $user = factory(\App\Models\User::class)->create([
+            'name' => 'DevSquad',
+            'email' => 'team@devsquad.com',
+            'card_expiration' => Carbon::createFromFormat('m/Y', '11/2017')->endOfMonth(),
+            'password' => bcrypt('devsquad##'),
+            'team_id' => $team->id,
+        ]);
+        $this->subscribeTeamOwners($user);
+
+        $team->owner_id = $user->id;
+        $team->save();
+
+        $user->attachRole(Defender::findRole(User::ADMIN));
+        $user->attachRole(Defender::findRole(User::SUPER_ADMIN));
+        $user->attachRole(Defender::findRole(User::ACCOUNT_OWNER));
+    }
+
+    private function createAdminUser()
+    {
+        $team = \App\Models\Team::query()->where('slug', 'signly')->first();
 
         /** @var User $user */
         $user = factory(\App\Models\User::class)->create([
-            'name' => 'Support SLC DevShop',
-            'email' => 'support@slcdevshop.com',
+            'name' => 'Admin',
+            'email' => 'admin@signly.com',
             'card_expiration' => Carbon::createFromFormat('m/Y', '11/2017')->endOfMonth(),
-            'password' => bcrypt('slcdev##'),
-            'team_id' => 1
+            'password' => bcrypt('signly##'),
+            'team_id' => $team->id
         ]);
+        $this->subscribeTeamOwners($user);
+        $team->owner_id = $user->id;
+        $team->save();
 
-        $user->attachRole($role);
+        $user->attachRole(Defender::findRole(User::ADMIN));
+        $user->attachRole(Defender::findRole(User::ACCOUNT_OWNER));
     }
 
-    private function setTeamOwners()
+    private function createTeams()
     {
-        $role = Defender::findRole('admin');
-
-        \App\Models\Team::all()->each(function (\App\Models\Team $team) use ($role) {
-            if ($team->id == 1) {
-                $team->owner_id = 1;
-                $team->save();
+        \App\Models\Team::all()->each(function (\App\Models\Team $team) {
+            if ($team->owner_id) {
                 return;
             }
 
@@ -107,35 +128,32 @@ class UsersTableSeeder extends Seeder
                 ->create([
                     'team_id' => $team->id
                 ]);
+            $owner->attachRole(Defender::findRole(User::ACCOUNT_OWNER));
+            $this->subscribeTeamOwners($owner);
+
             $team->owner_id = $owner->id;
             $team->save();
-        });
-    }
 
-    private function createUserUsers()
-    {
-        $role = Defender::findRole('user');
-        \App\Models\Team::all()->each(function (\App\Models\Team $team) use ($role) {
             factory(\App\Models\User::class, 2)
                 ->create([
                     'team_id' => $team->id
-                ]);
+                ])->each(function (User $user) {
+                    $user->attachRole(Defender::findRole(User::ACCOUNT_MEMBER));
+                });
         });
     }
 
-    private function subscribeTeamOwners()
+    private function subscribeTeamOwners(User $user)
     {
-        User::all()->each(function (User $user) {
-            if (!$user->is_team_owner) return;
-            $plan = $this->resolvePlan();
-            $token = $this->stripeToken($user);
-            $user->newSubscription('main', $plan->id)
-                ->trialDays(30)
-                ->create($token->id, ['email' => $user->email]);
+        if (!$user->is_team_owner) return;
+        $plan = $this->resolvePlan();
+        $token = $this->stripeToken($user);
+        $user->newSubscription('main', $plan->id)
+            ->trialDays(30)
+            ->create($token->id, ['email' => $user->email]);
 
-            $dateStr = "{$token->card->exp_year}-{$token->card->exp_month}-01";
-            $user->card_expiration = Carbon::createFromFormat("Y-m-d", $dateStr)->endOfMonth();
-            $user->save();
-        });
+        $dateStr = "{$token->card->exp_year}-{$token->card->exp_month}-01";
+        $user->card_expiration = Carbon::createFromFormat("Y-m-d", $dateStr)->endOfMonth();
+        $user->save();
     }
 }

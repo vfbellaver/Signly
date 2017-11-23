@@ -9,21 +9,8 @@ use Symfony\Component\Finder\SplFileInfo;
 
 class BillboardsCsvController extends Controller
 {
-    private $service;
-
-    public function __construct(BillboardsImportService $service)
-    {
-        $this->middleware('needsRole:admin');
-        $this->service = $service;
-    }
-
     public function index()
     {
         return view('billboard.upload-csv');
     }
-
-
-
-
-
 }
