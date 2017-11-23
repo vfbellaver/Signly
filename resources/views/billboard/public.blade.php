@@ -45,7 +45,7 @@
                     <div class="row  m-t-sm">
                         <div class="col-sm-6">
                             <p>Monthly Impressions</p>
-                            <h2 class="font-bold">{{$faces->monthly_impressions}}</h2>
+                            <h2 class="font-bold">{{number_format($faces->monthly_impressions,0,'.','.')}}</h2>
                         </div>
                     </div>
                     <hr style="margin-top: 5px; margin-bottom: 15px">

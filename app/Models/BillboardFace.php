@@ -46,7 +46,6 @@ class BillboardFace extends Model
 
     protected $casts = [
         'rate_card' => 'decimal',
-        'monthly_impressions' => 'decimal',
         'max_ads' => 'int',
         'duration' => 'int',
         'team_id' => 'int',

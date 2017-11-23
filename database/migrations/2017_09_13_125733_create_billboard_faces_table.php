@@ -19,7 +19,7 @@ class CreateBillboardFacesTable extends Migration
             $table->enum('reads', ['Left', 'Right', 'Across'])->nullable();
 
             $table->decimal('rate_card', 10, 2)->default(0)->comment('the suggest price for this face');
-            $table->decimal('monthly_impressions', 10, 2)->default(0);
+            $table->bigInteger('monthly_impressions')->default(0);
 
             $table->enum('type', ['Static', 'Digital'])->default('Static');
 
