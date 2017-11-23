@@ -61,7 +61,7 @@
                             <form-group :form="form" field="monthly_impressions">
                                 <input-label for="monthly_impressions">Monthly Impressions: </input-label>
                                 <input-text v-model="form.monthly_impressions" id="monthly_impressions"
-                                            name="monthly_impressions"></input-text>
+                                            v-integer name="monthly_impressions"></input-text>
                             </form-group>
                         </column>
                         <column size="4">
