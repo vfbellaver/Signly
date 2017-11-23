@@ -27,7 +27,7 @@ class RegisterRequest extends BaseRequest
             'name' => 'required',
             'email' => 'required|email|unique:teams,email',
             'password' => ['required', 'confirmed', new PasswordFormat],
-            'card' => 'required',
+            'source' => 'required',
             'terms_of_service' => 'required|accepted'
         ];
     }
