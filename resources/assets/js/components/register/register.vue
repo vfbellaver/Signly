@@ -183,7 +183,6 @@
                 password: null,
                 password_confirmation: null,
                 owner: null,
-                card: null,
                 source: null,
                 terms_of_service: null
             })
