@@ -16,14 +16,14 @@
                             </button>
                         </td>
                         <td>{{plan.price}} / {{plan.interval}}</td>
-                        <td>{{ plan.trial_days }} Day Trial</td>
                         <td class="text-right" style="width: 134px;">
                             <button
                                     class="select btn btn-primary btn-outline"
                                     :class="{'active': planForm.stripe_plan == plan.id}"
                                     type="button" @click="choosePlan(plan)">
                                 <i v-if="planForm.stripe_plan == plan.id" class="fa fa-check"></i>
-                                Select
+                                <span v-if="planForm.stripe_plan == plan.id">Selected</span>
+                                <span v-else>Select</span>
                             </button>
                         </td>
                     </tr>
@@ -63,10 +63,9 @@
 
     .ibox-content {
         clear: none;
-
-        tr.first {
+        tr {
             td {
-                border-top: none;
+                border-top: none !important;
             }
         }
     }
