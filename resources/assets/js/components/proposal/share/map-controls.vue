@@ -167,7 +167,6 @@
             return {
                 sendDown: true,
                 form: this.buildForm(),
-                commentsView: null,
                 user: window.Slc.user,
             }
         },
