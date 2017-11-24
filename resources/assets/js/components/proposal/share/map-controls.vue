@@ -200,7 +200,7 @@
                 return laroute.route('proposal.share.pdf', {proposal: this.$store.state.id});
             },
         },
-        mounted() {
+        mounted(){
             const self = this;
 
             const pullComments = function () {
@@ -248,7 +248,6 @@
             centerFace(face) {
                 this.$emit('centerFace', face);
             },
-
 
             comment(evt) {
                 if (evt.shiftKey) {
