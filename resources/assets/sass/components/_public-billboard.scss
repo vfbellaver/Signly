@@ -7,21 +7,30 @@
   box-sizing: border-box;
   min-height: calc(100vh - 60px);
   box-shadow: 2px 2px 2px #d7d7d7;
-}
-#public-billboard .ibox-content {
-  padding-left: 0;
-  padding-right: 0;
-  padding-top: 10px;
-}
-#public-billboard .m-t {
-  margin-top: -25px;
-}
-h3 {
-  margin-top: 0px;
-}
 
-.billboard-face{
-  margin-top: 0px;
-  max-height: 200px;
+  .ibox-content {
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 10px;
+  }
+
+  h3 {
+    margin-top: 0px;
+  }
+
+  .billboard-face {
+    margin-top: 0px;
+    max-height: 200px;
+  }
+
+  @media print {
+    background: red !important;
+
+    img{
+      width: 256px;
+      height: 256px;
+    }
+
+  }
 
 }

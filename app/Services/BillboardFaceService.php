@@ -19,7 +19,7 @@ class BillboardFaceService
                 'width' => $form->width(),
                 'label' => $form->label(),
                 'rate_card' => $form->rateCard(),
-                'monthly_impressions' => str_replace('.','',$form->monthlyImpressions()),
+                'monthly_impressions' => $form->monthlyImpressions(),
                 'notes' => $form->notes(),
                 'max_ads' => $form->maxAds(),
                 'duration' => $form->duration(),
@@ -54,7 +54,7 @@ class BillboardFaceService
             $billboardFace->reads = $form->reads();
             $billboardFace->label = $form->label();
             $billboardFace->rate_card = $form->rateCard();
-            $billboardFace->monthly_impressions = str_replace('.','',$form->monthlyImpressions());
+            $billboardFace->monthly_impressions = $form->monthlyImpressions();
             $billboardFace->notes = $form->notes();
             $billboardFace->max_ads = $form->maxAds();
             $billboardFace->duration = $form->duration();
