@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Web;
 use App\Models\User;
 use App\Services\CardService;
 use App\Http\Controllers\Controller;
+use View;
 
 
 class PaymentController extends Controller
@@ -30,9 +31,18 @@ class PaymentController extends Controller
         $subscription = $user->getSubscription->toArray();
         $team = $user->team;
 
+        return View::make('cashier::receipt', array_merge([
+            'vendor' => $team->name,
+            'product' => $subscription["stripe_plan"],
+        ], [
+            'invoice' => $this,
+            'owner' => $this->owner,
+            'user' => $this->owner,
+        ]));
+
         return $user->downloadInvoice($invoiceId, [
             'vendor' => $team->name,
-            'product' => $subscription[0]["stripe_plan"],
+            'product' => $subscription["stripe_plan"],
         ]);
     }
 }
