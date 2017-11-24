@@ -7,7 +7,7 @@
                     <column size="6">
                         <form-group :form="form" field="filecsv">
                             <input-label for="filecsv">Select File: </input-label>
-                            <client-csv-upload v-model="form.clients" id="clients"></client-csv-upload>
+                            <client-csv-upload v-model="form.clients" id="clients" @uploaded="updateUploaded"></client-csv-upload>
                         </form-group>
                     </column>
                     <column size="6">
@@ -41,7 +41,7 @@
             </modal-body>
 
             <modal-footer>
-                <btn-submit :disabled="form.busy">
+                <btn-submit :disabled="!uploaded">
                     <spinner v-if="form.busy"></spinner>
                 </btn-submit>
             </modal-footer>
@@ -64,7 +64,7 @@
         mixins: [ModalForm],
         data() {
             return {
-                userForm: null
+                uploaded: false,
             }
         },
 
@@ -74,18 +74,17 @@
                     clients: []
                 });
             },
-            reload() {
-                window.location = laroute.route("client.index");
-            },
-
             save() {
-                const uri = laroute.route('api.billboard.import');
-                Slc.post(uri, this.userForm).then((response) => {
+                const uri = laroute.route('api.client.import');
+                Slc.post(uri, this.form).then((response) => {
                     console.log('Post Billboards:', response);
                     this.saved(response.data, 'saved');
                 });
 
-            }
+            },
+            updateUploaded(){
+                this.uploaded = true;
+            },
 
         }
     }

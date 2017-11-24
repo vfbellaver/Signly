@@ -132,7 +132,7 @@ class ClientService
                     'phone1' => $cli['phone1'],
                     'phone2' => $cli['phone2'],
                     'fax' => $cli['fax'],
-                    'user_id' => $data['user_id']
+                    'team_id' => $data['team_id']
                 ]);
                 $events[] = new ClientCreated($client);
                 $savedClients = $client;

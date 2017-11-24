@@ -8,3 +8,4 @@ require('./zipcode');
 require('./date');
 require('./tooltip');
 require('./time');
+require('./integer');

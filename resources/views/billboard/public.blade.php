@@ -20,15 +20,13 @@
                     </div>
                     <div class="col-md-4">
                         <strong> <i class="fa fa-phone"></i> Phones:</strong><br>
-                        {{$team->phone1}}<br>
-                        {{$team->phone2}}<br>
+                        {{$team->phone}}<br>
                         {{$team->fax}}
                     </div>
                     <div class="col-md-4">
                         <address>
                             <strong> <i class="fa fa-map-marker"></i> Address:</strong><br>
-                            {{$team->address_line1}} <br>
-                            {{$team->address_line2}} <br>
+                            {{$team->address}} <br>
                         </address>
                     </div>
                 </div>
@@ -47,7 +45,7 @@
                     <div class="row  m-t-sm">
                         <div class="col-sm-6">
                             <p>Monthly Impressions</p>
-                            <h2 class="font-bold">{{$faces->monthly_impressions}}</h2>
+                            <h2 class="font-bold">{{number_format($faces->monthly_impressions,0,'.','.')}}</h2>
                         </div>
                     </div>
                     <hr style="margin-top: 5px; margin-bottom: 15px">

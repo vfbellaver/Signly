@@ -19,6 +19,7 @@ class TeamForm extends BaseForm
         return $this->request->get('phone');
     }
 
+
     public function fax()
     {
         return $this->request->get('fax');
@@ -27,6 +28,21 @@ class TeamForm extends BaseForm
     public function address()
     {
         return $this->request->get('address');
+    }
+
+    public function city()
+    {
+        return $this->request->get('city');
+    }
+
+    public function state()
+    {
+        return $this->request->get('state');
+    }
+
+    public function zipcode()
+    {
+        return $this->request->get('zipcode');
     }
 
     public function slug()

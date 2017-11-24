@@ -36,6 +36,9 @@ class TeamService
             $team->phone = $form->phone();
             $team->fax = $form->fax();
             $team->address = $form->address();
+            $team->city = $form->city();
+            $team->state = $form->state();
+            $team->zipcode = $form->zipcode();
             $team->logo = $form->logo();
             $team->save();
 

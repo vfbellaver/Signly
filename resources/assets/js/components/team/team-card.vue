@@ -28,7 +28,7 @@
                     <div class="ibox-title">
                         <h5>Update your Card</h5>
                     </div>
-                    <div class="ibox-body-card">
+                    <div :class="classError">
                         <form-submit v-model="userForm" @submit="createToken">
                             <column size="12">
                                 <form-group :form="userForm" field="owner">
@@ -46,7 +46,7 @@
                                     </div>
                                 </div>
                                 <hr class="hr">
-                                <button class="btn btn-success" @click="createToken" :disabled="userForm.busy">
+                                <button class="btn btn-primary" :disabled="userForm.busy">
                                     <spinner v-if="userForm.busy"></spinner>
                                     Update Card
                                 </button>
@@ -69,7 +69,14 @@
 
     .ibox-body-card {
         background-color: white;
-        height: 227px;
+        height: 239px;
+        margin-top: 2px;
+        padding: 10px 20px 20px 20px;
+    }
+
+    .ibox-body-card-msg {
+        background-color: white;
+        height: 262px;
         margin-top: 2px;
         padding: 10px 20px 20px 20px;
     }
@@ -91,11 +98,9 @@
     }
 </style>
 <script>
-
     import * as SLC from '../../vue/http';
 
     export default {
-
         data() {
             return {
                 userForm: null,
@@ -118,38 +123,54 @@
             }
         },
 
+        computed: {
+
+            classError(){
+                if(this.cardError) {
+                    return 'ibox-body-card-msg';
+                } else {
+                    return 'ibox-body-card';
+                }
+            }
+
+        },
+
         created() {
             this.getCard();
             this.buildForm();
         },
 
         mounted() {
-            this.stripe = Stripe(window.Slc.stripeKey);
-            const elements = this.stripe.elements();
-            this.card = elements.create('card', {style: {base: {lineHeight: '1.429'}}});
-            this.card.mount(this.$refs.card);
 
-            this.card.addEventListener('change', function (event) {
-                if (event.error) {
-                    console.log('Error', event);
-                }
-            });
+            this.buildFormStripe();
+
         },
 
-        watch: {
-            'currentCard.brand': function () {
-                this.getBrandCard(this.currentCard.brand);
-            },
-        },
 
         methods: {
+
+            buildFormStripe() {
+                this.stripe = Stripe(window.Slc.stripeKey);
+                const elements = this.stripe.elements();
+                this.card = elements.create('card', {style: {base: {lineHeight: '1.429'}}});
+                this.card.mount(this.$refs.card);
+                const self = this;
+                this.card.addEventListener('change', function (event) {
+                    if (event.error) {
+                        self.cardError = event.error ? event.error.message : null
+                    } else {
+                        self.cardError = null;
+                    }
+                });
+            },
 
             getCard() {
                 let self = this;
                 SLC.get(laroute.route('api.payment.card'))
                     .then((response) => {
-                        console.log('get Card ', response.data[0]);
+                        console.log('get Card');
                         self.currentCard = response.data[0];
+                        this.getBrandCard(this.currentCard.brand);
                     });
             },
 
@@ -171,8 +192,8 @@
                         self.userForm.finishProcessing();
                         return;
                     }
-                    self.token = result.token.id;
-                    self.buildForm();
+
+                    self.userForm.source = result.token.id;
                     self.updateCard();
                 });
             },
@@ -180,21 +201,23 @@
             updateCard() {
                 const self = this;
                 const uri = laroute.route('api.payment.update.card');
-                SLC.post(uri, this.userForm).then((response) => {
+                SLC.put(uri, this.userForm).then((response) => {
                     console.log('update card', response);
                     self.buildForm();
+                    self.getCard();
+                    this.card.unmount(this.$refs.card);
+                    this.card.mount(this.$refs.card);
                 });
+
             },
 
             buildForm() {
                 this.userForm = new SlcForm({
-                    source: this.token,
+                    source: null,
                     owner: '',
                 });
+
             },
-
         }
-
-
     }
 </script>

@@ -20,7 +20,8 @@ class TeamUpdateRequest extends BaseRequest
     {
         return [
             'name' => 'required',
-            'logo' => 'required'
+            'address' => 'required',
+            'phone' => 'required'
         ];
     }
 }

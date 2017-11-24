@@ -55,7 +55,7 @@
                 <row>
                     <div class="col-xs-12">
                         <hr class="hr">
-                        <button class="btn btn-success" @click="save" :disabled="user.busy">
+                        <button class="btn btn-primary" @click="save" :disabled="user.busy">
                             <spinner v-if="user.busy"></spinner>
                             Define
                         </button>
@@ -73,13 +73,15 @@
     .ibox {
         clear: none;
         margin-bottom: 60px;
-        margin-top: 0px;
+        margin-top: -20px;
         padding: 0;
     }
 
     .ibox-content {
         clear: none;
     }
+
+
 </style>
 
 <script>

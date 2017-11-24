@@ -53,7 +53,8 @@
                                         <td class="contact-type"><i class="fa fa-envelope"> </i></td>
                                         <td style="width:60%"> {{user.email}}</td>
                                         <td style="width: 36px;" class="client-status">
-                                            <btn-danger class="pull-rigth"
+                                            <btn-danger v-if="boss.email != user.email"
+                                                        class="pull-rigth"
                                                         @click.native="destroy(user)"
                                                         :disabled="user.destroyForm.busy"
                                                         size="xs">

@@ -26,6 +26,12 @@ $cyan: #67c2ef;
 // Body
 $body-bg: #f5f8fa;
 
+// Input
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000px white inset !important;
+}
+
+
 // Borders
 $laravel-border-color: darken($body-bg, 10%);
 $list-group-border: $laravel-border-color;

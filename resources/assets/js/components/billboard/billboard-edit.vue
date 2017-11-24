@@ -125,19 +125,15 @@
     .top-navigation .wrapper.wrapper-content {
         padding-top: 0;
     }
-
     .margin-billboard-edit {
         margin-right: 5px;
     }
-
     .map-container {
         position: relative;
-
         .vue-map-container {
             width: 100%;
             min-height: 600px
         }
-
         .vue-street-view-pano-container {
             position: absolute;
             width: 320px;
@@ -146,14 +142,12 @@
             left: 0;
         }
     }
-
 </style>
 
 <script>
     import _ from 'lodash';
     import * as Slc from "../../vue/http";
     import BillboardFaceForm from './edit/billboard-face-form';
-
     export default {
         props: {
             id: {required: true},
@@ -161,7 +155,6 @@
         components: {
             BillboardFaceForm
         },
-
         data() {
             return {
                 form: new SlcForm({}),
@@ -196,17 +189,14 @@
                 },
             }
         },
-
         watch: {
             'form.address': function () {
                 this.onAddressChange();
             }
         },
-
         created() {
             this.load();
         },
-
         methods: {
             load() {
                 this.loaded = false;
@@ -231,27 +221,23 @@
                     this.faces = billboard.billboard_faces;
                 });
             },
-
             save() {
+                console.log('Save!!!');
                 const uri = laroute.route('api.billboard.update', {billboard: this.form.id});
                 Slc.put(uri, this.form).then((response) => {
                     console.log('Billboard Updated:', response);
                 });
             },
-
             addBillboardFace() {
                 this.$refs.billboardFaceForm.show();
             },
-
             openBillboardFace(face) {
                 this.$refs.billboardFaceForm.show(face);
             },
-
             billboardFaceCreated(face) {
                 console.log("Face Created", face);
                 this.faces.push(face);
             },
-
             billboardFaceUpdated(face) {
                 console.log("Face Updated", face);
                 for (let i = 0; i < this.faces.length; i++) {
@@ -262,7 +248,6 @@
                     }
                 }
             },
-
             billboardDestroy(face) {
                 face.destroyForm = new SlcForm({});
                 Slc.delete(laroute.route('api.billboard-face.destroy', {billboard_face: face.id}), face.destroyForm)
@@ -271,7 +256,6 @@
                         this.faces.splice(i, 1);
                     });
             },
-
             onMapClick(e) {
                 const self = this;
                 console.log(e);
@@ -302,15 +286,12 @@
                     return;
                 }
                 this.zoom = 15;
-
                 console.log('On click Billboard', this.form);
             },
-
             onZoomChanged(e) {
                 console.log("On Zoom Changed", e);
                 this.zoomChanged = true;
             },
-
             onAddressChange: _.debounce(function (e) {
                 console.log("OnAddressChange", e);
                 const self = this;
@@ -341,7 +322,6 @@
                     console.log('On address Changed Billboard', this.form);
                 });
             }, 500),
-
             onMarkerMoved: _.debounce(function (e) {
                 console.log('On Marker Moved', e);
                 const pos = {
@@ -359,7 +339,6 @@
                 });
                 console.log('On marker Moved Billboard', this.form);
             }),
-
             updatePov(pov) {
                 console.log('Pov Changed: ', pov);
                 this.pov = pov;
@@ -367,7 +346,6 @@
                 this.form.pitch = pov.pitch;
                 console.log('Update Pov Billboard', this.form);
             },
-
             updatePano(pano) {
                 const self = this;
                 this.pano = pano;

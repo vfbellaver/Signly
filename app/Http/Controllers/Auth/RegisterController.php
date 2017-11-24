@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\RegisterInvitationRequest;
 use App\Http\Requests\RegisterRequest;
 use App\Models\Team;
 use App\Models\User;
@@ -70,7 +71,7 @@ class RegisterController extends Controller
                     'email' => $email,
                 ]);
 
-            $this->service->store($user, $owner);
+            $this->service->store($user, $request);
             auth()->login($user);
             return ['message' => 'Register Complete!'];
         });
@@ -86,7 +87,7 @@ class RegisterController extends Controller
         return view('auth.invitation', compact('isValid', 'token'));
     }
 
-    public function registerInvitation(Request $request)
+    public function registerInvitation(RegisterInvitationRequest $request)
     {
         return DB::transaction(function () use ($request) {
             /** @var User $user */

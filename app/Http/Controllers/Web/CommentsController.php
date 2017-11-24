@@ -22,12 +22,7 @@ class CommentsController extends Controller
     {
         $data = $this->service->create($request->form());
 
-        $response = [
-            'message' => 'Comment created.',
-            'data' => $data
-        ];
-
-        return $response;
+        return $data;
     }
 
     public function index()

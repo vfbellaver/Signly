@@ -46,7 +46,7 @@
                         <td>{{ (index + 1) + ((query.page - 1) * query.per_page)}}</td>
                         <td v-for="(column, index) in columns" :key="index">
                             <span v-if="typeof(row[column.name]) === 'object' && row[column.name] !== null">
-                                <img v-image-preview class="hand" :src="row[column.name]['data']"
+                                <img v-image-preview class="hand" :src="row[column.name]['data'] ? row[column.name]['data'] : imagedefault"
                                      :width="row[column.name]['width']"
                                      :height="row[column.name]['height']"
                                      v-if="row[column.name]['type'] === 'image'"/>
@@ -54,6 +54,7 @@
                                     {{(row[column.name]['data'] === null) ? '-' : (row[column.name]['data'] ? 'Yes' : 'No')}}
                                 </span>
                             </span>
+                            <span v-else-if="column.name == 'monthly_impressions'" v-html="format(row[column.name])"></span>
                             <span v-else v-html="row[column.name]"></span>
                         </td>
                         <td style="white-space:nowrap;">
@@ -132,9 +133,9 @@
             btnEdit: {require: false, default: false},
             btnDestroy: {require: false, default: false},
             btnShare: {require: false, default: false},
-            btnOptional: {
-                require: false, default: function () {
-                    return {enabled: false}
+            btnOptional: {require: false,
+                default: function () {
+                    return {enabled: false }
                 }
             }
         },
@@ -142,6 +143,7 @@
             return {
                 model: {},
                 columns: {},
+                imagedefault: '/images/no_image_available.jpeg',
                 query: {
                     page: 1,
                     column: this.defaultColumn || 'id',
@@ -168,6 +170,7 @@
         created() {
             this.fetchIndexData();
         },
+
         methods: {
             next() {
                 if (this.model.next_page_url) {
@@ -203,14 +206,20 @@
                         vm.loading = false;
                     })
                     .catch(function (response) {
-                        console.log(response)
+                        console.log(response);
                         vm.loading = false;
                     })
             },
             rowsPerPageChanged() {
                 this.query.page = 1;
                 this.fetchIndexData();
-            }
+            },
+            format(el){
+                console.log('valor - ',el);
+                return String(el)
+                    .split('').reverse().join('').split(/(\d{3})/).filter(Boolean)
+                    .join('.').split('').reverse().join('');
+            },
         }
     }
 </script>

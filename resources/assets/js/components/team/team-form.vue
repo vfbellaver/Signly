@@ -46,38 +46,25 @@
                                             name="email"></input-text>
                             </form-group>
                             <row>
-                                <column size="4">
-                                    <form-group :form="form" field="phone1">
-                                        <input-label for="phone1">Phone 1: </input-label>
-                                        <input-text v-model="form.phone1" id="phone1"
-                                                    name="phone1" v-tel></input-text>
+                                <column size="6">
+                                    <form-group :form="form" field="phone">
+                                        <input-label for="phone1">Phone: </input-label>
+                                        <input-text v-model="form.phone" id="phone"
+                                                    name="phone" v-tel></input-text>
                                     </form-group>
                                 </column>
-                                <column size="4">
-                                    <form-group :form="form" field="phone2">
-                                        <input-label for="phone2">Phone 2: </input-label>
-                                        <input-text v-model="form.phone2" id="phone2"
-                                                    name="phone2" v-tel></input-text>
-                                    </form-group>
-                                </column>
-                                <column size="4">
+                                <column size="6">
                                     <form-group :form="form" field="fax">
                                         <input-label for="fax">Fax: </input-label>
-                                        <input-text v-model="form.fax" id="fax"
-                                                    name="fax" placeholder="(Optional)" v-tel></input-text>
+                                        <input-text v-model="form.fax" id="fax" name="fax" v-tel></input-text>
                                     </form-group>
                                 </column>
                             </row>
-                            <form-group :form="form" field="address_line1">
-                                <input-label for="address_line1">Address Line 1: </input-label>
-                                <input-text v-model="form.address_line1" id="address_line1"
-                                            name="address_line1"></input-text>
-                            </form-group>
 
-                            <form-group :form="form" field="address_line2">
-                                <input-label for="address_line2">Address Line 2: </input-label>
-                                <input-text v-model="form.address_line2" id="address_line2" name="address_line2"
-                                            placeholder="(Optional)"></input-text>
+                            <form-group :form="form" field="address">
+                                <input-label for="address">Address: </input-label>
+                                <input-text v-model="form.address" id="address"
+                                            name="address"></input-text>
                             </form-group>
 
                             <form-group :form="form" field="city">
@@ -157,11 +144,10 @@
                 id: this.team.id,
                 name: this.team.name,
                 email: this.team.email,
-                phone1: this.team.phone1,
+                phone: this.team.phone,
                 phone2: this.team.phone2,
                 fax: this.team.fax,
-                address_line1: this.team.address_line1,
-                address_line2: this.team.address_line2,
+                address: this.team.address,
                 city: this.team.city,
                 zipcode: this.team.zipcode,
                 state: this.team.state,
@@ -175,10 +161,10 @@
         },
 
         methods: {
-
             saveTeamName() {
                 const self = this;
-                const uri = laroute.route('api.team.update.name', {team: this.team.id});
+                console.log('endereco - ',self.team.address);
+                const uri = laroute.route('api.team.update', {team: this.team.id});
                 SLC.put(uri, self.form).then((response) => {
                     console.log('Team updated ', response);
                 });

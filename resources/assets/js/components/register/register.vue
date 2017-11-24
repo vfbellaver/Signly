@@ -184,7 +184,7 @@
                 password: null,
                 password_confirmation: null,
                 owner: null,
-                card: null,
+                source: null,
                 terms_of_service: null
             })
         }),
@@ -231,7 +231,7 @@
                             return;
                         }
                         self.cardError = null;
-                        self.form.card = result.token.id;
+                        self.form.source = result.token.id;
 
                         self.formSubmit();
                     });

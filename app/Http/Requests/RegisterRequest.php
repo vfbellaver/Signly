@@ -2,11 +2,16 @@
 
 namespace App\Http\Requests;
 
+use App\Forms\CardForm;
 use App\Rules\PasswordFormat;
 use Illuminate\Foundation\Http\FormRequest;
 
-class RegisterRequest extends FormRequest
+class RegisterRequest extends BaseRequest
 {
+    public function form(): CardForm
+    {
+        return new CardForm($this);
+    }
 
     public function authorize()
     {
@@ -22,7 +27,7 @@ class RegisterRequest extends FormRequest
             'name' => 'required',
             'email' => 'required|email|unique:teams,email',
             'password' => ['required', 'confirmed', new PasswordFormat],
-            'card' => 'required',
+            'source' => 'required',
             'terms_of_service' => 'required|accepted'
         ];
     }

@@ -7,6 +7,7 @@ use App\Http\Requests\BillboardCreateRequest;
 use App\Http\Requests\BillboardImportRequest;
 use App\Http\Requests\BillboardUpdateRequest;
 use App\Models\Billboard;
+use App\Models\User;
 use App\Services\BillboardService;
 use Carbon\Carbon;
 use DB;
@@ -64,6 +65,10 @@ class BillboardsController extends Controller
         $data['user_id'] = auth()->user()->id;
         $data['team_id'] = auth()->user()->team_id;
         $this->service->import($data);
+
+        return [
+            'message' => 'Billboards Uploaded',
+        ];
     }
 
     public function update(BillboardUpdateRequest $request, Billboard $billboard)

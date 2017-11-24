@@ -3,10 +3,38 @@
         <div class="ibox float-e-margins">
             <div class="ibox-content">
                 <div class="file-manager">
+
+                    <h5>Time Range</h5>
+                    <div v-if="proposal">
+                        {{proposal.from_date | date('MM/DD/YYYY')}} - {{proposal.to_date | date('MM/DD/YYYY')}}
+                    </div>
+
+                    <div class="hr-line-dashed"></div>
+
+                    <h5>Billboard Faces</h5>
+                    <div class="faces-box">
+                        <div class="dd-list" v-if="proposal">
+                            <div class="dd-item"
+                                 v-for="face in $store.state.proposal.billboard_faces"
+                                 :key="face.id">
+                                <div class="dd-content">{{face.code}} - {{face.pivot.price | money('$')}}</div>
+                                <div class="dd-action">
+                                    <button type="button" class="btn btn-xs btn-default"
+                                            @click="centerFace(face)">
+                                        <i class="fa fa-dot-circle-o"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div v-if="proposal" class="hr-line-dashed"></div>
+
                     <div v-if="proposal" class="social-feed-box">
                         <div class="social-avatar">
                             <a href="javascript:;" class="pull-left">
-                                <img alt="image" :src="proposal.team.logo">
+                                <img alt="image" v-if="proposal.team.logo" :src="proposal.team.logo">
+                                <img alt="image" src="/images/default-logo.png" v-else>
                             </a>
                             <div class="media-body">
                                 <a href="javascript:;">
@@ -54,33 +82,10 @@
                             </div>
                         </div>
                     </div>
-                    <div v-if="proposal" class="hr-line-dashed"></div>
 
-                    <h5>Time Range</h5>
-                    <div v-if="proposal">
-                        {{proposal.from_date | date('MM/DD/YYYY')}} - {{proposal.to_date | date('MM/DD/YYYY')}}
-                    </div>
 
-                    <div class="hr-line-dashed"></div>
-                    <h5>Billboard Faces</h5>
-                    <div class="faces-box">
-                        <div class="dd-list" v-if="proposal">
-                            <div class="dd-item"
-                                 v-for="face in $store.state.proposal.billboard_faces"
-                                 :key="face.id">
-                                <div class="dd-content">{{face.code}} - {{face.pivot.price | money('$')}}</div>
-                                <div class="dd-action">
-                                    <button type="button" class="btn btn-xs btn-default"
-                                            @click="centerFace(face)">
-                                        <i class="fa fa-dot-circle-o"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                     <div class="clearfix"></div>
 
-                    <div class="hr-line-dashed"></div>
                     <h4 class="text-right p-xs">Total: {{total | money('$')}}</h4>
                 </div>
             </div>
@@ -97,35 +102,29 @@
         bottom: 0;
         margin-top: 0;
         z-index: 1;
-
         .ibox {
             margin-top: 4px;
             .ibox-content {
                 border-top-width: 0;
             }
         }
-
         .faces-box {
             height: 180px;
             overflow-y: auto;
         }
-
         .comment-box {
             height: 180px;
             overflow-y: auto
         }
-
         .dd-list {
             .dd-item {
                 background: #f5f5f5;
                 border: 1px solid #e7eaec;
                 margin: 4px 0;
                 padding: 5px 10px;
-
                 .dd-handle, .dd-content, .dd-action {
                     display: table-cell;
                 }
-
                 .dd-content {
                     width: 324px;
                     overflow: hidden;
@@ -133,12 +132,10 @@
                     white-space: nowrap;
                     margin: 0 8px;
                 }
-
                 .dd-action {
                     width: 36px;
                     text-align: right;
                 }
-
                 &.sortable-ghost {
                     margin: 5px 0;
                     padding: 0;
@@ -152,7 +149,6 @@
                     }
                 }
                 &.sortable-chosen {
-
                 }
             }
         }
@@ -160,11 +156,9 @@
 </style>
 
 <script>
-
     import * as Slc from "../../../vue/http";
     import store from './store';
     import Draggable from 'vuedraggable'
-
     export default {
         props: {},
         store,
@@ -175,10 +169,10 @@
             return {
                 sendDown: true,
                 form: this.buildForm(),
+                commentsView: null,
                 user: window.Slc.user,
             }
         },
-
         computed: {
             markers() {
                 return this.$store.state.markers;
@@ -209,9 +203,11 @@
                 return laroute.route('proposal.share.pdf', {proposal: this.$store.state.id});
             },
         },
-
         mounted() {
             const self = this;
+
+            this.updateComments();
+
             const pullComments = function () {
                 if (self.form.comment) {
                     setTimeout(() => {
@@ -226,7 +222,6 @@
                     return;
                 }
                 const lengthBefore = self.$store.state.comments.length;
-
                 self.$store.dispatch('fetchComments', self.$store.state.id)
                     .then(() => {
                         const lengthAfter = self.$store.state.comments.length;
@@ -240,7 +235,6 @@
                     pullComments();
                 }, 3000);
             };
-
             this.$store.watch(state => {
                     return state.comments;
                 },
@@ -255,18 +249,34 @@
                 });
             pullComments();
         },
-
         methods: {
             centerFace(face) {
                 this.$emit('centerFace', face);
             },
+
+            updateComments() {
+
+                if(this.user) {
+
+                    const uri = laroute.route('api.update.comments');
+
+                    this.commentsView = new SlcForm ({
+                        id : this.$store.state.proposal.id,
+                    });
+
+                    Slc.put(uri,this.commentsView).then(response => {
+                       console.log('Deu certo', response);
+                    });
+
+                };
+            },
+
             comment(evt) {
                 if (evt.shiftKey) {
                     return true;
                 }
                 evt.preventDefault();
                 console.log('Comment');
-
                 this.form.proposal = this.proposal;
                 this.form.proposal_id = this.$store.state.id;
                 this.$store.dispatch('saveComment', this.form)

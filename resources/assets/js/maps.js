@@ -1,8 +1,10 @@
 $(document).ready(function () {
 
+
     // initial position
     var position = {lat: 40.757994, lng: -111.970834};
     var latLng = new google.maps.LatLng(position);
+
 
     // my options
     var options = {
@@ -13,6 +15,7 @@ $(document).ready(function () {
     // isntance of map
     var map = new google.maps.Map(document.getElementById('map'), options);
 
+
     // marker
     var marker = new google.maps.Marker({
         position: position,
@@ -20,32 +23,10 @@ $(document).ready(function () {
         draggable: true
     });
 
+
     // Geocoding
     var geocoder = new google.maps.Geocoder();
 
-    /*
-    $("#address").keypress (function(event) {
-
-        var t = event.;
-
-        if (event.keyCode == 39) {
-
-            var address = document.getElementById('address').value;
-
-            geocoder.geocode({'address': address}, function (results, status) {
-
-                if (status === 'OK') {
-
-                    map.setCenter(results[0].geometry.location);
-
-                    marker.setPosition(results[0].geometry.location);
-
-                }
-            });
-        }
-
-    });
-    */
 
     // latitude and logitude
     google.maps.event.addListener(marker, 'position_changed', function () {

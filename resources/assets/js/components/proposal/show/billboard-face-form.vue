@@ -48,7 +48,6 @@
             }
         },
         mounted() {
-
         },
         computed: {
             title() {

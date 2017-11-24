@@ -10,8 +10,8 @@
                         <div class="col-xs-12">
                             <form-group :form="userEmail" field="email">
                                 <input-label for="email">Email: </input-label>
-                                <input-text v-model="userEmail.email" id="email"
-                                            name="email"></input-text>
+                                <input-email v-model="userEmail.email" id="email"
+                                            name="email"></input-email>
                             </form-group>
                         </div>
                     </div>
@@ -68,13 +68,13 @@
     export default {
         data() {
             return {
-                userEmail: '',
+                userEmail: null,
             }
         },
 
         created(){
             this.userEmail = new SlcForm({
-                email: '',
+                email: null,
             });
         },
 
@@ -89,7 +89,7 @@
 
             loadUser(){
                 this.userEmail = new SlcForm({
-                    email: '',
+                    email: null,
                 });
             },
 

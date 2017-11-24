@@ -22,6 +22,8 @@
                                     <th style="width: 64px"></th>
                                     <th>Name</th>
                                     <th>Client</th>
+                                    <th>Time Range</th>
+                                    <th>Total Price</th>
                                     <th style="width: 72px"></th>
                                 </tr>
                                 </thead>
@@ -30,6 +32,8 @@
                                     <td>{{ index + 1 }}</td>
                                     <td>{{ proposal.name }}</td>
                                     <td>{{ proposal.client.company_name }}</td>
+                                    <td> {{proposal.from_date | date('MM/DD/YYYY')}} - {{proposal.to_date | date('MM/DD/YYYY')}}</td>
+                                    <td>{{ "$"+  total(proposal) }}</td>
                                     <td>
                                         <btn-success size="xs" @click.native="edit(proposal)"
                                                      :disabled="proposal.editForm.busy">
@@ -124,7 +128,20 @@
                 return this.proposals.findIndex((_proposal) => {
                     return _proposal.id === proposal.id;
                 });
-            }
+            },
+            total(proposal) {
+                if (!proposal.billboard_faces) {
+                    return 0;
+                }
+                const faces = proposal.billboard_faces;
+                let total = 0;
+                for (let i = 0; i < faces.length; i++) {
+                    const f = faces[i];
+                    total += Number.parseFloat(f.pivot.price);
+                }
+                console.log("Total", total);
+                return total.toFixed(2);
+            },
         }
 
     }

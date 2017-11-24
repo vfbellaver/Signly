@@ -35,6 +35,7 @@
 </template>
 
 <script>
+
     import ModalForm from '../shared/Mixins/ModalForm';
     import ClientSelect from '../client/client-select';
     import * as _ from "lodash";
@@ -79,6 +80,7 @@
                     to_date: toDate.format('MM/DD/YYYY'),
                     notes: proposal ? proposal.notes : null,
                     user_id: proposal ? proposal.user_id : null,
+                    budget: proposal ? proposal.budget : null,
                 });
 
                 $(this.$refs.timeFrame).daterangepicker({

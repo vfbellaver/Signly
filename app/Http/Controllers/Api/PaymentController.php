@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Requests\CardsCreateRequest;
+use App\Http\Requests\PlanUpdateRequest;
 use App\Http\Requests\TokenCreateRequest;
 use App\Http\Requests\PaymentRegistrationRequest;
 use App\Models\User;
@@ -16,7 +17,6 @@ class PaymentController extends Controller
 {
     private $key;
     private $service;
-    private $user;
     private $role;
 
     public function __construct(CardService $service)
@@ -44,33 +44,31 @@ class PaymentController extends Controller
     {
         /** @var User $user */
         $user = User::query()->find(auth()->id());
-        $user->updateCard($request->form()->source());
-        $data = $this->service->store($user, $request->form()->owner());
+        $data = $this->service->store($user, $request);
 
-        return $response = [
-            'message' => "Your payment method has been updated",
-            'data' => $data
-        ];
+        return $data;
     }
 
-    public function updateSubscription($plan)
+    public function updateSubscription(PlanUpdateRequest $request)
     {
         /** @var User $user */
         $user = auth()->user();
         $subscription = $user->getSubscription()->get()->first();
-        $user->subscription($subscription->name)->swap($plan);
+        $user->subscription($subscription->name)->swap($request->form()->stripe_plan());
         return [
             'message' => "Your subscription has been updated",
-            'data' => $plan
+            'data' => $request
         ];
+
     }
 
     public function deleteSubscription(User $user)
     {
-        $user->subscription('main')->cancelNow();
+        $subscription = $user->getSubscription()->get()->first();
+        $user->subscription($subscription->name)->cancelNow();
         return $response = [
             'message' => "Your subscription has been canceled",
-            'data' => $this->user
+            'data' => $user
         ];
     }
 

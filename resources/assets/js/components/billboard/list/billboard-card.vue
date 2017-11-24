@@ -8,12 +8,11 @@
                 <div class="feed-activity-list">
                     <div class="feed-element" v-for="face in billboard.billboard_faces">
                         <a class="pull-left">
-                            <img v-image-preview alt="Billboard Face" class="img-circle" :src="face.photo_url">
+                            <img v-image-preview alt="Billboard Face" class="img-circle" :src="face.photo_url ? face.photo_url : imagedefault">
                         </a>
                         <div class="media-body ">
                             <small class="pull-right">{{face.type}}</small>
                             <strong>{{face.code}}</strong> - Facing {{face.label}}<br>
-                            <small class="text-muted">Rate Card {{face.rate_card | money('$')}}</small>
                         </div>
                     </div>
                 </div>
@@ -75,6 +74,11 @@
         props: {
             team: {required: true},
             billboard: {required: true},
+        },
+        data(){
+            return {
+                imagedefault: '/images/no_image_available.jpeg',
+            }
         },
         methods: {
             edit() {

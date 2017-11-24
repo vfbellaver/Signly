@@ -18,27 +18,33 @@
     </div>
 </template>
 <script>
+
     import DataViewer from '../shared/DataViewer';
     import BillboardFaceForm from './edit/billboard-face-form';
     import * as Slc from "../../vue/http";
 
     export default {
+
         components: {
             DataViewer,
             BillboardFaceForm
         },
+
         data: () => ({
             title: 'Billboard List View',
             source: laroute.route('api.billboard-face.search'),
             defaultColumn: 'code',
             billboardId: null
         }),
+
         methods: {
+
             share(billboard) {
                 console.log(billboard);
                 const win = window.open(billboard.public_url, '_blank');
                 win.focus();
             },
+
             destroy(billboard) {
                 console.log("destroy", billboard);
                 billboard.destroyForm = new SlcForm({});
@@ -47,6 +53,7 @@
                         this.$refs.dataViewer.fetchIndexData();
                     });
             },
+
             edit(billboard) {
                 console.log("edit", billboard);
                 this.billboardId = billboard.billboard_id;
@@ -54,10 +61,11 @@
                     this.$refs.billboardFaceForm.show(billboard);
                 });
             },
+
             billboardFaceUpdated(face) {
                 console.log("billboardFaceUpdated", face);
                 this.$refs.dataViewer.fetchIndexData();
-            }
+            },
         }
     }
 </script>

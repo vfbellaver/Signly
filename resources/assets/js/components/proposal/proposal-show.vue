@@ -12,6 +12,7 @@
                 </li>
                 <li>
                     <a @click="openComments">
+                        <span v-if="commentsView.length >= 1" class="badge badge-danger pull-left">{{commentsView.length}}</span>
                         <icon icon="comments"></icon>
                         Comments
                     </a>
@@ -109,6 +110,7 @@
                 },
                 infoWindowPos: null,
                 gmapInfoWindowClosed: false,
+                commentsView: []
             }
         },
 
@@ -136,6 +138,7 @@
         },
 
         mounted() {
+            this.getComments();
             const self = this;
             this.center = {
                 lat: parseFloat(this.user.lat),
@@ -257,6 +260,14 @@
                     }
                 }
             },
+
+            getComments(){
+                const uri = laroute.route('api.comments.get.not.visualized',{id: this.id});
+                Slc.get(uri).then(response => {
+                    this.commentsView = response;
+                });
+
+            }
         }
     }
 </script>

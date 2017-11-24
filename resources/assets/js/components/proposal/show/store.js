@@ -122,7 +122,8 @@ export default new Vuex.Store({
             form.timezone = moment.tz.guess();
             const uri = laroute.route('comment.store');
             return Slc.post(uri, form).then(response => {
-                commit('commentSaved', response.data);
+                console.log('response - ',response);
+                commit('commentSaved', response);
             });
         }
 

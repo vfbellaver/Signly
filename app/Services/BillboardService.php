@@ -10,6 +10,7 @@ use App\Forms\BillboardForm;
 use App\Models\Billboard;
 use App\Models\BillboardFace;
 use Carbon\Carbon;
+use function GuzzleHttp\Psr7\str;
 
 class BillboardService
 {
@@ -82,8 +83,8 @@ class BillboardService
             $billboard['faces'] = [];
 
             $i = 1;
-            $required = ['code', 'label', 'rate_card', 'monthly_impressions', 'duration'];
-            $optional = ['height', 'width', 'reads', 'notes', 'max_ads', 'lights_on', 'lights_off', 'billboard_id', 'photo_url', 'is_illuminated'];
+            $required = ['code', 'label', 'rate_card', 'monthly_impressions'];
+            $optional = ['type','duration','height', 'width', 'reads', 'notes', 'max_ads', 'lights_on', 'lights_off', 'billboard_id','team_id','photo_url', 'is_illuminated'];
             while (isset($row["face{$i}_code"])) {
                 $face = [];
                 $valid = true;
@@ -109,12 +110,15 @@ class BillboardService
                         continue;
                     }
                     $face[$o] = $row["face{$i}_{$o}"];
+                    $face['team_id'] = auth()->user()->team_id;
+                    $face['slug'] = str_slug($face['code'],'-');
                 }
                 $billboard['faces'][] = $face;
                 $i++;
             }
             $billboards[] = $billboard;
         }
+
         unset($billboard, $data, $face, $filename, $i, $o, $optional, $r, $required, $row, $time, $valid);
 
         return $billboards;
@@ -132,7 +136,6 @@ class BillboardService
                 /** @var Billboard $billboard */
                 $billboard = Billboard::query()->create([
                     'name' => $blb['name'],
-                    'description' => $blb['description'],
                     'address' => $blb['address'],
                     'lat' => $blb['lat'],
                     'lng' => $blb['lng'],
@@ -147,6 +150,10 @@ class BillboardService
 
                 //create as faces relations
                 foreach ($faces as $face) {
+
+                    $face['team_id'] = auth()->user()->team_id;
+                    $face['slug'] = str_slug($face['code'],'-');
+
                     if (strtolower($face['is_illuminated']) == strtolower('No')) {
                         $face['is_illuminated'] = false;
                     } else {

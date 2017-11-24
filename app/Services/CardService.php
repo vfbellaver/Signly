@@ -26,39 +26,82 @@ class CardService
 
     private $key;
 
-    public function __construct(){
+    public function __construct()
+    {
         $this->key = config('services.stripe.secret');
     }
 
-    public function store(User $user,$owner)
+    public function store(User $user, $request)
     {
-
-        Stripe::setApiKey($this->key);
-
-        $customer = Customer::retrieve($user->stripe_id);
-        $card = $customer->sources->retrieve($customer->default_source);
-        $card->name = $owner;
-
         try {
+
+            Stripe::setApiKey($this->key);
+
+            $user->updateCard($request->form()->source());
+
+            $customer = Customer::retrieve($user->stripe_id);
+            $card = $customer->sources->retrieve($customer->default_source);
+            $card->name = $request->form()->owner();
+
             $card->save();
-            return $card;
+
+            return [
+                'message' => 'Card Updated',
+            ];
+
         } catch (\Stripe\Error\Card $e) {
+            // Since it's a decline, \Stripe\Error\Card will be caught
             $body = $e->getJsonBody();
             $err = $body['error'];
-            return $e->getHttpStatus();
+
+            return [
+                'message' => $err['message'],
+            ];
+
         } catch (\Stripe\Error\RateLimit $e) {
-            return $e;
+            $body = $e->getJsonBody();
+            $err = $body['error'];
+
+            return [
+                'message' => $err['message'],
+            ];
         } catch (\Stripe\Error\InvalidRequest $e) {
-            return $e;
+            $body = $e->getJsonBody();
+            $err = $body['error'];
+
+            return [
+                'message' => $err['message'],
+            ];
         } catch (\Stripe\Error\Authentication $e) {
-            return $e;
+            $body = $e->getJsonBody();
+            $err = $body['error'];
+
+            return [
+                'message' => $err['message'],
+            ];
         } catch (\Stripe\Error\ApiConnection $e) {
-            return $e;
+            $body = $e->getJsonBody();
+            $err = $body['error'];
+
+            return [
+                'message' => $err['message'],
+            ];
         } catch (\Stripe\Error\Base $e) {
-            return $e;
+            $body = $e->getJsonBody();
+            $err = $body['error'];
+
+            return [
+                'message' => $err['message'],
+            ];
         } catch (Exception $e) {
-            return $e;
+            $body = $e->getJsonBody();
+            $err = $body['error'];
+
+            return [
+                'message' => $err['message'],
+            ];
         }
+
 
     }
 
@@ -89,14 +132,13 @@ class CardService
         $i = 0;
 
         foreach ($invoices as $invoice) {
-            $arrayInvoices[$i]   =  array([
+            $arrayInvoices[$i] = array([
                 'date' => $invoice->date()->toFormattedDateString(),
                 'total' => $invoice->total(),
                 'id' => $invoice->id,
             ]);
             $i++;
         };
-
 
         return $arrayInvoices;
     }

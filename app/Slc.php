@@ -28,6 +28,63 @@ class Slc
             'pusher' => env('PUSHER_APP_KEY'),
             'plans' => [
                 [
+                    'id' => 'master',
+                    'name' => 'MASTER',
+                    'interval' => 'Monthly',
+                    'trial_days' => 30,
+                    'price' => 10,
+                    'features' => [
+                        'users' => 'Custom',
+                        'billboards' => 'Unlimited',
+                        'pdfs' => 'Custom',
+                        'proposals' => 'Custom',
+                        'contracts' => 'Custom',
+                        'scheduler' => 'Yes',
+                        'whiteLabel' => 'Yes',
+                        'valueMonthly' => 'Call For Quote',
+                        'valueAnnual' => 'Call For Quote',
+                    ]
+                ],
+
+                [
+                    'id' => 'standard',
+                    'name' => 'STANDARD',
+                    'interval' => 'Monthly',
+                    'trial_days' => 30,
+                    'price' => 10,
+                    'features' => [
+                        'users' => 'Custom',
+                        'billboards' => 'Unlimited',
+                        'pdfs' => 'Custom',
+                        'proposals' => 'Custom',
+                        'contracts' => 'Custom',
+                        'scheduler' => 'Yes',
+                        'whiteLabel' => 'Yes',
+                        'valueMonthly' => 'Call For Quote',
+                        'valueAnnual' => 'Call For Quote',
+                    ]
+                ],
+
+                [
+                    'id' => 'basic',
+                    'name' => 'BASIC',
+                    'interval' => 'Monthly',
+                    'trial_days' => 30,
+                    'price' => 10,
+                    'features' => [
+                        'users' => 'Custom',
+                        'billboards' => 'Unlimited',
+                        'pdfs' => 'Custom',
+                        'proposals' => 'Custom',
+                        'contracts' => 'Custom',
+                        'scheduler' => 'Yes',
+                        'whiteLabel' => 'Yes',
+                        'valueMonthly' => 'Call For Quote',
+                        'valueAnnual' => 'Call For Quote',
+                    ]
+                ],
+
+                [
                     'id' => self::PLAN_1['id'],
                     'name' => self::PLAN_1['name'],
                     'interval' => 'Monthly',
@@ -45,6 +102,7 @@ class Slc
                         'valueAnnual' => 'Call For Quote',
                     ]
                 ],
+
                 [
                     'id' => self::PLAN_2['id'],
                     'name' => self::PLAN_2['name'],
@@ -63,6 +121,7 @@ class Slc
                         'valueAnnual' => '449',
                     ]
                 ],
+
                 [
                     'id' => self::PLAN_3['id'],
                     'name' => self::PLAN_3['name'],
@@ -81,6 +140,7 @@ class Slc
                         'valueAnnual' => '349',
                     ]
                 ],
+
                 [
                     'id' => self::PLAN_4['id'],
                     'name' => self::PLAN_4['name'],

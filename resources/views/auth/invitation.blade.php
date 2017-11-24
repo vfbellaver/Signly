@@ -22,7 +22,7 @@
                     <input type="hidden" name="invitation_token" value="{{ $token }}"/>
 
                     <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                        <input id="name" type="name" class="form-control" name="name" required
+                        <input id="name" type="name" class="form-control" name="name"
                                placeholder="Name">
 
                         @if ($errors->has('name'))
@@ -32,7 +32,7 @@
                         @endif
                     </div>
                     <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                        <input id="password" type="password" class="form-control" name="password" required
+                        <input id="password" type="password" class="form-control" name="password"
                                placeholder="Password">
 
                         @if ($errors->has('password'))
@@ -43,7 +43,7 @@
                     </div>
                     <div class="form-group{{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
                         <input id="password_confirmation" type="password"
-                               class="form-control" name="password_confirmation" required
+                               class="form-control" name="password_confirmation"
                                placeholder="Confirm your password">
 
                         @if ($errors->has('password_confirmation'))

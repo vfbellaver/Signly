@@ -59,17 +59,8 @@ class BillboardsController extends Controller
         $team = Team::query()->where('teams.slug', 'LIKE', '%' . $teamSlug . '%')->get()->first();
         $faces = BillboardFace::query()->where('billboard_faces.slug', 'LIKE', '%' . $faceCode . '%')->get()->first();
 
-        /*
 
-        $url = $this->service->createPOVUrl($faces);
 
-        $client = new Client();
-
-        $path = fopen(storage_path().'/app/public/images/pov_img.png','w') or die('Something went wrong');
-        $client->request('GET',$url,['timeout' => 10.29,'save_to' => $path]);
-
-        */
-
-        return view('billboard.public', compact('team', 'faces'));
+         return view('billboard.public',compact('team','faces'));
     }
 }
