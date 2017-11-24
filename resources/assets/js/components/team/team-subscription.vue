@@ -7,8 +7,8 @@
             <div class="ibox-content">
                 <table class="table table-borderless m-b-none" v-cloak="true">
                     <tbody>
-                    <tr v-for="(plan , index ) in plans">
-                        <td><h3><strong>{{plan.name}}</strong></h3></td>
+                    <tr v-for="(plan , index ) in plans" :class="{'first' : !index}">
+                        <td><h3 class="text-uppercase"><strong>{{plan.name}}</strong></h3></td>
                         <td>
                             <button class="btn btn-default" type="button" @click="showFeatures(plan)">
                                 <i class="fa fa-btn fa-star-o"></i>
@@ -63,6 +63,12 @@
 
     .ibox-content {
         clear: none;
+
+        tr.first {
+            td {
+                border-top: none;
+            }
+        }
     }
 </style>
 

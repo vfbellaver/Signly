@@ -31,6 +31,8 @@
                                     <td>{{ user.role.name }}</td>
                                     <td v-if="!loggedUser.impersonated">
                                         <btn-success size="xs"
+                                                     data-toggle="tooltip"
+                                                     title="Impersonate"
                                                      :disabled="loggedUser.id == user.id"
                                                      @click.native="impersonate(user)">
                                             <spinner v-if="user.busy"></spinner>
