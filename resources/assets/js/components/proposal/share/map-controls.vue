@@ -169,7 +169,6 @@
             return {
                 sendDown: true,
                 form: this.buildForm(),
-                commentsView: null,
                 user: window.Slc.user,
             }
         },
@@ -205,8 +204,6 @@
         },
         mounted() {
             const self = this;
-
-            this.updateComments();
 
             const pullComments = function () {
                 if (self.form.comment) {
@@ -254,22 +251,6 @@
                 this.$emit('centerFace', face);
             },
 
-            updateComments() {
-
-                if(this.user) {
-
-                    const uri = laroute.route('api.update.comments');
-
-                    this.commentsView = new SlcForm ({
-                        id : this.$store.state.proposal.id,
-                    });
-
-                    Slc.put(uri,this.commentsView).then(response => {
-                       console.log('Deu certo', response);
-                    });
-
-                };
-            },
 
             comment(evt) {
                 if (evt.shiftKey) {

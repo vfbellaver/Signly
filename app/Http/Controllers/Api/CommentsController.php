@@ -8,21 +8,21 @@ use App\Http\Controllers\Controller;
 
 class CommentsController extends Controller
 {
-    public function getNotVisualized($id) {
+    public function getNotVisualized($id)
+    {
 
-        $comment = Comment::query()
-            ->where('proposal_id', '=',$id,'and','visualized','=',false)
-        ->get()->toArray();
+        $comment = Comment::query()->where('proposal_id','=',$id)->where('visualized','=',false)
+            ->get()->toArray();
 
         return $comment;
 
     }
 
-    public function updateComments (Request $request)
+    public function updateComments(Request $request)
     {
 
-        Comment::query()->insert(['visualized' => true])
-            ->where('proposal_id', '=',$request->input('id'));
+        Comment::query()->where('proposal_id', '=', $request->input('id'))
+            ->update(['visualized' => true]);
 
         return 'ok';
     }

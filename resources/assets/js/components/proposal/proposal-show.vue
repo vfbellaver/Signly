@@ -162,7 +162,18 @@
 
         methods: {
             openComments() {
+
                 this.$refs.comments.show();
+
+                this.commentsView = new SlcForm ({
+                    id : this.$store.state.proposal.id,
+                });
+
+                const uri = laroute.route('api.update.comments');
+
+                Slc.put(uri,this.commentsView).then(response => {
+                    console.log('Deu certo', response);
+                });
             },
             markerIcon(marker) {
 
