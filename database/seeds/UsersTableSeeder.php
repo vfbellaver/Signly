@@ -22,28 +22,28 @@ class UsersTableSeeder extends Seeder
         }
     }
 
-    private function resolvePlan($planId = null)
+    private function resolveStripePlan($plan = null)
     {
-        $plans = ['basic', 'standard', 'master'];
+        $plans = [\App\Slc::PLAN_1, \App\Slc::PLAN_2, \App\Slc::PLAN_3, \App\Slc::PLAN_4];
 
-        if (!$planId) {
-            $planId = $plans[rand(0, 2)];
+        if (!$plan) {
+            $plan = $plans[rand(0, 3)];
         }
 
-        $plan = null;
+        $stripePlan = null;
         try {
-            $plan = Plan::retrieve($planId);
+            $stripePlan = Plan::retrieve($plan['id']);
         } catch (Exception $e) {
-            $plan = Plan::create(array(
-                "id" => $planId,
-                "name" => $planId,
+            $stripePlan = Plan::create(array(
+                "id" => $plan['id'],
+                "name" => $plan['name'],
                 "amount" => 250,
                 "interval" => "month",
                 "currency" => "usd",
             ));
         }
 
-        return $plan;
+        return $stripePlan;
     }
 
     private function stripeToken(User $user, $card = null)
@@ -63,15 +63,17 @@ class UsersTableSeeder extends Seeder
             $card = $cards[rand(0, (count($cards) - 1))];
         }
 
-        $token = Token::create(array(
-            "card" => array(
+        $data = [
+            "card" => [
                 "name" => $user->name,
                 "number" => $card,
                 "exp_month" => rand(1, 12),
                 "exp_year" => Carbon::now()->addYears(rand(1, 5))->format('Y'),
                 "cvc" => rand(100, 999),
-            )
-        ));
+            ]
+        ];
+
+        $token = Token::create($data);
 
         return $token;
     }
@@ -83,7 +85,6 @@ class UsersTableSeeder extends Seeder
         $user = factory(\App\Models\User::class)->create([
             'name' => 'DevSquad',
             'email' => 'team@devsquad.com',
-            'card_expiration' => Carbon::createFromFormat('m/Y', '11/2017')->endOfMonth(),
             'password' => bcrypt('devsquad##'),
             'team_id' => $team->id,
         ]);
@@ -129,10 +130,10 @@ class UsersTableSeeder extends Seeder
                     'team_id' => $team->id
                 ]);
             $owner->attachRole(Defender::findRole(User::ACCOUNT_OWNER));
-            $this->subscribeTeamOwners($owner);
-
             $team->owner_id = $owner->id;
             $team->save();
+
+            $this->subscribeTeamOwners($owner);
 
             factory(\App\Models\User::class, 2)
                 ->create([
@@ -145,13 +146,14 @@ class UsersTableSeeder extends Seeder
 
     private function subscribeTeamOwners(User $user)
     {
-        if (!$user->is_team_owner) return;
-        $plan = $this->resolvePlan();
+        $plan = $this->resolveStripePlan();
         $token = $this->stripeToken($user);
-        $user->newSubscription('main', $plan->id)
+        $subscription = $user->newSubscription($plan->name, $plan->id)
             ->trialDays(30)
             ->create($token->id, ['email' => $user->email]);
+        $user = User::query()->find($user->id);
 
+        $user->trial_ends_at = $subscription->trial_ends_at;
         $dateStr = "{$token->card->exp_year}-{$token->card->exp_month}-01";
         $user->card_expiration = Carbon::createFromFormat("Y-m-d", $dateStr)->endOfMonth();
         $user->save();

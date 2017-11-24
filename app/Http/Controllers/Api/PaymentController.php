@@ -2,14 +2,11 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Forms\UserForm;
 use App\Http\Requests\CardsCreateRequest;
 use App\Http\Requests\TokenCreateRequest;
 use App\Http\Requests\PaymentRegistrationRequest;
-use App\Models\Team;
 use App\Models\User;
 use App\Services\CardService;
-use Carbon\Carbon;
 use App\Http\Controllers\Controller;
 use Defender;
 use Stripe\Customer;
@@ -45,34 +42,34 @@ class PaymentController extends Controller
 
     public function updateCard(CardsCreateRequest $request)
     {
+        /** @var User $user */
         $user = User::query()->find(auth()->id());
         $user->updateCard($request->form()->source());
         $data = $this->service->store($user, $request->form()->owner());
 
         return $response = [
-            'message' => "Card updated with successful",
+            'message' => "Your payment method has been updated",
             'data' => $data
         ];
     }
 
     public function updateSubscription($plan)
     {
-        $user = User::query()->find(auth()->id());
-        $user->subscription('main')->swap($plan);
-
+        /** @var User $user */
+        $user = auth()->user();
+        $subscription = $user->getSubscription()->get()->first();
+        $user->subscription($subscription->name)->swap($plan);
         return [
-
-            'message' => "Plan updated with successful",
+            'message' => "Your subscription has been updated",
             'data' => $plan
         ];
-
     }
 
     public function deleteSubscription(User $user)
     {
         $user->subscription('main')->cancelNow();
         return $response = [
-            'message' => "Plan canceled with successful",
+            'message' => "Your subscription has been canceled",
             'data' => $this->user
         ];
     }

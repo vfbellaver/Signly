@@ -14,6 +14,7 @@
 <body class="{{$bodyClass}}">
 
 <div id="app">
+    <notification></notification>
     @yield('base-content')
 </div>
 

@@ -31,7 +31,8 @@
                 </table>
                 <hr>
                 <btn-submit class="btn btn-success"
-                            @click.native="updateSubscription" :disabled="planForm.busy">
+                            @click.native="updateSubscription"
+                            :disabled="planForm.busy || planForm.stripe_plan == user.subscription.stripe_plan">
                     <spinner v-if="planForm.busy"></spinner>
                     <span>Update</span>
                 </btn-submit>
@@ -83,6 +84,7 @@
                 plans: [],
                 planForm: null,
                 features: null,
+                user: window.Slc.user,
             }
         },
 
@@ -90,10 +92,10 @@
             this.reload();
             this.plans = Slc.plans;
             this.userForm = new SlcForm({
-                id: Slc.user.id,
+                id: this.user.id,
             });
             this.planForm = new SlcForm({
-                stripe_plan: Slc.user.subscription[0].stripe_plan,
+                stripe_plan: this.user.subscription.stripe_plan,
             });
         },
 
@@ -110,7 +112,7 @@
                     });
             },
 
-            getToken(){
+            getToken() {
 
                 let number = this.userForm.number;
                 this.userForm.number = number.replace(/\s/g, "");
@@ -123,27 +125,31 @@
 
             },
 
-            showFeatures(plan){
+            showFeatures(plan) {
                 this.features = plan.features;
                 this.$refs.terms.show();
             },
 
-            choosePlan(plan){
+            choosePlan(plan) {
                 this.planForm.stripe_plan = plan.id;
                 console.log('choosePlan ', plan.id);
             },
 
-            deleteSubscription(){
-                const uri = laroute.route("api.payment.delete.subscription",{user: this.userForm.id});
-                SLC.delete(uri,this.userForm)
+            deleteSubscription() {
+                const uri = laroute.route("api.payment.delete.subscription", {user: this.userForm.id});
+                SLC.delete(uri, this.userForm)
                     .then((response) => {
                         console.log('Subscription Deleted', response);
                     });
             },
 
-            updateSubscription(){
+            updateSubscription() {
                 this.planForm.busy = true;
-                SLC.get(laroute.route("api.payment.update.subscription", {plan: this.planForm.stripe_plan}))
+                SLC.sendForm('get', laroute.route("api.payment.update.subscription",
+                    {plan: this.planForm.stripe_plan}), this.planForm)
+                    .catch(() => {
+                        this.planForm.busy = false;
+                    })
                     .then((response) => {
                         console.log('Subscription Updated', response);
                         this.planForm.busy = false;

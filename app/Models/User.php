@@ -136,6 +136,8 @@ class User extends Authenticatable
             ];
         };
 
+        $subscription = $this->getSubscription()->get()->first();
+
         return [
             'id' => (int)$this->id,
             'name' => $this->name,
@@ -145,7 +147,7 @@ class User extends Authenticatable
             'roles' => $this->roles->pluck('name')->all(),
             'status' => $this->status,
             'team' => $this->team_id ? $this->team->toArray() : null,
-            'subscription' => $this->getSubscription()->get()->toArray(),
+            'subscription' => $subscription ? $subscription->toArray() : null,
             'pending' => $this->invitation_token != null,
             'impersonated' => $this->isImpersonated(),
 
