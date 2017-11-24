@@ -206,8 +206,6 @@
         mounted() {
             const self = this;
 
-            this.updateComments();
-
             const pullComments = function () {
                 if (self.form.comment) {
                     setTimeout(() => {
@@ -265,7 +263,7 @@
                     });
 
                     Slc.put(uri,this.commentsView).then(response => {
-                       console.log('Deu certo', response);
+                       console.log('Ok.', response);
                     });
 
                 };
