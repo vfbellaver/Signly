@@ -137,7 +137,7 @@
 
             choosePlan(plan) {
                 this.planForm.stripe_plan = plan.id;
-                console.log('choosePlan ', plan.id, 'Name', plan.name);
+                console.log('choosePlan ', plan.id);
             },
 
             deleteSubscription() {

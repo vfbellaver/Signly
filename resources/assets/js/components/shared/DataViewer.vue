@@ -133,7 +133,11 @@
             btnEdit: {require: false, default: false},
             btnDestroy: {require: false, default: false},
             btnShare: {require: false, default: false},
-            btnOptional: {require: false, default: function () { return {enabled: false} }}
+            btnOptional: {require: false,
+                default: function () {
+                    return {enabled: false }
+                }
+            }
         },
         data() {
             return {
@@ -166,6 +170,7 @@
         created() {
             this.fetchIndexData();
         },
+
         methods: {
             next() {
                 if (this.model.next_page_url) {
@@ -201,14 +206,20 @@
                         vm.loading = false;
                     })
                     .catch(function (response) {
-                        console.log(response)
+                        console.log(response);
                         vm.loading = false;
                     })
             },
             rowsPerPageChanged() {
                 this.query.page = 1;
                 this.fetchIndexData();
-            }
+            },
+            format(el){
+                console.log('valor - ',el);
+                return String(el)
+                    .split('').reverse().join('').split(/(\d{3})/).filter(Boolean)
+                    .join('.').split('').reverse().join('');
+            },
         }
     }
 </script>
