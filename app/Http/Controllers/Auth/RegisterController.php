@@ -101,7 +101,7 @@ class RegisterController extends Controller
             $user->save();
             $role = Defender::findRole('user');
             $user->attachRole($role);
-
+    
             return redirect()->route('home');
         });
     }
