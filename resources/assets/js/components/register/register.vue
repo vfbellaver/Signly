@@ -36,7 +36,8 @@
                                                     :class="{'active': form.plan && form.plan.id == plan.id}"
                                                     type="button" @click="form.plan = plan">
                                                 <icon v-if="form.plan && form.plan.id == plan.id" icon="check"></icon>
-                                                Select
+                                                <span v-if="form.plan && form.plan.id == plan.id">Selected</span>
+                                                <span v-else>Select</span>
                                             </button>
                                         </td>
                                     </tr>

@@ -17,13 +17,11 @@ class RegisterController extends Controller
 {
     private $key;
     private $service;
-    private $role;
 
     public function __construct(CardService $service)
     {
         $this->service = $service;
         $this->key = config('services.stripe.secret');
-        $this->role = Defender::findRole('admin');
     }
 
     public function register()
@@ -58,15 +56,15 @@ class RegisterController extends Controller
             $team->owner_id = $user->id;
             $team->save();
 
-            $user->attachRole($this->role);
-            $plan = $request->input('plan')['id'];
+            $user->attachRole(Defender::findRole(User::ACCOUNT_OWNER));
+            $plan = $request->input('plan');
             $email = $request->input('email');
             $owner = $request->input('owner');
             $cardToken = request('card');
 
             Stripe::setApiKey($this->key);
 
-            $user->newSubscription('main', $plan)
+            $user->newSubscription($plan['name'], $plan['id'])
                 ->trialDays($trialDays)
                 ->create($cardToken, [
                     'email' => $email,
@@ -91,15 +89,15 @@ class RegisterController extends Controller
     public function registerInvitation(Request $request)
     {
         return DB::transaction(function () use ($request) {
-            $user = User::where('invitation_token', $request->input('invitation_token'))->first();
+            /** @var User $user */
+            $user = User::query()->where('invitation_token', $request->input('invitation_token'))->first();
 
             $user->name = $request->input('name');
             $user->invitation_token = null;
             $user->password = bcrypt($request->input('password'));
             $user->remember_token = str_random(10);
             $user->save();
-            $role = Defender::findRole('user');
-            $user->attachRole($role);
+            $user->attachRole(Defender::findRole(User::ACCOUNT_OWNER));
 
             return redirect()->route('home');
         });
