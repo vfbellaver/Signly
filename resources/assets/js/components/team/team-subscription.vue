@@ -30,7 +30,7 @@
                     </tbody>
                 </table>
                 <hr>
-                <btn-submit class="btn btn-primary"
+                <btn-submit class="btn btn-success"
                             @click.native="updateSubscription"
                             :disabled="planForm.busy || planForm.stripe_plan == user.subscription.stripe_plan">
                     <spinner v-if="planForm.busy"></spinner>
@@ -94,6 +94,7 @@
         },
 
         created() {
+            this.reload();
             this.plans = Slc.plans;
             this.userForm = new SlcForm({
                 id: this.user.id,
@@ -106,7 +107,18 @@
         watch: {},
 
         methods: {
+
+            reload() {
+                let self = this;
+                SLC.get(laroute.route('api.payment.card'))
+                    .then((response) => {
+                        console.log('get Card ', response.data[0]);
+                        self.card = response.data[0];
+                    });
+            },
+
             getToken() {
+
                 let number = this.userForm.number;
                 this.userForm.number = number.replace(/\s/g, "");
 
@@ -138,11 +150,7 @@
 
             updateSubscription() {
                 this.planForm.busy = true;
-                SLC.sendForm('get', laroute.route("api.payment.update.subscription",
-                    {plan: this.planForm.stripe_plan}), this.planForm)
-                    .catch(() => {
-                        this.planForm.busy = false;
-                    })
+                SLC.put(laroute.route("api.payment.update.subscription") , this.planForm)
                     .then((response) => {
                         console.log('Subscription Updated', response);
                         this.planForm.busy = false;

@@ -88,8 +88,8 @@
                 });
             },
 
-            generatePDF(id){
-              window.location = laroute.route('payment.invoice.pdf',{invoice:id});
+            generatePDF(id) {
+                window.location = laroute.route('payment.invoice.pdf', {invoice: id});
             },
 
         }
