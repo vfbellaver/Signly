@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Web;
 use App\Models\User;
 use App\Services\CardService;
 use App\Http\Controllers\Controller;
+use View;
 
 
 class PaymentController extends Controller
@@ -32,7 +33,7 @@ class PaymentController extends Controller
 
         return $user->downloadInvoice($invoiceId, [
             'vendor' => $team->name,
-            'product' => $subscription[0]["stripe_plan"],
+            'product' => $subscription["stripe_plan"],
         ]);
     }
 }
