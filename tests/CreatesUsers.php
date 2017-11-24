@@ -36,7 +36,7 @@ trait CreatesUsers
 
     protected function loginAsUser(array $attributes = []): User
     {
-        return $this->login($attributes, User::USER);
+        return $this->login($attributes, User::ACCOUNT_MEMBER);
     }
 
 
@@ -52,7 +52,7 @@ trait CreatesUsers
 
     protected function createUserUser(array $attributes = []): User
     {
-        return $this->createUser($attributes, User::USER);
+        return $this->createUser($attributes, User::ACCOUNT_MEMBER);
     }
 
 
@@ -89,6 +89,6 @@ trait CreatesUsers
 
     protected function createUserRole()
     {
-        return $this->createRole(User::USER);
+        return $this->createRole(User::ACCOUNT_MEMBER);
     }
 }

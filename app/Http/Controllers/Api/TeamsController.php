@@ -19,7 +19,7 @@ class TeamsController extends Controller
 
     public function __construct(TeamService $service)
     {
-        $this->middleware('needsRole:admin');
+        $this->middleware("needsRole:" . User::ACCOUNT_OWNER);
         $this->service = $service;
     }
 

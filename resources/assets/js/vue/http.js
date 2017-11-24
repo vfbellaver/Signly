@@ -2,7 +2,6 @@ module.exports = {
 
     get(uri) {
         return Slc.fetch('get', uri);
-
     },
 
     find(uri) {
@@ -38,13 +37,12 @@ module.exports = {
                     }
                 })
                 .catch(errors => {
-                    Slc.handleErrors(errors);
+                    Slc.handleErrors(null, errors);
                     reject(errors.data);
                 });
         });
     },
 
-    // --
     upload(uri, files) {
         const data = new FormData();
         for (let i = 0; i < files.length; i++) {
@@ -88,6 +86,7 @@ module.exports = {
                         resolve(data);
                     })
                     .catch(error => {
+                        Slc.handleErrors(form, error);
                         reject(error);
                     });
             });
@@ -97,6 +96,29 @@ module.exports = {
     sendForm(method, uri, form) {
         return new Promise((resolve, reject) => {
             form.startProcessing();
+
+            if (method === 'get') {
+                axios.get(uri)
+                    .then(response => {
+                        form.finishProcessing();
+                        let data = response.data;
+                        if (data.message) {
+                            toastr.success('', data.message);
+                        }
+                        resolve(data);
+                    })
+                    .catch(errors => {
+                        console.log("Ajax Error", errors);
+                        Slc.handleErrors(form, errors);
+                        if (_.has(errors.response, 'data')) {
+                            form.errors.set(errors.response.data.errors);
+                        }
+                        form.busy = false;
+                        reject(errors.data);
+                    });
+                return;
+            }
+
             axios[method](uri, JSON.parse(JSON.stringify(form)))
                 .then(response => {
                     form.finishProcessing();
@@ -126,23 +148,44 @@ module.exports = {
                 });
         });
     },
-    // --
-    handleErrors(form, errors) {
-        if (_.has(errors.response, 'status')) {
-            if (errors.response.status === 401) {
-                window.location = '/';
-            }
 
-            if (form.hasSwal) {
-                swal("Error occurred!", errors.response.data.message, "error");
-                return;
-            } else {
-                Bus.$emit(
-                    'notify',
-                    'error',
-                    errors.response.data.message
-                );
-            }
+    handleErrors(form, errors) {
+        if (form) {
+            form.busy = false;
         }
+        if (!errors || !_.has(errors.response, 'status')) {
+            window.EventBus.$emit(
+                'notify',
+                'error',
+                'Unknown error. This incident has already been reported. Try again later.'
+            );
+            return;
+        }
+
+        if (errors.response.status === 401) {
+            window.location = '/';
+            return;
+        }
+
+        if (errors.response.status === 500) {
+            console.log("Unknown error", errors.response.data.message);
+            window.EventBus.$emit(
+                'notify',
+                'error',
+                'Unknown error. This incident has already been reported. Try again later.'
+            );
+            return;
+        }
+
+        if (form && form.hasSwal) {
+            swal("Error occurred!", errors.response.data.message, "error");
+            return;
+        }
+
+        window.EventBus.$emit(
+            'notify',
+            'error',
+            errors.response.data.message
+        );
     }
 };

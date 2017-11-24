@@ -24,6 +24,7 @@ class PlanUpdateRequest extends BaseRequest
         return [
 
             'stripe_plan' => 'required',
+            'subscription_name' => 'required',
 
         ];
     }

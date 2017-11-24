@@ -7,8 +7,8 @@
             <div class="ibox-content">
                 <table class="table table-borderless m-b-none" v-cloak="true">
                     <tbody>
-                    <tr v-for="(plan , index ) in plans">
-                        <td><h3><strong>{{plan.name}}</strong></h3></td>
+                    <tr v-for="(plan , index ) in plans" :class="{'first' : !index}">
+                        <td><h3 class="text-uppercase"><strong>{{plan.name}}</strong></h3></td>
                         <td>
                             <button class="btn btn-default" type="button" @click="showFeatures(plan)">
                                 <i class="fa fa-btn fa-star-o"></i>
@@ -16,22 +16,23 @@
                             </button>
                         </td>
                         <td>{{plan.price}} / {{plan.interval}}</td>
-                        <td>{{ plan.trial_days }} Day Trial</td>
                         <td class="text-right" style="width: 134px;">
                             <button
                                     class="select btn btn-primary btn-outline"
                                     :class="{'active': planForm.stripe_plan == plan.id}"
                                     type="button" @click="choosePlan(plan)">
                                 <i v-if="planForm.stripe_plan == plan.id" class="fa fa-check"></i>
-                                Select
+                                <span v-if="planForm.stripe_plan == plan.id">Selected</span>
+                                <span v-else>Select</span>
                             </button>
                         </td>
                     </tr>
                     </tbody>
                 </table>
                 <hr>
-                <btn-submit class="btn btn-primary"
-                            @click.native="updateSubscription" :disabled="planForm.busy">
+                <btn-submit class="btn btn-success"
+                            @click.native="updateSubscription"
+                            :disabled="planForm.busy || planForm.stripe_plan == user.subscription.stripe_plan">
                     <spinner v-if="planForm.busy"></spinner>
                     <span>Update</span>
                 </btn-submit>
@@ -62,6 +63,11 @@
 
     .ibox-content {
         clear: none;
+        tr {
+            td {
+                border-top: none !important;
+            }
+        }
     }
 </style>
 
@@ -83,23 +89,36 @@
                 plans: [],
                 planForm: null,
                 features: null,
+                user: window.Slc.user,
             }
         },
 
         created() {
+            this.reload();
             this.plans = Slc.plans;
             this.userForm = new SlcForm({
-                id: Slc.user.id,
+                id: this.user.id,
             });
             this.planForm = new SlcForm({
-                stripe_plan: Slc.user.subscription[0].stripe_plan,
+                stripe_plan: this.user.subscription.stripe_plan,
             });
         },
 
         watch: {},
 
         methods: {
-            getToken(){
+
+            reload() {
+                let self = this;
+                SLC.get(laroute.route('api.payment.card'))
+                    .then((response) => {
+                        console.log('get Card ', response.data[0]);
+                        self.card = response.data[0];
+                    });
+            },
+
+            getToken() {
+
                 let number = this.userForm.number;
                 this.userForm.number = number.replace(/\s/g, "");
 
@@ -111,28 +130,27 @@
 
             },
 
-            showFeatures(plan){
+            showFeatures(plan) {
                 this.features = plan.features;
                 this.$refs.terms.show();
             },
 
-            choosePlan(plan){
+            choosePlan(plan) {
                 this.planForm.stripe_plan = plan.id;
-                console.log('choosePlan ', plan.id);
+                console.log('choosePlan ', plan.id, 'Name', plan.name);
             },
 
-            deleteSubscription(){
-                const uri = laroute.route("api.payment.delete.subscription",{user: this.userForm.id});
-                SLC.delete(uri,this.userForm)
+            deleteSubscription() {
+                const uri = laroute.route("api.payment.delete.subscription", {user: this.userForm.id});
+                SLC.delete(uri, this.userForm)
                     .then((response) => {
                         console.log('Subscription Deleted', response);
                     });
             },
 
-            updateSubscription(){
+            updateSubscription() {
                 this.planForm.busy = true;
-                const uri = laroute.route("api.payment.update.subscription");
-                SLC.put(uri,this.planForm)
+                SLC.put(laroute.route("api.payment.update.subscription") , this.planForm)
                     .then((response) => {
                         console.log('Subscription Updated', response);
                         this.planForm.busy = false;

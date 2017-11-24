@@ -28,6 +28,7 @@
     "fideloper/proxy": "~3.3",
     "filp/whoops": "~2.0",
     "fzaninotto/faker": "~1.4",
+    "lab404/laravel-impersonate": "^1.2",
     "laravel/cashier": "~7.0",
     "laravel/dusk": "^1.1",
     "laravel/framework": "5.5.*",

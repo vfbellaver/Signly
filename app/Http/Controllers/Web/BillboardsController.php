@@ -11,7 +11,6 @@ use App\Models\User;
 use App\Services\BillboardPublicService;
 use bar\foo\baz\Object;
 use GuzzleHttp\Client;
-use GuzzleHttp\Stream\Stream;
 use PhpParser\Node\Expr\Cast\Object_;
 
 class BillboardsController extends Controller
@@ -53,8 +52,8 @@ class BillboardsController extends Controller
 
     public function publicView($teamSlug, $faceCode)
     {
-        $team = Team::query()->where('teams.slug','LIKE','%'.$teamSlug.'%')->get()->first();
-        $faces = BillboardFace::query()->where('billboard_faces.slug','LIKE','%'.$faceCode.'%')->get()->first();
+        $team = Team::query()->where('teams.slug', 'LIKE', '%' . $teamSlug . '%')->get()->first();
+        $faces = BillboardFace::query()->where('billboard_faces.slug', 'LIKE', '%' . $faceCode . '%')->get()->first();
 
          return view('billboard.public',compact('team','faces'));
     }

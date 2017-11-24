@@ -28,7 +28,7 @@
                     <tr>
                         <th class="index">#</th>
                         <th v-for="(column, index) in columns" @click="toggleOrder(column)"
-                            :style="{width: column.width !== undefined ? column.width + 'px' : 'auto'}" 
+                            :style="{width: column.width !== undefined ? column.width + 'px' : 'auto'}"
                             :key="index"
                         >
                             <span>{{column.label}}</span>
@@ -166,7 +166,6 @@
         created() {
             this.fetchIndexData();
         },
-
         methods: {
             next() {
                 if (this.model.next_page_url) {
@@ -202,20 +201,14 @@
                         vm.loading = false;
                     })
                     .catch(function (response) {
-                        console.log(response);
+                        console.log(response)
                         vm.loading = false;
                     })
             },
             rowsPerPageChanged() {
                 this.query.page = 1;
                 this.fetchIndexData();
-            },
-            format(el){
-                console.log('valor - ',el);
-                return String(el)
-                    .split('').reverse().join('').split(/(\d{3})/).filter(Boolean)
-                    .join('.').split('').reverse().join('');
-            },
+            }
         }
     }
 </script>

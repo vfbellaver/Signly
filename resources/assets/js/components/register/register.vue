@@ -19,8 +19,8 @@
                             <div class="table-responsive">
                                 <table class="table table-borderless m-b-none" v-cloak="true">
                                     <tbody>
-                                    <tr v-for="plan in plans">
-                                        <td><strong>{{plan.name}}</strong></td>
+                                    <tr v-for="plan in plans" :class="{'first' : !index}">
+                                        <td class="text-uppercase"><strong>{{plan.name}}</strong></td>
                                         <td>
                                             <button class="btn btn-default" type="button"
                                                     @click="showPlanFeatures(plan)">
@@ -36,7 +36,8 @@
                                                     :class="{'active': form.plan && form.plan.id == plan.id}"
                                                     type="button" @click="form.plan = plan">
                                                 <icon v-if="form.plan && form.plan.id == plan.id" icon="check"></icon>
-                                                Select
+                                                <span v-if="form.plan && form.plan.id == plan.id">Selected</span>
+                                                <span v-else>Select</span>
                                             </button>
                                         </td>
                                     </tr>
@@ -252,8 +253,16 @@
     .help-block.col-md-offset-4 {
         margin-left: calc(33.33% + 15px);
     }
-    
+
     .control-label.text-left {
         text-align: left !important;
+    }
+
+    .table.table-borderless {
+        tr.first {
+            td {
+                border-top: none;
+            }
+        }
     }
 </style>

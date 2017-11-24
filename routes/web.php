@@ -24,6 +24,8 @@ js;
 })->name('slc.js');
 
 Route::group(['middleware' => ['auth', 'timezone']], function () {
+    Route::impersonate();
+
     Route::get('/ ', 'Web\HomeController@index')->name('home');
 
     foreach (File::files(app()->path() . '/Routes/auth') as $file) {
