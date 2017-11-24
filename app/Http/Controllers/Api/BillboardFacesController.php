@@ -47,6 +47,7 @@ class BillboardFacesController extends Controller
                         'width' => 50,
                         'height' => 33,
                     ],
+                    'monthly_impressions' => number_format($item->monthly_impressions, 0)
                 ]);
             });
 

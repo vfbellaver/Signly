@@ -104,8 +104,8 @@ class UsersTableSeeder extends Seeder
 
         /** @var User $user */
         $user = factory(\App\Models\User::class)->create([
-            'name' => 'Admin',
-            'email' => 'admin@signly.com',
+            'name' => 'Mike Admin',
+            'email' => 'mike@signly.com',
             'card_expiration' => Carbon::createFromFormat('m/Y', '11/2017')->endOfMonth(),
             'password' => bcrypt('signly##'),
             'team_id' => $team->id

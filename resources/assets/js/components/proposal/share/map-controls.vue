@@ -14,9 +14,7 @@
                     <h5>Billboard Faces</h5>
                     <div class="faces-box">
                         <div class="dd-list" v-if="proposal">
-                            <div class="dd-item"
-                                 v-for="face in $store.state.proposal.billboard_faces"
-                                 :key="face.id">
+                            <div class="dd-item" v-for="face in $store.state.proposal.billboard_faces">
                                 <div class="dd-content">{{face.code}} - {{face.pivot.price | money('$')}}</div>
                                 <div class="dd-action">
                                     <button type="button" class="btn btn-xs btn-default"
@@ -49,8 +47,7 @@
                         <div class="social-footer">
                             <div class="p-h-lg" v-if="!comments.length">Empty</div>
                             <div v-else class="comment-box" ref="comments">
-                                <div class="social-comment" v-for="(comment, index) in comments"
-                                     :key="comment.id">
+                                <div class="social-comment" v-for="(comment, index) in comments">
                                     <div class="media-body">
                                         <a href="#">{{ comment.name }}</a>
                                         {{ comment.comment }}
@@ -159,6 +156,7 @@
     import * as Slc from "../../../vue/http";
     import store from './store';
     import Draggable from 'vuedraggable'
+
     export default {
         props: {},
         store,

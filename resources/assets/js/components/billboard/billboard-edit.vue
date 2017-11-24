@@ -88,7 +88,7 @@
                                     <thead>
                                     <tr>
                                         <th style="width: 64px">ID</th>
-                                        <th>Facing</th>
+                                        <th>Label</th>
                                         <th style="width: 120px">Type</th>
                                         <th style="width: 92px"></th>
                                     </tr>
