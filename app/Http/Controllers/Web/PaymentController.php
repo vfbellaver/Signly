@@ -31,15 +31,6 @@ class PaymentController extends Controller
         $subscription = $user->getSubscription->toArray();
         $team = $user->team;
 
-        return View::make('cashier::receipt', array_merge([
-            'vendor' => $team->name,
-            'product' => $subscription["stripe_plan"],
-        ], [
-            'invoice' => $this,
-            'owner' => $this->owner,
-            'user' => $this->owner,
-        ]));
-
         return $user->downloadInvoice($invoiceId, [
             'vendor' => $team->name,
             'product' => $subscription["stripe_plan"],
