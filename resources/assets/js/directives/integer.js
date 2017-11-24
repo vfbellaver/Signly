@@ -1,21 +1,20 @@
+import Vue from "vue";
+
 Vue.directive('integer', {
 
     bind: function (el, binding) {
         $(el).attr('maxlength', 11);
-        let mask = function () {
+        const mask = function () {
             let v = $(el).val();
             v = v.toString().replace(/[^0-9]/g, "");
             if (v === undefined || v === null || v.length === 0) {
                 return "";
             }
 
-            v = v.replace(/^0*/g, "");
-            v = v.replace(/^(\d{1})(\d{3})$/, "$1.$2");
-            v = v.replace(/^(\d{2})(\d{3})$/, "$1.$2");
-            v = v.replace(/^(\d{3})(\d{3})$/, "$1.$2");
-            v = v.replace(/^(\d{1})(\d{3})(\d{3})$/, "$1.$2.$3");
-            v = v.replace(/^(\d{2})(\d{3})(\d{3})$/, "$1.$2.$3");
-            v = v.replace(/^(\d{3})(\d{3})(\d{3})$/, "$1.$2.$3");
+            v = v.replace(/^$/, "0");
+            v = v.replace(/([\d+,])(\.\d*)$/, "$1");
+            v = v.replace(/^(0*)(\d+)$/, "$2");
+            v = v.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
 
             $(el).val(v);
             let event = new Event('input', {bubbles: true});

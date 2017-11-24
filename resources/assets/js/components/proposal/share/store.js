@@ -63,7 +63,8 @@ export default new Vuex.Store({
         saveComment({commit}, form) {
             const uri = laroute.route('comment.store');
             return Slc.post(uri, form).then(response => {
-                commit('commentSaved', response.data);
+
+                commit('commentSaved', response);
             });
         },
         fetchComments({commit}, proposal) {

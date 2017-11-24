@@ -54,7 +54,6 @@
                                     {{(row[column.name]['data'] === null) ? '-' : (row[column.name]['data'] ? 'Yes' : 'No')}}
                                 </span>
                             </span>
-                            <span v-else-if="column.name == 'monthly_impressions'" v-html="format(row[column.name])"></span>
                             <span v-else v-html="row[column.name]"></span>
                         </td>
                         <td style="white-space:nowrap;">
