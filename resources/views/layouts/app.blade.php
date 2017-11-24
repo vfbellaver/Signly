@@ -20,15 +20,21 @@
                             @if(isset(auth()->user()->name))
                                 <li>
                                     <a data-toggle="dropdown" class="dropdown-toggle" href="#" aria-expanded="true">
-                                        <span v-cloak>@{{user.name}}</span>
+                                        <span v-cloak>
+                                            <i v-if="user.impersonated" class="fa fa-user-secret"></i>
+                                            @{{user.name}}
+                                        </span>
                                         <b class="caret"></b>
                                     </a>
                                     <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                                        @impersonating
+                                        <li><a href="{{ route('impersonate.leave') }}">Leave impersonation</a></li>
+                                        <li class="divider"></li>
+                                        @endImpersonating
                                         <li><a href="{{route('user.settings')}}">Your Settings</a></li>
                                         @if(auth()->user()->is_team_owner)
                                             <li><a href="{{route('team.settings')}}">Company Settings</a></li>
                                         @endif
-                                        <li class="divider"></li>
                                         <li><a href="javascript:;"
                                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
                                             >Logout</a></li>

@@ -14,9 +14,10 @@ class User extends Authenticatable
 {
     use Notifiable, HasApiTokens, HasDefender, Billable;
 
-    const SUPER_ADMIN = 'slc';
-    const ADMIN = 'admin';
-    const USER = 'user';
+    const ADMIN = 'Admin';
+    const SUPER_ADMIN = 'DevSquad';
+    const ACCOUNT_OWNER = 'Account Owner';
+    const ACCOUNT_MEMBER = 'Account Member';
 
     protected $fillable = [
         'name',
@@ -84,6 +85,26 @@ class User extends Authenticatable
         $isTeamOwner = $this->team->owner_id == $this->id;
         return $isTeamOwner;
     }
+
+    public function canImpersonate()
+    {
+        $roles = $this->roles->pluck('name')->all();
+        if (session()->exists(config('laravel-impersonate.session_key'))) {
+            return true;
+        }
+        return in_array(self::ADMIN, $roles);
+    }
+
+    public function canBeImpersonated()
+    {
+        $roles = $this->roles->pluck('name')->all();
+        return !in_array(self::SUPER_ADMIN, $roles);
+    }
+
+    public function isImpersonated()
+    {
+        return session()->exists(config('laravel-impersonate.session_key'));
+    }
     #endregion
 
     #region Queries
@@ -115,16 +136,20 @@ class User extends Authenticatable
             ];
         };
 
+        $subscription = $this->getSubscription()->get()->first();
+
         return [
             'id' => (int)$this->id,
             'name' => $this->name,
             'photo_url' => $this->photo_url,
             'email' => $this->email,
             'role' => $role,
+            'roles' => $this->roles->pluck('name')->all(),
             'status' => $this->status,
             'team' => $this->team_id ? $this->team->toArray() : null,
-            'subscription' => $this->getSubscription()->get()->toArray(),
+            'subscription' => $subscription ? $subscription->toArray() : null,
             'pending' => $this->invitation_token != null,
+            'impersonated' => $this->isImpersonated(),
 
             'stripe_id' => $this->stripe_id,
             'card_brand' => $this->card_brand,

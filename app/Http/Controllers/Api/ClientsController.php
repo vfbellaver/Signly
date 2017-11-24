@@ -16,7 +16,6 @@ class ClientsController extends Controller
 
     public function __construct(ClientService $service)
     {
-        $this->middleware('needsRole:admin');
         $this->service = $service;
     }
 

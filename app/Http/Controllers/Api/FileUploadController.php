@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\UploadedFile;
 use Storage;
 
 class FileUploadController extends Controller
@@ -13,6 +14,8 @@ class FileUploadController extends Controller
         $files = request()->file('file');
 
         $storedFiles = [];
+
+        /** @var UploadedFile $file */
         foreach ($files as $file) {
             $name = str_random(64);
             $extension = $file->getClientOriginalExtension();

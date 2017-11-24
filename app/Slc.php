@@ -4,6 +4,11 @@ namespace App;
 
 class Slc
 {
+    const PLAN_1 = ['id' => 'enterprise', 'name' => 'Enterprise Team'];
+    const PLAN_2 = ['id' => 'company', 'name' => 'Company Team'];
+    const PLAN_3 = ['id' => 'growing', 'name' => 'Growing Team'];
+    const PLAN_4 = ['id' => 'solo', 'name' => 'Solo'];
+
     public static function scriptVariables()
     {
         $user = self::getCurrentUser();
@@ -80,8 +85,8 @@ class Slc
                 ],
 
                 [
-                    'id' => 'enterprise-team',
-                    'name' => 'ENTERPRISE TEAM',
+                    'id' => self::PLAN_1['id'],
+                    'name' => self::PLAN_1['name'],
                     'interval' => 'Monthly',
                     'trial_days' => 30,
                     'price' => 10,
@@ -99,8 +104,8 @@ class Slc
                 ],
 
                 [
-                    'id' => 'company-team',
-                    'name' => 'COMPANY-TEAM',
+                    'id' => self::PLAN_2['id'],
+                    'name' => self::PLAN_2['name'],
                     'interval' => 'Monthly',
                     'trial_days' => 30,
                     'price' => 20,
@@ -118,8 +123,8 @@ class Slc
                 ],
 
                 [
-                    'id' => 'growing-team',
-                    'name' => 'GROWING-TEAM',
+                    'id' => self::PLAN_3['id'],
+                    'name' => self::PLAN_3['name'],
                     'interval' => 'Monthly',
                     'trial_days' => 30,
                     'price' => 30,
@@ -137,8 +142,8 @@ class Slc
                 ],
 
                 [
-                    'id' => 'solo-team',
-                    'name' => 'SOLO TEAM',
+                    'id' => self::PLAN_4['id'],
+                    'name' => self::PLAN_4['name'],
                     'interval' => 'Monthly',
                     'trial_days' => 30,
                     'price' => 30,
@@ -154,7 +159,6 @@ class Slc
                         'valueAnnual' => '449',
                     ]
                 ]
-
             ]
         ];
     }

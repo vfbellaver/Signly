@@ -2,15 +2,12 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Forms\UserForm;
 use App\Http\Requests\CardsCreateRequest;
 use App\Http\Requests\PlanUpdateRequest;
 use App\Http\Requests\TokenCreateRequest;
 use App\Http\Requests\PaymentRegistrationRequest;
-use App\Models\Team;
 use App\Models\User;
 use App\Services\CardService;
-use Carbon\Carbon;
 use App\Http\Controllers\Controller;
 use Defender;
 use Stripe\Customer;
@@ -28,7 +25,7 @@ class PaymentController extends Controller
         $this->key = config('services.stripe.secret');
         Stripe::setApiKey($this->key);
         $this->service = $service;
-        $this->role = Defender::findRole('user');
+        $this->role = Defender::findRole(User::ACCOUNT_MEMBER);
     }
 
     public function getCard()
@@ -46,28 +43,35 @@ class PaymentController extends Controller
 
     public function updateCard(CardsCreateRequest $request)
     {
+        /** @var User $user */
         $user = User::query()->find(auth()->id());
         $data = $this->service->store($user, $request);
 
-        return $data;
+        return $response = [
+            'message' => "Your payment method has been updated",
+            'data' => $data
+        ];
     }
 
     public function updateSubscription(PlanUpdateRequest $request)
     {
-        $user = User::query()->find(auth()->id());
-        $user->subscription('main')->swap($request->form()->stripe_plan());
+        /** @var User$user */
+        $user =auth()->user();
+        $subscription = $user->getSubscription()->get()->first();
+        $user->subscription($subscription->name)->swap($request->form()->stripe_plan());
 
         return $response = [
-            'message' => "Plan updated with successful",
-        ];
 
+            'message' => "Your subscription has been updated ",
+
+        ];
     }
 
     public function deleteSubscription(User $user)
     {
         $user->subscription('main')->cancelNow();
         return $response = [
-            'message' => "Plan canceled with successful",
+            'message' => "Your subscription has been canceled",
             'data' => $this->user
         ];
     }

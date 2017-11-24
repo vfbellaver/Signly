@@ -25,6 +25,9 @@ class BillboardsController extends Controller
 
     public function index()
     {
+        $user = auth()->user();
+        if (true) ;
+
         return view('billboard.index');
     }
 
@@ -53,8 +56,10 @@ class BillboardsController extends Controller
 
     public function publicView($teamSlug, $faceCode)
     {
-        $team = Team::query()->where('teams.slug','LIKE','%'.$teamSlug.'%')->get()->first();
-        $faces = BillboardFace::query()->where('billboard_faces.slug','LIKE','%'.$faceCode.'%')->get()->first();
+        $team = Team::query()->where('teams.slug', 'LIKE', '%' . $teamSlug . '%')->get()->first();
+        $faces = BillboardFace::query()->where('billboard_faces.slug', 'LIKE', '%' . $faceCode . '%')->get()->first();
+
+
 
          return view('billboard.public',compact('team','faces'));
     }

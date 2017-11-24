@@ -24,7 +24,7 @@
                             {{user.team.name}}
                         </td>
                         <td class="footable-visible">
-                            {{user.subscription[0].stripe_plan}}
+                            {{user.subscription.stripe_plan}}
                         </td>
                         <td class="footable-visible">
                             {{invoice.total}}
@@ -34,7 +34,7 @@
                         </td>
                         <td class="footable-visible">
                             <button class="btn btn-primary btn-xs"
-                            @click="generatePDF(invoice.id)"
+                                    @click="generatePDF(invoice.id)"
                             >
                                 <i class="fa fa-file-pdf-o"></i>
                             </button>
@@ -75,13 +75,13 @@
             }
         },
 
-        created(){
+        created() {
             this.getInvoices();
         },
 
         methods: {
 
-            getInvoices(){
+            getInvoices() {
                 SLC.get(laroute.route('api.payment.invoices')).then((response) => {
                     this.invoices = response[0];
                     console.log('Invoices ', response[0]);
@@ -89,8 +89,7 @@
             },
 
             generatePDF(id){
-                debugger;
-               window.location = laroute.route('payment.invoice.pdf',{invoice:id});
+              window.location = laroute.route('payment.invoice.pdf',{invoice:id});
             },
 
         }

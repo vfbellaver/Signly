@@ -28,7 +28,7 @@
                     <tr>
                         <th class="index">#</th>
                         <th v-for="(column, index) in columns" @click="toggleOrder(column)"
-                            :style="{width: column.width !== undefined ? column.width + 'px' : 'auto'}" 
+                            :style="{width: column.width !== undefined ? column.width + 'px' : 'auto'}"
                             :key="index"
                         >
                             <span>{{column.label}}</span>
@@ -133,7 +133,11 @@
             btnEdit: {require: false, default: false},
             btnDestroy: {require: false, default: false},
             btnShare: {require: false, default: false},
-            btnOptional: {require: false, default: function () { return {enabled: false} }}
+            btnOptional: {require: false,
+                default: function () {
+                    return {enabled: false }
+                }
+            }
         },
         data() {
             return {

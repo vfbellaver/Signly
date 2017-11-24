@@ -19,7 +19,7 @@
                                         Company profile
                                     </a>
                                 </li>
-                                <li>
+                                <li v-if="false">
                                     <a data-toggle="tab" href="#tab-membership" aria-expanded="false">
                                         <i class="fa fa-fw fa-btn fa-users"></i>
                                         Membership

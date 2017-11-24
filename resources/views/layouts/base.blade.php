@@ -35,6 +35,7 @@
 <!-- End Google Tag Manager (noscript) -->
 
 <div id="app">
+    <notification></notification>
     @yield('base-content')
 </div>
 
