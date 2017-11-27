@@ -25,7 +25,7 @@ class TestCommand extends Command
 
     public function handle()
     {
-        /** @var Comment $commment */
+        /** @var Comment $comment */
         $comment = Comment::query()->find(1);
         broadcast(new CommentCreated($comment));
     }

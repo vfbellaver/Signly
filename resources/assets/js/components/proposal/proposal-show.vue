@@ -158,6 +158,13 @@
                 {
                     deep: true
                 });
+
+            window.EventBus.$on('CommentCreated', e => {
+                if (e.comment.proposal_id !== self.id) {
+                    return;
+                }
+                //todo update show!
+            });
         },
 
         methods: {
@@ -261,8 +268,8 @@
                 }
             },
 
-            getComments(){
-                const uri = laroute.route('api.comments.get.not.visualized',{id: this.id});
+            getComments() {
+                const uri = laroute.route('api.comments.get.not.visualized', {id: this.id});
                 Slc.get(uri).then(response => {
                     this.commentsView = response;
                 });
