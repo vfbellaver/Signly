@@ -31,6 +31,22 @@ input:-webkit-autofill {
   -webkit-box-shadow: 0 0 0 1000px white inset !important;
 }
 
+// Color Picker Photoshop
+
+.color-picker {
+
+  .vc-photoshop {
+    background: inherit;
+    border-radius: 4px;
+    /* -webkit-box-shadow: 0 0 0 1px rgba(0,0,0,.25), 0 8px 16px rgba(0,0,0,.15); */
+    /* box-shadow: 0 0 0 1px rgba(0,0,0,.25), 0 8px 16px rgba(0,0,0,.15); */
+    -webkit-box-sizing: initial;
+    box-sizing: initial;
+    /* width: 513px; */
+    font-family: Roboto;
+
+  }
+}
 
 // Borders
 $laravel-border-color: darken($body-bg, 10%);

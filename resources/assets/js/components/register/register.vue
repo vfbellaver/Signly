@@ -19,7 +19,7 @@
                             <div class="table-responsive">
                                 <table class="table table-borderless m-b-none" v-cloak="true">
                                     <tbody>
-                                    <tr v-for="plan in plans" :class="{'first' : !index}">
+                                    <tr v-for="plan in plans">
                                         <td class="text-uppercase"><strong>{{plan.name}}</strong></td>
                                         <td>
                                             <button class="btn btn-default" type="button"

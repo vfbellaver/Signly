@@ -46,6 +46,7 @@ export default new Vuex.Store({
     },
 
     actions: {
+
         getProposal({commit}, proposalId) {
             const url = laroute.route('public.api.proposal.show', {proposal: proposalId});
             Slc.find(url).then((proposal) => {
@@ -54,23 +55,28 @@ export default new Vuex.Store({
                 commit('setComments', proposal.comments);
             });
         },
+
         setFace({commit}, face) {
             commit('setFace', face);
         },
+
         setId({commit}, id) {
             commit('setId', id);
         },
+
         saveComment({commit}, form) {
             const uri = laroute.route('comment.store');
             return Slc.post(uri, form).then(response => {
-                commit('commentSaved', response.data);
+
+                commit('commentSaved', response);
             });
         },
+
         fetchComments({commit}, proposal) {
             const uri = laroute.route('comment.index', {proposal: proposal, timezone: moment.tz.guess()});
             return Slc.get(uri).then(response => {
                 commit('setComments', response);
             });
-        }
+        },
     }
 });

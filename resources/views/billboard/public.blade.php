@@ -3,27 +3,27 @@
 @section('base-content')
     <div id="public-billboard">
         <div class="row">
-            <div class="col-md-2" style="padding-right: 0">
+            <div class="col-xs-2 col-md-2" style="padding-right: 0">
                 <img alt="Company" src="{{$team->logo}}" width="100%">
             </div>
-            <div class="col-md-10">
+            <div class="col-xs-10 col-md-10">
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-xs-12 col-md-12">
                         <h3><strong>{{$team->name}}</strong></h3>
                         <hr>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-xs-4 col-md-4">
                         <strong> <i class="fa fa-send"></i> Email:</strong><br>
                         {{$team->email}}
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-xs-4 col-md-4">
                         <strong> <i class="fa fa-phone"></i> Phones:</strong><br>
                         {{$team->phone}}<br>
                         {{$team->fax}}
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-xs-4 col-md-4">
                         <address>
                             <strong> <i class="fa fa-map-marker"></i> Address:</strong><br>
                             {{$team->address}} <br>
@@ -34,16 +34,16 @@
         </div>
         <hr>
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-xs-6 col-md-6">
                 <img alt="Face" class="img-responsive" src="{{$faces->photo_url}}" width="100%">
             </div>
-            <div class="col-md-6">
+            <div class="col-xs-6 col-md-6">
                 <div class="label-inline">
                     <h3>{{$faces->billboard->address}}</h3>
                 </div>
                 <div class="ibox-content">
                     <div class="row  m-t-sm">
-                        <div class="col-sm-6">
+                        <div class="col-xs-6 col-sm-6">
                             <p>Monthly Impressions</p>
                             <h2 class="font-bold">{{number_format($faces->monthly_impressions,0)}}</h2>
                         </div>
@@ -104,13 +104,13 @@
         </div>
 
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-xs-12 col-md-12">
                 <hr/>
             </div>
         </div>
 
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-xs-12 col-md-12">
                 <div class="well m-t"><strong>Note:</strong>
                     {{$faces->notes}}
                 </div>

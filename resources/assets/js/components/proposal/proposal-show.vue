@@ -135,10 +135,14 @@
         created() {
             this.$store.dispatch('getUser');
             this.$store.dispatch('getProposal', this.id);
+
+
         },
 
         mounted() {
+            //this.loadComments();
             this.getComments();
+
             const self = this;
             this.center = {
                 lat: parseFloat(this.user.lat),
@@ -161,9 +165,36 @@
         },
 
         methods: {
+
             openComments() {
+
                 this.$refs.comments.show();
+
+                this.commentsView = new SlcForm({
+                    id: this.$store.state.proposal.id,
+                });
+
+                const uri = laroute.route('api.update.comments');
+
+                Slc.put(uri, this.commentsView).then(response => {
+                    this.commentsView = [];
+                    //this.loadComments();
+                });
             },
+
+            loadComments() {
+                setTimeout(() => {
+                    while (this.commentsView.length == 0) {
+                        const uri = laroute.route('api.comments.get.not.visualized', {id: this.id});
+                        Slc.get(uri).then(response => {
+                            this.commentsView = response;
+                            console.log('Event Listening');
+                        });
+                    }
+                }, 5000);
+            },
+
+
             markerIcon(marker) {
 
                 let fillColor = '#42c0fb';
@@ -261,13 +292,13 @@
                 }
             },
 
-            getComments(){
-                const uri = laroute.route('api.comments.get.not.visualized',{id: this.id});
+            getComments() {
+                const uri = laroute.route('api.comments.get.not.visualized', {id: this.id});
                 Slc.get(uri).then(response => {
                     this.commentsView = response;
                 });
 
-            }
+            },
         }
     }
 </script>
