@@ -1,6 +1,6 @@
 <style>
     .page-title {
-        background-color: #4DA2CE;
+        background-color: #000000;
         width: 100%;
         text-transform: uppercase;
         font-size: 16pt;
@@ -11,132 +11,107 @@
         padding: 8pt 34pt;
     }
 
+    .value {
+        color: #5a5852;
+    }
+
     table.table {
         border-collapse: collapse;
     }
-
     table.table tr th {
         padding: 8pt;
         text-align: left;
     }
-
     table.table tr td {
         padding: 8pt;
         border-top: 1px solid #e7eaec;
     }
-
     tr.odd {
         background-color: #F8F8F8;
     }
-
     tr.even {
         background-color: #ffffff;
     }
-
     td.notes {
         font-size: 10pt;
         padding: 8pt;
         background-color: #F8F8F8;
     }
-
     table.vertical-table {
         border-collapse: collapse;
     }
-
     table.vertical-table tr td {
         padding: 4pt;
-        background: #419DCC;
+        background: #000000;
         color: #ffffff;
         font-size: 10pt;
         border-top: 2px solid #ffffff;
     }
-
     table.vertical-table tr.first td {
         border-top: 0;
     }
-
     table.vertical-table tr td.label {
         width: 128pt;
         font-weight: bold;
         text-transform: uppercase;
         font-size: 11pt;
     }
-
     table.vertical-table tr td.value {
-
     }
-
     .divider {
         height: 12pt;
         border-top: 1px solid #888888;
     }
-
     .cover-page {
-
     }
-
     .toc-header {
         background-color: #ffffff;
         font-size: 11pt;
     }
-
     .toc-footer {
         background-color: #ffffff;
     }
-
     a.mpdf_toc_a {
         text-decoration: none;
         color: black;
     }
-
     div.mpdf_toc_level_0 {
         font-size: 11pt;
         line-height: 1.5;
         margin-left: 6pt;
         padding-right: 2em;
     }
-
     span.mpdf_toc_t_level_0 {
         font-weight: bold;
     }
-
     span.mpdf_toc_p_level_0 {
     }
-
     .page-header {
         background-color: #ffffff;
     }
-
     .page-footer {
         background-color: #ffffff;
     }
-
     .face-page {
-
     }
-
     .face-image {
         max-width: 290pt;
         max-height: 190pt;
         vertical-align: top;
     }
-
     .footer-image {
         max-width: 92px;
         max-height: 92px;
     }
-
     .footer-content {
         padding-left: 2pt;
         font-size: 10pt;
     }
-
     .page-number {
         text-align: right;
         vertical-align: middle;
         padding-right: 8px;
     }
-
     .uppercase {
         text-transform: uppercase;
     }
@@ -220,20 +195,11 @@
 </htmlpagefooter>
 
 <page class="cover-page">
-
-    <div style="position: absolute; top: 0; left: 0;">
-        <img src="{{asset('images/proposal-cover-top.jpg')}}" style=""/>
-    </div>
-    <div style="position: absolute; bottom: 0; left: 0;">
-        <img src="{{asset('images/proposal-cover-bottom.jpg')}}"/>
-    </div>
-
-    <br/>
     <table style="width:100%; margin-top: 250pt">
         <tr>
             <td align="center" class="uppercase" style="font-size: 22pt; color: #888888">
                 Proposal Presented to: <br/>
-                <strong style="font-size: ">{{$client['company_name']}}</strong>
+                <strong style="">{{$client['company_name']}}</strong>
             </td>
         </tr>
     </table>
@@ -318,38 +284,38 @@
             </tr>
         </table>
         <h3 class="uppercase">Details</h3>
-        <table width="100%" class="vertical-table">
+        <table width="100%" class="table">
             <tr class="first">
-                <td class="label">ID</td>
+                <td class="label"><strong>ID</strong></td>
                 <td class="value">{{$face['code']}}</td>
-                <td class="label">Label</td>
+                <td class="label"><strong>Label</strong></td>
                 <td class="value">{{$face['label']}}</td>
             </tr>
             <tr>
-                <td class="label">Mo. Impressions</td>
+                <td class="label"><strong>Monthly Impressions</strong></td>
                 <td class="value">{{$face['monthly_impressions']}}</td>
-                <td class="label">Price</td>
+                <td class="label"><strong>Price</strong></td>
                 <td class="value">{{number_format($face['pivot']['price'], 2)}}</td>
             </tr>
             <tr>
-                <td class="label">Dimensions</td>
+                <td class="label"><strong>Dimensions</strong></td>
                 <td class="value">{{$face['width']}} x {{$face['height']}}</td>
-                <td class="label">Type</td>
+                <td class="label"><strong>Type</strong></td>
                 <td class="value">{{$face['type']}}</td>
             </tr>
             <tr>
                 @if($face['type'] == 'Static')
-                    <td class="label">Illuminated</td>
+                    <td class="label"><strong>Illuminated</strong></td>
                     <td class="value"
                         colspan="{{$face['is_illuminated'] ? 1 : 3}}">{{$face['is_illuminated'] ? 'Illuminated' : ''}}</td>
                     @if($face['is_illuminated'])
-                        <td class="label">Lights on/off</td>
+                        <td class="label"><strong>Lights</strong> <small>on/off</small> </td>
                         <td class="value">{{$face['lights_on']}} - {{$face['lights_off']}}</td>
                     @endif
                 @else
-                    <td class="label">Max Ads</td>
+                    <td class="label"><strong>Max Ads</strong></td>
                     <td class="value">{{$face['max_ads']}}</td>
-                    <td class="label">Duration</td>
+                    <td class="label"><strong>Duration</strong></td>
                     <td class="value">{{$face['duration']}}</td>
                 @endif
             </tr>

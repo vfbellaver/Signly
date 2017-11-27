@@ -98,38 +98,31 @@
     </div>
 </template>
 <style lang="scss" scoped="scoped">
-
     .ibox {
         clear: none;
         margin-bottom: 60px;
         margin-top: 0px;
         padding: 0;
     }
-
     hr {
         margin-top: 1px;
         margin-bottom: 20px;
         border: 0;
         border-top: 1px solid #eeeeee;
     }
-
     .row:before, .row:after {
         content: " ";
         display: none;
     }
-
     .ibox-content {
         clear: none;
     }
-
     .clear {
         clear: both;
     }
 </style>
 <script>
-
     import * as SLC from '../../vue/http'
-
     export default {
         data() {
             return {
@@ -138,7 +131,6 @@
                 formLogo: {}
             }
         },
-
         created() {
             this.form = new SlcForm({
                 id: this.team.id,
@@ -153,13 +145,11 @@
                 state: this.team.state,
                 logo: this.team.logo ? this.team.logo : null,
             });
-
             this.formLogo = new SlcForm({
                 id: this.team.id,
                 logo: this.team.logo ? this.team.logo : null,
             });
         },
-
         methods: {
             saveTeamName() {
                 const self = this;
@@ -169,7 +159,6 @@
                     console.log('Team updated ', response);
                 });
             },
-
             saveTeamLogo() {
                 const self = this;
                 const uri = laroute.route('api.team.update.logo', {team: this.team.id});
