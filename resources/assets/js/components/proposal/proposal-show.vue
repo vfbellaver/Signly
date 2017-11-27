@@ -135,16 +135,10 @@
         created() {
             this.$store.dispatch('getUser');
             this.$store.dispatch('getProposal', this.id);
-
-            EventBus.$on('newComment', function () {
-                console.log('new Comment');
-            });
-
         },
 
         mounted() {
             this.getComments();
-
             const self = this;
             this.center = {
                 lat: parseFloat(this.user.lat),
@@ -167,7 +161,6 @@
         },
 
         methods: {
-
             openComments() {
 
                 this.$refs.comments.show();
@@ -179,13 +172,9 @@
                 const uri = laroute.route('api.update.comments');
 
                 Slc.put(uri,this.commentsView).then(response => {
-
+                    console.log('Deu certo', response);
                 });
             },
-
-
-
-
             markerIcon(marker) {
 
                 let fillColor = '#42c0fb';
@@ -289,7 +278,7 @@
                     this.commentsView = response;
                 });
 
-            },
+            }
         }
     }
 </script>

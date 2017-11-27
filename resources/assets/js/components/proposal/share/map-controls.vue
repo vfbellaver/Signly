@@ -156,7 +156,6 @@
     import * as Slc from "../../../vue/http";
     import store from './store';
     import Draggable from 'vuedraggable'
-
     export default {
         props: {},
         store,
@@ -202,7 +201,6 @@
         },
         mounted(){
             const self = this;
-
             const pullComments = function () {
                 if (self.form.comment) {
                     setTimeout(() => {
@@ -248,7 +246,6 @@
             centerFace(face) {
                 this.$emit('centerFace', face);
             },
-
             comment(evt) {
                 if (evt.shiftKey) {
                     return true;

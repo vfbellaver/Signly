@@ -39,6 +39,7 @@ window.App = new Vue({
         console.log("App Created");
         window.Layout.init();
         let self = this;
+
         EventBus.$on(['loadCurrentUser', 'userUpdated'], () => {
             axios.get(laroute.route('api.current.user'))
                 .then(response => {
