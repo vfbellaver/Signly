@@ -255,6 +255,7 @@
                 }
                 evt.preventDefault();
                 console.log('Comment');
+                EventBus.$emit('newComment');
                 this.form.proposal = this.proposal;
                 this.form.proposal_id = this.$store.state.id;
                 this.$store.dispatch('saveComment', this.form)
