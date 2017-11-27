@@ -167,7 +167,6 @@
             return {
                 sendDown: true,
                 form: this.buildForm(),
-                commentsView: null,
                 user: window.Slc.user,
             }
         },
@@ -201,7 +200,7 @@
                 return laroute.route('proposal.share.pdf', {proposal: this.$store.state.id});
             },
         },
-        mounted() {
+        mounted(){
             const self = this;
 
             const pullComments = function () {
@@ -246,6 +245,7 @@
             pullComments();
         },
         methods: {
+
             centerFace(face) {
                 this.$emit('centerFace', face);
             },
@@ -256,6 +256,7 @@
                 }
                 evt.preventDefault();
                 console.log('Comment');
+
                 this.form.proposal = this.proposal;
                 this.form.proposal_id = this.$store.state.id;
                 this.$store.dispatch('saveComment', this.form)
