@@ -61,7 +61,7 @@
                             <form-group :form="form" field="rate_card">
                                 <input-label for="rate_card">Rate Card: </input-label>
                                 <input-text v-model="form.rate_card" id="rate_card" name="rate_card"
-                                            v-float></input-text>
+                                            v-integer></input-text>
                             </form-group>
                         </column>
                     </row>
