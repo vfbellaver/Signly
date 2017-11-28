@@ -1,6 +1,6 @@
 <style>
     .page-title {
-        background-color: #000000;
+        background-color: #626262;
         width: 100%;
         text-transform: uppercase;
         font-size: 16pt;
@@ -42,7 +42,7 @@
     }
     table.vertical-table tr td {
         padding: 4pt;
-        background: #000000;
+        background: #626262;
         color: #ffffff;
         font-size: 10pt;
         border-top: 2px solid #ffffff;
