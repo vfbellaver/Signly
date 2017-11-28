@@ -11,7 +11,7 @@ class CreateProposalBillboardFacesTable extends Migration
             $table->unsignedInteger('proposal_id');
             $table->unsignedInteger('billboard_face_id');
 
-            $table->decimal('price', 10, 2);
+            $table->bigInteger('price');
             $table->integer('order');
 
             $table->timestamps();

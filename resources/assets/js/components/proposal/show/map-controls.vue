@@ -33,7 +33,7 @@
                                 <div class="dd-handle">
                                     <i class="fa fa-arrows"></i>
                                 </div>
-                                <div class="dd-content">{{face.code}} - {{face.pivot.price | money('$')}}</div>
+                                <div class="dd-content">{{face.code}} - $ {{face.pivot.price | integer}}</div>
                                 <div class="dd-action">
                                     <button type="button" class="btn btn-xs btn-primary"
                                             @click="editBillboardFace(face)">
