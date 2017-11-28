@@ -39,10 +39,11 @@ class ProposalsController extends Controller
 
         if ($t['logo']) {
 
-            $img = \Intervention\Image\Facades\Image::make($t['logo']);
+            $img = \Intervention\Image\Facades\Image::make($t['logo'])->opacity(30);
+            return $img->save(public_path('/images/img.png'));
             $img->insert(public_path('/images/watermark.png'));
 
-        }
+        };
         */
 
         $defaultConfig = (new ConfigVariables())->getDefaults();
