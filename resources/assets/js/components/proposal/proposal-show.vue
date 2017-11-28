@@ -162,6 +162,13 @@
                 {
                     deep: true
                 });
+
+            window.EventBus.$on('CommentCreated', e => {
+                if (e.comment.proposal_id !== self.id) {
+                    return;
+                }
+                //todo update show!
+            });
         },
 
         methods: {
