@@ -8,7 +8,7 @@
                         <form-group :form="form" field="price">
                             <input-label for="price">Price: </input-label>
                             <input-text v-model="form.price" id="price" name="price" v-integer></input-text>
-                            <small v-if="face" class="pull-right p-xs">Rate Card: {{face.rate_card | money('$')}}
+                            <small v-if="face" class="pull-right p-xs">Rate Card: $ {{face.rate_card}}
                             </small>
                         </form-group>
                     </column>
