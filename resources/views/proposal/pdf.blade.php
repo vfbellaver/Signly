@@ -197,17 +197,10 @@
 </htmlpagefooter>
 
 <page class="cover-page">
-    <table style="width:100%; margin-top: 250pt; ">
-
-        <tr>
-            <td align="center" class="uppercase" style="font-size: 22pt; color: #888888; margin-top: 580pt">
-
-                <!----
-
-                      <img src="/images/watermark.png">
-
-                -->
-
+    <div class="toc-footer" style="border-top: 1px solid #ffffff;">
+    <table style="width:100%; margin-top: 250pt;">
+        <tr style="padding: 50%">
+            <td align="center" class="uppercase" style="font-size: 28pt; color: #888888;">
                 Proposal Presented to: <br/>
                 <strong style="" >{{$client['company_name']}}</strong>
             </td>

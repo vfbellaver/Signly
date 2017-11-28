@@ -34,7 +34,6 @@ class ProposalsController extends Controller
         ini_set('max_execution_time', 5000);
 
         /*
-
         $t = Team::findOrFail($proposal->team_id)->toArray();
 
 
