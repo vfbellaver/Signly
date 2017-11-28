@@ -38,6 +38,7 @@
     "lord/laroute": "dev-master",
     "mpdf/mpdf": "7.0.x-dev",
     "predis/predis": "^1.1",
+    "pusher/pusher-php-server": "^3.0",
     "stripe/stripe-php": "^5.3"
   },
   "require-dev": {

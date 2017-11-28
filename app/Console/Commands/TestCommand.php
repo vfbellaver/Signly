@@ -2,6 +2,8 @@
 
 namespace App\Console\Commands;
 
+use App\Events\CommentCreated;
+use App\Models\Comment;
 use App\Models\User;
 use App\Notifications\CardExpirationSoon;
 use Faker\Generator;
@@ -21,7 +23,14 @@ class TestCommand extends Command
         parent::__construct();
     }
 
-    public function handle(Generator $faker)
+    public function handle()
+    {
+        /** @var Comment $comment */
+        $comment = Comment::query()->find(1);
+        broadcast(new CommentCreated($comment));
+    }
+
+    public function handle2(Generator $faker)
     {
         $lat = '40.7767168';
         $lng = '-111.9905246';

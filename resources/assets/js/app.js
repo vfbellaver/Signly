@@ -7,6 +7,7 @@ import axios from 'axios';
 import Vue from 'vue';
 import Moment from 'moment';
 import MomentTZ from 'moment-timezone';
+import Echo from "laravel-echo";
 
 window.moment = Moment;
 window.momentTZ = MomentTZ;
@@ -20,6 +21,17 @@ require('./directives/bootstrap');
 require('./components/bootstrap');
 require('./filters/bootstrap');
 require('./vue/bootstrap');
+
+window.Pusher = require('pusher-js');
+Pusher.logToConsole = true;
+
+if (window.Slc.pusher) {
+    window.Echo = new Echo({
+        broadcaster: 'pusher',
+        key: window.Slc.pusher,
+        cluster: 'us2',
+    });
+}
 
 window.EventBus = window.Bus = new Vue();
 
@@ -53,5 +65,13 @@ window.App = new Vue({
                     self.user = response.data;
                 });
         });
+
+        if (window.Slc.pusher && this.user && this.user.id) {
+            window.Echo.private(`App.Team.${this.user.id}`)
+                .listen('CommentCreated', (e) => {
+                    console.log("Event", e);
+                    EventBus.$emit('CommentCreated', e);
+                });
+        }
     },
 });
