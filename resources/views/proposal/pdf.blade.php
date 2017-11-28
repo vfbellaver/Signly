@@ -1,6 +1,6 @@
 <style>
     .page-title {
-        background-color: #000000;
+        background-color: #626262;
         width: 100%;
         text-transform: uppercase;
         font-size: 16pt;
@@ -42,7 +42,7 @@
     }
     table.vertical-table tr td {
         padding: 4pt;
-        background: #000000;
+        background: #626262;
         color: #ffffff;
         font-size: 10pt;
         border-top: 2px solid #ffffff;
@@ -63,6 +63,8 @@
         border-top: 1px solid #888888;
     }
     .cover-page {
+        padding-top: 800pt;
+        float: none;
     }
     .toc-header {
         background-color: #ffffff;
@@ -195,11 +197,19 @@
 </htmlpagefooter>
 
 <page class="cover-page">
-    <table style="width:100%; margin-top: 250pt">
+    <table style="width:100%; margin-top: 250pt; ">
+
         <tr>
-            <td align="center" class="uppercase" style="font-size: 22pt; color: #888888">
+            <td align="center" class="uppercase" style="font-size: 22pt; color: #888888; margin-top: 580pt">
+
+                <!----
+
+                      <img src="/images/watermark.png">
+
+                -->
+
                 Proposal Presented to: <br/>
-                <strong style="">{{$client['company_name']}}</strong>
+                <strong style="" >{{$client['company_name']}}</strong>
             </td>
         </tr>
     </table>
