@@ -140,9 +140,16 @@
         },
 
         mounted() {
-            //this.loadComments();
             this.getComments();
+            EventBus.$on('CommentCreated', (e) => {
+                console.log("proposal Show", e.comment);
+                if(e.comment.proposal_id == this.id) {
+                    console.log("Ok",this.commentsView.length);
+                    this.commentsView.push(e.comment);
+                    console.log("Ok",this.commentsView.length);
+                }
 
+            });
             const self = this;
             this.center = {
                 lat: parseFloat(this.user.lat),
