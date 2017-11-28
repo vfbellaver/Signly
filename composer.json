@@ -21,7 +21,6 @@
   ],
   "require": {
     "php": ">=7.0.0",
-    "intervention/image": "dev-master",
     "artesaos/defender": "dev-master@dev",
     "barryvdh/laravel-debugbar": "2.4.*",
     "barryvdh/laravel-ide-helper": "2.4.*",
