@@ -33,18 +33,33 @@ class ProposalsController extends Controller
     {
         ini_set('max_execution_time', 5000);
 
-        /*
+
         $t = Team::findOrFail($proposal->team_id)->toArray();
 
 
         if ($t['logo']) {
 
-            $img = \Intervention\Image\Facades\Image::make($t['logo'])->opacity(30);
-            return $img->save(public_path('/images/img.png'));
-            $img->insert(public_path('/images/watermark.png'));
+            $img = \Intervention\Image\Facades\Image::make($t['logo']);
+
+            $size['width'] = $img->getWidth();
+            $size['height'] = $img->getHeight();
+
+
+            while ($size['width'] > 450 && $size['height'] > 450) {
+
+                $size['width'] = $size['width']/2;
+                $size['height'] = $size['height']/2;
+
+                $img->resize($size['width'],$size['height']);
+
+            };
+
+
+            $img->opacity(20);
+            $img->save(public_path('/images/logo.png'));
 
         };
-        */
+
 
         $defaultConfig = (new ConfigVariables())->getDefaults();
         $fontDirs = $defaultConfig['fontDir'];
