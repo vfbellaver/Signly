@@ -14,6 +14,7 @@ class Comment extends Model
         'user_id',
         'from_name',
         'comment',
+        'visualized'
     ];
 
     protected $casts = [

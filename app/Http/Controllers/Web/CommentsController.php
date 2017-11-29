@@ -20,6 +20,7 @@ class CommentsController extends Controller
 
     public function store(CommentCreateRequest $request)
     {
+
         $data = $this->service->create($request->form());
 
         return $data;

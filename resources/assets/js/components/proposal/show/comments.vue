@@ -71,7 +71,6 @@
                 this.moveDown();
             },
             save() {
-                debugger;
                 this.$store.dispatch('saveComment', this.form)
                     .then(() => {
                         this.$forceUpdate();
