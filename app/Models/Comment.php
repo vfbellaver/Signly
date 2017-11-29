@@ -16,6 +16,12 @@ class Comment extends Model
         'comment',
     ];
 
+    protected $casts = [
+
+        'visualized' => 'boolean',
+
+    ];
+
     public function team()
     {
         return $this->belongsTo(Team::class);
@@ -31,6 +37,7 @@ class Comment extends Model
         return $this->belongsTo(Proposal::class);
     }
 
+
     public function toArray()
     {
         /** @var Carbon $date */
@@ -40,6 +47,7 @@ class Comment extends Model
         return array_merge(parent::toArray(), [
             'name' => $this->user ? $this->user->name : $this->from_name,
             'created_at' => $createdAt,
+            'visualized' => $this->visualized,
         ]);
     }
 

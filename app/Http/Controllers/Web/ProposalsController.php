@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
 use App\Models\Proposal;
+use App\Models\Team;
 use Exception;
+use Illuminate\Support\Facades\Storage;
 use Mpdf\Config\ConfigVariables;
 use Mpdf\Config\FontVariables;
 use Mpdf\Mpdf;
@@ -30,6 +32,34 @@ class ProposalsController extends Controller
     public function pdf(Proposal $proposal)
     {
         ini_set('max_execution_time', 5000);
+
+
+        $t = Team::findOrFail($proposal->team_id)->toArray();
+
+
+        if ($t['logo']) {
+
+            $img = \Intervention\Image\Facades\Image::make($t['logo']);
+
+            $size['width'] = $img->getWidth();
+            $size['height'] = $img->getHeight();
+
+
+            while ($size['width'] > 450 && $size['height'] > 450) {
+
+                $size['width'] = $size['width']/2;
+                $size['height'] = $size['height']/2;
+
+                $img->resize($size['width'],$size['height']);
+
+            };
+
+
+            $img->opacity(20);
+            $img->save(public_path('/images/logo.png'));
+
+        };
+
 
         $defaultConfig = (new ConfigVariables())->getDefaults();
         $fontDirs = $defaultConfig['fontDir'];
@@ -58,6 +88,7 @@ class ProposalsController extends Controller
             'margin_top' => 20,
             'margin_bottom' => 20,
         ]);
+
 
         $gen->SetTitle($proposal->name);
 

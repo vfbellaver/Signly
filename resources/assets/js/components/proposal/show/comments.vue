@@ -71,6 +71,7 @@
                 this.moveDown();
             },
             save() {
+                debugger;
                 this.$store.dispatch('saveComment', this.form)
                     .then(() => {
                         this.$forceUpdate();
@@ -82,6 +83,7 @@
                 this.form = new SlcForm({
                     proposal: this.proposal,
                     from_name: null,
+                    visualized: true,
                     comment: null
                 });
             },
