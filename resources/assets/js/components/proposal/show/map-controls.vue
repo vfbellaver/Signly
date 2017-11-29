@@ -33,7 +33,7 @@
                                 <div class="dd-handle">
                                     <i class="fa fa-arrows"></i>
                                 </div>
-                                <div class="dd-content">{{face.code}} - $ {{face.pivot.price | integer}}</div>
+                                <div class="dd-content">{{face.code}} - {{face.pivot.price | money('$')}}</div>
                                 <div class="dd-action">
                                     <button type="button" class="btn btn-xs btn-primary"
                                             @click="editBillboardFace(face)">
@@ -163,7 +163,8 @@
                 let total = 0;
                 for (let i = 0; i < faces.length; i++) {
                     const f = faces[i];
-                    total += Number.parseFloat(f.pivot.price);
+                    let v  = f.pivot.price.replace(',',"");
+                    total += Number.parseFloat(v);
                 }
                 console.log("Total", total);
                 return total.toFixed(2);
