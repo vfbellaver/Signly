@@ -2,6 +2,7 @@
 
 namespace Tests\Browser;
 
+use App\Models\Team;
 use App\Models\User;
 use Tests\Browser\Pages\Login;
 use Tests\DuskTestCase;
@@ -17,6 +18,7 @@ class LoginTest extends DuskTestCase
         $user = factory(User::class)->create([
             'email' => 'user@user.com',
         ]);
+
 
         $this->browse(function ($browser) use ($user) {
             $browser->visit(new Login)
