@@ -28,18 +28,8 @@
                                                 Plan Features
                                             </button>
                                         </td>
-                                        <td>{{ plan.price}} / {{plan.interval}}</td>
+                                        <td>{{ plan.price | money('$')}} / {{plan.interval}}</td>
                                         <td>{{ plan.trial_days }} Day Trial</td>
-                                        <td class="text-right" style="width: 134px;">
-                                            <button
-                                                    class="select btn btn-primary btn-outline"
-                                                    :class="{'active': form.plan && form.plan.id == plan.id}"
-                                                    type="button" @click="form.plan = plan">
-                                                <icon v-if="form.plan && form.plan.id == plan.id" icon="check"></icon>
-                                                <span v-if="form.plan && form.plan.id == plan.id">Selected</span>
-                                                <span v-else>Select</span>
-                                            </button>
-                                        </td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -137,7 +127,6 @@
                     </div>
                 </div>
             </row>
-
         </form>
 
         <div ref="featuresModal" class="modal fade" tabindex="-1" role="dialog">
@@ -149,15 +138,7 @@
 
                     <div class="modal-body">
                         <ul>
-                            <li><strong>Users</strong>{{" " + selectedPlan.features.users}}</li>
-                            <li><strong>Billboards</strong>{{" " + selectedPlan.features.billboards}}</li>
-                            <li><strong>Pdf's</strong>{{" " + selectedPlan.features.pdfs}}</li>
-                            <li><strong>Proposals</strong>{{" " + selectedPlan.features.proposals}}</li>
-                            <li><strong>Contracts</strong>{{" " + selectedPlan.features.contracts}}</li>
-                            <li><strong>Scheduler</strong>{{" " + selectedPlan.features.scheduler}}</li>
-                            <li><strong>White Label</strong>{{" " + selectedPlan.features.whiteLabel}}</li>
-                            <li><strong>Value Monthly</strong>{{" " + selectedPlan.features.valueMonthly}}</li>
-                            <li><strong>Value Annual</strong>{{" " + selectedPlan.features.valueAnnual}}</li>
+                            <li v-for="feature in selectedPlan.features">{{feature}}</li>
                         </ul>
                     </div>
                     <div class="modal-footer">
@@ -173,19 +154,19 @@
 
     export default {
         data: () => ({
-            plans: 'Slc' in window ? Slc.plans : [],
+            plans       : 'Slc' in window ? Slc.plans : [],
             selectedPlan: null,
-            cardError: null,
-            form: new SlcForm({
-                plan: null,
-                company: null,
-                name: null,
-                email: null,
-                password: null,
+            cardError   : null,
+            form        : new SlcForm({
+                plan                 : null,
+                company              : null,
+                name                 : null,
+                email                : null,
+                password             : null,
                 password_confirmation: null,
-                owner: null,
-                source: null,
-                terms_of_service: null
+                owner                : null,
+                source               : null,
+                terms_of_service     : null
             })
         }),
 

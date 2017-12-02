@@ -21,145 +21,24 @@ class Slc
         }
 
         return [
-            'user' => $user,
-            'csrfToken' => csrf_token(),
-            'stripeKey' => env('STRIPE_KEY'),
+            'user'         => $user,
+            'csrfToken'    => csrf_token(),
+            'stripeKey'    => env('STRIPE_KEY'),
             'googleApiKey' => env('GOOGLE_API_KEY'),
-            'pusher' => env('PUSHER_APP_KEY'),
-            'plans' => [
+            'pusher'       => env('PUSHER_APP_KEY'),
+            'plans'        => [
                 [
-                    'id' => 'master',
-                    'name' => 'MASTER',
-                    'interval' => 'Monthly',
+                    'id'         => self::PLAN_1['id'],
+                    'name'       => self::PLAN_1['name'],
+                    'interval'   => 'Monthly',
                     'trial_days' => 30,
-                    'price' => 10,
-                    'features' => [
-                        'users' => 'Custom',
-                        'billboards' => 'Unlimited',
-                        'pdfs' => 'Custom',
-                        'proposals' => 'Custom',
-                        'contracts' => 'Custom',
-                        'scheduler' => 'Yes',
-                        'whiteLabel' => 'Yes',
-                        'valueMonthly' => 'Call For Quote',
-                        'valueAnnual' => 'Call For Quote',
-                    ]
+                    'price'      => "200.00",
+                    'features'   => [
+                        'Unlimited Users',
+                        'Unlimited Billboards',
+                    ],
                 ],
-
-                [
-                    'id' => 'standard',
-                    'name' => 'STANDARD',
-                    'interval' => 'Monthly',
-                    'trial_days' => 30,
-                    'price' => 10,
-                    'features' => [
-                        'users' => 'Custom',
-                        'billboards' => 'Unlimited',
-                        'pdfs' => 'Custom',
-                        'proposals' => 'Custom',
-                        'contracts' => 'Custom',
-                        'scheduler' => 'Yes',
-                        'whiteLabel' => 'Yes',
-                        'valueMonthly' => 'Call For Quote',
-                        'valueAnnual' => 'Call For Quote',
-                    ]
-                ],
-
-                [
-                    'id' => 'basic',
-                    'name' => 'BASIC',
-                    'interval' => 'Monthly',
-                    'trial_days' => 30,
-                    'price' => 10,
-                    'features' => [
-                        'users' => 'Custom',
-                        'billboards' => 'Unlimited',
-                        'pdfs' => 'Custom',
-                        'proposals' => 'Custom',
-                        'contracts' => 'Custom',
-                        'scheduler' => 'Yes',
-                        'whiteLabel' => 'Yes',
-                        'valueMonthly' => 'Call For Quote',
-                        'valueAnnual' => 'Call For Quote',
-                    ]
-                ],
-
-                [
-                    'id' => self::PLAN_1['id'],
-                    'name' => self::PLAN_1['name'],
-                    'interval' => 'Monthly',
-                    'trial_days' => 30,
-                    'price' => 10,
-                    'features' => [
-                        'users' => 'Custom',
-                        'billboards' => 'Unlimited',
-                        'pdfs' => 'Custom',
-                        'proposals' => 'Custom',
-                        'contracts' => 'Custom',
-                        'scheduler' => 'Yes',
-                        'whiteLabel' => 'Yes',
-                        'valueMonthly' => 'Call For Quote',
-                        'valueAnnual' => 'Call For Quote',
-                    ]
-                ],
-
-                [
-                    'id' => self::PLAN_2['id'],
-                    'name' => self::PLAN_2['name'],
-                    'interval' => 'Monthly',
-                    'trial_days' => 30,
-                    'price' => 20,
-                    'features' => [
-                        'users' => '10',
-                        'billboards' => 'Unlimited',
-                        'pdfs' => '100',
-                        'proposals' => '100',
-                        'contracts' => '20',
-                        'scheduler' => 'Yes',
-                        'whiteLabel' => 'Yes',
-                        'valueMonthly' => '499',
-                        'valueAnnual' => '449',
-                    ]
-                ],
-
-                [
-                    'id' => self::PLAN_3['id'],
-                    'name' => self::PLAN_3['name'],
-                    'interval' => 'Monthly',
-                    'trial_days' => 30,
-                    'price' => 30,
-                    'features' => [
-                        'users' => '5',
-                        'billboards' => 'Unlimited',
-                        'pdfs' => '50',
-                        'proposals' => '50',
-                        'contracts' => '10',
-                        'scheduler' => '-',
-                        'whiteLabel' => '-',
-                        'valueMonthly' => '399',
-                        'valueAnnual' => '349',
-                    ]
-                ],
-
-                [
-                    'id' => self::PLAN_4['id'],
-                    'name' => self::PLAN_4['name'],
-                    'interval' => 'Monthly',
-                    'trial_days' => 30,
-                    'price' => 30,
-                    'features' => [
-                        'users' => '1',
-                        'billboards' => '25',
-                        'pdfs' => '20',
-                        'proposals' => '-',
-                        'contracts' => '-',
-                        'scheduler' => '-',
-                        'whiteLabel' => '-',
-                        'valueMonthly' => '299',
-                        'valueAnnual' => '449',
-                    ]
-                ]
-            ]
+            ],
         ];
     }
 
