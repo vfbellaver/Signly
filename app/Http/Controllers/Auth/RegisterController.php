@@ -103,9 +103,4 @@ class RegisterController extends Controller
         });
     }
 
-    public function termsOfService()
-    {
-        return view('auth.terms-of-service');
-    }
-
 }

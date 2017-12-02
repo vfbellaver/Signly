@@ -1,5 +1,5 @@
 <template>
-    <input class="form-control" v-model="internalValue" v-bind:value="value" :name="name"/>
+    <input class="form-control" v-model="value" :name="name"/>
 </template>
 
 <script>

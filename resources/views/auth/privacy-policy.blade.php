@@ -10,7 +10,7 @@
                 <div class="row">
                     <div class="col-xs-12 col-md-12">
                         <h1><strong>
-                                <small>Terms of Service</small>
+                                <small>Privacy Policy</small>
                             </strong></h1>
                         <hr>
                     </div>
