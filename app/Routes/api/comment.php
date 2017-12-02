@@ -5,6 +5,6 @@ Route::get('comments/get-not-visualized/{id}',
     ->name('comments.get.not.visualized');
 
 
-Route::put('comments/update-comments',
+Route::put('comments/update-comments/{proposal}',
     'Api\CommentsController@updateComments')
     ->name('update.comments');

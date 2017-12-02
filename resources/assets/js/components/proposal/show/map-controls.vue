@@ -12,10 +12,13 @@
                     <div class="form-group">
                         <div class="input-group mb-2 mb-sm-0">
                             <div class="input-group-addon">
-                                <i class="fa fa-clone" aria-hidden="true"></i>
+                                <i class="fa fa-clone" aria-hidden="true" style="cursor: pointer;"
+                                   data-toggle="tooltip" title="Copy to clipboard"
+                                   @click="copyToClipboard"
+                                ></i>
                             </div>
-                            <input id="shareLink" type="text" v-if="proposal" class="form-control"
-                                   v-model="proposal.share_link"/>
+                            <input ref="shareLink" type="text" v-if="proposal" class="form-control"
+                                   v-model="proposal.share_link" readonly="true"/>
                         </div>
                     </div>
 
@@ -128,7 +131,7 @@
     import Draggable from 'vuedraggable'
 
     export default {
-        props: {},
+        props     : {},
         store,
         components: {
             Draggable,
@@ -163,7 +166,7 @@
                 let total = 0;
                 for (let i = 0; i < faces.length; i++) {
                     const f = faces[i];
-                    let v  = f.pivot.price.replace(',',"");
+                    let v = f.pivot.price.replace(',', "");
                     total += Number.parseFloat(v);
                 }
                 console.log("Total", total);
@@ -194,7 +197,7 @@
         },
 
         mounted() {
-
+            $("[data-toggle='tooltip']").tooltip();
         },
 
         methods: {
@@ -214,6 +217,10 @@
             },
             centerFace(face) {
                 this.$emit('centerFace', face);
+            },
+            copyToClipboard() {
+                $(this.$refs.shareLink).select();
+                document.execCommand("copy");
             }
         }
 

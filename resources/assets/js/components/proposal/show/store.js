@@ -68,7 +68,14 @@ export default new Vuex.Store({
         },
         addComment(state, comment) {
             state.proposal.comments.push(comment);
-        }
+        },
+        viewMessages(state) {
+            const comments = state.proposal.comments;
+            for (let i = 0; i < comments.length; i++) {
+                const comment = comments[i];
+                comment.visualized = true;
+            }
+        },
     },
 
     actions: {
@@ -130,6 +137,9 @@ export default new Vuex.Store({
         },
         addComment({commit}, comment) {
             commit('addComment', comment);
+        },
+        viewMessages({commit}) {
+            commit('viewMessages');
         },
     }
 });

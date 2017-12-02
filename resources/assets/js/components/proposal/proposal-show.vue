@@ -12,7 +12,8 @@
                 </li>
                 <li>
                     <a @click="openComments">
-                        <span v-if="commentsView.length >= 1" class="badge badge-danger pull-left">{{commentsView.length}}</span>
+                        <span v-if="proposal && unreadComments > 0"
+                              class="badge badge-danger pull-left">{{unreadComments}}</span>
                         <icon icon="comments"></icon>
                         Comments
                     </a>
@@ -110,7 +111,6 @@
                 },
                 infoWindowPos       : null,
                 gmapInfoWindowClosed: false,
-                commentsView        : []
             }
         },
 
@@ -129,7 +129,22 @@
             },
             proposal() {
                 return this.$store.state.proposal;
-            }
+            },
+            unreadComments() {
+                const comments = this.$store.state.proposal.comments;
+                let total = 0;
+                for (let i = 0; i < comments.length; i++) {
+                    const comment = comments[i];
+                    if (comment.visualized) {
+                        continue;
+                    }
+                    if (comment.user_id && comment.user_id === this.$root.user.id) {
+                        continue;
+                    }
+                    total++;
+                }
+                return total;
+            },
         },
 
         created() {
@@ -144,7 +159,6 @@
                 console.log("CommentCreated", e.comment);
                 if (e.comment.proposal_id === self.proposal.id && self.$root.user.id !== e.comment.user_id) {
                     self.$store.dispatch('addComment', e.comment);
-                    self.commentsView.push(e.comment);
                 }
             });
             this.center = {
@@ -169,18 +183,13 @@
 
         methods: {
             openComments() {
-                this.commentsView = new SlcForm({
-                    id: this.$store.state.proposal.id,
-                });
-
-                const uri = laroute.route('api.update.comments');
-                SLC.put(uri, this.commentsView).then(response => {
+                const uri = laroute.route('api.update.comments', {proposal: this.proposal.id});
+                SLC.put(uri, new SlcForm({})).then(response => {
                     console.log("Comments", response);
-                    this.commentsView = [];
+                    this.$store.dispatch('viewMessages');
                     this.$refs.comments.show();
                 });
             },
-
             markerIcon(marker) {
 
                 let fillColor = '#42c0fb';
