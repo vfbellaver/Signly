@@ -14,8 +14,9 @@ class BillboardFace extends Model
     const TYPE_DIGITAL = 'Digital';
 
     const READS_LEFT = 'Left';
+    const READS_ACROSS_LEFT = 'Left Across';
     const READS_RIGHT = 'Right';
-    const READS_ACROSS = 'Across';
+    const READS_ACROSS_RIGHT = 'Right Across';
 
     const FACING_NORTH = 'North';
     const FACING_SOUTH = 'South';
@@ -45,10 +46,10 @@ class BillboardFace extends Model
     ];
 
     protected $casts = [
-        'rate_card' => 'decimal',
-        'max_ads' => 'int',
-        'duration' => 'int',
-        'team_id' => 'int',
+        'rate_card'      => 'decimal',
+        'max_ads'        => 'int',
+        'duration'       => 'int',
+        'team_id'        => 'int',
         'is_illuminated' => 'boolean',
     ];
 
@@ -88,38 +89,38 @@ class BillboardFace extends Model
         $staticMap = "{$base}{$center}{$marker}{$zoom}{$size}";
 
         return [
-            'id' => $this->id,
-            'code' => $this->code,
-            'label' => $this->label,
-            'facing' => $this->facing,
-            'rate_card' => $this->rate_card,
+            'id'                  => $this->id,
+            'code'                => $this->code,
+            'label'               => $this->label,
+            'facing'              => $this->facing,
+            'rate_card'           => $this->rate_card,
             'monthly_impressions' => $this->monthly_impressions,
-            'duration' => $this->duration,
-            'is_illuminated' => $this->is_illuminated,
-            'height' => $this->height,
-            'width' => $this->width,
-            'reads' => $this->reads,
-            'notes' => $this->notes,
-            'max_ads' => $this->max_ads,
-            'photo_url' => $this->photo_url,
-            'lights_on' => $this->lights_on,
-            'lights_off' => $this->lights_off,
-            'type' => $this->type,
-            'billboard_id' => $this->billboard_id,
-            'team_id' => $this->team_id,
-            'slug' => $this->slug,
-            'billboard_name' => $billboard->name,
-            'location' => $billboard->address,
-            'position' => [
+            'duration'            => $this->duration,
+            'is_illuminated'      => $this->is_illuminated,
+            'height'              => $this->height,
+            'width'               => $this->width,
+            'reads'               => $this->reads,
+            'notes'               => $this->notes,
+            'max_ads'             => $this->max_ads,
+            'photo_url'           => $this->photo_url,
+            'lights_on'           => $this->lights_on,
+            'lights_off'          => $this->lights_off,
+            'type'                => $this->type,
+            'billboard_id'        => $this->billboard_id,
+            'team_id'             => $this->team_id,
+            'slug'                => $this->slug,
+            'billboard_name'      => $billboard->name,
+            'location'            => $billboard->address,
+            'position'            => [
                 'lat' => $billboard->lat,
                 'lng' => $billboard->lng,
             ],
-            'static_map' => $staticMap,
-            'pivot' => $this->pivot,
-            'public_url' => route('billboard.public-view', [
+            'static_map'          => $staticMap,
+            'pivot'               => $this->pivot,
+            'public_url'          => route('billboard.public-view', [
                 'teamSlug' => $this->team->slug,
                 'faceCode' => $this->slug,
-            ])
+            ]),
         ];
     }
 

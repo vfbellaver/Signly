@@ -16,7 +16,9 @@ class CreateBillboardFacesTable extends Migration
             $table->string('slug', 48);
             $table->string('label', 32);
             $table->enum('facing', ['North', 'South', 'East', 'West', 'Other'])->nullable();
-            $table->enum('reads', ['Left', 'Right', 'Across'])->nullable();
+            $table->enum('reads', [
+                'Left', 'Left Across', 'Right', 'Right Across',
+            ])->nullable();
 
             $table->decimal('rate_card', 10, 2)->default(0)->comment('the suggest price for this face');
             $table->bigInteger('monthly_impressions')->default(0);

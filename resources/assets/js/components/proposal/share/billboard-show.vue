@@ -1,10 +1,10 @@
 <template>
     <div class="info-window">
         <div style="padding: 0 15px;">
-            <div class="row" style="height: 82px;">
+            <div class="row" style="height: 36px;">
                 <div class="col-xs-12">
                     <strong style="position: relative; top: 4px;">{{face.code}}</strong>
-                    <img alt="image" class="pull-right hand" style="max-width: 128px" :src="face.photo_url"
+                    <img alt="image" class="pull-right hand" style="max-width: 64px" :src="face.photo_url"
                          v-image-preview>
                 </div>
             </div>

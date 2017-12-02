@@ -10,9 +10,11 @@ class CommentsController extends Controller
 {
     public function getNotVisualized($id)
     {
-
-        $comment = Comment::query()->where('proposal_id','=',$id)->where('visualized','=',false)
-            ->get()->toArray();
+        $comment = Comment::query()
+            ->where('proposal_id', '=', $id)
+            ->where('visualized', '=', false)
+            ->get()
+            ->toArray();
 
         return $comment;
 

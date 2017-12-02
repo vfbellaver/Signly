@@ -83,7 +83,7 @@
 
         computed: {
             style() {
-                return this.photoUrl ? {'background-image': `url(${image})`} : '';
+                return this.photoUrl ? {'background-image': `url(${this.photoUrl})`} : '';
             }
         },
 

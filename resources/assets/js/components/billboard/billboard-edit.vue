@@ -90,7 +90,7 @@
                                         <th style="width: 64px">ID</th>
                                         <th>Label</th>
                                         <th style="width: 120px">Type</th>
-                                        <th style="width: 92px"></th>
+                                        <th style="width: 72px"></th>
                                     </tr>
                                     </thead>
                                     <tbody>

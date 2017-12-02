@@ -44,7 +44,8 @@
                             <column size="4">
                                 <form-group :form="form" field="phone2">
                                     <input-label for="phone2">Phone 2: </input-label>
-                                    <input-text v-model="form.phone2" id="phone2" name="phone2" placeholder="(Optional)"
+                                    <input-text v-model="form.phone2" id="phone2" name="phone2"
+                                                placeholder="Optional"
                                                 type="tel" v-tel></input-text>
                                 </form-group>
                             </column>
@@ -52,7 +53,8 @@
                             <column size="4">
                                 <form-group :form="form" field="fax">
                                     <input-label for="fax">Fax: </input-label>
-                                    <input-text v-model="form.fax" id="fax" name="fax" v-tel></input-text>
+                                    <input-text v-model="form.fax" id="fax" name="fax" placeholder="Optional"
+                                                v-tel></input-text>
                                 </form-group>
                             </column>
                         </row>
@@ -66,7 +68,7 @@
                         <form-group :form="form" field="address_line2">
                             <input-label for="address_line2">Address Line 2: </input-label>
                             <input-text v-model="form.address_line2" id="address_line2" name="address_line2"
-                                        placeholder="(Optional)"></input-text>
+                                        placeholder="Optional"></input-text>
                         </form-group>
 
                         <form-group :form="form" field="city">
@@ -130,20 +132,20 @@
         methods: {
             buildForm(client) {
                 return new SlcForm({
-                    id: client ? client.id : null,
-                    company_name: client ? client.company_name : null,
-                    logo: client ? client.logo : null,
-                    first_name: client ? client.first_name : null,
-                    last_name: client ? client.last_name : null,
-                    email: client ? client.email : null,
+                    id           : client ? client.id : null,
+                    company_name : client ? client.company_name : null,
+                    logo         : client ? client.logo : null,
+                    first_name   : client ? client.first_name : null,
+                    last_name    : client ? client.last_name : null,
+                    email        : client ? client.email : null,
                     address_line1: client ? client.address_line1 : null,
                     address_line2: client ? client.address_line2 : null,
-                    city: client ? client.city : null,
-                    zipcode: client ? client.zipcode : null,
-                    state: client ? client.state : null,
-                    phone1: client ? client.phone1 : null,
-                    phone2: client ? client.phone2 : null,
-                    fax: client ? client.fax : null,
+                    city         : client ? client.city : null,
+                    zipcode      : client ? client.zipcode : null,
+                    state        : client ? client.state : null,
+                    phone1       : client ? client.phone1 : null,
+                    phone2       : client ? client.phone2 : null,
+                    fax          : client ? client.fax : null,
                 });
             }
         }

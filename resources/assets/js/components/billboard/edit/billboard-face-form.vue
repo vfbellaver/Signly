@@ -52,8 +52,9 @@
                                 <input-label for="reads">Reads: </input-label>
                                 <select id="reads" class="form-control" v-model="form.reads" name="reads">
                                     <option>Right</option>
+                                    <option>Right Across</option>
                                     <option>Left</option>
-                                    <option>Across</option>
+                                    <option>Left Across</option>
                                 </select>
                             </form-group>
                         </column>
@@ -78,7 +79,7 @@
                             <form-group :form="form" field="max_ads">
                                 <input-label for="max_ads">Max Ads: </input-label>
                                 <input-number v-model="form.max_ads" id="max_ads" name="max_ads"
-                                         v-number   placeholder="Optional"></input-number>
+                                              v-number placeholder="Optional"></input-number>
                             </form-group>
                         </column>
 
@@ -159,7 +160,7 @@
     export default {
 
         components: {},
-        props: {
+        props     : {
             billboardId: {required: true},
         },
 
@@ -167,7 +168,7 @@
 
         data() {
             return {
-                api: 'billboard-face',
+                api   : 'billboard-face',
                 loaded: false,
             }
         },
@@ -185,24 +186,24 @@
         methods: {
             buildForm(billboard_face) {
                 const data = {
-                    id: billboard_face ? billboard_face.id : null,
-                    code: billboard_face ? billboard_face.code : null,
-                    height: billboard_face ? billboard_face.height : null,
-                    width: billboard_face ? billboard_face.width : null,
-                    reads: billboard_face ? billboard_face.reads : null,
-                    label: billboard_face ? billboard_face.label : null,
-                    rate_card: billboard_face ? billboard_face.rate_card : null,
+                    id                 : billboard_face ? billboard_face.id : null,
+                    code               : billboard_face ? billboard_face.code : null,
+                    height             : billboard_face ? billboard_face.height : null,
+                    width              : billboard_face ? billboard_face.width : null,
+                    reads              : billboard_face ? billboard_face.reads : null,
+                    label              : billboard_face ? billboard_face.label : null,
+                    rate_card          : billboard_face ? billboard_face.rate_card : null,
                     monthly_impressions: billboard_face ? billboard_face.monthly_impressions : null,
-                    notes: billboard_face ? billboard_face.notes : null,
-                    max_ads: billboard_face ? billboard_face.max_ads : null,
-                    duration: billboard_face ? billboard_face.duration : null,
-                    photo_url: billboard_face ? billboard_face.photo_url : null,
-                    is_illuminated: billboard_face ? billboard_face.is_illuminated : false,
-                    lights_on: billboard_face ? billboard_face.lights_on : null,
-                    lights_off: billboard_face ? billboard_face.lights_off : null,
-                    type: billboard_face ? billboard_face.type : 'Static',
-                    billboard_face: billboard_face ? billboard_face.id : null,
-                    billboard: this.billboardId,
+                    notes              : billboard_face ? billboard_face.notes : null,
+                    max_ads            : billboard_face ? billboard_face.max_ads : null,
+                    duration           : billboard_face ? billboard_face.duration : null,
+                    photo_url          : billboard_face ? billboard_face.photo_url : null,
+                    is_illuminated     : billboard_face ? billboard_face.is_illuminated : false,
+                    lights_on          : billboard_face ? billboard_face.lights_on : null,
+                    lights_off         : billboard_face ? billboard_face.lights_off : null,
+                    type               : billboard_face ? billboard_face.type : 'Static',
+                    billboard_face     : billboard_face ? billboard_face.id : null,
+                    billboard          : this.billboardId,
                 };
 
                 this.loaded = true;
