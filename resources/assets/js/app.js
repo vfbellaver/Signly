@@ -28,8 +28,8 @@ Pusher.logToConsole = true;
 if (window.Slc.pusher) {
     window.Echo = new Echo({
         broadcaster: 'pusher',
-        key: window.Slc.pusher,
-        cluster: 'us2',
+        key        : window.Slc.pusher,
+        cluster    : 'us2',
     });
 }
 
@@ -40,9 +40,10 @@ window.App = new Vue({
 
     data() {
         return {
-            user: 'Slc' in window ? Slc.user : null,
-            settings: 'Slc' in window ? Slc.settings : null,
-            pageHeading: null,
+            user         : 'Slc' in window ? window.Slc.user : null,
+            settings     : 'Slc' in window ? window.Slc.settings : null,
+            context      : 'Slc' in window ? window.Slc : null,
+            pageHeading  : null,
             isMenuVisible: true
         }
     },
@@ -67,7 +68,7 @@ window.App = new Vue({
         });
 
         if (window.Slc.pusher && this.user && this.user.id) {
-            window.Echo.private(`App.Team.${this.user.id}`)
+            window.Echo.private(`App.Team.${this.user.team.id}`)
                 .listen('CommentCreated', (e) => {
                     console.log("Event", e);
                     EventBus.$emit('CommentCreated', e);

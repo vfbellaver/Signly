@@ -10,17 +10,17 @@
 <script>
     export default {
         props: {
-            form: {
-                type: Object,
+            form      : {
+                type    : Object,
                 required: true
             },
-            field: {
-                type: String,
+            field     : {
+                type    : String,
                 required: true
             },
             horizontal: {
                 required: false,
-                default: false
+                default : false
             }
         }
     }

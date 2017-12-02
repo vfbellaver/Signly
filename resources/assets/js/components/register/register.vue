@@ -19,7 +19,7 @@
                             <div class="table-responsive">
                                 <table class="table table-borderless m-b-none" v-cloak="true">
                                     <tbody>
-                                    <tr v-for="plan in plans">
+                                    <tr v-for="plan in $root.context.plans">
                                         <td class="text-uppercase"><strong>{{plan.name}}</strong></td>
                                         <td>
                                             <button class="btn btn-default" type="button"
@@ -30,6 +30,16 @@
                                         </td>
                                         <td>{{ plan.price | money('$')}} / {{plan.interval}}</td>
                                         <td>{{ plan.trial_days }} Day Trial</td>
+                                        <td class="text-right" style="width: 134px;">
+                                            <button
+                                                    class="select btn btn-primary btn-outline"
+                                                    :class="{'active': form.plan && form.plan.id == plan.id}"
+                                                    type="button" @click="form.plan = plan">
+                                                <icon v-if="form.plan && form.plan.id == plan.id" icon="check"></icon>
+                                                <span v-if="form.plan && form.plan.id == plan.id">Selected</span>
+                                                <span v-else>Select</span>
+                                            </button>
+                                        </td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -152,9 +162,10 @@
 
 <script>
 
+    import * as Slc from "../../vue/http";
+
     export default {
         data: () => ({
-            plans       : 'Slc' in window ? Slc.plans : [],
             selectedPlan: null,
             cardError   : null,
             form        : new SlcForm({

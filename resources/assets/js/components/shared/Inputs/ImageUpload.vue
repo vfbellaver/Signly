@@ -70,21 +70,20 @@
 
     export default {
         props: {
-            maxSize: {required: false},
+            maxSize     : {required: false},
             allowedTypes: {required: false}
-        },
-        mixins: [require('../Mixins/Model')],
-
-        computed: {
-            style() {
-                const image = this.internalValue ? this.internalValue : '/images/fileupload-bg.jpg';
-                return {'background-image': `url(${image})`};
-            }
         },
 
         data() {
             return {
-                internalAllowedTypes: []
+                internalAllowedTypes: [],
+                photoUrl            : null,
+            }
+        },
+
+        computed: {
+            style() {
+                return this.photoUrl ? {'background-image': `url(${image})`} : '';
             }
         },
 
@@ -144,8 +143,9 @@
                 Slc.upload(uri, allowedFiles).then((response) => {
                     console.log("Uploaded image", response);
                     const file = response.data[0];
-                    this.internalValue = file.url;
+                    this.photoUrl = file.url;
                     this.$emit('uploaded');
+                    this.$emit('input', this.photoUrl);
                 });
             },
             replaceImage() {

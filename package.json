@@ -46,6 +46,7 @@
     "vue-directive-image-previewer": "^1.1.2",
     "vue-js-toggle-button": "^1.1.0",
     "vue-multiselect": "^2.0.0-beta.15",
+    "vue-select2": "^0.2.6",
     "vue2-google-maps": "^0.8.3",
     "vue2-timepicker": "^0.1.4",
     "vuedraggable": "^2.15.0",
