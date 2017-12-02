@@ -6,12 +6,37 @@ export default new Vuex.Store({
     state: {
         user      : null,
         proposal  : null,
-        billboards: [],
         billboard : null,
-        markers   : [],
+        billboards: [],
+        filters   : {
+            type: null,
+        },
     },
 
-    getters: {},
+    getters: {
+        markers: (state) => {
+            const markers = [];
+            const billboards = state.billboards.filter(b => b.id);
+
+            for (let i = 0; i < billboards.length; i++) {
+                const billboard = state.billboards[i];
+                const faces = billboard.billboard_faces.filter(f => f.type === state.filters.type);
+                if (state.filters.type && !faces.length) {
+                    continue;
+                }
+
+                markers.push({
+                    position : {
+                        lat: parseFloat(billboard.lat),
+                        lng: parseFloat(billboard.lng)
+                    },
+                    billboard: billboard,
+                });
+            }
+            console.log("Getting markers", markers.length, markers);
+            return markers;
+        }
+    },
 
     mutations: {
         setUser(state, user) {
@@ -22,17 +47,7 @@ export default new Vuex.Store({
         },
         setBillboards(state, billboards) {
             state.billboards.splice(0, state.billboards.length);
-            state.markers.splice(0, state.markers.length);
-
-            for (let i = 0; i < billboards.length; i++) {
-                state.markers.push({
-                    position : {
-                        lat: parseFloat(billboards[i].lat),
-                        lng: parseFloat(billboards[i].lng)
-                    },
-                    billboard: billboards[i],
-                });
-            }
+            state.billboards = billboards;
         },
         setBillboard(state, billboard) {
             state.billboard = billboard;
@@ -76,6 +91,9 @@ export default new Vuex.Store({
                 comment.visualized = true;
             }
         },
+        setFilters(state, filters) {
+            state.filters = filters;
+        }
     },
 
     actions: {
@@ -141,5 +159,8 @@ export default new Vuex.Store({
         viewMessages({commit}) {
             commit('viewMessages');
         },
+        setFilters({commit}, filters) {
+            commit('setFilters', filters);
+        }
     }
 });

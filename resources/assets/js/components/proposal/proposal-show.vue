@@ -1,8 +1,6 @@
 <template>
-
     <div class="proposal-list">
         <inspinia-page-heading v-if="pageHeading" :data="pageHeading"></inspinia-page-heading>
-
         <nav class="navbar navbar-in-content navbar-default" data-spy="affix" data-offset-top="147">
             <ul class="nav navbar-nav navbar-right">
                 <li>
@@ -47,6 +45,7 @@
                     <billboard-show v-if="billboard" @add="openBillboardFaceForm"></billboard-show>
                 </gmap-info-window>
             </gmap-map>
+            <filters></filters>
         </div>
         <proposal-form ref="form" @saved="formSaved"></proposal-form>
         <billboard-face-form ref="billboardFaceForm" @created="faceCreated"
@@ -78,6 +77,7 @@
     import ProposalForm from './proposal-form';
     import store from './show/store';
     import Comments from './show/comments';
+    import Filters from './show/filters';
 
     export default {
         props     : {
@@ -89,18 +89,18 @@
             MapControls,
             BillboardFaceForm,
             ProposalForm,
-            Comments
+            Comments,
+            Filters,
         },
         data() {
             return {
-                pageHeading: {
+                pageHeading         : {
                     title     : 'Loading...',
                     breadcrumb: [
                         {title: 'Home', url: laroute.route('home')},
                         {title: 'Proposal List', url: laroute.route('proposals.index')}
                     ]
                 },
-
                 loaded              : false,
                 center              : null,
                 zoom                : null,
@@ -125,7 +125,7 @@
                 return this.$store.state.billboards;
             },
             markers() {
-                return this.$store.state.markers;
+                return this.$store.getters.markers;
             },
             proposal() {
                 return this.$store.state.proposal;
