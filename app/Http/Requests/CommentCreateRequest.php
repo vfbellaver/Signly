@@ -36,7 +36,7 @@ class CommentCreateRequest extends BaseRequest
     public function rules()
     {
         $data = [
-            'comment' => 'required',
+            'comment'  => 'required',
             'proposal' => 'required',
         ];
 
@@ -50,7 +50,7 @@ class CommentCreateRequest extends BaseRequest
     public function messages()
     {
         return [
-            'from_name.required' => 'The name field is required.'
+            'from_name.required' => 'The name field is required.',
         ];
     }
 }

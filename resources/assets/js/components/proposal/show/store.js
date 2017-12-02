@@ -4,11 +4,11 @@ import * as Slc from "../../../vue/http";
 export default new Vuex.Store({
 
     state: {
-        user: null,
-        proposal: null,
+        user      : null,
+        proposal  : null,
         billboards: [],
-        billboard: null,
-        markers: [],
+        billboard : null,
+        markers   : [],
     },
 
     getters: {},
@@ -26,7 +26,7 @@ export default new Vuex.Store({
 
             for (let i = 0; i < billboards.length; i++) {
                 state.markers.push({
-                    position: {
+                    position : {
                         lat: parseFloat(billboards[i].lat),
                         lng: parseFloat(billboards[i].lng)
                     },
@@ -64,6 +64,9 @@ export default new Vuex.Store({
             if (!state.proposal.comments) {
                 state.proposal.comments = [];
             }
+            state.proposal.comments.push(comment);
+        },
+        addComment(state, comment) {
             state.proposal.comments.push(comment);
         }
     },
@@ -117,15 +120,16 @@ export default new Vuex.Store({
             Slc.put(uri, form).then(response => {
             });
         },
-
         saveComment({commit}, form) {
             form.timezone = moment.tz.guess();
             const uri = laroute.route('comment.store');
             return Slc.post(uri, form).then(response => {
-                console.log('response - ',response);
+                console.log('response - ', response);
                 commit('commentSaved', response);
             });
-        }
-
+        },
+        addComment({commit}, comment) {
+            commit('addComment', comment);
+        },
     }
 });

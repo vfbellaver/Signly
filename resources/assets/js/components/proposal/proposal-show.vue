@@ -79,7 +79,7 @@
     import Comments from './show/comments';
 
     export default {
-        props: {
+        props     : {
             id: {required: true},
         },
         store,
@@ -93,24 +93,24 @@
         data() {
             return {
                 pageHeading: {
-                    title: 'Loading...',
+                    title     : 'Loading...',
                     breadcrumb: [
                         {title: 'Home', url: laroute.route('home')},
                         {title: 'Proposal List', url: laroute.route('proposals.index')}
                     ]
                 },
 
-                loaded: false,
-                center: null,
-                zoom: null,
-                mapOptions: {
-                    scrollWell: true,
-                    mapTypeControl: false,
+                loaded              : false,
+                center              : null,
+                zoom                : null,
+                mapOptions          : {
+                    scrollWell     : true,
+                    mapTypeControl : false,
                     gestureHandling: 'greedy',
                 },
-                infoWindowPos: null,
+                infoWindowPos       : null,
                 gmapInfoWindowClosed: false,
-                commentsView: []
+                commentsView        : []
             }
         },
 
@@ -138,17 +138,15 @@
         },
 
         mounted() {
-            this.getComments();
-            EventBus.$on('CommentCreated', (e) => {
-                console.log("proposal Show", e.comment);
-                if(e.comment.proposal_id == this.id && Slc.user.name !== e.comment.name) {
-                    console.log("Ok",this.commentsView.length);
-                    this.commentsView.push(e.comment);
-                    console.log("Ok",this.commentsView.length);
-                }
-
-            });
             const self = this;
+            this.getComments();
+            window.EventBus.$on('CommentCreated', (e) => {
+                console.log("CommentCreated", e.comment);
+                if (e.comment.proposal_id === self.proposal.id && self.$root.user.id !== e.comment.user_id) {
+                    self.$store.dispatch('addComment', e.comment);
+                    self.commentsView.push(e.comment);
+                }
+            });
             this.center = {
                 lat: parseFloat(this.user.lat),
                 lng: parseFloat(this.user.lng),
@@ -171,17 +169,15 @@
 
         methods: {
             openComments() {
-
-                this.$refs.comments.show();
-
-                this.commentsView = new SlcForm ({
-                    id : this.$store.state.proposal.id,
+                this.commentsView = new SlcForm({
+                    id: this.$store.state.proposal.id,
                 });
 
                 const uri = laroute.route('api.update.comments');
-
                 SLC.put(uri, this.commentsView).then(response => {
+                    console.log("Comments", response);
                     this.commentsView = [];
+                    this.$refs.comments.show();
                 });
             },
 
@@ -202,7 +198,7 @@
                 }
 
                 return {
-                    path: "M 13.24,29.00\n" +
+                    path        : "M 13.24,29.00\n" +
                     "           C 11.29,25.16 9.45,22.37 8.81,18.00\n" +
                     "             5.47,-4.64 38.39,-6.24 39.40,14.00\n" +
                     "             39.62,18.39 38.18,22.10 36.36,26.00\n" +
@@ -214,12 +210,12 @@
                     "             28.80,41.52 26.51,44.93 25.00,48.00\n" +
                     "             25.00,48.00 23.00,48.00 23.00,48.00\n" +
                     "             23.00,48.00 13.24,29.00 13.24,29.00 Z",
-                    fillColor: fillColor,
-                    fillOpacity: 1,
+                    fillColor   : fillColor,
+                    fillOpacity : 1,
                     strokeWeight: 0,
-                    scale: 1,
-                    origin: new google.maps.Point(4, 0),
-                    anchor: new google.maps.Point(24, 48),
+                    scale       : 1,
+                    origin      : new google.maps.Point(4, 0),
+                    anchor      : new google.maps.Point(24, 48),
                 };
             },
             openEditForm() {
@@ -262,7 +258,7 @@
                 console.log("Order changed", orderList);
                 const form = new SlcForm({
                     proposal_id: this.proposal.id,
-                    orderList: orderList,
+                    orderList  : orderList,
                 });
 
                 this.$store.dispatch('reorderBillboardFaces', form);
@@ -281,13 +277,11 @@
                     }
                 }
             },
-
-            getComments(){
-                const uri = laroute.route('api.comments.get.not.visualized',{id: this.id});
+            getComments() {
+                const uri = laroute.route('api.comments.get.not.visualized', {id: this.id});
                 SLC.get(uri).then(response => {
                     this.commentsView = response;
                 });
-
             }
         }
     }

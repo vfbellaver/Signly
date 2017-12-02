@@ -5,9 +5,9 @@
             <modal-body>
                 <row>
                     <column size="12">
-                        <span v-if="! form.proposal || form.proposal.comments.length === 0">Empty</span>
+                        <span v-if="!proposal || !proposal.comments">Empty</span>
                         <div v-else class="comments" ref="comments">
-                            <div class="social-comment" v-for="(comment, index) in form.proposal.comments"
+                            <div class="social-comment" v-for="(comment, index) in proposal.comments"
                                  :key="comment.id">
                                 <div class="media-body">
                                     <a href="#">{{ comment.name }}</a>
@@ -56,7 +56,7 @@
 
     export default {
         store,
-        data: () => ({
+        data    : () => ({
             form: new SlcForm({})
         }),
         computed: {
@@ -64,7 +64,7 @@
                 return this.$store.state.proposal;
             }
         },
-        methods: {
+        methods : {
             show() {
                 $(this.$el).modal('show');
                 this.buildForm();
@@ -80,10 +80,10 @@
             },
             buildForm() {
                 this.form = new SlcForm({
-                    proposal: this.proposal,
-                    from_name: null,
+                    proposal  : this.proposal,
+                    from_name : null,
                     visualized: true,
-                    comment: null
+                    comment   : null
                 });
             },
             moveDown() {

@@ -10,13 +10,12 @@ use App\Models\Comment;
 
 class CommentService
 {
-    public function create (CommentForm $form): Comment
+    public function create(CommentForm $form): Comment
     {
         return \DB::transaction(function () use ($form) {
             $data = [
                 'from_name' => $form->fromName(),
-                'comment' => $form->comment(),
-                'visualized' => $form->visualized(),
+                'comment'   => $form->comment(),
             ];
 
             $comment = new Comment($data);
