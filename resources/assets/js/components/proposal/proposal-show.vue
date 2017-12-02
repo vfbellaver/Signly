@@ -70,7 +70,7 @@
 </style>
 <script>
 
-    import * as Slc from "../../vue/http";
+    import * as SLC from "../../vue/http";
     import BillboardShow from './show/billboard-show';
     import MapControls from './show/map-controls';
     import BillboardFaceForm from './show/billboard-face-form';
@@ -139,6 +139,15 @@
 
         mounted() {
             this.getComments();
+            EventBus.$on('CommentCreated', (e) => {
+                console.log("proposal Show", e.comment);
+                if(e.comment.proposal_id == this.id && Slc.user.name !== e.comment.name) {
+                    console.log("Ok",this.commentsView.length);
+                    this.commentsView.push(e.comment);
+                    console.log("Ok",this.commentsView.length);
+                }
+
+            });
             const self = this;
             this.center = {
                 lat: parseFloat(this.user.lat),
@@ -171,10 +180,11 @@
 
                 const uri = laroute.route('api.update.comments');
 
-                Slc.put(uri,this.commentsView).then(response => {
-                    console.log('Deu certo', response);
+                SLC.put(uri, this.commentsView).then(response => {
+                    this.commentsView = [];
                 });
             },
+
             markerIcon(marker) {
 
                 let fillColor = '#42c0fb';
@@ -274,7 +284,7 @@
 
             getComments(){
                 const uri = laroute.route('api.comments.get.not.visualized',{id: this.id});
-                Slc.get(uri).then(response => {
+                SLC.get(uri).then(response => {
                     this.commentsView = response;
                 });
 

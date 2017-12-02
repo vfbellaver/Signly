@@ -60,7 +60,6 @@ class RegisterController extends Controller
             $user->attachRole(Defender::findRole(User::ACCOUNT_OWNER));
             $plan = $request->input('plan');
             $email = $request->input('email');
-            $owner = $request->input('owner');
             $cardToken = request('card');
 
             Stripe::setApiKey($this->key);

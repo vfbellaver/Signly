@@ -77,8 +77,8 @@
                         <column size="4">
                             <form-group :form="form" field="max_ads">
                                 <input-label for="max_ads">Max Ads: </input-label>
-                                <input-text v-model="form.max_ads" id="max_ads" name="max_ads"
-                                            placeholder="Optional"></input-text>
+                                <input-number v-model="form.max_ads" id="max_ads" name="max_ads"
+                                         v-number   placeholder="Optional"></input-number>
                             </form-group>
                         </column>
 

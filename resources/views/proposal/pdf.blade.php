@@ -1,11 +1,11 @@
 <style>
     .page-title {
-        background-color: #4DA2CE;
+        background-color: #a8a8a8;
         width: 100%;
         text-transform: uppercase;
         font-size: 16pt;
         height: 22pt;
-        color: #ffffff;
+        color: #000000;
         float: left;
         margin-left: -34pt;
         padding: 8pt 34pt;
@@ -220,8 +220,7 @@
 </htmlpagefooter>
 
 <page class="cover-page">
-
-    <div style="position: absolute; top: 0; left: 0;">
+<div style="position: absolute; top: 0; left: 0;">
         <img src="{{asset('images/proposal-cover-top.jpg')}}" style=""/>
     </div>
     <div style="position: absolute; bottom: 0; left: 0;">
@@ -229,9 +228,16 @@
     </div>
 
     <br/>
-    <table style="width:100%; margin-top: 250pt">
+
+    <table style="width:100%; margin-top: 250pt ">
         <tr>
             <td align="center" class="uppercase" style="font-size: 22pt; color: #888888">
+            <td align="center" class="uppercase" style="font-size: 28pt; color: #888888;">
+                <img src="/images/logo.png" width="100%" style="align-items: center">
+            </td>
+        </tr>
+        <tr style="padding: 50%">
+            <td align="center" class="uppercase" style="font-size: 28pt; color: #888888;">
                 Proposal Presented to: <br/>
                 <strong style="font-size: ">{{$client['company_name']}}</strong>
             </td>
@@ -343,7 +349,7 @@
                     <td class="value"
                         colspan="{{$face['is_illuminated'] ? 1 : 3}}">{{$face['is_illuminated'] ? 'Illuminated' : ''}}</td>
                     @if($face['is_illuminated'])
-                        <td class="label">Lights on/off</td>
+                        <td class="label">Lightson/off</td>
                         <td class="value">{{$face['lights_on']}} - {{$face['lights_off']}}</td>
                     @endif
                 @else

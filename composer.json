@@ -30,7 +30,6 @@
     "fzaninotto/faker": "~1.4",
     "lab404/laravel-impersonate": "^1.2",
     "laravel/cashier": "~7.0",
-    "laravel/dusk": "^1.1",
     "laravel/framework": "5.5.*",
     "laravel/passport": "3.0.*",
     "laravel/scout": "3.0.*",
@@ -44,6 +43,7 @@
   "require-dev": {
     "deployer/deployer": "^5.1",
     "deployer/recipes": "^4.0",
+    "laravel/dusk": "^2.0",
     "mockery/mockery": "0.9.*",
     "pdepend/pdepend": "2.5.*",
     "phploc/phploc": "4.0.*",

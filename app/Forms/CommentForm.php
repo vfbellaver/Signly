@@ -35,4 +35,9 @@ class CommentForm extends BaseForm
     {
         return $this->request->get('comment');
     }
+
+    public function visualized()
+    {
+        return $this->request->get('visualized');
+    }
 }
