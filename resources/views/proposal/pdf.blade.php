@@ -1,11 +1,11 @@
 <style>
     .page-title {
-        background-color: #000000;
+        background-color: #a8a8a8;
         width: 100%;
         text-transform: uppercase;
         font-size: 16pt;
         height: 22pt;
-        color: #ffffff;
+        color: #000000;
         float: left;
         margin-left: -34pt;
         padding: 8pt 34pt;
@@ -18,100 +18,128 @@
     table.table {
         border-collapse: collapse;
     }
+
     table.table tr th {
         padding: 8pt;
         text-align: left;
     }
+
     table.table tr td {
         padding: 8pt;
         border-top: 1px solid #e7eaec;
     }
+
     tr.odd {
         background-color: #F8F8F8;
     }
+
     tr.even {
         background-color: #ffffff;
     }
+
     td.notes {
         font-size: 10pt;
         padding: 8pt;
         background-color: #F8F8F8;
     }
+
     table.vertical-table {
         border-collapse: collapse;
     }
+
     table.vertical-table tr td {
         padding: 4pt;
-        background: #000000;
+        background: #626262;
         color: #ffffff;
         font-size: 10pt;
         border-top: 2px solid #ffffff;
     }
+
     table.vertical-table tr.first td {
         border-top: 0;
     }
+
     table.vertical-table tr td.label {
         width: 128pt;
         font-weight: bold;
         text-transform: uppercase;
         font-size: 11pt;
     }
+
     table.vertical-table tr td.value {
     }
+
     .divider {
         height: 12pt;
         border-top: 1px solid #888888;
     }
+
     .cover-page {
+        padding-top: 800pt;
+        float: none;
     }
+
     .toc-header {
         background-color: #ffffff;
         font-size: 11pt;
     }
+
     .toc-footer {
         background-color: #ffffff;
     }
+
     a.mpdf_toc_a {
         text-decoration: none;
         color: black;
     }
+
     div.mpdf_toc_level_0 {
         font-size: 11pt;
         line-height: 1.5;
         margin-left: 6pt;
         padding-right: 2em;
     }
+
     span.mpdf_toc_t_level_0 {
         font-weight: bold;
     }
+
     span.mpdf_toc_p_level_0 {
     }
+
     .page-header {
         background-color: #ffffff;
     }
+
     .page-footer {
         background-color: #ffffff;
     }
+
     .face-page {
     }
+
     .face-image {
         max-width: 290pt;
         max-height: 190pt;
         vertical-align: top;
     }
+
     .footer-image {
         max-width: 92px;
         max-height: 92px;
     }
+
     .footer-content {
         padding-left: 2pt;
         font-size: 10pt;
     }
+
     .page-number {
         text-align: right;
         vertical-align: middle;
         padding-right: 8px;
     }
+
     .uppercase {
         text-transform: uppercase;
     }
@@ -195,9 +223,16 @@
 </htmlpagefooter>
 
 <page class="cover-page">
-    <table style="width:100%; margin-top: 250pt">
+    <!--<div class="toc-footer" style="border-top: 1px solid #ffffff;">-->
+
+    <table style="width:100%; margin-top: 250pt;">
         <tr>
-            <td align="center" class="uppercase" style="font-size: 22pt; color: #888888">
+            <td align="center" class="uppercase" style="font-size: 28pt; color: #888888;">
+                <img src="/images/logo.png" width="100%" style="align-items: center">
+            </td>
+        </tr>
+        <tr style="padding: 50%">
+            <td align="center" class="uppercase" style="font-size: 28pt; color: #888888;">
                 Proposal Presented to: <br/>
                 <strong style="">{{$client['company_name']}}</strong>
             </td>
@@ -309,7 +344,9 @@
                     <td class="value"
                         colspan="{{$face['is_illuminated'] ? 1 : 3}}">{{$face['is_illuminated'] ? 'Illuminated' : ''}}</td>
                     @if($face['is_illuminated'])
-                        <td class="label"><strong>Lights</strong> <small>on/off</small> </td>
+                        <td class="label"><strong>Lights</strong>
+                            <small>on/off</small>
+                        </td>
                         <td class="value">{{$face['lights_on']}} - {{$face['lights_off']}}</td>
                     @endif
                 @else

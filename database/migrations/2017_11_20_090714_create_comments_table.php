@@ -28,7 +28,7 @@ class CreateCommentsTable extends Migration
                 ->onDelete('cascade');
             
             $table->string('from_name')->nullable();
-            $table->boolean('visualized')->default(false);
+            $table->boolean('visualized')->default(0);
             $table->text('comment');
 
             $table->timestamps();

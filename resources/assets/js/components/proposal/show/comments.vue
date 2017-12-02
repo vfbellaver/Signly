@@ -82,6 +82,7 @@
                 this.form = new SlcForm({
                     proposal: this.proposal,
                     from_name: null,
+                    visualized: true,
                     comment: null
                 });
             },

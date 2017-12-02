@@ -175,6 +175,7 @@ return [
         Lord\Laroute\LarouteServiceProvider::class,
         Artesaos\Defender\Providers\DefenderServiceProvider::class,
         Laravel\Cashier\CashierServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -183,8 +184,10 @@ return [
         App\Providers\AuthServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        \App\Providers\FakerServiceProvider::class,
+        App\Providers\FakerServiceProvider::class,
         App\Providers\TimezoneServiceProvider::class,
+        App\Providers\BroadcastServiceProvider::class,
+
     ],
 
     /*
@@ -236,6 +239,7 @@ return [
         'Bugsnag' => Bugsnag\BugsnagLaravel\Facades\Bugsnag::class,
         'Defender' => Artesaos\Defender\Facades\Defender::class,
         'Timezone' => App\Services\Facades\Timezone::class,
+        'Image' => Intervention\Image\Facades\Image::class
     ],
 
 ];

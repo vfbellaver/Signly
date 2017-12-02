@@ -139,6 +139,7 @@ class User extends Authenticatable
         $subscription = $this->getSubscription()->get()->first();
 
         return [
+
             'id' => (int)$this->id,
             'name' => $this->name,
             'photo_url' => $this->photo_url,

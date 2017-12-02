@@ -21,6 +21,7 @@
   ],
   "require": {
     "php": ">=7.0.0",
+    "intervention/image": "dev-master",
     "artesaos/defender": "dev-master@dev",
     "barryvdh/laravel-debugbar": "2.4.*",
     "barryvdh/laravel-ide-helper": "2.4.*",
@@ -30,7 +31,6 @@
     "fzaninotto/faker": "~1.4",
     "lab404/laravel-impersonate": "^1.2",
     "laravel/cashier": "~7.0",
-    "laravel/dusk": "^1.1",
     "laravel/framework": "5.5.*",
     "laravel/passport": "3.0.*",
     "laravel/scout": "3.0.*",
@@ -38,11 +38,13 @@
     "lord/laroute": "dev-master",
     "mpdf/mpdf": "7.0.x-dev",
     "predis/predis": "^1.1",
+    "pusher/pusher-php-server": "^3.0",
     "stripe/stripe-php": "^5.3"
   },
   "require-dev": {
     "deployer/deployer": "^5.1",
     "deployer/recipes": "^4.0",
+    "laravel/dusk": "^2.0",
     "mockery/mockery": "0.9.*",
     "pdepend/pdepend": "2.5.*",
     "phploc/phploc": "4.0.*",

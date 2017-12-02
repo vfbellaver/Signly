@@ -12,6 +12,7 @@ use App\Notifications\UserInvited;
 use App\Services\TeamService;
 use Illuminate\Http\Request;
 use Illuminate\Notifications\Notifiable;
+use Intervention\Image\Facades\Image;
 
 class TeamsController extends Controller
 {
@@ -63,6 +64,23 @@ class TeamsController extends Controller
         $team->logo = $request->input('logo');
         $team->save();
 
+        /*
+        $logo = Image::make($team->logo);
+
+        $size['width'] = $logo->getWidth();
+        $size['height'] = $logo->getHeight();
+
+        while ($size['width'] <= 450 && $size['height'] <= 450) {
+
+            $size['width'] = $size['width']/2;
+            $size['height'] = $size['height']/2;
+
+            $logo->resize($size['width'],$size['height']);
+
+        };
+
+        $logo->save($team->logo);
+        */
         $response = [
             'message' => 'Company Logo updated.',
             'data' => $team,

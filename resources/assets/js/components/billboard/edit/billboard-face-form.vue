@@ -68,7 +68,7 @@
                             <form-group :form="form" field="rate_card">
                                 <input-label for="rate_card">Rate Card: </input-label>
                                 <input-text v-model="form.rate_card" id="rate_card" name="rate_card"
-                                            v-money></input-text>
+                                            v-integer></input-text>
                             </form-group>
                         </column>
                     </row>
@@ -77,8 +77,8 @@
                         <column size="4">
                             <form-group :form="form" field="max_ads">
                                 <input-label for="max_ads">Max Ads: </input-label>
-                                <input-text v-model="form.max_ads" id="max_ads" name="max_ads"
-                                            placeholder="Optional"></input-text>
+                                <input-number v-model="form.max_ads" id="max_ads" name="max_ads"
+                                         v-number   placeholder="Optional"></input-number>
                             </form-group>
                         </column>
 
