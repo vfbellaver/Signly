@@ -6,14 +6,13 @@ class DatabaseSeeder extends Seeder
 {
     public function run()
     {
-        if (app()->environment('production')) {
-            exit("I've just stopped you from getting fired. With love, Jeremias! S2");
-        }
         $this->call(TeamTableSeeder::class);
         $this->call(RolesTableSeeder::class);
         $this->call(UsersTableSeeder::class);
-        $this->call(ClientsTableSeeder::class);
-        $this->call(BillboardsTableSeeder::class);
-        $this->call(ProposalTableSeeder::class);
+        if (!app()->environment('production')) {
+            $this->call(ClientsTableSeeder::class);
+            $this->call(BillboardsTableSeeder::class);
+            $this->call(ProposalTableSeeder::class);
+        }
     }
 }

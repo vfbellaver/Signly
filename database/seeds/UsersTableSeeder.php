@@ -35,9 +35,9 @@ class UsersTableSeeder extends Seeder
             $stripePlan = Plan::retrieve($plan['id']);
         } catch (Exception $e) {
             $stripePlan = Plan::create(array(
-                "id" => $plan['id'],
-                "name" => $plan['name'],
-                "amount" => 250,
+                "id"       => $plan['id'],
+                "name"     => $plan['name'],
+                "amount"   => 250,
                 "interval" => "month",
                 "currency" => "usd",
             ));
@@ -65,12 +65,12 @@ class UsersTableSeeder extends Seeder
 
         $data = [
             "card" => [
-                "name" => $user->name,
-                "number" => $card,
+                "name"      => $user->name,
+                "number"    => $card,
                 "exp_month" => rand(1, 12),
-                "exp_year" => Carbon::now()->addYears(rand(1, 5))->format('Y'),
-                "cvc" => rand(100, 999),
-            ]
+                "exp_year"  => Carbon::now()->addYears(rand(1, 5))->format('Y'),
+                "cvc"       => rand(100, 999),
+            ],
         ];
 
         $token = Token::create($data);
@@ -83,19 +83,19 @@ class UsersTableSeeder extends Seeder
         $team = \App\Models\Team::query()->where('slug', 'devsquad')->first();
         /** @var User $user */
         $user = factory(\App\Models\User::class)->create([
-            'name' => 'DevSquad',
-            'email' => 'team@devsquad.com',
+            'name'     => 'DevSquad',
+            'email'    => 'team@devsquad.com',
             'password' => bcrypt('devsquad##'),
-            'team_id' => $team->id,
+            'team_id'  => $team->id,
         ]);
-        $this->subscribeTeamOwners($user);
+        if (!app()->environment('production')) {
+            $this->subscribeTeamOwners($user);
+        }
 
         $team->owner_id = $user->id;
         $team->save();
 
-        $user->attachRole(Defender::findRole(User::ADMIN));
         $user->attachRole(Defender::findRole(User::SUPER_ADMIN));
-        $user->attachRole(Defender::findRole(User::ACCOUNT_OWNER));
     }
 
     private function createAdminUser()
@@ -104,13 +104,16 @@ class UsersTableSeeder extends Seeder
 
         /** @var User $user */
         $user = factory(\App\Models\User::class)->create([
-            'name' => 'Mike Admin',
-            'email' => 'mike@signly.com',
+            'name'            => 'Mike Admin',
+            'email'           => 'mike@signly.com',
             'card_expiration' => Carbon::createFromFormat('m/Y', '11/2017')->endOfMonth(),
-            'password' => bcrypt('signly##'),
-            'team_id' => $team->id
+            'password'        => bcrypt('signly##'),
+            'team_id'         => $team->id,
         ]);
-        $this->subscribeTeamOwners($user);
+        if (!app()->environment('production')) {
+            $this->subscribeTeamOwners($user);
+        }
+
         $team->owner_id = $user->id;
         $team->save();
 
@@ -127,7 +130,7 @@ class UsersTableSeeder extends Seeder
 
             $owner = factory(\App\Models\User::class)
                 ->create([
-                    'team_id' => $team->id
+                    'team_id' => $team->id,
                 ]);
             $owner->attachRole(Defender::findRole(User::ACCOUNT_OWNER));
             $team->owner_id = $owner->id;
@@ -137,7 +140,7 @@ class UsersTableSeeder extends Seeder
 
             factory(\App\Models\User::class, 2)
                 ->create([
-                    'team_id' => $team->id
+                    'team_id' => $team->id,
                 ])->each(function (User $user) {
                     $user->attachRole(Defender::findRole(User::ACCOUNT_MEMBER));
                 });

@@ -9,7 +9,9 @@ class TeamTableSeeder extends Seeder
     {
         $this->createSuperAdminTeam();
         $this->createAdminTeam();
-        $this->createTeams();
+        if (!app()->environment('production')) {
+            $this->createTeams();
+        }
     }
 
     private function createSuperAdminTeam()

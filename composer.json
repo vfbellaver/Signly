@@ -38,12 +38,12 @@
     "mpdf/mpdf": "7.0.x-dev",
     "predis/predis": "^1.1",
     "pusher/pusher-php-server": "^3.0",
-    "stripe/stripe-php": "^5.3",
-    "laravel/dusk": "^2.0"
+    "stripe/stripe-php": "^5.3"
   },
   "require-dev": {
     "deployer/deployer": "^5.1",
     "deployer/recipes": "^4.0",
+    "laravel/dusk": "^2.0",
     "mockery/mockery": "0.9.*",
     "pdepend/pdepend": "2.5.*",
     "phploc/phploc": "4.0.*",
@@ -92,24 +92,20 @@
       "yarn install",
       "yarn run dev"
     ],
-    "post-root-package-install": [
-      "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
-    ],
-    "post-create-project-cmd": [
-      "@setup",
-      "App\\Helpers\\ComposerProjectSetup::postProjectCrete"
-    ],
-    "post-autoload-dump": [
-      "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
-      "php artisan ide-helper:generate",
-      "php artisan ide-helper:meta",
-      "php artisan optimize",
-      "@php artisan package:discover"
-    ],
     "ide-helper": [
       "php artisan ide-helper:generate",
       "php artisan ide-helper:meta",
       "php artisan optimize"
+    ],
+    "post-root-package-install": [
+      "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+    ],
+    "post-create-project-cmd": [
+      "@php artisan key:generate"
+    ],
+    "post-autoload-dump": [
+      "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
+      "@php artisan package:discover"
     ]
   },
   "config": {
