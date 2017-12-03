@@ -9,7 +9,7 @@
             </div>
             <br/>
             <p>
-                Login in. To see it in action.
+                Login in to see it in action.
             </p>
             <form class="m-t" role="form" method="POST" action="{{ route('login') }}">
                 {{ csrf_field() }}

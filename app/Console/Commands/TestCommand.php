@@ -6,8 +6,11 @@ use App\Events\CommentCreated;
 use App\Models\Comment;
 use App\Models\User;
 use App\Notifications\CardExpirationSoon;
+use App\Slc;
 use Faker\Generator;
 use Laravel\Cashier\Cashier;
+use Stripe\Plan;
+use Stripe\Stripe;
 use Timezone;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
@@ -25,9 +28,15 @@ class TestCommand extends Command
 
     public function handle()
     {
-        /** @var Comment $comment */
-        $comment = Comment::query()->find(1);
-        broadcast(new CommentCreated($comment));
+        Stripe::setApiKey(config('services.stripe.secret'));
+        $plan = Slc::PLAN_2;
+        $stripePlan = Plan::create(array(
+            "id"       => $plan['id'],
+            "name"     => $plan['name'],
+            "amount"   => 200,
+            "interval" => "month",
+            "currency" => "usd",
+        ));
     }
 
     public function handle2(Generator $faker)

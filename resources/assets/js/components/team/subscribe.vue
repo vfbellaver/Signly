@@ -6,8 +6,11 @@
                     <div class="ibox-title">
                         <h5>Subscribe</h5>
                     </div>
-                    <div :class="classError">
+                    <div class="ibox-body-card" :class="classError">
                         <form-submit v-model="userForm" @submit="createToken">
+                            <column size="12">
+                                <h3>$ 200.00/Mo</h3>
+                            </column>
                             <column size="12">
                                 <form-group :form="userForm" field="owner">
                                     <input-label for="owner">Cardholder's Name: </input-label>
@@ -26,7 +29,7 @@
                                 <hr class="hr">
                                 <button class="btn btn-primary" :disabled="userForm.busy">
                                     <spinner v-if="userForm.busy"></spinner>
-                                    Update Card
+                                    Subscribe
                                 </button>
                             </column>
                         </form-submit>
@@ -47,7 +50,7 @@
 
     .ibox-body-card {
         background-color: white;
-        height: 239px;
+        min-height: 239px;
         margin-top: 2px;
         padding: 10px 20px 20px 20px;
     }
@@ -82,17 +85,6 @@
         data() {
             return {
                 userForm   : null,
-                cardBrand  : [
-                    {name: 'Visa', class: 'fa fa-cc-visa payment-icon-big text-success'},
-                    {name: 'MasterCard', class: 'fa fa-cc-mastercard payment-icon-big text-success'},
-                    {name: 'Diners Club', class: 'fa fa-cc-diners-club payment-icon-big text-success'},
-                    {name: 'American Express', class: 'fa fa-cc-amex payment-icon-big text-success'},
-                    {name: 'Discover', class: 'fa fa-cc-discover payment-icon-big text-success'},
-                    {name: 'JCB', class: 'fa fa-cc-jcb payment-icon-big text-success'},
-                    {name: 'Stripe', class: 'fa fa-cc-stripe payment-icon-big text-success'},
-                    {name: 'Unknown', class: 'fa fa-cc payment-icon-big text-success'},
-                ],
-                brand      : null,
                 stripe     : null,
                 token      : null,
                 card       : null,
@@ -114,19 +106,14 @@
         },
 
         created() {
-            this.getCard();
             this.buildForm();
         },
 
         mounted() {
-
             this.buildFormStripe();
-
         },
 
-
         methods: {
-
             buildFormStripe() {
                 this.stripe = Stripe(window.Slc.stripeKey);
                 const elements = this.stripe.elements();
@@ -140,16 +127,6 @@
                         self.cardError = null;
                     }
                 });
-            },
-
-            getCard() {
-                let self = this;
-                SLC.get(laroute.route('api.payment.card'))
-                    .then((response) => {
-                        console.log('get Card');
-                        self.currentCard = response.data[0];
-                        this.getBrandCard(this.currentCard.brand);
-                    });
             },
 
             getBrandCard(flag) {
@@ -172,21 +149,16 @@
                     }
 
                     self.userForm.source = result.token.id;
-                    self.updateCard();
+                    self.subscribe();
                 });
             },
 
-            updateCard() {
-                const self = this;
-                const uri = laroute.route('api.payment.update.card');
-                SLC.put(uri, this.userForm).then((response) => {
+            subscribe() {
+                const uri = laroute.route('api.subscribe');
+                SLC.post(uri, this.userForm).then((response) => {
                     console.log('update card', response);
-                    self.buildForm();
-                    self.getCard();
-                    this.card.unmount(this.$refs.card);
-                    this.card.mount(this.$refs.card);
+                    window.location = laroute.route('team.settings');
                 });
-
             },
 
             buildForm() {
@@ -194,7 +166,6 @@
                     source: null,
                     owner : '',
                 });
-
             },
         }
     }
