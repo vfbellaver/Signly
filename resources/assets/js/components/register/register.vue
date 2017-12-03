@@ -3,7 +3,7 @@
         <form id="register-form" class="form-horizontal" method="POST" @submit.prevent="submit">
             <row>
                 <div class="col-md-8 col-md-offset-2">
-                    <div class="panel panel-success">
+                    <div v-if="false" class="panel panel-success">
                         <div class="panel-heading">
                             Subscription
                         </div>
@@ -91,7 +91,7 @@
                         </div>
                     </div>
 
-                    <div class="panel panel-success">
+                    <div v-if="false" class="panel panel-success">
                         <div class="panel-heading">
                             Billing Information
                         </div>

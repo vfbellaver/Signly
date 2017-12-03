@@ -89,7 +89,7 @@ class UsersTableSeeder extends Seeder
             'team_id'  => $team->id,
         ]);
         if (!app()->environment('production')) {
-            $this->subscribeTeamOwners($user);
+            //$this->subscribeTeamOwners($user);
         }
 
         $team->owner_id = $user->id;
@@ -111,7 +111,7 @@ class UsersTableSeeder extends Seeder
             'team_id'         => $team->id,
         ]);
         if (!app()->environment('production')) {
-            $this->subscribeTeamOwners($user);
+            //$this->subscribeTeamOwners($user);
         }
 
         $team->owner_id = $user->id;
@@ -136,7 +136,7 @@ class UsersTableSeeder extends Seeder
             $team->owner_id = $owner->id;
             $team->save();
 
-            $this->subscribeTeamOwners($owner);
+            //$this->subscribeTeamOwners($owner);
 
             factory(\App\Models\User::class, 2)
                 ->create([

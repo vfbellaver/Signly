@@ -21,14 +21,12 @@ class RegisterRequest extends BaseRequest
     public function rules()
     {
         return [
-            'plan' => 'required',
-            'owner' => 'required',
-            'company' => 'required|unique:teams,name',
-            'name' => 'required',
-            'email' => 'required|email|unique:teams,email',
-            'password' => ['required', 'confirmed', new PasswordFormat],
-            'source' => 'required',
-            'terms_of_service' => 'required|accepted'
+            'owner'            => 'required',
+            'company'          => 'required|unique:teams,name',
+            'name'             => 'required',
+            'email'            => 'required|email|unique:teams,email',
+            'password'         => ['required', 'confirmed', new PasswordFormat],
+            'terms_of_service' => 'required|accepted',
         ];
     }
 
@@ -36,7 +34,7 @@ class RegisterRequest extends BaseRequest
     public function messages()
     {
         return [
-            'plan.required' => 'You must choose a plan',
+            'plan.required'  => 'You must choose a plan',
             'owner.required' => 'Please type the Cardholder name',
         ];
     }

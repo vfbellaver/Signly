@@ -58,19 +58,19 @@ class RegisterController extends Controller
             $team->save();
 
             $user->attachRole(Defender::findRole(User::ACCOUNT_OWNER));
+
             $plan = $request->input('plan');
-            $email = $request->input('email');
-            $cardToken = request('card');
-
-            Stripe::setApiKey($this->key);
-
-            $user->newSubscription($plan['name'], $plan['id'])
-                ->trialDays($trialDays)
-                ->create($cardToken, [
-                    'email' => $email,
-                ]);
-
-            $this->service->store($user, $request);
+            if ($plan) {
+                $email = $request->input('email');
+                $cardToken = request('card');
+                Stripe::setApiKey($this->key);
+                $user->newSubscription($plan['name'], $plan['id'])
+                    ->trialDays($trialDays)
+                    ->create($cardToken, [
+                        'email' => $email,
+                    ]);
+                $this->service->store($user, $request);
+            }
             auth()->login($user);
             return ['message' => 'Register Complete!'];
         });
