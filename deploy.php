@@ -9,9 +9,6 @@ $env = readEnv(__DIR__);
 // Configuration
 set('repository', 'git@github.com:' . $env['DEPLOY_REPOSITORY']);
 set('git_tty', false);
-set('bin/yarn', function () {
-    return (string)run('which yarn');
-});
 set('bin/npm', function () {
     return (string)run('which npm');
 });
@@ -28,13 +25,12 @@ host('stage')
     ->user($env['DEPLOY_STAGE_USER'])
     ->set('deploy_path', $env['DEPLOY_STAGE_FOLDER']);
 
-/*
 host('production')
-    ->hostname('****')
+    ->hostname('new.signly.com')
+    ->set('keep_releases', 2)
     ->set('branch', 'production')
-    ->user('***')
-    ->set('deploy_path', "/var/www/{$projectName}.com");
-*/
+    ->user('forge')
+    ->set('deploy_path', "/home/forge/new.signly.com");
 
 // Tasks
 desc('Generate laroute');

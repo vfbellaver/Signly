@@ -3,9 +3,9 @@
         background-color: #a8a8a8;
         width: 100%;
         text-transform: uppercase;
-        font-size: 16pt;
+        font-size: 14pt;
         height: 22pt;
-        color: #000000;
+        color: #FFF;
         float: left;
         margin-left: -34pt;
         padding: 8pt 34pt;
@@ -37,33 +37,6 @@
         font-size: 10pt;
         padding: 8pt;
         background-color: #F8F8F8;
-    }
-
-    table.vertical-table {
-        border-collapse: collapse;
-    }
-
-    table.vertical-table tr td {
-        padding: 4pt;
-        background: #419DCC;
-        color: #ffffff;
-        font-size: 10pt;
-        border-top: 2px solid #ffffff;
-    }
-
-    table.vertical-table tr.first td {
-        border-top: 0;
-    }
-
-    table.vertical-table tr td.label {
-        width: 128pt;
-        font-weight: bold;
-        text-transform: uppercase;
-        font-size: 11pt;
-    }
-
-    table.vertical-table tr td.value {
-
     }
 
     .divider {
@@ -122,8 +95,8 @@
     }
 
     .footer-image {
-        max-width: 92px;
-        max-height: 92px;
+        max-width: 64px;
+        max-height: 64px;
     }
 
     .footer-content {
@@ -145,7 +118,7 @@
 
 <htmlpageheader name="tocHeader">
     <div class="toc-header">
-        <table style="width: 100%">
+        <table style="width: 100%;">
             <tr>
                 <td></td>
                 <td style="text-align: right;">
@@ -220,26 +193,12 @@
 </htmlpagefooter>
 
 <page class="cover-page">
-<div style="position: absolute; top: 0; left: 0;">
-        <img src="{{asset('images/proposal-cover-top.jpg')}}" style=""/>
-    </div>
-    <div style="position: absolute; bottom: 0; left: 0;">
-        <img src="{{asset('images/proposal-cover-bottom.jpg')}}"/>
-    </div>
-
     <br/>
-
     <table style="width:100%; margin-top: 250pt ">
         <tr>
-            <td align="center" class="uppercase" style="font-size: 22pt; color: #888888">
-            <td align="center" class="uppercase" style="font-size: 28pt; color: #888888;">
-                <img src="/images/logo.png" width="100%" style="align-items: center">
-            </td>
-        </tr>
-        <tr style="padding: 50%">
-            <td align="center" class="uppercase" style="font-size: 28pt; color: #888888;">
+            <td align="center" class="uppercase" style="font-size: 20pt; color: #888888;">
                 Proposal Presented to: <br/>
-                <strong style="font-size: ">{{$client['company_name']}}</strong>
+                <strong style="font-size: 24pt">{{$client['company_name']}}</strong>
             </td>
         </tr>
     </table>
@@ -248,7 +207,7 @@
 <tocpagebreak links="on"
               toc-odd-header-name='tocHeader'
               toc-odd-header-value="on"
-              toc-margin-top="72"
+              toc-margin-top="102"
               toc-odd-margin-left="72"
               toc-odd-footer-name="tocFooter"
               toc-odd-footer-value="on"
@@ -292,7 +251,7 @@
                 <td>{{$face['label']}}</td>
                 <td>{{$face['type']}}</td>
                 <td>{{$face['width']}} x {{$face['height']}}</td>
-                <td>{{number_format($face['pivot']['price'], 2)}}</td>
+                <td>{{number_format($face['pivot']['price'],0)}}</td>
             </tr>
             {{$total += $face['pivot']['price']}}
         @endforeach
@@ -301,7 +260,7 @@
         <tr>
             <td colspan="5" class="uppercase"
                 style="text-align: right; font-size: 14pt; padding: 8pt;">
-                Total: <strong>{{number_format($total, 2)}}</strong></td>
+                Total: <strong>{{number_format($total, 0)}}</strong></td>
         </tr>
         </tfoot>
     </table>
@@ -325,25 +284,25 @@
         </table>
         <h3 class="uppercase">Details</h3>
         <table width="100%" class="vertical-table">
-            <tr class="first">
+            <tr class="odd">
                 <td class="label">ID</td>
                 <td class="value">{{$face['code']}}</td>
                 <td class="label">Label</td>
                 <td class="value">{{$face['label']}}</td>
             </tr>
-            <tr>
+            <tr class="even">
                 <td class="label">Mo. Impressions</td>
                 <td class="value">{{$face['monthly_impressions']}}</td>
                 <td class="label">Price</td>
-                <td class="value">{{number_format($face['pivot']['price'], 2)}}</td>
+                <td class="value">{{number_format($face['pivot']['price'], 0)}}</td>
             </tr>
-            <tr>
+            <tr class="odd">
                 <td class="label">Dimensions</td>
                 <td class="value">{{$face['width']}} x {{$face['height']}}</td>
                 <td class="label">Type</td>
                 <td class="value">{{$face['type']}}</td>
             </tr>
-            <tr>
+            <tr class="even">
                 @if($face['type'] == 'Static')
                     <td class="label">Illuminated</td>
                     <td class="value"

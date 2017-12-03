@@ -32,9 +32,7 @@ class ProposalsController extends Controller
     public function pdf(Proposal $proposal)
     {
         ini_set('max_execution_time', 5000);
-
-
-        $t = Team::findOrFail($proposal->team_id)->toArray();
+        $t = Team::query()->findOrFail($proposal->team_id)->toArray();
 
 
         if ($t['logo']) {
@@ -47,10 +45,10 @@ class ProposalsController extends Controller
 
             while ($size['width'] > 450 && $size['height'] > 450) {
 
-                $size['width'] = $size['width']/2;
-                $size['height'] = $size['height']/2;
+                $size['width'] = $size['width'] / 2;
+                $size['height'] = $size['height'] / 2;
 
-                $img->resize($size['width'],$size['height']);
+                $img->resize($size['width'], $size['height']);
 
             };
 
@@ -69,26 +67,25 @@ class ProposalsController extends Controller
 
         //612 × 792 points
         $gen = new Mpdf([
-            'fontDir' => array_merge($fontDirs, [
+            'fontDir'       => array_merge($fontDirs, [
                 base_path() . '/resources/fonts/Roboto',
             ]),
-            'fontdata' => $fontData + [
+            'fontdata'      => $fontData + [
                     'Roboto' => [
-                        'R' => 'Roboto-Regular.ttf',
-                        'I' => 'Roboto-Italic.ttf',
-                        'B' => 'Roboto-Bold.ttf',
+                        'R'  => 'Roboto-Regular.ttf',
+                        'I'  => 'Roboto-Italic.ttf',
+                        'B'  => 'Roboto-Bold.ttf',
                         'BI' => 'Roboto-BoldItalic.ttf',
-                    ]
+                    ],
                 ],
-            'default_font' => 'Roboto',
-            'mode' => 'c',
-            'format' => 'Letter',
-            'margin_left' => 12,
-            'margin_right' => 12,
-            'margin_top' => 20,
+            'default_font'  => 'Roboto',
+            'mode'          => 'c',
+            'format'        => 'Letter',
+            'margin_left'   => 12,
+            'margin_right'  => 12,
+            'margin_top'    => 20,
             'margin_bottom' => 20,
         ]);
-
 
         $gen->SetTitle($proposal->name);
 
@@ -97,10 +94,10 @@ class ProposalsController extends Controller
 
         $content = view('proposal.pdf', [
             'proposalObj' => $proposal,
-            'proposal' => $proposal->toArray(),
-            'client' => $client,
-            'team' => $team,
-            'user' => $proposal->user ? $proposal->user->toArray() : null,
+            'proposal'    => $proposal->toArray(),
+            'client'      => $client,
+            'team'        => $team,
+            'user'        => $proposal->user ? $proposal->user->toArray() : null,
         ]);
 
         $gen->WriteHTML($content);
@@ -109,7 +106,7 @@ class ProposalsController extends Controller
         return response($pdf)
             ->header('Content-Type', 'application/pdf')
             ->header('Content-Length', strlen($pdf))
-            ->header('Content-Disposition', "attachment; filename=\"proposal.pdf\"");
+            ->header('Content-Disposition', "inline; filename=\"proposal.pdf\"");
     }
 
     public function share($proposalEncryptedId)
