@@ -106,7 +106,7 @@ class ProposalsController extends Controller
         return response($pdf)
             ->header('Content-Type', 'application/pdf')
             ->header('Content-Length', strlen($pdf))
-            ->header('Content-Disposition', "inline; filename=\"proposal.pdf\"");
+            ->header('Content-Disposition', "attachment; filename=\"proposal.pdf\"");
     }
 
     public function share($proposalEncryptedId)
