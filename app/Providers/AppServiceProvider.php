@@ -2,9 +2,7 @@
 
 namespace App\Providers;
 
-use Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider;
 use Illuminate\Support\ServiceProvider;
-use Laravel\Dusk\DuskServiceProvider;
 use Laravel\Passport\Passport;
 use Schema;
 
@@ -23,7 +21,7 @@ class AppServiceProvider extends ServiceProvider
         }
 
         if ($this->app->environment('local', 'testing')) {
-            $this->app->register(DuskServiceProvider::class);
+            $this->app->register(\Laravel\Dusk\DuskServiceProvider::class);
         }
     }
 }

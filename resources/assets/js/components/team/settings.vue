@@ -31,13 +31,13 @@
                                         Subscription
                                     </a>
                                 </li>
-                                <li>
+                                <li v-if="$root.user.subscription">
                                     <a data-toggle="tab" href="#tab-payment-method" aria-expanded="false">
                                         <i class="fa fa-fw fa-btn fa-credit-card"></i>
                                         Payment method
                                     </a>
                                 </li>
-                                <li>
+                                <li v-if="$root.user.subscription">
                                     <a data-toggle="tab" href="#tab-invoices" aria-expanded="false">
                                         <i class="fa fa-fw fa-btn fa-history"></i>
                                         Invoices
@@ -62,18 +62,19 @@
                                 <div id="tab-subscription" class="tab-pane">
                                     <div class="panel-body">
                                         <ul>
-                                            <team-subscription></team-subscription>
+                                            <team-subscription v-if="$root.user.subscription"></team-subscription>
+                                            <subscribe v-else=""></subscribe>
                                         </ul>
                                     </div>
                                 </div>
-                                <div id="tab-payment-method" class="tab-pane">
+                                <div id="tab-payment-method" class="tab-pane" v-if="$root.user.subscription">
                                     <div class="panel-body">
                                         <ul>
                                             <team-card></team-card>
                                         </ul>
                                     </div>
                                 </div>
-                                <div id="tab-invoices" class="tab-pane">
+                                <div id="tab-invoices" class="tab-pane" v-if="$root.user.subscription">
                                     <div class="panel-body">
                                         <ul>
                                             <team-invoices></team-invoices>
@@ -119,6 +120,7 @@
     import TeamForm from './team-form';
     import TeamSubscription from './team-subscription';
     import TeamCard from './team-card';
+    import Subscribe from './subscribe';
 
     export default {
 
@@ -128,12 +130,13 @@
             TeamCard,
             TeamInvoices,
             TeamSubscription,
+            Subscribe,
         },
 
         data() {
             return {
                 pageHeading: {
-                    title: 'Company Settings',
+                    title     : 'Company Settings',
                     breadcrumb: [
                         {title: 'Home', url: laroute.route('home')}
                     ]

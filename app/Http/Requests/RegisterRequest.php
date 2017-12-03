@@ -21,8 +21,7 @@ class RegisterRequest extends BaseRequest
     public function rules()
     {
         return [
-            'owner'            => 'required',
-            'company'          => 'required|unique:teams,name',
+            'company'          => 'required',
             'name'             => 'required',
             'email'            => 'required|email|unique:teams,email',
             'password'         => ['required', 'confirmed', new PasswordFormat],

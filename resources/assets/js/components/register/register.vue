@@ -48,7 +48,7 @@
                     </div>
 
                     <div class="panel panel-success">
-                        <div class="panel-heading">Profile</div>
+                        <div class="panel-heading">Registration</div>
                         <div class="panel-body">
                             <form-group :form="form" field="company" :horizontal="true">
                                 <input-label for="company" class="col-md-4">Company: </input-label>
@@ -88,6 +88,25 @@
                                                     name="password_confirmation"></input-password>
                                 </column>
                             </form-group>
+                            <hr/>
+
+                            <form-group :form="form" field="terms_of_service" :horizontal="true">
+                                <input-label for="terms_of_service" class="col-md-8 col-md-offset-4 text-left">
+                                    <input name="terms_of_service" type="checkbox" v-model="form.terms_of_service"
+                                           id="terms_of_service"/>
+                                    I Accept The <a :href="urlTerms" target="_blank">Terms Of Service</a>
+                                </input-label>
+                            </form-group>
+
+                            <div class="form-group">
+                                <div class="col-md-4 col-md-offset-4">
+                                    <button type="submit" class="btn btn-primary" :disabled="form.busy">
+                                        <spinner v-if="form.busy"></spinner>
+                                        Register
+                                    </button>
+                                    <a class="btn btn-default" :href="urlLogin">Login</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -113,26 +132,6 @@
                                     </div>
                                 </column>
                             </form-group>
-
-                            <hr/>
-
-                            <form-group :form="form" field="terms_of_service" :horizontal="true">
-                                <input-label for="terms_of_service" class="col-md-8 col-md-offset-4 text-left">
-                                    <input name="terms_of_service" type="checkbox" v-model="form.terms_of_service"
-                                           id="terms_of_service"/>
-                                    I Accept The <a :href="urlTerms" target="_blank">Terms Of Service</a>
-                                </input-label>
-                            </form-group>
-
-                            <div class="form-group">
-                                <div class="col-md-4 col-md-offset-4">
-                                    <button type="submit" class="btn btn-primary" :disabled="form.busy">
-                                        <spinner v-if="form.busy"></spinner>
-                                        Register
-                                    </button>
-                                    <a class="btn btn-default" :href="urlLogin">Login</a>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -166,6 +165,7 @@
 
     export default {
         data: () => ({
+            cardUpfront : false,
             selectedPlan: null,
             cardError   : null,
             form        : new SlcForm({
@@ -201,11 +201,13 @@
 
         mounted() {
             let self = this;
-            this.card.mount('#card-element');
-            this.card.addEventListener('change', function (event) {
-                console.info('Card on Change', event);
-                self.cardError = event.error ? event.error.message : null;
-            });
+            if (this.cardUpfront) {
+                this.card.mount('#card-element');
+                this.card.addEventListener('change', function (event) {
+                    console.info('Card on Change', event);
+                    self.cardError = event.error ? event.error.message : null;
+                });
+            }
         },
         methods: {
             showPlanFeatures(plan) {
@@ -215,6 +217,10 @@
             submit() {
                 let self = this;
                 this.form.startProcessing();
+                if (!this.cardUpfront) {
+                    self.formSubmit();
+                }
+
                 this.stripe.createToken(this.card)
                     .then(function (result) {
                         if (result.error) {
