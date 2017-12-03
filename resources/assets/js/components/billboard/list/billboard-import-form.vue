@@ -7,7 +7,8 @@
                     <column size="6">
                         <form-group :form="form" field="filecsv">
                             <input-label for="filecsv">Select File: </input-label>
-                            <billboard-csv-upload v-model="form.billboards" id="billboards" @uploading="updateUploaded"></billboard-csv-upload>
+                            <billboard-csv-upload v-model="form.billboards" id="billboards"
+                                                  @uploading="updateUploaded"></billboard-csv-upload>
                         </form-group>
                     </column>
                     <column size="6">
@@ -37,7 +38,9 @@
                                 <td>{{ billboard.name }}</td>
                                 <td>
                                     <ul>
-                                        <li v-for="face in billboard.faces">{{face.code}} - {{face.code}}</li>
+                                        <li v-for="face in billboard.faces">
+                                            {{face.id}} - {{face.label}} {{face.type}}
+                                        </li>
                                     </ul>
                                 </td>
                             </tr>
@@ -61,11 +64,11 @@
     import BillboardCsvUpload from './billboard-csv-upload';
 
     export default {
-        props: {},
+        props     : {},
         components: {
             BillboardCsvUpload,
         },
-        mixins: [ModalForm],
+        mixins    : [ModalForm],
         data() {
             return {
                 uploaded: false,
@@ -81,21 +84,19 @@
             reload() {
                 window.location = laroute.route("billboards.index");
             },
-            updateUploaded(){
+            updateUploaded() {
                 this.uploaded = true;
             },
 
 
-
             save() {
                 const uri = laroute.route('api.billboard.import');
-                Slc.post(uri, this.form).then((response) => {
-                    console.log('Post Billboards:', response);
-                    this.saved(response.data, 'saved');
-                });
-
+                Slc.post(uri, this.form)
+                    .then((response) => {
+                        console.log('Post Billboards:', response);
+                        window.location = laroute.route("billboards.index");
+                    });
             }
-
         }
     }
 </script>

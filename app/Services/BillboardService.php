@@ -18,12 +18,12 @@ class BillboardService
     {
         return \DB::transaction(function () use ($form) {
             $data = [
-                'name' => $form->name(),
+                'name'    => $form->name(),
                 'address' => $form->address(),
-                'lat' => $form->lat(),
-                'lng' => $form->lng(),
+                'lat'     => $form->lat(),
+                'lng'     => $form->lng(),
                 'heading' => $form->heading(),
-                'pitch' => $form->pitch(),
+                'pitch'   => $form->pitch(),
             ];
 
 
@@ -71,21 +71,21 @@ class BillboardService
         $billboards = [];
         foreach ($data as $row) {
             $billboard = [
-                'name' => null,
+                'name'    => null,
                 'address' => null,
-                'lat' => null,
-                'lng' => null,
+                'lat'     => null,
+                'lng'     => null,
                 'heading' => null,
-                'pitch' => null,
+                'pitch'   => null,
 
             ];
             $billboard = array_intersect_key($row, $billboard);
             $billboard['faces'] = [];
 
             $i = 1;
-            $required = ['code', 'label', 'rate_card', 'monthly_impressions'];
-            $optional = ['type','duration','height', 'width', 'reads', 'notes', 'max_ads', 'lights_on', 'lights_off', 'billboard_id','team_id','photo_url', 'is_illuminated'];
-            while (isset($row["face{$i}_code"])) {
+            $required = ['id', 'label', 'rate_card', 'monthly_impressions'];
+            $optional = ['type', 'duration', 'height', 'width', 'reads', 'notes', 'max_ads', 'lights_on', 'lights_off', 'billboard_id', 'team_id', 'photo_url', 'is_illuminated'];
+            while (isset($row["face{$i}_id"])) {
                 $face = [];
                 $valid = true;
                 foreach ($required as $r) {
@@ -103,15 +103,9 @@ class BillboardService
                     if (!isset($row["face{$i}_{$o}"]) || !$row["face{$i}_{$o}"]) {
                         continue;
                     }
-
-                    if ($o === 'lights_on' || $o === 'lights_off') {
-                        $time = $row["face{$i}_{$o}"];
-                        $face[$o] = Carbon::createFromFormat('h:i A', $time)->format('H:i:s');
-                        continue;
-                    }
                     $face[$o] = $row["face{$i}_{$o}"];
                     $face['team_id'] = auth()->user()->team_id;
-                    $face['slug'] = str_slug($face['code'],'-');
+                    $face['slug'] = str_slug($face['id']);
                 }
                 $billboard['faces'][] = $face;
                 $i++;
@@ -135,10 +129,10 @@ class BillboardService
                 //create o billboard
                 /** @var Billboard $billboard */
                 $billboard = Billboard::query()->create([
-                    'name' => $blb['name'],
+                    'name'    => $blb['name'],
                     'address' => $blb['address'],
-                    'lat' => $blb['lat'],
-                    'lng' => $blb['lng'],
+                    'lat'     => $blb['lat'],
+                    'lng'     => $blb['lng'],
                     'user_id' => $data['user_id'],
                     'team_id' => $data['team_id'],
                 ]);
@@ -151,14 +145,12 @@ class BillboardService
                 //create as faces relations
                 foreach ($faces as $face) {
 
+                    $face['code'] = $face['id'];
+                    unset($face['id']);
                     $face['team_id'] = auth()->user()->team_id;
-                    $face['slug'] = str_slug($face['code'],'-');
+                    $face['slug'] = str_slug($face['code']);
+                    $face['is_illuminated'] = isset($face['is_illuminated']) ? strtolower($face['is_illuminated']) == 'yes' : null;
 
-                    if (strtolower($face['is_illuminated']) == strtolower('No')) {
-                        $face['is_illuminated'] = false;
-                    } else {
-                        $face['is_illuminated'] = true;
-                    }
                     $billboardFace = new BillboardFace($face);
                     $billboardFace->billboard()->associate($billboard);
                     $billboardFace->save();

@@ -55,7 +55,7 @@
             </div>
         </div>
         <billboard-form ref="form" @saved="edit"></billboard-form>
-        <billboard-import-form ref="importForm" @saved="reload"></billboard-import-form>
+        <billboard-import-form ref="importForm"></billboard-import-form>
     </div>
 </template>
 
@@ -72,7 +72,7 @@
     import BillboardListView from './billboard-list-view';
 
     export default {
-        props: {
+        props     : {
             team: {required: true},
         },
         components: {
@@ -81,18 +81,14 @@
             BillboardImportForm,
             BillboardListView
         },
-        data: () => ({
-
-            billboards: [],
-
-            view: 'list',
-
+        data      : () => ({
+            billboards : [],
+            view       : 'list',
             pageHeading: {
-                title: 'Billboard List',
-                breadcrumb:
-                    [
-                        {title: 'Home', url: laroute.route('home')}
-                    ]
+                title     : 'Billboard List',
+                breadcrumb: [
+                    {title: 'Home', url: laroute.route('home')}
+                ]
             },
 
         }),
@@ -102,35 +98,28 @@
         },
 
         methods: {
-
-
             create() {
                 this.$refs.form.show();
-            }
-            ,
+            },
 
             edit(billboard) {
                 window.location = laroute.route("billboards.edit", {billboard: billboard.id});
-            }
-            ,
+            },
 
             importBillboards() {
                 this.$refs.importForm.show();
-            }
-            ,
+            },
 
             goToHome() {
                 window.location = "/";
-            }
-            ,
+            },
 
             reload() {
                 Slc.get(laroute.route('api.billboard.index'))
                     .then((response) => {
                         this.billboards = response;
                     });
-            }
-            ,
+            },
 
             destroy(billboard) {
                 Slc.delete(laroute.route('api.billboard.destroy', {billboard: billboard.id}), billboard.destroyForm)
