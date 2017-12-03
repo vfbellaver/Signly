@@ -57,7 +57,7 @@
 
     .ibox-body-card-msg {
         background-color: white;
-        height: 262px;
+        min-height: 262px;
         margin-top: 2px;
         padding: 10px 20px 20px 20px;
     }
