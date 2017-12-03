@@ -4,6 +4,16 @@
         <nav class="navbar navbar-in-content navbar-default" data-spy="affix" data-offset-top="147">
             <ul class="nav navbar-nav navbar-right">
                 <li>
+                    <a @click="showFilters = !showFilters">
+                        <i class="fa fa-filter"></i>
+                        Filters</a>
+                </li>
+                <li>
+                    <a @click="fitToMarkers">
+                        <i class="fa fa-arrows-alt"></i>
+                        Fit to Markers</a>
+                </li>
+                <li>
                     <a @click="openEditForm">
                         <i class="fa fa-edit"></i>
                         Edit</a>
@@ -26,6 +36,7 @@
                           @reordered="reorderBillboardFaces"></map-controls>
             <gmap-map
                     v-if="loaded"
+                    ref="map"
                     :options="mapOptions"
                     :center="center"
                     :zoom="10">
@@ -45,7 +56,7 @@
                     <billboard-show v-if="billboard" @add="openBillboardFaceForm"></billboard-show>
                 </gmap-info-window>
             </gmap-map>
-            <filters></filters>
+            <filters @updated="fitToMarkers" :show="showFilters"></filters>
         </div>
         <proposal-form ref="form" @saved="formSaved"></proposal-form>
         <billboard-face-form ref="billboardFaceForm" @created="faceCreated"
@@ -111,6 +122,7 @@
                 },
                 infoWindowPos       : null,
                 gmapInfoWindowClosed: false,
+                showFilters         : false,
             }
         },
 
@@ -191,7 +203,6 @@
                 });
             },
             markerIcon(marker) {
-
                 let fillColor = '#42c0fb';
                 const markerFaces = marker.billboard.billboard_faces;
                 const proposalFaces = this.proposal.billboard_faces;
@@ -291,7 +302,16 @@
                 SLC.get(uri).then(response => {
                     this.commentsView = response;
                 });
-            }
+            },
+            fitToMarkers() {
+                const bounds = new google.maps.LatLngBounds();
+                const markers = this.$store.getters.markers;
+                for (let i = 0; i < markers.length; i++) {
+                    const marker = markers[i];
+                    bounds.extend(marker.position);
+                }
+                this.$refs.map.fitBounds(bounds);
+            },
         }
     }
 </script>

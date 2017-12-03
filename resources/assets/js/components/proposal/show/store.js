@@ -9,7 +9,8 @@ export default new Vuex.Store({
         billboard : null,
         billboards: [],
         filters   : {
-            type: null,
+            type        : null,
+            illumination: null,
         },
     },
 
@@ -18,12 +19,23 @@ export default new Vuex.Store({
             const markers = [];
             const billboards = state.billboards.filter(b => b.id);
 
+            const filterMethod = (face) => {
+                if (state.filters.type && face.type !== state.filters.type) return false;
+
+                if (state.filters.type && face.type === 'Static' && state.filters.illumination) {
+                    if (face.is_illuminated && state.filters.illumination !== '1') return false;
+                    if (!face.is_illuminated && state.filters.illumination !== '2') return false;
+                }
+                return true;
+            };
+
             for (let i = 0; i < billboards.length; i++) {
                 const billboard = state.billboards[i];
-                const faces = billboard.billboard_faces.filter(f => f.type === state.filters.type);
-                if (state.filters.type && !faces.length) {
-                    continue;
-                }
+                let faces = billboard.billboard_faces.filter(face => {
+                    return filterMethod(face);
+                });
+
+                if (!faces.length) continue;
 
                 markers.push({
                     position : {

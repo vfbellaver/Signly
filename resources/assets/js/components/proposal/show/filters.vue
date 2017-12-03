@@ -1,11 +1,20 @@
 <template>
-    <div class="filters">
+    <div ref="filter" class="filters animated fadeInRight hidden">
         <h3>Filters</h3>
         <div class="filter">
+            <label>Type</label>
             <select class="form-control input-sm" v-model="filters.type">
                 <option :value="null">All</option>
                 <option value="Static">Static</option>
                 <option value="Digital">Digital</option>
+            </select>
+        </div>
+        <div class="filter" v-if="filters.type == 'Static'">
+            <label>Illumination</label>
+            <select class="form-control input-sm" v-model="filters.illumination">
+                <option :value="null">All</option>
+                <option value="1">Illuminated</option>
+                <option value="2">Not Illuminated</option>
             </select>
         </div>
     </div>
@@ -31,6 +40,10 @@
 
         .filter {
             font-size: 11px;
+            margin-top: 8px;
+            label {
+                padding-left: 2px;
+            }
         }
     }
 </style>
@@ -39,11 +52,15 @@
     import store from './store';
 
     export default {
+        props   : {
+            show: {required: true},
+        },
         store,
         data() {
             return {
                 filters: {
-                    type: null,
+                    type        : null,
+                    illumination: null,
                 },
             }
         },
@@ -53,9 +70,13 @@
             }
         },
         watch   : {
+            show(value) {
+                (value) ? $(this.$refs.filter).removeClass('hidden') : $(this.$refs.filter).addClass('hidden');
+            },
             filters: {
                 handler(val) {
                     this.$store.dispatch('setFilters', this.filters);
+                    this.$emit('updated');
                 },
                 deep: true
             }
