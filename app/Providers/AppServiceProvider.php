@@ -20,6 +20,9 @@ class AppServiceProvider extends ServiceProvider
             class_alias('App\Slc', 'Slc');
         }
 
+        $this->app->alias('bugsnag.logger', \Illuminate\Contracts\Logging\Log::class);
+        $this->app->alias('bugsnag.logger', \Psr\Log\LoggerInterface::class);
+
         if ($this->app->environment('local', 'testing')) {
             $this->app->register(\Laravel\Dusk\DuskServiceProvider::class);
         }

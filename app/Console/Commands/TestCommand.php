@@ -28,6 +28,11 @@ class TestCommand extends Command
 
     public function handle()
     {
+        throw new \Exception("Testing bugsnag");
+    }
+
+    public function handle3()
+    {
         Stripe::setApiKey(config('services.stripe.secret'));
         $plan = Slc::PLAN_2;
         $stripePlan = Plan::create(array(
