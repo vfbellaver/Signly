@@ -38,12 +38,12 @@
     "mpdf/mpdf": "7.0.x-dev",
     "predis/predis": "^1.1",
     "pusher/pusher-php-server": "^3.0",
-    "stripe/stripe-php": "^5.3"
+    "stripe/stripe-php": "^5.3",
+    "laravel/dusk": "^2.0"
   },
   "require-dev": {
     "deployer/deployer": "^5.1",
     "deployer/recipes": "^4.0",
-    "laravel/dusk": "^2.0",
     "mockery/mockery": "0.9.*",
     "pdepend/pdepend": "2.5.*",
     "phploc/phploc": "4.0.*",
