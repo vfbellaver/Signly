@@ -87,7 +87,7 @@ export default new Vuex.Store({
                 }
             }
         },
-        commentSaved(state, comment) {
+            commentSaved(state, comment) {
             if (!state.proposal.comments) {
                 state.proposal.comments = [];
             }
